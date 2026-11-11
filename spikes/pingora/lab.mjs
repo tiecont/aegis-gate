@@ -19,7 +19,9 @@ import grpc from '@grpc/grpc-js';
 
 process.umask(0o077);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const runDir = fs.mkdtempSync(path.join(root, '.local/pingora-run-'));
+const runRoot = process.env.AEGIS_RUN_ROOT ?? path.join(root, '.local');
+assert.ok(path.isAbsolute(runRoot), 'run root must be absolute');
+const runDir = fs.mkdtempSync(path.join(runRoot, 'edge-proof-run-'));
 const evidence = { started_at: new Date().toISOString(), node: process.version, platform: process.platform,
   cpu: os.cpus()[0]?.model, logical_cpus: os.cpus().length, memory_bytes: os.totalmem(),
   profile: 'owned loopback lab; no production claims', tests: [], benchmark: null };
@@ -693,7 +695,7 @@ async function main() {
     const nginx = await benchmark(refPort, pids);
     assert.equal(candidate.errors, 0); assert.equal(nginx.errors, 0);
     evidence.benchmark = { reference: referenceImage, reference_version: 'nginx/1.30.6',
-      profile: `100 warmup, 5 seconds each, closed-loop concurrency 8, 90% GET/1024B response + 10% POST/32768B echo; H1 TLS verified on both hops; keepalive; client/origin/proxy same host; ${buildProfile} Rust build`,
+      profile: `100 warmup, 5 seconds each, closed-loop concurrency 8, 90% GET/1024B response + 10% POST/32768B echo; H1 TLS verified on both hops; keepalive; client/origin/proxy same host; ${candidateName} candidate; ${buildProfile} requested profile`,
       measurement: 'Linux /proc cumulative user+system CPU, HZ=100; sampled summed RSS at 100ms; latency includes client scheduling and origin; no handshake in steady state',
       candidate_name: candidateName, candidate, nginx, limitations: ['short single-run smoke benchmark; no launch SLO or capacity inference', 'independently built binaries; default build settings and crypto libraries may differ',
         'RSS sums shared nginx pages across processes', 'not open-loop; coordinated omission; shared host load', 'benchmark runs sequentially'] };

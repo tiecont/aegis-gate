@@ -19,6 +19,8 @@ flock /tmp/aegisgate-sprint02-fixtures.lock env PINGORA_SPIKE_PROFILE=release \
 For other candidates, set `AEGIS_CANDIDATE_NAME`, an absolute executable in
 `AEGIS_CANDIDATE_COMMAND`, and optional JSON array `AEGIS_CANDIDATE_ARGS`.
 The executable receives `manifest-path port`; SIGTERM must stop its children.
+`AEGIS_RUN_ROOT` sets an existing absolute owner-only output directory for
+per-agent fixture isolation. Defaults to the root worktree's ignored `.local`.
 `AEGIS_CANDIDATE_ARTIFACTS` optionally names additional absolute files (JSON
 array) whose hashes must be included, such as the proxy binary and Cargo lock.
 `AEGIS_CANDIDATE_ROOT` changes only the default binary location, not test inputs.
