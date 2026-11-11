@@ -1,0 +1,59 @@
+{
+  "lock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "parent_pid": 3219724,
+  "commands": [
+    {
+      "label": "revision",
+      "program": "git",
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-e",
+      "environment": {},
+      "started_at": "2026-11-11T08:49:15.454Z",
+      "ended_at": "2026-11-11T08:49:15.470Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "2f254206d11f552a1c804af8c562141a7585e88762af081063f0ed5c5bc83a94",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "lab",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/edge-comparison/run.mjs"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-e",
+      "environment": {
+        "PINGORA_SPIKE_PROFILE": "release",
+        "AEGIS_CANDIDATE_NAME": "hyper-independent-e",
+        "AEGIS_RUN_ROOT": "/home/tiecont/Projects/aegis-gate-sprint03-e/.local/hyper",
+        "AEGIS_CANDIDATE_COMMAND": "/home/tiecont/Projects/aegis-gate-sprint03-e/.local/hyper-target/release/aegisgate-hyper-feasibility",
+        "AEGIS_CANDIDATE_ARTIFACTS": "[\"/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/hyper/Cargo.toml\",\"/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/hyper/Cargo.lock\",\"/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/hyper/src/main.rs\",\"/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/hyper/src/config.rs\",\"/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/hyper/src/body.rs\"]"
+      },
+      "started_at": "2026-11-11T08:49:15.474Z",
+      "ended_at": "2026-11-11T08:49:41.949Z",
+      "exit_code": 1,
+      "signal": null,
+      "stdout_sha256": "fa62a971923b709e80673e081e40c2488a23ebe4d6609b113f0a4465ff4e96fd",
+      "stderr_sha256": "9e80d5d9b23d31b6610424e30f3f861abefc2fc46975123b166ec796b415cf0b"
+    },
+    {
+      "label": "evaluate",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/edge-comparison/evaluate.mjs",
+        "/home/tiecont/Projects/aegis-gate-sprint03-e/evidence/sprint03a-e/hyper/results.json"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-e",
+      "environment": {},
+      "started_at": "2026-11-11T08:49:41.951Z",
+      "ended_at": "2026-11-11T08:49:42.007Z",
+      "exit_code": 1,
+      "signal": null,
+      "stdout_sha256": "9f99cd0c4df7b12ccf8db602f481df75de3c8024fe3a8d51392063ab3092114b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

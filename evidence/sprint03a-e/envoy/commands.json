@@ -1,0 +1,59 @@
+{
+  "lock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "parent_pid": 3274122,
+  "commands": [
+    {
+      "label": "revision",
+      "program": "git",
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-e",
+      "environment": {},
+      "started_at": "2026-11-11T08:55:26.462Z",
+      "ended_at": "2026-11-11T08:55:26.468Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "7291c3f8246ad15c221410eb2a33cd2733171376abcd1e8a407e4479d86471d4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "lab",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/edge-comparison/run.mjs"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-e",
+      "environment": {
+        "PINGORA_SPIKE_PROFILE": "release",
+        "AEGIS_CANDIDATE_NAME": "envoy-independent-e",
+        "AEGIS_RUN_ROOT": "/home/tiecont/Projects/aegis-gate-sprint03-e/.local/envoy",
+        "AEGIS_CANDIDATE_COMMAND": "/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/envoy/launch",
+        "AEGIS_CANDIDATE_ARTIFACTS": "[\"/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/envoy/launcher.mjs\",\"/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/envoy/config.mjs\",\"/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/envoy/image.lock.json\"]"
+      },
+      "started_at": "2026-11-11T08:55:26.470Z",
+      "ended_at": "2026-11-11T08:56:33.317Z",
+      "exit_code": 1,
+      "signal": null,
+      "stdout_sha256": "af245a7887e1d942732fb257250475c473f3c6e949ecbacaf3b18cd2f6701c65",
+      "stderr_sha256": "cddce52c1c5d94817a80f5cd12e5d1e7762894ffcb449c949728aaafe1632bae"
+    },
+    {
+      "label": "evaluate",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/edge-comparison/evaluate.mjs",
+        "/home/tiecont/Projects/aegis-gate-sprint03-e/evidence/sprint03a-e/envoy/results.json"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-e",
+      "environment": {},
+      "started_at": "2026-11-11T08:56:33.318Z",
+      "ended_at": "2026-11-11T08:56:33.365Z",
+      "exit_code": 1,
+      "signal": null,
+      "stdout_sha256": "192b2de664ec53606794fa24a1514d4799ec2e1357a3cff8ce2a10f9db1616e9",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}
