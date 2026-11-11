@@ -8,8 +8,10 @@ PRs1-7 have been independently reviewed and merged after exact-head hosted
 foundation/supply-chain jobs passed. Image metadata/layer binding and empty Git
 history acceptance are repaired; root repeats substitution and nonempty-history
 proofs. Public-origin special-purpose ranges now reject with public controls.
-Module02 independent local security review passes; final integrated gate checks
-are tracked in `reports/sprint02-d-integration.md`.
+Module02 independent local security review and final integrated check/scan pass;
+M1-ADMIN-TENANCY is accepted for local scope. Commands and limits are tracked
+in `reports/sprint02-d-integration.md`. Task03 prerequisites are satisfied for a
+future scoped wave; its gate is not passed and module04 remains locked.
 
 Module01 remains NO-GO: root rebuild reproduces57/65 with eight strict-ingress
 failures. `derivative` and `unsafe-libyaml` warnings remain open, with no ignore

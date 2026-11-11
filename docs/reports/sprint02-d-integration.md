@@ -1,7 +1,8 @@
 # Sprint 02 independent integration review
 
 Status: A/B/C and dependency candidates independently reviewed and merged;
-final integrated check/scan in progress. Historical findings below are preserved.
+final integrated check/scan PASS. Module02 accepted for local scope only;
+Module01 remains NO-GO. Historical findings below are preserved.
 Baseline: `9e734e31bf1544bd1158a5bf8d29047c2adb72f8`.
 Integration branch: `sprint/02-integration`.
 
@@ -78,7 +79,7 @@ tree and final status/risk updates.
   `Branch not protected`. Required branch protection/reviewer approval from
   `QUALITY_GATES.md` is not proven. No repository setting was changed.
 
-## Current gate disposition
+## Initial gate disposition (historical)
 
 - Module 00: historical local PASS; hosted supply-chain recovery pending.
 - Module 01: NO-GO, closed pending fresh evidence and architecture review.
@@ -113,5 +114,62 @@ One repeated `make check` was interrupted during PostgreSQL integration while
 the task resumed; its log is retained as `make-check-interrupted.log` and is not
 accepted as a passing run. Earlier complete root evidence is preserved as
 `make-check-before-history-target.log`. Final `make-check.log` must contain
-`RESULT_EXIT=0`. The final scan and final gate disposition will be recorded
-after execution; implementation or a hosted candidate alone is insufficient.
+`RESULT_EXIT=0`; it now does. The final scan also returns0. An interrupted
+command, implementation or hosted candidate alone was not accepted.
+
+## Final Commands And Evidence
+
+All commands executed from the root integration worktree on2026-11-11. All
+Compose/database/full-check/scan/lab work held the shared fixture lock.
+Application/workflow source is6999d53, including all merged PRs1-7;75e4969 adds
+review docs only. No runtime code was changed after the final check.
+
+| Exact command (output piped to the indicated evidence log with pipefail) | Result | Evidence |
+| --- | --- | --- |
+| Locked `make check` (complete invocation below) | PASS, exit0 | `evidence/sprint02-d/make-check.log` |
+| Locked `make security-scan` (complete invocation below) | PASS, exit0;20 history commits | `evidence/sprint02-d/security-scan-final.log` |
+| `python3 evidence/sprint02/image-layer-binding-repro.py scripts/image_identity.py` | PASS, positive controls and substituted layers | `evidence/sprint02-d/image-layer-binding.log` |
+| `GOTOOLCHAIN=go1.27.4 go test -race ./apps/control-api/internal/domain -count=1 -v` | PASS, public/non-public/mixed DNS cases | `evidence/sprint02-d/origin-negative.log` |
+| `cargo +1.99.1 test --locked --manifest-path spikes/pingora/Cargo.toml` | PASS,5 tests | `evidence/sprint02-d/pingora-tests.log` |
+| `cargo +1.99.1 build --release --locked --manifest-path spikes/pingora/Cargo.toml` | PASS | `evidence/sprint02-d/pingora-build.log` |
+| `flock /tmp/aegisgate-sprint02-fixtures.lock env PINGORA_SPIKE_PROFILE=release .local/toolchains/node/bin/node spikes/pingora/lab.mjs` | FAIL, exit1;57/65, eight failures retained | `evidence/sprint02-d/pingora-lab.log`, `pingora-results.json` |
+| `git diff --check` | PASS | Executed before final commits |
+
+Full check and scan invocations:
+
+```sh
+flock /tmp/aegisgate-sprint02-fixtures.lock bash -o pipefail -c 'make check 2>&1 | tee evidence/sprint02-d/make-check.log; result=$?; printf "RESULT_EXIT=%s\n" "$result" | tee -a evidence/sprint02-d/make-check.log; exit "$result"'
+flock /tmp/aegisgate-sprint02-fixtures.lock bash -o pipefail -c 'make security-scan 2>&1 | tee evidence/sprint02-d/security-scan-final.log; result=$?; printf "RESULT_EXIT=%s\n" "$result" | tee -a evidence/sprint02-d/security-scan-final.log; exit "$result"'
+```
+
+The full check runs formatting, vet/clippy/eslint/types, schema compatibility,
+unit/race tests, builds, actual PostgreSQL/HTTPS OIDC/owned UDP DNS and fixture
+integration, security negatives and gate self-tests. The only database skip
+guards require `AEGIS_TENANCY_INTEGRATION=1`; the integration target sets it
+explicitly and both actual persistence/transport suites execute. No mandatory
+acceptance skip is used. The final scan includes fail-closed history preflight,
+nonempty history verification,31 image regressions, all SCA/secret/SBOM/image
+steps; original zero-commit evidence remains rejected and preserved.
+
+Hosted A/B/C and dependency outcomes are stored as `ci-<run>.json` in the same
+evidence directory. Each contains the exact reviewed head and both successful
+job URLs. Hash manifest: `evidence/sprint02-d/SHA256SUMS`.
+
+## Final Gate Matrix And Next Wave
+
+| Module | Disposition |
+| --- | --- |
+| 00 | Historical local PASS preserved; Sprint02 hosted supply-chain recovery PASS |
+| 01 | NO-GO/CLOSED; eight mandatory strict-ingress failures; human architecture decision pending |
+| 02 | M1-ADMIN-TENANCY PASS for local scope after full acceptance, independent review and final integrated checks |
+| 03 | Eligible for next wave per task03:00/02 and01 findings; NOT STARTED, gate CLOSED |
+| 04 | LOCKED; affirmative01 GO and03 PASS required |
+| 05-12 | LOCKED by their documented dependencies/release gates |
+
+Remaining blockers: strict-ingress behavior (P0 feasibility blocker), two Rust
+maintenance warnings (unaccepted), and all later production/security/operational
+release obligations. ADR011 offers upstream strict mode, reviewed maintained
+ingress, Envoy and Hyper/Tokio cost/proof comparisons. A human must decide any
+architecture replacement; no option has been silently selected. Next wave can
+prepare/execute module03's scoped distribution safety work and separately pursue
+the human architecture review. It cannot activate production edge or deploy.

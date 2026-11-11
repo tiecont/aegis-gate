@@ -1,5 +1,13 @@
 # Sprint02 Agent C: Module02 Acceptance Candidate
 
+Root acceptance update,2026-11-11: PR7 rebased without application changes to
+727f5b17dd38bca2f44b94634c53afa1e8504524; both hosted jobs passed in42969925238
+and the PR was merged. Independent root review and integrated check/scan pass.
+M1-ADMIN-TENANCY is accepted for local scope; sprint02-d-integration.md records
+commands/evidence and release limits. The original candidate report and failed
+history-scan evidence below remain historical; the final wrapper verifies20
+real commits.
+
 ## Agent Completion Report
 
 - Module: 02, Agent C C1-C3, candidate for `M1-ADMIN-TENANCY` review.

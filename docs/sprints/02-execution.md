@@ -92,6 +92,8 @@ sequentially, resolve contract conflicts and rerun full current checks and
 security review. Update status/risk/ADR/evidence with exact results. Keep01
 closed without accepted feasibility,02 closed with missing requirements,03
 locked until all documented dependencies,04 requires affirmative01 and03PASS;
-05–12 LOCKED. Final report covers summary, per-agent work, files/commits/PRs,
+05–12 LOCKED. Task03 explicitly requires00/02 and uses01 findings; once those
+are accepted it may be prepared as the next wave without representing03 PASS
+or granting04 eligibility. Final report covers summary, per-agent work, files/commits/PRs,
 commands/results/evidence, blockers/causes, security decisions, gate matrix and
 next wave. No production-readiness claim.
