@@ -249,6 +249,25 @@ an alternative architecture, a maintenance exception or production activation.
 
 ## Gate disposition
 
+### Sprint03-A proposed disposition
+
+The research-only alternatives comparison above is historical. Sprint03-A
+adds isolated executable Envoy and Hyper/Tokio PoCs and a candidate-neutral
+75-case corpus. The root preserved and independently reproduced the original
+57/65 Pingora baseline, including all eight failures. Corrected expanded
+implementation runs are Pingora63/75, Envoy69/75 and Hyper70/75. Every candidate
+fails mandatory properties; none is eligible for GO. Final independent review
+and integrated CI evidence are being completed before evidence-only acceptance.
+
+`docs/reports/sprint03a-architecture-decision.md` is the proposed decision
+package, including exact blocker classes, maintained strict-ingress options,
+integration/maintenance costs and the smallest next proof. Candidate reports
+retain earlier failed/interrupted and invalid-instrumentation runs explicitly.
+The immutable manifest and evaluator preserve every original negative and
+valid encoded-target control; no criterion, production implementation or
+architecture selection is changed. Human architecture ownership and approval
+remain unassigned. Merging these isolated proofs grants no feasibility gate.
+
 `M0-PROXY-GO-NOGO` must remain **closed**. The orchestrator must review the
 invalid-target reproduction, strict-ingress alternatives and the two dependency
 warning dispositions. A responsible human owns any architecture substitution or

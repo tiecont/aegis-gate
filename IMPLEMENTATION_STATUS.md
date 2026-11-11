@@ -27,7 +27,7 @@ A module opens only after **all** dependencies below have passed implementation,
 | Module | Gate | Dependencies | State | Evidence / remaining work |
 |---|---|---|---|---|
 | 00 Foundation | M0-FOUNDATION | — | PASS (local); hosted CI recovered | Historical foundation evidence preserved. Sprint02 identity/history regressions and hosted run42964002493 PASS; PR6 merged. No production signoff. |
-| 01 Pingora feasibility | M0-PROXY-GO-NOGO | 00 | NO-GO / HUMAN ARCHITECTURE REVIEW | Root release rebuild repeats57/65, eight failures, exit1; malformed targets/framing reach origin. ADR-011 decision package and sprint02-d/pingora-results.json. No architecture substitution authorized. |
+| 01 Proxy feasibility | M0-PROXY-GO-NOGO | 00 | NO-GO / HUMAN ARCHITECTURE REVIEW | Sprint03-A common75-case executable proofs: Pingora63/75, Envoy69/75, Hyper70/75; each fails mandatory security properties. Independent review/integrated checks are in progress. No replacement accepted. |
 | 02 Tenancy/control plane | M1-ADMIN-TENANCY | 00 | PASS (local scope) | Full module acceptance, independent security review, root integrated check/scan exit0, actual PostgreSQL/HTTPS OIDC/UDP DNS, tenant/role/security negatives and exact-head hosted run42969925238 PASS. sprint02-d-integration.md and sprint02-d-security-review.md. |
 | 03 Config distribution | M1-CONFIG-SAFETY | 00, 02; uses 01 findings | ELIGIBLE NEXT WAVE / GATE CLOSED | Task03 prerequisites now satisfied; no implementation started this sprint. Signed snapshots, authenticated delivery, anti-replay, ACK/NACK/LKG and atomic apply still require full acceptance. This does not permit module04. |
 | 04 Edge proxy | M1-EDGE-ROUTING | 01 affirmative Go, 03 | LOCKED | No production edge implementation until feasibility passes. |
