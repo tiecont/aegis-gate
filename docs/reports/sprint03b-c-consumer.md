@@ -11,6 +11,13 @@ and maximum staleness before constructing complete route/policy/pool indexes.
 Only exact path matching is defined by snapshot1.0. This library opens no edge
 listener, proxies no traffic and implements no customer authentication engine.
 
+`NewHTTPSFetcher` pins one HTTPS artifact origin, verification CA and consumer
+certificate. TLS hostname/chain validation is mandatory, TLS>=1.2, redirects
+are denied, connection/header/time limits apply, and only exact lowercase digest
+paths can be fetched. Disposable loopback mutual-TLS tests exercise success,
+wrong name/CA, missing client identity, forged locations, redirects and replaced
+artifact bytes. The final end-to-end review also uses B's actual artifact handler.
+
 Apply serializes staging, persistence and an atomic immutable pointer swap.
 Each captured operation holds one private generation with fully resolved
 references. Copies returned by `Resolve`/`Snapshot` cannot mutate active state.
@@ -39,6 +46,15 @@ floor are installation responsibilities. Full-disk rollback by an actor able
 to restore both ciphertext and provisioning state requires an external durable
 monotonic anchor in production; local file permissions are not hardware rollback
 protection. Production secret-service deployment remains blocked.
+
+An authentic expired/over-stale checkpoint retains only its verified generation
+floor using A's `VerifyCheckpoint`; it never becomes ready. A newer valid signed
+generation can then recover automatically. Retired/untrusted or corrupt
+checkpoints require authenticated reprovisioning. `CurrentAck` can retransmit a
+lost ACK for the exact still-valid active artifact; `Apply` continues to NACK all
+replayed generations. Raw JetStream hints go to the rollout planner, and only
+its selected group receives apply dispatch; direct bus-to-consumer apply would
+bypass the canary control and is unsupported.
 
 Readiness and new captures reverify trust, ownership expiry and hard validity;
 maximum staleness is explicitly configured and cannot exceed24h. During

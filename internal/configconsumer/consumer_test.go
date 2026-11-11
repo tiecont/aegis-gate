@@ -11,6 +11,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 	"testing"
 	"time"
@@ -409,5 +410,50 @@ func TestNegativeBoundedArtifactDownload(t *testing.T) {
 	ack := f.c.FetchApply(context.Background(), notice, oversizedFetcher{})
 	if ack.Accepted || ack.Code != "artifact_size" || f.c.Metrics().AppliedGeneration != 1 {
 		t.Fatal("oversized fetch affected active snapshot")
+	}
+}
+
+func TestExpiredCheckpointPreservesFloorAndRecoversWithNewSignedGeneration(t *testing.T) {
+	f := setup(t)
+	apply(t, f, 7)
+	f.now = f.now.Add(3 * time.Hour)
+	restart, err := New(f.c.options)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if restart.Restore(context.Background()) == nil || restart.Metrics().Ready {
+		t.Fatal("expired checkpoint activated")
+	}
+	f.c = restart
+	old, oldNotice := f.artifact(t, 6) // freshly signed but lower generation
+	if restart.Apply(context.Background(), oldNotice, old).Accepted {
+		t.Fatal("expired checkpoint lost replay floor")
+	}
+	apply(t, f, 8)
+	if !f.c.Metrics().Ready {
+		t.Fatal("new valid generation did not recover readiness")
+	}
+}
+
+func TestLostACKRetransmissionDoesNotApplyReplay(t *testing.T) {
+	f := setup(t)
+	raw, notice := f.artifact(t, 1)
+	if !f.c.Apply(context.Background(), notice, raw).Accepted {
+		t.Fatal("initial apply failed")
+	}
+	if ack, ok := f.c.CurrentAck(notice); !ok || !ack.Accepted || ack.Code != "already_applied" {
+		t.Fatal("lost ACK cannot recover")
+	}
+	if f.c.Apply(context.Background(), notice, raw).Accepted {
+		t.Fatal("ACK recovery allowed replay apply")
+	}
+	bad := notice
+	bad.Digest = strings.Repeat("0", 64)
+	if _, ok := f.c.CurrentAck(bad); ok {
+		t.Fatal("different artifact confirmed")
+	}
+	f.now = f.now.Add(3 * time.Hour)
+	if _, ok := f.c.CurrentAck(notice); ok {
+		t.Fatal("expired state confirmed ready")
 	}
 }

@@ -80,14 +80,15 @@ type Metrics struct {
 }
 
 type Consumer struct {
-	mu          sync.Mutex
-	active      atomic.Pointer[view]
-	options     Options
-	readers     map[*view]int
-	readerCount int
-	metrics     Metrics
-	initialized bool
-	startupErr  error
+	mu            sync.Mutex
+	active        atomic.Pointer[view]
+	options       Options
+	readers       map[*view]int
+	readerCount   int
+	metrics       Metrics
+	initialized   bool
+	startupErr    error
+	recoveryFloor uint64
 }
 
 func New(options Options) (*Consumer, error) {
@@ -105,7 +106,10 @@ func (c *Consumer) result(notice Notice, accepted bool, code string) Ack {
 		c.metrics.ACKs++
 	} else {
 		c.metrics.NACKs++
-		c.metrics.InvalidArtifacts++
+		switch code {
+		case "invalid_snapshot", "stale_snapshot", "invalid_notice", "artifact_digest", "wrong_generation", "artifact_size":
+			c.metrics.InvalidArtifacts++
+		}
 	}
 	// Never reflect attacker-supplied arbitrary identifiers or signature errors.
 	return Ack{DeploymentID: c.options.DeploymentID, Generation: notice.Generation, Digest: safeDigest(notice.Digest), Accepted: accepted, Code: code}
@@ -173,7 +177,7 @@ func (c *Consumer) Apply(ctx context.Context, notice Notice, raw []byte) Ack {
 	if notice.Digest != hex.EncodeToString(digest[:]) {
 		return c.result(notice, false, "artifact_digest")
 	}
-	minimum := c.options.MinimumGeneration
+	minimum := max(c.options.MinimumGeneration, c.recoveryFloor)
 	if active := c.active.Load(); active != nil {
 		minimum = active.envelope.Generation
 	}
@@ -232,6 +236,17 @@ func (c *Consumer) startupLocked(ctx context.Context) error {
 		return c.startupErr
 	}
 	candidate, code := c.validate(raw, 0)
+	if code != "" {
+		// An authentic expired checkpoint is evidence of a generation already
+		// observed, never permission to serve. Preserve only its replay floor so
+		// a newer valid candidate can recover automatically after an outage.
+		historical, historicalErr := configsnapshot.VerifyCheckpoint(raw, c.options.Trust, c.options.DeploymentID, c.options.Clock().UTC())
+		if historicalErr == nil && historical.Generation >= c.options.MinimumGeneration {
+			c.recoveryFloor = historical.Generation
+			c.initialized = true
+			return nil
+		}
+	}
 	if code == "" && candidate.envelope.Generation < c.options.MinimumGeneration {
 		code = "checkpoint_rollback"
 	}
@@ -272,8 +287,25 @@ func (c *Consumer) Metrics() Metrics {
 	defer c.mu.Unlock()
 	metrics := c.metrics
 	metrics.Ready = c.readyLocked()
-	metrics.Stale = c.active.Load() != nil && !metrics.Ready
+	metrics.Stale = (c.active.Load() != nil || c.recoveryFloor > 0) && !metrics.Ready
 	return metrics
+}
+
+// CurrentAck retransmits an ACK lost in transit without applying a replay. It
+// confirms only the exact already-active artifact under current trust/readiness.
+// Callers must use Apply for every candidate; this method cannot advance state.
+func (c *Consumer) CurrentAck(notice Notice) (Ack, bool) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	active := c.active.Load()
+	if active == nil || !c.readyLocked() || notice.DeploymentID != c.options.DeploymentID || notice.Generation != active.envelope.Generation {
+		return Ack{}, false
+	}
+	digest := sha256.Sum256(active.raw)
+	if notice.Digest != hex.EncodeToString(digest[:]) {
+		return Ack{}, false
+	}
+	return c.result(notice, true, "already_applied"), true
 }
 
 // Capture pins exactly one generation for the whole operation. Close must be
