@@ -50,7 +50,8 @@ The component reports retain exact author source commits and commands.
 | Integration / `sprint/03b-integration` | Compression/crypto advisory repair, evidence-runner formatting, final gates, status/risk/threat/ADR synchronization and this report | `3c1998b`, `da3598c`, final PR10 commits |
 
 Author-to-integration commit mapping is preserved by Git history and the reports.
-`evidence/sprint03b-root/commit-map.json` records every integrated sprint commit.
+`evidence/sprint03b-root/commit-map.json` records integrated implementation/review
+commits before the final report/evidence closeout.
 PR10 is the single integration PR; separate component PRs are not claimed.
 
 ## Actual execution and immutable evidence
@@ -93,6 +94,10 @@ dependencies and actual passing rerun are preserved. No ignore or security
 test suppression was added. Initial hosted run43050815764 fails formatting;
 `da3598c` fixes it and run43052478453 passes. F's initially missing `ws` parser
 fixture and corrected outage-injection attempt are disclosed in its report.
+Raw Compose/scanner stdout retains trailing whitespace and final blank lines.
+The full evidence-inclusive whitespace check therefore exits2; source-only
+whitespace validation passes. Raw log bytes and their original hashes are
+preserved rather than normalized to manufacture a clean evidence check.
 
 Historical source manifests are interpreted against their recorded immutable
 commits. D's original manifest matches all current files except the evidence
