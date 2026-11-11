@@ -1,0 +1,19 @@
+name: Defect
+description: Report a reproducible defect without credentials or private customer data.
+title: "fix: "
+labels: [bug]
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include module, environment, expected and actual behavior. Redact secrets.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and threat impact
+      description: Exact local commands, safe output and affected threat IDs.
+    validations:
+      required: true

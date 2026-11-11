@@ -1,0 +1,931 @@
+{
+  "source": "https://api.github.com/repos/cloudflare/pingora/security-advisories",
+  "response": [
+    {
+      "ghsa_id": "GHSA-vx4q-2c55-cvmg",
+      "cve_id": "CVE-2026-105299",
+      "url": "https://api.github.com/repos/cloudflare/pingora/security-advisories/GHSA-vx4q-2c55-cvmg",
+      "html_url": "https://github.com/cloudflare/pingora/security/advisories/GHSA-vx4q-2c55-cvmg",
+      "summary": "Pingora forwards client-nominated Connection headers to HTTP/1 upstreams, allowing ACL bypass in specific chained deployments",
+      "description": "### Summary\nBefore version 0.9.0, the HTTP/1 upstream path in pingora-proxy passed the downstream request through `upstream_request_filter` and wrote it to the upstream without removing the client's Connection header, other hop-by-hop headers, or the headers Connection nominated, although RFC 9110 Section 7.6.1 requires intermediaries to remove them. The HTTP/2 upstream path already removed Connection and related HTTP/1-specific headers. A client could therefore nominate a header that the application adds in `upstream_request_filter` (for example, `Connection: keep-alive, X-Forwarded-For`). A downstream HTTP/1 intermediary that honors Connection would then strip the Pingora-added header before it reached the origin.\n\n### Impact\nSpecifically affects chained deployments where an HTTP/1 intermediary between Pingora and the origin processes Connection nominations (for example, Go's `net/http/httputil.ReverseProxy`) and the origin trusts headers added by that intermediary (for example, X-Forwarded-For for IP-based authorization). A remote, unauthenticated attacker can have those headers removed, potentially bypassing authorization. The reporter demonstrated access to an IP-restricted endpoint using X-Forwarded-For for IP validation on the origin. This is the same class of issue as CVE-2022-31813 in Apache HTTP Server.\n\nNote that Cloudflare CDN customers were unaffected, as no such chained deployment as described above exists with internal Pingora services, and Connection headers are sanitized before arriving at Pingora gateways.\n\n### Mitigation\n- Upgrade to pingora 0.9.0 or later. By default, Pingora now removes hop-by-hop and Connection-nominated headers from upstream requests, and rejects requests whose Connection header nominates Host, X-Forwarded-For, X-Forwarded-Host, X-Forwarded-Proto, or a pseudo-header. This is controlled by `PeerOptions::http_upstream_request_policy` (`HttpUpstreamRequestPolicy`). Fix commits: https://github.com/cloudflare/pingora/commit/28c18e6b6b04dd0bd937234e5950049e6d74cded, https://github.com/cloudflare/pingora/commit/ca23f1668eca8e78be7ba62ef0edbd458b40eeee\n- Do not use `HttpUpstreamRequestPolicy::preserve()` if the origin relies on headers added by Pingora; it restores the old passthrough behavior.\n- If you cannot upgrade: in `upstream_request_filter`, remove the Connection header and every header it nominates before adding trusted headers.\n\n### References\n- [CVE-2026-105299](https://www.cve.org/CVERecord?id=CVE-2026-105299)\n\n### Credits\nReported by [@thesmartshadow](https://github.com/thesmartshadow).\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "drcaramelsyrup",
+        "id": 834403,
+        "node_id": "MDQ6VXNlcjgzNDQwMw==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/834403?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/drcaramelsyrup",
+        "html_url": "https://github.com/drcaramelsyrup",
+        "followers_url": "https://api.github.com/users/drcaramelsyrup/followers",
+        "following_url": "https://api.github.com/users/drcaramelsyrup/following{/other_user}",
+        "gists_url": "https://api.github.com/users/drcaramelsyrup/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/drcaramelsyrup/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/drcaramelsyrup/subscriptions",
+        "organizations_url": "https://api.github.com/users/drcaramelsyrup/orgs",
+        "repos_url": "https://api.github.com/users/drcaramelsyrup/repos",
+        "events_url": "https://api.github.com/users/drcaramelsyrup/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/drcaramelsyrup/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-vx4q-2c55-cvmg",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-105299",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-20T16:25:08Z",
+      "published_at": "2026-10-20T16:25:08Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "rust",
+            "name": "pingora-proxy"
+          },
+          "vulnerable_version_range": "< 0.9.0",
+          "patched_versions": "0.9.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:N/SC:H/SI:H/SA:N",
+          "score": 7.0
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-345",
+          "name": "Insufficient Verification of Data Authenticity"
+        },
+        {
+          "cwe_id": "CWE-346",
+          "name": "Origin Validation Error"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-345",
+        "CWE-346"
+      ],
+      "credits": [
+        {
+          "login": "thesmartshadow",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "thesmartshadow",
+            "id": 33183887,
+            "node_id": "MDQ6VXNlcjMzMTgzODg3",
+            "avatar_url": "https://avatars.githubusercontent.com/u/33183887?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/thesmartshadow",
+            "html_url": "https://github.com/thesmartshadow",
+            "followers_url": "https://api.github.com/users/thesmartshadow/followers",
+            "following_url": "https://api.github.com/users/thesmartshadow/following{/other_user}",
+            "gists_url": "https://api.github.com/users/thesmartshadow/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/thesmartshadow/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/thesmartshadow/subscriptions",
+            "organizations_url": "https://api.github.com/users/thesmartshadow/orgs",
+            "repos_url": "https://api.github.com/users/thesmartshadow/repos",
+            "events_url": "https://api.github.com/users/thesmartshadow/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/thesmartshadow/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 1,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-mgg9-6xw2-jfgp",
+      "cve_id": "CVE-2026-105298",
+      "url": "https://api.github.com/repos/cloudflare/pingora/security-advisories/GHSA-mgg9-6xw2-jfgp",
+      "html_url": "https://github.com/cloudflare/pingora/security/advisories/GHSA-mgg9-6xw2-jfgp",
+      "summary": "Pingora HTTP/2 :authority and Host header mismatch enables cache poisoning and host-based access control bypass",
+      "description": "### Summary\nBefore version 0.9.0, Pingora accepted HTTP/2 requests whose Host header differed from the `:authority` pseudo-header. Request filters, cache keys, and logs that read the request URI (`session.req_header().uri`) saw the `:authority` value, but the upstream received the client-supplied Host value. Pingora also accepted `:authority` values containing userinfo (for example, `user@example.com`). This violates RFC 9113 Section 8.3.1, which requires an intermediary to use the `:authority` value for Host and replace any existing Host field.\n\n### Root cause\n- HTTP/2 to HTTP/1.1: Host was generated from `:authority` only when the request had no Host header, so a conflicting client Host was forwarded unchanged.\n- HTTP/2 to HTTP/2: the client Host header was removed and used to overwrite the upstream `:authority`, after request filters had already run against the original `:authority`.\n- The HTTP/2 server did not compare Host with `:authority` and did not reject userinfo in the authority.\n\n### Impact\nA remote, unauthenticated attacker can send a single HTTP/2 request that the application sees as one host and the upstream receives as another. Where request filters, access controls, or cache keys use the URI authority and the upstream routes by Host, this can lead to:\n\n- Cache poisoning: a response from another virtual host is stored under the victim host's cache key and served to other users (this also requires the upstream to serve different content per Host).\n- Host-based access control bypass: a request approved for one host is served by a different virtual host on the upstream.\n\nDeployments that do not accept HTTP/2 from clients, or that do not use the request authority for security or caching decisions, are not affected.\n\nNote that Cloudflare CDN customers were unaffected, as internal Pingora services at Cloudflare do not have HTTP/2 clients.\n\n### Mitigation\n- Upgrade to pingora 0.9.0 or later. Pingora now returns 400 Bad Request for HTTP/2 requests whose Host differs from `:authority`, that contain more than one Host, or whose authority contains userinfo, and keeps the upstream Host or `:authority` consistent with the request authority. Fix commits: https://github.com/cloudflare/pingora/commit/915590a91811877795531f6ba0927a3138b5cb4b, https://github.com/cloudflare/pingora/commit/ffab8302d08d4292d1924eb8fe84647fd5cb8e76\n- If you cannot upgrade: in `request_filter`, reject HTTP/2 requests that carry a Host header different from the URI authority, or whose authority contains `@`.\n\n### References\n- [CVE-2026-105298](https://www.cve.org/CVERecord?id=CVE-2026-105298)\n\n### Credits\nReported by [@bipol4r](https://github.com/bipol4r).\n",
+      "severity": "medium",
+      "author": null,
+      "publisher": {
+        "login": "drcaramelsyrup",
+        "id": 834403,
+        "node_id": "MDQ6VXNlcjgzNDQwMw==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/834403?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/drcaramelsyrup",
+        "html_url": "https://github.com/drcaramelsyrup",
+        "followers_url": "https://api.github.com/users/drcaramelsyrup/followers",
+        "following_url": "https://api.github.com/users/drcaramelsyrup/following{/other_user}",
+        "gists_url": "https://api.github.com/users/drcaramelsyrup/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/drcaramelsyrup/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/drcaramelsyrup/subscriptions",
+        "organizations_url": "https://api.github.com/users/drcaramelsyrup/orgs",
+        "repos_url": "https://api.github.com/users/drcaramelsyrup/repos",
+        "events_url": "https://api.github.com/users/drcaramelsyrup/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/drcaramelsyrup/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-mgg9-6xw2-jfgp",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-105298",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-20T16:25:35Z",
+      "published_at": "2026-10-20T16:25:35Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "rust",
+            "name": "pingora-proxy"
+          },
+          "vulnerable_version_range": "< 0.9.0",
+          "patched_versions": "0.9.0",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "rust",
+            "name": "pingora-core"
+          },
+          "vulnerable_version_range": "< 0.9.0",
+          "patched_versions": "0.9.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:N/SC:L/SI:L/SA:N",
+          "score": 6.3
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-436",
+          "name": "Interpretation Conflict"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-436"
+      ],
+      "credits": [
+        {
+          "login": "bipol4r",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "bipol4r",
+            "id": 109329336,
+            "node_id": "U_kgDOBoQ7uA",
+            "avatar_url": "https://avatars.githubusercontent.com/u/109329336?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/bipol4r",
+            "html_url": "https://github.com/bipol4r",
+            "followers_url": "https://api.github.com/users/bipol4r/followers",
+            "following_url": "https://api.github.com/users/bipol4r/following{/other_user}",
+            "gists_url": "https://api.github.com/users/bipol4r/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/bipol4r/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/bipol4r/subscriptions",
+            "organizations_url": "https://api.github.com/users/bipol4r/orgs",
+            "repos_url": "https://api.github.com/users/bipol4r/repos",
+            "events_url": "https://api.github.com/users/bipol4r/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/bipol4r/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 1,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-7gpj-mj4q-x62x",
+      "cve_id": "CVE-2026-105297",
+      "url": "https://api.github.com/repos/cloudflare/pingora/security-advisories/GHSA-7gpj-mj4q-x62x",
+      "html_url": "https://github.com/cloudflare/pingora/security/advisories/GHSA-7gpj-mj4q-x62x",
+      "summary": "Pingora HTTP/2 server memory exhaustion through unbounded default header-list and concurrent-stream limits",
+      "description": "### Summary\nBefore version 0.8.1, Pingora's HTTP/2 server used the h2 crate's default limits unless the application set its own 16 MiB decoded header-list size and no limit on concurrent streams. A remote, unauthenticated client can send 1-byte HPACK references to a near-empty header, making the server allocate hundreds of thousands of header fields per stream across an unlimited number of streams on one connection, and use HTTP/2 flow control to keep those streams open. This can exhaust memory and degrade or terminate the Pingora process.\n\n### Impact\nRemote, unauthenticated denial of service against any Pingora service that terminates HTTP/2 (h2 or h2c) without explicitly setting `max_header_list_size` and `max_concurrent_streams`. The reporter showed that a single connection could get a Pingora process with a 2 GiB memory limit OOM-killed.\n\nNote that Cloudflare CDN customers were unaffected, as internal Pingora services at Cloudflare do not have HTTP/2 clients.\n\n### Mitigation\n- Upgrade to pingora 0.8.1 or later (fix: https://github.com/cloudflare/pingora/commit/d193c8d49b8b7c1c1ede93183759caa4f6906bbd). When no `H2Options` are supplied, Pingora now advertises and enforces a 64 KiB decoded header-list limit and at most 100 concurrent streams per connection.\n- Applications that supply their own `H2Options` are not covered by these defaults and must set `max_header_list_size` and `max_concurrent_streams` explicitly (this also works on versions before 0.8.1), or, on 0.8.1 and later, start from `pingora_core::protocols::http::v2::server::default_h2_options()`. `H2Options::default()` does not include these limits.\n\n### References\n- [CVE-2026-105297](https://www.cve.org/CVERecord?id=CVE-2026-105297)\n\n### Credits\nReported by [@jro-calif](https://github.com/jro-calif).\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "drcaramelsyrup",
+        "id": 834403,
+        "node_id": "MDQ6VXNlcjgzNDQwMw==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/834403?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/drcaramelsyrup",
+        "html_url": "https://github.com/drcaramelsyrup",
+        "followers_url": "https://api.github.com/users/drcaramelsyrup/followers",
+        "following_url": "https://api.github.com/users/drcaramelsyrup/following{/other_user}",
+        "gists_url": "https://api.github.com/users/drcaramelsyrup/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/drcaramelsyrup/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/drcaramelsyrup/subscriptions",
+        "organizations_url": "https://api.github.com/users/drcaramelsyrup/orgs",
+        "repos_url": "https://api.github.com/users/drcaramelsyrup/repos",
+        "events_url": "https://api.github.com/users/drcaramelsyrup/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/drcaramelsyrup/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-7gpj-mj4q-x62x",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-105297",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-20T16:25:43Z",
+      "published_at": "2026-10-20T16:25:43Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "rust",
+            "name": "pingora-core"
+          },
+          "vulnerable_version_range": "< 0.8.1",
+          "patched_versions": "0.8.1",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+          "score": 8.7
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-400",
+          "name": "Uncontrolled Resource Consumption"
+        },
+        {
+          "cwe_id": "CWE-770",
+          "name": "Allocation of Resources Without Limits or Throttling"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-400",
+        "CWE-770"
+      ],
+      "credits": [
+        {
+          "login": "jro-calif",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "jro-calif",
+            "id": 273926274,
+            "node_id": "U_kgDOEFPIgg",
+            "avatar_url": "https://avatars.githubusercontent.com/u/273926274?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/jro-calif",
+            "html_url": "https://github.com/jro-calif",
+            "followers_url": "https://api.github.com/users/jro-calif/followers",
+            "following_url": "https://api.github.com/users/jro-calif/following{/other_user}",
+            "gists_url": "https://api.github.com/users/jro-calif/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/jro-calif/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/jro-calif/subscriptions",
+            "organizations_url": "https://api.github.com/users/jro-calif/orgs",
+            "repos_url": "https://api.github.com/users/jro-calif/repos",
+            "events_url": "https://api.github.com/users/jro-calif/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/jro-calif/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 1,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-f93w-pcj3-rggc",
+      "cve_id": "CVE-2026-2836",
+      "url": "https://api.github.com/repos/cloudflare/pingora/security-advisories/GHSA-f93w-pcj3-rggc",
+      "html_url": "https://github.com/cloudflare/pingora/security/advisories/GHSA-f93w-pcj3-rggc",
+      "summary": "Cache poisoning via insecure-by-default cache key",
+      "description": "### Impact\r\nPingora versions prior to 0.8.0 generated cache keys using only the URI path, excluding critical factors such as the host header. This allows an attacker to poison the cache and serve cross-origin responses to users.\r\n\r\nThis vulnerability affects users of Pingora's alpha proxy caching feature who relied on the default CacheKey implementation. An attacker could exploit this for cross-tenant data leakage in multi-tenant deployments, or serve malicious content to legitimate users by poisoning shared cache entries.\r\n\r\nNote: Cloudflare customers and Cloudflare's CDN infrastructure were not affected by this vulnerability, as Cloudflare's default cache key implementation uses multiple factors to prevent cache key poisoning and never made use of the previously provided default.\r\n\r\n### Patches\r\nWe strongly suggest users should upgrade to Pingora v.0.8.0 or higher, which removes the default CacheKey implementation.\r\n\r\n### Workarounds\r\nDo not rely on the provided CacheKey default, and at minimum use the host / :authority and the upstream peer TLS scheme as part of building the CacheKey, as well as other factors that may apply to the deployment e.g. HTTP method. \r\n\r\n### References\r\nSee [CVE-2026-2836](https://cve.org/CVERecord?id=CVE-2026-2836) and the [Cloudflare blog post](https://blog.cloudflare.com/pingora-oss-smuggling-vulnerabilities/) for more details.\r\n\r\n### Credits\r\nDisclosed responsibly by Rajat Raghav (@xclow3n) through the Cloudflare [Bug Bounty Program](https://www.cloudflare.com/disclosure/).",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "drcaramelsyrup",
+        "id": 834403,
+        "node_id": "MDQ6VXNlcjgzNDQwMw==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/834403?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/drcaramelsyrup",
+        "html_url": "https://github.com/drcaramelsyrup",
+        "followers_url": "https://api.github.com/users/drcaramelsyrup/followers",
+        "following_url": "https://api.github.com/users/drcaramelsyrup/following{/other_user}",
+        "gists_url": "https://api.github.com/users/drcaramelsyrup/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/drcaramelsyrup/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/drcaramelsyrup/subscriptions",
+        "organizations_url": "https://api.github.com/users/drcaramelsyrup/orgs",
+        "repos_url": "https://api.github.com/users/drcaramelsyrup/repos",
+        "events_url": "https://api.github.com/users/drcaramelsyrup/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/drcaramelsyrup/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-f93w-pcj3-rggc",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-2836",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-03-09T16:32:29Z",
+      "published_at": "2026-03-05T00:39:45Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "rust",
+            "name": "pingora-cache"
+          },
+          "vulnerable_version_range": "<=0.7.0",
+          "patched_versions": "0.8.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:N/VI:H/VA:N/SC:H/SI:H/SA:N",
+          "score": 8.4
+        }
+      },
+      "cwes": [],
+      "cwe_ids": [],
+      "credits": [
+        {
+          "login": "xclow3n",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "xclow3n",
+            "id": 63908872,
+            "node_id": "MDQ6VXNlcjYzOTA4ODcy",
+            "avatar_url": "https://avatars.githubusercontent.com/u/63908872?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/xclow3n",
+            "html_url": "https://github.com/xclow3n",
+            "followers_url": "https://api.github.com/users/xclow3n/followers",
+            "following_url": "https://api.github.com/users/xclow3n/following{/other_user}",
+            "gists_url": "https://api.github.com/users/xclow3n/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/xclow3n/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/xclow3n/subscriptions",
+            "organizations_url": "https://api.github.com/users/xclow3n/orgs",
+            "repos_url": "https://api.github.com/users/xclow3n/repos",
+            "events_url": "https://api.github.com/users/xclow3n/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/xclow3n/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-hj7x-879w-vrp7",
+      "cve_id": "CVE-2026-2835",
+      "url": "https://api.github.com/repos/cloudflare/pingora/security-advisories/GHSA-hj7x-879w-vrp7",
+      "html_url": "https://github.com/cloudflare/pingora/security/advisories/GHSA-hj7x-879w-vrp7",
+      "summary": "HTTP Request Smuggling via HTTP/1.0 and Transfer-Encoding Misparsing",
+      "description": "### Impact\r\nPingora versions prior to 0.8.0 improperly allowed HTTP/1.0 request bodies to be close-delimited and incorrectly handled multiple Transfer-Encoding values. This allows an attacker to desync Pingora's request framing from backend servers and smuggle requests to the backend.\r\n\r\nThis vulnerability primarily affects standalone Pingora deployments in front of certain backends that accept HTTP/1.0 requests. An attacker could exploit this to bypass proxy-level ACL controls and WAF logic, poison caches and upstream connections, or perform cross-user attacks by hijacking sessions.\r\n\r\nNote: Cloudflare customers and Cloudflare's CDN infrastructure were not affected by this vulnerability, as its ingress proxy layers rejected ambiguous framing such as invalid Content-Length values and internally forwarded non-ambiguous message length framing headers.\r\n\r\n### Patches\r\nPingora users should upgrade to Pingora v0.8.0 or higher that fixes this issue by correctly parsing message length headers per RFC 9112 and strictly adhering to more RFC guidelines, including that HTTP request bodies are never close-delimited (commits 7f7166d62fa916b9f11b2eb8f9e3c4999e8b9023, 40c3c1e9a43a86b38adeab8da7a2f6eba68b83ad, and 87e2e2fb37edf9be33e3b1d04726293ae6bf2052).\r\n\r\n### Workarounds\r\nAs a workaround, users can reject certain requests with an error in the request filter logic in order to stop processing bytes on the connection and disable downstream connection reuse. The user should reject any non-HTTP/1.1 request, or a request that has invalid Content-Length, multiple Transfer-Encoding headers, or Transfer-Encoding header that is not an exact \u201cchunked\u201d string match.\r\n\r\n### References\r\nSee [CVE-2026-2835](https://www.cve.org/CVERecord?id=CVE-2026-2835) and the [Cloudflare blog post](https://blog.cloudflare.com/pingora-oss-smuggling-vulnerabilities/) for more details.\r\n\r\n### Credits\r\nDisclosed responsibly by Rajat Raghav (@xclow3n) through the Cloudflare [Bug Bounty Program](https://www.cloudflare.com/disclosure/).",
+      "severity": "critical",
+      "author": null,
+      "publisher": {
+        "login": "3-shna",
+        "id": 150473831,
+        "node_id": "U_kgDOCPgMZw",
+        "avatar_url": "https://avatars.githubusercontent.com/u/150473831?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/3-shna",
+        "html_url": "https://github.com/3-shna",
+        "followers_url": "https://api.github.com/users/3-shna/followers",
+        "following_url": "https://api.github.com/users/3-shna/following{/other_user}",
+        "gists_url": "https://api.github.com/users/3-shna/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/3-shna/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/3-shna/subscriptions",
+        "organizations_url": "https://api.github.com/users/3-shna/orgs",
+        "repos_url": "https://api.github.com/users/3-shna/repos",
+        "events_url": "https://api.github.com/users/3-shna/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/3-shna/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-hj7x-879w-vrp7",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-2835",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-03-09T16:31:37Z",
+      "published_at": "2026-03-05T00:37:45Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "rust",
+            "name": "pingora-core"
+          },
+          "vulnerable_version_range": "<=0.7.0",
+          "patched_versions": "0.8.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:H/VA:N/SC:H/SI:H/SA:N",
+          "score": 9.3
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-444",
+          "name": "Inconsistent Interpretation of HTTP Requests"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-444"
+      ],
+      "credits": [
+        {
+          "login": "xclow3n",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "xclow3n",
+            "id": 63908872,
+            "node_id": "MDQ6VXNlcjYzOTA4ODcy",
+            "avatar_url": "https://avatars.githubusercontent.com/u/63908872?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/xclow3n",
+            "html_url": "https://github.com/xclow3n",
+            "followers_url": "https://api.github.com/users/xclow3n/followers",
+            "following_url": "https://api.github.com/users/xclow3n/following{/other_user}",
+            "gists_url": "https://api.github.com/users/xclow3n/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/xclow3n/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/xclow3n/subscriptions",
+            "organizations_url": "https://api.github.com/users/xclow3n/orgs",
+            "repos_url": "https://api.github.com/users/xclow3n/repos",
+            "events_url": "https://api.github.com/users/xclow3n/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/xclow3n/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-xq2h-p299-vjwv",
+      "cve_id": "CVE-2026-2833",
+      "url": "https://api.github.com/repos/cloudflare/pingora/security-advisories/GHSA-xq2h-p299-vjwv",
+      "html_url": "https://github.com/cloudflare/pingora/security/advisories/GHSA-xq2h-p299-vjwv",
+      "summary": "HTTP Request Smuggling via Premature Upgrade",
+      "description": "### Impact\r\nPingora versions prior to 0.8.0 would immediately forward bytes following a request with an Upgrade header to the backend, without waiting for a 101 Switching Protocols response. This allows an attacker to smuggle requests to the backend and bypass proxy-level security controls.\r\n\r\nThis vulnerability primarily affects standalone Pingora deployments where a Pingora proxy is exposed to external traffic. An attacker could exploit this to bypass proxy-level ACL controls and WAF logic, poison caches and upstream connections, or perform cross-user attacks by hijacking sessions.\r\n\r\nNote: Cloudflare customers and Cloudflare's CDN infrastructure were not affected by this vulnerability, as ingress proxies in the CDN stack maintain proper HTTP parsing boundaries and do not prematurely switch to upgraded connection forwarding mode.\r\n\r\n### Patches\r\nPingora users should upgrade to Pingora v0.8.0 or higher, which fixes this issue by only switching connection modes after receiving a 101 Switching Protocols response from the backend (hash 824bdeefc61e121cc8861de1b35e8e8f39026ecd). Without a 101 response, subsequent bytes continue to be parsed as HTTP requests.\r\n\r\n### Workarounds\r\nAs a workaround, users may return an error on requests with the Upgrade header present in their request filter logic in order to stop processing bytes beyond the request header and disable downstream connection reuse.\r\n\r\n### References\r\nSee [CVE-2026-2833](https://www.cve.org/cverecord?id=CVE-2026-2833) and the [Cloudflare blog post](https://blog.cloudflare.com/pingora-oss-smuggling-vulnerabilities/) for more details.\r\n\r\n### Credits\r\nDisclosed responsibly by Rajat Raghav (@xclow3n) through the Cloudflare [Bug Bounty Program](https://www.cloudflare.com/disclosure/).",
+      "severity": "critical",
+      "author": null,
+      "publisher": {
+        "login": "3-shna",
+        "id": 150473831,
+        "node_id": "U_kgDOCPgMZw",
+        "avatar_url": "https://avatars.githubusercontent.com/u/150473831?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/3-shna",
+        "html_url": "https://github.com/3-shna",
+        "followers_url": "https://api.github.com/users/3-shna/followers",
+        "following_url": "https://api.github.com/users/3-shna/following{/other_user}",
+        "gists_url": "https://api.github.com/users/3-shna/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/3-shna/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/3-shna/subscriptions",
+        "organizations_url": "https://api.github.com/users/3-shna/orgs",
+        "repos_url": "https://api.github.com/users/3-shna/repos",
+        "events_url": "https://api.github.com/users/3-shna/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/3-shna/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-xq2h-p299-vjwv",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-2833",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-03-09T16:30:41Z",
+      "published_at": "2026-03-05T00:37:35Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "rust",
+            "name": "pingora-core"
+          },
+          "vulnerable_version_range": "<=0.7.0",
+          "patched_versions": "0.8.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:H/VA:N/SC:H/SI:H/SA:N",
+          "score": 9.3
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-444",
+          "name": "Inconsistent Interpretation of HTTP Requests"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-444"
+      ],
+      "credits": [
+        {
+          "login": "xclow3n",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "xclow3n",
+            "id": 63908872,
+            "node_id": "MDQ6VXNlcjYzOTA4ODcy",
+            "avatar_url": "https://avatars.githubusercontent.com/u/63908872?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/xclow3n",
+            "html_url": "https://github.com/xclow3n",
+            "followers_url": "https://api.github.com/users/xclow3n/followers",
+            "following_url": "https://api.github.com/users/xclow3n/following{/other_user}",
+            "gists_url": "https://api.github.com/users/xclow3n/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/xclow3n/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/xclow3n/subscriptions",
+            "organizations_url": "https://api.github.com/users/xclow3n/orgs",
+            "repos_url": "https://api.github.com/users/xclow3n/repos",
+            "events_url": "https://api.github.com/users/xclow3n/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/xclow3n/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-393w-9x6h-8gc7",
+      "cve_id": "CVE-2025-8671",
+      "url": "https://api.github.com/repos/cloudflare/pingora/security-advisories/GHSA-393w-9x6h-8gc7",
+      "html_url": "https://github.com/cloudflare/pingora/security/advisories/GHSA-393w-9x6h-8gc7",
+      "summary": "Pingora update for MadeYouReset HTTP/2 vulnerability",
+      "description": "Pingora deployments that include HTTP/2 server support may be affected by the vulnerability described in CVE-2025-8671. Under certain conditions, Pingora applications may allocate buffers before the HTTP/2 reset and resulting stream cancellation is processed by the server. Repeated resets can force excessive memory consumption and lead to denial-of-service.\r\n\r\n**Impact**:\r\nOn affected versions, malicious clients could trigger unusually high memory consumption, which may result in service instability or process termination.\r\n\r\n**Credits**:\r\nReported responsibly by security researcher [Gal Bar Nahum](https://github.com/galbarnahum) (@[galbarnahum](https://github.com/galbarnahum))\r\n\r\n**Mitigation**:\r\nThis issue is addressed by ensuring Pingora uses patched versions of HTTP/2 dependencies that include reset-handling safeguards to release connection resources before excessive memory buildup. Users should upgrade to the latest Pingora release, which incorporates the required fixes.\r\n- Users are requested to upgrade to latest version of Pingora >= 0.6.0",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "drcaramelsyrup",
+        "id": 834403,
+        "node_id": "MDQ6VXNlcjgzNDQwMw==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/834403?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/drcaramelsyrup",
+        "html_url": "https://github.com/drcaramelsyrup",
+        "followers_url": "https://api.github.com/users/drcaramelsyrup/followers",
+        "following_url": "https://api.github.com/users/drcaramelsyrup/following{/other_user}",
+        "gists_url": "https://api.github.com/users/drcaramelsyrup/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/drcaramelsyrup/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/drcaramelsyrup/subscriptions",
+        "organizations_url": "https://api.github.com/users/drcaramelsyrup/orgs",
+        "repos_url": "https://api.github.com/users/drcaramelsyrup/repos",
+        "events_url": "https://api.github.com/users/drcaramelsyrup/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/drcaramelsyrup/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-393w-9x6h-8gc7",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2025-8671",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2025-09-17T18:48:52Z",
+      "published_at": "2025-09-17T18:48:52Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "rust",
+            "name": "pingora-core"
+          },
+          "vulnerable_version_range": "< 0.6.0",
+          "patched_versions": ">= 0.6.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:L",
+          "score": 8.2
+        }
+      },
+      "cwes": [],
+      "cwe_ids": [],
+      "credits": [
+        {
+          "login": "galbarnahum",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "galbarnahum",
+            "id": 26554459,
+            "node_id": "MDQ6VXNlcjI2NTU0NDU5",
+            "avatar_url": "https://avatars.githubusercontent.com/u/26554459?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/galbarnahum",
+            "html_url": "https://github.com/galbarnahum",
+            "followers_url": "https://api.github.com/users/galbarnahum/followers",
+            "following_url": "https://api.github.com/users/galbarnahum/following{/other_user}",
+            "gists_url": "https://api.github.com/users/galbarnahum/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/galbarnahum/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/galbarnahum/subscriptions",
+            "organizations_url": "https://api.github.com/users/galbarnahum/orgs",
+            "repos_url": "https://api.github.com/users/galbarnahum/repos",
+            "events_url": "https://api.github.com/users/galbarnahum/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/galbarnahum/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-93c7-7xqw-w357",
+      "cve_id": "CVE-2025-4366",
+      "url": "https://api.github.com/repos/cloudflare/pingora/security-advisories/GHSA-93c7-7xqw-w357",
+      "html_url": "https://github.com/cloudflare/pingora/security/advisories/GHSA-93c7-7xqw-w357",
+      "summary": "Request Smuggling Vulnerability in Pingora",
+      "description": "This issue is already disclosed at https://www.cve.org/cverecord?id=CVE-2025-4366\r\n\r\nA request smuggling vulnerability identified within Pingora\u2019s proxying framework, pingora-proxy, allows malicious HTTP requests to be injected via manipulated request bodies on cache HITs, leading to unauthorized request execution and potential cache poisoning.\r\n\r\n### Fixed in\r\nhttps://github.com/cloudflare/pingora/commit/fda3317ec822678564d641e7cf1c9b77ee3759ff \r\n\r\n### Impact\r\nThe issue could lead to request smuggling in cases where Pingora\u2019s proxying framework, pingora-proxy, is used for caching allowing an attacker to manipulate headers and URLs in subsequent requests made on the same HTTP/1.1 connection.\r\n\r\n### Additional Information\r\nhttps://blog.cloudflare.com/resolving-a-request-smuggling-vulnerability-in-pingora/\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "drcaramelsyrup",
+        "id": 834403,
+        "node_id": "MDQ6VXNlcjgzNDQwMw==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/834403?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/drcaramelsyrup",
+        "html_url": "https://github.com/drcaramelsyrup",
+        "followers_url": "https://api.github.com/users/drcaramelsyrup/followers",
+        "following_url": "https://api.github.com/users/drcaramelsyrup/following{/other_user}",
+        "gists_url": "https://api.github.com/users/drcaramelsyrup/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/drcaramelsyrup/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/drcaramelsyrup/subscriptions",
+        "organizations_url": "https://api.github.com/users/drcaramelsyrup/orgs",
+        "repos_url": "https://api.github.com/users/drcaramelsyrup/repos",
+        "events_url": "https://api.github.com/users/drcaramelsyrup/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/drcaramelsyrup/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-93c7-7xqw-w357",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2025-4366",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2025-06-20T17:28:16Z",
+      "published_at": "2025-06-20T17:28:16Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "rust",
+            "name": "pingora-core"
+          },
+          "vulnerable_version_range": "< 0.5.0",
+          "patched_versions": ">= 0.5.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:H/AT:P/PR:N/UI:A/VC:H/VI:H/VA:N/SC:L/SI:L/SA:N",
+          "score": 7.4
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-444",
+          "name": "Inconsistent Interpretation of HTTP Requests"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-444"
+      ],
+      "credits": [],
+      "credits_detailed": [],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    }
+  ]
+}

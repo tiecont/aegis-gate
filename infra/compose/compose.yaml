@@ -1,0 +1,89 @@
+name: aegisgate-local
+services:
+  postgres:
+    image: "${AEGIS_POSTGRES_IMAGE:?run make fixture-images}"
+    pull_policy: never
+    environment:
+      POSTGRES_DB: aegisgate_local
+      POSTGRES_USER: aegisgate_local
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres-password
+    secrets: [postgres-password]
+    ports: ["127.0.0.1:54329:5432"]
+    volumes: ["postgres-data:/var/lib/postgresql"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aegisgate_local -d aegisgate_local"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    networks: [lab]
+  redis:
+    image: redis:8.10.3-alpine@sha256:71885d8cc6e42f2bc0aa2eb853bfc4be200b5108a46ac50e117ae1df0531fb80
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    entrypoint: ["redis-server", "/run/secrets/redis-config"]
+    secrets: [redis-config, redis-password]
+    ports: ["127.0.0.1:56379:6379"]
+    tmpfs:
+      [
+        "/data:rw,noexec,nosuid,size=64m,uid=${LOCAL_UID:-1000},gid=${LOCAL_GID:-1000}",
+      ]
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "REDISCLI_AUTH=$$(cat /run/secrets/redis-password) redis-cli --no-auth-warning ping | grep -q PONG",
+        ]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    networks: [lab]
+  nats:
+    image: nats:2.15.2-alpine@sha256:afae2fdbe2e326c65e1246cb83b9d05d319188734f3bd577ac8072daae78a10f
+    command: ["-c", "/run/secrets/nats-config"]
+    secrets: [nats-config]
+    ports: ["127.0.0.1:54222:4222"]
+    volumes: ["nats-data:/data"]
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "-q",
+          "-O",
+          "/dev/null",
+          "http://127.0.0.1:8222/healthz?js-enabled-only=true",
+        ]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    networks: [lab]
+  demo-origin:
+    image: "${AEGIS_ORIGIN_IMAGE:?run make fixture-images}"
+    pull_policy: never
+    command: ["python", "/app/origin.py"]
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    ports: ["127.0.0.1:18443:8443"]
+    volumes:
+      - ../../packages/test-fixtures/origin.py:/app/origin.py:ro
+      - ../../.local/pki/origin-a.pem:/fixtures/origin.pem:ro
+      - ../../.local/pki/origin-a.key:/fixtures/origin.key:ro
+    networks: [lab]
+networks:
+  lab:
+    driver: bridge
+volumes:
+  postgres-data:
+  nats-data:
+secrets:
+  postgres-password:
+    file: ../../.local/postgres-password
+  redis-password:
+    file: ../../.local/redis-password
+  redis-config:
+    file: ../../.local/redis.conf
+  nats-config:
+    file: ../../.local/nats.conf

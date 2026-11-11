@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "generation": 173,
+  "deployment_id": "00000000-0000-4000-8000-000000000173",
+  "content_sha256": "EXAMPLE_ONLY_COMPUTED_BY_PUBLISHER",
+  "signing_key_id": "config-signing-key-2026-01",
+  "signature": "EXAMPLE_ONLY_BASE64_SIGNATURE",
+  "tenants": [
+    {
+      "tenant_id": "demo-tenant-a",
+      "domain": "api.demo.example",
+      "domain_verified": true,
+      "tls_certificate_ref": "secrets://certificates/demo-tenant-a/api.demo.example",
+      "routes": [
+        {
+          "route_id": "route-v1",
+          "path_prefix": "/v1/",
+          "methods": ["GET", "POST"],
+          "origin_pool_id": "origin-1",
+          "policy_id": "auth-policy-1",
+          "timeout_ms": 3000,
+          "max_request_body_bytes": 1048576
+        }
+      ],
+      "origins": [
+        {
+          "id": "origin-1",
+          "url": "https://origin.demo.example:443",
+          "tls_verify": true,
+          "weight": 1
+        }
+      ],
+      "policies": [
+        {
+          "id": "auth-policy-1",
+          "jwt_issuer": "https://identity.demo.example/",
+          "jwt_audience": "aegisgate-demo-api",
+          "jwks_url": "https://identity.demo.example/.well-known/jwks.json",
+          "accepted_algs": ["RS256"],
+          "allow_anonymous": false,
+          "local_rate_limit_per_second": 20,
+          "local_burst": 40
+        }
+      ]
+    }
+  ]
+}

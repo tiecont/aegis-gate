@@ -1,0 +1,8 @@
+# Standard-library-only fixture origin needs neither pip nor bundled vendors.
+FROM python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894
+RUN rm -rf /usr/local/lib/python3.14/site-packages/* \
+      /usr/local/lib/python3.14/ensurepip /root/.cache \
+    && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.14 \
+    && python -I -c "import http.server, ssl; assert ssl.OPENSSL_VERSION"
+LABEL org.aegisgate.scope="unsafe-local-fixture" \
+      org.aegisgate.base="python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894"

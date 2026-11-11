@@ -1,0 +1,71 @@
+python3 scripts/dev-secrets.py
+Local development secrets ready (material not logged)
+python3 scripts/build-fixture-images.py
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.postgres
+#1 transferring dockerfile: 644B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 102B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 DONE 0.0s
+
+#5 [1/4] FROM docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395
+#5 resolve docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395 0.0s done
+#5 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 39B done
+#4 DONE 0.0s
+
+#6 [2/4] RUN apk add --no-cache krb5-libs=1.22.3-r0 libxslt=1.1.43-r4 su-exec=0.3-r0     && rm /usr/local/bin/gosu
+#6 CACHED
+
+#7 [3/4] COPY su-exec-wrapper.sh /usr/local/bin/gosu
+#7 CACHED
+
+#8 [4/4] RUN chmod 0755 /usr/local/bin/gosu     && /usr/local/bin/gosu postgres id -u | grep -qx 70
+#8 CACHED
+
+#9 exporting to image
+#9 exporting layers done
+#9 exporting manifest sha256:3bd3054c489c5cef8220a4bd142432251b9ae19f071ba32ca50b2c4602aaa6c3 done
+#9 exporting config sha256:44658fc6d17db57eea69a9498afb1718d8ce18ade357e532e2a52b8bcf1834d8 done
+#9 naming to moby-dangling@sha256:3bd3054c489c5cef8220a4bd142432251b9ae19f071ba32ca50b2c4602aaa6c3 done
+#9 unpacking to moby-dangling@sha256:3bd3054c489c5cef8220a4bd142432251b9ae19f071ba32ca50b2c4602aaa6c3 done
+#9 DONE 0.0s
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.origin
+#1 transferring dockerfile: 658B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 102B done
+#3 DONE 0.0s
+
+#4 [1/2] FROM docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894
+#4 resolve docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894 0.0s done
+#4 DONE 0.0s
+
+#5 [2/2] RUN rm -rf /usr/local/lib/python3.14/site-packages/*       /usr/local/lib/python3.14/ensurepip /root/.cache     && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.14     && python -I -c "import http.server, ssl; assert ssl.OPENSSL_VERSION"
+#5 CACHED
+
+#6 exporting to image
+#6 exporting layers done
+#6 exporting manifest sha256:d951150f6a4075e1bc5d55510f86ee72c69e9d517fe9ae2aa0e40b75bec53f7b done
+#6 exporting config sha256:f9740f3564b69e0e3489cb82c41ec73249dc531a6fad4dc019edf3e7cd41a528 done
+#6 naming to moby-dangling@sha256:d951150f6a4075e1bc5d55510f86ee72c69e9d517fe9ae2aa0e40b75bec53f7b done
+#6 unpacking to moby-dangling@sha256:d951150f6a4075e1bc5d55510f86ee72c69e9d517fe9ae2aa0e40b75bec53f7b 0.0s done
+#6 DONE 0.1s
+Local fixture images built and locked by immutable image ID; no publication

@@ -1,0 +1,28 @@
+version: 2
+updates:
+  - package-ecosystem: gomod
+    directory: /
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+  - package-ecosystem: cargo
+    directory: /apps/edge
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+  - package-ecosystem: npm
+    directory: /
+    schedule: { interval: weekly }
+    versioning-strategy: increase
+    open-pull-requests-limit: 5
+  - package-ecosystem: npm
+    directory: /apps/dashboard
+    schedule: { interval: weekly }
+    versioning-strategy: increase
+    open-pull-requests-limit: 5
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+  - package-ecosystem: docker-compose
+    directory: /infra/compose
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5

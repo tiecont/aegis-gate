@@ -1,0 +1,287 @@
+{
+  "started_at": "2026-11-11T03:53:05.944Z",
+  "node": "v26.13.0",
+  "platform": "linux",
+  "cpu": "AMD Ryzen 7 4800HS with Radeon Graphics",
+  "logical_cpus": 16,
+  "memory_bytes": 24573243392,
+  "profile": "owned loopback lab; no production claims",
+  "tests": [
+    {
+      "name": "two-SNI-certificate-selection",
+      "status": "pass",
+      "milliseconds": 15.35
+    },
+    {
+      "name": "unknown-and-missing-SNI-handshake-rejected",
+      "status": "pass",
+      "milliseconds": 16.25
+    },
+    {
+      "name": "pre-TLS-filter-rejects-unapproved-lab-source",
+      "status": "pass",
+      "milliseconds": 3.44
+    },
+    {
+      "name": "HTTP1-routing-and-untrusted-header-stripping",
+      "status": "pass",
+      "milliseconds": 5.94
+    },
+    {
+      "name": "cross-tenant-SNI-Host-binding",
+      "status": "pass",
+      "milliseconds": 15.96
+    },
+    {
+      "name": "declared-oversized-body-rejected-before-origin",
+      "status": "pass",
+      "milliseconds": 5.71
+    },
+    {
+      "name": "HTTP2-downstream-and-upstream-ALPN",
+      "status": "pass",
+      "milliseconds": 15.67
+    },
+    {
+      "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+      "status": "pass",
+      "milliseconds": 22.07
+    },
+    {
+      "name": "HTTP1-and-HTTP2-body-streaming",
+      "status": "pass",
+      "milliseconds": 444.28,
+      "detail": {
+        "first_response_chunk_ms": 7.55,
+        "payload_bytes": 245760
+      }
+    },
+    {
+      "name": "WebSocket-upgrade-bidirectional-close",
+      "status": "pass",
+      "milliseconds": 16.88
+    },
+    {
+      "name": "certificate-rotation-keeps-active-stream-and-snapshot",
+      "status": "pass",
+      "milliseconds": 422.21,
+      "detail": {
+        "active_generation": 1,
+        "new_generation": 2
+      }
+    },
+    {
+      "name": "invalid-and-replayed-snapshot-retains-last-good",
+      "status": "pass",
+      "milliseconds": 388.74
+    },
+    {
+      "name": "invalid-certificate-config-retains-last-good",
+      "status": "pass",
+      "milliseconds": 696.99,
+      "detail": {
+        "rejected": [
+          "mismatched key",
+          "wrong SAN",
+          "duplicate host",
+          "publicly readable key"
+        ],
+        "rejected_generation": 4,
+        "restored_generation": 5
+      }
+    },
+    {
+      "name": "verified-origin-TLS-rejects-wrong",
+      "status": "pass",
+      "milliseconds": 230.72
+    },
+    {
+      "name": "verified-origin-TLS-rejects-expired",
+      "status": "pass",
+      "milliseconds": 228.97
+    },
+    {
+      "name": "verified-origin-TLS-rejects-untrusted",
+      "status": "pass",
+      "milliseconds": 226.67
+    },
+    {
+      "name": "trust-store-swap-cannot-reuse-old-origin-TLS-session",
+      "status": "pass",
+      "milliseconds": 244.99
+    },
+    {
+      "name": "origin-read-timeout-is-bounded",
+      "status": "pass",
+      "milliseconds": 2015.84,
+      "detail": {
+        "timeout_ms": 2015.75
+      }
+    },
+    {
+      "name": "origin-connection-pooling",
+      "status": "pass",
+      "milliseconds": 20.88,
+      "detail": {
+        "sequential_requests": 6,
+        "unique_origin_connections": 1
+      }
+    },
+    {
+      "name": "same-origin-pools-are-partitioned-between-routes",
+      "status": "pass",
+      "milliseconds": 151.83
+    },
+    {
+      "name": "client-upload-cancellation-is-bounded",
+      "status": "pass",
+      "milliseconds": 416.46,
+      "detail": {
+        "cancellations": 8,
+        "elapsed_ms": 415.99,
+        "rss_before": 16011264,
+        "rss_after": 16142336,
+        "limit": "2.5s per cancellation; <64MiB net RSS increase; smoke bound, not leak/soak proof"
+      }
+    },
+    {
+      "name": "weighted-health-check-failover-and-recovery",
+      "status": "pass",
+      "milliseconds": 1722.41,
+      "detail": {
+        "healthy_weight_distribution": {
+          "first": 30,
+          "second": 10
+        },
+        "failover_requests": 12,
+        "invalid_TLS_backend_requests": 12,
+        "all_unhealthy_status": 503,
+        "recovery": [
+          "first",
+          "second"
+        ]
+      }
+    },
+    {
+      "name": "malformed-HTTP-conflicting-content-length",
+      "status": "pass",
+      "milliseconds": 9.05
+    },
+    {
+      "name": "malformed-HTTP-CL-TE",
+      "status": "pass",
+      "milliseconds": 5.75
+    },
+    {
+      "name": "malformed-HTTP-TE-CL",
+      "status": "pass",
+      "milliseconds": 5.38
+    },
+    {
+      "name": "malformed-HTTP-duplicate-Host",
+      "status": "pass",
+      "milliseconds": 6.09
+    },
+    {
+      "name": "malformed-HTTP-invalid-transfer-encoding",
+      "status": "pass",
+      "milliseconds": 7.63
+    },
+    {
+      "name": "malformed-HTTP-obsolete-folded-header",
+      "status": "pass",
+      "milliseconds": 4.68
+    },
+    {
+      "name": "malformed-HTTP-invalid-request-target",
+      "status": "fail",
+      "milliseconds": 7.79,
+      "error": "unsafe framing response: HTTP/1.1 200 OK\r\nx-origin-connection: 23\r\ncontent-type: application/json\r\nDate: Wed, 11 Nov 2026 03:"
+    },
+    {
+      "name": "malformed-HTTP-Connection-nominates-trusted-header",
+      "status": "pass",
+      "milliseconds": 7
+    },
+    {
+      "name": "upgrade-does-not-forward-preread-bytes-before-101",
+      "status": "pass",
+      "milliseconds": 9.16
+    },
+    {
+      "name": "gRPC-bidirectional-streaming-and-trailers",
+      "status": "pass",
+      "milliseconds": 43.7
+    },
+    {
+      "name": "gRPC-client-cancellation-reaches-origin",
+      "status": "pass",
+      "milliseconds": 55.61
+    },
+    {
+      "name": "bounded-reference-benchmark",
+      "status": "pass",
+      "milliseconds": 10942.84
+    },
+    {
+      "name": "secret-bearing-request-absent-from-runtime-log",
+      "status": "pass",
+      "milliseconds": 19.49
+    }
+  ],
+  "benchmark": {
+    "reference": "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311",
+    "reference_version": "nginx/1.30.6",
+    "profile": "100 warmup, 5 seconds each, closed-loop concurrency 8, 90% GET/1024B response + 10% POST/32768B echo; H1 TLS verified on both hops; keepalive; client/origin/proxy same host; release Rust build",
+    "measurement": "Linux /proc cumulative user+system CPU, HZ=100; sampled summed RSS at 100ms; latency includes client scheduling and origin; no handshake in steady state",
+    "pingora": {
+      "duration_seconds": 5.001,
+      "requests": 7939,
+      "requests_per_second": 1587.59,
+      "p50_ms": 4.329,
+      "p95_ms": 9.638,
+      "p99_ms": 14.792,
+      "errors": 0,
+      "timeouts": 0,
+      "cpu_percent_of_one_core": 49.99,
+      "peak_rss_bytes": 22601728,
+      "pids_sampled": 1
+    },
+    "nginx": {
+      "duration_seconds": 5.004,
+      "requests": 7367,
+      "requests_per_second": 1472.32,
+      "p50_ms": 4.821,
+      "p95_ms": 10.544,
+      "p99_ms": 13.854,
+      "errors": 0,
+      "timeouts": 0,
+      "cpu_percent_of_one_core": 36.37,
+      "peak_rss_bytes": 20324352,
+      "pids_sampled": 3
+    },
+    "limitations": [
+      "short single-run smoke benchmark; no launch SLO or capacity inference",
+      "independently built binaries; default build settings and crypto libraries may differ",
+      "RSS sums shared nginx pages across processes",
+      "not open-loop; coordinated omission; shared host load",
+      "benchmark runs sequentially"
+    ]
+  },
+  "pending": [],
+  "completed_at": "2026-11-11T03:53:25.176Z",
+  "result": "fail",
+  "run_directory": ".local/pingora-run-KzNELk",
+  "gate": "M0-PROXY-GO-NOGO closed",
+  "source_hashes": {
+    "spikes/pingora/Cargo.toml": "b31a70f0e6658b7ea33cce09aa3dbcddaa24da0a1f0cfdbfed3168c3a8f42996",
+    "spikes/pingora/Cargo.lock": "d555e1b64824c515b30b60becb54ff949ffd96c3d31f80d55f3cd5fb9614df6e",
+    "spikes/pingora/src/main.rs": "3d9f345e36271940a6f2caf3b546d310022c445fb29bc31a58aa9637d7691e87",
+    "spikes/pingora/src/config.rs": "5ad23b7857787222673fc4519df4830ef71e3f0ce89cfd27fcefd4a5f56b0599",
+    "spikes/pingora/package.json": "cc967f3d084ba85b02a78cd3b0d170fe35eeff691d5f1e94c18e055cd24aeef2",
+    "spikes/pingora/package-lock.json": "9c56b70504e411a736f637d65ea5b6e73ccc8d321fb90cc7c9906a4d4cc3e503",
+    "spikes/pingora/lab.mjs": "8af92100f92ef304b25d86e97cd46eeb4e4da2845ad126651a101ed020a490e8",
+    "spikes/pingora/evidence.mjs": "760d631d2258aeaf0653e3922e85a644dd6c3ef06a4090ccd11d67fc6195bb77"
+  },
+  "binary_sha256": "0a9d8dad4c08832c10618daf331b5bdc0e5a448d42630aaea6fc3493f262a0da"
+}

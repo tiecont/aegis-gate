@@ -1,0 +1,27 @@
+python3 scripts/bootstrap.py
+v26.13.0
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm ci --ignore-scripts
+
+added 47 packages, and audited 48 packages in 1s
+
+11 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard ci --ignore-scripts
+
+added 143 packages, and audited 144 packages in 5s
+
+40 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+GOTOOLCHAIN=go1.27.4 go mod download
+cargo +1.99.1 fetch --locked --manifest-path apps/edge/Cargo.toml
+ Downloading crates ...
+  Downloaded wasm-bindgen-macro v0.2.130
+  Downloaded wasm-bindgen v0.2.130
+  Downloaded bumpalo v3.20.3
+  Downloaded js-sys v0.3.107
+  Downloaded wasm-bindgen-macro-support v0.2.130
+  Downloaded wasm-bindgen-shared v0.2.130

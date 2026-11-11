@@ -1,0 +1,97 @@
+?   	aegisgate.dev/aegisgate/apps/control-api/cmd/control-api	[no test files]
+?   	aegisgate.dev/aegisgate/apps/control-api/internal/application	[no test files]
+=== RUN   TestHostnameAndOrigin
+--- PASS: TestHostnameAndOrigin (0.00s)
+=== RUN   TestNegativeHostAndSSRF
+--- PASS: TestNegativeHostAndSSRF (0.00s)
+=== RUN   TestNegativeRolesAndPolicies
+--- PASS: TestNegativeRolesAndPolicies (0.00s)
+PASS
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/domain	1.032s
+=== RUN   TestNegativeOIDCCrossOriginJWKS
+--- PASS: TestNegativeOIDCCrossOriginJWKS (0.02s)
+=== RUN   TestNegativeOIDCUnknownLengthDiscoveryLimit
+--- PASS: TestNegativeOIDCUnknownLengthDiscoveryLimit (0.05s)
+=== RUN   TestNegativeOIDCConfiguration
+--- PASS: TestNegativeOIDCConfiguration (0.00s)
+=== RUN   TestIntegrationOIDCTLSAndClaims
+=== RUN   TestIntegrationOIDCTLSAndClaims/signature
+=== RUN   TestIntegrationOIDCTLSAndClaims/issuer
+=== RUN   TestIntegrationOIDCTLSAndClaims/audience
+=== RUN   TestIntegrationOIDCTLSAndClaims/expiry
+=== RUN   TestIntegrationOIDCTLSAndClaims/nonce
+=== RUN   TestIntegrationOIDCTLSAndClaims/subject
+=== RUN   TestIntegrationOIDCTLSAndClaims/old_issuance
+=== RUN   TestIntegrationOIDCTLSAndClaims/future_issuance
+=== RUN   TestIntegrationOIDCTLSAndClaims/not_before
+=== RUN   TestIntegrationOIDCTLSAndClaims/authorized_party
+=== RUN   TestIntegrationOIDCTLSAndClaims/multiple_audience
+--- PASS: TestIntegrationOIDCTLSAndClaims (0.03s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/signature (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/issuer (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/audience (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/expiry (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/nonce (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/subject (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/old_issuance (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/future_issuance (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/not_before (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/authorized_party (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/multiple_audience (0.00s)
+=== RUN   TestNegativeOIDCTLSAndFetching
+=== RUN   TestNegativeOIDCTLSAndFetching/untrusted_issuer_certificate
+=== RUN   TestNegativeOIDCTLSAndFetching/expired_certificate
+=== RUN   TestNegativeOIDCTLSAndFetching/wrong_hostname_certificate
+=== RUN   TestNegativeOIDCTLSAndFetching/redirect
+=== RUN   TestNegativeOIDCTLSAndFetching/oversize_discovery
+=== RUN   TestNegativeOIDCTLSAndFetching/plaintext_JWKS
+=== RUN   TestNegativeOIDCTLSAndFetching/unavailable_JWKS
+--- PASS: TestNegativeOIDCTLSAndFetching (0.37s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/untrusted_issuer_certificate (0.23s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/expired_certificate (0.02s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/wrong_hostname_certificate (0.01s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/redirect (0.01s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/oversize_discovery (0.06s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/plaintext_JWKS (0.01s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/unavailable_JWKS (0.01s)
+PASS
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/identity	1.507s
+=== RUN   TestIntegrationDomainClaimLifecycleAndIsolation
+--- PASS: TestIntegrationDomainClaimLifecycleAndIsolation (0.36s)
+=== RUN   TestIntegrationDomainConcurrentClaimsAndMembershipRevocation
+--- PASS: TestIntegrationDomainConcurrentClaimsAndMembershipRevocation (0.37s)
+=== RUN   TestIntegrationLoginReplayBrowserBindingAndWebSession
+--- PASS: TestIntegrationLoginReplayBrowserBindingAndWebSession (0.27s)
+=== RUN   TestIntegrationDomainJobLeaseRetryAndScope
+--- PASS: TestIntegrationDomainJobLeaseRetryAndScope (0.28s)
+=== RUN   TestIntegrationRouteReferencesApprovalAndImmutablePreview
+--- PASS: TestIntegrationRouteReferencesApprovalAndImmutablePreview (0.33s)
+=== RUN   TestIntegrationTenantIsolationIdempotencyAndSession
+--- PASS: TestIntegrationTenantIsolationIdempotencyAndSession (0.32s)
+=== RUN   TestNegativeDatabaseTLS
+--- PASS: TestNegativeDatabaseTLS (0.00s)
+PASS
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/persistence	2.959s
+=== RUN   TestIntegrationAdminNegativeSessionAuthorityAndMembership
+    admin_negative_test.go:78: "https://contracts.invalid/response.json#/components/schemas/ErrorDetail" is not valid against metaschema: jsonschema validation failed with 'http://json-schema.org/draft-07/schema#'
+        - at '/properties/message/pattern': '^[^\\u0000-\\u001f\\u007f-\\u009f]+$' is not valid regex: error parsing regexp: invalid escape sequence: `\u`
+--- FAIL: TestIntegrationAdminNegativeSessionAuthorityAndMembership (0.76s)
+=== RUN   TestIntegrationAdminHTTPIsolationAndOIDC
+    admin_test.go:51: "https://contracts.invalid/response.json#/components/schemas/ErrorDetail" is not valid against metaschema: jsonschema validation failed with 'http://json-schema.org/draft-07/schema#'
+        - at '/properties/message/pattern': '^[^\\u0000-\\u001f\\u007f-\\u009f]+$' is not valid regex: error parsing regexp: invalid escape sequence: `\u`
+--- FAIL: TestIntegrationAdminHTTPIsolationAndOIDC (0.40s)
+=== RUN   TestNegativePrivateConfigurationFiles
+--- PASS: TestNegativePrivateConfigurationFiles (0.00s)
+=== RUN   TestNegativeAdminRateLimitsBounded
+--- PASS: TestNegativeAdminRateLimitsBounded (0.96s)
+=== RUN   TestHealth
+--- PASS: TestHealth (0.00s)
+=== RUN   TestNegativeSpoofedTenantAndSecrets
+--- PASS: TestNegativeSpoofedTenantAndSecrets (0.00s)
+=== RUN   TestNegativePublicListener
+--- PASS: TestNegativePublicListener (0.00s)
+=== RUN   TestIntegrationHTTP
+--- PASS: TestIntegrationHTTP (0.00s)
+FAIL
+FAIL	aegisgate.dev/aegisgate/apps/control-api/internal/transport	2.176s
+FAIL

@@ -1,0 +1,314 @@
+{
+  "started_at": "2026-11-11T04:02:20.436Z",
+  "node": "v26.13.0",
+  "platform": "linux",
+  "cpu": "AMD Ryzen 7 4800HS with Radeon Graphics",
+  "logical_cpus": 16,
+  "memory_bytes": 24573243392,
+  "profile": "owned loopback lab; no production claims",
+  "tests": [
+    {
+      "name": "two-SNI-certificate-selection",
+      "status": "pass",
+      "milliseconds": 11.58
+    },
+    {
+      "name": "unknown-and-missing-SNI-handshake-rejected",
+      "status": "pass",
+      "milliseconds": 14.09
+    },
+    {
+      "name": "pre-TLS-filter-rejects-unapproved-lab-source",
+      "status": "pass",
+      "milliseconds": 3.01
+    },
+    {
+      "name": "HTTP1-routing-and-untrusted-header-stripping",
+      "status": "pass",
+      "milliseconds": 6.81
+    },
+    {
+      "name": "cross-tenant-SNI-Host-binding",
+      "status": "pass",
+      "milliseconds": 16.65
+    },
+    {
+      "name": "declared-oversized-body-rejected-before-origin",
+      "status": "pass",
+      "milliseconds": 10.56
+    },
+    {
+      "name": "HTTP2-downstream-and-upstream-ALPN",
+      "status": "pass",
+      "milliseconds": 21.63
+    },
+    {
+      "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+      "status": "pass",
+      "milliseconds": 24.62
+    },
+    {
+      "name": "HTTP1-and-HTTP2-body-streaming",
+      "status": "pass",
+      "milliseconds": 446.45,
+      "detail": {
+        "first_response_chunk_ms": 12.8,
+        "payload_bytes": 245760
+      }
+    },
+    {
+      "name": "WebSocket-upgrade-bidirectional-close",
+      "status": "pass",
+      "milliseconds": 22.98
+    },
+    {
+      "name": "certificate-rotation-keeps-active-stream-and-snapshot",
+      "status": "pass",
+      "milliseconds": 422.04,
+      "detail": {
+        "active_generation": 1,
+        "new_generation": 2
+      }
+    },
+    {
+      "name": "invalid-and-replayed-snapshot-retains-last-good",
+      "status": "pass",
+      "milliseconds": 399.7
+    },
+    {
+      "name": "invalid-certificate-config-retains-last-good",
+      "status": "pass",
+      "milliseconds": 709.55,
+      "detail": {
+        "rejected": [
+          "mismatched key",
+          "wrong SAN",
+          "duplicate host",
+          "publicly readable key"
+        ],
+        "rejected_generation": 4,
+        "restored_generation": 5
+      }
+    },
+    {
+      "name": "verified-origin-TLS-rejects-wrong",
+      "status": "pass",
+      "milliseconds": 243.9
+    },
+    {
+      "name": "verified-origin-TLS-rejects-expired",
+      "status": "pass",
+      "milliseconds": 234.96
+    },
+    {
+      "name": "verified-origin-TLS-rejects-untrusted",
+      "status": "pass",
+      "milliseconds": 239.79
+    },
+    {
+      "name": "trust-store-swap-cannot-reuse-old-origin-TLS-session",
+      "status": "pass",
+      "milliseconds": 253.63
+    },
+    {
+      "name": "origin-read-timeout-is-bounded",
+      "status": "pass",
+      "milliseconds": 2015.38,
+      "detail": {
+        "timeout_ms": 2015.32
+      }
+    },
+    {
+      "name": "origin-connection-pooling",
+      "status": "pass",
+      "milliseconds": 21.61,
+      "detail": {
+        "sequential_requests": 6,
+        "unique_origin_connections": 1
+      }
+    },
+    {
+      "name": "same-origin-pools-are-partitioned-between-routes",
+      "status": "pass",
+      "milliseconds": 237.62
+    },
+    {
+      "name": "client-upload-cancellation-is-bounded",
+      "status": "pass",
+      "milliseconds": 423.73,
+      "detail": {
+        "cancellations": 8,
+        "elapsed_ms": 421.54,
+        "rss_before": 16117760,
+        "rss_after": 16248832,
+        "limit": "2.5s per cancellation; <64MiB net RSS increase; smoke bound, not leak/soak proof"
+      }
+    },
+    {
+      "name": "weighted-health-check-failover-and-recovery",
+      "status": "pass",
+      "milliseconds": 1981.86,
+      "detail": {
+        "healthy_weight_distribution": {
+          "first": 30,
+          "second": 10
+        },
+        "failover_requests": 12,
+        "invalid_TLS_backend_requests": 12,
+        "all_unhealthy_status": 503,
+        "recovery": [
+          "first",
+          "second"
+        ]
+      }
+    },
+    {
+      "name": "malformed-HTTP-conflicting-content-length",
+      "status": "pass",
+      "milliseconds": 9.65
+    },
+    {
+      "name": "malformed-HTTP-CL-TE",
+      "status": "pass",
+      "milliseconds": 5.83
+    },
+    {
+      "name": "malformed-HTTP-TE-CL",
+      "status": "pass",
+      "milliseconds": 3.93
+    },
+    {
+      "name": "malformed-HTTP-duplicate-Host",
+      "status": "pass",
+      "milliseconds": 4.19
+    },
+    {
+      "name": "malformed-HTTP-invalid-transfer-encoding",
+      "status": "pass",
+      "milliseconds": 4.55
+    },
+    {
+      "name": "malformed-HTTP-obsolete-folded-header",
+      "status": "pass",
+      "milliseconds": 4.47
+    },
+    {
+      "name": "malformed-HTTP-invalid-request-target",
+      "status": "fail",
+      "milliseconds": 6.39,
+      "error": "unsafe framing response: HTTP/1.1 200 OK\r\nx-origin-connection: 23\r\ncontent-type: application/json\r\nDate: Wed, 11 Nov 2026 04:"
+    },
+    {
+      "name": "malformed-HTTP-Connection-nominates-trusted-header",
+      "status": "pass",
+      "milliseconds": 5.77
+    },
+    {
+      "name": "upgrade-does-not-forward-preread-bytes-before-101",
+      "status": "pass",
+      "milliseconds": 7.3
+    },
+    {
+      "name": "gRPC-bidirectional-streaming-and-trailers",
+      "status": "pass",
+      "milliseconds": 45.61
+    },
+    {
+      "name": "gRPC-client-cancellation-reaches-origin",
+      "status": "pass",
+      "milliseconds": 58.99
+    },
+    {
+      "name": "bounded-reference-benchmark",
+      "status": "pass",
+      "milliseconds": 10894.66,
+      "detail": {
+        "reference": "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311",
+        "reference_version": "nginx/1.30.6",
+        "profile": "100 warmup, 5 seconds each, closed-loop concurrency 8, 90% GET/1024B response + 10% POST/32768B echo; H1 TLS verified on both hops; keepalive; client/origin/proxy same host; release Rust build",
+        "measurement": "Linux /proc cumulative user+system CPU, HZ=100; sampled summed RSS at 100ms; latency includes client scheduling and origin; no handshake in steady state",
+        "pingora": {
+          "duration_seconds": 5.003,
+          "requests": 8468,
+          "requests_per_second": 1692.62,
+          "p50_ms": 3.94,
+          "p95_ms": 10.335,
+          "p99_ms": 16.988,
+          "errors": 0,
+          "timeouts": 0,
+          "cpu_percent_of_one_core": 50.37,
+          "peak_rss_bytes": 22073344,
+          "pids_sampled": 1
+        },
+        "nginx": {
+          "duration_seconds": 5.005,
+          "requests": 9007,
+          "requests_per_second": 1799.67,
+          "p50_ms": 3.404,
+          "p95_ms": 10.725,
+          "p99_ms": 18.244,
+          "errors": 0,
+          "timeouts": 0,
+          "cpu_percent_of_one_core": 29.97,
+          "peak_rss_bytes": 16424960,
+          "pids_sampled": 3
+        },
+        "limitations": [
+          "short single-run smoke benchmark; no launch SLO or capacity inference",
+          "independently built binaries; default build settings and crypto libraries may differ",
+          "RSS sums shared nginx pages across processes",
+          "not open-loop; coordinated omission; shared host load",
+          "benchmark runs sequentially"
+        ]
+      }
+    },
+    {
+      "name": "secret-bearing-request-absent-from-runtime-log",
+      "status": "pass",
+      "milliseconds": 12.37
+    }
+  ],
+  "benchmark": {
+    "reference": "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311",
+    "reference_version": "nginx/1.30.6",
+    "profile": "100 warmup, 5 seconds each, closed-loop concurrency 8, 90% GET/1024B response + 10% POST/32768B echo; H1 TLS verified on both hops; keepalive; client/origin/proxy same host; release Rust build",
+    "measurement": "Linux /proc cumulative user+system CPU, HZ=100; sampled summed RSS at 100ms; latency includes client scheduling and origin; no handshake in steady state",
+    "pingora": {
+      "duration_seconds": 5.003,
+      "requests": 8468,
+      "requests_per_second": 1692.62,
+      "p50_ms": 3.94,
+      "p95_ms": 10.335,
+      "p99_ms": 16.988,
+      "errors": 0,
+      "timeouts": 0,
+      "cpu_percent_of_one_core": 50.37,
+      "peak_rss_bytes": 22073344,
+      "pids_sampled": 1
+    },
+    "nginx": {
+      "duration_seconds": 5.005,
+      "requests": 9007,
+      "requests_per_second": 1799.67,
+      "p50_ms": 3.404,
+      "p95_ms": 10.725,
+      "p99_ms": 18.244,
+      "errors": 0,
+      "timeouts": 0,
+      "cpu_percent_of_one_core": 29.97,
+      "peak_rss_bytes": 16424960,
+      "pids_sampled": 3
+    },
+    "limitations": [
+      "short single-run smoke benchmark; no launch SLO or capacity inference",
+      "independently built binaries; default build settings and crypto libraries may differ",
+      "RSS sums shared nginx pages across processes",
+      "not open-loop; coordinated omission; shared host load",
+      "benchmark runs sequentially"
+    ]
+  },
+  "pending": [],
+  "completed_at": "2026-11-11T04:02:40.337Z",
+  "result": "fail",
+  "run_directory": "/home/tiecont/Projects/aegis-gate/.local/pingora-run-2pyCDP"
+}

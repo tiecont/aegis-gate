@@ -1,0 +1,42 @@
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" bash scripts/security-scan.sh
+Running rust-vulnerabilities
+PASS rust-vulnerabilities
+Running go-scanner-gate-selftest
+PASS go-scanner-gate-selftest
+Running go-vulnerabilities
+PASS go-vulnerabilities
+Running npm-root-vulnerabilities
+PASS npm-root-vulnerabilities
+Running npm-dashboard-vulnerabilities
+PASS npm-dashboard-vulnerabilities
+Running worktree-secrets
+FAIL worktree-secrets (exit 1; inspect .local/evidence/security/worktree-secrets.log)
+Running repository-sbom
+PASS repository-sbom
+Running filesystem-vulnerabilities
+FAIL filesystem-vulnerabilities (exit 1; inspect .local/evidence/security/filesystem-vulnerabilities.log)
+Image 1: demo-origin sha256:d951150f6a4075e1bc5d55510f86ee72c69e9d517fe9ae2aa0e40b75bec53f7b
+Running image-1-vulnerabilities
+PASS image-1-vulnerabilities
+Running image-1-sbom
+PASS image-1-sbom
+Running image-1-identity
+PASS image-1-identity
+Image 2: nats nats:2.15.2-alpine@sha256:afae2fdbe2e326c65e1246cb83b9d05d319188734f3bd577ac8072daae78a10f
+Running image-2-vulnerabilities
+PASS image-2-vulnerabilities
+Running image-2-sbom
+PASS image-2-sbom
+Image 3: postgres sha256:3bd3054c489c5cef8220a4bd142432251b9ae19f071ba32ca50b2c4602aaa6c3
+Running image-3-vulnerabilities
+PASS image-3-vulnerabilities
+Running image-3-sbom
+PASS image-3-sbom
+Running image-3-identity
+PASS image-3-identity
+Image 4: redis redis:8.10.3-alpine@sha256:71885d8cc6e42f2bc0aa2eb853bfc4be200b5108a46ac50e117ae1df0531fb80
+Running image-4-vulnerabilities
+PASS image-4-vulnerabilities
+Running image-4-sbom
+PASS image-4-sbom
+make: *** [Makefile:87: security-scan] Error 1

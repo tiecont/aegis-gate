@@ -1,0 +1,13 @@
+title = "AegisGate secret scanning"
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Generated dependencies, caches and ignored private LOCAL fixtures"
+paths = [
+  '''(^|/)\.git/''',
+  '''(^|/)\.local/''',
+  '''(^|/)node_modules/''',
+  '''(^|/)target/''',
+  '''(^|/)\.next/''',
+]

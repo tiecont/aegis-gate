@@ -1,0 +1,40 @@
+gofmt -w apps/control-api apps/config-publisher internal packages/test-fixtures
+cargo +1.99.1 fmt --all --manifest-path apps/edge/Cargo.toml
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm run format
+
+> aegisgate-contract-tools@0.0.0 format
+> prettier --write package.json packages/contracts scripts/*.mjs .github infra/compose/compose.yaml
+
+package.json 39ms (unchanged)
+packages/contracts/baseline.openapi.json 37ms (unchanged)
+packages/contracts/fixtures/error.json 13ms (unchanged)
+packages/contracts/openapi.json 109ms
+packages/contracts/README.md 95ms (unchanged)
+scripts/contract-integration.mjs 40ms (unchanged)
+scripts/contracts.mjs 70ms (unchanged)
+scripts/contracts.test.mjs 21ms (unchanged)
+scripts/gate-selftest.mjs 36ms (unchanged)
+.github/CONTRIBUTING.md 10ms (unchanged)
+.github/dependabot.yml 30ms (unchanged)
+.github/ISSUE_TEMPLATE/bug.yml 7ms (unchanged)
+.github/pull_request_template.md 11ms (unchanged)
+.github/SECURITY.md 6ms (unchanged)
+.github/workflows/ci.yml 28ms (unchanged)
+infra/compose/compose.yaml 22ms (unchanged)
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run fmt
+
+> @aegisgate/dashboard@0.1.0 fmt
+> prettier --write app lib tests *.mjs *.json *.md
+
+app/layout.tsx 79ms (unchanged)
+app/page.tsx 32ms (unchanged)
+app/styles.css 59ms (unchanged)
+lib/foundation.mjs 30ms (unchanged)
+tests/integration.test.mjs 58ms (unchanged)
+tests/unit.test.mjs 12ms (unchanged)
+eslint.config.mjs 4ms (unchanged)
+next.config.mjs 8ms (unchanged)
+package-lock.json 52ms (unchanged)
+package.json 1ms (unchanged)
+tsconfig.json 4ms (unchanged)
+README.md 83ms (unchanged)

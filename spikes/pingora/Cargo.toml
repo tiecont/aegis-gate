@@ -1,0 +1,21 @@
+[workspace]
+
+[package]
+name = "aegisgate-pingora-feasibility"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license = "Apache-2.0"
+
+[dependencies]
+pingora = { version = "=0.9.1", default-features = false, features = ["proxy", "openssl", "connection_filter", "lb"] }
+async-trait = "=0.1.92"
+arc-swap = "=1.9.5"
+tokio = { version = "=1.54.1", features = ["rt-multi-thread", "macros", "time"] }
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = "=1.0.154"
+http = "=1.5.0"
+bytes = "=1.12.1"
+openssl = "=0.10.82"
+httparse = "=1.10.1"
+
