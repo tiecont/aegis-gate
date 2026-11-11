@@ -2,6 +2,23 @@
 
 Last updated: 2026-11-11. Scope: local implementation only. No production deployment or live DNS/payment action is authorized.
 
+## Sprint03-A checkpoint
+
+Executed the shared original65 plus ten supplemental cases for all three
+isolated candidates. Pingora63/75, Envoy69/75 and Hyper70/75: **all NO-GO**.
+Original eight Pingora failures remain active. Root/E corrected TLS error
+classification and H2 decrypted-byte observation; earlier invalid/incomplete
+observations are retained. No production implementation or architecture was
+substituted. Candidate source commits and exact commands/evidence are in
+`docs/reports/sprint03a-d-integration.md`; the proposed human decision package
+is `sprint03a-architecture-decision.md`.
+
+Combined `make check` and `make security-scan` both exit0, with real integration,
+race/security negatives, candidate unit/build/lock/image checks and42-commit
+secret history scan. Final independent observed-harness review and exact-head
+hosted acceptance are still pending. Passing repository checks do not grant
+the deliberately failed feasibility gate or any production release gate.
+
 ## Sprint 02 verified result
 
 Reconciled the baseline `9e734e31bf1544bd1158a5bf8d29047c2adb72f8`, preserved

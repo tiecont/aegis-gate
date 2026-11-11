@@ -1,6 +1,6 @@
 # Sprint03-A Root Integration
 
-Status: verification in progress; no architecture/module acceptance yet.
+Status: combined local quality/scan PASS; final review/hosted acceptance pending.
 Baseline main: `668b8d998d8a39f3a554a9e42ad6a1a270049d27`.
 Integration branch: `test/edge-architecture-comparison`, draft PR9.
 
@@ -69,8 +69,14 @@ flock /tmp/aegisgate-sprint02-fixtures.lock make security-scan
 ```
 
 Final logs: `evidence/sprint03a-d/make-check-final.log` and
-`security-scan-final.log`. Their actual `RESULT_EXIT` and hosted exact-head
-results must be recorded before this report declares evidence-only acceptance.
+`security-scan-final.log`, both **RESULT_EXIT=0**. Check includes real
+PostgreSQL/HTTPS OIDC/UDP DNS, race, tenancy/permission/security negatives,
+contracts, build and deliberate-defect gates. Scan includes42 actual commits,
+zero known Rust vulnerability findings, two unresolved Pingora maintenance
+warnings, clean lab Node audit and zero HIGH/CRITICAL pinned Envoy findings.
+Selected raw outputs are copied beside the logs; complete scanner reports are
+retained in `.local/evidence/security` and hosted artifact output. Exact-head
+hosted acceptance and E's final observed-harness review remain pending.
 CI now includes Hyper fmt/clippy/test/locked build, Envoy adapter unit tests,
 shared evaluator/observer regressions and manifest integrity. Common scans
 include both isolated Rust locks, lab Node dependencies and pinned Envoy image
