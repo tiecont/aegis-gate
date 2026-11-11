@@ -53,10 +53,24 @@ if [ "$mode" = all ] || [ "$mode" = secrets ]; then
     status=1
   fi
   if git rev-parse --verify HEAD >/dev/null 2>&1; then
-    # History uses built-in rules without worktree fixture exclusions.
-    run history-secrets docker run --rm --user "$(id -u):$(id -g)" \
-      -v "$PWD:/repo:ro" -v "$reports:/reports" "$gitleaks" git /repo \
-      --redact --report-format json --report-path /reports/history-secrets.json --no-banner --log-opts=--all
+    # A linked worktree's .git file points outside /repo. Mount its common
+    # object database explicitly and override Git's discovery inside the
+    # container; otherwise Gitleaks can report a false zero-commit success.
+    git_common_dir=$(git rev-parse --path-format=absolute --git-common-dir)
+    history_container() {
+      docker run --rm --user "$(id -u):$(id -g)" \
+        -e GIT_DIR=/git-common -e GIT_WORK_TREE=/repo \
+        -v "$PWD:/repo:ro" -v "$git_common_dir:/git-common:ro" -v "$reports:/reports" "$@"
+    }
+    run history-git-preflight history_container --entrypoint /bin/sh "$gitleaks" -c \
+      'set -eu; test -d "$GIT_DIR/objects"; count=$(git --git-dir="$GIT_DIR" --work-tree="$GIT_WORK_TREE" rev-list --all --count); test "$count" -gt 0; printf "%s commits available for history scan\n" "$count"'
+    history_scan() {
+      history_container "$gitleaks" git /repo \
+        --redact --report-format json --report-path /reports/history-secrets.json --no-banner --log-opts=--all \
+        >"$reports/history-secrets.log" 2>&1 || return $?
+      python3 scripts/history_scan_evidence.py "$reports/history-secrets.log"
+    }
+    run history-secrets history_scan
   else
     printf 'No git commits exist; history scan has no input\n' >"$reports/history-secrets.log"
   fi
@@ -71,6 +85,7 @@ if [ "$mode" = all ] || [ "$mode" = sbom ]; then
     --skip-dirs /repo/apps/edge/target
 fi
 if [ "$mode" = all ] || [ "$mode" = images ]; then
+  run image-identity-selftest python3 scripts/image_identity_test.py -v
   # Scan exactly the immutable references used by Compose, including local builds.
   if [ ! -f .local/compose.env ] || [ ! -f .local/fixture-images.env ] || [ ! -f .local/fixture-images.lock.json ]; then
     printf 'FAIL local fixture image environment/lock missing; run make fixture-images\n' >&2

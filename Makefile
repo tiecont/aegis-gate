@@ -39,6 +39,7 @@ lint:
 
 unit:
 	python3 scripts/dev-secrets.test.py
+	python3 scripts/git_history_preflight_test.py
 	python3 scripts/image_identity_test.py
 	$(GO) test -race $(GO_PACKAGES)
 	cargo +1.99.1 test --workspace --locked --manifest-path apps/edge/Cargo.toml
