@@ -41,7 +41,7 @@ unit:
 	python3 scripts/dev-secrets.test.py
 	python3 scripts/git_history_preflight_test.py
 	python3 scripts/image_identity_test.py
-	"$(NODE_CMD)" --test spikes/edge-comparison/contract.test.mjs
+	"$(NODE_CMD)" --test spikes/edge-comparison/*.test.mjs
 	"$(NODE_CMD)" spikes/edge-comparison/extract-baseline.mjs --check
 	$(GO) test -race $(GO_PACKAGES)
 	cargo +1.99.1 test --workspace --locked --manifest-path apps/edge/Cargo.toml
