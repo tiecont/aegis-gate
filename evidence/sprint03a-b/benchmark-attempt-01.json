@@ -1,0 +1,17 @@
+{
+  "started_at": "2026-11-11T08:41:38.650Z",
+  "cpu": "AMD Ryzen 7 4800HS with Radeon Graphics",
+  "logical_cpus": 16,
+  "memory_bytes": 24573243392,
+  "profile": "100 warmup; 5 seconds; closed-loop concurrency8; 90% GET/1024B and10% POST/32768B echo; verified TLS both hops; H1 keepalive; same host",
+  "limitations": [
+    "single short run, shared host, sequential candidates, coordinated omission; no capacity/SLO/ranking claim",
+    "Envoy concurrency1 versus Nginx workers2; RSS sums shared pages",
+    "resource sampler includes actual container PIDs; launcher is recorded separately"
+  ],
+  "reference": "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311",
+  "image": "envoyproxy/envoy@sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded",
+  "result": "fail",
+  "error": "connect ECONNREFUSED 127.0.0.1:46015",
+  "completed_at": "2026-11-11T08:41:45.944Z"
+}

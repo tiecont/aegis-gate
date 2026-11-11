@@ -1,0 +1,4843 @@
+{
+  "started_at": "2026-11-11T08:40:00.740Z",
+  "node": "v26.13.0",
+  "platform": "linux",
+  "cpu": "AMD Ryzen 7 4800HS with Radeon Graphics",
+  "logical_cpus": 16,
+  "memory_bytes": 24573243392,
+  "profile": "owned loopback lab; no production claims",
+  "tests": [
+    {
+      "name": "malformed-HTTP-conflicting-content-length",
+      "status": "pass",
+      "milliseconds": 1024.63,
+      "detail": {
+        "name": "conflicting-content-length",
+        "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 1\r\nContent-Length: 2\r\nConnection: close\r\n\r\nx",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:05 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "malformed-HTTP-CL-TE",
+      "status": "pass",
+      "milliseconds": 1011.69,
+      "detail": {
+        "name": "CL-TE",
+        "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\n0\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:06 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "malformed-HTTP-TE-CL",
+      "status": "pass",
+      "milliseconds": 1010.43,
+      "detail": {
+        "name": "TE-CL",
+        "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nContent-Length: 4\r\nConnection: close\r\n\r\n0\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:07 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "malformed-HTTP-duplicate-Host",
+      "status": "pass",
+      "milliseconds": 1010.75,
+      "detail": {
+        "name": "duplicate-Host",
+        "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n",
+        "response_status": "421",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 421 Misdirected Request\r\ndate: Wed, 11 Nov 2026 08:40:08 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "malformed-HTTP-invalid-transfer-encoding",
+      "status": "fail",
+      "milliseconds": 1013.83,
+      "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "malformed-HTTP-obsolete-folded-header",
+      "status": "fail",
+      "milliseconds": 10.8,
+      "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 263,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "malformed-HTTP-invalid-request-target",
+      "status": "pass",
+      "milliseconds": 1008.95,
+      "detail": {
+        "name": "invalid-request-target",
+        "request": "GET /bad target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:10 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "malformed-HTTP-Connection-nominates-trusted-header",
+      "status": "pass",
+      "milliseconds": 1008.82,
+      "detail": {
+        "name": "Connection-nominates-trusted-header",
+        "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nConnection: X-Forwarded-For, close\r\nX-Forwarded-For: 127.0.0.1\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:11 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-target-raw-tab",
+      "status": "pass",
+      "milliseconds": 1009.26,
+      "detail": {
+        "name": "target-raw-tab",
+        "request": "GET /bad\ttarget HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:12 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-target-raw-control",
+      "status": "pass",
+      "milliseconds": 1013.31,
+      "detail": {
+        "name": "target-raw-control",
+        "request": "GET /bad\u0001target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:13 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-target-raw-null",
+      "status": "pass",
+      "milliseconds": 1032.88,
+      "detail": {
+        "name": "target-raw-null",
+        "request": "GET /bad\u0000target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:14 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-host-missing",
+      "status": "pass",
+      "milliseconds": 1007.01,
+      "detail": {
+        "name": "host-missing",
+        "request": "GET / HTTP/1.1\r\nX-Lab: no-host\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ndate: Wed, 11 Nov 2026 08:40:15 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-host-empty",
+      "status": "pass",
+      "milliseconds": 1008.32,
+      "detail": {
+        "name": "host-empty",
+        "request": "GET / HTTP/1.1\r\nHost:\r\nConnection: close\r\n\r\n",
+        "response_status": "421",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 421 Misdirected Request\r\ndate: Wed, 11 Nov 2026 08:40:16 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-host-duplicate-identical",
+      "status": "pass",
+      "milliseconds": 1007.4,
+      "detail": {
+        "name": "host-duplicate-identical",
+        "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "421",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 421 Misdirected Request\r\ndate: Wed, 11 Nov 2026 08:40:17 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-host-comma-list",
+      "status": "pass",
+      "milliseconds": 1007.47,
+      "detail": {
+        "name": "host-comma-list",
+        "request": "GET / HTTP/1.1\r\nHost: edge-a.test,edge-b.test\r\nConnection: close\r\n\r\n",
+        "response_status": "421",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 421 Misdirected Request\r\ndate: Wed, 11 Nov 2026 08:40:18 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-host-userinfo",
+      "status": "pass",
+      "milliseconds": 1006.62,
+      "detail": {
+        "name": "host-userinfo",
+        "request": "GET / HTTP/1.1\r\nHost: user@edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "421",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 421 Misdirected Request\r\ndate: Wed, 11 Nov 2026 08:40:19 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-host-invalid-port",
+      "status": "pass",
+      "milliseconds": 1008.23,
+      "detail": {
+        "name": "host-invalid-port",
+        "request": "GET / HTTP/1.1\r\nHost: edge-a.test:abc\r\nConnection: close\r\n\r\n",
+        "response_status": "421",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 421 Misdirected Request\r\ndate: Wed, 11 Nov 2026 08:40:20 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-host-whitespace-before-colon",
+      "status": "pass",
+      "milliseconds": 1014.08,
+      "detail": {
+        "name": "host-whitespace-before-colon",
+        "request": "GET / HTTP/1.1\r\nHost : edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:21 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-absolute-authority-SNI-mismatch",
+      "status": "pass",
+      "milliseconds": 1024.68,
+      "detail": {
+        "name": "absolute-authority-SNI-mismatch",
+        "request": "GET https://edge-b.test/ HTTP/1.1\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n",
+        "response_status": "404",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 404 Not Found\r\ndate: Wed, 11 Nov 2026 08:40:22 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-absolute-authority-Host-mismatch",
+      "status": "pass",
+      "milliseconds": 1009.6,
+      "detail": {
+        "name": "absolute-authority-Host-mismatch",
+        "request": "GET https://edge-a.test/ HTTP/1.1\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n",
+        "response_status": "404",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 404 Not Found\r\ndate: Wed, 11 Nov 2026 08:40:23 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-absolute-authority-userinfo",
+      "status": "pass",
+      "milliseconds": 1007.43,
+      "detail": {
+        "name": "absolute-authority-userinfo",
+        "request": "GET https://user@edge-a.test/ HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "404",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 404 Not Found\r\ndate: Wed, 11 Nov 2026 08:40:24 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-absolute-authority-without-Host",
+      "status": "pass",
+      "milliseconds": 1007.98,
+      "detail": {
+        "name": "absolute-authority-without-Host",
+        "request": "GET https://edge-a.test/ HTTP/1.1\r\nX-Lab: no-host\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ndate: Wed, 11 Nov 2026 08:40:25 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-absolute-unsupported-scheme",
+      "status": "pass",
+      "milliseconds": 1009.5,
+      "detail": {
+        "name": "absolute-unsupported-scheme",
+        "request": "GET ftp://edge-a.test/ HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "404",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 404 Not Found\r\ndate: Wed, 11 Nov 2026 08:40:26 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-target-relative-form",
+      "status": "pass",
+      "milliseconds": 1011.27,
+      "detail": {
+        "name": "target-relative-form",
+        "request": "GET relative HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:27 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-target-fragment",
+      "status": "pass",
+      "milliseconds": 1007.58,
+      "detail": {
+        "name": "target-fragment",
+        "request": "GET /path#fragment HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ndate: Wed, 11 Nov 2026 08:40:28 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-connect-authority-form-disabled",
+      "status": "pass",
+      "milliseconds": 1005,
+      "detail": {
+        "name": "connect-authority-form-disabled",
+        "request": "CONNECT edge-a.test:443 HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "404",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 404 Not Found\r\ndate: Wed, 11 Nov 2026 08:40:29 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-CL-TE-pipelined",
+      "status": "pass",
+      "milliseconds": 1006.31,
+      "detail": {
+        "name": "CL-TE-pipelined",
+        "request": "POST /echo HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\n\r\n0\r\n\r\nGET /smuggled HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:30 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-TE-CL-pipelined",
+      "status": "pass",
+      "milliseconds": 1005.24,
+      "detail": {
+        "name": "TE-CL-pipelined",
+        "request": "POST /echo HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nContent-Length: 4\r\n\r\n0\r\n\r\nGET /smuggled HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:31 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-TE-obsolete-fold",
+      "status": "pass",
+      "milliseconds": 1005.23,
+      "detail": {
+        "name": "TE-obsolete-fold",
+        "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding:\r\n chunked\r\nConnection: close\r\n\r\n0\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:32 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-CL-comma-conflict",
+      "status": "pass",
+      "milliseconds": 1005.35,
+      "detail": {
+        "name": "CL-comma-conflict",
+        "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 1, 2\r\nConnection: close\r\n\r\nx",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:33 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-TE-repeated-chunked",
+      "status": "fail",
+      "milliseconds": 1007.7,
+      "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-TE-not-final-chunked",
+      "status": "fail",
+      "milliseconds": 1007.53,
+      "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "valid-percent-encoded-/bad%20target",
+      "status": "pass",
+      "milliseconds": 11.12,
+      "detail": {
+        "target": "/bad%20target",
+        "origin_dispatches": 1,
+        "origin_inbound_bytes": 251
+      },
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 251,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/bad%20target",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "valid-percent-encoded-/bad%09target",
+      "status": "pass",
+      "milliseconds": 10.29,
+      "detail": {
+        "target": "/bad%09target",
+        "origin_dispatches": 1,
+        "origin_inbound_bytes": 251
+      },
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 251,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/bad%09target",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "valid-percent-encoded-/bad%01target",
+      "status": "pass",
+      "milliseconds": 8.15,
+      "detail": {
+        "target": "/bad%01target",
+        "origin_dispatches": 1,
+        "origin_inbound_bytes": 251
+      },
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 251,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/bad%01target",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "valid-percent-encoded-/bad%00target",
+      "status": "pass",
+      "milliseconds": 7.67,
+      "detail": {
+        "target": "/bad%00target",
+        "origin_dispatches": 1,
+        "origin_inbound_bytes": 251
+      },
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 251,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/bad%00target",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "valid-percent-encoded-/encoded%2Fsegment?value=%2520",
+      "status": "pass",
+      "milliseconds": 7.98,
+      "detail": {
+        "target": "/encoded%2Fsegment?value=%2520",
+        "origin_dispatches": 1,
+        "origin_inbound_bytes": 268
+      },
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 268,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/encoded%2Fsegment?value=%2520",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "valid-percent-encoded-/caf%C3%A9?x=a%20b",
+      "status": "pass",
+      "milliseconds": 7.24,
+      "detail": {
+        "target": "/caf%C3%A9?x=a%20b",
+        "origin_dispatches": 1,
+        "origin_inbound_bytes": 256
+      },
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 256,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/caf%C3%A9?x=a%20b",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "supplemental-space-target-before-pipelined-request",
+      "status": "pass",
+      "milliseconds": 1007.55,
+      "detail": {
+        "name": "space-target-before-pipelined-request",
+        "request": "GET /bad target HTTP/1.1\r\nHost: edge-a.test\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response_status": "400",
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:36 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "supplemental-tab-target-before-pipelined-request",
+      "status": "pass",
+      "milliseconds": 1006.14,
+      "detail": {
+        "name": "tab-target-before-pipelined-request",
+        "request": "GET /bad\ttarget HTTP/1.1\r\nHost: edge-a.test\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response_status": "400",
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:37 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "supplemental-duplicate-host-before-pipelined-request",
+      "status": "pass",
+      "milliseconds": 1004.45,
+      "detail": {
+        "name": "duplicate-host-before-pipelined-request",
+        "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nHost: edge-b.test\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response_status": "421",
+        "response": "HTTP/1.1 421 Misdirected Request\r\ndate: Wed, 11 Nov 2026 08:40:38 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "supplemental-conflicting-length-before-pipelined-request",
+      "status": "pass",
+      "milliseconds": 1005.87,
+      "detail": {
+        "name": "conflicting-length-before-pipelined-request",
+        "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 0\r\nContent-Length: 1\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response_status": "400",
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:39 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "supplemental-signed-content-length",
+      "status": "pass",
+      "milliseconds": 1008.58,
+      "detail": {
+        "name": "signed-content-length",
+        "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: +0\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response_status": "400",
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:40 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "supplemental-negative-content-length",
+      "status": "pass",
+      "milliseconds": 1013.59,
+      "detail": {
+        "name": "negative-content-length",
+        "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: -1\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response_status": "400",
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:41 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "supplemental-repeated-transfer-encoding-fields",
+      "status": "fail",
+      "milliseconds": 1011.15,
+      "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "supplemental-nul-in-header-value",
+      "status": "pass",
+      "milliseconds": 1007.75,
+      "detail": {
+        "name": "nul-in-header-value",
+        "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nX-Lab: before\u0000after\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response_status": "400",
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:43 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "supplemental-invalid-header-name",
+      "status": "pass",
+      "milliseconds": 1008.16,
+      "detail": {
+        "name": "invalid-header-name",
+        "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nBad Header: value\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response_status": "400",
+        "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:44 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "valid-HTTP1-pipelining-preserves-boundaries-and-encoded-targets",
+      "status": "pass",
+      "milliseconds": 28.01,
+      "detail": {
+        "response": "HTTP/1.1 200 OK\r\nx-origin-connection: 4\r\ncontent-type: application/json\r\ndate: Wed, 11 Nov 2026 08:40:45 GMT\r\ncontent-length: 148\r\nx-envoy-upstream-service-time: 2\r\nx-lab-generation: 1\r\nserver: envoy\r\n\r\n{\"target\":\"/pipeline%2Ffirst?x=%2520\",\"host\":\"lab-origin.test\",\"generation\":\"1\",\"route\":\"edge-a.test\",\"forwarded\":null,\"tenant\":null,\"connection\":4}HTTP/1.1 200 OK\r\nx-origin-connection: 4\r\ncontent-type: application/json\r\ndate: Wed, 11 Nov 2026 08:40:45 GMT\r\ncontent-length: 141\r\nx-envoy-upstream-service-time: 7\r\nx-lab-generation: 1\r\nserver: envoy\r\nconnection: close\r\n\r\n{\"target\":\"/pipeline%20second\",\"host\":\"lab-origin.test\",\"generation\":\"1\",\"route\":\"edge-a.test\",\"forwarded\":null,\"tenant\":null,\"connection\":4}",
+        "peer_closed": true,
+        "timed_out": false,
+        "negotiated": {
+          "tls": "TLSv1.3",
+          "alpn": false,
+          "sni": "edge-a.test",
+          "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+        }
+      },
+      "origin": {
+        "handler_invocations": 2,
+        "decrypted_bytes": 519,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/pipeline%2Ffirst?x=%2520",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/pipeline%20second",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "two-SNI-certificate-selection",
+      "status": "pass",
+      "milliseconds": 69.29,
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "unknown-and-missing-SNI-handshake-rejected",
+      "status": "pass",
+      "milliseconds": 33.83,
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "pre-TLS-filter-rejects-unapproved-lab-source",
+      "status": "pass",
+      "milliseconds": 5.09,
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "HTTP1-routing-and-untrusted-header-stripping",
+      "status": "pass",
+      "milliseconds": 11.36,
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 239,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "cross-tenant-SNI-Host-binding",
+      "status": "pass",
+      "milliseconds": 24.67,
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "declared-oversized-body-rejected-before-origin",
+      "status": "pass",
+      "milliseconds": 17.59,
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "HTTP2-downstream-and-upstream-ALPN",
+      "status": "pass",
+      "milliseconds": 126.04,
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "2"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+      "status": "fail",
+      "milliseconds": 18.19,
+      "error": "unsafe authority status 200",
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "2"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "HTTP1-and-HTTP2-body-streaming",
+      "status": "pass",
+      "milliseconds": 472.23,
+      "detail": {
+        "first_response_chunk_ms": 11.32,
+        "payload_bytes": 245760
+      },
+      "origin": {
+        "handler_invocations": 3,
+        "decrypted_bytes": 246273,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "POST",
+            "target": "/echo",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "POST",
+            "target": "/echo",
+            "protocol": "2"
+          },
+          {
+            "method": "GET",
+            "target": "/stream",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "WebSocket-upgrade-bidirectional-close",
+      "status": "pass",
+      "milliseconds": 34.29,
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 462,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/ws",
+            "protocol": "1.1",
+            "upgrade": true
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "certificate-rotation-keeps-active-stream-and-snapshot",
+      "status": "pass",
+      "milliseconds": 422.99,
+      "detail": {
+        "active_generation": 1,
+        "new_generation": 2
+      },
+      "origin": {
+        "handler_invocations": 4,
+        "decrypted_bytes": 962,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/stream",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "invalid-and-replayed-snapshot-retains-last-good",
+      "status": "pass",
+      "milliseconds": 404.7,
+      "origin": {
+        "handler_invocations": 4,
+        "decrypted_bytes": 956,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "invalid-certificate-config-retains-last-good",
+      "status": "pass",
+      "milliseconds": 789.59,
+      "detail": {
+        "rejected": [
+          "mismatched key",
+          "wrong SAN",
+          "duplicate host",
+          "publicly readable key"
+        ],
+        "rejected_generation": 4,
+        "restored_generation": 5
+      },
+      "origin": {
+        "handler_invocations": 6,
+        "decrypted_bytes": 1434,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "verified-origin-TLS-rejects-wrong",
+      "status": "pass",
+      "milliseconds": 267.43,
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 239,
+        "parser_errors": 0,
+        "transport_errors": 2,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "verified-origin-TLS-rejects-expired",
+      "status": "pass",
+      "milliseconds": 264.65,
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 239,
+        "parser_errors": 0,
+        "transport_errors": 2,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "verified-origin-TLS-rejects-untrusted",
+      "status": "pass",
+      "milliseconds": 244.03,
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 240,
+        "parser_errors": 0,
+        "transport_errors": 2,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "trust-store-swap-cannot-reuse-old-origin-TLS-session",
+      "status": "pass",
+      "milliseconds": 254.13,
+      "origin": {
+        "handler_invocations": 3,
+        "decrypted_bytes": 720,
+        "parser_errors": 0,
+        "transport_errors": 2,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "origin-read-timeout-is-bounded",
+      "status": "pass",
+      "milliseconds": 2007.17,
+      "detail": {
+        "timeout_ms": 2007.03
+      },
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 244,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/slow",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "origin-connection-pooling",
+      "status": "pass",
+      "milliseconds": 17.77,
+      "detail": {
+        "sequential_requests": 6,
+        "unique_origin_connections": 1
+      },
+      "origin": {
+        "handler_invocations": 6,
+        "decrypted_bytes": 1440,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "same-origin-pools-are-partitioned-between-routes",
+      "status": "pass",
+      "milliseconds": 156.13,
+      "origin": {
+        "handler_invocations": 5,
+        "decrypted_bytes": 1200,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "client-upload-cancellation-is-bounded",
+      "status": "pass",
+      "milliseconds": 417.12,
+      "detail": {
+        "cancellations": 8,
+        "elapsed_ms": 416.59,
+        "rss_before": 63086592,
+        "rss_after": 63348736,
+        "limit": "2.5s per cancellation; <64MiB net RSS increase; smoke bound, not leak/soak proof"
+      },
+      "origin": {
+        "handler_invocations": 8,
+        "decrypted_bytes": 264320,
+        "parser_errors": 8,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "POST",
+            "target": "/upload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "POST",
+            "target": "/upload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "POST",
+            "target": "/upload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "POST",
+            "target": "/upload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "POST",
+            "target": "/upload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "POST",
+            "target": "/upload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "POST",
+            "target": "/upload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "POST",
+            "target": "/upload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "weighted-health-check-failover-and-recovery",
+      "status": "pass",
+      "milliseconds": 1719.08,
+      "detail": {
+        "healthy_weight_distribution": {
+          "first": 30,
+          "second": 10
+        },
+        "failover_requests": 12,
+        "invalid_TLS_backend_requests": 12,
+        "all_unhealthy_status": 503,
+        "recovery": [
+          "first",
+          "second"
+        ]
+      },
+      "origin": {
+        "handler_invocations": 105,
+        "decrypted_bytes": 20244,
+        "parser_errors": 0,
+        "transport_errors": 6,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "upgrade-does-not-forward-preread-bytes-before-101",
+      "status": "pass",
+      "milliseconds": 1008.65,
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 362,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/premature",
+            "protocol": "1.1",
+            "upgrade": true
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "gRPC-bidirectional-streaming-and-trailers",
+      "status": "pass",
+      "milliseconds": 54.69,
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "gRPC-client-cancellation-reaches-origin",
+      "status": "pass",
+      "milliseconds": 55.88,
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "bounded-reference-benchmark",
+      "status": "pass",
+      "milliseconds": 11236.75,
+      "detail": {
+        "reference": "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311",
+        "reference_version": "nginx/1.30.6",
+        "profile": "100 warmup, 5 seconds each, closed-loop concurrency 8, 90% GET/1024B response + 10% POST/32768B echo; H1 TLS verified on both hops; keepalive; client/origin/proxy same host; envoy candidate; debug requested profile",
+        "measurement": "Linux /proc cumulative user+system CPU, HZ=100; sampled summed RSS at 100ms; latency includes client scheduling and origin; no handshake in steady state",
+        "candidate_name": "envoy",
+        "candidate": {
+          "duration_seconds": 5.001,
+          "requests": 9099,
+          "requests_per_second": 1819.36,
+          "p50_ms": 4.053,
+          "p95_ms": 7.638,
+          "p99_ms": 9.928,
+          "errors": 0,
+          "timeouts": 0,
+          "cpu_percent_of_one_core": 1.2,
+          "peak_rss_bytes": 62418944,
+          "pids_sampled": 1
+        },
+        "nginx": {
+          "duration_seconds": 5.003,
+          "requests": 8683,
+          "requests_per_second": 1735.54,
+          "p50_ms": 4.067,
+          "p95_ms": 8.992,
+          "p99_ms": 13.572,
+          "errors": 0,
+          "timeouts": 0,
+          "cpu_percent_of_one_core": 35.38,
+          "peak_rss_bytes": 20430848,
+          "pids_sampled": 3
+        },
+        "limitations": [
+          "short single-run smoke benchmark; no launch SLO or capacity inference",
+          "independently built binaries; default build settings and crypto libraries may differ",
+          "RSS sums shared nginx pages across processes",
+          "not open-loop; coordinated omission; shared host load",
+          "benchmark runs sequentially"
+        ]
+      },
+      "origin": {
+        "handler_invocations": 17983,
+        "decrypted_bytes": 60959831,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.3",
+            "sni": "lab-origin.test",
+            "alpn": false
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "POST",
+            "target": "/echo",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "POST",
+            "target": "/echo",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "method": "GET",
+            "target": "/payload",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 17855
+      }
+    },
+    {
+      "name": "secret-bearing-request-absent-from-runtime-log",
+      "status": "pass",
+      "milliseconds": 9.66,
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 403,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "POST",
+            "target": "/echo",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    }
+  ],
+  "benchmark": {
+    "reference": "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311",
+    "reference_version": "nginx/1.30.6",
+    "profile": "100 warmup, 5 seconds each, closed-loop concurrency 8, 90% GET/1024B response + 10% POST/32768B echo; H1 TLS verified on both hops; keepalive; client/origin/proxy same host; envoy candidate; debug requested profile",
+    "measurement": "Linux /proc cumulative user+system CPU, HZ=100; sampled summed RSS at 100ms; latency includes client scheduling and origin; no handshake in steady state",
+    "candidate_name": "envoy",
+    "candidate": {
+      "duration_seconds": 5.001,
+      "requests": 9099,
+      "requests_per_second": 1819.36,
+      "p50_ms": 4.053,
+      "p95_ms": 7.638,
+      "p99_ms": 9.928,
+      "errors": 0,
+      "timeouts": 0,
+      "cpu_percent_of_one_core": 1.2,
+      "peak_rss_bytes": 62418944,
+      "pids_sampled": 1
+    },
+    "nginx": {
+      "duration_seconds": 5.003,
+      "requests": 8683,
+      "requests_per_second": 1735.54,
+      "p50_ms": 4.067,
+      "p95_ms": 8.992,
+      "p99_ms": 13.572,
+      "errors": 0,
+      "timeouts": 0,
+      "cpu_percent_of_one_core": 35.38,
+      "peak_rss_bytes": 20430848,
+      "pids_sampled": 3
+    },
+    "limitations": [
+      "short single-run smoke benchmark; no launch SLO or capacity inference",
+      "independently built binaries; default build settings and crypto libraries may differ",
+      "RSS sums shared nginx pages across processes",
+      "not open-loop; coordinated omission; shared host load",
+      "benchmark runs sequentially"
+    ]
+  },
+  "candidate": {
+    "name": "envoy",
+    "command": "/home/tiecont/Projects/aegis-gate-sprint03-b/spikes/envoy/launch",
+    "args": [],
+    "artifacts": [
+      {
+        "path": "/home/tiecont/Projects/aegis-gate-sprint03-b/spikes/envoy/launch",
+        "sha256": "0ee313b5b338486cd856415a6022ae10f6f12aeab2696f0d0399c512f723f0f1"
+      },
+      {
+        "path": "/home/tiecont/Projects/aegis-gate-sprint03-b/spikes/envoy/launcher.mjs",
+        "sha256": "26705e93f391d6fcd815ce48ef279142ab5d3463be681a8cfe11edfea6bb5da3"
+      },
+      {
+        "path": "/home/tiecont/Projects/aegis-gate-sprint03-b/spikes/envoy/config.mjs",
+        "sha256": "53fd7c0c624f8a4771ce75d6059981762694a89d61f24482803289b979cebeef"
+      },
+      {
+        "path": "/home/tiecont/Projects/aegis-gate-sprint03-b/spikes/envoy/image.lock.json",
+        "sha256": "a96054e7fe3b8994f708f54c221758ecd786b91655c641cb7648067d1f02889d"
+      }
+    ]
+  },
+  "test_manifest_sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+  "lab_sha256": "ef8f113ffe33a24cf490f73b7039fdafadebfa786ef5081971419a7379ae12dc",
+  "supplemental_sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf",
+  "openssl": "OpenSSL 3.6.5 29 Sep 2026 (Library: OpenSSL 3.6.5 29 Sep 2026)",
+  "ingress_observations": [
+    {
+      "name": "conflicting-content-length",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 1\r\nContent-Length: 2\r\nConnection: close\r\n\r\nx",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:05 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "CL-TE",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\n0\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:06 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "TE-CL",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nContent-Length: 4\r\nConnection: close\r\n\r\n0\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:07 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "duplicate-Host",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n",
+      "response_status": "421",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 421 Misdirected Request\r\ndate: Wed, 11 Nov 2026 08:40:08 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "invalid-transfer-encoding",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: cow\r\nConnection: close\r\n\r\nx",
+      "response_status": "501",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:09 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "obsolete-folded-header",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nX-Folded: first\r\n second\r\nConnection: close\r\n\r\n",
+      "response_status": "200",
+      "origin_dispatches": 1,
+      "origin_inbound_bytes": 263,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 200 OK\r\nx-origin-connection: 2\r\ncontent-type: application/json\r\ndate: Wed, 11 Nov 2026 08:40:10 GMT\r\ncontent-length: 124\r\nx-envoy-upstream-service-time: 2\r\nx-lab-generation: 1\r\nserver: envoy\r\nconnection: close\r\n\r\n{\"target\":\"/\",\"host\":\"lab-origin.test\",\"generation\":\"1\",\"route\":\"edge-a.test\",\"forwarded\":null,\"tenant\":null,\"connection\":2}",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "invalid-request-target",
+      "request": "GET /bad target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:10 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "Connection-nominates-trusted-header",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nConnection: X-Forwarded-For, close\r\nX-Forwarded-For: 127.0.0.1\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:11 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "target-raw-tab",
+      "request": "GET /bad\ttarget HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:12 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "target-raw-control",
+      "request": "GET /bad\u0001target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:13 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "target-raw-null",
+      "request": "GET /bad\u0000target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:14 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "host-missing",
+      "request": "GET / HTTP/1.1\r\nX-Lab: no-host\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ndate: Wed, 11 Nov 2026 08:40:15 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "host-empty",
+      "request": "GET / HTTP/1.1\r\nHost:\r\nConnection: close\r\n\r\n",
+      "response_status": "421",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 421 Misdirected Request\r\ndate: Wed, 11 Nov 2026 08:40:16 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "host-duplicate-identical",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "421",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 421 Misdirected Request\r\ndate: Wed, 11 Nov 2026 08:40:17 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "host-comma-list",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test,edge-b.test\r\nConnection: close\r\n\r\n",
+      "response_status": "421",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 421 Misdirected Request\r\ndate: Wed, 11 Nov 2026 08:40:18 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "host-userinfo",
+      "request": "GET / HTTP/1.1\r\nHost: user@edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "421",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 421 Misdirected Request\r\ndate: Wed, 11 Nov 2026 08:40:19 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "host-invalid-port",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test:abc\r\nConnection: close\r\n\r\n",
+      "response_status": "421",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 421 Misdirected Request\r\ndate: Wed, 11 Nov 2026 08:40:20 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "host-whitespace-before-colon",
+      "request": "GET / HTTP/1.1\r\nHost : edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:21 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "absolute-authority-SNI-mismatch",
+      "request": "GET https://edge-b.test/ HTTP/1.1\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n",
+      "response_status": "404",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 404 Not Found\r\ndate: Wed, 11 Nov 2026 08:40:22 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "absolute-authority-Host-mismatch",
+      "request": "GET https://edge-a.test/ HTTP/1.1\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n",
+      "response_status": "404",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 404 Not Found\r\ndate: Wed, 11 Nov 2026 08:40:23 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "absolute-authority-userinfo",
+      "request": "GET https://user@edge-a.test/ HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "404",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 404 Not Found\r\ndate: Wed, 11 Nov 2026 08:40:24 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "absolute-authority-without-Host",
+      "request": "GET https://edge-a.test/ HTTP/1.1\r\nX-Lab: no-host\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ndate: Wed, 11 Nov 2026 08:40:25 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "absolute-unsupported-scheme",
+      "request": "GET ftp://edge-a.test/ HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "404",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 404 Not Found\r\ndate: Wed, 11 Nov 2026 08:40:26 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "target-relative-form",
+      "request": "GET relative HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:27 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "target-fragment",
+      "request": "GET /path#fragment HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ndate: Wed, 11 Nov 2026 08:40:28 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "connect-authority-form-disabled",
+      "request": "CONNECT edge-a.test:443 HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "404",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 404 Not Found\r\ndate: Wed, 11 Nov 2026 08:40:29 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "CL-TE-pipelined",
+      "request": "POST /echo HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\n\r\n0\r\n\r\nGET /smuggled HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:30 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "TE-CL-pipelined",
+      "request": "POST /echo HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nContent-Length: 4\r\n\r\n0\r\n\r\nGET /smuggled HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:31 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "TE-obsolete-fold",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding:\r\n chunked\r\nConnection: close\r\n\r\n0\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:32 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "CL-comma-conflict",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 1, 2\r\nConnection: close\r\n\r\nx",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:33 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "TE-repeated-chunked",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, chunked\r\nConnection: close\r\n\r\n0\r\n\r\n",
+      "response_status": "501",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:34 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "TE-not-final-chunked",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, gzip\r\nConnection: close\r\n\r\n0\r\n\r\n",
+      "response_status": "501",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:35 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "space-target-before-pipelined-request",
+      "request": "GET /bad target HTTP/1.1\r\nHost: edge-a.test\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response_status": "400",
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:36 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "tab-target-before-pipelined-request",
+      "request": "GET /bad\ttarget HTTP/1.1\r\nHost: edge-a.test\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response_status": "400",
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:37 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "duplicate-host-before-pipelined-request",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nHost: edge-b.test\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response_status": "421",
+      "response": "HTTP/1.1 421 Misdirected Request\r\ndate: Wed, 11 Nov 2026 08:40:38 GMT\r\nserver: envoy\r\nconnection: close\r\ncontent-length: 0\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "conflicting-length-before-pipelined-request",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 0\r\nContent-Length: 1\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response_status": "400",
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:39 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "signed-content-length",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: +0\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response_status": "400",
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:40 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "negative-content-length",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: -1\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response_status": "400",
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:41 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "repeated-transfer-encoding-fields",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\n0\r\n\r\n",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response_status": "501",
+      "response": "HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:42 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "nul-in-header-value",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nX-Lab: before\u0000after\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response_status": "400",
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:43 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    },
+    {
+      "name": "invalid-header-name",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nBad Header: value\r\n\r\nGET /pipeline-successor HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response_status": "400",
+      "response": "HTTP/1.1 400 Bad Request\r\ncontent-length: 11\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 08:40:44 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nBad Request",
+      "peer_closed": true,
+      "timed_out": false,
+      "negotiated": {
+        "tls": "TLSv1.3",
+        "alpn": false,
+        "sni": "edge-a.test",
+        "peer_fingerprint256": "B1:AF:0D:07:E5:4C:81:14:3C:66:02:2E:19:50:BE:31:EB:85:67:0F:FD:C4:29:F5:6B:2F:82:00:36:3D:DF:73"
+      }
+    }
+  ],
+  "pending": [],
+  "completed_at": "2026-11-11T08:41:06.139Z",
+  "result": "fail",
+  "run_directory": "/home/tiecont/Projects/aegis-gate-sprint03-b/.local/edge-proof-run-VbR2Sm"
+}
