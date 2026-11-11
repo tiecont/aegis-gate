@@ -3,7 +3,10 @@
 ## Agent Completion Report
 
 - Module: Sprint02 Agent A / foundation supply-chain gate recovery (T14/R13).
-- Status: local full checks/scans PASS; final hosted exact-head gates pending.
+- Status: local full checks/scans and exact-head hosted gates PASS; PR6 merged.
+  Root verified run42964002493 onf53e1d2 and repeated the independent
+  substitution/history regressions and integrated check/scan. Final evidence:
+  sprint02-d-integration.md and sprint02-d-security-review.md.
 - Files: `scripts/image_identity.py`, `scripts/image_identity_test.py`,
   `scripts/security-scan.sh`, `scripts/history_scan_evidence.py`,
   `scripts/git_history_preflight_test.py`, the unit target in `Makefile`, and

@@ -1,0 +1,1042 @@
+{
+  "started_at": "2026-11-11T06:12:56.874Z",
+  "node": "v26.13.0",
+  "platform": "linux",
+  "cpu": "AMD Ryzen 7 4800HS with Radeon Graphics",
+  "logical_cpus": 16,
+  "memory_bytes": 24573243392,
+  "profile": "owned loopback lab; no production claims",
+  "tests": [
+    {
+      "name": "two-SNI-certificate-selection",
+      "status": "pass",
+      "milliseconds": 8.57
+    },
+    {
+      "name": "unknown-and-missing-SNI-handshake-rejected",
+      "status": "pass",
+      "milliseconds": 9.45
+    },
+    {
+      "name": "pre-TLS-filter-rejects-unapproved-lab-source",
+      "status": "pass",
+      "milliseconds": 2.34
+    },
+    {
+      "name": "HTTP1-routing-and-untrusted-header-stripping",
+      "status": "pass",
+      "milliseconds": 5.47
+    },
+    {
+      "name": "cross-tenant-SNI-Host-binding",
+      "status": "pass",
+      "milliseconds": 15.56
+    },
+    {
+      "name": "declared-oversized-body-rejected-before-origin",
+      "status": "pass",
+      "milliseconds": 5.46
+    },
+    {
+      "name": "HTTP2-downstream-and-upstream-ALPN",
+      "status": "pass",
+      "milliseconds": 14.12
+    },
+    {
+      "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+      "status": "pass",
+      "milliseconds": 15.1
+    },
+    {
+      "name": "HTTP1-and-HTTP2-body-streaming",
+      "status": "pass",
+      "milliseconds": 429.76,
+      "detail": {
+        "first_response_chunk_ms": 5.67,
+        "payload_bytes": 245760
+      }
+    },
+    {
+      "name": "WebSocket-upgrade-bidirectional-close",
+      "status": "pass",
+      "milliseconds": 17.79
+    },
+    {
+      "name": "certificate-rotation-keeps-active-stream-and-snapshot",
+      "status": "pass",
+      "milliseconds": 415.21,
+      "detail": {
+        "active_generation": 1,
+        "new_generation": 2
+      }
+    },
+    {
+      "name": "invalid-and-replayed-snapshot-retains-last-good",
+      "status": "pass",
+      "milliseconds": 374.55
+    },
+    {
+      "name": "invalid-certificate-config-retains-last-good",
+      "status": "pass",
+      "milliseconds": 637.95,
+      "detail": {
+        "rejected": [
+          "mismatched key",
+          "wrong SAN",
+          "duplicate host",
+          "publicly readable key"
+        ],
+        "rejected_generation": 4,
+        "restored_generation": 5
+      }
+    },
+    {
+      "name": "verified-origin-TLS-rejects-wrong",
+      "status": "pass",
+      "milliseconds": 226.72
+    },
+    {
+      "name": "verified-origin-TLS-rejects-expired",
+      "status": "pass",
+      "milliseconds": 223.34
+    },
+    {
+      "name": "verified-origin-TLS-rejects-untrusted",
+      "status": "pass",
+      "milliseconds": 222.63
+    },
+    {
+      "name": "trust-store-swap-cannot-reuse-old-origin-TLS-session",
+      "status": "pass",
+      "milliseconds": 242.08
+    },
+    {
+      "name": "origin-read-timeout-is-bounded",
+      "status": "pass",
+      "milliseconds": 2019.04,
+      "detail": {
+        "timeout_ms": 2018.96
+      }
+    },
+    {
+      "name": "origin-connection-pooling",
+      "status": "pass",
+      "milliseconds": 12.13,
+      "detail": {
+        "sequential_requests": 6,
+        "unique_origin_connections": 1
+      }
+    },
+    {
+      "name": "same-origin-pools-are-partitioned-between-routes",
+      "status": "pass",
+      "milliseconds": 141.37
+    },
+    {
+      "name": "client-upload-cancellation-is-bounded",
+      "status": "pass",
+      "milliseconds": 416.62,
+      "detail": {
+        "cancellations": 8,
+        "elapsed_ms": 415.94,
+        "rss_before": 15867904,
+        "rss_after": 15998976,
+        "limit": "2.5s per cancellation; <64MiB net RSS increase; smoke bound, not leak/soak proof"
+      }
+    },
+    {
+      "name": "weighted-health-check-failover-and-recovery",
+      "status": "pass",
+      "milliseconds": 1718.2,
+      "detail": {
+        "healthy_weight_distribution": {
+          "first": 30,
+          "second": 10
+        },
+        "failover_requests": 12,
+        "invalid_TLS_backend_requests": 12,
+        "all_unhealthy_status": 503,
+        "recovery": [
+          "first",
+          "second"
+        ]
+      }
+    },
+    {
+      "name": "malformed-HTTP-conflicting-content-length",
+      "status": "pass",
+      "milliseconds": 9.74
+    },
+    {
+      "name": "malformed-HTTP-CL-TE",
+      "status": "pass",
+      "milliseconds": 8.77
+    },
+    {
+      "name": "malformed-HTTP-TE-CL",
+      "status": "pass",
+      "milliseconds": 7.84
+    },
+    {
+      "name": "malformed-HTTP-duplicate-Host",
+      "status": "pass",
+      "milliseconds": 5.56
+    },
+    {
+      "name": "malformed-HTTP-invalid-transfer-encoding",
+      "status": "pass",
+      "milliseconds": 6.47
+    },
+    {
+      "name": "malformed-HTTP-obsolete-folded-header",
+      "status": "pass",
+      "milliseconds": 5.38
+    },
+    {
+      "name": "malformed-HTTP-invalid-request-target",
+      "status": "fail",
+      "milliseconds": 9.23,
+      "error": "malformed request reached an owned origin\n\n172 !== 171\n"
+    },
+    {
+      "name": "malformed-HTTP-Connection-nominates-trusted-header",
+      "status": "pass",
+      "milliseconds": 4.65
+    },
+    {
+      "name": "strict-ingress-target-raw-tab",
+      "status": "fail",
+      "milliseconds": 6.41,
+      "error": "rejected-input policy violated: {\"name\":\"target-raw-tab\",\"request\":\"GET /bad\\ttarget HTTP/1.1\\r\\nHost: edge-a.test\\r\\nConnection: close\\r\\n\\r\\n\",\"response_status\":\"200\",\"origin_dispatches\":1,\"origin_inbound_bytes\":101,\"origin_parse_errors\":0,\"response\":\"HTTP/1.1 200 OK\\r\\nx-origin-connection: 24\\r\\ncontent-type: application/json\\r\\nDate: Wed, 11 Nov 2026 06:13:04 GMT\\r\\nConnection: close\\r\\nKeep-Alive: timeout=5\\r\\nContent-Length: 138\\r\\nx-lab-generation: 19\\r\\n\\r\\n{\\\"target\\\":\\\"/bad%09target\\\",\\\"host\\\":\\\"lab-origin.test\\\",\\\"generation\\\":\\\"19\\\",\\\"route\\\":\\\"edge-a.test\\\",\\\"forwarded\\\":null,\\\"tenant\\\":null,\\\"connection\\\":24}\",\"peer_closed\":true,\"timed_out\":false}\n\n1 !== 0\n"
+    },
+    {
+      "name": "strict-ingress-target-raw-control",
+      "status": "fail",
+      "milliseconds": 3.66,
+      "error": "rejected-input policy violated: {\"name\":\"target-raw-control\",\"request\":\"GET /bad\\u0001target HTTP/1.1\\r\\nHost: edge-a.test\\r\\nConnection: close\\r\\n\\r\\n\",\"response_status\":\"200\",\"origin_dispatches\":1,\"origin_inbound_bytes\":101,\"origin_parse_errors\":0,\"response\":\"HTTP/1.1 200 OK\\r\\nx-origin-connection: 24\\r\\ncontent-type: application/json\\r\\nDate: Wed, 11 Nov 2026 06:13:04 GMT\\r\\nConnection: close\\r\\nKeep-Alive: timeout=5\\r\\nContent-Length: 138\\r\\nx-lab-generation: 19\\r\\n\\r\\n{\\\"target\\\":\\\"/bad%01target\\\",\\\"host\\\":\\\"lab-origin.test\\\",\\\"generation\\\":\\\"19\\\",\\\"route\\\":\\\"edge-a.test\\\",\\\"forwarded\\\":null,\\\"tenant\\\":null,\\\"connection\\\":24}\",\"peer_closed\":true,\"timed_out\":false}\n\n1 !== 0\n"
+    },
+    {
+      "name": "strict-ingress-target-raw-null",
+      "status": "fail",
+      "milliseconds": 3.94,
+      "error": "rejected-input policy violated: {\"name\":\"target-raw-null\",\"request\":\"GET /bad\\u0000target HTTP/1.1\\r\\nHost: edge-a.test\\r\\nConnection: close\\r\\n\\r\\n\",\"response_status\":\"200\",\"origin_dispatches\":1,\"origin_inbound_bytes\":101,\"origin_parse_errors\":0,\"response\":\"HTTP/1.1 200 OK\\r\\nx-origin-connection: 24\\r\\ncontent-type: application/json\\r\\nDate: Wed, 11 Nov 2026 06:13:04 GMT\\r\\nConnection: close\\r\\nKeep-Alive: timeout=5\\r\\nContent-Length: 138\\r\\nx-lab-generation: 19\\r\\n\\r\\n{\\\"target\\\":\\\"/bad%00target\\\",\\\"host\\\":\\\"lab-origin.test\\\",\\\"generation\\\":\\\"19\\\",\\\"route\\\":\\\"edge-a.test\\\",\\\"forwarded\\\":null,\\\"tenant\\\":null,\\\"connection\\\":24}\",\"peer_closed\":true,\"timed_out\":false}\n\n1 !== 0\n"
+    },
+    {
+      "name": "strict-ingress-host-missing",
+      "status": "pass",
+      "milliseconds": 3.64,
+      "detail": {
+        "name": "host-missing",
+        "request": "GET / HTTP/1.1\r\nX-Lab: no-host\r\nConnection: close\r\n\r\n",
+        "response_status": "421",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 421 Misdirected Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-host-empty",
+      "status": "pass",
+      "milliseconds": 4.28,
+      "detail": {
+        "name": "host-empty",
+        "request": "GET / HTTP/1.1\r\nHost:\r\nConnection: close\r\n\r\n",
+        "response_status": "421",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 421 Misdirected Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-host-duplicate-identical",
+      "status": "pass",
+      "milliseconds": 4.22,
+      "detail": {
+        "name": "host-duplicate-identical",
+        "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-host-comma-list",
+      "status": "pass",
+      "milliseconds": 4.96,
+      "detail": {
+        "name": "host-comma-list",
+        "request": "GET / HTTP/1.1\r\nHost: edge-a.test,edge-b.test\r\nConnection: close\r\n\r\n",
+        "response_status": "421",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 421 Misdirected Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-host-userinfo",
+      "status": "pass",
+      "milliseconds": 3.13,
+      "detail": {
+        "name": "host-userinfo",
+        "request": "GET / HTTP/1.1\r\nHost: user@edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-host-invalid-port",
+      "status": "pass",
+      "milliseconds": 3.28,
+      "detail": {
+        "name": "host-invalid-port",
+        "request": "GET / HTTP/1.1\r\nHost: edge-a.test:abc\r\nConnection: close\r\n\r\n",
+        "response_status": "421",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 421 Misdirected Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-host-whitespace-before-colon",
+      "status": "pass",
+      "milliseconds": 3.3,
+      "detail": {
+        "name": "host-whitespace-before-colon",
+        "request": "GET / HTTP/1.1\r\nHost : edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-absolute-authority-SNI-mismatch",
+      "status": "pass",
+      "milliseconds": 3.16,
+      "detail": {
+        "name": "absolute-authority-SNI-mismatch",
+        "request": "GET https://edge-b.test/ HTTP/1.1\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n",
+        "response_status": "421",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 421 Misdirected Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-absolute-authority-Host-mismatch",
+      "status": "pass",
+      "milliseconds": 3.69,
+      "detail": {
+        "name": "absolute-authority-Host-mismatch",
+        "request": "GET https://edge-a.test/ HTTP/1.1\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-absolute-authority-userinfo",
+      "status": "pass",
+      "milliseconds": 4.12,
+      "detail": {
+        "name": "absolute-authority-userinfo",
+        "request": "GET https://user@edge-a.test/ HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-absolute-authority-without-Host",
+      "status": "pass",
+      "milliseconds": 3.52,
+      "detail": {
+        "name": "absolute-authority-without-Host",
+        "request": "GET https://edge-a.test/ HTTP/1.1\r\nX-Lab: no-host\r\nConnection: close\r\n\r\n",
+        "response_status": "421",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 421 Misdirected Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-absolute-unsupported-scheme",
+      "status": "fail",
+      "milliseconds": 4.13,
+      "error": "rejected-input policy violated: {\"name\":\"absolute-unsupported-scheme\",\"request\":\"GET ftp://edge-a.test/ HTTP/1.1\\r\\nHost: edge-a.test\\r\\nConnection: close\\r\\n\\r\\n\",\"response_status\":\"200\",\"origin_dispatches\":1,\"origin_inbound_bytes\":110,\"origin_parse_errors\":0,\"response\":\"HTTP/1.1 200 OK\\r\\nx-origin-connection: 24\\r\\ncontent-type: application/json\\r\\nDate: Wed, 11 Nov 2026 06:13:04 GMT\\r\\nConnection: close\\r\\nKeep-Alive: timeout=5\\r\\nContent-Length: 147\\r\\nx-lab-generation: 19\\r\\n\\r\\n{\\\"target\\\":\\\"ftp://lab-origin.test/\\\",\\\"host\\\":\\\"lab-origin.test\\\",\\\"generation\\\":\\\"19\\\",\\\"route\\\":\\\"edge-a.test\\\",\\\"forwarded\\\":null,\\\"tenant\\\":null,\\\"connection\\\":24}\",\"peer_closed\":true,\"timed_out\":false}\n\n1 !== 0\n"
+    },
+    {
+      "name": "strict-ingress-target-relative-form",
+      "status": "fail",
+      "milliseconds": 9.77,
+      "error": "invalid bytes reached origin: {\"name\":\"target-relative-form\",\"request\":\"GET relative HTTP/1.1\\r\\nHost: edge-a.test\\r\\nConnection: close\\r\\n\\r\\n\",\"response_status\":\"502\",\"origin_dispatches\":0,\"origin_inbound_bytes\":192,\"origin_parse_errors\":2,\"response\":\"HTTP/1.1 502 Bad Gateway\\r\\nServer: Pingora\\r\\nDate: Wed, 11 Nov 2026 06:13:04 GMT\\r\\nContent-Length: 0\\r\\nCache-Control: private, no-store\\r\\nConnection: close\\r\\n\\r\\n\",\"peer_closed\":true,\"timed_out\":false}\n\n192 !== 0\n"
+    },
+    {
+      "name": "strict-ingress-target-fragment",
+      "status": "fail",
+      "milliseconds": 7.42,
+      "error": "rejected-input policy violated: {\"name\":\"target-fragment\",\"request\":\"GET /path#fragment HTTP/1.1\\r\\nHost: edge-a.test\\r\\nConnection: close\\r\\n\\r\\n\",\"response_status\":\"200\",\"origin_dispatches\":1,\"origin_inbound_bytes\":93,\"origin_parse_errors\":0,\"response\":\"HTTP/1.1 200 OK\\r\\nx-origin-connection: 25\\r\\ncontent-type: application/json\\r\\nDate: Wed, 11 Nov 2026 06:13:04 GMT\\r\\nConnection: close\\r\\nKeep-Alive: timeout=5\\r\\nContent-Length: 130\\r\\nx-lab-generation: 19\\r\\n\\r\\n{\\\"target\\\":\\\"/path\\\",\\\"host\\\":\\\"lab-origin.test\\\",\\\"generation\\\":\\\"19\\\",\\\"route\\\":\\\"edge-a.test\\\",\\\"forwarded\\\":null,\\\"tenant\\\":null,\\\"connection\\\":25}\",\"peer_closed\":true,\"timed_out\":false}\n\n1 !== 0\n"
+    },
+    {
+      "name": "strict-ingress-connect-authority-form-disabled",
+      "status": "pass",
+      "milliseconds": 4.89,
+      "detail": {
+        "name": "connect-authority-form-disabled",
+        "request": "CONNECT edge-a.test:443 HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "405",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 405 Method Not Allowed\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-CL-TE-pipelined",
+      "status": "pass",
+      "milliseconds": 4.53,
+      "detail": {
+        "name": "CL-TE-pipelined",
+        "request": "POST /echo HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\n\r\n0\r\n\r\nGET /smuggled HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-TE-CL-pipelined",
+      "status": "pass",
+      "milliseconds": 4.83,
+      "detail": {
+        "name": "TE-CL-pipelined",
+        "request": "POST /echo HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nContent-Length: 4\r\n\r\n0\r\n\r\nGET /smuggled HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-TE-obsolete-fold",
+      "status": "pass",
+      "milliseconds": 4.59,
+      "detail": {
+        "name": "TE-obsolete-fold",
+        "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding:\r\n chunked\r\nConnection: close\r\n\r\n0\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-CL-comma-conflict",
+      "status": "pass",
+      "milliseconds": 4.46,
+      "detail": {
+        "name": "CL-comma-conflict",
+        "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 1, 2\r\nConnection: close\r\n\r\nx",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "strict-ingress-TE-repeated-chunked",
+      "status": "fail",
+      "milliseconds": 5.03,
+      "error": "rejected-input policy violated: {\"name\":\"TE-repeated-chunked\",\"request\":\"POST / HTTP/1.1\\r\\nHost: edge-a.test\\r\\nTransfer-Encoding: chunked, chunked\\r\\nConnection: close\\r\\n\\r\\n0\\r\\n\\r\\n\",\"response_status\":\"200\",\"origin_dispatches\":1,\"origin_inbound_bytes\":123,\"origin_parse_errors\":0,\"response\":\"HTTP/1.1 200 OK\\r\\nx-origin-connection: 25\\r\\ncontent-type: application/json\\r\\nDate: Wed, 11 Nov 2026 06:13:04 GMT\\r\\nConnection: close\\r\\nKeep-Alive: timeout=5\\r\\nContent-Length: 126\\r\\nx-lab-generation: 19\\r\\n\\r\\n{\\\"target\\\":\\\"/\\\",\\\"host\\\":\\\"lab-origin.test\\\",\\\"generation\\\":\\\"19\\\",\\\"route\\\":\\\"edge-a.test\\\",\\\"forwarded\\\":null,\\\"tenant\\\":null,\\\"connection\\\":25}\",\"peer_closed\":true,\"timed_out\":false}\n\n1 !== 0\n"
+    },
+    {
+      "name": "strict-ingress-TE-not-final-chunked",
+      "status": "pass",
+      "milliseconds": 4.01,
+      "detail": {
+        "name": "TE-not-final-chunked",
+        "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, gzip\r\nConnection: close\r\n\r\n0\r\n\r\n",
+        "response_status": "400",
+        "origin_dispatches": 0,
+        "origin_inbound_bytes": 0,
+        "origin_parse_errors": 0,
+        "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+        "peer_closed": true,
+        "timed_out": false
+      }
+    },
+    {
+      "name": "valid-percent-encoded-/bad%20target",
+      "status": "pass",
+      "milliseconds": 5.91,
+      "detail": {
+        "target": "/bad%20target",
+        "origin_dispatches": 1,
+        "origin_inbound_bytes": 101
+      }
+    },
+    {
+      "name": "valid-percent-encoded-/bad%09target",
+      "status": "pass",
+      "milliseconds": 6.1,
+      "detail": {
+        "target": "/bad%09target",
+        "origin_dispatches": 1,
+        "origin_inbound_bytes": 101
+      }
+    },
+    {
+      "name": "valid-percent-encoded-/bad%01target",
+      "status": "pass",
+      "milliseconds": 4.65,
+      "detail": {
+        "target": "/bad%01target",
+        "origin_dispatches": 1,
+        "origin_inbound_bytes": 101
+      }
+    },
+    {
+      "name": "valid-percent-encoded-/bad%00target",
+      "status": "pass",
+      "milliseconds": 6.98,
+      "detail": {
+        "target": "/bad%00target",
+        "origin_dispatches": 1,
+        "origin_inbound_bytes": 101
+      }
+    },
+    {
+      "name": "valid-percent-encoded-/encoded%2Fsegment?value=%2520",
+      "status": "pass",
+      "milliseconds": 4.78,
+      "detail": {
+        "target": "/encoded%2Fsegment?value=%2520",
+        "origin_dispatches": 1,
+        "origin_inbound_bytes": 118
+      }
+    },
+    {
+      "name": "valid-percent-encoded-/caf%C3%A9?x=a%20b",
+      "status": "pass",
+      "milliseconds": 4.33,
+      "detail": {
+        "target": "/caf%C3%A9?x=a%20b",
+        "origin_dispatches": 1,
+        "origin_inbound_bytes": 106
+      }
+    },
+    {
+      "name": "upgrade-does-not-forward-preread-bytes-before-101",
+      "status": "pass",
+      "milliseconds": 4.01
+    },
+    {
+      "name": "gRPC-bidirectional-streaming-and-trailers",
+      "status": "pass",
+      "milliseconds": 34.68
+    },
+    {
+      "name": "gRPC-client-cancellation-reaches-origin",
+      "status": "pass",
+      "milliseconds": 52.72
+    },
+    {
+      "name": "bounded-reference-benchmark",
+      "status": "pass",
+      "milliseconds": 10783.04,
+      "detail": {
+        "reference": "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311",
+        "reference_version": "nginx/1.30.6",
+        "profile": "100 warmup, 5 seconds each, closed-loop concurrency 8, 90% GET/1024B response + 10% POST/32768B echo; H1 TLS verified on both hops; keepalive; client/origin/proxy same host; release Rust build",
+        "measurement": "Linux /proc cumulative user+system CPU, HZ=100; sampled summed RSS at 100ms; latency includes client scheduling and origin; no handshake in steady state",
+        "pingora": {
+          "duration_seconds": 5.001,
+          "requests": 13848,
+          "requests_per_second": 2769.3,
+          "p50_ms": 2.542,
+          "p95_ms": 5.008,
+          "p99_ms": 8.078,
+          "errors": 0,
+          "timeouts": 0,
+          "cpu_percent_of_one_core": 60.39,
+          "peak_rss_bytes": 22142976,
+          "pids_sampled": 1
+        },
+        "nginx": {
+          "duration_seconds": 5.002,
+          "requests": 17438,
+          "requests_per_second": 3486.4,
+          "p50_ms": 2.026,
+          "p95_ms": 4.13,
+          "p99_ms": 6.574,
+          "errors": 0,
+          "timeouts": 0,
+          "cpu_percent_of_one_core": 45.58,
+          "peak_rss_bytes": 20066304,
+          "pids_sampled": 3
+        },
+        "limitations": [
+          "short single-run smoke benchmark; no launch SLO or capacity inference",
+          "independently built binaries; default build settings and crypto libraries may differ",
+          "RSS sums shared nginx pages across processes",
+          "not open-loop; coordinated omission; shared host load",
+          "benchmark runs sequentially"
+        ]
+      }
+    },
+    {
+      "name": "secret-bearing-request-absent-from-runtime-log",
+      "status": "pass",
+      "milliseconds": 9.95
+    }
+  ],
+  "benchmark": {
+    "reference": "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311",
+    "reference_version": "nginx/1.30.6",
+    "profile": "100 warmup, 5 seconds each, closed-loop concurrency 8, 90% GET/1024B response + 10% POST/32768B echo; H1 TLS verified on both hops; keepalive; client/origin/proxy same host; release Rust build",
+    "measurement": "Linux /proc cumulative user+system CPU, HZ=100; sampled summed RSS at 100ms; latency includes client scheduling and origin; no handshake in steady state",
+    "pingora": {
+      "duration_seconds": 5.001,
+      "requests": 13848,
+      "requests_per_second": 2769.3,
+      "p50_ms": 2.542,
+      "p95_ms": 5.008,
+      "p99_ms": 8.078,
+      "errors": 0,
+      "timeouts": 0,
+      "cpu_percent_of_one_core": 60.39,
+      "peak_rss_bytes": 22142976,
+      "pids_sampled": 1
+    },
+    "nginx": {
+      "duration_seconds": 5.002,
+      "requests": 17438,
+      "requests_per_second": 3486.4,
+      "p50_ms": 2.026,
+      "p95_ms": 4.13,
+      "p99_ms": 6.574,
+      "errors": 0,
+      "timeouts": 0,
+      "cpu_percent_of_one_core": 45.58,
+      "peak_rss_bytes": 20066304,
+      "pids_sampled": 3
+    },
+    "limitations": [
+      "short single-run smoke benchmark; no launch SLO or capacity inference",
+      "independently built binaries; default build settings and crypto libraries may differ",
+      "RSS sums shared nginx pages across processes",
+      "not open-loop; coordinated omission; shared host load",
+      "benchmark runs sequentially"
+    ]
+  },
+  "ingress_observations": [
+    {
+      "name": "conflicting-content-length",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 1\r\nContent-Length: 2\r\nConnection: close\r\n\r\nx",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "CL-TE",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\n0\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "TE-CL",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nContent-Length: 4\r\nConnection: close\r\n\r\n0\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "duplicate-Host",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "invalid-transfer-encoding",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: cow\r\nConnection: close\r\n\r\nx",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "obsolete-folded-header",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nX-Folded: first\r\n second\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "invalid-request-target",
+      "request": "GET /bad target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "200",
+      "origin_dispatches": 1,
+      "origin_inbound_bytes": 101,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 200 OK\r\nx-origin-connection: 23\r\ncontent-type: application/json\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nConnection: close\r\nKeep-Alive: timeout=5\r\nContent-Length: 138\r\nx-lab-generation: 19\r\n\r\n{\"target\":\"/bad%20target\",\"host\":\"lab-origin.test\",\"generation\":\"19\",\"route\":\"edge-a.test\",\"forwarded\":null,\"tenant\":null,\"connection\":23}",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "Connection-nominates-trusted-header",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nConnection: X-Forwarded-For, close\r\nX-Forwarded-For: 127.0.0.1\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "target-raw-tab",
+      "request": "GET /bad\ttarget HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "200",
+      "origin_dispatches": 1,
+      "origin_inbound_bytes": 101,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 200 OK\r\nx-origin-connection: 24\r\ncontent-type: application/json\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nConnection: close\r\nKeep-Alive: timeout=5\r\nContent-Length: 138\r\nx-lab-generation: 19\r\n\r\n{\"target\":\"/bad%09target\",\"host\":\"lab-origin.test\",\"generation\":\"19\",\"route\":\"edge-a.test\",\"forwarded\":null,\"tenant\":null,\"connection\":24}",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "target-raw-control",
+      "request": "GET /bad\u0001target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "200",
+      "origin_dispatches": 1,
+      "origin_inbound_bytes": 101,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 200 OK\r\nx-origin-connection: 24\r\ncontent-type: application/json\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nConnection: close\r\nKeep-Alive: timeout=5\r\nContent-Length: 138\r\nx-lab-generation: 19\r\n\r\n{\"target\":\"/bad%01target\",\"host\":\"lab-origin.test\",\"generation\":\"19\",\"route\":\"edge-a.test\",\"forwarded\":null,\"tenant\":null,\"connection\":24}",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "target-raw-null",
+      "request": "GET /bad\u0000target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "200",
+      "origin_dispatches": 1,
+      "origin_inbound_bytes": 101,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 200 OK\r\nx-origin-connection: 24\r\ncontent-type: application/json\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nConnection: close\r\nKeep-Alive: timeout=5\r\nContent-Length: 138\r\nx-lab-generation: 19\r\n\r\n{\"target\":\"/bad%00target\",\"host\":\"lab-origin.test\",\"generation\":\"19\",\"route\":\"edge-a.test\",\"forwarded\":null,\"tenant\":null,\"connection\":24}",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "host-missing",
+      "request": "GET / HTTP/1.1\r\nX-Lab: no-host\r\nConnection: close\r\n\r\n",
+      "response_status": "421",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 421 Misdirected Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "host-empty",
+      "request": "GET / HTTP/1.1\r\nHost:\r\nConnection: close\r\n\r\n",
+      "response_status": "421",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 421 Misdirected Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "host-duplicate-identical",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "host-comma-list",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test,edge-b.test\r\nConnection: close\r\n\r\n",
+      "response_status": "421",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 421 Misdirected Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "host-userinfo",
+      "request": "GET / HTTP/1.1\r\nHost: user@edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "host-invalid-port",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test:abc\r\nConnection: close\r\n\r\n",
+      "response_status": "421",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 421 Misdirected Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "host-whitespace-before-colon",
+      "request": "GET / HTTP/1.1\r\nHost : edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "absolute-authority-SNI-mismatch",
+      "request": "GET https://edge-b.test/ HTTP/1.1\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n",
+      "response_status": "421",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 421 Misdirected Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "absolute-authority-Host-mismatch",
+      "request": "GET https://edge-a.test/ HTTP/1.1\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "absolute-authority-userinfo",
+      "request": "GET https://user@edge-a.test/ HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "absolute-authority-without-Host",
+      "request": "GET https://edge-a.test/ HTTP/1.1\r\nX-Lab: no-host\r\nConnection: close\r\n\r\n",
+      "response_status": "421",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 421 Misdirected Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "absolute-unsupported-scheme",
+      "request": "GET ftp://edge-a.test/ HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "200",
+      "origin_dispatches": 1,
+      "origin_inbound_bytes": 110,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 200 OK\r\nx-origin-connection: 24\r\ncontent-type: application/json\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nConnection: close\r\nKeep-Alive: timeout=5\r\nContent-Length: 147\r\nx-lab-generation: 19\r\n\r\n{\"target\":\"ftp://lab-origin.test/\",\"host\":\"lab-origin.test\",\"generation\":\"19\",\"route\":\"edge-a.test\",\"forwarded\":null,\"tenant\":null,\"connection\":24}",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "target-relative-form",
+      "request": "GET relative HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "502",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 192,
+      "origin_parse_errors": 2,
+      "response": "HTTP/1.1 502 Bad Gateway\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "target-fragment",
+      "request": "GET /path#fragment HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "200",
+      "origin_dispatches": 1,
+      "origin_inbound_bytes": 93,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 200 OK\r\nx-origin-connection: 25\r\ncontent-type: application/json\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nConnection: close\r\nKeep-Alive: timeout=5\r\nContent-Length: 130\r\nx-lab-generation: 19\r\n\r\n{\"target\":\"/path\",\"host\":\"lab-origin.test\",\"generation\":\"19\",\"route\":\"edge-a.test\",\"forwarded\":null,\"tenant\":null,\"connection\":25}",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "connect-authority-form-disabled",
+      "request": "CONNECT edge-a.test:443 HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "405",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 405 Method Not Allowed\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "CL-TE-pipelined",
+      "request": "POST /echo HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\n\r\n0\r\n\r\nGET /smuggled HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "TE-CL-pipelined",
+      "request": "POST /echo HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nContent-Length: 4\r\n\r\n0\r\n\r\nGET /smuggled HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "TE-obsolete-fold",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding:\r\n chunked\r\nConnection: close\r\n\r\n0\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "CL-comma-conflict",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 1, 2\r\nConnection: close\r\n\r\nx",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "TE-repeated-chunked",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, chunked\r\nConnection: close\r\n\r\n0\r\n\r\n",
+      "response_status": "200",
+      "origin_dispatches": 1,
+      "origin_inbound_bytes": 123,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 200 OK\r\nx-origin-connection: 25\r\ncontent-type: application/json\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nConnection: close\r\nKeep-Alive: timeout=5\r\nContent-Length: 126\r\nx-lab-generation: 19\r\n\r\n{\"target\":\"/\",\"host\":\"lab-origin.test\",\"generation\":\"19\",\"route\":\"edge-a.test\",\"forwarded\":null,\"tenant\":null,\"connection\":25}",
+      "peer_closed": true,
+      "timed_out": false
+    },
+    {
+      "name": "TE-not-final-chunked",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, gzip\r\nConnection: close\r\n\r\n0\r\n\r\n",
+      "response_status": "400",
+      "origin_dispatches": 0,
+      "origin_inbound_bytes": 0,
+      "origin_parse_errors": 0,
+      "response": "HTTP/1.1 400 Bad Request\r\nServer: Pingora\r\nDate: Wed, 11 Nov 2026 06:13:04 GMT\r\nContent-Length: 0\r\nCache-Control: private, no-store\r\nConnection: close\r\n\r\n",
+      "peer_closed": true,
+      "timed_out": false
+    }
+  ],
+  "pending": [],
+  "completed_at": "2026-11-11T06:13:15.976Z",
+  "result": "fail",
+  "run_directory": "/home/tiecont/Projects/aegis-gate/.local/pingora-run-kf6cW8"
+}

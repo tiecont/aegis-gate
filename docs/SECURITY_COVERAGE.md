@@ -37,4 +37,15 @@ full IdP/DNS lifecycle, application database privileges and the remaining module
 acceptance matrix are not proved. Neither addendum closes a global threat or a
 production release requirement.
 
+Sprint02 addendum: `reports/sprint02-d-security-review.md` independently reviews
+the completed local management candidate: actual least-privilege PostgreSQL,
+HTTPS OIDC rotation/outage/MFA, owned UDP DNS transport and lease lifecycle,
+tenant/role/list/item/mutation/job negatives, bounded retention/quotas and
+contracts. `reports/sprint02-d-integration.md` records the final module gate.
+Root repeats the stricter Pingora corpus:57/65, eight failures; T07 remains a
+blocker. Image/config/layer identity, scanner history preflight and actual
+nonempty history scans close the Sprint02 CI findings; signed production images
+and provenance are still later release work. The table above remains a global
+threat-closure checklist, not a denial of these scoped local proofs.
+
 Production remains blocked until all module gates, the complete quality matrix, security assessment and named human release signoffs have evidence. No entry is closed solely by documentation, compilation, a mocked transport or adding a CI workflow that has never run.

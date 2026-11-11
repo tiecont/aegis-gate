@@ -1,7 +1,8 @@
 # Local Management Lifecycle
 
-This documents the module02 implementation candidate. Gate acceptance remains
-with root and independent security review. No API here publishes a signed edge
+This documents locally accepted module02 behavior. Root's independent review
+and evidence are in reports/sprint02-d-integration.md and
+reports/sprint02-d-security-review.md. No API here publishes a signed edge
 snapshot, serves tenant traffic or authorizes a public listener.
 
 ## Database Identities
