@@ -9,6 +9,7 @@ require github.com/golang-jwt/jwt/v5 v5.3.1
 require (
 	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
 	github.com/coreos/go-oidc/v3 v3.21.0 // indirect
+	github.com/cyberphone/json-canonicalization v0.0.0-20261011152517-32a48195b9b2 // indirect
 	github.com/dprotaso/go-yit v0.0.0-20220510233725-9ba8df137936 // indirect
 	github.com/getkin/kin-openapi v0.153.0 // indirect
 	github.com/go-jose/go-jose/v4 v4.1.6 // indirect
