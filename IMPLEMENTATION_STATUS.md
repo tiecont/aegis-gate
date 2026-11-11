@@ -2,6 +2,31 @@
 
 Last updated: 2026-11-11. Scope: local implementation only. No production deployment or live DNS/payment action is authorized.
 
+## Sprint03-B accepted local result
+
+**M1-CONFIG-SAFETY: PASS (local scope).** Canonical Ed25519 snapshots and
+authenticated trust rotation, approved PostgreSQL revisions/outbox, fenced
+workers, immutable mTLS artifact delivery and JetStream, atomic consumers with
+encrypted restart-safe LKG, management preview/approval/rollback and durable
+canary/ACK/health rollout are implemented. Independent F review ACCEPT at
+`ce7c9b2`; real PostgreSQL/JetStream/mTLS publication-to-ACK and signed rollback
+tests pass, including malicious signed payloads, outages and restart.
+
+Integrated implementation `da3598c` passes locked `make check` and
+`make security-scan` (both exit0), and both hosted jobs in run43052478453.
+The scanner inspects106 history commits and12.03MB of worktree inputs; new
+compression/crypto advisories were repaired without ignores. Subsequent changes
+preserve independent evidence and update gate documentation. Final-head checks
+and merge receipts are recorded in [PR10](https://github.com/tiecont/aegis-gate/pull/10).
+The full acceptance matrix, commands, hashes and limits are in
+`docs/reports/sprint03b-completion.md` and `sprint03b-f-security-review.md`.
+
+The focused Module01 maintained Envoy Host-retention track independently
+reproduces69/75 with the same six failures. Three extra raw-H2 probes and bounded
+32-connection drain pass; they do not close the strict-parser blocker. Module01
+stays NO-GO and requires a complete eligible proof plus human architecture
+approval. Modules04-12 remain locked; production stays BLOCKED.
+
 ## Sprint03-A checkpoint
 
 Executed the shared original65 plus ten supplemental cases for all three
@@ -49,9 +74,9 @@ A module opens only after **all** dependencies below have passed implementation,
 | Module | Gate | Dependencies | State | Evidence / remaining work |
 |---|---|---|---|---|
 | 00 Foundation | M0-FOUNDATION | — | PASS (local); hosted CI recovered | Historical foundation evidence preserved. Sprint02 identity/history regressions and hosted run42964002493 PASS; PR6 merged. No production signoff. |
-| 01 Proxy feasibility | M0-PROXY-GO-NOGO | 00 | NO-GO / HUMAN ARCHITECTURE REVIEW | Sprint03-A common75-case proofs independently reproduced: Pingora63/75, Envoy69/75, Hyper70/75; each fails mandatory security properties. Independent observer review complete; local check/scan PASS, exact-head hosted merge policy in PR9. No replacement accepted. |
+| 01 Proxy feasibility | M0-PROXY-GO-NOGO | 00 | NO-GO / HUMAN ARCHITECTURE REVIEW | Sprint03-A common75: Pingora63/75, Envoy69/75, Hyper70/75. Sprint03-B focused maintained Envoy setting independently reproduces69/75 and the same six failures. Reports sprint03b-e/f and ADR-011; no replacement accepted. |
 | 02 Tenancy/control plane | M1-ADMIN-TENANCY | 00 | PASS (local scope) | Full module acceptance, independent security review, root integrated check/scan exit0, actual PostgreSQL/HTTPS OIDC/UDP DNS, tenant/role/security negatives and exact-head hosted run42969925238 PASS. sprint02-d-integration.md and sprint02-d-security-review.md. |
-| 03 Config distribution | M1-CONFIG-SAFETY | 00, 02; uses 01 findings | ELIGIBLE NEXT WAVE / GATE CLOSED | Task03 prerequisites now satisfied; no implementation started this sprint. Signed snapshots, authenticated delivery, anti-replay, ACK/NACK/LKG and atomic apply still require full acceptance. This does not permit module04. |
+| 03 Config distribution | M1-CONFIG-SAFETY | 00, 02; uses 01 findings | PASS (local scope) | Full signed publication/consumer/rollout acceptance and independent review ACCEPT; actual PostgreSQL/JetStream/mTLS, negative/race/recovery suites, locked check/scan exit0 and hosted run43052478453 PASS. sprint03b-completion.md; final-head integration in PR10. |
 | 04 Edge proxy | M1-EDGE-ROUTING | 01 affirmative Go, 03 | LOCKED | No production edge implementation until feasibility passes. |
 | 05 TLS/domain | M2-TLS | 02, 03, 04 | LOCKED | Domain ownership and certificate lifecycle/verification tests mandatory. |
 | 06 Identity/access | M2-AUTH | 02, 03, 04 | LOCKED | Separate admin auth and traffic auth; fail closed. |
@@ -68,7 +93,7 @@ A module opens only after **all** dependencies below have passed implementation,
 
 ## Security and release status
 
-**Production release: BLOCKED.** Modules00/02 have scoped local acceptance;
+**Production release: BLOCKED.** Modules00/02/03 have scoped local acceptance;
 module01 fails strict ingress. Resilience, operational and production release
 gates remain unproven. QUALITY_GATES targets are not observed SLOs. Human
 architecture/security/operational/legal reviews remain required. No public
@@ -81,9 +106,11 @@ are authorized by this acceptance.
 - Module01 stopped at the reproducible feasibility blocker. ADR-011 provides Envoy and Hyper/Tokio alternatives for human review; none was silently substituted.
 - Module02 full local acceptance passes; continue monitoring its documented
   deployment/IdP/resolver/retention limits without claiming production readiness.
-- Prepare module03 next under its actual task prerequisites (00/02 plus01
-  findings). Its gate remains closed until implemented and tested. Keep04-12
-  locked; module04 requires affirmative01 GO and03 PASS.
+- Module03 full local acceptance passes. Production secret-service custody,
+  operational transport assembly, archival automation and measured revocation/
+  drain remain release work; no production engine is supplied by its libraries.
+- Pursue the exact maintained-parser stop condition in Sprint03-B E/F reports.
+  Keep04-12 locked; module04 requires affirmative01 GO as well as03 PASS.
 
 ## Sprint02 final executed checkpoint
 

@@ -8,11 +8,19 @@
 
 Module 00 provides a local Go/Rust/Next.js foundation, generated transport contracts, disposable PKI/JWT fixtures and a loopback-only Compose lab. Tenant traffic remains unavailable and the default administrative listener exposes only foundation health. Follow [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) for actual gate evidence and [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for commands.
 
-Current checkpoint: the isolated Pingora feasibility spike is **No-Go** because
-one strict malformed-request test fails; see [ADR-011](docs/ADR-011-pingora-evaluation.md).
-Module02 has an explicit local HTTPS management mode with real OIDC/PostgreSQL
-tests, but remains partial and is not enabled by default. Details and remaining
-acceptance work: [management checkpoint](docs/reports/02-management-checkpoint.md).
+Current checkpoint: Modules00/02 and Module03 signed configuration distribution
+are **PASS (local scope)**. Module03 includes approved transactional publication,
+authenticated signed snapshots, atomic consumers with encrypted last-known-good
+recovery, and audited canary rollout/rollback. See the
+[Sprint03-B completion report](docs/reports/sprint03b-completion.md) and
+[local rollout runbook](docs/CONFIG_ROLLOUT_RUNBOOK.md).
+
+Module01 remains **NO-GO**: Pingora63/75, Envoy69/75 and Hyper70/75 fail mandatory
+strict-ingress cases. The focused maintained Envoy setting still scores69/75;
+[ADR-011](docs/ADR-011-pingora-evaluation.md) records the unresolved conditions.
+Modules04-12 remain locked. No production edge engine or production release is
+authorized. Module02 management and Module03 publisher use explicit local modes;
+they are not enabled by the default foundation listener.
 
 ```sh
 make bootstrap

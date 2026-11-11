@@ -2,6 +2,39 @@
 
 This register tracks residual implementation and release risks. It does not accept risks on behalf of a human reviewer. The current module states and actual executed evidence are recorded in `IMPLEMENTATION_STATUS.md`; T01–T20 mappings are maintained in `docs/SECURITY_COVERAGE.md`.
 
+## Sprint03-B disposition
+
+R03 is closed for the Module03 local acceptance scope: canonical Ed25519
+envelopes, pinned authenticated trust rotation, durable approved outbox,
+authenticated artifact fetch/admission, tenant/policy validation, immutable
+atomic activation, encrypted LKG, canary/ACK/health, signed newer-generation
+rollback and outage/restart negatives pass independent review and integration.
+See `reports/sprint03b-completion.md` and `sprint03b-f-security-review.md`.
+This supersedes the original R03 absence-of-implementation entry below.
+
+R01/R04 remain blocking. The focused maintained Envoy setting reproduces69/75
+with unchanged inputs/expectations and origin byte assertions. Obsolete folding
+still reaches origin; H2 authority confusion still sends nine decrypted bytes;
+four TE rejection statuses violate the contract. Three additional raw-H2 probes
+and bounded drain do not prove exhaustive conformance. A maintained released
+strict-parser path and complete proof, followed by human architecture approval,
+are required. Pingora `derivative`/`unsafe-libyaml` warnings remain open.
+
+R13/R14 have actual integrated check/scan and hosted evidence. New Go compression
+and crypto advisories were fixed, with no suppression; scanners inspected106
+history commits and12.03MB of worktree inputs at `da3598c`. PR10 binds final-head
+checks. This is time-bound local evidence, not release provenance or risk acceptance.
+
+Residual Module03 release work has explicit owners: platform/security must
+provide production secret-service signing and authenticated trust/cache-key
+custody; operators must assemble authenticated edge delivery, archive/cleanup
+with durable-reference checks, and test HA/backup/restore; the future edge owner
+must prove bounded stream drain and emergency revocation. Local storage enforces
+quota and manual safe deletion, not automatic artifact garbage collection.
+Disconnected consumers fail readiness at signed expiry, retired trust, expired
+ownership or configured staleness; instant revocation during disconnection is
+not promised. Modules04-12 remain locked and production remains blocked.
+
 ## Sprint 02 disposition
 
 PRs1-7 have been independently reviewed and merged after exact-head hosted

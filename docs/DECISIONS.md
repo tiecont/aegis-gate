@@ -12,9 +12,20 @@
 
 **Status:** accepted for design. Prevents online dependencies in request hot path; protects config integrity; enables atomic apply and LKG. Trade-off: eventual consistency and staleness/revocation window.
 
+Sprint03-B implements and independently accepts this design for Module03 local
+scope. The frozen v1 contract is `CONFIG_PROTOCOL.md`; exact evidence and
+production custody/revocation limits are in `reports/sprint03b-completion.md`.
+No production architecture approval or edge-engine selection is implied.
+
 ## ADR-004: Postgres as source of truth; outbox + NATS as delivery notification
 
 **Status:** proposed. Avoid double-write losing config events; simpler than Kafka at MVP size. Durable immutable blob is authoritative snapshot. No NATS dependency on hot path.
+
+Sprint03-B local proof implements approved revision/outbox transactions, fenced
+workers, immutable signed artifacts and mTLS JetStream hints. Durable approval,
+authenticated fetch and cryptographic validation precede rollout admission;
+messages alone cannot authorize a configuration. Local independent acceptance
+does not record a human production architecture decision.
 
 ## ADR-005: Redis for global quota + local conservative fallback
 
