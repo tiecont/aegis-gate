@@ -1,0 +1,61 @@
+[
+  {
+    "source_commit": "0c9a700b72e1085b8d946aff1008a57ba2659641",
+    "argv": [
+      "flock",
+      "/tmp/aegisgate-sprint02-fixtures.lock",
+      "env",
+      "AEGIS_TENANCY_INTEGRATION=1",
+      "go",
+      "test",
+      "-race",
+      "-v",
+      "./internal/configrollout",
+      "-count=1"
+    ],
+    "started_at": "2026-11-11T15:30:37.879Z",
+    "ended_at": "2026-11-11T15:30:40.299Z",
+    "exit_code": 0,
+    "signal": null,
+    "log_sha256": "e3ab8424a2fde6b47d7975bca54ab7b468549488eb6b34a0cc92e8a68c80f5f8"
+  },
+  {
+    "source_commit": "0c9a700b72e1085b8d946aff1008a57ba2659641",
+    "argv": [
+      "go",
+      "vet",
+      "./internal/configrollout"
+    ],
+    "started_at": "2026-11-11T15:30:40.304Z",
+    "ended_at": "2026-11-11T15:30:40.443Z",
+    "exit_code": 0,
+    "signal": null,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source_commit": "0c9a700b72e1085b8d946aff1008a57ba2659641",
+    "argv": [
+      "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "--check",
+      "internal/configsnapshot/testdata/verify-vector.mjs"
+    ],
+    "started_at": "2026-11-11T15:30:40.444Z",
+    "ended_at": "2026-11-11T15:30:40.470Z",
+    "exit_code": 0,
+    "signal": null,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source_commit": "0c9a700b72e1085b8d946aff1008a57ba2659641",
+    "argv": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "started_at": "2026-11-11T15:30:40.470Z",
+    "ended_at": "2026-11-11T15:30:40.474Z",
+    "exit_code": 0,
+    "signal": null,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]
