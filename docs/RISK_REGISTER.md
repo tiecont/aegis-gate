@@ -2,6 +2,24 @@
 
 This register tracks residual implementation and release risks. It does not accept risks on behalf of a human reviewer. The current module states and actual executed evidence are recorded in `IMPLEMENTATION_STATUS.md`; T01–T20 mappings are maintained in `docs/SECURITY_COVERAGE.md`.
 
+## Sprint 02 active findings
+
+- Supply-chain recovery: baseline hosted Actions run42957348129 fails two image
+  identity steps with `KeyError: 'digest'`. Historical local scan success does
+  not close hosted acceptance. Exact-fix local and hosted checks are pending.
+- Origin registration: root negative tests show baseline `PublicAddress`
+  accepts additional special-purpose/non-public ranges including IPv6 site-local
+  `fec0::/10`. Agent C remediation and independent regression verification are
+  pending. Module02 remains closed; no edge/dial-time SSRF protection is claimed.
+- Release controls: GitHub branch-protection API reports `main` is not
+  protected (HTTP404). The quality gate requires branch protection and reviewer
+  approval; no settings were changed and no release approval is implied.
+- Parser feasibility: the strict malformed-target criterion remains failed;
+  expanded tests and maintained-upstream evaluation are in progress. No
+  architecture substitution or requirement relaxation has been approved.
+
+Evidence and review status: `reports/sprint02-d-integration.md`.
+
 Foundation update, 2026-11-11: module00 local implementation/review passed.
 R00, R13 and R14 have foundation evidence in `reports/00-security-review.md`;
 their continuing release obligations remain open. The pending language in the

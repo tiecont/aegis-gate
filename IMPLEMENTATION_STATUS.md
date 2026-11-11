@@ -2,6 +2,21 @@
 
 Last updated: 2026-11-11. Scope: local implementation only. No production deployment or live DNS/payment action is authorized.
 
+## Sprint 02 recovery in progress
+
+Fetched `origin/main` matches baseline
+`9e734e31bf1544bd1158a5bf8d29047c2adb72f8`. The historical local results below
+remain scoped to that checkpoint. Hosted Actions run
+[42957348129](https://github.com/tiecont/aegis-gate/actions/runs/42957348129)
+passed foundation but failed supply-chain image identity for two artifacts;
+module00 hosted recovery is pending, not a Sprint02 PASS. Independent agents
+are working in isolated branches under `docs/sprints/02-execution.md`.
+
+Module01 remains NO-GO and module02 remains PARTIAL/CLOSED. Root independently
+reproduced missing public-origin special-purpose address exclusions; fixes and
+review are pending. `docs/reports/sprint02-d-integration.md` records current
+findings and required acceptance evidence. No downstream module has opened.
+
 ## Repository inventory
 
 Initial repository: unborn `main`, no tracked code, one user-provided `AegisGate_Architecture_Agent_Plans.zip`. The archive was inspected and extracted into the repository root without overwriting existing files. Its design documents are the project instructions; the original archive is preserved. Tooling found: Go, Rust/Cargo, Node/npm, Python, Docker Engine and Docker Compose. Installed tools alone do not constitute passing build/test evidence.
