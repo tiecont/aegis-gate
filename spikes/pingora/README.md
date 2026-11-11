@@ -5,8 +5,9 @@ edge implementation and does not accept customer configuration. Both proxy
 listeners and upstream dials are hard limited to loopback. The pre-TLS fixture
 filter accepts only source `127.0.0.1`.
 
-Current gate: **blocked**. The final release run passes 34/35 cases, but Pingora
-normalizes an invalid request-target containing a raw space and returns 200.
+Current gate: **blocked**. The retained baseline passes34/35; sprint02 expands
+this to57/65, with8 mandatory strict-ingress failures. Pingora
+normalizes an invalid request-target containing a raw space and returns200.
 The harness deliberately exits 1; ADR-011 records the reproduction and review
 required before dependent runtime implementation.
 
@@ -27,7 +28,7 @@ cargo +1.99.1 build --release --locked --manifest-path spikes/pingora/Cargo.toml
 env PATH="$PWD/.local/toolchains/node/bin:$PATH" npm ci --prefix spikes/pingora --ignore-scripts --no-audit --no-fund
 docker pull nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311
 .local/toolchains/node/bin/node --check spikes/pingora/lab.mjs
-env PINGORA_SPIKE_PROFILE=release .local/toolchains/node/bin/node spikes/pingora/lab.mjs
+flock /tmp/aegisgate-sprint02-fixtures.lock env PINGORA_SPIKE_PROFILE=release .local/toolchains/node/bin/node spikes/pingora/lab.mjs
 .local/toolchains/node/bin/node --check spikes/pingora/evidence.mjs
 .local/toolchains/node/bin/node spikes/pingora/evidence.mjs
 ```
@@ -62,3 +63,31 @@ publish signed configs, authorize domains, manage tenants or distribute keys.
 Certificate chains with intermediates, session resumption, production secrets,
 CIDR proxy trust, distributed config, quotas, drain/HA and a full malformed/fuzz
 corpus belong to the later modules and release gates.
+
+## Sprint02 research
+
+The retained 35-case baseline reproduces 34 pass/1 failure. The expanded harness
+adds target controls, Host/absolute authority, pipelined CL/TE and transfer-coding
+cases. Every negative records exact fixture bytes, response, peer-close versus
+client deadline, dispatch counts across owned H1/H2/upgrade origins, decrypted
+bytes received and H1 parser errors (including requests rejected before a handler).
+The relative-target502 has no handler dispatch but still sends bytes to origin. Valid
+percent-encoded paths must arrive unchanged at the origin. Failures stay enabled
+and force a nonzero exit; no upstream source or runtime behavior is patched.
+
+`research.mjs` performs read-only upstream metadata/source retrieval and records
+URL, time, hash and relevant excerpts. It checks local Pingora parser sources
+against published crate archive checksums. Search results and open PR claims are
+research leads, not executed alternative proofs. Reproduce with:
+
+```sh
+.local/toolchains/node/bin/node spikes/pingora/research.mjs
+env PATH="$PWD/.local/toolchains/node/bin:$PATH" .local/toolchains/node/bin/node spikes/pingora/evidence.mjs
+.local/toolchains/node/bin/node spikes/pingora/export-sprint02.mjs .local/pingora-run-BASELINE/results.json .local/pingora-run-EXPANDED/results.json
+```
+
+Use actual result paths printed by the locked harness. The exporter reads only
+this worktree's lab results, hashes source/binary/artifacts and reruns scoped Rust
+checks. Report: `docs/reports/sprint02-b-pingora.md`. Root owns gate acceptance;
+all alternatives need an equivalent protocol/security proof and architecture
+review before replacement.
