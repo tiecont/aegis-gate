@@ -4218,6 +4218,255 @@
           }
         }
       }
+    },
+    "/v1/projects/{project}/publications/preview": {
+      "get": {
+        "operationId": "previewConfigurationPublication",
+        "servers": [
+          {
+            "url": "https://127.0.0.1:8443"
+          }
+        ],
+        "security": [
+          {
+            "AdminSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "x-go-type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized local configuration publication operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicationPreview"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "404": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "409": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "429": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    },
+    "/v1/projects/{project}/publications": {
+      "post": {
+        "operationId": "approveConfigurationPublication",
+        "servers": [
+          {
+            "url": "https://127.0.0.1:8443"
+          }
+        ],
+        "security": [
+          {
+            "AdminSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "x-go-type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 43,
+              "maxLength": 43
+            }
+          },
+          {
+            "name": "Origin",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized local configuration publication operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Publication"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "404": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "409": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "429": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublicationRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/projects/{project}/publications/rollback": {
+      "post": {
+        "operationId": "rollbackConfigurationPublication",
+        "servers": [
+          {
+            "url": "https://127.0.0.1:8443"
+          }
+        ],
+        "security": [
+          {
+            "AdminSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "x-go-type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128
+            }
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 43,
+              "maxLength": 43
+            }
+          },
+          {
+            "name": "Origin",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized local configuration publication operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Publication"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "404": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "409": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "429": {
+            "$ref": "#/components/responses/Unavailable"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublicationRollbackRequest"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4600,11 +4849,15 @@
         "oneOf": [
           {
             "required": ["origin_id"],
-            "not": { "required": ["origin_pool_id"] }
+            "not": {
+              "required": ["origin_pool_id"]
+            }
           },
           {
             "required": ["origin_pool_id"],
-            "not": { "required": ["origin_id"] }
+            "not": {
+              "required": ["origin_id"]
+            }
           }
         ],
         "properties": {
@@ -4780,7 +5033,10 @@
           "policy_generation"
         ],
         "properties": {
-          "decision_id": { "type": "integer", "minimum": 1 },
+          "decision_id": {
+            "type": "integer",
+            "minimum": 1
+          },
           "origin_pool_generation": {
             "type": "integer",
             "minimum": 0,
@@ -4878,6 +5134,311 @@
           "status": {
             "type": "string",
             "enum": ["alive"]
+          }
+        }
+      },
+      "SnapshotV1Domain": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "tenant_id", "hostname", "verified_until"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          },
+          "tenant_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          },
+          "hostname": {
+            "type": "string",
+            "maxLength": 253
+          },
+          "verified_until": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+          }
+        }
+      },
+      "SnapshotV1Endpoint": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "tenant_id", "url", "generation"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          },
+          "tenant_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          },
+          "url": {
+            "type": "string",
+            "maxLength": 2048
+          },
+          "generation": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          }
+        }
+      },
+      "SnapshotV1Pool": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "tenant_id", "generation", "endpoints"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          },
+          "tenant_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          },
+          "generation": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SnapshotV1Endpoint"
+            },
+            "maxItems": 64
+          }
+        }
+      },
+      "SnapshotV1Policy": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "tenant_id",
+          "generation",
+          "auth_required",
+          "jwt_issuer",
+          "jwt_audience"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          },
+          "tenant_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          },
+          "generation": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "auth_required": {
+            "enum": [true]
+          },
+          "jwt_issuer": {
+            "type": "string",
+            "maxLength": 2048
+          },
+          "jwt_audience": {
+            "type": "string",
+            "maxLength": 256
+          }
+        }
+      },
+      "SnapshotV1Route": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "tenant_id",
+          "generation",
+          "domain_id",
+          "origin_pool_id",
+          "policy_id",
+          "path",
+          "methods"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          },
+          "tenant_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          },
+          "generation": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "domain_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          },
+          "origin_pool_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          },
+          "policy_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          },
+          "path": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "methods": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 7,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "GET",
+                "HEAD",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE",
+                "OPTIONS"
+              ]
+            }
+          }
+        }
+      },
+      "SnapshotV1Tenant": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "domains", "origin_pools", "policies", "routes"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+          },
+          "domains": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/SnapshotV1Domain"
+            },
+            "maxItems": 1024
+          },
+          "origin_pools": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/SnapshotV1Pool"
+            },
+            "maxItems": 1024
+          },
+          "policies": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/SnapshotV1Policy"
+            },
+            "maxItems": 1024
+          },
+          "routes": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/SnapshotV1Route"
+            },
+            "maxItems": 4096
+          }
+        }
+      },
+      "SnapshotV1Payload": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["tenants"],
+        "properties": {
+          "tenants": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/SnapshotV1Tenant"
+            },
+            "maxItems": 128
+          }
+        }
+      },
+      "PublicationPreview": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["payload", "digest"],
+        "properties": {
+          "payload": {
+            "$ref": "#/components/schemas/SnapshotV1Payload"
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      },
+      "Publication": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["deployment_id", "generation", "payload_digest"],
+        "properties": {
+          "deployment_id": {
+            "type": "string",
+            "format": "uuid",
+            "x-go-type": "string"
+          },
+          "generation": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "payload_digest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "rollback_of": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          }
+        }
+      },
+      "PublicationRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["digest", "ttl_seconds"],
+        "properties": {
+          "digest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "ttl_seconds": {
+            "type": "integer",
+            "minimum": 60,
+            "maximum": 86400
+          }
+        }
+      },
+      "PublicationRollbackRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["generation", "ttl_seconds"],
+        "properties": {
+          "generation": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "ttl_seconds": {
+            "type": "integer",
+            "minimum": 60,
+            "maximum": 86400
           }
         }
       }

@@ -61,6 +61,7 @@ func NewAdminHandler(config AdminConfig) (http.Handler, error) {
 	h.protected("POST /v1/organizations/{org}/members/revoke", h.members)
 	h.protected("GET /v1/projects/{project}/audit", h.audit)
 	h.registerAcceptance()
+	h.registerPublication()
 	h.protected("POST /v1/projects/{project}/domains/{id}/verifications", func(w http.ResponseWriter, r *http.Request, p persistence.Principal) {
 		job, err := h.config.Service.Store.QueueDomainVerification(r.Context(), p, r.PathValue("project"), r.PathValue("id"))
 		h.result(w, r, job, err)
