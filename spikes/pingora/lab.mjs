@@ -31,6 +31,11 @@ let originDispatches = 0;
 let originInboundBytes = 0;
 let originParseErrors = 0;
 const originRequests = [];
+let omittedOriginRequests = 0;
+function recordOrigin(request) {
+  if (originRequests.length < 128) originRequests.push(request);
+  else omittedOriginRequests++;
+}
 const ingressObservations = [];
 let cancelledCalls = 0;
 let cancelledUploads = 0;
@@ -106,6 +111,8 @@ async function benchmark(port, pids) {
 
 async function test(name, run) {
   const started = performance.now();
+  originRequests.length = 0;
+  omittedOriginRequests = 0;
   const before = { handlers: originDispatches, bytes: originInboundBytes, errors: originParseErrors, requests: originRequests.length };
   try {
     const detail = await run();
@@ -118,7 +125,7 @@ async function test(name, run) {
   } finally {
     Object.assign(evidence.tests.at(-1), { origin: { handler_invocations: originDispatches - before.handlers,
       decrypted_bytes: originInboundBytes - before.bytes, parser_errors: originParseErrors - before.errors,
-      requests: originRequests.slice(before.requests) } });
+      requests: originRequests.slice(before.requests), omitted_request_samples: omittedOriginRequests } });
   }
 }
 
@@ -169,7 +176,7 @@ async function listen(server) {
 function origin(name, handler) {
   const server = https.createServer({ cert: cert(name), key: key(name), minVersion: 'TLSv1.2' }, (req, res) => {
     originDispatches++;
-    originRequests.push({ method: req.method, target: req.url, protocol: req.httpVersion,
+    recordOrigin({ method: req.method, target: req.url, protocol: req.httpVersion,
       tls: req.socket.getProtocol(), sni: req.socket.servername, alpn: req.socket.alpnProtocol });
     return handler(req, res);
   });
@@ -291,7 +298,7 @@ async function main() {
   let prematureUpgradeBytes = 0;
   server.on('upgrade', (req, socket, head) => {
     originDispatches++;
-    originRequests.push({ method: req.method, target: req.url, protocol: req.httpVersion, upgrade: true });
+    recordOrigin({ method: req.method, target: req.url, protocol: req.httpVersion, upgrade: true });
     if (req.url === '/premature') {
       prematureUpgradeBytes += head.length;
       socket.on('data', (chunk) => { prematureUpgradeBytes += chunk.length; });
@@ -308,7 +315,7 @@ async function main() {
   let h2Requests = 0;
   h2origin.on('stream', (stream, headers) => {
     originDispatches++;
-    originRequests.push({ method: headers[':method'], target: headers[':path'], protocol: '2' });
+    recordOrigin({ method: headers[':method'], target: headers[':path'], protocol: '2' });
     h2Requests++;
     stream.on('error', () => {});
     stream.respond({ ':status': 200, 'content-type': 'text/plain' });

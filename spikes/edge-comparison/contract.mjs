@@ -21,4 +21,6 @@ export function assertInventory(tests, includeSupplemental = true) {
   assert.equal(new Set(names).size, names.length, 'duplicate test ID');
   for (const name of manifest.baseline_tests) assert.ok(names.includes(name), `missing mandatory baseline test: ${name}`);
   if (includeSupplemental) for (const name of supplementalTestNames) assert.ok(names.includes(name), `missing mandatory supplemental test: ${name}`);
+  assert.equal(names.length, manifest.baseline_tests.length + (includeSupplemental ? supplementalTestNames.length : 0), 'unexpected test inventory');
+  for (const test of tests) assert.ok(['pass', 'fail'].includes(test.status), `invalid or skipped result: ${test.name}`);
 }

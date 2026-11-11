@@ -16,11 +16,12 @@ test('negative: status and zero handlers cannot hide forwarded bytes or parser e
   }
 });
 test('negative: missing or duplicated functional and security cases cannot pass inventory', () => {
-  const tests = [...manifest.baseline_tests, ...supplementalTestNames].map((name) => ({ name }));
+  const tests = [...manifest.baseline_tests, ...supplementalTestNames].map((name) => ({ name, status: 'pass' }));
   assertInventory(tests);
   assert.throws(() => assertInventory(tests.slice(1)));
   assert.throws(() => assertInventory([...tests, tests[0]]));
   assert.throws(() => assertInventory(tests.slice(0, 65)));
+  assert.throws(() => assertInventory(tests.map((entry, index) => index ? entry : { ...entry, status: 'skip' })));
   assert.equal(manifest.baseline_failures.length, 8);
   for (const name of manifest.baseline_failures) assert.ok(manifest.negatives.some((entry) => entry.name === name));
 });
