@@ -16,6 +16,7 @@ function seal() {
     }
   }
   walk(root);
+  files.push("docs/reports/sprint03b-completion.md", "IMPLEMENTATION_STATUS.md", "README.md", "docs/DECISIONS.md", "docs/RISK_REGISTER.md", "docs/SECURITY_COVERAGE.md");
   fs.writeFileSync(path.join(root, "SHA256SUMS"), files.sort().map((file) => `${hash(fs.readFileSync(file))}  ${file}\n`).join(""));
 }
 if (process.argv.includes("--seal-only")) {

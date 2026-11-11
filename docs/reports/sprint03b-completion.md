@@ -32,6 +32,13 @@ integrated as `9701122` and `ec71e45`. Subsequent changes record acceptance and
 evidence. Final documentation-head hosted checks and merge SHA are attached
 to PR10, avoiding a self-referential commit receipt.
 
+Closeout repeats the locked full check and full scanner on
+`5161a61df1a09affd239cfc26a529485a3c04686`: both exit0. The scanner inspects110
+commits (20.53MB) and12.41MB worktree with no leaks. The cross-language golden
+vector and locked fixture teardown also exit0. `closeout/commands.json` binds
+the exact source, timings and hashes; final changes add only this receipt and
+evidence tooling/output, with no runtime-source changes.
+
 ## Work by agent and source
 
 All work used isolated branches/worktrees. Integration followed review and
@@ -65,6 +72,7 @@ timestamps, exit code and SHA256. Root integration evidence lives in
 | --- | --- | --- |
 | `flock /tmp/aegisgate-sprint02-fixtures.lock make check` | 0 | `da3598c`; `evidence/sprint03b-root/final/check.log` |
 | `flock /tmp/aegisgate-sprint02-fixtures.lock make security-scan` | 0 | `da3598c`; `evidence/sprint03b-root/final/security-scan.log` |
+| Same two locked full commands, closeout repeat | 0 / 0 | `5161a61`; `evidence/sprint03b-root/closeout/{check,security-scan}.log` |
 | `flock /tmp/aegisgate-sprint02-fixtures.lock env AEGIS_TENANCY_INTEGRATION=1 go test -race -v ./apps/control-api/internal/persistence ./apps/control-api/internal/transport ./internal/configreview ./internal/configconsumer ./internal/configsnapshot ./internal/configrollout ./internal/configpublish -count=1` | 0 | F `ce7c9b2`; `evidence/sprint03b-f/commands.json` and `independent-module03.log` |
 | `go vet ./internal/configreview ./internal/configconsumer ./internal/configsnapshot ./internal/configrollout ./internal/configpublish` | 0 | F same source; `evidence/sprint03b-f/vet.log` |
 | `node --check scripts/module03-contracts.mjs` | 0 | F same source; `evidence/sprint03b-f/syntax.log` |
@@ -81,6 +89,8 @@ de8b27a76c67a2ab57776fce8347c73039a3414eaf71f09695f4f42351c58e46  evidence/sprin
 a77a8d3c3de40f74cf446243b9d3d15aae34fbad45ab16a05e2791b6ec3397b1  evidence/sprint03b-f/independent-module03.log
 9f0adc8ea16568a3b741e706064bcec6b077ff57d782489fe1cf8f13e265c405  evidence/sprint03b-a/snapshot-race.log
 b70231f4426915989e6bc8f80a43fe385089b11e94afcca540a6192cb9595d9a  evidence/sprint03b-a/node-golden.log
+1a69707582f8b879512c9cb92d465380c44069063a40aabc64bc881d97172f75  evidence/sprint03b-root/closeout/check.log
+de8b27a76c67a2ab57776fce8347c73039a3414eaf71f09695f4f42351c58e46  evidence/sprint03b-root/closeout/security-scan.log
 ```
 
 Full filenames/hashes and final documentation verification are in the root

@@ -20,6 +20,9 @@ preserve independent evidence and update gate documentation. Final-head checks
 and merge receipts are recorded in [PR10](https://github.com/tiecont/aegis-gate/pull/10).
 The full acceptance matrix, commands, hashes and limits are in
 `docs/reports/sprint03b-completion.md` and `sprint03b-f-security-review.md`.
+Closeout `5161a61` repeats both full locked commands successfully, with110
+history commits and12.41MB worktree secret-scan inputs; golden vector and
+fixture teardown pass. Final receipt-only changes are bound by PR10 checks.
 
 The focused Module01 maintained Envoy Host-retention track independently
 reproduces69/75 with the same six failures. Three extra raw-H2 probes and bounded
