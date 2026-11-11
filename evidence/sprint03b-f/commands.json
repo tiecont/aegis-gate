@@ -1,0 +1,55 @@
+[
+  {
+    "source_commit": "ce7c9b2c0fc9f3f9b347aec1ea93e7289ae133fa",
+    "argv": [
+      "flock",
+      "/tmp/aegisgate-sprint02-fixtures.lock",
+      "env",
+      "AEGIS_TENANCY_INTEGRATION=1",
+      "go",
+      "test",
+      "-race",
+      "-v",
+      "./apps/control-api/internal/persistence",
+      "./apps/control-api/internal/transport",
+      "./internal/configreview",
+      "./internal/configconsumer",
+      "./internal/configsnapshot",
+      "./internal/configrollout",
+      "./internal/configpublish",
+      "-count=1"
+    ],
+    "started_at": "2026-11-11T15:40:55.466948+00:00",
+    "ended_at": "2026-11-11T15:42:23.618525+00:00",
+    "exit_code": 0,
+    "log_sha256": "a77a8d3c3de40f74cf446243b9d3d15aae34fbad45ab16a05e2791b6ec3397b1"
+  },
+  {
+    "source_commit": "ce7c9b2c0fc9f3f9b347aec1ea93e7289ae133fa",
+    "argv": [
+      "node",
+      "--check",
+      "scripts/module03-contracts.mjs"
+    ],
+    "started_at": "2026-11-11T15:42:23.618671+00:00",
+    "ended_at": "2026-11-11T15:42:23.653322+00:00",
+    "exit_code": 0,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source_commit": "ce7c9b2c0fc9f3f9b347aec1ea93e7289ae133fa",
+    "argv": [
+      "go",
+      "vet",
+      "./internal/configreview",
+      "./internal/configconsumer",
+      "./internal/configsnapshot",
+      "./internal/configrollout",
+      "./internal/configpublish"
+    ],
+    "started_at": "2026-11-11T15:42:23.653456+00:00",
+    "ended_at": "2026-11-11T15:42:24.105917+00:00",
+    "exit_code": 0,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]
