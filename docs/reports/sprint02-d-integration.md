@@ -133,7 +133,7 @@ review docs only. No runtime code was changed after the final check.
 | `cargo +1.99.1 test --locked --manifest-path spikes/pingora/Cargo.toml` | PASS,5 tests | `evidence/sprint02-d/pingora-tests.log` |
 | `cargo +1.99.1 build --release --locked --manifest-path spikes/pingora/Cargo.toml` | PASS | `evidence/sprint02-d/pingora-build.log` |
 | `flock /tmp/aegisgate-sprint02-fixtures.lock env PINGORA_SPIKE_PROFILE=release .local/toolchains/node/bin/node spikes/pingora/lab.mjs` | FAIL, exit1;57/65, eight failures retained | `evidence/sprint02-d/pingora-lab.log`, `pingora-results.json` |
-| `git diff --check` | PASS | Executed before final commits |
+| `git diff --check origin/main -- . ':!evidence/**'` | PASS | Source/docs changes; raw evidence preserved |
 
 Full check and scan invocations:
 
@@ -154,6 +154,11 @@ steps; original zero-commit evidence remains rejected and preserved.
 Hosted A/B/C and dependency outcomes are stored as `ci-<run>.json` in the same
 evidence directory. Each contains the exact reviewed head and both successful
 job URLs. Hash manifest: `evidence/sprint02-d/SHA256SUMS`.
+
+An all-files staged whitespace diagnostic flags Docker's trailing spaces in
+raw Compose logs and Cargo's final blank line. These artifacts remain byte-for-
+byte execution evidence, with hashes checked; they were not reformatted. Source
+and documentation whitespace checks and the full format gate pass separately.
 
 ## Final Gate Matrix And Next Wave
 
