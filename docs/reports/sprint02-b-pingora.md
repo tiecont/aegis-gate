@@ -5,7 +5,7 @@
 - Module:01 Pingora feasibility, assigned research branch `research/pingora-strict-ingress`.
 - Status: research delivered; **NO-GO recommendation / module blocked**. Root owns gate/status acceptance. No gate or implementation-status file changed.
 - Worktree: `/home/tiecont/Projects/aegis-gate-sprint02-b` only. Starting revision `2425c2c`, based on main `9e734e3`.
-- Commits / publication: this report, ADR011 proposal, isolated spike harness/unit test/research/export scripts and two evidence JSON files. Published commit/PR are recorded in the branch history and draft PR.
+- Commits / publication: research/evidence commit `0a0235cfb1a7cb3174d751d28b002762a33ada14`; draft [PR5](https://github.com/tiecont/aegis-gate/pull/5) into main on `research/pingora-strict-ingress`. This report, ADR011 proposal, isolated harness/unit test/research/export scripts and two evidence JSON files; this publication entry is a documentation follow-up.
 - Architecture/ADR decisions: proposed evidence update only; no replacement, upstream patch, custom HTTP parser, weaker rejection criterion or TLS bypass.
 - Contracts changed: none. Production edge and management implementation untouched.
 - Human review needed: root independent reproduction/security review, strict-ingress choice, both maintenance warnings; human architecture review before material replacement. No risk exception accepted.
@@ -15,7 +15,7 @@
 
 Unchanged35-case release baseline under the sprint fixture lock: **34 pass,1 fail**, exit1. Raw `GET /bad target HTTP/1.1` returns200. Baseline evidence is `.local/pingora-run-1CqgAK/results.json`, exported with SHA256. That reproduction used the copied pre-existing release binary; its pre-copy provenance is not newly established. The final expanded run uses a freshly rebuilt local release binary with exported hash.
 
-Final expanded release run: **57 pass,8 fail /65**, exit1,2026-11-11 UTC. Raw evidence `.local/pingora-run-2ahN01/results.json`; safe results and hashes: [`spikes/pingora/evidence/sprint02-runs.json`](../../spikes/pingora/evidence/sprint02-runs.json). Exact timestamps, hardware, environment, commands, source/binary and audit artifact hashes are in that JSON. The negative tests remain enabled and cause failure.
+Final expanded release run: **57 pass,8 fail /65**, exit1,2026-11-11 04:43:38.353-04:44:00.102 UTC. Raw evidence `.local/pingora-run-2ahN01/results.json`; safe results and hashes: [`spikes/pingora/evidence/sprint02-runs.json`](../../spikes/pingora/evidence/sprint02-runs.json). Exact timestamps, hardware, environment, commands, source/binary and audit artifact hashes are in that JSON. The negative tests remain enabled and cause failure.
 
 | Failing input | Client result | Actual owned-origin observation |
 | --- | --- | --- |
