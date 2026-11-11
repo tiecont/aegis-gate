@@ -67,8 +67,8 @@ if [ "$mode" = all ] || [ "$mode" = secrets ]; then
     history_scan() {
       history_container "$gitleaks" git /repo \
         --redact --report-format json --report-path /reports/history-secrets.json --no-banner --log-opts=--all \
-        >"$reports/history-secrets.log" 2>&1 || return $?
-      python3 scripts/history_scan_evidence.py "$reports/history-secrets.log"
+        >"$reports/history-gitleaks.log" 2>&1 || return $?
+      python3 scripts/history_scan_evidence.py "$reports/history-gitleaks.log"
     }
     run history-secrets history_scan
   else

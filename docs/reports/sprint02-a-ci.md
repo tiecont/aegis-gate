@@ -3,15 +3,17 @@
 ## Agent Completion Report
 
 - Module: Sprint02 Agent A / foundation supply-chain gate recovery (T14/R13).
-- Status: in progress; local full checks/scans and hosted exact-head gates pending.
+- Status: local full checks/scans PASS; final hosted exact-head gates pending.
 - Files: `scripts/image_identity.py`, `scripts/image_identity_test.py`,
-  `scripts/security-scan.sh`, and this report. No shared gate/status files edited.
+  `scripts/security-scan.sh`, `scripts/history_scan_evidence.py`,
+  `scripts/git_history_preflight_test.py`, the unit target in `Makefile`, and
+  this report. No shared gate/status files edited.
 - Architecture/ADR decisions: none. Classic Docker config identities and OCI
   manifest/index identities remain supported; SHA256 is mandatory.
 - Contracts changed: no application, API, schema, runtime authorization or TLS
   contract change. Image identity validation now binds complete selected layer
   contents as well as scanner/config identity.
-- Positive/security-negative tests: 27 validator regressions PASS; final exact
+- Positive/security-negative tests: 31 image regressions and 4 history regressions PASS; final exact
   commands, full check/scan artifacts, commits, PR and CI will be recorded below.
 - Performance data: not applicable; no load/abuse tests run.
 - Known risks/release blockers: hosted recovery is not yet proved. Production
@@ -76,7 +78,10 @@ Two initial direct patch-tool delete calls accidentally used inherited cwd;
 the two shared-tree scripts were immediately restored byte-for-byte and
 `git -C /home/tiecont/Projects/aegis-gate diff --exit-code -- scripts/image_identity.py scripts/image_identity_test.py`
 returned0. Root confirmed the integration tree clean. Subsequent edits use
-shell `apply_patch` in the explicit isolated workdir.
+shell `apply_patch` in the explicit isolated workdir. A later direct patch
+invocation also temporarily changed the shared Makefile and added the history
+test there; these accidental edits were removed and the shared tracked-file
+diff was verified empty before continuing. Root confirmed the tree clean.
 
 Every Compose/DB/full-check operation holds
 `flock /tmp/aegisgate-sprint02-fixtures.lock` for its duration. No credentials
@@ -96,17 +101,42 @@ and malformed or multi-count output. Final history evidence reports
 `6 commits available for history scan` and `6 commits scanned.`
 
 Regression command: `PYTHONPATH=scripts python3 scripts/git_history_preflight_test.py -v`
-(3 tests PASS), covering a full clone, a linked worktree under `path with
-spaces`, 12 commits, inaccessible Git metadata, 10/12-digit parsing, zero
-count, and fatal output. The pre-fix false evidence is retained and is not
+(4 tests PASS), covering actual Gitleaks Docker runs over a full clone and a
+linked worktree under `path with
+spaces`, 12 commits, inaccessible Git metadata, counts of 10 and 12, zero
+counts, and fatal output. The pre-fix false evidence is retained and is not
 counted as a pass.
 
 ## Final Local Evidence
 
 - `flock /tmp/aegisgate-sprint02-fixtures.lock make check`: PASS after the
-  final history changes; log `.local/evidence/sprint02-a/make-check-final.log`.
+  final changes; log `.local/evidence/sprint02-a/final-check.log`.
 - `flock /tmp/aegisgate-sprint02-fixtures.lock make security-scan`: PASS after
   history recovery; dependency, secret, SBOM, filesystem, image and identity
-  jobs pass. Log `.local/evidence/sprint02-a/security-scan-history-fixed.log`.
+  jobs pass. Log `.local/evidence/sprint02-a/final-scan.log`.
 - Independent root probe `evidence/sprint02/image-layer-binding-repro.py`: PASS
   for valid classic/OCI controls and rejection of substituted layers.
+
+## Hosted Recovery Iteration
+
+Commit `9796734b52e866c62eb8f8e77041b69ef78fdd46` was published in draft
+[PR6](https://github.com/tiecont/aegis-gate/pull/6).
+[Run42962601908](https://github.com/tiecont/aegis-gate/actions/runs/42962601908)
+passed foundation-quality but failed both local image identity jobs: the
+classic Docker store also exports an OCI `index.json` wrapper naming a
+manifest whose config is the requested Docker config ID. Requiring that
+wrapper's manifest ID equal the requested config ID was incorrect. Its
+failure evidence is preserved under `.local/remote-run-42962601908`.
+
+The follow-up validates the wrapper descriptor and the manifest normally,
+then binds its config digest to the requested config ID. Explicit requested
+index/manifest identities retain their own hash/platform validation. Actual
+Docker-save-shape regressions cover all three identity types and malformed
+manifest rejection. Raw Gitleaks output is now in `history-gitleaks.log`,
+separate from the parsed summary, avoiding overlapping output offsets.
+
+An actual local Docker export was converted losslessly to classic Docker
+archive layout and scanned by Trivy0.69.1: valid archive identity PASS;
+substituting a valid-tar layer retained Trivy ImageID but the validator
+rejected it. Log `.local/evidence/sprint02-a/real-classic-archive.log` and
+the two corresponding `actual-classic*-scan.json` reports retain this proof.

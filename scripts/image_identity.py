@@ -129,6 +129,9 @@ def config_digest(archive, image_id, architecture, operating_system, variant='')
         root_path = 'blobs/sha256/' + image_id.split(':')[1]
         if root_path in members:
             current = blob(image_id)
+        elif ('index.json' in members
+              and 'sha256:' + hashlib.sha256(read('index.json')).hexdigest() == image_id):
+            current = document(read('index.json'))
         else:
             if legacy is None:
                 raise ValueError('Missing image archive root')
@@ -143,17 +146,33 @@ def config_digest(archive, image_id, architecture, operating_system, variant='')
         if 'index.json' in members:
             data = read('index.json')
             index = document(data)
-            if 'sha256:' + hashlib.sha256(data).hexdigest() != image_id:
-                if (not isinstance(index, dict) or type(index.get('schemaVersion')) is not int
-                        or index['schemaVersion'] != 2
-                        or ('mediaType' in index and index['mediaType'] not in INDEX_TYPES)
-                        or not isinstance(index.get('manifests'), list) or len(index['manifests']) != 1):
-                    raise ValueError('Ambiguous OCI archive entry point')
-                entry = descriptor(index['manifests'][0], INDEX_TYPES | MANIFEST_TYPES)
-                if entry['digest'] != image_id:
-                    raise ValueError('OCI archive entry point does not match requested image')
-                blob(entry['digest'], entry['size'])
+            if (not isinstance(index, dict) or type(index.get('schemaVersion')) is not int
+                    or index['schemaVersion'] != 2
+                    or ('mediaType' in index and index['mediaType'] not in INDEX_TYPES)
+                    or not isinstance(index.get('manifests'), list) or len(index['manifests']) != 1):
+                raise ValueError('Ambiguous OCI archive entry point')
+            entry = descriptor(index['manifests'][0], INDEX_TYPES | MANIFEST_TYPES)
+            if 'platform' in entry:
+                platform = entry['platform']
+                if (not isinstance(platform, dict) or platform.get('architecture') != architecture
+                        or platform.get('os') != operating_system or platform.get('variant', '') != variant):
+                    raise ValueError('OCI archive entry point platform mismatch')
+            manifest = blob(entry['digest'], entry['size'])
+            if 'sha256:' + hashlib.sha256(data).hexdigest() == image_id:
+                current = index
+                expected_type = 'application/vnd.oci.image.index.v1+json'
+            elif entry['digest'] == image_id:
+                current = manifest
                 expected_type = entry['mediaType']
+            elif (isinstance(manifest, dict) and isinstance(manifest.get('config'), dict)
+                  and manifest['config'].get('digest') == image_id):
+                # Docker save names the archive by config ID while index.json
+                # points to the schema-2 manifest ID. Bind both identities.
+                current = manifest
+                digest = entry['digest']
+                expected_type = entry['mediaType']
+            else:
+                raise ValueError('OCI archive entry point does not match requested image')
         for _ in range(4):
             if not isinstance(current, dict):
                 raise ValueError('Invalid image metadata document')

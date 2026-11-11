@@ -50,11 +50,40 @@ class GitHistoryPreflightTests(unittest.TestCase):
             commit_count(self.root / 'missing-common', self.source)
 
     def test_history_log_parser_is_exact_and_fail_closed(self):
+        self.assertEqual(scanned_commits('INF 10 commits scanned.\n'), 10)
         self.assertEqual(scanned_commits('INF 12 commits scanned.\n'), 12)
         with self.assertRaisesRegex(ValueError, 'positive'):
             scanned_commits('INF 0 commits scanned.\n')
-        with self.assertRaisesRegex(ValueError, 'error'):
-            scanned_commits('ERR fatal: not a git repository\nINF 12 commits scanned.\n')
+        for error in ('ERR fatal: not a git repository', 'ERROR history unavailable', 'FATAL missing history'):
+            with self.subTest(error=error), self.assertRaisesRegex(ValueError, 'error'):
+                scanned_commits(error + '\nINF 12 commits scanned.\n')
+
+    def test_real_container_clone_worktree_and_missing_git(self):
+        image = 'ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f'
+        clone = self.root / 'full clone'
+        subprocess.run(['git', 'clone', '--quiet', '--no-local', str(self.source), str(clone)], check=True)
+        linked = self.root / 'container path with spaces' / 'linked'
+        linked.parent.mkdir()
+        subprocess.run(['git', '-C', str(self.source), 'worktree', 'add', '--quiet', str(linked)], check=True)
+        for work_tree in (clone, linked):
+            common = subprocess.check_output(
+                ['git', '-C', str(work_tree), 'rev-parse', '--path-format=absolute', '--git-common-dir'], text=True).strip()
+            args = ['docker', 'run', '--rm', '--user', f'{os.getuid()}:{os.getgid()}',
+                    '-e', 'GIT_DIR=/git-common', '-e', 'GIT_WORK_TREE=/repo',
+                    '-v', f'{work_tree}:/repo:ro', '-v', f'{common}:/git-common:ro']
+            with self.subTest(work_tree=work_tree):
+                preflight = subprocess.run(args + ['--entrypoint', '/bin/sh', image, '-c',
+                    'set -eu; count=$(git rev-list --all --count); test "$count" -gt 0; echo "$count"'],
+                    check=True, capture_output=True, text=True)
+                self.assertEqual(int(preflight.stdout), 12)
+                scanned = subprocess.run(args + [image, 'git', '/repo', '--redact', '--no-banner', '--log-opts=--all'],
+                                         check=True, capture_output=True, text=True)
+                self.assertEqual(scanned_commits(scanned.stdout + scanned.stderr), 12)
+        missing = subprocess.run(['docker', 'run', '--rm', '-e', 'GIT_DIR=/missing',
+                                  '--entrypoint', '/bin/sh', image, '-c',
+                                  'set -eu; count=$(git rev-list --all --count); test "$count" -gt 0'],
+                                 capture_output=True, text=True)
+        self.assertNotEqual(missing.returncode, 0)
 
 
 if __name__ == '__main__':

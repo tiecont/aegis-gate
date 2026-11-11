@@ -9,8 +9,7 @@ ANSI = re.compile(r'\x1b\[[0-9;]*m')
 def scanned_commits(log):
     clean = ANSI.sub('', log)
     failures = [line for line in clean.splitlines()
-                if re.search(r'\bfatal:', line, re.IGNORECASE)
-                or re.search(r'\bERR\b', line)
+                if re.search(r'\b(?:FATAL|ERROR|ERR)\b', line, re.IGNORECASE)
                 or re.search(r'\berror=', line, re.IGNORECASE)]
     if failures:
         raise ValueError('history scanner reported an error')

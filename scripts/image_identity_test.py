@@ -190,6 +190,42 @@ class IdentityTests(unittest.TestCase):
         del self.entries['index.json']
         self.assertEqual(self.check(index['digest']), config['digest'])
 
+    def test_docker_save_config_identity_with_oci_entry_point(self):
+        layers, names = self.layer_graph()
+        manifest, config = self.manifest(layers=layers)
+        self.entries['manifest.json'] = json.dumps([{
+            'Config': 'blobs/sha256/' + config['digest'].split(':')[1],
+            'Layers': names}]).encode()
+        self.entries['index.json'] = json.dumps({'schemaVersion': 2, 'mediaType': INDEX,
+                                                'manifests': [manifest]}).encode()
+        self.assertEqual(self.check(config['digest']), config['digest'])
+        self.entries[names[0]] = self.entries[names[1]]
+        with self.assertRaisesRegex(ValueError, 'ordered config diff IDs'):
+            self.check(config['digest'])
+
+    def test_config_identity_does_not_bypass_manifest_validation(self):
+        config = self.add(self.config, CONFIG)
+        for schema, media_type in ((1, MANIFEST), (2, INDEX), (2, 'application/json')):
+            manifest = self.add({'schemaVersion': schema, 'mediaType': media_type,
+                                 'config': config, 'layers': []}, MANIFEST)
+            self.entries['index.json'] = json.dumps({'schemaVersion': 2, 'manifests': [manifest]}).encode()
+            with self.subTest(schema=schema, media_type=media_type), self.assertRaises(ValueError):
+                self.check(config['digest'])
+
+    def test_archive_index_can_be_the_requested_identity(self):
+        manifest, config = self.manifest()
+        index = self.index([self.platform(manifest)])
+        self.entries['index.json'] = self.entries['blobs/sha256/' + index['digest'].split(':')[1]]
+        del self.entries['blobs/sha256/' + index['digest'].split(':')[1]]
+        self.assertEqual(self.check(index['digest']), config['digest'])
+
+    def test_docker_save_wrapper_platform_cannot_conflict(self):
+        manifest, config = self.manifest()
+        entry = self.platform(manifest, 'arm64')
+        self.entries['index.json'] = json.dumps({'schemaVersion': 2, 'manifests': [entry]}).encode()
+        with self.assertRaisesRegex(ValueError, 'platform mismatch'):
+            self.check(config['digest'])
+
     def test_explicit_null_or_conflicting_media_types_rejected(self):
         manifest, _ = self.manifest()
         for value in (None, 'application/json', MANIFEST):
