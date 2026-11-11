@@ -1,0 +1,41 @@
+error: failed to download `windows-sys v0.52.0`
+
+Caused by:
+  attempting to make an HTTP request, but --offline was specified
+node:internal/errors:999
+  const err = new Error(message);
+              ^
+
+Error: Command failed: cargo +1.99.1 metadata --locked --offline --format-version 1 --manifest-path spikes/hyper/Cargo.toml
+error: failed to download `windows-sys v0.52.0`
+
+Caused by:
+  attempting to make an HTTP request, but --offline was specified
+
+    at genericNodeError (node:internal/errors:999:15)
+    at wrappedFn (node:internal/errors:544:14)
+    at checkExecSyncError (node:child_process:990:11)
+    at execFileSync (node:child_process:1026:15)
+    at file:///home/tiecont/Projects/aegis-gate-sprint03-c/spikes/hyper/collect.mjs:16:29
+    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)
+    at async node:internal/modules/esm/loader:650:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:105:5) {
+  status: 101,
+  signal: null,
+  output: [
+    null,
+    '',
+    'error: failed to download `windows-sys v0.52.0`\n' +
+      '\n' +
+      'Caused by:\n' +
+      '  attempting to make an HTTP request, but --offline was specified\n'
+  ],
+  pid: 3107220,
+  stdout: '',
+  stderr: 'error: failed to download `windows-sys v0.52.0`\n' +
+    '\n' +
+    'Caused by:\n' +
+    '  attempting to make an HTTP request, but --offline was specified\n'
+}
+
+Node.js v26.13.0

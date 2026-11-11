@@ -1,0 +1,68 @@
+{
+  "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-c",
+  "notes": "All lab/scan processes held the fixture flock for their full lifetime. Logs contain actual output. Root's initial TLS-alert instrumentation error and later correction are preserved. No shared test or exclusion was changed by Agent C. Raw cargo test output ends with a blank line; preserve it despite git diff --check's EOF whitespace notice. Source/docs diff check passes separately. The scoped private-key/credential pattern check has zero matches (rg exit1), not a comprehensive secret-scanner certification.",
+  "commands": [
+    {
+      "command": "cargo +1.99.1 fmt --check --manifest-path spikes/hyper/Cargo.toml",
+      "exit": 0,
+      "stdout_stderr": "fmt.log"
+    },
+    {
+      "command": "env CARGO_HOME=/home/tiecont/Projects/aegis-gate-sprint03-c/.local/cargo-home cargo +1.99.1 clippy --locked --manifest-path spikes/hyper/Cargo.toml --all-targets -- -D warnings",
+      "exit": 0,
+      "stdout_stderr": "clippy.log"
+    },
+    {
+      "command": "env CARGO_HOME=/home/tiecont/Projects/aegis-gate-sprint03-c/.local/cargo-home cargo +1.99.1 test --locked --manifest-path spikes/hyper/Cargo.toml",
+      "exit": 0,
+      "stdout_stderr": "test.log",
+      "result": "4/4 Rust tests; no ignored tests"
+    },
+    {
+      "command": "env CARGO_HOME=/home/tiecont/Projects/aegis-gate-sprint03-c/.local/cargo-home cargo +1.99.1 build --locked --release --manifest-path spikes/hyper/Cargo.toml",
+      "exit": 0,
+      "stdout_stderr": "release.log"
+    },
+    {
+      "command": "flock /tmp/aegisgate-sprint02-fixtures.lock env PINGORA_SPIKE_PROFILE=release AEGIS_CANDIDATE_NAME=hyper AEGIS_CANDIDATE_COMMAND=/home/tiecont/Projects/aegis-gate-sprint03-c/spikes/hyper/target/release/aegisgate-hyper-feasibility AEGIS_CANDIDATE_ROOT=/home/tiecont/Projects/aegis-gate-sprint03-c /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node /home/tiecont/Projects/aegis-gate/spikes/edge-comparison/run.mjs",
+      "exit": 1,
+      "stdout_stderr": "shared-run-01.log",
+      "result": "57/71 executed,14 failures,fatal snapshot deadline; incomplete failed proof retained"
+    },
+    {
+      "command": "flock /tmp/aegisgate-sprint02-fixtures.lock env PINGORA_SPIKE_PROFILE=release AEGIS_CANDIDATE_NAME=hyper AEGIS_CANDIDATE_COMMAND=/home/tiecont/Projects/aegis-gate-sprint03-c/spikes/hyper/target/release/aegisgate-hyper-feasibility AEGIS_CANDIDATE_ROOT=/home/tiecont/Projects/aegis-gate-sprint03-c AEGIS_RUN_ROOT=/home/tiecont/Projects/aegis-gate-sprint03-c/.local /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node /home/tiecont/Projects/aegis-gate/spikes/edge-comparison/run.mjs",
+      "exit": 1,
+      "stdout_stderr": "shared-run-02.log",
+      "result": "70/75, five strict-ingress failures; all75 executed once, no exclusions, no fatal"
+    },
+    {
+      "command": "flock /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node spikes/hyper/limits.mjs evidence/sprint03a-c/shared-run-02.json",
+      "exit": 1,
+      "stdout_stderr": "limits-01.log",
+      "result": "5/6; test TLS options error retained in limits-01.json"
+    },
+    {
+      "command": "flock /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node spikes/hyper/limits.mjs evidence/sprint03a-c/shared-run-02.json",
+      "exit": 0,
+      "stdout_stderr": "limits.log",
+      "result": "6/6 corrected supplemental probes; shared75 untouched"
+    },
+    {
+      "command": "env CARGO_HOME=/home/tiecont/Projects/aegis-gate-sprint03-c/.local/cargo-home cargo +1.99.1 fetch --locked --manifest-path spikes/hyper/Cargo.toml",
+      "exit": 0,
+      "stdout_stderr": "fetch.log"
+    },
+    {
+      "command": "flock /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node spikes/hyper/collect.mjs /home/tiecont/Projects/aegis-gate",
+      "exit": 0,
+      "stdout_stderr": "collect.log",
+      "result": "87 packages inventoried;86 published archives match lock and5422 source files, no modifications/extras. Earlier collector setup errors retained in collect-01.log/collect-02.log."
+    },
+    {
+      "command": "flock /tmp/aegisgate-sprint02-fixtures.lock env CARGO_HOME=/home/tiecont/Projects/aegis-gate-sprint03-c/.local/cargo-home /home/tiecont/Projects/aegis-gate/.local/tools/bin/cargo-audit audit --file spikes/hyper/Cargo.lock --db .local/rustsec-db --deny warnings --json",
+      "exit": 0,
+      "stdout": "audit-final.json",
+      "stderr": "audit-final.stderr"
+    }
+  ]
+}

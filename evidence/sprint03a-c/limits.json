@@ -1,0 +1,67 @@
+{
+  "started_at": "2026-11-11T08:37:02.212Z",
+  "binary_sha256": "8fb900bae4fb992ba4296cff0c5975f5e2e14bf8fc0378841af1e5fc7ff828e7",
+  "source": "additional owned loopback limit probes; shared75 unmodified",
+  "tests": [
+    {
+      "name": "chunked-upload-enforces-decoded-1MiB-cap-and-cancels-origin",
+      "status": "pass",
+      "detail": {
+        "forwarded_bytes": 1048576,
+        "cap_bytes": 1048576,
+        "origin_cancelled": true
+      },
+      "milliseconds": 81.84533400000001
+    },
+    {
+      "name": "stalled-upload-idle-timeout-cancels-origin",
+      "status": "pass",
+      "detail": {
+        "origin_cancelled": true,
+        "elapsed_ms": 2011.639353
+      },
+      "milliseconds": 2012.807674
+    },
+    {
+      "name": "response-stream-enforces-8MiB-cap",
+      "status": "pass",
+      "detail": {
+        "bytes": 8388608,
+        "ended": false,
+        "status": 200,
+        "cap_bytes": 8388608
+      },
+      "milliseconds": 124.85426599999982
+    },
+    {
+      "name": "stalled-response-idle-timeout-closes-origin",
+      "status": "pass",
+      "detail": {
+        "bytes": 5,
+        "ended": false,
+        "status": 200
+      },
+      "milliseconds": 2009.7461539999995
+    },
+    {
+      "name": "incomplete-header-deadline-stops-before-origin",
+      "status": "pass",
+      "detail": {
+        "dispatched": 0,
+        "elapsed_ms": 2007.1594079999995
+      },
+      "milliseconds": 2007.2865950000005
+    },
+    {
+      "name": "incomplete-TLS-handshake-deadline",
+      "status": "pass",
+      "detail": {
+        "elapsed_ms": 2003.7389910000002
+      },
+      "milliseconds": 2003.916932
+    }
+  ],
+  "completed_at": "2026-11-11T08:37:10.520Z",
+  "result": "pass",
+  "proxy_log": "isolated Hyper lab ready on 127.0.0.1:35819\nmanifest rejected; last good retained\n"
+}

@@ -1,0 +1,17 @@
+node:fs:624
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open '/home/tiecont/Projects/aegis-gate-sprint03-c/.local/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/arc-swap-1.9.5/.cargo-checksum.json'
+    at Object.readFileSync (node:fs:624:20)
+    at file:///home/tiecont/Projects/aegis-gate-sprint03-c/spikes/hyper/collect.mjs:23:49
+    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)
+    at async node:internal/modules/esm/loader:650:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:105:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/tiecont/Projects/aegis-gate-sprint03-c/.local/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/arc-swap-1.9.5/.cargo-checksum.json'
+}
+
+Node.js v26.13.0
