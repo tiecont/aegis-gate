@@ -37,11 +37,14 @@ func (s *Store) QueueDomainVerification(ctx context.Context, p Principal, projec
 	if _, err = tx.Exec(ctx, "SELECT pg_advisory_xact_lock(hashtextextended($1,3))", project); err != nil {
 		return VerificationJob{}, opaque(err)
 	}
-	var count int
+	var count, max int
 	if err = tx.QueryRow(ctx, "SELECT count(*) FROM domain_verification_jobs WHERE project_id=$1 AND state IN ('pending','running')", project).Scan(&count); err != nil {
 		return VerificationJob{}, opaque(err)
 	}
-	if count >= 100 {
+	if err = tx.QueryRow(ctx, "SELECT max_pending_jobs FROM organization_quotas WHERE organization_id=$1", org).Scan(&max); err != nil {
+		return VerificationJob{}, domain.ErrConflict
+	}
+	if count >= max {
 		return VerificationJob{}, domain.ErrConflict
 	}
 	jobID, err := contracts.RequestID()
@@ -49,9 +52,9 @@ func (s *Store) QueueDomainVerification(ctx context.Context, p Principal, projec
 		return VerificationJob{}, err
 	}
 	var job VerificationJob
-	err = tx.QueryRow(ctx, `INSERT INTO domain_verification_jobs(id,project_id,resource_id,issuer,subject)VALUES($1,$2,$3,$4,$5)
+	err = tx.QueryRow(ctx, `INSERT INTO domain_verification_jobs(id,project_id,resource_id,issuer,subject,challenge_generation)VALUES($1,$2,$3,$4,$5,$6)
 		ON CONFLICT(project_id,resource_id) WHERE state IN ('pending','running') DO UPDATE SET project_id=EXCLUDED.project_id
-		RETURNING id,project_id,resource_id,state,attempts`, jobID, project, id, p.Issuer, p.Subject).Scan(&job.ID, &job.ProjectID, &job.DomainID, &job.State, &job.Attempts)
+		RETURNING id,project_id,resource_id,state,attempts`, jobID, project, id, p.Issuer, p.Subject, claim.Generation).Scan(&job.ID, &job.ProjectID, &job.DomainID, &job.State, &job.Attempts)
 	if err != nil {
 		return job, opaque(err)
 	}
@@ -82,20 +85,27 @@ func (s *Store) RunDomainVerification(ctx context.Context, resolver TXTResolver)
 	if resolver == nil {
 		return false, domain.ErrInvalid
 	}
+	if err := s.ExpireDomainClaims(ctx); err != nil {
+		return false, err
+	}
 	tx, err := s.pool.Begin(ctx)
 	if err != nil {
 		return false, opaque(err)
 	}
 	defer tx.Rollback(ctx)
+	if _, err = tx.Exec(ctx, `UPDATE domain_claims d SET state='failed' FROM domain_verification_jobs j WHERE j.project_id=d.project_id AND j.resource_id=d.resource_id AND j.challenge_generation=d.challenge_generation AND d.state='pending' AND j.state='running' AND j.attempts=3 AND j.lease_until<=now()`); err != nil {
+		return false, opaque(err)
+	}
 	if _, err = tx.Exec(ctx, "UPDATE domain_verification_jobs SET state='failed',lease_until=NULL WHERE state='running' AND attempts=3 AND lease_until<=now()"); err != nil {
 		return false, opaque(err)
 	}
 	var id, project, resource string
 	var p Principal
 	var attempt int
-	err = tx.QueryRow(ctx, `SELECT id,project_id,resource_id,issuer,subject,attempts FROM domain_verification_jobs
+	var generation int64
+	err = tx.QueryRow(ctx, `SELECT id,project_id,resource_id,issuer,subject,attempts,challenge_generation FROM domain_verification_jobs
 		WHERE attempts<3 AND available_at<=now() AND (state='pending' OR (state='running' AND lease_until<=now()))
-		ORDER BY available_at,id FOR UPDATE SKIP LOCKED LIMIT 1`).Scan(&id, &project, &resource, &p.Issuer, &p.Subject, &attempt)
+		ORDER BY available_at,id FOR UPDATE SKIP LOCKED LIMIT 1`).Scan(&id, &project, &resource, &p.Issuer, &p.Subject, &attempt, &generation)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return false, opaque(tx.Commit(ctx))
 	}
@@ -109,11 +119,11 @@ func (s *Store) RunDomainVerification(ctx context.Context, resolver TXTResolver)
 	if err = tx.Commit(ctx); err != nil {
 		return false, opaque(err)
 	}
-	claim, verifyErr := s.VerifyDomainClaim(ctx, p, project, resource, resolver)
+	claim, verifyErr := s.verifyDomain(ctx, p, project, resource, resolver, id, attempt, generation)
 	if verifyErr != nil {
 		// A process may have committed the verification then crashed before the
 		// job ACK. A verified unexpired claim safely completes a leased retry.
-		if existing, e := s.DomainClaim(ctx, p, project, resource); e == nil && (existing.State == "verified" || existing.State == "active") {
+		if existing, e := s.DomainClaim(ctx, p, project, resource); e == nil && existing.Generation == generation && (existing.State == "verified" || existing.State == "active") {
 			claim = existing
 			verifyErr = nil
 		}
@@ -125,7 +135,20 @@ func (s *Store) RunDomainVerification(ctx context.Context, resolver TXTResolver)
 			state = "failed"
 		}
 	}
-	_, err = s.pool.Exec(ctx, `UPDATE domain_verification_jobs SET state=$3,lease_until=NULL,available_at=now()+interval '10 seconds'
-		WHERE id=$1 AND attempts=$2 AND state='running'`, id, attempt, state)
-	return true, opaque(err)
+	tx, err = s.pool.Begin(ctx)
+	if err != nil {
+		return true, opaque(err)
+	}
+	defer tx.Rollback(ctx)
+	command, err := tx.Exec(ctx, `UPDATE domain_verification_jobs SET state=$3,lease_until=NULL,available_at=now()+interval '10 seconds'
+		WHERE id=$1 AND attempts=$2 AND state='running' AND lease_until>now() AND challenge_generation=$4`, id, attempt, state, generation)
+	if err != nil {
+		return true, opaque(err)
+	}
+	if state == "failed" && command.RowsAffected() == 1 {
+		if _, err = tx.Exec(ctx, "UPDATE domain_claims SET state='failed' WHERE project_id=$1 AND resource_id=$2 AND challenge_generation=$3 AND state='pending'", project, resource, generation); err != nil {
+			return true, opaque(err)
+		}
+	}
+	return true, opaque(tx.Commit(ctx))
 }

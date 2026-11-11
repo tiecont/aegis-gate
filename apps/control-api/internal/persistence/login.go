@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"aegisgate.dev/aegisgate/apps/control-api/internal/domain"
+	"aegisgate.dev/aegisgate/apps/control-api/internal/identity"
 )
 
 type LoginAttempt struct{ State, Browser, Verifier, Nonce string }
@@ -69,11 +70,31 @@ func (s *Store) CreateWebSession(ctx context.Context, p Principal, expiry time.T
 	if err != nil {
 		return "", "", err
 	}
-	_, err = s.pool.Exec(ctx, `INSERT INTO admin_sessions(token_hash,csrf_hash,issuer,subject,expires_at)VALUES($1,$2,$3,$4,$5)`, TokenHash(token), TokenHash(csrf), p.Issuer, p.Subject, expiry)
+	var mfaAt *time.Time
+	if l, ok := ctx.Value(authenticationKey{}).(identity.Login); ok && l.Issuer == p.Issuer && l.Subject == p.Subject && !l.MFAAt.IsZero() {
+		mfaAt = &l.MFAAt
+	}
+	_, err = s.pool.Exec(ctx, `INSERT INTO admin_sessions(token_hash,csrf_hash,issuer,subject,expires_at,mfa_at)VALUES($1,$2,$3,$4,$5,$6)`, TokenHash(token), TokenHash(csrf), p.Issuer, p.Subject, expiry, mfaAt)
 	if err != nil {
 		return "", "", opaque(err)
 	}
 	return token, csrf, nil
+}
+
+func (s *Store) SessionContext(ctx context.Context, token string) (context.Context, Principal, error) {
+	p, err := s.Session(ctx, token)
+	if err != nil {
+		return ctx, p, err
+	}
+	var at *time.Time
+	if err = s.pool.QueryRow(ctx, "SELECT mfa_at FROM admin_sessions WHERE token_hash=$1 AND expires_at>now() AND revoked_at IS NULL", TokenHash(token)).Scan(&at); err != nil {
+		return ctx, Principal{}, domain.ErrDenied
+	}
+	l := identity.Login{Issuer: p.Issuer, Subject: p.Subject}
+	if at != nil {
+		l.MFAAt = *at
+	}
+	return WithVerifiedLogin(ctx, l), p, nil
 }
 
 func (s *Store) CheckCSRF(ctx context.Context, session, csrf string) error {

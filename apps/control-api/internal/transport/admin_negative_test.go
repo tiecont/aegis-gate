@@ -6,7 +6,9 @@ import (
 	"net/url"
 	"strings"
 	"testing"
+	"time"
 
+	"aegisgate.dev/aegisgate/apps/control-api/internal/identity"
 	"aegisgate.dev/aegisgate/apps/control-api/internal/persistence"
 )
 
@@ -64,7 +66,8 @@ func TestIntegrationAdminNegativeSessionAuthorityAndMembership(t *testing.T) {
 		t.Fatal(err)
 	}
 	member := persistence.Principal{Issuer: lab.idp.URL, Subject: "member"}
-	if err = lab.store.AddMember(context.Background(), p, org, member, "developer"); err != nil {
+	authContext := persistence.WithVerifiedLogin(context.Background(), identity.Login{Issuer: p.Issuer, Subject: p.Subject, MFAAt: time.Now()})
+	if err = lab.store.AddMember(authContext, p, org, member, "developer"); err != nil {
 		t.Fatal(err)
 	}
 	memberClient := lab.client(t, "member")
@@ -72,7 +75,7 @@ func TestIntegrationAdminNegativeSessionAuthorityAndMembership(t *testing.T) {
 	if status != 200 {
 		t.Fatal("authorized member denied")
 	}
-	if err = lab.store.RevokeMember(context.Background(), p, org, member); err != nil {
+	if err = lab.store.RevokeMember(authContext, p, org, member); err != nil {
 		t.Fatal(err)
 	}
 	status, _, _ = lab.request(t, memberClient, "GET", "/v1/projects/"+project+"/origins", "", nil)
