@@ -14,6 +14,7 @@ import { performance } from 'node:perf_hooks';
 import { createHash } from 'node:crypto';
 import { manifest as testManifest, manifestHash, assertRejected, assertInventory } from '../edge-comparison/contract.mjs';
 import { supplementalNegatives } from '../edge-comparison/supplemental.mjs';
+import { createTlsObserver } from '../edge-comparison/tls-observer.mjs';
 import { WebSocket, WebSocketServer } from 'ws';
 import grpc from '@grpc/grpc-js';
 
@@ -66,6 +67,8 @@ evidence.candidate = { name: candidateName, command: candidateCommand, args: can
 evidence.test_manifest_sha256 = manifestHash;
 evidence.lab_sha256 = sha256(fileURLToPath(import.meta.url));
 evidence.supplemental_sha256 = sha256(path.join(root, 'spikes/edge-comparison/supplemental.mjs'));
+evidence.origin_observer = { h1: 'HTTPS decrypted socket data', h2: 'verified TLS relay before native HTTP2 consumption',
+  source_sha256: sha256(path.join(root, 'spikes/edge-comparison/tls-observer.mjs')) };
 evidence.openssl = execFileSync('openssl', ['version'], { encoding: 'utf8' }).trim();
 
 function processSample(pids) {
@@ -325,7 +328,6 @@ async function main() {
   cleanup.push(async () => { for (const ws of wss.clients) ws.terminate(); wss.close(); });
   const originPort = await listen(server);
   const h2origin = http2.createSecureServer({ cert: cert('origin'), key: key('origin'), minVersion: 'TLSv1.2' });
-  h2origin.on('secureConnection', (socket) => socket.on('data', (chunk) => { originInboundBytes += chunk.length; }));
   h2origin.on('session', (session) => { cleanup.push(async () => session.destroy()); });
   let h2Requests = 0;
   h2origin.on('stream', (stream, headers) => {
@@ -337,7 +339,10 @@ async function main() {
     if (headers[':path'] === '/echo') stream.pipe(stream);
     else stream.end('h2-origin');
   });
-  const h2port = await listen(h2origin);
+  const observedH2Port = async (port) => listen(createTlsObserver({ cert: cert('origin'), key: key('origin'),
+    ca: cert('ca'), port, onBytes: (size) => { originInboundBytes += size; },
+    onTransportError: () => { originTransportErrors++; } }));
+  const h2port = await observedH2Port(await listen(h2origin));
   const badPorts = {};
   for (const name of ['wrong', 'expired', 'untrusted']) badPorts[name] = await listen(origin(name, (_, res) => res.end('MUST-NOT-BE-SEEN')));
   const route = (host, name, origin_port, h2 = false) => ({ host, origin_name: 'lab-origin.test', origin_port,
@@ -458,8 +463,10 @@ async function main() {
     assert.equal(activeRequests, before);
   });
   await test('HTTP2-downstream-and-upstream-ALPN', async () => {
+    const before = originInboundBytes;
     const response = await h2Request(port);
     assert.equal(response.status, 200); assert.equal(response.body, 'h2-origin');
+    assert.ok(originInboundBytes > before, 'H2 origin observation missed decrypted frames');
   });
   await test('HTTP2-authority-Host-and-SNI-confusion-rejected', async () => {
     for (const headers of [{ host: 'edge-a.test' }, { ':authority': 'edge-a.test' }, { ':authority': 'user@edge-b.test' }]) {
@@ -660,14 +667,17 @@ async function main() {
     responseSerialize: (v) => Buffer.from(v), responseDeserialize: (v) => v.toString() } };
   const grpcServer = new grpc.Server();
   grpcServer.addService(echoService, { chat: (call) => {
+    originDispatches++;
+    recordOrigin({ method: 'POST', target: '/lab.Echo/Chat', protocol: '2', transport: 'grpc' });
     call.on('data', (value) => call.write(`echo:${value}`));
     call.on('cancelled', () => { cancelledCalls++; });
     call.on('end', () => { const trailer = new grpc.Metadata(); trailer.set('lab-trailer', 'complete'); call.end(trailer); });
   } });
-  const grpcPort = await new Promise((resolve, reject) => grpcServer.bindAsync('127.0.0.1:0',
+  const boundGrpcPort = await new Promise((resolve, reject) => grpcServer.bindAsync('127.0.0.1:0',
     grpc.ServerCredentials.createSsl(null, [{ private_key: key('origin'), cert_chain: cert('origin') }]),
     (error, bound) => error ? reject(error) : resolve(bound)));
   cleanup.push(async () => grpcServer.forceShutdown());
+  const grpcPort = await observedH2Port(boundGrpcPort);
   publish({ routes: current.routes.map((r) => r.host === 'edge-b.test' ? { ...r, origin_port: grpcPort, h2: true } : r) });
   await applied(port, generation);
   const Client = grpc.makeGenericClientConstructor(echoService, 'Echo');
