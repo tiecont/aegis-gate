@@ -53,10 +53,12 @@ const candidateName = process.env.AEGIS_CANDIDATE_NAME ?? 'pingora';
 const candidateRoot = process.env.AEGIS_CANDIDATE_ROOT ?? root;
 const candidateCommand = process.env.AEGIS_CANDIDATE_COMMAND ?? path.join(candidateRoot, `spikes/pingora/target/${buildProfile}/aegisgate-pingora-feasibility`);
 const candidateArgs = JSON.parse(process.env.AEGIS_CANDIDATE_ARGS ?? '[]');
+const candidateArtifacts = JSON.parse(process.env.AEGIS_CANDIDATE_ARTIFACTS ?? '[]');
 assert.ok(Array.isArray(candidateArgs) && candidateArgs.every((arg) => typeof arg === 'string'));
+assert.ok(Array.isArray(candidateArtifacts) && candidateArtifacts.every((file) => typeof file === 'string' && path.isAbsolute(file)));
 const sha256 = (file) => createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 evidence.candidate = { name: candidateName, command: candidateCommand, args: candidateArgs,
-  artifacts: [candidateCommand, ...candidateArgs.filter((arg) => path.isAbsolute(arg) && fs.existsSync(arg))]
+  artifacts: [...new Set([candidateCommand, ...candidateArgs.filter((arg) => path.isAbsolute(arg) && fs.existsSync(arg)), ...candidateArtifacts])]
     .map((file) => ({ path: file, sha256: sha256(file) })) };
 evidence.test_manifest_sha256 = manifestHash;
 evidence.lab_sha256 = sha256(fileURLToPath(import.meta.url));
@@ -246,6 +248,8 @@ async function applied(port, target) {
 
 async function raw(port, payload) {
   const socket = await connect(port);
+  const negotiated = { tls: socket.getProtocol(), alpn: socket.alpnProtocol,
+    sni: socket.servername, peer_fingerprint256: socket.getPeerCertificate().fingerprint256 };
   let data = '';
   let timedOut = false;
   socket.on('error', () => {});
@@ -256,7 +260,7 @@ async function raw(port, payload) {
   });
   socket.write(payload);
   await done;
-  return { response: data, peer_closed: !timedOut, timed_out: timedOut };
+  return { response: data, peer_closed: !timedOut, timed_out: timedOut, negotiated };
 }
 
 async function main() {
