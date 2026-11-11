@@ -1,0 +1,71 @@
+{
+  "cwd": "/tmp/aegisgate-03b-a",
+  "source_commit": "84df9d8b17808f6c6177337814bd3b735fd51f1b",
+  "environment": {
+    "GOTOOLCHAIN": "go1.27.4"
+  },
+  "versions": {
+    "go": "go version go1.27.4 linux/amd64",
+    "node": "v26.9.0"
+  },
+  "results": [
+    {
+      "label": "snapshot-race",
+      "argv": [
+        "go",
+        "test",
+        "-race",
+        "-v",
+        "./internal/configsnapshot",
+        "-count=1"
+      ],
+      "source_commit": "84df9d8b17808f6c6177337814bd3b735fd51f1b",
+      "started_at": "2026-11-11T11:46:46.531416+00:00",
+      "ended_at": "2026-11-11T11:46:48.268389+00:00",
+      "exit_code": 0,
+      "log": "evidence/sprint03b-a/snapshot-race.log",
+      "sha256": "9f0adc8ea16568a3b741e706064bcec6b077ff57d782489fe1cf8f13e265c405"
+    },
+    {
+      "label": "snapshot-vet",
+      "argv": [
+        "go",
+        "vet",
+        "./internal/configsnapshot"
+      ],
+      "source_commit": "84df9d8b17808f6c6177337814bd3b735fd51f1b",
+      "started_at": "2026-11-11T11:46:48.268480+00:00",
+      "ended_at": "2026-11-11T11:46:48.428168+00:00",
+      "exit_code": 0,
+      "log": "evidence/sprint03b-a/snapshot-vet.log",
+      "sha256": "29efc5990e1e67e7b0a5e7570e81a46c04e2a97b27e6fc269ad22000ba0c4693"
+    },
+    {
+      "label": "node-golden",
+      "argv": [
+        "node",
+        "internal/configsnapshot/testdata/verify-vector.mjs"
+      ],
+      "source_commit": "84df9d8b17808f6c6177337814bd3b735fd51f1b",
+      "started_at": "2026-11-11T11:46:48.428216+00:00",
+      "ended_at": "2026-11-11T11:46:48.479947+00:00",
+      "exit_code": 0,
+      "log": "evidence/sprint03b-a/node-golden.log",
+      "sha256": "b70231f4426915989e6bc8f80a43fe385089b11e94afcca540a6192cb9595d9a"
+    },
+    {
+      "label": "source-whitespace",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "source_commit": "84df9d8b17808f6c6177337814bd3b735fd51f1b",
+      "started_at": "2026-11-11T11:46:48.479992+00:00",
+      "ended_at": "2026-11-11T11:46:48.483335+00:00",
+      "exit_code": 0,
+      "log": "evidence/sprint03b-a/source-whitespace.log",
+      "sha256": "29efc5990e1e67e7b0a5e7570e81a46c04e2a97b27e6fc269ad22000ba0c4693"
+    }
+  ]
+}
