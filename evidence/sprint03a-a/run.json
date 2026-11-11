@@ -1,0 +1,137 @@
+{
+  "commands": [
+    {
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--test",
+        "/home/tiecont/Projects/aegis-gate/spikes/edge-comparison/contract.test.mjs"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-a",
+      "started_at": "2026-11-11T08:28:02.902Z",
+      "ended_at": "2026-11-11T08:28:04.333Z",
+      "environment": {
+        "PINGORA_SPIKE_PROFILE": "release",
+        "AEGIS_CANDIDATE_NAME": "pingora-0.9.1-sprint03a-a",
+        "AEGIS_CANDIDATE_ROOT": "/home/tiecont/Projects/aegis-gate-sprint03-a",
+        "AEGIS_RUN_ROOT": "/home/tiecont/Projects/aegis-gate-sprint03-a/.local"
+      },
+      "exit_code": 0,
+      "stdout": "contract.stdout.txt",
+      "stderr": "contract.stderr.txt"
+    },
+    {
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "/home/tiecont/Projects/aegis-gate/spikes/edge-comparison/run.mjs"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-a",
+      "started_at": "2026-11-11T08:28:04.334Z",
+      "ended_at": "2026-11-11T08:28:41.399Z",
+      "environment": {
+        "PINGORA_SPIKE_PROFILE": "release",
+        "AEGIS_CANDIDATE_NAME": "pingora-0.9.1-sprint03a-a",
+        "AEGIS_CANDIDATE_ROOT": "/home/tiecont/Projects/aegis-gate-sprint03-a",
+        "AEGIS_RUN_ROOT": "/home/tiecont/Projects/aegis-gate-sprint03-a/.local"
+      },
+      "exit_code": 1,
+      "stdout": "lab.stdout.txt",
+      "stderr": "lab.stderr.txt"
+    }
+  ],
+  "lock": {
+    "path": "/tmp/aegisgate-sprint02-fixtures.lock",
+    "held_by_parent_pid": 3012444
+  },
+  "script_sha256": "eef94c45f64bb0800aaa299351420594e1e2246132d8e9f525aa9aad4c1230f0",
+  "shared_source_sha256": {
+    "spikes/edge-comparison/run.mjs": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493",
+    "spikes/edge-comparison/contract.mjs": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f",
+    "spikes/edge-comparison/manifest.json": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+    "spikes/edge-comparison/supplemental.mjs": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf",
+    "spikes/edge-comparison/contract.test.mjs": "b8ddf59505a5e342eea217ff49fd6a3d3ec64b0cdfe036000257d1191b6df223",
+    "spikes/pingora/lab.mjs": "e9f5013bfd7e7b147aebf3a1cc4f83fd7de9e7c1e53863e76ab29324ad4a7721"
+  },
+  "results_sha256": "a0fa4807166f2f92f4376b4e647dea29c31c52d7b13434d0ecaa23b354170f33",
+  "private_result": "/home/tiecont/Projects/aegis-gate-sprint03-a/.local/edge-proof-run-qCZThI/results.json",
+  "private_result_sha256": "a0fa4807166f2f92f4376b4e647dea29c31c52d7b13434d0ecaa23b354170f33",
+  "proxy_log_sha256": "46b119252ffdfd0a107199d093edae4b9429639a09e37869070d29bd5c60459b",
+  "total": 75,
+  "pass": 55,
+  "fail": 20,
+  "baseline": {
+    "total": 65,
+    "pass": 49,
+    "fail": 16,
+    "failures": [
+      "malformed-HTTP-invalid-request-target",
+      "strict-ingress-target-raw-tab",
+      "strict-ingress-target-raw-control",
+      "strict-ingress-target-raw-null",
+      "strict-ingress-absolute-unsupported-scheme",
+      "strict-ingress-target-relative-form",
+      "strict-ingress-target-fragment",
+      "strict-ingress-TE-repeated-chunked",
+      "verified-origin-TLS-rejects-wrong",
+      "verified-origin-TLS-rejects-expired",
+      "verified-origin-TLS-rejects-untrusted",
+      "trust-store-swap-cannot-reuse-old-origin-TLS-session",
+      "same-origin-pools-are-partitioned-between-routes",
+      "client-upload-cancellation-is-bounded",
+      "weighted-health-check-failover-and-recovery",
+      "bounded-reference-benchmark"
+    ],
+    "expected_failures": [
+      "malformed-HTTP-invalid-request-target",
+      "strict-ingress-target-raw-tab",
+      "strict-ingress-target-raw-control",
+      "strict-ingress-target-raw-null",
+      "strict-ingress-absolute-unsupported-scheme",
+      "strict-ingress-target-relative-form",
+      "strict-ingress-target-fragment",
+      "strict-ingress-TE-repeated-chunked"
+    ]
+  },
+  "supplemental": [
+    {
+      "name": "supplemental-space-target-before-pipelined-request",
+      "status": "fail"
+    },
+    {
+      "name": "supplemental-tab-target-before-pipelined-request",
+      "status": "fail"
+    },
+    {
+      "name": "supplemental-duplicate-host-before-pipelined-request",
+      "status": "pass"
+    },
+    {
+      "name": "supplemental-conflicting-length-before-pipelined-request",
+      "status": "pass"
+    },
+    {
+      "name": "supplemental-signed-content-length",
+      "status": "pass"
+    },
+    {
+      "name": "supplemental-negative-content-length",
+      "status": "pass"
+    },
+    {
+      "name": "supplemental-repeated-transfer-encoding-fields",
+      "status": "fail"
+    },
+    {
+      "name": "supplemental-nul-in-header-value",
+      "status": "pass"
+    },
+    {
+      "name": "supplemental-invalid-header-name",
+      "status": "pass"
+    },
+    {
+      "name": "valid-HTTP1-pipelining-preserves-boundaries-and-encoded-targets",
+      "status": "fail"
+    }
+  ],
+  "fatal": null
+}
