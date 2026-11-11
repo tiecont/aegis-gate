@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "postgres": {
+    "image_id": "sha256:2d78615115c144419d4626723f7042fde70dcabe770f73eeda79bc7a1e234eaf",
+    "base": "postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395",
+    "dockerfile_sha256": "4e8cb4b61706ff8f1bfce591452603030d3dfac611ada71e88ed76d02c8698fc",
+    "source_sha256": "07c2cd56f03215443f41246222b1475b79a95b13c72903752e6781ceeb264bbd",
+    "source_files": [
+      "Dockerfile.postgres",
+      "su-exec-wrapper.sh"
+    ]
+  },
+  "demo-origin": {
+    "image_id": "sha256:c6ae3182b62b1119315a39fea0b9592d7120eb032f0e58f26965748bddf9f173",
+    "base": "python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894",
+    "dockerfile_sha256": "8173a4d2d764756646170ef2556495de39726e4d89c1ce1d37a7aced3f3858ca",
+    "source_sha256": "8231707c7e26510919884e1bd05f991baa69b4968715a628880ccbd3f6d44a6b",
+    "source_files": [
+      "Dockerfile.origin"
+    ]
+  }
+}

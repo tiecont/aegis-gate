@@ -152,7 +152,7 @@ func opaque(err error) error {
 	var pg *pgconn.PgError
 	if errors.As(err, &pg) {
 		switch pg.Code {
-		case "23505", "40001", "40P01":
+		case "23505", "40001", "40P01", "54000":
 			return domain.ErrConflict
 		case "23503", "22P02", "23514":
 			return domain.ErrInvalid
@@ -199,7 +199,7 @@ func orgRole(ctx context.Context, tx pgx.Tx, p Principal, org string) (domain.Ro
 	var role domain.Role
 	err := tx.QueryRow(ctx, "SELECT m.role FROM memberships m JOIN organizations o ON o.id=m.organization_id WHERE m.organization_id=$1 AND m.issuer=$2 AND m.subject=$3 AND m.active AND o.status='active' FOR SHARE OF m,o", org, p.Issuer, p.Subject).Scan(&role)
 	if err != nil {
-		return "", domain.ErrDenied
+		return "", denied(ctx, tx, p, org, "", "organization_denied")
 	}
 	return role, nil
 }
@@ -215,16 +215,25 @@ func (s *Store) AddMember(ctx context.Context, p Principal, org string, member P
 	defer tx.Rollback(ctx)
 	actorRole, err := orgRole(ctx, tx, p, org)
 	if err != nil || !actorRole.Allows("members") {
-		return domain.ErrDenied
+		if err != nil {
+			return err
+		}
+		return denied(ctx, tx, p, org, "", "membership_denied")
+	}
+	if err = sensitive(ctx, tx, p, org, "", "membership_denied"); err != nil {
+		return err
 	}
 	// Ownership transfers need a separate reviewed workflow; never remove the
 	// owner's last authority through an ordinary membership update.
 	if member == p || role == domain.Owner {
-		return domain.ErrDenied
+		return denied(ctx, tx, p, org, "", "membership_denied")
 	}
-	_, err = tx.Exec(ctx, "INSERT INTO memberships(organization_id,issuer,subject,role)VALUES($1,$2,$3,$4) ON CONFLICT(organization_id,issuer,subject)DO UPDATE SET role=EXCLUDED.role,active=true WHERE memberships.role<>'owner'", org, member.Issuer, member.Subject, string(role))
+	command, err := tx.Exec(ctx, "INSERT INTO memberships(organization_id,issuer,subject,role)VALUES($1,$2,$3,$4) ON CONFLICT(organization_id,issuer,subject)DO UPDATE SET role=EXCLUDED.role,active=true WHERE memberships.role<>'owner'", org, member.Issuer, member.Subject, string(role))
 	if err != nil {
 		return opaque(err)
+	}
+	if command.RowsAffected() != 1 {
+		return denied(ctx, tx, p, org, "", "membership_denied")
 	}
 	_, err = tx.Exec(ctx, "INSERT INTO audit_events(organization_id,issuer,subject,action,outcome)VALUES($1,$2,$3,'membership_change','allowed')", org, p.Issuer, p.Subject)
 	if err != nil {
@@ -244,7 +253,10 @@ func (s *Store) CreateProject(ctx context.Context, p Principal, org, name string
 	defer tx.Rollback(ctx)
 	role, err := orgRole(ctx, tx, p, org)
 	if err != nil || !role.Allows("projects") {
-		return "", domain.ErrDenied
+		if err != nil {
+			return "", err
+		}
+		return "", denied(ctx, tx, p, org, "", "project_create_denied")
 	}
 	id, err := contracts.RequestID()
 	if err != nil {
@@ -269,7 +281,12 @@ func scoped(ctx context.Context, tx pgx.Tx, p Principal, project, action string)
 	var role domain.Role
 	err := tx.QueryRow(ctx, `SELECT p.organization_id,m.role FROM projects p JOIN organizations o ON o.id=p.organization_id JOIN memberships m ON m.organization_id=p.organization_id WHERE p.id=$1 AND m.issuer=$2 AND m.subject=$3 AND m.active AND p.status='active' AND o.status='active' FOR SHARE OF p,o,m`, project, p.Issuer, p.Subject).Scan(&org, &role)
 	if err != nil || !role.Allows(action) {
-		return "", domain.ErrDenied
+		return "", denied(ctx, tx, p, "", project, "management_denied")
+	}
+	if action == "policies" || action == "approve" {
+		if err = sensitive(ctx, tx, p, org, project, "security_denied"); err != nil {
+			return "", err
+		}
 	}
 	return org, nil
 }
@@ -384,6 +401,9 @@ func (s *Store) Get(ctx context.Context, p Principal, project, kind, id string) 
 		return result, err
 	}
 	err = tx.QueryRow(ctx, "SELECT id,project_id,kind,generation,spec FROM resources WHERE project_id=$1 AND kind=$2 AND id=$3", project, kind, id).Scan(&result.ID, &result.ProjectID, &result.Kind, &result.Generation, &result.Spec)
+	if errors.Is(err, pgx.ErrNoRows) {
+		return result, denied(ctx, tx, p, "", project, "resource_denied")
+	}
 	return result, opaque(err)
 }
 

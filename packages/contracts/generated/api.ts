@@ -1,4 +1,228 @@
 export interface paths {
+    "/v1/projects/{project}/origin-pools": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["acceptance1"];
+        put?: never;
+        post: operations["acceptance2"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project}/origin-pools/{pool}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["acceptance3"];
+        put: operations["acceptance4"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project}/origin-pools/{pool}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["acceptance5"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project}/origin-pools/{pool}/revisions/{generation}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["acceptance6"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project}/origin-pools/{pool}/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["acceptance7"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project}/origin-pools/{pool}/endpoints": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["acceptance8"];
+        put?: never;
+        post: operations["acceptance9"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project}/origin-pools/{pool}/endpoints/{endpoint}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["acceptance10"];
+        put: operations["acceptance11"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project}/origin-pools/{pool}/endpoints/{endpoint}/revisions/{generation}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["acceptance12"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/organizations/{org}/audit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["acceptance13"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project}/domains/{id}/reverify": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["acceptance14"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project}/routes/{id}/retire": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["acceptance15"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project}/routes/{id}/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["acceptance16"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project}/origins/{id}/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["acceptance17"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project}/policies/{id}/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["acceptance18"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/session": {
         parameters: {
             query?: never;
@@ -419,6 +643,71 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        OriginPool: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            project_id: string;
+            name: string;
+            /** @enum {string} */
+            state: "active" | "disabled" | "retired";
+            generation: number;
+            /** Format: date-time */
+            created_at: string;
+        };
+        OriginEndpoint: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            pool_id: string;
+            /** Format: uuid */
+            project_id: string;
+            /** Format: uri */
+            url: string;
+            hostname: string;
+            /** @enum {integer} */
+            port: 443;
+            /** @enum {string} */
+            state: "active" | "disabled" | "retired";
+            generation: number;
+            /** Format: date-time */
+            created_at: string;
+        };
+        PoolRevision: {
+            pool: components["schemas"]["OriginPool"];
+            endpoints: components["schemas"]["OriginEndpoint"][];
+        };
+        PoolCreate: {
+            name: string;
+        };
+        PoolUpdate: {
+            name: string;
+            /** @enum {string} */
+            state: "active" | "disabled" | "retired";
+        };
+        EndpointUpdate: {
+            /** Format: uri */
+            url: string;
+            /** @enum {string} */
+            state: "active" | "disabled" | "retired";
+        };
+        FieldChange: {
+            field: string;
+            before: unknown;
+            after: unknown;
+        };
+        RevisionPreview: {
+            from: components["schemas"]["ManagementResource"];
+            to: components["schemas"]["ManagementResource"];
+            changes: components["schemas"]["FieldChange"][];
+            approvable: boolean;
+            reasons: string[];
+        };
+        PoolPreview: {
+            from: components["schemas"]["PoolRevision"];
+            to: components["schemas"]["PoolRevision"];
+            changes: components["schemas"]["FieldChange"][];
+        };
         ManagementPrincipal: {
             issuer: string;
             subject: string;
@@ -465,18 +754,21 @@ export interface components {
         };
         RouteSpec: {
             /** Format: uuid */
+            origin_pool_id?: string;
+            /** Format: uuid */
             domain_id: string;
             /** Format: uuid */
-            origin_id: string;
+            origin_id?: string;
             /** Format: uuid */
             policy_id: string;
             path: string;
             methods: ("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS")[];
-        };
+        } & (unknown | unknown);
         DomainInput: {
             hostname: string;
         };
         DomainClaim: {
+            generation?: number;
             /** Format: uuid */
             id: string;
             /** Format: uuid */
@@ -513,6 +805,8 @@ export interface components {
             attempts: number;
         };
         RouteApproval: {
+            decision_id?: number;
+            origin_pool_generation?: number;
             /** Format: uuid */
             route_id: string;
             route_generation: number;
@@ -561,6 +855,596 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    acceptance1: {
+        parameters: {
+            query?: {
+                after?: string;
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                project: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OriginPool"][];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance2: {
+        parameters: {
+            query?: never;
+            header: {
+                Origin: string;
+                "X-CSRF-Token": string;
+                "Idempotency-Key": string;
+            };
+            path: {
+                project: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PoolCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OriginPool"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance3: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                project: string;
+                pool: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PoolRevision"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance4: {
+        parameters: {
+            query?: never;
+            header: {
+                Origin: string;
+                "X-CSRF-Token": string;
+                "If-Match": string;
+            };
+            path: {
+                project: string;
+                pool: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PoolUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PoolRevision"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance5: {
+        parameters: {
+            query?: never;
+            header: {
+                Origin: string;
+                "X-CSRF-Token": string;
+                "If-Match": string;
+            };
+            path: {
+                project: string;
+                pool: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PoolRevision"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance6: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                project: string;
+                pool: string;
+                generation: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PoolRevision"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance7: {
+        parameters: {
+            query: {
+                from: number;
+                to: number;
+            };
+            header?: never;
+            path: {
+                project: string;
+                pool: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PoolPreview"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance8: {
+        parameters: {
+            query?: {
+                after?: string;
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                project: string;
+                pool: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OriginEndpoint"][];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance9: {
+        parameters: {
+            query?: never;
+            header: {
+                Origin: string;
+                "X-CSRF-Token": string;
+                "If-Match": string;
+                "Idempotency-Key": string;
+            };
+            path: {
+                project: string;
+                pool: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["OriginSpec"];
+            };
+        };
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OriginEndpoint"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance10: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                project: string;
+                pool: string;
+                endpoint: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OriginEndpoint"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance11: {
+        parameters: {
+            query?: never;
+            header: {
+                Origin: string;
+                "X-CSRF-Token": string;
+                "If-Match": string;
+            };
+            path: {
+                project: string;
+                pool: string;
+                endpoint: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EndpointUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OriginEndpoint"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance12: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                project: string;
+                pool: string;
+                endpoint: string;
+                generation: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OriginEndpoint"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance13: {
+        parameters: {
+            query?: {
+                after?: string;
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                org: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AuditEvent"][];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance14: {
+        parameters: {
+            query?: never;
+            header: {
+                Origin: string;
+                "X-CSRF-Token": string;
+                "If-Match": string;
+            };
+            path: {
+                project: string;
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DomainClaim"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance15: {
+        parameters: {
+            query?: never;
+            header: {
+                Origin: string;
+                "X-CSRF-Token": string;
+                "If-Match": string;
+            };
+            path: {
+                project: string;
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManagementStatus"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance16: {
+        parameters: {
+            query: {
+                from: number;
+                to: number;
+            };
+            header?: never;
+            path: {
+                project: string;
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevisionPreview"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance17: {
+        parameters: {
+            query: {
+                from: number;
+                to: number;
+            };
+            header?: never;
+            path: {
+                project: string;
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevisionPreview"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    acceptance18: {
+        parameters: {
+            query: {
+                from: number;
+                to: number;
+            };
+            header?: never;
+            path: {
+                project: string;
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful local management operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevisionPreview"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
     management1: {
         parameters: {
             query?: never;

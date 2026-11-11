@@ -87,7 +87,7 @@ func (s *Store) Projects(ctx context.Context, p Principal, org, after string, li
 }
 
 func (s *Store) RevokeMember(ctx context.Context, p Principal, org string, member Principal) error {
-	if !member.valid() || p == member {
+	if !member.valid() {
 		return domain.ErrDenied
 	}
 	tx, err := s.pool.Begin(ctx)
@@ -97,14 +97,23 @@ func (s *Store) RevokeMember(ctx context.Context, p Principal, org string, membe
 	defer tx.Rollback(ctx)
 	role, err := orgRole(ctx, tx, p, org)
 	if err != nil || !role.Allows("members") {
-		return domain.ErrDenied
+		if err != nil {
+			return err
+		}
+		return denied(ctx, tx, p, org, "", "membership_revoke_denied")
+	}
+	if p == member {
+		return denied(ctx, tx, p, org, "", "membership_revoke_denied")
+	}
+	if err = sensitive(ctx, tx, p, org, "", "membership_revoke_denied"); err != nil {
+		return err
 	}
 	command, err := tx.Exec(ctx, "UPDATE memberships SET active=false WHERE organization_id=$1 AND issuer=$2 AND subject=$3 AND role<>'owner'", org, member.Issuer, member.Subject)
 	if err != nil {
 		return opaque(err)
 	}
 	if command.RowsAffected() != 1 {
-		return domain.ErrDenied
+		return denied(ctx, tx, p, org, "", "membership_revoke_denied")
 	}
 	if _, err = tx.Exec(ctx, `INSERT INTO audit_events(organization_id,issuer,subject,action,outcome)VALUES($1,$2,$3,'membership_revoke','allowed')`, org, p.Issuer, p.Subject); err != nil {
 		return opaque(err)
@@ -156,4 +165,45 @@ func (s *Store) AuditDenied(ctx context.Context, p Principal, project string) er
 	_, err := s.pool.Exec(ctx, `INSERT INTO audit_events(organization_id,project_id,issuer,subject,action,outcome)
 		SELECT organization_id,id,$2,$3,'management_denied','denied' FROM projects WHERE id=$1`, project, p.Issuer, p.Subject)
 	return opaque(err)
+}
+
+func (s *Store) AuditRequestDenied(ctx context.Context, p Principal, org, project string) error {
+	if !p.valid() {
+		return domain.ErrDenied
+	}
+	if project != "" {
+		return s.AuditDenied(ctx, p, project)
+	}
+	if org == "" {
+		return nil
+	}
+	_, err := s.pool.Exec(ctx, `INSERT INTO audit_events(organization_id,issuer,subject,action,outcome) SELECT id,$2,$3,'organization_denied','denied' FROM organizations WHERE id=$1`, org, p.Issuer, p.Subject)
+	return opaque(err)
+}
+func (s *Store) OrganizationAudit(ctx context.Context, p Principal, org string, after int64, limit int) ([]AuditEvent, error) {
+	if after < 0 || limit < 1 || limit > 100 {
+		return nil, domain.ErrInvalid
+	}
+	tx, err := s.pool.Begin(ctx)
+	if err != nil {
+		return nil, opaque(err)
+	}
+	defer tx.Rollback(ctx)
+	if _, err = orgRole(ctx, tx, p, org); err != nil {
+		return nil, err
+	}
+	rows, err := tx.Query(ctx, "SELECT sequence,action,outcome,at FROM audit_events WHERE organization_id=$1 AND sequence>$2 ORDER BY sequence LIMIT $3", org, after, limit)
+	if err != nil {
+		return nil, opaque(err)
+	}
+	defer rows.Close()
+	items := []AuditEvent{}
+	for rows.Next() {
+		var v AuditEvent
+		if err = rows.Scan(&v.Sequence, &v.Action, &v.Outcome, &v.At); err != nil {
+			return nil, opaque(err)
+		}
+		items = append(items, v)
+	}
+	return items, opaque(rows.Err())
 }
