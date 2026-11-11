@@ -36,7 +36,7 @@ func (q *publicationQueue) Claim(ctx context.Context, owner string, lease time.D
 	defer tx.Rollback(ctx)
 	// Exhausted workers that crashed on their final lease become terminal;
 	// later independently approved generations must not wait forever.
-	if _, err = tx.Exec(ctx, "UPDATE config_outbox SET state='failed',lease_until=NULL,lease_owner=NULL,lease_token=NULL WHERE state='leased' AND attempts>=32 AND lease_until<=now()"); err != nil {
+	if _, err = tx.Exec(ctx, `WITH exhausted AS (SELECT project_id,generation FROM config_outbox WHERE state='leased' AND attempts>=32 AND lease_until<=now() ORDER BY project_id,generation FOR UPDATE SKIP LOCKED LIMIT 64) UPDATE config_outbox o SET state='failed',lease_until=NULL,lease_owner=NULL,lease_token=NULL FROM exhausted e WHERE o.project_id=e.project_id AND o.generation=e.generation`); err != nil {
 		return job, configpublish.ErrUnavailable
 	}
 	var payload []byte
