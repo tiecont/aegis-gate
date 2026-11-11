@@ -1,0 +1,281 @@
+{
+  "recorded_at": "2026-11-11T08:52:31.150Z",
+  "result": "pass",
+  "meaning": "Evidence inventory and provenance validation passes; candidate proof remains failed/NO-GO",
+  "shared_total": 75,
+  "shared_pass": 70,
+  "shared_fail": 5,
+  "excluded": 0,
+  "process_exit": 1,
+  "unchanged_runtime": true,
+  "binary_sha256": "8fb900bae4fb992ba4296cff0c5975f5e2e14bf8fc0378841af1e5fc7ff828e7",
+  "lock_sha256": "3d7e17a5b973919e522edc4cebb8b5035ddb29850d18c4676cdd06b207f72c77",
+  "candidate_commit": "c17e0bf590ad4d229d1d43f139b4dfd25f63df72",
+  "root_commit": "bd96d00211a3a78d689282697788061c198bf2a1",
+  "root_files": [
+    {
+      "file": "spikes/edge-comparison/run.mjs",
+      "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493"
+    },
+    {
+      "file": "spikes/edge-comparison/contract.mjs",
+      "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/edge-comparison/supplemental.mjs",
+      "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.mjs",
+      "sha256": "79c063c1439e429c76ccface3c6ffc3de95977393333f4a832cb4bc127307347"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.test.mjs",
+      "sha256": "9ddc71cf675cc89cb2bc2cba3770cf57f6b0eecde42885db0dccaa0718b1dbbd"
+    },
+    {
+      "file": "spikes/pingora/lab.mjs",
+      "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d"
+    }
+  ],
+  "failure_names": [
+    "malformed-HTTP-CL-TE",
+    "malformed-HTTP-TE-CL",
+    "strict-ingress-target-fragment",
+    "strict-ingress-CL-TE-pipelined",
+    "strict-ingress-TE-CL-pipelined"
+  ],
+  "observer": {
+    "h1": "HTTPS decrypted socket data",
+    "h2": "verified TLS relay before native HTTP2 consumption",
+    "source_sha256": "79c063c1439e429c76ccface3c6ffc3de95977393333f4a832cb4bc127307347"
+  },
+  "observer_test": {
+    "status": "source reviewed; not rerun by Agent C",
+    "assertions": "24 decrypted preface bytes with zero handlers; valid encoded H2 request preserved"
+  },
+  "earlier_limit": "Native Node H2 consumes frames without JS socket data events; prior zero H2/gRPC bytes do not prove zero forwarding. Prior gRPC handler counts were also uninstrumented.",
+  "comparison": [
+    {
+      "name": "HTTP2-downstream-and-upstream-ALPN",
+      "prior_status": "pass",
+      "current_status": "pass",
+      "prior_origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "2"
+          }
+        ],
+        "omitted_request_samples": 0
+      },
+      "current_origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 162,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "2"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+      "prior_status": "pass",
+      "current_status": "pass",
+      "prior_origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      },
+      "current_origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "HTTP1-and-HTTP2-body-streaming",
+      "prior_status": "pass",
+      "current_status": "pass",
+      "prior_origin": {
+        "handler_invocations": 3,
+        "decrypted_bytes": 245971,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "POST",
+            "target": "/echo",
+            "protocol": "1.1",
+            "tls": "TLSv1.3",
+            "sni": "lab-origin.test",
+            "alpn": false
+          },
+          {
+            "method": "POST",
+            "target": "/echo",
+            "protocol": "2"
+          },
+          {
+            "method": "GET",
+            "target": "/stream",
+            "protocol": "1.1",
+            "tls": "TLSv1.3",
+            "sni": "lab-origin.test",
+            "alpn": false
+          }
+        ],
+        "omitted_request_samples": 0
+      },
+      "current_origin": {
+        "handler_invocations": 3,
+        "decrypted_bytes": 491896,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "POST",
+            "target": "/echo",
+            "protocol": "1.1",
+            "tls": "TLSv1.3",
+            "sni": "lab-origin.test",
+            "alpn": false
+          },
+          {
+            "method": "POST",
+            "target": "/echo",
+            "protocol": "2"
+          },
+          {
+            "method": "GET",
+            "target": "/stream",
+            "protocol": "1.1",
+            "tls": "TLSv1.3",
+            "sni": "lab-origin.test",
+            "alpn": false
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "gRPC-bidirectional-streaming-and-trailers",
+      "prior_status": "pass",
+      "current_status": "pass",
+      "prior_origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      },
+      "current_origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 315,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "POST",
+            "target": "/lab.Echo/Chat",
+            "protocol": "2",
+            "transport": "grpc"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "gRPC-client-cancellation-reaches-origin",
+      "prior_status": "pass",
+      "current_status": "pass",
+      "prior_origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      },
+      "current_origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 85,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "POST",
+            "target": "/lab.Echo/Chat",
+            "protocol": "2",
+            "transport": "grpc"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    }
+  ],
+  "benchmark": {
+    "reference": "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311",
+    "reference_version": "nginx/1.30.6",
+    "profile": "100 warmup, 5 seconds each, closed-loop concurrency 8, 90% GET/1024B response + 10% POST/32768B echo; H1 TLS verified on both hops; keepalive; client/origin/proxy same host; hyper candidate; release requested profile",
+    "measurement": "Linux /proc cumulative user+system CPU, HZ=100; sampled summed RSS at 100ms; latency includes client scheduling and origin; no handshake in steady state",
+    "candidate_name": "hyper",
+    "candidate": {
+      "duration_seconds": 5.039,
+      "requests": 4856,
+      "requests_per_second": 963.59,
+      "p50_ms": 1.272,
+      "p95_ms": 43.432,
+      "p99_ms": 48.149,
+      "errors": 0,
+      "timeouts": 0,
+      "cpu_percent_of_one_core": 26.79,
+      "peak_rss_bytes": 12369920,
+      "pids_sampled": 1
+    },
+    "nginx": {
+      "duration_seconds": 5.001,
+      "requests": 13217,
+      "requests_per_second": 2642.93,
+      "p50_ms": 2.645,
+      "p95_ms": 5.638,
+      "p99_ms": 7.943,
+      "errors": 0,
+      "timeouts": 0,
+      "cpu_percent_of_one_core": 39.59,
+      "peak_rss_bytes": 20508672,
+      "pids_sampled": 3
+    },
+    "limitations": [
+      "short single-run smoke benchmark; no launch SLO or capacity inference",
+      "independently built binaries; default build settings and crypto libraries may differ",
+      "RSS sums shared nginx pages across processes",
+      "not open-loop; coordinated omission; shared host load",
+      "benchmark runs sequentially"
+    ]
+  },
+  "retained_limits": "limits.json 6/6 retained; unchanged runtime, no repeat",
+  "run_directory": "/home/tiecont/Projects/aegis-gate-sprint03-c/.local/edge-proof-run-2Xdtn7"
+}
