@@ -1,0 +1,22 @@
+{
+  "generation": 1,
+  "ca_file": "/lab/ca.pem",
+  "routes": [
+    {
+      "host": "edge-a.test",
+      "origin_name": "lab-origin.test",
+      "origin_port": 18443,
+      "cert_file": "/lab/edge-a.pem",
+      "key_file": "/lab/edge-a.key",
+      "h2": false
+    },
+    {
+      "host": "edge-b.test",
+      "origin_name": "lab-origin.test",
+      "origin_port": 18444,
+      "cert_file": "/lab/edge-b.pem",
+      "key_file": "/lab/edge-b.key",
+      "h2": true
+    }
+  ]
+}

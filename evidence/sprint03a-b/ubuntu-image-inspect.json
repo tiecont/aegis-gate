@@ -1,0 +1,66 @@
+[
+    {
+        "Id": "sha256:8de97e654644827d62afdbf7e1d3dc9fee01a8690d410dd1c63a30dc6b6cecbb",
+        "RepoTags": [
+            "envoyproxy/envoy:v1.40.2"
+        ],
+        "RepoDigests": [
+            "envoyproxy/envoy@sha256:8de97e654644827d62afdbf7e1d3dc9fee01a8690d410dd1c63a30dc6b6cecbb"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-27T01:34:20.079544061Z",
+        "Config": {
+            "ExposedPorts": {
+                "10000/tcp": {}
+            },
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "DEBIAN_FRONTEND=noninteractive"
+            ],
+            "Entrypoint": [
+                "/docker-entrypoint.sh"
+            ],
+            "Cmd": [
+                "envoy",
+                "-c",
+                "/etc/envoy/envoy.yaml"
+            ],
+            "Labels": {
+                "org.opencontainers.image.version": "22.04"
+            },
+            "ArgsEscaped": true
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 285897596,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:cbaf391e670933f026c05c7dedec3faf8f194b6c2d83b0d5694ad68323c8077c",
+                "sha256:3b8ef704e9d02135d984c552bc5808cb07e25cbb2b2f00b2fef01d18fb4b1f45",
+                "sha256:f925bbd0d5086dda851f16e57e974a9131b543f4f643be7b0b5a36ca33ad9087",
+                "sha256:482978062e585389a7e45a6a784c04652af1aed7a4d77c43906e53100b53e900",
+                "sha256:fab9066d3e396f5600c28483a73a41be9b91fb621f22fa3ac8284b946774dc25",
+                "sha256:2369d9ea43e76e3e9f7b7d4c866cbf77878be21f6aada0f4a9d3bc1147851cdd",
+                "sha256:50058b9c689ca0c1cfd3bfaaa21f836be364f502e07df191b8b4c777d11fb5fc",
+                "sha256:63f97facfed39df139b5fbb1ff9ceca60707f46dfeae2b823d926fb595ca1fbf",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-11-11T08:23:44.977337515Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:8de97e654644827d62afdbf7e1d3dc9fee01a8690d410dd1c63a30dc6b6cecbb",
+            "size": 493
+        },
+        "Identity": {
+            "Pull": [
+                {
+                    "Repository": "docker.io/envoyproxy/envoy"
+                }
+            ]
+        }
+    }
+]

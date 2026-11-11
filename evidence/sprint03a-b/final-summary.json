@@ -1,0 +1,99 @@
+{
+  "disposition": "NO-GO",
+  "tests": 75,
+  "passed": 69,
+  "failed": 6,
+  "failures": [
+    {
+      "name": "malformed-HTTP-invalid-transfer-encoding",
+      "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "malformed-HTTP-obsolete-folded-header",
+      "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 263,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-TE-repeated-chunked",
+      "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-TE-not-final-chunked",
+      "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "supplemental-repeated-transfer-encoding-fields",
+      "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+      "error": "unsafe authority status 200",
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "2"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    }
+  ],
+  "benchmark_result": "pass",
+  "image_scan_high_critical": 0,
+  "mandatory_failures_close_gate": true,
+  "production_or_architecture_approval": false
+}
