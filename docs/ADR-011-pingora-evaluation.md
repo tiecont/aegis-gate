@@ -1,6 +1,6 @@
 # ADR-011: Pingora feasibility evaluation
 
-- Status: **proposed**; **No-Go at the current proof state**. One required strict malformed-request rejection test fails. This is not a general claim of Pingora insecurity or a permanent framework rejection.
+- Status: **proposed**; **No-Go at the current proof state**. Expanded strict-ingress proof fails eight of65 cases, independently reproduced by root. This is not a general claim of Pingora insecurity or a permanent framework rejection.
 - Date: 2026-11-11.
 - Scope: module 01, `M0-PROXY-GO-NOGO`; isolated `spikes/pingora` workspace only.
 - Supersedes: no accepted decision. Supplies evidence for pending ADR-002 in `docs/DECISIONS.md`.
@@ -234,6 +234,18 @@ If a mandatory proof regresses or dependency risk is judged unacceptable, keep
 responsible human must decide a material architecture replacement after an
 equivalent alternatives proof. Removing this isolated workspace has no effect
 on production because no production edge/contracts were changed.
+
+## Sprint02 independent review
+
+Root rebuilt the unchanged reviewed release source and reproduced **57/65**,
+eight failures, exit1, on2026-11-11. Raw evidence:
+`evidence/sprint02-d/pingora-results.json`; binary SHA256
+`416358486ea4221c8b0141b7d6895b81f61d42d05f65d56d5aaf6184865c0152`.
+Relative target again sends192 decrypted bytes and causes two origin parser
+errors despite502/no handler dispatch. All six valid encoded-target controls
+pass. `reports/sprint02-d-security-review.md` accepts the evidence and NO-GO
+recommendation only. PR5 is evidence-only; its merge does not approve Pingora,
+an alternative architecture, a maintenance exception or production activation.
 
 ## Gate disposition
 

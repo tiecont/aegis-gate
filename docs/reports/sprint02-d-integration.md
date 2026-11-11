@@ -1,6 +1,7 @@
 # Sprint 02 independent integration review
 
-Status: in progress; no Sprint 02 acceptance gate has passed.
+Status: A/B/C and dependency candidates independently reviewed and merged;
+final integrated check/scan in progress. Historical findings below are preserved.
 Baseline: `9e734e31bf1544bd1158a5bf8d29047c2adb72f8`.
 Integration branch: `sprint/02-integration`.
 
@@ -85,3 +86,32 @@ tree and final status/risk updates.
 - Modules 03-12: locked under their existing task prerequisites.
 - Production release: blocked. No deployment, live DNS, billing or public
   security/load operation is part of this sprint.
+
+## Sprint02 Reviewed Integration
+
+PR6 merged as45ae1c6 after exact-head run42964002493 passed both hosted jobs.
+Full A scripts, history regression target and C implementation were integrated
+with B evidence; PR5 and PR7 were then rebased onto the recovered CI base and
+passed both jobs in runs42969922803 and42969925238. Their reviewed heads are
+da919d7 and727f5b1. PRs1-4 were reviewed in separate E worktrees, rebased,
+tested and merged individually; details are in `sprint02-e-dependencies.md`.
+Actual PR merge commits/timestamps are in `evidence/sprint02-d/pull-requests.json`.
+
+Independent security report: `sprint02-d-security-review.md`. Root repeated
+classic/OCI layer substitution, all public-origin regressions and real scans;
+the corrected history wrapper inspected18 commits rather than accepting the
+old zero-commit scan. Final history count is recorded in the final scan log.
+No scanner suppression or TLS/auth relaxation was introduced.
+
+Root rebuilt Pingora release and repeated57/65, eight failures, exit1. The
+relative target again sent192 decrypted bytes and caused two origin parser
+errors. The six valid percent-encoded controls pass unchanged. Exact raw results
+are `evidence/sprint02-d/pingora-results.json`; unit/build/lab logs are adjacent.
+The evidence-only merge does not approve any architecture or change NO-GO.
+
+One repeated `make check` was interrupted during PostgreSQL integration while
+the task resumed; its log is retained as `make-check-interrupted.log` and is not
+accepted as a passing run. Earlier complete root evidence is preserved as
+`make-check-before-history-target.log`. Final `make-check.log` must contain
+`RESULT_EXIT=0`. The final scan and final gate disposition will be recorded
+after execution; implementation or a hosted candidate alone is insufficient.

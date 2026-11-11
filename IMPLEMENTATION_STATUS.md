@@ -2,20 +2,19 @@
 
 Last updated: 2026-11-11. Scope: local implementation only. No production deployment or live DNS/payment action is authorized.
 
-## Sprint 02 recovery in progress
+## Sprint 02 integrated verification
 
-Fetched `origin/main` matches baseline
-`9e734e31bf1544bd1158a5bf8d29047c2adb72f8`. The historical local results below
-remain scoped to that checkpoint. Hosted Actions run
-[42957348129](https://github.com/tiecont/aegis-gate/actions/runs/42957348129)
-passed foundation but failed supply-chain image identity for two artifacts;
-module00 hosted recovery is pending, not a Sprint02 PASS. Independent agents
-are working in isolated branches under `docs/sprints/02-execution.md`.
+Reconciled the baseline `9e734e31bf1544bd1158a5bf8d29047c2adb72f8`, preserved
+isolated agent work and merged reviewed PRs1-7. Agent A recovered both exact-head
+hosted jobs in run42964002493; rebased B/C and each dependency PR also passed
+both jobs before merge. Reports: `docs/reports/sprint02-{a-ci,b-pingora,c-module02,e-dependencies}.md`.
 
-Module01 remains NO-GO and module02 remains PARTIAL/CLOSED. Root independently
-reproduced missing public-origin special-purpose address exclusions; fixes and
-review are pending. `docs/reports/sprint02-d-integration.md` records current
-findings and required acceptance evidence. No downstream module has opened.
+Root independently repeated the65-case Pingora proof:57 pass/eight fail, exit1;
+Module01 remains NO-GO. Module02 implementation and independent security review
+are complete; its gate remains closed pending final integrated check/scan.
+Public-origin and empty-history findings are repaired and independently retested.
+`docs/reports/sprint02-d-security-review.md` and `sprint02-d-integration.md`
+record scope, evidence and final acceptance. No downstream implementation started.
 
 ## Repository inventory
 
@@ -27,9 +26,9 @@ A module opens only after **all** dependencies below have passed implementation,
 
 | Module | Gate | Dependencies | State | Evidence / remaining work |
 |---|---|---|---|---|
-| 00 Foundation | M0-FOUNDATION | — | PASS (local) | Root make check, final integration, complete security-scan and independent review PASS. Final evidence: docs/reports/00-security-review.md. No production signoff. |
+| 00 Foundation | M0-FOUNDATION | — | PASS (local); hosted CI recovered | Historical foundation evidence preserved. Sprint02 identity/history regressions and hosted run42964002493 PASS; PR6 merged. No production signoff. |
 | 01 Pingora feasibility | M0-PROXY-GO-NOGO | 00 | NO-GO / HUMAN ARCHITECTURE REVIEW | Root reproduced 34/35 local cases; malformed raw-space request-target reaches origin (200). Test retained. ADR-011 and docs/reports/01-root-security-review.md; no architecture substitution authorized. |
-| 02 Tenancy/control plane | M1-ADMIN-TENANCY | 00 | PARTIAL / GATE CLOSED | PostgreSQL/OIDC-PKCE/HTTPS session-CSRF, domain jobs, route approvals and actual two-tenant/three-user HTTP negatives implemented. Remaining acceptance/security work: docs/reports/02-management-checkpoint.md. |
+| 02 Tenancy/control plane | M1-ADMIN-TENANCY | 00 | IMPLEMENTED / FINAL GATE REVIEW | Full acceptance candidate, independent local security review PASS and exact-head hosted run42969925238 PASS. Final integrated check/scan pending. Reports: sprint02-c-module02.md, sprint02-d-security-review.md. |
 | 03 Config distribution | M1-CONFIG-SAFETY | 00, 01 findings, 02 | LOCKED | Signed immutable snapshots, anti-replay, authenticated delivery, ACK/NACK/LKG, atomic apply. |
 | 04 Edge proxy | M1-EDGE-ROUTING | 01 affirmative Go, 03 | LOCKED | No production edge implementation until feasibility passes. |
 | 05 TLS/domain | M2-TLS | 02, 03, 04 | LOCKED | Domain ownership and certificate lifecycle/verification tests mandatory. |

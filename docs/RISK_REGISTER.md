@@ -2,7 +2,23 @@
 
 This register tracks residual implementation and release risks. It does not accept risks on behalf of a human reviewer. The current module states and actual executed evidence are recorded in `IMPLEMENTATION_STATUS.md`; T01–T20 mappings are maintained in `docs/SECURITY_COVERAGE.md`.
 
-## Sprint 02 active findings
+## Sprint 02 disposition
+
+PRs1-7 have been independently reviewed and merged after exact-head hosted
+foundation/supply-chain jobs passed. Image metadata/layer binding and empty Git
+history acceptance are repaired; root repeats substitution and nonempty-history
+proofs. Public-origin special-purpose ranges now reject with public controls.
+Module02 independent local security review passes; final integrated gate checks
+are tracked in `reports/sprint02-d-integration.md`.
+
+Module01 remains NO-GO: root rebuild reproduces57/65 with eight strict-ingress
+failures. `derivative` and `unsafe-libyaml` warnings remain open, with no ignore
+or accepted exception. Human architecture selection/review remains required;
+the evidence-only PR5 merge does not authorize replacement. Branch protection,
+professional assessment, provenance/signing and human release signoffs remain
+production obligations; Git autonomy does not satisfy those release controls.
+
+## Sprint 02 initial findings (historical)
 
 - Supply-chain recovery: baseline hosted Actions run42957348129 fails two image
   identity steps with `KeyError: 'digest'`. Historical local scan success does
