@@ -2,6 +2,7 @@ package persistence
 
 import (
 	"context"
+	"crypto/rand"
 	"encoding/json"
 	"errors"
 	"net/url"
@@ -13,7 +14,9 @@ import (
 	"time"
 
 	"aegisgate.dev/aegisgate/apps/control-api/internal/domain"
+	"aegisgate.dev/aegisgate/apps/control-api/internal/identity"
 	"aegisgate.dev/aegisgate/internal/contracts"
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
@@ -49,14 +52,64 @@ func localStore(t *testing.T) (*Store, string) {
 	if err != nil {
 		t.Fatal("isolated store unavailable")
 	}
-	t.Cleanup(func() { store.Close(); _, _ = admin.pool.Exec(ctx, "DROP SCHEMA "+schema+" CASCADE"); admin.Close() })
 	if err = store.Migrate(ctx); err != nil {
 		t.Fatalf("migration: %v", err)
 	}
 	if err = store.Migrate(ctx); err != nil {
 		t.Fatal("migration not idempotent")
 	}
+	runtimeRole := "run_" + strings.ReplaceAll(id, "-", "")
+	maintenanceRole := "maint_" + strings.ReplaceAll(id, "-", "")
+	password := rand.Text()
+	for _, role := range []string{runtimeRole, maintenanceRole} {
+		if _, err = admin.pool.Exec(ctx, "CREATE ROLE "+pgx.Identifier{role}.Sanitize()+" LOGIN NOINHERIT NOSUPERUSER NOCREATEDB NOCREATEROLE NOBYPASSRLS NOREPLICATION PASSWORD '"+password+"'"); err != nil {
+			t.Fatal("fixture role creation failed")
+		}
+	}
+	if err = store.GrantRoles(ctx, runtimeRole, maintenanceRole); err != nil {
+		t.Fatal("runtime grants", err)
+	}
+	store.Close()
+	dsn.User = url.UserPassword(runtimeRole, password)
+	store, err = Open(ctx, dsn.String())
+	if err != nil {
+		t.Fatal("runtime connection unavailable")
+	}
+	if err = store.RequireRuntimeRole(ctx); err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(func() {
+		store.Close()
+		_, _ = admin.pool.Exec(ctx, "DROP SCHEMA "+schema+" CASCADE")
+		for _, role := range []string{runtimeRole, maintenanceRole} {
+			_, _ = admin.pool.Exec(ctx, "DROP ROLE "+pgx.Identifier{role}.Sanitize())
+		}
+		admin.Close()
+	})
 	return store, dsn.String()
+}
+
+func testMFA(p Principal) context.Context {
+	return WithVerifiedLogin(context.Background(), identity.Login{Issuer: p.Issuer, Subject: p.Subject, MFAAt: time.Now()})
+}
+
+func testOwner(t *testing.T, dsn string) *Store {
+	t.Helper()
+	u, err := url.Parse(dsn)
+	if err != nil {
+		t.Fatal("fixture DSN invalid")
+	}
+	password, err := os.ReadFile(filepath.Join("..", "..", "..", "..", ".local", "postgres-password"))
+	if err != nil {
+		t.Fatal("fixture owner unavailable")
+	}
+	u.User = url.UserPassword("aegisgate_local", strings.TrimSpace(string(password)))
+	s, err := Open(context.Background(), u.String())
+	if err != nil {
+		t.Fatal("fixture owner unavailable")
+	}
+	t.Cleanup(s.Close)
+	return s
 }
 
 func TestIntegrationTenantIsolationIdempotencyAndSession(t *testing.T) {
@@ -73,7 +126,7 @@ func TestIntegrationTenantIsolationIdempotencyAndSession(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err = s.AddMember(ctx, a, orgA, viewer, domain.Viewer); err != nil {
+	if err = s.AddMember(testMFA(a), a, orgA, viewer, domain.Viewer); err != nil {
 		t.Fatal(err)
 	}
 	projectA, err := s.CreateProject(ctx, a, orgA, "A project")

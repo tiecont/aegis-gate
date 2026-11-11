@@ -9,7 +9,9 @@ import (
 	"crypto/x509"
 	"encoding/base64"
 	"encoding/json"
+	"fmt"
 	"io"
+	"net"
 	"net/http"
 	"net/http/cookiejar"
 	"net/http/httptest"
@@ -29,21 +31,21 @@ import (
 	"aegisgate.dev/aegisgate/internal/contracts"
 	jose "github.com/go-jose/go-jose/v4"
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type labDNS struct {
-	mu     sync.Mutex
-	proofs map[string]string
+	mu       sync.Mutex
+	proofs   map[string]string
+	resolver *net.Resolver
 }
 
-func (d *labDNS) LookupNetIP(context.Context, string, string) ([]netip.Addr, error) {
-	return []netip.Addr{netip.MustParseAddr("93.184.216.34")}, nil
+func (d *labDNS) LookupNetIP(ctx context.Context, network, name string) ([]netip.Addr, error) {
+	return d.resolver.LookupNetIP(ctx, network, name)
 }
-func (d *labDNS) LookupTXT(_ context.Context, name string) ([]string, error) {
-	d.mu.Lock()
-	defer d.mu.Unlock()
-	return []string{d.proofs[name]}, nil
+func (d *labDNS) LookupTXT(ctx context.Context, name string) ([]string, error) {
+	return d.resolver.LookupTXT(ctx, name)
 }
 
 type adminLab struct {
@@ -51,6 +53,12 @@ type adminLab struct {
 	store       *persistence.Store
 	pool        *pgxpool.Pool
 	dns         *labDNS
+	signing     atomic.Pointer[ecdsa.PrivateKey]
+	kid         atomic.Int32
+	jwksCalls   atomic.Int32
+	jwksOutage  atomic.Bool
+	tokenOutage atomic.Bool
+	claimsMode  atomic.Value
 	subject     atomic.Value
 	tokenCalls  atomic.Int32
 }
@@ -89,22 +97,48 @@ func newAdminLab(t *testing.T) *adminLab {
 	if err = store.Migrate(context.Background()); err != nil {
 		t.Fatal(err)
 	}
+	runtimeRole := "http_run_" + strings.ReplaceAll(id, "-", "")
+	maintenanceRole := "http_maint_" + strings.ReplaceAll(id, "-", "")
+	password := rand.Text()
+	for _, role := range []string{runtimeRole, maintenanceRole} {
+		if _, err = admin.Exec(context.Background(), "CREATE ROLE "+pgx.Identifier{role}.Sanitize()+" LOGIN NOINHERIT NOSUPERUSER NOCREATEDB NOCREATEROLE NOBYPASSRLS NOREPLICATION PASSWORD '"+password+"'"); err != nil {
+			t.Fatal("HTTP fixture role creation failed")
+		}
+	}
+	if err = store.GrantRoles(context.Background(), runtimeRole, maintenanceRole); err != nil {
+		t.Fatal("HTTP runtime grants", err)
+	}
+	store.Close()
 	pool, err := pgxpool.New(context.Background(), dsn.String())
 	if err != nil {
 		t.Fatal("fixture inspection pool failed")
 	}
+	dsn.User = url.UserPassword(runtimeRole, password)
+	store, err = persistence.Open(context.Background(), dsn.String())
+	if err != nil {
+		t.Fatal("HTTP runtime connection failed")
+	}
+	if err = store.RequireRuntimeRole(context.Background()); err != nil {
+		t.Fatal(err)
+	}
 	lab := &adminLab{store: store, pool: pool, dns: &labDNS{proofs: map[string]string{}}}
+	lab.dns.start(t)
 	lab.subject.Store("owner-a")
 	t.Cleanup(func() {
 		pool.Close()
 		store.Close()
 		_, _ = admin.Exec(context.Background(), "DROP SCHEMA "+schema+" CASCADE")
+		for _, role := range []string{runtimeRole, maintenanceRole} {
+			_, _ = admin.Exec(context.Background(), "DROP ROLE "+pgx.Identifier{role}.Sanitize())
+		}
 		admin.Close()
 	})
 	key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
 	if err != nil {
 		t.Fatal(err)
 	}
+	lab.signing.Store(key)
+	lab.claimsMode.Store("")
 	type grant struct{ nonce, challenge, redirect, subject string }
 	var mu sync.Mutex
 	codes := map[string]grant{}
@@ -114,7 +148,13 @@ func newAdminLab(t *testing.T) *adminLab {
 		case "/.well-known/openid-configuration":
 			_ = json.NewEncoder(w).Encode(map[string]any{"issuer": lab.idp.URL, "jwks_uri": lab.idp.URL + "/jwks", "authorization_endpoint": lab.idp.URL + "/authorize", "token_endpoint": lab.idp.URL + "/token", "id_token_signing_alg_values_supported": []string{"ES256"}})
 		case "/jwks":
-			_ = json.NewEncoder(w).Encode(jose.JSONWebKeySet{Keys: []jose.JSONWebKey{{Key: &key.PublicKey, KeyID: "fixture", Algorithm: "ES256", Use: "sig"}}})
+			lab.jwksCalls.Add(1)
+			if lab.jwksOutage.Load() {
+				w.WriteHeader(503)
+				return
+			}
+			signing := lab.signing.Load()
+			_ = json.NewEncoder(w).Encode(jose.JSONWebKeySet{Keys: []jose.JSONWebKey{{Key: &signing.PublicKey, KeyID: fmt.Sprintf("fixture-%d", lab.kid.Load()), Algorithm: "ES256", Use: "sig"}}})
 		case "/authorize":
 			query := r.URL.Query()
 			if query.Get("client_id") != "management-client" || query.Get("code_challenge_method") != "S256" || len(query.Get("code_challenge")) != 43 || len(query.Get("nonce")) != 43 {
@@ -141,6 +181,10 @@ func newAdminLab(t *testing.T) *adminLab {
 			http.Redirect(w, r, location.String(), 302)
 		case "/token":
 			lab.tokenCalls.Add(1)
+			if lab.tokenOutage.Load() {
+				w.WriteHeader(503)
+				return
+			}
 			r.Body = http.MaxBytesReader(w, r.Body, 16384)
 			if r.ParseForm() != nil {
 				w.WriteHeader(400)
@@ -155,9 +199,28 @@ func newAdminLab(t *testing.T) *adminLab {
 				w.WriteHeader(400)
 				return
 			}
-			token := jwt.NewWithClaims(jwt.SigningMethodES256, jwt.MapClaims{"iss": lab.idp.URL, "sub": g.subject, "aud": "management-client", "iat": time.Now().Unix(), "exp": time.Now().Add(10 * time.Minute).Unix(), "nonce": g.nonce})
-			token.Header["kid"] = "fixture"
-			raw, err := token.SignedString(key)
+			claims := jwt.MapClaims{"iss": lab.idp.URL, "sub": g.subject, "aud": "management-client", "iat": time.Now().Unix(), "exp": time.Now().Add(10 * time.Minute).Unix(), "nonce": g.nonce, "amr": []string{"pwd", "mfa"}, "auth_time": time.Now().Unix()}
+			switch lab.claimsMode.Load().(string) {
+			case "nonce":
+				claims["nonce"] = "wrong"
+			case "audience":
+				claims["aud"] = "customer-traffic"
+			case "expired":
+				claims["exp"] = time.Now().Add(-time.Minute).Unix()
+			case "no-mfa":
+				delete(claims, "amr")
+			case "stale-mfa":
+				claims["auth_time"] = time.Now().Add(-6 * time.Minute).Unix()
+			case "future-mfa":
+				claims["auth_time"] = time.Now().Add(time.Hour).Unix()
+			}
+			token := jwt.NewWithClaims(jwt.SigningMethodES256, claims)
+			token.Header["kid"] = fmt.Sprintf("fixture-%d", lab.kid.Load())
+			signer := lab.signing.Load()
+			if lab.claimsMode.Load().(string) == "signature" {
+				signer, _ = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+			}
+			raw, err := token.SignedString(signer)
 			if err != nil {
 				w.WriteHeader(503)
 				return
@@ -192,6 +255,9 @@ func newAdminLab(t *testing.T) *adminLab {
 }
 
 func (l *adminLab) client(t *testing.T, subject string) *http.Client {
+	return l.clientStatus(t, subject, 200)
+}
+func (l *adminLab) clientStatus(t *testing.T, subject string, want int) *http.Client {
 	t.Helper()
 	jar, err := cookiejar.New(nil)
 	if err != nil {
@@ -227,8 +293,8 @@ func (l *adminLab) client(t *testing.T, subject string) *http.Client {
 		t.Fatal(err)
 	}
 	resp.Body.Close()
-	if resp.StatusCode != 200 {
-		t.Fatal("callback failed", resp.StatusCode)
+	if resp.StatusCode != want {
+		t.Fatal("callback status", resp.StatusCode, "want", want)
 	}
 	calls := l.tokenCalls.Load()
 	resp, err = client.Get(callback)

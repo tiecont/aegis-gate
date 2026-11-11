@@ -35,7 +35,7 @@ func TestIntegrationRouteReferencesApprovalAndImmutablePreview(t *testing.T) {
 		p    Principal
 		role domain.Role
 	}{{viewer, domain.Viewer}, {developer, domain.Developer}, {security, domain.SecurityAdmin}} {
-		if err := s.AddMember(ctx, a, orgA, member.p, member.role); err != nil {
+		if err := s.AddMember(testMFA(a), a, orgA, member.p, member.role); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -47,7 +47,7 @@ func TestIntegrationRouteReferencesApprovalAndImmutablePreview(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	policy, err := s.CreateDraft(ctx, a, projectA, "policy", "policy-key-a", json.RawMessage(`{"auth_required":true,"jwt_issuer":"https://identity.example.com","jwt_audience":"traffic"}`))
+	policy, err := s.CreateDraft(testMFA(a), a, projectA, "policy", "policy-key-a", json.RawMessage(`{"auth_required":true,"jwt_issuer":"https://identity.example.com","jwt_audience":"traffic"}`))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -68,7 +68,7 @@ func TestIntegrationRouteReferencesApprovalAndImmutablePreview(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if _, err = s.ApproveRoute(ctx, a, projectA, route.ID, 1); !errors.Is(err, domain.ErrConflict) {
+	if _, err = s.ApproveRoute(testMFA(a), a, projectA, route.ID, 1); !errors.Is(err, domain.ErrConflict) {
 		t.Fatal("pending domain approved")
 	}
 	if _, err = s.VerifyDomainClaim(ctx, a, projectA, claim.ResourceID, txtResolverFunc(func(context.Context, string) ([]string, error) { return []string{claim.Proof}, nil })); err != nil {
@@ -79,11 +79,11 @@ func TestIntegrationRouteReferencesApprovalAndImmutablePreview(t *testing.T) {
 			t.Fatal("unauthorized approval")
 		}
 	}
-	approved, err := s.ApproveRoute(ctx, security, projectA, route.ID, 1)
+	approved, err := s.ApproveRoute(testMFA(security), security, projectA, route.ID, 1)
 	if err != nil || approved.PolicyGeneration != 1 || approved.OriginGeneration != 1 {
 		t.Fatal("valid route approval failed", err)
 	}
-	if _, err = s.ApproveRoute(ctx, a, projectA, route.ID, 2); !errors.Is(err, domain.ErrConflict) {
+	if _, err = s.ApproveRoute(testMFA(a), a, projectA, route.ID, 2); !errors.Is(err, domain.ErrConflict) {
 		t.Fatal("stale revision approval")
 	}
 	spec.Path = "/v2"
@@ -131,7 +131,7 @@ func TestIntegrationRouteReferencesApprovalAndImmutablePreview(t *testing.T) {
 	var wg sync.WaitGroup
 	errs := make(chan error, 2)
 	for _, id := range []string{r1.ID, r2.ID} {
-		wg.Go(func() { _, err := s.ApproveRoute(ctx, a, projectA, id, 1); errs <- err })
+		wg.Go(func() { _, err := s.ApproveRoute(testMFA(a), a, projectA, id, 1); errs <- err })
 	}
 	wg.Wait()
 	close(errs)
@@ -147,5 +147,33 @@ func TestIntegrationRouteReferencesApprovalAndImmutablePreview(t *testing.T) {
 	}
 	if allowed != 1 || conflicted != 1 {
 		t.Fatal("concurrent conflicting routes both approved")
+	}
+	var winner string
+	if err = s.pool.QueryRow(ctx, "SELECT route_id FROM active_route_approvals WHERE project_id=$1 AND route_id=ANY($2::uuid[]) AND NOT retired", projectA, []string{r1.ID, r2.ID}).Scan(&winner); err != nil {
+		t.Fatal(err)
+	}
+	loser := r1.ID
+	if loser == winner {
+		loser = r2.ID
+	}
+	if err = s.RetireRoute(testMFA(a), a, projectA, winner, 1); err != nil {
+		t.Fatal("retire collision", err)
+	}
+	if _, err = s.ApproveRoute(testMFA(a), a, projectA, loser, 1); err != nil {
+		t.Fatal("retirement did not release collision", err)
+	}
+	moved := first
+	moved.Path = "/moved"
+	if _, err = s.ReviseRouteDraft(ctx, a, projectA, loser, 1, moved); err != nil {
+		t.Fatal(err)
+	}
+	if _, err = s.ApproveRoute(testMFA(a), a, projectA, loser, 2); err != nil {
+		t.Fatal("replace active approval", err)
+	}
+	if _, err = s.ApproveRoute(testMFA(a), a, projectA, winner, 1); err != nil {
+		t.Fatal("historical approval still reserves collision", err)
+	}
+	if _, err = s.pool.Exec(ctx, "UPDATE route_retirements SET subject='forged'"); err == nil {
+		t.Fatal("mutable retirement history")
 	}
 }

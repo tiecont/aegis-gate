@@ -39,7 +39,7 @@ func TestIntegrationDomainClaimLifecycleAndIsolation(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := s.AddMember(ctx, a, orgA, viewer, domain.Viewer); err != nil {
+	if err := s.AddMember(testMFA(a), a, orgA, viewer, domain.Viewer); err != nil {
 		t.Fatal(err)
 	}
 	claim, err := s.CreateDomainClaim(ctx, a, projectA, "API.Example.COM.", "domain-key-a")

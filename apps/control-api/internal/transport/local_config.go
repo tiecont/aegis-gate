@@ -100,6 +100,10 @@ func LocalAdminServer(ctx context.Context, addr, path string) (*http.Server, *pe
 	if err != nil {
 		return nil, nil, nil, errors.New("management database unavailable")
 	}
+	if err = store.RequireRuntimeRole(ctx); err != nil {
+		store.Close()
+		return nil, nil, nil, err
+	}
 	handler, err := NewAdminHandler(AdminConfig{Service: &application.Service{Store: store, Resolver: resolver}, Identity: verifier, Origin: config.Origin, DNS: resolver})
 	if err != nil {
 		store.Close()
@@ -113,4 +117,26 @@ func LocalAdminServer(ctx context.Context, addr, path string) (*http.Server, *pe
 	server.Handler = handler
 	server.TLSConfig = &tls.Config{MinVersion: tls.VersionTLS12, Certificates: []tls.Certificate{pair}, NextProtos: []string{"h2", "http/1.1"}}
 	return server, store, resolver, nil
+}
+
+// MigrateLocalConfig is an offline operation on the schema-owner connection.
+// Serving always uses a separately configured, checked runtime connection.
+func MigrateLocalConfig(ctx context.Context, path, runtime, maintenance string) error {
+	raw, err := privateFile(path)
+	if err != nil {
+		return err
+	}
+	var config LocalAdminConfig
+	if application.Decode(raw, &config) != nil {
+		return errors.New("invalid migration configuration")
+	}
+	s, err := persistence.Open(ctx, config.DatabaseDSN)
+	if err != nil {
+		return errors.New("migration database unavailable")
+	}
+	defer s.Close()
+	if err = s.Migrate(ctx); err != nil {
+		return errors.New("migration failed")
+	}
+	return s.GrantRoles(ctx, runtime, maintenance)
 }

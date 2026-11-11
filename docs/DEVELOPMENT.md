@@ -4,15 +4,20 @@ This repository starts from the module 00 foundation. Module02 now includes a pa
 
 ## Local management checkpoint
 
+The sprint02 candidate lifecycle and role provisioning are documented in
+[MANAGEMENT_ACCEPTANCE.md](MANAGEMENT_ACCEPTANCE.md). Root owns gate acceptance.
 Run its owned-fixture integration suite with `make integration`, which now sets
 `AEGIS_TENANCY_INTEGRATION=1` explicitly. The tests provision disposable database
 schemas and a verified HTTPS IdP, exercise actual authorization-code/PKCE and
-HTTP isolation, then tear down their own resources. Injected DNS responses in
-these tests do not prove external DNS transport or domain ownership.
+HTTP isolation, then tear down their own resources. The sprint02 HTTP lab uses
+actual owned UDP DNS transport; it does not contact public DNS or prove
+production ownership operations.
 
 The control-api executable accepts `--management-config .local/management.json`
-with `--listen 127.0.0.1:8443`. The optional `--migrate` applies embedded local
-migrations. The configuration must be an owner-only regular file, no symlink,
+with `--listen 127.0.0.1:8443`. Offline `--migrate --runtime-role NAME
+--maintenance-role NAME` applies embedded migrations/grants with a separate
+schema-owner configuration, then exits. Serving requires a checked runtime login.
+The configuration must be an owner-only regular file, no symlink,
 at most16KiB, with these operator-owned fields:
 
 | Field | Required value |

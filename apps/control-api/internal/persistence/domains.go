@@ -23,7 +23,8 @@ type DomainClaim struct {
 	ExpiresAt  time.Time `json:"expires_at"`
 	TXTName    string    `json:"txt_name"`
 	// Proof is returned once on creation. It is never stored in resource JSON.
-	Proof string `json:"proof,omitempty"`
+	Proof      string `json:"proof,omitempty"`
+	Generation int64  `json:"generation"`
 }
 
 func randomToken() (string, error) {
@@ -37,9 +38,9 @@ func randomToken() (string, error) {
 func readClaim(ctx context.Context, tx pgx.Tx, project, id string) (DomainClaim, []byte, error) {
 	var claim DomainClaim
 	var hash []byte
-	err := tx.QueryRow(ctx, `SELECT resource_id,project_id,hostname,state,expires_at,challenge_hash
+	err := tx.QueryRow(ctx, `SELECT resource_id,project_id,hostname,state,expires_at,challenge_hash,challenge_generation
 		FROM domain_claims WHERE project_id=$1 AND resource_id=$2`, project, id).
-		Scan(&claim.ResourceID, &claim.ProjectID, &claim.Hostname, &claim.State, &claim.ExpiresAt, &hash)
+		Scan(&claim.ResourceID, &claim.ProjectID, &claim.Hostname, &claim.State, &claim.ExpiresAt, &hash, &claim.Generation)
 	claim.TXTName = "_aegisgate-challenge." + claim.Hostname
 	if err == nil && !claim.ExpiresAt.After(time.Now()) {
 		claim.State = "expired"
@@ -137,7 +138,7 @@ func (s *Store) CreateDomainClaim(ctx context.Context, p Principal, project, hos
 	if err = tx.Commit(ctx); err != nil {
 		return DomainClaim{}, opaque(err)
 	}
-	return DomainClaim{ResourceID: id, ProjectID: project, Hostname: host, State: "pending", ExpiresAt: expires, TXTName: "_aegisgate-challenge." + host, Proof: proof}, nil
+	return DomainClaim{ResourceID: id, ProjectID: project, Hostname: host, State: "pending", ExpiresAt: expires, TXTName: "_aegisgate-challenge." + host, Proof: proof, Generation: 1}, nil
 }
 
 // TXTResolver is injected by the operator-owned DNS worker, never by a tenant.
@@ -146,6 +147,10 @@ type TXTResolver interface {
 }
 
 func (s *Store) VerifyDomainClaim(ctx context.Context, p Principal, project, id string, resolver TXTResolver) (DomainClaim, error) {
+	return s.verifyDomain(ctx, p, project, id, resolver, "", 0, 0)
+}
+
+func (s *Store) verifyDomain(ctx context.Context, p Principal, project, id string, resolver TXTResolver, jobID string, attempt int, generation int64) (DomainClaim, error) {
 	if resolver == nil {
 		return DomainClaim{}, domain.ErrInvalid
 	}
@@ -161,7 +166,7 @@ func (s *Store) VerifyDomainClaim(ctx context.Context, p Principal, project, id 
 	if err != nil {
 		return DomainClaim{}, err
 	}
-	if claim.State != "pending" {
+	if claim.State != "pending" || (generation != 0 && claim.Generation != generation) {
 		return DomainClaim{}, domain.ErrConflict
 	}
 	// Release all database locks before consulting DNS, then recheck membership,
@@ -191,6 +196,16 @@ func (s *Store) VerifyDomainClaim(ctx context.Context, p Principal, project, id 
 	if err != nil {
 		return DomainClaim{}, err
 	}
+	if jobID != "" {
+		var valid bool
+		if err = tx.QueryRow(ctx, `SELECT attempts=$2 AND challenge_generation=$3 AND state='running' AND lease_until>now() FROM domain_verification_jobs WHERE id=$1 FOR SHARE`, jobID, attempt, generation).Scan(&valid); err != nil || !valid {
+			return DomainClaim{}, domain.ErrConflict
+		}
+	}
+	var unchanged bool
+	if err = tx.QueryRow(ctx, `SELECT state='pending' AND expires_at>now() AND challenge_hash=$3 AND challenge_generation=$4 FROM domain_claims WHERE project_id=$1 AND resource_id=$2 FOR UPDATE`, project, id, hash, claim.Generation).Scan(&unchanged); err != nil || !unchanged {
+		return DomainClaim{}, domain.ErrConflict
+	}
 	outcome := "denied"
 	if matched {
 		outcome = "allowed"
@@ -213,4 +228,60 @@ func (s *Store) VerifyDomainClaim(ctx context.Context, p Principal, project, id 
 		return DomainClaim{}, domain.ErrConflict
 	}
 	return claim, nil
+}
+
+// ReverifyDomain withdraws active approvals and rotates a one-use proof. It
+// never extends ownership based on the old TXT value or an outstanding lease.
+func (s *Store) ReverifyDomain(ctx context.Context, p Principal, project, id string, expected int64) (DomainClaim, error) {
+	tx, err := s.pool.Begin(ctx)
+	if err != nil {
+		return DomainClaim{}, opaque(err)
+	}
+	defer tx.Rollback(ctx)
+	org, err := scoped(ctx, tx, p, project, "domains")
+	if err != nil {
+		return DomainClaim{}, err
+	}
+	if _, err = tx.Exec(ctx, "SELECT pg_advisory_xact_lock(hashtextextended($1,12))", project); err != nil {
+		return DomainClaim{}, opaque(err)
+	}
+	if _, err = tx.Exec(ctx, "UPDATE domain_verification_jobs SET state='failed',lease_until=NULL WHERE project_id=$1 AND resource_id=$2 AND state IN ('pending','running')", project, id); err != nil {
+		return DomainClaim{}, opaque(err)
+	}
+	claim, _, err := readClaim(ctx, tx, project, id)
+	if err != nil {
+		return claim, err
+	}
+	if claim.Generation != expected {
+		return claim, domain.ErrConflict
+	}
+	if _, err = tx.Exec(ctx, "SELECT pg_advisory_xact_lock(hashtextextended($1,1))", claim.Hostname); err != nil {
+		return claim, opaque(err)
+	}
+	secret, err := randomToken()
+	if err != nil {
+		return claim, err
+	}
+	proof := "aegisgate-verification=" + secret
+	err = tx.QueryRow(ctx, `UPDATE domain_claims SET challenge_hash=$4,challenge_generation=challenge_generation+1,state='pending',verified_at=NULL,expires_at=now()+interval '15 minutes' WHERE project_id=$1 AND resource_id=$2 AND challenge_generation=$3 RETURNING expires_at,challenge_generation`, project, id, expected, TokenHash(proof)).Scan(&claim.ExpiresAt, &claim.Generation)
+	if err != nil {
+		return claim, opaque(err)
+	}
+	if _, err = tx.Exec(ctx, `UPDATE active_route_approvals a SET retired=true FROM route_approvals d WHERE d.decision_id=a.decision_id AND a.project_id=$1 AND d.domain_id=$2`, project, id); err != nil {
+		return claim, opaque(err)
+	}
+	if err = originAudit(ctx, tx, p, org, project, id, "domain_reverify"); err != nil {
+		return claim, err
+	}
+	if err = tx.Commit(ctx); err != nil {
+		return claim, opaque(err)
+	}
+	claim.State = "pending"
+	claim.Proof = proof
+	return claim, nil
+}
+
+func (s *Store) ExpireDomainClaims(ctx context.Context) error {
+	_, err := s.pool.Exec(ctx, `UPDATE domain_claims SET state='expired' WHERE (project_id,resource_id) IN (SELECT project_id,resource_id FROM domain_claims WHERE state IN ('pending','verified','active') AND expires_at<=now() ORDER BY expires_at LIMIT 100 FOR UPDATE SKIP LOCKED)`)
+	return opaque(err)
 }

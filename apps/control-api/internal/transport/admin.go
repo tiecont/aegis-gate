@@ -60,6 +60,7 @@ func NewAdminHandler(config AdminConfig) (http.Handler, error) {
 	h.protected("POST /v1/organizations/{org}/members", h.members)
 	h.protected("POST /v1/organizations/{org}/members/revoke", h.members)
 	h.protected("GET /v1/projects/{project}/audit", h.audit)
+	h.registerAcceptance()
 	h.protected("POST /v1/projects/{project}/domains/{id}/verifications", func(w http.ResponseWriter, r *http.Request, p persistence.Principal) {
 		job, err := h.config.Service.Store.QueueDomainVerification(r.Context(), p, r.PathValue("project"), r.PathValue("id"))
 		h.result(w, r, job, err)
@@ -75,6 +76,15 @@ func NewAdminHandler(config AdminConfig) (http.Handler, error) {
 		h.protected("GET "+base+"/{id}", func(w http.ResponseWriter, r *http.Request, p persistence.Principal) { h.resource(w, r, p, kind) })
 		if kind != "domain" {
 			h.protected("PUT "+base+"/{id}", func(w http.ResponseWriter, r *http.Request, p persistence.Principal) { h.resource(w, r, p, kind) })
+			h.protected("GET "+base+"/{id}/preview", func(w http.ResponseWriter, r *http.Request, p persistence.Principal) {
+				from, to, err := previewRange(r)
+				if err != nil {
+					h.fail(w, r, err)
+					return
+				}
+				v, err := h.config.Service.Store.Preview(r.Context(), p, r.PathValue("project"), kind, r.PathValue("id"), from, to)
+				h.result(w, r, v, err)
+			})
 		}
 		h.protected("GET "+base+"/{id}/revisions/{generation}", func(w http.ResponseWriter, r *http.Request, p persistence.Principal) {
 			generation, err := strconv.ParseInt(r.PathValue("generation"), 10, 64)
@@ -148,19 +158,20 @@ func (h *adminHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func (h *adminHandler) protected(pattern string, next func(http.ResponseWriter, *http.Request, persistence.Principal)) {
 	h.mux.HandleFunc(pattern, func(w http.ResponseWriter, r *http.Request) {
 		token := uniqueCookie(r, sessionCookie)
-		p, err := h.config.Service.Store.Session(r.Context(), token)
+		ctx, p, err := h.config.Service.Store.SessionContext(r.Context(), token)
 		if err != nil {
 			h.error(w, "authentication_required", 401)
 			return
 		}
+		r = r.WithContext(ctx)
 		if !h.allow(p.Issuer+"\x00"+p.Subject, 120) {
 			w.Header().Set("Retry-After", "60")
 			h.error(w, "rate_limited", 429)
 			return
 		}
 		if r.Method != "GET" && r.Method != "HEAD" {
-			if r.Header.Get("Origin") != h.config.Origin || len(r.Header.Values("X-CSRF-Token")) != 1 || h.config.Service.Store.CheckCSRF(r.Context(), token, r.Header.Get("X-CSRF-Token")) != nil {
-				_ = h.config.Service.Store.AuditDenied(r.Context(), p, r.PathValue("project"))
+			if len(r.Header.Values("Origin")) != 1 || r.Header.Get("Origin") != h.config.Origin || len(r.Header.Values("X-CSRF-Token")) != 1 || h.config.Service.Store.CheckCSRF(r.Context(), token, r.Header.Get("X-CSRF-Token")) != nil {
+				_ = h.config.Service.Store.AuditRequestDenied(r.Context(), p, r.PathValue("org"), r.PathValue("project"))
 				h.fail(w, r, domain.ErrDenied)
 				return
 			}
@@ -275,8 +286,8 @@ func (h *adminHandler) login(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, location, 302)
 }
 func (h *adminHandler) callback(w http.ResponseWriter, r *http.Request) {
-	query := r.URL.Query()
-	if len(query["state"]) != 1 || len(query["code"]) != 1 || query.Get("error") != "" {
+	query, parseErr := url.ParseQuery(r.URL.RawQuery)
+	if parseErr != nil || len(r.URL.RawQuery) > 8192 || len(query["state"]) != 1 || len(query["code"]) != 1 || len(query["error"]) != 0 {
 		h.error(w, "login_unavailable", 401)
 		return
 	}
@@ -291,7 +302,7 @@ func (h *adminHandler) callback(w http.ResponseWriter, r *http.Request) {
 		h.error(w, "login_unavailable", 401)
 		return
 	}
-	token, csrf, err := h.config.Service.Store.CreateWebSession(r.Context(), persistence.Principal{Issuer: login.Issuer, Subject: login.Subject}, login.ExpiresAt)
+	token, csrf, err := h.config.Service.Store.CreateWebSession(persistence.WithVerifiedLogin(r.Context(), login), persistence.Principal{Issuer: login.Issuer, Subject: login.Subject}, login.ExpiresAt)
 	if err != nil {
 		h.error(w, "login_unavailable", 503)
 		return

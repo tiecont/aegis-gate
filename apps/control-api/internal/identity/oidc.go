@@ -12,6 +12,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"sync"
 	"time"
 
 	"github.com/coreos/go-oidc/v3/oidc"
@@ -23,6 +24,7 @@ var ErrLogin = errors.New("login unavailable")
 type Login struct {
 	Issuer, Subject string
 	ExpiresAt       time.Time
+	MFAAt           time.Time
 }
 type Verifier struct {
 	verifier       *oidc.IDTokenVerifier
@@ -32,16 +34,42 @@ type Verifier struct {
 }
 
 type boundedTransport struct {
-	base   http.RoundTripper
-	origin string
+	base     http.RoundTripper
+	origin   string
+	mu       sync.Mutex
+	next     time.Time
+	failures int
+	keyURL   string
+	keyNext  time.Time
 }
 
-func (t boundedTransport) RoundTrip(r *http.Request) (*http.Response, error) {
+func (t *boundedTransport) RoundTrip(r *http.Request) (*http.Response, error) {
 	if r.URL.Scheme != "https" || r.URL.User != nil || r.URL.Host != t.origin || r.URL.Fragment != "" {
 		return nil, ErrLogin
 	}
+	// All network fetches share bounded failure backoff; cached signing keys
+	// remain usable inside go-oidc without a fetch during an IdP outage.
+	t.mu.Lock()
+	if time.Now().Before(t.next) {
+		t.mu.Unlock()
+		return nil, ErrLogin
+	}
+	if r.URL.String() == t.keyURL {
+		if time.Now().Before(t.keyNext) {
+			t.mu.Unlock()
+			return nil, ErrLogin
+		}
+		t.keyNext = time.Now().Add(time.Second)
+	}
+	t.mu.Unlock()
 	response, err := t.base.RoundTrip(r)
 	if err != nil {
+		t.backoff()
+		return nil, ErrLogin
+	}
+	if response.StatusCode == 429 || response.StatusCode >= 500 {
+		response.Body.Close()
+		t.backoff()
 		return nil, ErrLogin
 	}
 	if response.ContentLength > 1<<20 {
@@ -54,7 +82,20 @@ func (t boundedTransport) RoundTrip(r *http.Request) (*http.Response, error) {
 		return nil, ErrLogin
 	}
 	response.Body = io.NopCloser(bytes.NewReader(body))
+	t.mu.Lock()
+	t.failures = 0
+	t.next = time.Time{}
+	t.mu.Unlock()
 	return response, nil
+}
+
+func (t *boundedTransport) backoff() {
+	t.mu.Lock()
+	defer t.mu.Unlock()
+	if t.failures < 5 {
+		t.failures++
+	}
+	t.next = time.Now().Add(time.Duration(1<<t.failures) * time.Second)
 }
 
 func New(ctx context.Context, issuer, client string) (*Verifier, error) {
@@ -79,12 +120,23 @@ func newWithRoots(ctx context.Context, issuer, client string, roots *x509.CertPo
 	transport.MaxResponseHeaderBytes = 32 << 10
 	transport.MaxConnsPerHost = 4
 	transport.MaxIdleConnsPerHost = 2
-	clientHTTP := &http.Client{Transport: boundedTransport{base: transport, origin: u.Host}, Timeout: 5 * time.Second, CheckRedirect: func(*http.Request, []*http.Request) error { return ErrLogin }}
+	clientHTTP := &http.Client{Transport: &boundedTransport{base: transport, origin: u.Host}, Timeout: 5 * time.Second, CheckRedirect: func(*http.Request, []*http.Request) error { return ErrLogin }}
 	ctx = oidc.ClientContext(ctx, clientHTTP)
 	provider, err := oidc.NewProvider(ctx, issuer)
 	if err != nil {
 		return nil, ErrLogin
 	}
+	var metadata struct {
+		JWKS string `json:"jwks_uri"`
+	}
+	if provider.Claims(&metadata) != nil {
+		return nil, ErrLogin
+	}
+	keys, err := url.Parse(metadata.JWKS)
+	if err != nil || keys.Scheme != "https" || keys.Host != u.Host || keys.User != nil || keys.Fragment != "" || keys.RawQuery != "" {
+		return nil, ErrLogin
+	}
+	clientHTTP.Transport.(*boundedTransport).keyURL = keys.String()
 	endpoint := provider.Endpoint()
 	for _, raw := range []string{endpoint.AuthURL, endpoint.TokenURL} {
 		if raw == "" {
@@ -103,7 +155,7 @@ func (v *Verifier) AuthorizationURL(redirect, state, nonce, verifier string) (st
 		return "", ErrLogin
 	}
 	cfg := oauth2.Config{ClientID: v.client, Endpoint: v.endpoint, RedirectURL: redirect, Scopes: []string{oidc.ScopeOpenID}}
-	return cfg.AuthCodeURL(state, oauth2.S256ChallengeOption(verifier), oauth2.SetAuthURLParam("nonce", nonce)), nil
+	return cfg.AuthCodeURL(state, oauth2.S256ChallengeOption(verifier), oauth2.SetAuthURLParam("nonce", nonce), oauth2.SetAuthURLParam("max_age", "0"), oauth2.SetAuthURLParam("prompt", "login")), nil
 }
 
 func (v *Verifier) Exchange(ctx context.Context, redirect, code, verifier, nonce string) (Login, error) {
@@ -136,10 +188,12 @@ func (v *Verifier) Verify(ctx context.Context, raw, expectedNonce string) (Login
 		return Login{}, ErrLogin
 	}
 	var claims struct {
-		Nonce           string `json:"nonce"`
-		IssuedAt        int64  `json:"iat"`
-		NotBefore       *int64 `json:"nbf"`
-		AuthorizedParty string `json:"azp"`
+		Nonce           string   `json:"nonce"`
+		IssuedAt        int64    `json:"iat"`
+		NotBefore       *int64   `json:"nbf"`
+		AuthorizedParty string   `json:"azp"`
+		AuthTime        int64    `json:"auth_time"`
+		AMR             []string `json:"amr"`
 	}
 	if token.Claims(&claims) != nil || subtle.ConstantTimeCompare([]byte(claims.Nonce), []byte(expectedNonce)) != 1 || token.Subject == "" || len(token.Subject) > 256 {
 		return Login{}, ErrLogin
@@ -158,5 +212,14 @@ func (v *Verifier) Verify(ctx context.Context, raw, expectedNonce string) (Login
 	if cap := now.Add(15 * time.Minute); expiry.After(cap) {
 		expiry = cap
 	}
-	return Login{Issuer: v.issuer, Subject: token.Subject, ExpiresAt: expiry}, nil
+	var mfaAt time.Time
+	if claims.AuthTime > 0 && !time.Unix(claims.AuthTime, 0).After(now.Add(30*time.Second)) && claims.AuthTime <= claims.IssuedAt+30 {
+		for _, method := range claims.AMR {
+			if method == "mfa" {
+				mfaAt = time.Unix(claims.AuthTime, 0)
+				break
+			}
+		}
+	}
+	return Login{Issuer: v.issuer, Subject: token.Subject, ExpiresAt: expiry, MFAAt: mfaAt}, nil
 }

@@ -4,7 +4,11 @@
 package contracts
 
 import (
+	"encoding/json"
+	"fmt"
 	"time"
+
+	"github.com/oapi-codegen/runtime"
 )
 
 // Defines values for AuditEventOutcome.
@@ -46,6 +50,27 @@ func (e DomainClaimState) Valid() bool {
 	case DomainClaimStatePending:
 		return true
 	case DomainClaimStateVerified:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for EndpointUpdateState.
+const (
+	EndpointUpdateStateActive   EndpointUpdateState = "active"
+	EndpointUpdateStateDisabled EndpointUpdateState = "disabled"
+	EndpointUpdateStateRetired  EndpointUpdateState = "retired"
+)
+
+// Valid indicates whether the value is a known member of the EndpointUpdateState enum.
+func (e EndpointUpdateState) Valid() bool {
+	switch e {
+	case EndpointUpdateStateActive:
+		return true
+	case EndpointUpdateStateDisabled:
+		return true
+	case EndpointUpdateStateRetired:
 		return true
 	default:
 		return false
@@ -136,6 +161,63 @@ func (e ManagementResourceKind) Valid() bool {
 	}
 }
 
+// Defines values for OriginEndpointPort.
+const (
+	N443 OriginEndpointPort = 443
+)
+
+// Valid indicates whether the value is a known member of the OriginEndpointPort enum.
+func (e OriginEndpointPort) Valid() bool {
+	switch e {
+	case N443:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for OriginEndpointState.
+const (
+	OriginEndpointStateActive   OriginEndpointState = "active"
+	OriginEndpointStateDisabled OriginEndpointState = "disabled"
+	OriginEndpointStateRetired  OriginEndpointState = "retired"
+)
+
+// Valid indicates whether the value is a known member of the OriginEndpointState enum.
+func (e OriginEndpointState) Valid() bool {
+	switch e {
+	case OriginEndpointStateActive:
+		return true
+	case OriginEndpointStateDisabled:
+		return true
+	case OriginEndpointStateRetired:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for OriginPoolState.
+const (
+	OriginPoolStateActive   OriginPoolState = "active"
+	OriginPoolStateDisabled OriginPoolState = "disabled"
+	OriginPoolStateRetired  OriginPoolState = "retired"
+)
+
+// Valid indicates whether the value is a known member of the OriginPoolState enum.
+func (e OriginPoolState) Valid() bool {
+	switch e {
+	case OriginPoolStateActive:
+		return true
+	case OriginPoolStateDisabled:
+		return true
+	case OriginPoolStateRetired:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for PolicySpecAuthRequired.
 const (
 	True PolicySpecAuthRequired = true
@@ -145,6 +227,27 @@ const (
 func (e PolicySpecAuthRequired) Valid() bool {
 	switch e {
 	case True:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PoolUpdateState.
+const (
+	PoolUpdateStateActive   PoolUpdateState = "active"
+	PoolUpdateStateDisabled PoolUpdateState = "disabled"
+	PoolUpdateStateRetired  PoolUpdateState = "retired"
+)
+
+// Valid indicates whether the value is a known member of the PoolUpdateState enum.
+func (e PoolUpdateState) Valid() bool {
+	switch e {
+	case PoolUpdateStateActive:
+		return true
+	case PoolUpdateStateDisabled:
+		return true
+	case PoolUpdateStateRetired:
 		return true
 	default:
 		return false
@@ -221,13 +324,14 @@ type AuditEventOutcome string
 
 // DomainClaim defines model for DomainClaim.
 type DomainClaim struct {
-	ExpiresAt time.Time        `json:"expires_at"`
-	Hostname  string           `json:"hostname"`
-	Id        string           `json:"id"`
-	ProjectId string           `json:"project_id"`
-	Proof     *string          `json:"proof,omitempty"`
-	State     DomainClaimState `json:"state"`
-	TxtName   string           `json:"txt_name"`
+	ExpiresAt  time.Time        `json:"expires_at"`
+	Generation *int             `json:"generation,omitempty"`
+	Hostname   string           `json:"hostname"`
+	Id         string           `json:"id"`
+	ProjectId  string           `json:"project_id"`
+	Proof      *string          `json:"proof,omitempty"`
+	State      DomainClaimState `json:"state"`
+	TxtName    string           `json:"txt_name"`
 }
 
 // DomainClaimState defines model for DomainClaim.State.
@@ -237,6 +341,15 @@ type DomainClaimState string
 type DomainInput struct {
 	Hostname string `json:"hostname"`
 }
+
+// EndpointUpdate defines model for EndpointUpdate.
+type EndpointUpdate struct {
+	State EndpointUpdateState `json:"state"`
+	Url   string              `json:"url"`
+}
+
+// EndpointUpdateState defines model for EndpointUpdate.State.
+type EndpointUpdateState string
 
 // ErrorDetail defines model for ErrorDetail.
 type ErrorDetail struct {
@@ -248,6 +361,13 @@ type ErrorDetail struct {
 // ErrorEnvelope defines model for ErrorEnvelope.
 type ErrorEnvelope struct {
 	Error ErrorDetail `json:"error"`
+}
+
+// FieldChange defines model for FieldChange.
+type FieldChange struct {
+	After  interface{} `json:"after"`
+	Before interface{} `json:"before"`
+	Field  string      `json:"field"`
 }
 
 // Health defines model for Health.
@@ -319,6 +439,38 @@ type ManagementStatus struct {
 	Status string `json:"status"`
 }
 
+// OriginEndpoint defines model for OriginEndpoint.
+type OriginEndpoint struct {
+	CreatedAt  time.Time           `json:"created_at"`
+	Generation int                 `json:"generation"`
+	Hostname   string              `json:"hostname"`
+	Id         string              `json:"id"`
+	PoolId     string              `json:"pool_id"`
+	Port       OriginEndpointPort  `json:"port"`
+	ProjectId  string              `json:"project_id"`
+	State      OriginEndpointState `json:"state"`
+	Url        string              `json:"url"`
+}
+
+// OriginEndpointPort defines model for OriginEndpoint.Port.
+type OriginEndpointPort int
+
+// OriginEndpointState defines model for OriginEndpoint.State.
+type OriginEndpointState string
+
+// OriginPool defines model for OriginPool.
+type OriginPool struct {
+	CreatedAt  time.Time       `json:"created_at"`
+	Generation int             `json:"generation"`
+	Id         string          `json:"id"`
+	Name       string          `json:"name"`
+	ProjectId  string          `json:"project_id"`
+	State      OriginPoolState `json:"state"`
+}
+
+// OriginPoolState defines model for OriginPool.State.
+type OriginPoolState string
+
 // OriginSpec defines model for OriginSpec.
 type OriginSpec struct {
 	Url string `json:"url"`
@@ -334,25 +486,71 @@ type PolicySpec struct {
 // PolicySpecAuthRequired defines model for PolicySpec.AuthRequired.
 type PolicySpecAuthRequired bool
 
+// PoolCreate defines model for PoolCreate.
+type PoolCreate struct {
+	Name string `json:"name"`
+}
+
+// PoolPreview defines model for PoolPreview.
+type PoolPreview struct {
+	Changes []FieldChange `json:"changes"`
+	From    PoolRevision  `json:"from"`
+	To      PoolRevision  `json:"to"`
+}
+
+// PoolRevision defines model for PoolRevision.
+type PoolRevision struct {
+	Endpoints []OriginEndpoint `json:"endpoints"`
+	Pool      OriginPool       `json:"pool"`
+}
+
+// PoolUpdate defines model for PoolUpdate.
+type PoolUpdate struct {
+	Name  string          `json:"name"`
+	State PoolUpdateState `json:"state"`
+}
+
+// PoolUpdateState defines model for PoolUpdate.State.
+type PoolUpdateState string
+
+// RevisionPreview defines model for RevisionPreview.
+type RevisionPreview struct {
+	Approvable bool               `json:"approvable"`
+	Changes    []FieldChange      `json:"changes"`
+	From       ManagementResource `json:"from"`
+	Reasons    []string           `json:"reasons"`
+	To         ManagementResource `json:"to"`
+}
+
 // RouteApproval defines model for RouteApproval.
 type RouteApproval struct {
-	OriginGeneration int    `json:"origin_generation"`
-	PolicyGeneration int    `json:"policy_generation"`
-	RouteGeneration  int    `json:"route_generation"`
-	RouteId          string `json:"route_id"`
+	DecisionId           *int   `json:"decision_id,omitempty"`
+	OriginGeneration     int    `json:"origin_generation"`
+	OriginPoolGeneration *int   `json:"origin_pool_generation,omitempty"`
+	PolicyGeneration     int    `json:"policy_generation"`
+	RouteGeneration      int    `json:"route_generation"`
+	RouteId              string `json:"route_id"`
 }
 
 // RouteSpec defines model for RouteSpec.
 type RouteSpec struct {
-	DomainId string             `json:"domain_id"`
-	Methods  []RouteSpecMethods `json:"methods"`
-	OriginId string             `json:"origin_id"`
-	Path     string             `json:"path"`
-	PolicyId string             `json:"policy_id"`
+	DomainId     string             `json:"domain_id"`
+	Methods      []RouteSpecMethods `json:"methods"`
+	OriginId     *string            `json:"origin_id,omitempty"`
+	OriginPoolId *string            `json:"origin_pool_id,omitempty"`
+	Path         string             `json:"path"`
+	PolicyId     string             `json:"policy_id"`
+	union        json.RawMessage
 }
 
 // RouteSpecMethods defines model for RouteSpec.Methods.
 type RouteSpecMethods string
+
+// RouteSpec0 defines model for RouteSpec.0.
+type RouteSpec0 = interface{}
+
+// RouteSpec1 defines model for RouteSpec.1.
+type RouteSpec1 = interface{}
 
 // VerificationJob defines model for VerificationJob.
 type VerificationJob struct {
@@ -391,6 +589,12 @@ type Management3Params struct {
 type Management4Params struct {
 	XCSRFToken string `json:"X-CSRF-Token"`
 	Origin     string `json:"Origin"`
+}
+
+// Acceptance13Params defines parameters for Acceptance13.
+type Acceptance13Params struct {
+	After *string `form:"after,omitempty" json:"after,omitempty"`
+	Limit *int    `form:"limit,omitempty" json:"limit,omitempty"`
 }
 
 // Management7Params defines parameters for Management7.
@@ -436,10 +640,71 @@ type Management11Params struct {
 	Origin         string `json:"Origin"`
 }
 
+// Acceptance14Params defines parameters for Acceptance14.
+type Acceptance14Params struct {
+	Origin     string `json:"Origin"`
+	XCSRFToken string `json:"X-CSRF-Token"`
+	IfMatch    string `json:"If-Match"`
+}
+
 // Management29Params defines parameters for Management29.
 type Management29Params struct {
 	XCSRFToken string `json:"X-CSRF-Token"`
 	Origin     string `json:"Origin"`
+}
+
+// Acceptance1Params defines parameters for Acceptance1.
+type Acceptance1Params struct {
+	After *string `form:"after,omitempty" json:"after,omitempty"`
+	Limit *int    `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// Acceptance2Params defines parameters for Acceptance2.
+type Acceptance2Params struct {
+	Origin         string `json:"Origin"`
+	XCSRFToken     string `json:"X-CSRF-Token"`
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// Acceptance4Params defines parameters for Acceptance4.
+type Acceptance4Params struct {
+	Origin     string `json:"Origin"`
+	XCSRFToken string `json:"X-CSRF-Token"`
+	IfMatch    string `json:"If-Match"`
+}
+
+// Acceptance5Params defines parameters for Acceptance5.
+type Acceptance5Params struct {
+	Origin     string `json:"Origin"`
+	XCSRFToken string `json:"X-CSRF-Token"`
+	IfMatch    string `json:"If-Match"`
+}
+
+// Acceptance8Params defines parameters for Acceptance8.
+type Acceptance8Params struct {
+	After *string `form:"after,omitempty" json:"after,omitempty"`
+	Limit *int    `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// Acceptance9Params defines parameters for Acceptance9.
+type Acceptance9Params struct {
+	Origin         string `json:"Origin"`
+	XCSRFToken     string `json:"X-CSRF-Token"`
+	IfMatch        string `json:"If-Match"`
+	IdempotencyKey string `json:"Idempotency-Key"`
+}
+
+// Acceptance11Params defines parameters for Acceptance11.
+type Acceptance11Params struct {
+	Origin     string `json:"Origin"`
+	XCSRFToken string `json:"X-CSRF-Token"`
+	IfMatch    string `json:"If-Match"`
+}
+
+// Acceptance7Params defines parameters for Acceptance7.
+type Acceptance7Params struct {
+	From int `form:"from" json:"from"`
+	To   int `form:"to" json:"to"`
 }
 
 // Management14Params defines parameters for Management14.
@@ -462,6 +727,12 @@ type Management17Params struct {
 	Origin     string `json:"Origin"`
 }
 
+// Acceptance17Params defines parameters for Acceptance17.
+type Acceptance17Params struct {
+	From int `form:"from" json:"from"`
+	To   int `form:"to" json:"to"`
+}
+
 // Management19Params defines parameters for Management19.
 type Management19Params struct {
 	After *string `form:"after,omitempty" json:"after,omitempty"`
@@ -480,6 +751,12 @@ type Management22Params struct {
 	IfMatch    string `json:"If-Match"`
 	XCSRFToken string `json:"X-CSRF-Token"`
 	Origin     string `json:"Origin"`
+}
+
+// Acceptance18Params defines parameters for Acceptance18.
+type Acceptance18Params struct {
+	From int `form:"from" json:"from"`
+	To   int `form:"to" json:"to"`
 }
 
 // Management24Params defines parameters for Management24.
@@ -509,6 +786,19 @@ type Management31Params struct {
 	Origin     string `json:"Origin"`
 }
 
+// Acceptance16Params defines parameters for Acceptance16.
+type Acceptance16Params struct {
+	From int `form:"from" json:"from"`
+	To   int `form:"to" json:"to"`
+}
+
+// Acceptance15Params defines parameters for Acceptance15.
+type Acceptance15Params struct {
+	Origin     string `json:"Origin"`
+	XCSRFToken string `json:"X-CSRF-Token"`
+	IfMatch    string `json:"If-Match"`
+}
+
 // Management4JSONRequestBody defines body for Management4 for application/json ContentType.
 type Management4JSONRequestBody = ManagementName
 
@@ -523,6 +813,18 @@ type Management6JSONRequestBody = ManagementName
 
 // Management11JSONRequestBody defines body for Management11 for application/json ContentType.
 type Management11JSONRequestBody = DomainInput
+
+// Acceptance2JSONRequestBody defines body for Acceptance2 for application/json ContentType.
+type Acceptance2JSONRequestBody = PoolCreate
+
+// Acceptance4JSONRequestBody defines body for Acceptance4 for application/json ContentType.
+type Acceptance4JSONRequestBody = PoolUpdate
+
+// Acceptance9JSONRequestBody defines body for Acceptance9 for application/json ContentType.
+type Acceptance9JSONRequestBody = OriginSpec
+
+// Acceptance11JSONRequestBody defines body for Acceptance11 for application/json ContentType.
+type Acceptance11JSONRequestBody = EndpointUpdate
 
 // Management15JSONRequestBody defines body for Management15 for application/json ContentType.
 type Management15JSONRequestBody = OriginSpec
@@ -541,3 +843,164 @@ type Management25JSONRequestBody = RouteSpec
 
 // Management27JSONRequestBody defines body for Management27 for application/json ContentType.
 type Management27JSONRequestBody = RouteSpec
+
+// AsRouteSpec0 returns the union data inside the RouteSpec as a RouteSpec0
+func (t RouteSpec) AsRouteSpec0() (RouteSpec0, error) {
+	var body RouteSpec0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRouteSpec0 overwrites any union data inside the RouteSpec as the provided RouteSpec0
+func (t *RouteSpec) FromRouteSpec0(v RouteSpec0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeRouteSpec0 performs a merge with any union data inside the RouteSpec, using the provided RouteSpec0
+func (t *RouteSpec) MergeRouteSpec0(v RouteSpec0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsRouteSpec1 returns the union data inside the RouteSpec as a RouteSpec1
+func (t RouteSpec) AsRouteSpec1() (RouteSpec1, error) {
+	var body RouteSpec1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRouteSpec1 overwrites any union data inside the RouteSpec as the provided RouteSpec1
+func (t *RouteSpec) FromRouteSpec1(v RouteSpec1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeRouteSpec1 performs a merge with any union data inside the RouteSpec, using the provided RouteSpec1
+func (t *RouteSpec) MergeRouteSpec1(v RouteSpec1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t RouteSpec) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	object := make(map[string]json.RawMessage)
+	if t.union != nil {
+		err = json.Unmarshal(b, &object)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	object["domain_id"], err = json.Marshal(t.DomainId)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'domain_id': %w", err)
+	}
+
+	if t.Methods != nil {
+		object["methods"], err = json.Marshal(t.Methods)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'methods': %w", err)
+		}
+	}
+
+	if t.OriginId != nil {
+		object["origin_id"], err = json.Marshal(t.OriginId)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'origin_id': %w", err)
+		}
+	}
+
+	if t.OriginPoolId != nil {
+		object["origin_pool_id"], err = json.Marshal(t.OriginPoolId)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'origin_pool_id': %w", err)
+		}
+	}
+
+	object["path"], err = json.Marshal(t.Path)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'path': %w", err)
+	}
+
+	object["policy_id"], err = json.Marshal(t.PolicyId)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'policy_id': %w", err)
+	}
+
+	b, err = json.Marshal(object)
+	return b, err
+}
+
+func (t *RouteSpec) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	if err != nil {
+		return err
+	}
+	object := make(map[string]json.RawMessage)
+	err = json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["domain_id"]; found {
+		err = json.Unmarshal(raw, &t.DomainId)
+		if err != nil {
+			return fmt.Errorf("error reading 'domain_id': %w", err)
+		}
+	}
+
+	if raw, found := object["methods"]; found {
+		err = json.Unmarshal(raw, &t.Methods)
+		if err != nil {
+			return fmt.Errorf("error reading 'methods': %w", err)
+		}
+	}
+
+	if raw, found := object["origin_id"]; found {
+		err = json.Unmarshal(raw, &t.OriginId)
+		if err != nil {
+			return fmt.Errorf("error reading 'origin_id': %w", err)
+		}
+	}
+
+	if raw, found := object["origin_pool_id"]; found {
+		err = json.Unmarshal(raw, &t.OriginPoolId)
+		if err != nil {
+			return fmt.Errorf("error reading 'origin_pool_id': %w", err)
+		}
+	}
+
+	if raw, found := object["path"]; found {
+		err = json.Unmarshal(raw, &t.Path)
+		if err != nil {
+			return fmt.Errorf("error reading 'path': %w", err)
+		}
+	}
+
+	if raw, found := object["policy_id"]; found {
+		err = json.Unmarshal(raw, &t.PolicyId)
+		if err != nil {
+			return fmt.Errorf("error reading 'policy_id': %w", err)
+		}
+	}
+
+	return err
+}

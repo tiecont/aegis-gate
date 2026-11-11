@@ -1,0 +1,134 @@
+?   	aegisgate.dev/aegisgate/apps/control-api/cmd/control-api	[no test files]
+?   	aegisgate.dev/aegisgate/apps/control-api/internal/application	[no test files]
+=== RUN   TestNegativePublicAddressSpecialPurpose
+--- PASS: TestNegativePublicAddressSpecialPurpose (0.00s)
+=== RUN   TestHostnameAndOrigin
+--- PASS: TestHostnameAndOrigin (0.00s)
+=== RUN   TestNegativeHostAndSSRF
+--- PASS: TestNegativeHostAndSSRF (0.00s)
+=== RUN   TestNegativeRolesAndPolicies
+--- PASS: TestNegativeRolesAndPolicies (0.00s)
+PASS
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/domain	1.065s
+=== RUN   TestNegativeOIDCCrossOriginJWKS
+--- PASS: TestNegativeOIDCCrossOriginJWKS (0.05s)
+=== RUN   TestNegativeOIDCUnknownLengthDiscoveryLimit
+--- PASS: TestNegativeOIDCUnknownLengthDiscoveryLimit (0.06s)
+=== RUN   TestNegativeOIDCConfiguration
+--- PASS: TestNegativeOIDCConfiguration (0.00s)
+=== RUN   TestIntegrationOIDCTLSAndClaims
+=== RUN   TestIntegrationOIDCTLSAndClaims/signature
+=== RUN   TestIntegrationOIDCTLSAndClaims/issuer
+=== RUN   TestIntegrationOIDCTLSAndClaims/audience
+=== RUN   TestIntegrationOIDCTLSAndClaims/expiry
+=== RUN   TestIntegrationOIDCTLSAndClaims/nonce
+=== RUN   TestIntegrationOIDCTLSAndClaims/subject
+=== RUN   TestIntegrationOIDCTLSAndClaims/old_issuance
+=== RUN   TestIntegrationOIDCTLSAndClaims/future_issuance
+=== RUN   TestIntegrationOIDCTLSAndClaims/not_before
+=== RUN   TestIntegrationOIDCTLSAndClaims/authorized_party
+=== RUN   TestIntegrationOIDCTLSAndClaims/multiple_audience
+--- PASS: TestIntegrationOIDCTLSAndClaims (0.04s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/signature (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/issuer (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/audience (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/expiry (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/nonce (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/subject (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/old_issuance (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/future_issuance (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/not_before (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/authorized_party (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/multiple_audience (0.00s)
+=== RUN   TestNegativeOIDCTLSAndFetching
+=== RUN   TestNegativeOIDCTLSAndFetching/untrusted_issuer_certificate
+=== RUN   TestNegativeOIDCTLSAndFetching/expired_certificate
+=== RUN   TestNegativeOIDCTLSAndFetching/wrong_hostname_certificate
+=== RUN   TestNegativeOIDCTLSAndFetching/redirect
+=== RUN   TestNegativeOIDCTLSAndFetching/oversize_discovery
+=== RUN   TestNegativeOIDCTLSAndFetching/plaintext_JWKS
+=== RUN   TestNegativeOIDCTLSAndFetching/unavailable_JWKS
+--- PASS: TestNegativeOIDCTLSAndFetching (0.34s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/untrusted_issuer_certificate (0.23s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/expired_certificate (0.01s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/wrong_hostname_certificate (0.01s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/redirect (0.01s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/oversize_discovery (0.04s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/plaintext_JWKS (0.01s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/unavailable_JWKS (0.02s)
+PASS
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/identity	1.593s
+=== RUN   TestIntegrationOriginPoolLifecycleAndRuntimePermissions
+--- PASS: TestIntegrationOriginPoolLifecycleAndRuntimePermissions (1.34s)
+=== RUN   TestIntegrationNonSuperuserMigrationOwner
+--- PASS: TestIntegrationNonSuperuserMigrationOwner (1.35s)
+=== RUN   TestIntegrationQuotaConcurrentKeysAndMissingDefaults
+--- PASS: TestIntegrationQuotaConcurrentKeysAndMissingDefaults (0.59s)
+=== RUN   TestIntegrationSensitiveDirectCallerAuditAndFreshness
+--- PASS: TestIntegrationSensitiveDirectCallerAuditAndFreshness (1.15s)
+=== RUN   TestIntegrationDNSLeaseFenceAndReverification
+--- PASS: TestIntegrationDNSLeaseFenceAndReverification (0.87s)
+=== RUN   TestIntegrationDomainClaimLifecycleAndIsolation
+--- PASS: TestIntegrationDomainClaimLifecycleAndIsolation (0.64s)
+=== RUN   TestIntegrationDomainConcurrentClaimsAndMembershipRevocation
+--- PASS: TestIntegrationDomainConcurrentClaimsAndMembershipRevocation (0.50s)
+=== RUN   TestIntegrationLoginReplayBrowserBindingAndWebSession
+--- PASS: TestIntegrationLoginReplayBrowserBindingAndWebSession (0.50s)
+=== RUN   TestIntegrationDomainJobLeaseRetryAndScope
+--- PASS: TestIntegrationDomainJobLeaseRetryAndScope (0.81s)
+=== RUN   TestIntegrationRouteReferencesApprovalAndImmutablePreview
+--- PASS: TestIntegrationRouteReferencesApprovalAndImmutablePreview (0.98s)
+=== RUN   TestIntegrationTenantIsolationIdempotencyAndSession
+--- PASS: TestIntegrationTenantIsolationIdempotencyAndSession (0.71s)
+=== RUN   TestNegativeDatabaseTLS
+--- PASS: TestNegativeDatabaseTLS (0.00s)
+PASS
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/persistence	10.454s
+=== RUN   TestIntegrationPoolHTTPRoutesPreviewAndRetirement
+--- PASS: TestIntegrationPoolHTTPRoutesPreviewAndRetirement (3.10s)
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/rotation-and-outage
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/jwks-outage
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/nonce
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/audience
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/expired
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/no-mfa
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/stale-mfa
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/future-mfa
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/callback-query
+--- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA (10.05s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/rotation-and-outage (1.78s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/jwks-outage (3.98s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/nonce (0.47s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/audience (0.50s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/expired (0.53s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/no-mfa (0.61s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/stale-mfa (0.88s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/future-mfa (0.69s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/callback-query (0.60s)
+=== RUN   TestIntegrationAdminNegativeSessionAuthorityAndMembership
+--- PASS: TestIntegrationAdminNegativeSessionAuthorityAndMembership (1.08s)
+=== RUN   TestIntegrationAdminHTTPIsolationAndOIDC
+=== RUN   TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_domains
+=== RUN   TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_origins
+=== RUN   TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_policies
+=== RUN   TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_routes
+--- PASS: TestIntegrationAdminHTTPIsolationAndOIDC (2.99s)
+    --- PASS: TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_domains (0.24s)
+    --- PASS: TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_origins (0.25s)
+    --- PASS: TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_policies (0.30s)
+    --- PASS: TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_routes (0.32s)
+=== RUN   TestNegativePrivateConfigurationFiles
+--- PASS: TestNegativePrivateConfigurationFiles (0.00s)
+=== RUN   TestNegativeAdminRateLimitsBounded
+--- PASS: TestNegativeAdminRateLimitsBounded (0.97s)
+=== RUN   TestHealth
+--- PASS: TestHealth (0.00s)
+=== RUN   TestNegativeSpoofedTenantAndSecrets
+--- PASS: TestNegativeSpoofedTenantAndSecrets (0.00s)
+=== RUN   TestNegativePublicListener
+--- PASS: TestNegativePublicListener (0.00s)
+=== RUN   TestIntegrationHTTP
+--- PASS: TestIntegrationHTTP (0.00s)
+PASS
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/transport	19.274s

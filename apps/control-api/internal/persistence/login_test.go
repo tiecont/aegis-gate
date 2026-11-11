@@ -12,7 +12,8 @@ import (
 )
 
 func TestIntegrationLoginReplayBrowserBindingAndWebSession(t *testing.T) {
-	s, _ := localStore(t)
+	s, dsn := localStore(t)
+	owner := testOwner(t, dsn)
 	ctx := context.Background()
 	attempt, err := s.BeginLogin(ctx)
 	if err != nil {
@@ -46,7 +47,7 @@ func TestIntegrationLoginReplayBrowserBindingAndWebSession(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if _, err = s.pool.Exec(ctx, "UPDATE login_attempts SET expires_at=now()-interval '1 second' WHERE state_hash=$1", TokenHash(expired.State)); err != nil {
+	if _, err = owner.pool.Exec(ctx, "UPDATE login_attempts SET expires_at=now()-interval '1 second' WHERE state_hash=$1", TokenHash(expired.State)); err != nil {
 		t.Fatal(err)
 	}
 	if _, err = s.ConsumeLogin(ctx, expired.State, expired.Browser); !errors.Is(err, domain.ErrDenied) {
