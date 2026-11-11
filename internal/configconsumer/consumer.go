@@ -383,7 +383,8 @@ func (c *Consumer) FetchApply(ctx context.Context, notice Notice, fetcher Fetche
 	if fetcher == nil {
 		return c.reject(notice, "fetch_unavailable")
 	}
-	// Both a deadline and a size bound apply even to faulty adapter implementations.
+	// Size is bounded here. The adapter must honor this deadline; HTTPSFetcher
+	// additionally enforces transport-level and total request timeouts.
 	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
 	body, err := fetcher.Fetch(ctx, notice.Location)
