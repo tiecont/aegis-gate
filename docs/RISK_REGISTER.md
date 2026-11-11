@@ -96,8 +96,10 @@ R01/R04 remain blocking: the common75-case executable comparison currently
 reports Pingora63/75, Envoy69/75 and Hyper70/75. All three fail mandatory
 security properties, so no weighted comparison or green foundation CI can
 grant GO. The proposed decision package is
-`reports/sprint03a-architecture-decision.md`; independent review and integrated
-check/scan/hosted evidence are still in progress. All original65 cases and
+`reports/sprint03a-architecture-decision.md`; independent final observer review
+`ed8d48d` reproduces every failure. Combined local check/scan and reviewed-head
+hosted run42992622282 pass; final-head checks/merge are recorded by PR9 and
+remain required before integration. All original65 cases and
 eight Pingora failures remain enabled, plus ten common supplemental cases.
 
 Pingora rewrites malformed targets before proxy filters. Envoy still forwards
@@ -113,3 +115,11 @@ warnings remain open without ignores or accepted exceptions. Candidate-image
 scan success does not prove ingress correctness. Intermediate invalid runs
 are retained and cannot serve as release evidence. R03/config trust, R05/TLS
 lifecycle and all production release obligations remain open.
+
+The native H2 byte-accounting defect is fixed with a bounded verified TLS
+observer and independent reruns. The relay observes byte lengths without
+parsing frames; exhaustive raw H2 framing/conformance, saturation, slow-reader
+fairness and production drain are still unproven. Whole-case invalid-origin-TLS
+counters include a successful recovery request; negative-interval assertions
+separately require zero handlers and decrypted bytes. See the independent
+observer follow-up for exact counters and limitations.

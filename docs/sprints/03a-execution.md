@@ -62,3 +62,15 @@ combined check/scan and exact-head hosted jobs; a green repository CI does not
 mean the deliberately failing architecture proof is accepted.
 Any required property failure means NO-GO. Human decision follows evidence;
 it does not turn an incomplete proof into an affirmative gate.
+
+## Executed Outcome
+
+A/B/C isolated work and E independent review are complete. Final common75-case
+results are Pingora63/75, Envoy69/75 and Hyper70/75, each NO-GO. Original65
+cases, all eight Pingora failures and valid encoded controls remain active.
+The bounded H2/gRPC observer is independently calibrated and rerun; raw H2
+parser conformance remains unproven. Root combined check/scan pass. PR9 records
+final exact-head hosted checks and evidence-only integration; both jobs must
+pass before merge. See the integration report, independent observer follow-up
+and proposed architecture decision package. No architecture is adopted and
+Module01/04 or production gates are not opened by completing this investigation.

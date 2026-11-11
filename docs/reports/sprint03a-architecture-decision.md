@@ -50,9 +50,10 @@ in `evidence/sprint03a-c/shared-run-03.json`.
 
 ## Candidate Matrix
 
-These are implementation results pending the final independent review, not
-accepted module gates. The reviewer report and final integration evidence must
-be read with this table.
+Final independent review `ed8d48d` reproduces these results without candidate
+changes, skipped cases or exclusions. They are failed feasibility proofs, not
+accepted module gates. See `sprint03a-e-observer-followup.md` for the final
+source hashes, origin counters and raw H2 conformance/resource limitations.
 
 | Candidate | Full corpus | Mandatory blockers | Disposition |
 | --- | --- | --- | --- |
@@ -60,6 +61,11 @@ be read with this table.
 | Envoy1.40.2, pinned distroless image |69/75 | obs-fold reaches origin; H2 Host/authority confusion; four TE cases return501 instead of the required4xx/close | NO-GO |
 | Hyper1.12.0 / Tokio1.54.1 / rustls0.23.46 |70/75 | CL/TE and TE/CL, their pipelined variants, and fragment target reach origin after normalization | NO-GO |
 | Maintained strict ingress before Pingora | No supported complete adapter proven | Framing on every request, streaming/upgrades, identity propagation, bounded resources and parser differentials require proof | Not eligible |
+
+The executable comparison and independent review are complete with no eligible
+candidate. Root combined quality and supply-chain checks pass; PR9 must also
+pass both hosted jobs on its exact final head before evidence-only integration.
+These repository checks do not approve a failed architecture proof.
 
 Pingora's relative target returns502 with zero handlers but sends190 decrypted
 bytes and triggers two origin parser errors in this ordering. It is a failure,

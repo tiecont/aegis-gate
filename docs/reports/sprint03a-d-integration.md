@@ -1,8 +1,9 @@
 # Sprint03-A Root Integration
 
-Status: combined local quality/scan PASS; final review/hosted acceptance pending.
+Status: executable comparison and independent review complete; all candidates
+NO-GO. Combined local quality/scan PASS; final-head hosted jobs required to merge.
 Baseline main: `668b8d998d8a39f3a554a9e42ad6a1a270049d27`.
-Integration branch: `test/edge-architecture-comparison`, draft PR9.
+Integration branch: `test/edge-architecture-comparison`, PR9.
 
 ## Integrated Work
 
@@ -12,10 +13,11 @@ Integration branch: `test/edge-architecture-comparison`, draft PR9.
 | B | `f7660dd` | Isolated pinned Envoy loopback PoC, file-based CDS/RDS/SDS, regression tests, identity/scan/SBOM, actual process benchmark and migration report |
 | C | `c17e0bf`, follow-up `f8ce234` | Isolated Hyper/Tokio/rustls proxy, source/lock integrity, protocol proof, six extra bounded-resource probes and observed H2 follow-up |
 | D/root | `4179b42`, `bd96d00`, `2e97ce3`, `2cc5ad7` | Immutable corpus/evaluator, negative regressions, corrected TLS/H2 observation, candidate check/scan coverage and root reruns |
-| E | Pending review commit | Separate clean worktree; independent reproduction, source/dependency/image review and instrumentation calibration |
+| E | `dbbdf3e` (integrated as `1fb2d32`); `ed8d48d` (integrated as `3553bb9`) | Separate clean worktree; independent reproduction, source/dependency/image review, instrumentation calibration and bounded-observer final reruns |
 
-Safe PoCs/evidence are staged on an integration branch pending final review
-and repository gates. No `apps/`, `internal/`, API/schema, production runtime,
+Safe isolated PoCs/evidence have independent review and local repository checks.
+Merge requires both hosted jobs on the final head; PR9 records that disposition.
+No `apps/`, `internal/`, API/schema, production runtime,
 TLS-verification setting or deployment configuration is changed by this sprint.
 Original tests, failed evidence and historical architecture decisions remain.
 
@@ -75,17 +77,50 @@ contracts, build and deliberate-defect gates. Scan includes42 actual commits,
 zero known Rust vulnerability findings, two unresolved Pingora maintenance
 warnings, clean lab Node audit and zero HIGH/CRITICAL pinned Envoy findings.
 Selected raw outputs are copied beside the logs; complete scanner reports are
-retained in `.local/evidence/security` and hosted artifact output. Exact-head
-hosted acceptance and E's final observed-harness review remain pending.
+retained in `.local/evidence/security` and hosted artifact output. E's final
+observed-harness review is complete, with the limits documented below. Final
+exact-head hosted checks remain a required merge condition recorded in PR9.
 CI now includes Hyper fmt/clippy/test/locked build, Envoy adapter unit tests,
 shared evaluator/observer regressions and manifest integrity. Common scans
 include both isolated Rust locks, lab Node dependencies and pinned Envoy image
 plus existing application/dependency/history/filesystem/fixture-image gates.
 No scanner ignore or accepted maintenance exception is introduced.
 
+Hosted run42992622282 verifies `1fb2d32`: foundation-quality PASS (2m59s),
+supply-chain-security PASS (5m9s). Raw exact-head job metadata is
+`evidence/sprint03a-d/hosted-reviewed-head.json`. Final follow-up evidence/docs
+will be checked again on the eventual merge candidate; this earlier run is
+not represented as final-head acceptance. The final run and merge metadata are
+recorded in PR9 and the completion report, avoiding a self-referential evidence
+commit that would change the head being checked.
+
 Source/docs whitespace diagnostics exclude raw logs deliberately: retained
 HTTP CRLF/ANSI scanner output and trailing tool newlines are original evidence,
 not source formatting changes. This is not a security-test or scan exclusion.
+
+## Final Independent Disposition
+
+Reviewer `ed8d48d` independently executes all75 cases for each candidate on
+the final bounded observer, with identical failure inventories: Pingora63/75,
+Hyper70/75, Envoy69/75. Seven harness/observer units and immutable-manifest
+check pass. `evidence/sprint03a-e/FOLLOWUP-SHA256SUMS` verifies all64 bound
+follow-up files after integration. Exact commands are in
+`docs/reports/sprint03a-e-observer-followup.md` and adjacent `commands.json`.
+
+Positive H2 bytes are139/162/248 for Pingora/Hyper/Envoy. Envoy's authority
+failure forwards56 decrypted bytes and invokes one origin handler. TLS denial
+assertions require zero bytes/handlers during the invalid attempt; whole-case
+counters include the later valid-origin recovery request. Raw H2 parser
+conformance and exhaustive saturation/drain remain unproven. No failed proof
+is upgraded by these observation fixes or passing repository checks.
+
+The independent review also verifies the combined check/scan logs and the
+candidate coverage added by `2e97ce3`; those local logs precede the observer
+admission-limit follow-up. Final observer units and all three reviewer reruns
+cover that change. Historical runs/inventories remain unchanged; no repeated
+Rust build or audit is claimed for an unchanged candidate. The sprint's
+executable investigation and decision package are complete with no candidate
+eligible for GO. Architecture selection and production release remain blocked.
 
 ## Disposition
 

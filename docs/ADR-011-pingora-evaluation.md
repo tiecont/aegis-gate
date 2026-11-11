@@ -256,13 +256,19 @@ adds isolated executable Envoy and Hyper/Tokio PoCs and a candidate-neutral
 75-case corpus. The root preserved and independently reproduced the original
 57/65 Pingora baseline, including all eight failures. Corrected expanded
 implementation runs are Pingora63/75, Envoy69/75 and Hyper70/75. Every candidate
-fails mandatory properties; none is eligible for GO. Final independent review
-and integrated CI evidence are being completed before evidence-only acceptance.
+fails mandatory properties; none is eligible for GO. Independent review
+`ed8d48d` reproduces those same results with the bounded H2/gRPC byte observer.
+The original H2 accounting defect is fixed within the exercised corpus; raw
+H2 parser conformance remains unproven. Root combined check/scan exit0 and
+reviewed-head hosted run42992622282 passes both jobs. Evidence-only integration
+requires final-head hosted checks; PR9 records the final checks and merge.
 
 `docs/reports/sprint03a-architecture-decision.md` is the proposed decision
 package, including exact blocker classes, maintained strict-ingress options,
 integration/maintenance costs and the smallest next proof. Candidate reports
 retain earlier failed/interrupted and invalid-instrumentation runs explicitly.
+`docs/reports/sprint03a-e-observer-followup.md` records the independent final
+reruns, exact hashes, origin counter semantics and remaining observation limits.
 The immutable manifest and evaluator preserve every original negative and
 valid encoded-target control; no criterion, production implementation or
 architecture selection is changed. Human architecture ownership and approval
