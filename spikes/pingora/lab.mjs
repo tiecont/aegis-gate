@@ -24,6 +24,10 @@ const cleanup = [];
 let proxy;
 let generation = 1;
 let activeRequests = 0;
+let originDispatches = 0;
+let originInboundBytes = 0;
+let originParseErrors = 0;
+const ingressObservations = [];
 let cancelledCalls = 0;
 let cancelledUploads = 0;
 let uploadedChunks = 0;
@@ -141,9 +145,13 @@ async function listen(server) {
 }
 
 function origin(name, handler) {
-  const server = https.createServer({ cert: cert(name), key: key(name), minVersion: 'TLSv1.2' }, handler);
+  const server = https.createServer({ cert: cert(name), key: key(name), minVersion: 'TLSv1.2' }, (req, res) => {
+    originDispatches++;
+    return handler(req, res);
+  });
   server.on('tlsClientError', () => {});
-  server.on('clientError', (_, socket) => socket.destroy());
+  server.on('secureConnection', (socket) => socket.on('data', (chunk) => { originInboundBytes += chunk.length; }));
+  server.on('clientError', (_, socket) => { originParseErrors++; socket.destroy(); });
   return server;
 }
 
@@ -208,15 +216,16 @@ async function applied(port, target) {
 async function raw(port, payload) {
   const socket = await connect(port);
   let data = '';
+  let timedOut = false;
   socket.on('error', () => {});
   const done = new Promise((resolve) => {
-    const timer = setTimeout(() => { socket.destroy(); resolve(); }, 2500);
+    const timer = setTimeout(() => { timedOut = true; socket.destroy(); resolve(); }, 2500);
     socket.on('data', (chunk) => { data += chunk.toString(); });
     socket.once('close', () => { clearTimeout(timer); resolve(); });
   });
   socket.write(payload);
   await done;
-  return data;
+  return { response: data, peer_closed: !timedOut, timed_out: timedOut };
 }
 
 async function main() {
@@ -249,7 +258,7 @@ async function main() {
     }
     if (req.url === '/payload') { res.end('r'.repeat(1024)); return; }
     res.setHeader('content-type', 'application/json');
-    res.end(JSON.stringify({ host: req.headers.host, generation: req.headers['x-lab-generation'],
+    res.end(JSON.stringify({ target: req.url, host: req.headers.host, generation: req.headers['x-lab-generation'],
       route: req.headers['x-lab-route'], forwarded: req.headers['x-forwarded-for'] ?? null,
       tenant: req.headers['x-tenant-id'] ?? null, connection: id }));
   });
@@ -257,6 +266,7 @@ async function main() {
   wss.on('connection', (ws) => ws.on('message', (message) => ws.send(message)));
   let prematureUpgradeBytes = 0;
   server.on('upgrade', (req, socket, head) => {
+    originDispatches++;
     if (req.url === '/premature') {
       prematureUpgradeBytes += head.length;
       socket.on('data', (chunk) => { prematureUpgradeBytes += chunk.length; });
@@ -268,9 +278,11 @@ async function main() {
   cleanup.push(async () => { for (const ws of wss.clients) ws.terminate(); wss.close(); });
   const originPort = await listen(server);
   const h2origin = http2.createSecureServer({ cert: cert('origin'), key: key('origin'), minVersion: 'TLSv1.2' });
+  h2origin.on('secureConnection', (socket) => socket.on('data', (chunk) => { originInboundBytes += chunk.length; }));
   h2origin.on('session', (session) => { cleanup.push(async () => session.destroy()); });
   let h2Requests = 0;
   h2origin.on('stream', (stream, headers) => {
+    originDispatches++;
     h2Requests++;
     stream.on('error', () => {});
     stream.respond({ ':status': 200, 'content-type': 'text/plain' });
@@ -528,16 +540,78 @@ async function main() {
     'Connection-nominates-trusted-header': 'GET / HTTP/1.1\r\nHost: edge-a.test\r\nConnection: X-Forwarded-For, close\r\nX-Forwarded-For: 127.0.0.1\r\n\r\n',
   };
   for (const [name, payload] of Object.entries(corpus)) await test(`malformed-HTTP-${name}`, async () => {
-    const before = activeRequests; const result = await raw(port, payload);
-    assert.ok(result === '' || /^HTTP\/1\.[01] 4\d\d/.test(result), `unsafe framing response: ${result.slice(0, 100)}`);
-    assert.equal(activeRequests, before, 'malformed request reached origin');
+    const before = originDispatches; const bytesBefore = originInboundBytes; const errorsBefore = originParseErrors;
+    const observation = await raw(port, payload);
+    const result = observation.response;
+    ingressObservations.push({ name, request: payload, response_status: result.match(/^HTTP\/1\.[01] (\d+)/)?.[1] ?? null,
+      origin_dispatches: originDispatches - before, origin_inbound_bytes: originInboundBytes - bytesBefore,
+      origin_parse_errors: originParseErrors - errorsBefore, ...observation });
+    assert.equal(originDispatches, before, 'malformed request reached an owned origin');
+    assert.equal(originInboundBytes, bytesBefore, 'malformed request bytes reached an owned origin');
+    assert.equal(originParseErrors, errorsBefore, 'malformed request rejected by origin parser instead of ingress');
+    assert.ok((result === '' && observation.peer_closed) || /^HTTP\/1\.[01] 4\d\d/.test(result), `unsafe framing response: ${result.slice(0, 100)}`);
   });
+  const requestLine = (target, headers = 'Host: edge-a.test', method = 'GET') =>
+    `${method} ${target} HTTP/1.1\r\n${headers}\r\nConnection: close\r\n\r\n`;
+  const expandedCorpus = {
+    'target-raw-tab': requestLine('/bad\ttarget'),
+    'target-raw-control': requestLine('/bad\x01target'),
+    'target-raw-null': requestLine('/bad\x00target'),
+    'host-missing': requestLine('/', 'X-Lab: no-host'),
+    'host-empty': requestLine('/', 'Host:'),
+    'host-duplicate-identical': requestLine('/', 'Host: edge-a.test\r\nHost: edge-a.test'),
+    'host-comma-list': requestLine('/', 'Host: edge-a.test,edge-b.test'),
+    'host-userinfo': requestLine('/', 'Host: user@edge-a.test'),
+    'host-invalid-port': requestLine('/', 'Host: edge-a.test:abc'),
+    'host-whitespace-before-colon': requestLine('/', 'Host : edge-a.test'),
+    'absolute-authority-SNI-mismatch': requestLine('https://edge-b.test/', 'Host: edge-b.test'),
+    'absolute-authority-Host-mismatch': requestLine('https://edge-a.test/', 'Host: edge-b.test'),
+    'absolute-authority-userinfo': requestLine('https://user@edge-a.test/'),
+    'absolute-authority-without-Host': requestLine('https://edge-a.test/', 'X-Lab: no-host'),
+    'absolute-unsupported-scheme': requestLine('ftp://edge-a.test/'),
+    'target-relative-form': requestLine('relative'),
+    'target-fragment': requestLine('/path#fragment'),
+    'connect-authority-form-disabled': requestLine('edge-a.test:443', 'Host: edge-a.test', 'CONNECT'),
+    'CL-TE-pipelined': 'POST /echo HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\n\r\n0\r\n\r\n' + requestLine('/smuggled'),
+    'TE-CL-pipelined': 'POST /echo HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nContent-Length: 4\r\n\r\n0\r\n\r\n' + requestLine('/smuggled'),
+    'TE-obsolete-fold': 'POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding:\r\n chunked\r\nConnection: close\r\n\r\n0\r\n\r\n',
+    'CL-comma-conflict': 'POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 1, 2\r\nConnection: close\r\n\r\nx',
+    'TE-repeated-chunked': 'POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, chunked\r\nConnection: close\r\n\r\n0\r\n\r\n',
+    'TE-not-final-chunked': 'POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, gzip\r\nConnection: close\r\n\r\n0\r\n\r\n',
+  };
+  for (const [name, payload] of Object.entries(expandedCorpus)) await test(`strict-ingress-${name}`, async () => {
+    const before = originDispatches;
+    const bytesBefore = originInboundBytes; const errorsBefore = originParseErrors;
+    const observation = await raw(port, payload);
+    const result = observation.response;
+    const detail = { name, request: payload, response_status: result.match(/^HTTP\/1\.[01] (\d+)/)?.[1] ?? null,
+      origin_dispatches: originDispatches - before, origin_inbound_bytes: originInboundBytes - bytesBefore,
+      origin_parse_errors: originParseErrors - errorsBefore, ...observation };
+    ingressObservations.push(detail);
+    assert.equal(detail.origin_dispatches, 0, `rejected-input policy violated: ${JSON.stringify(detail)}`);
+    assert.equal(detail.origin_inbound_bytes, 0, `invalid bytes reached origin: ${JSON.stringify(detail)}`);
+    assert.equal(detail.origin_parse_errors, 0, 'origin parser rejected input that should have stopped at ingress');
+    assert.ok((result === '' && observation.peer_closed) || /^HTTP\/1\.[01] 4\d\d/.test(result), `unsafe response: ${result.slice(0, 100)}`);
+    return detail;
+  });
+  for (const target of ['/bad%20target', '/bad%09target', '/bad%01target', '/bad%00target',
+    '/encoded%2Fsegment?value=%2520', '/caf%C3%A9?x=a%20b']) await test(`valid-percent-encoded-${target}`, async () => {
+    const before = originDispatches;
+    const bytesBefore = originInboundBytes;
+    const response = await request(port, target);
+    assert.equal(response.status, 200);
+    assert.equal(originDispatches, before + 1);
+    assert.ok(originInboundBytes > bytesBefore, 'origin byte instrumentation did not observe positive control');
+    assert.equal(JSON.parse(response.body).target, target, 'valid target changed at origin');
+    return { target, origin_dispatches: originDispatches - before, origin_inbound_bytes: originInboundBytes - bytesBefore };
+  });
+  evidence.ingress_observations = ingressObservations;
   await test('upgrade-does-not-forward-preread-bytes-before-101', async () => {
     const before = activeRequests;
     // RFC 6455's public sample nonce, encoded at runtime to avoid classifying
     // this published protocol example as a checked-in credential.
     const nonce = Buffer.from('the sample nonce').toString('base64');
-    const result = await raw(port, `GET /premature HTTP/1.1\r\nHost: edge-a.test\r\nConnection: Upgrade\r\nUpgrade: websocket\r\nSec-WebSocket-Key: ${nonce}\r\nSec-WebSocket-Version: 13\r\n\r\nGET / HTTP/1.1\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n`);
+    const { response: result } = await raw(port, `GET /premature HTTP/1.1\r\nHost: edge-a.test\r\nConnection: Upgrade\r\nUpgrade: websocket\r\nSec-WebSocket-Key: ${nonce}\r\nSec-WebSocket-Version: 13\r\n\r\nGET / HTTP/1.1\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n`);
     assert.match(result, /^HTTP\/1\.1 200/);
     assert.equal(prematureUpgradeBytes, 0, 'bytes forwarded as an upgraded stream before origin sent 101');
     assert.equal(activeRequests, before, 'cross-tenant preread request reached origin');

@@ -1,0 +1,615 @@
+{
+  "purpose": "source review only; no upstream patch, issue submission or alternative runtime proof",
+  "records": [
+    {
+      "url": "https://api.github.com/repos/cloudflare/pingora/releases/latest",
+      "fetched_at": "2026-11-11T04:43:39.842Z",
+      "sha256": "63509eeeff17d7d71b4c74b516e3746fa012a7e2518ab64da3596b8c3e0af683",
+      "release": {
+        "tag": "0.9.1",
+        "url": "https://github.com/cloudflare/pingora/releases/tag/0.9.1",
+        "published_at": "2026-11-03T01:07:23Z",
+        "body": "## [0.9.1](https://github.com/cloudflare/pingora/compare/0.9.0...0.9.1) - 2026-11-02\n\n\n**🐛 Bug Fixes**\n\n* Fix a panic on every accepted and outgoing connection with tokio 1.54 and later, which rejects zero-capacity buffered readers (#1059).\n* Fix the docs.rs build of the `pingora` crate, which failed for 0.9.0 (#1018).\n* Fix a panic in `pingora-limits` `Estimator::incr` when a counter overflows in builds with overflow checks enabled (#1041).\n\n**🔒 Security**\n\n* Require zstd 0.14.3, and through it zstd-safe 8.2.0 and zstd-sys 2.1.2, so dependency resolution cannot select zstd crates affected by RUSTSEC-2026-0391, RUSTSEC-2026-0395 through RUSTSEC-2026-0406, or RUSTSEC-2026-0410.\n\n**⚙️ Miscellaneous Tasks**\n\n* Ignore RustSec advisories for rustls 0.21, webpki-roots 0.26, rustls-webpki 0.101 and crypto-bigint 0.5.5, which reach the lockfile only through optional transitive dependencies and have no compatible fixed release.\n* Update HTTP/2 rejection tests for h2 releases that reject conflicting Content-Length headers in the codec.\n"
+      }
+    },
+    {
+      "url": "https://api.github.com/repos/cloudflare/pingora/commits/main",
+      "fetched_at": "2026-11-11T04:43:40.175Z",
+      "sha256": "ac0e60ad0f19d39953cd81bc9c4a7bfbff7e12a362f89f93614f651d5b54d7a9",
+      "commit": {
+        "sha": "3f87e92c982ee27c714506e16ae362776faea4aa",
+        "url": "https://github.com/cloudflare/pingora/commit/3f87e92c982ee27c714506e16ae362776faea4aa",
+        "date": "2026-11-09T16:45:47Z"
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/0.9.1/pingora-core/src/apps/mod.rs",
+      "fetched_at": "2026-11-11T04:43:40.685Z",
+      "sha256": "e440faec2de2104b7dce71c018f870dd181d93127b44c84553dece6dc401b712",
+      "excerpts": {
+        "options": {
+          "first_line": 64,
+          "text": "pub struct HttpServerOptions {\n    /// Allow HTTP/2 for plaintext.\n    pub h2c: bool,\n\n    /// Allow proxying CONNECT requests when handling HTTP traffic.\n    ///\n    /// When disabled, CONNECT requests are rejected with 405 by proxy services.\n    pub allow_connect_method_proxying: bool,\n\n    #[doc(hidden)]\n    pub force_custom: bool,\n\n    /// Maximum number of requests that this connection will handle. This is\n    /// equivalent to [Nginx's keepalive requests](https://nginx.org/en/docs/http/ngx_http_upstream_module.html#keepalive_requests)\n    /// which says:\n    ///\n    /// > Closing connections periodically is necessary to free per-connection\n    /// > memory allocations. Therefore, using too high maximum number of\n    /// > requests could result in excessive memory usage and not recommended.\n    ///\n    /// Unlike nginx, the default behavior here is _no limit_.\n    pub keepalive_request_limit: Option<u32>,\n\n    /// If set, close a downstream HTTP/2 connection that has been idle\n    /// for this duration.\n    ///\n    /// Default: `None`\n    pub h2_idle_timeout: Option<Duration>,\n}\n"
+        },
+        "normalization": null,
+        "normalization_call": null,
+        "escape": null,
+        "proxy_parse_order": null,
+        "custom_accept": null,
+        "default_yaml": null,
+        "dependency_lines": []
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/0.9.1/pingora-core/src/protocols/http/v1/server.rs",
+      "fetched_at": "2026-11-11T04:43:41.018Z",
+      "sha256": "c4459a2b6f274cf2300b83944e62f15a9fbd06454c3867d35b34e034585b274e",
+      "excerpts": {
+        "options": null,
+        "normalization": {
+          "first_line": 436,
+          "text": "                    HeaderParseState::Invalid(e) => match e {\n                        httparse::Error::Token | httparse::Error::Version => {\n                            // URI escaping rebuilds the current header. Detach any request body or\n                            // pipelined suffix first so normalization never copies queued requests.\n                            // `separator_start` is the index of the blank line itself, so the\n                            // header ends just past it.\n                            if detached_suffix.is_none() {\n                                if let Some(header_end) =\n                                    buf.find(HEADER_SECTION_END).map(|separator_start| {\n                                        separator_start + HEADER_SECTION_END.len()\n                                    })\n                                {\n                                    detached_suffix = Some(buf.split_off(header_end));\n                                }\n                            }\n                            // try to escape URI\n                            if let Some(new_buf) = escape_illegal_request_line(&buf) {\n                                buf = new_buf;\n                                already_read = buf.len();\n                            } else {\n                                debug!(\"Invalid request header from {:?}\", self.underlying_stream);\n                                buf.truncate(MAX_ERR_BUF_LEN);\n                                return Error::e_because(\n                                    InvalidHTTPHeader,\n                                    format!(\"buf: {}\", buf.escape_ascii()),\n                                    e,\n                                );\n                            }\n                        }\n                        _ => {\n                            debug!(\"Invalid request header from {:?}\", self.underlying_stream);\n                            buf.truncate(MAX_ERR_BUF_LEN);\n                            return Error::e_because(\n                                InvalidHTTPHeader,\n                                format!(\"buf: {:?}\", buf.as_bstr()),\n                                e,\n                            );\n                        }\n                    },\n                }\n            }\n        }\n    }\n"
+        },
+        "normalization_call": {
+          "first_line": 452,
+          "text": "                            if let Some(new_buf) = escape_illegal_request_line(&buf) {\n                                buf = new_buf;\n                                already_read = buf.len();\n                            } else {\n                                debug!(\"Invalid request header from {:?}\", self.underlying_stream);\n                                buf.truncate(MAX_ERR_BUF_LEN);\n                                return Error::e_because(\n                                    InvalidHTTPHeader,\n                                    format!(\"buf: {}\", buf.escape_ascii()),\n                                    e,\n                                );\n                            }\n                        }\n                        _ => {\n                            debug!(\"Invalid request header from {:?}\", self.underlying_stream);\n                            buf.truncate(MAX_ERR_BUF_LEN);\n                            return Error::e_because(\n                                InvalidHTTPHeader,\n                                format!(\"buf: {:?}\", buf.as_bstr()),\n                                e,\n                            );\n                        }\n                    },\n                }\n            }\n        }\n    }\n\n    /// Validate the request header read. This function must be called after the request header\n    /// read.\n    /// # Panics\n    /// this function and most other functions will panic if called before [`Self::read_request()`]\n    pub fn validate_request(&self) -> Result<()> {\n        let req_header = self.req_header();\n"
+        },
+        "escape": {
+          "first_line": 1758,
+          "text": "static REQUEST_LINE_REGEX: Lazy<Regex> =\n    Lazy::new(|| Regex::new(r\"^\\w+ (?P<uri>.+) HTTP/\\d(?:\\.\\d)?\").unwrap());\n\n// the chars httparse considers illegal in URL\n// Almost https://url.spec.whatwg.org/#query-percent-encode-set + {}\nconst URI_ESC_CHARSET: &AsciiSet = &CONTROLS.add(b' ').add(b'<').add(b'>').add(b'\"');\n\nfn escape_illegal_request_line(buf: &BytesMut) -> Option<BytesMut> {\n    if let Some(captures) = REQUEST_LINE_REGEX.captures(buf) {\n        // return if nothing matches: not a request line at all\n        let uri = captures.name(\"uri\")?;\n\n        let escaped_uri = percent_encode(uri.as_bytes(), URI_ESC_CHARSET);\n\n        // rebuild the entire request buf in a new buffer\n        // TODO: this might be able to be done in place\n\n        // need to be slightly bigger than the current buf;\n        let mut new_buf = BytesMut::with_capacity(buf.len() + 32);\n        new_buf.extend_from_slice(&buf[..uri.start()]);\n\n        for s in escaped_uri {\n            new_buf.extend_from_slice(s.as_bytes());\n        }\n\n        if new_buf.len() == uri.end() {\n            // buf unchanged, nothing is escaped, return None to avoid loop\n            return None;\n        }\n\n        new_buf.extend_from_slice(&buf[uri.end()..]);\n\n        Some(new_buf)\n    } else {\n        None\n    }\n}\n"
+        },
+        "proxy_parse_order": null,
+        "custom_accept": null,
+        "default_yaml": null,
+        "dependency_lines": []
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/0.9.1/pingora-proxy/src/lib.rs",
+      "fetched_at": "2026-11-11T04:43:41.321Z",
+      "sha256": "70d42079405fde9a6a7b03565b47c1ad7eb939377383c00857f326fd9de3f435",
+      "excerpts": {
+        "options": null,
+        "normalization": null,
+        "normalization_call": null,
+        "escape": null,
+        "proxy_parse_order": {
+          "first_line": 1442,
+          "text": "        let mut session = match self.handle_new_request(session).await {\n            Some(downstream_session) => Session::new(\n                downstream_session,\n                &self.downstream_modules,\n                #[cfg(feature = \"upstream_modules\")]\n                &self.upstream_modules,\n                self.shutdown_flag.clone(),\n            ),\n            None => return, // bad request\n        };\n\n        // no real downstream to keepalive, but it doesn't matter what is set here because at the end\n        // of this fn the dummy connection will be dropped\n        session.set_keepalive(None);\n\n        session.subrequest_ctx.replace(sub_req_ctx);\n        trace!(\"processing subrequest\");\n        let ctx = self.inner.new_ctx();\n        self.process_request(session, ctx).await;\n        trace!(\"subrequest done\");\n    }\n}\n\n/// A handle to the underlying HTTP proxy app that allows spawning subrequests.\npub struct SubrequestSpawner {\n    app: Arc<dyn Subrequest + Send + Sync>,\n}\n\n/// A [`PreparedSubrequest`] that is ready to run.\npub struct PreparedSubrequest {\n    app: Arc<dyn Subrequest + Send + Sync>,\n    session: Box<HttpSession>,\n    sub_req_ctx: Box<SubrequestCtx>,\n}\n\nimpl PreparedSubrequest {\n    pub async fn run(self) {\n        self.app\n            .process_subrequest(self.session, self.sub_req_ctx)\n            .await\n    }\n\n    pub fn session(&self) -> &HttpSession {\n        self.session.as_ref()\n    }\n\n    pub fn session_mut(&mut self) -> &mut HttpSession {\n        self.session.deref_mut()\n    }\n}\n\nimpl SubrequestSpawner {\n    /// Create a new [`SubrequestSpawner`].\n    pub fn new(app: Arc<dyn Subrequest + Send + Sync>) -> SubrequestSpawner {\n        SubrequestSpawner { app }\n    }\n\n    /// Spawn a background subrequest and return a join handle.\n    // TODO: allow configuring the subrequest session before use\n    pub fn spawn_background_subrequest(\n        &self,\n        session: &HttpSession,\n        ctx: SubrequestCtx,\n    ) -> tokio::task::JoinHandle<()> {\n        let new_app = self.app.clone(); // Clone the Arc\n        let (mut session, handle) = subrequest::create_session(session);\n        if ctx.body_mode() == BodyMode::NoBody {\n            session\n                .as_subrequest_mut()\n                .expect(\"created subrequest session\")\n                .clear_request_body_headers();\n        }\n        let sub_req_ctx = Box::new(ctx);\n        handle.drain_tasks();\n        tokio::spawn(async move {\n            new_app\n                .process_subrequest(Box::new(session), sub_req_ctx)\n                .await;\n        })\n    }\n\n    /// Create a subrequest that listens to `HttpTask`s sent from the returned `Sender`\n    /// and sends `HttpTask`s to the returned `Receiver`.\n    ///\n    /// To run that subrequest, call `run()`.\n    // TODO: allow configuring the subrequest session before use\n    pub fn create_subrequest(\n        &self,\n        session: &HttpSession,\n        ctx: SubrequestCtx,\n    ) -> (PreparedSubrequest, SubrequestHandle) {\n        let new_app = self.app.clone(); // Clone the Arc\n        let (mut session, handle) = subrequest::create_session(session);\n        if ctx.body_mode() == BodyMode::NoBody {\n            session\n                .as_subrequest_mut()\n                .expect(\"created subrequest session\")\n                .clear_request_body_headers();\n        }\n        let sub_req_ctx = Box::new(ctx);\n        (\n            PreparedSubrequest {\n                app: new_app,\n                session: Box::new(session),\n                sub_req_ctx,\n            },\n            handle,\n        )\n    }\n}\n\n#[async_trait]\nimpl<SV, C> HttpServerApp for HttpProxy<SV, C>\nwhere\n    SV: ProxyHttp + Send + Sync + 'static,\n    <SV as ProxyHttp>::CTX: Send + Sync,\n    C: custom::Connector,\n{\n    async fn process_new_http(\n        self: &Arc<Self>,\n        mut session: HttpSession,\n        shutdown: &ShutdownWatch,\n    ) -> Option<ReusedHttpStream> {\n        // Extract user context from the previous request before the session is moved into the Box\n        let prev_user_ctx = session.take_connection_user_context();\n\n        let session = Box::new(session);\n\n        // TODO: keepalive pool, use stack\n        let mut session = match self.handle_new_request(session).await {\n            Some(downstream_session) => Session::new(\n                downstream_session,\n                &self.downstream_modules,\n                #[cfg(feature = \"upstream_modules\")]\n                &self.upstream_modules,\n                self.shutdown_flag.clone(),\n            ),\n            None => return None, // bad request\n        };\n\n        if *shutdown.borrow() {\n            // stop downstream from reusing if this service is shutting down soon\n            session.set_keepalive(None);\n        }\n\n        let mut ctx = self.inner.new_ctx();\n\n        // Deliver user context from the previous request on this reused connection\n        if let Some(prev_ctx) = prev_user_ctx {\n            self.inner\n                .on_connection_reuse(&mut session, &mut ctx, prev_ctx);\n        }\n\n        self.process_request(session, ctx).await\n    }\n"
+        },
+        "custom_accept": {
+          "first_line": 1631,
+          "text": "/// Create an [`HttpProxy`] without wrapping it in a [`Service`].\n///\n/// This is useful when you need to integrate `HttpProxy` into a custom accept loop,\n/// for example when implementing SNI-based routing that decides between TLS passthrough\n/// and TLS termination on a single port.\n///\n/// The returned `HttpProxy` is fully initialized and ready to process requests via\n/// [`HttpServerApp::process_new_http()`].\n///"
+        },
+        "default_yaml": null,
+        "dependency_lines": []
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/0.9.1/pingora-core/src/server/configuration/mod.rs",
+      "fetched_at": "2026-11-11T04:43:41.711Z",
+      "sha256": "5ad6feddd5e6788e85b57aa4b5578c0e6fa5a270baeb3277e52ae81d3caf41b2",
+      "excerpts": {
+        "options": null,
+        "normalization": null,
+        "normalization_call": null,
+        "escape": null,
+        "proxy_parse_order": null,
+        "custom_accept": null,
+        "default_yaml": {
+          "first_line": 335,
+          "text": "    pub fn new() -> Option<Self> {\n        Self::from_yaml(\"---\\nversion: 1\").ok()\n    }\n\n    pub fn new_with_opt_override(opt: &Opt) -> Option<Self> {\n        let conf = Self::new();\n        match conf {\n            Some(mut c) => {\n                c.merge_with_opt(opt);\n                Some(c)\n            }\n            None => None,\n        }\n    }\n\n    pub fn from_yaml(conf_str: &str) -> Result<Self> {\n        trace!(\"Read conf file: {conf_str}\");\n        let conf: ServerConf = serde_yaml::from_str(conf_str).or_err_with(ReadError, || {\n            format!(\"Unable to parse yaml conf {conf_str}\")\n        })?;\n\n        trace!(\"Loaded conf: {conf:?}\");\n        conf.validate()\n    }\n\n    pub fn to_yaml(&self) -> String {\n        serde_yaml::to_string(self).unwrap()\n    }\n"
+        },
+        "dependency_lines": [
+          "        let conf: ServerConf = serde_yaml::from_str(conf_str).or_err_with(ReadError, || {",
+          "        serde_yaml::to_string(self).unwrap()",
+          "        let yaml = serde_yaml::to_value(&conf).unwrap();",
+          "            Some(&serde_yaml::Value::String(\"/var/lib/pingora\".to_string()))"
+        ]
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/0.9.1/pingora-core/Cargo.toml",
+      "fetched_at": "2026-11-11T04:43:42.088Z",
+      "sha256": "addf1c55813d22220ceaa0935526abce6699d812cef57d93e1487ce31aad4451",
+      "excerpts": {
+        "options": null,
+        "normalization": null,
+        "normalization_call": null,
+        "escape": null,
+        "proxy_parse_order": null,
+        "custom_accept": null,
+        "default_yaml": null,
+        "dependency_lines": [
+          "derivative.workspace = true",
+          "serde_yaml = \"0.9\""
+        ]
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/0.9.1/pingora-load-balancing/Cargo.toml",
+      "fetched_at": "2026-11-11T04:43:42.456Z",
+      "sha256": "66e7386f11193fa703af767b55701d0d813143e447a06f1d24d2e2d7e89d10c7",
+      "excerpts": {
+        "options": null,
+        "normalization": null,
+        "normalization_call": null,
+        "escape": null,
+        "proxy_parse_order": null,
+        "custom_accept": null,
+        "default_yaml": null,
+        "dependency_lines": [
+          "derivative.workspace = true"
+        ]
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/3f87e92c982ee27c714506e16ae362776faea4aa/pingora-core/src/apps/mod.rs",
+      "fetched_at": "2026-11-11T04:43:42.826Z",
+      "sha256": "742bfedf38253fa3c3d0b2bd6aec6128bff9017b2bffaf77e76c2d9c3c535051",
+      "excerpts": {
+        "options": {
+          "first_line": 69,
+          "text": "pub struct HttpServerOptions {\n    /// Allow HTTP/2 for plaintext.\n    pub h2c: bool,\n\n    /// Allow proxying CONNECT requests when handling HTTP traffic.\n    ///\n    /// When disabled, CONNECT requests are rejected with 405 by proxy services.\n    pub allow_connect_method_proxying: bool,\n\n    #[doc(hidden)]\n    pub force_custom: bool,\n\n    /// Maximum number of requests that this connection will handle. This is\n    /// equivalent to [Nginx's keepalive requests](https://nginx.org/en/docs/http/ngx_http_upstream_module.html#keepalive_requests)\n    /// which says:\n    ///\n    /// > Closing connections periodically is necessary to free per-connection\n    /// > memory allocations. Therefore, using too high maximum number of\n    /// > requests could result in excessive memory usage and not recommended.\n    ///\n    /// Unlike nginx, the default behavior here is _no limit_.\n    pub keepalive_request_limit: Option<u32>,\n\n    /// Maximum number of fields accepted in an HTTP/1 request head.\n    ///\n    /// The default is [`HeaderLimit::Limited`] with a value of 256. This does not replace\n    /// Pingora's byte-size limit for the complete request head.\n    pub h1_header_count_limit: HeaderLimit,\n\n    /// If set, close a downstream HTTP/2 connection that has been idle\n    /// for this duration.\n    ///\n    /// Default: `None`\n    pub h2_idle_timeout: Option<Duration>,\n}\n"
+        },
+        "normalization": null,
+        "normalization_call": null,
+        "escape": null,
+        "proxy_parse_order": null,
+        "custom_accept": null,
+        "default_yaml": null,
+        "dependency_lines": []
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/3f87e92c982ee27c714506e16ae362776faea4aa/pingora-core/src/protocols/http/v1/server.rs",
+      "fetched_at": "2026-11-11T04:43:43.142Z",
+      "sha256": "122a2b1c0a37c4caf9052729de6587f87be15189b93c2d8b7acdc58e4a0e87ef",
+      "excerpts": {
+        "options": null,
+        "normalization": null,
+        "normalization_call": {
+          "first_line": 456,
+          "text": "                            if let Some(new_buf) = escape_illegal_request_line(&buf) {\n                                buf = new_buf;\n                                already_read = buf.len();\n                            } else {\n                                debug!(\"Invalid request header from {:?}\", self.underlying_stream);\n                                buf.truncate(MAX_ERR_BUF_LEN);\n                                return Error::e_because(\n                                    InvalidHTTPHeader,\n                                    format!(\"buf: {}\", buf.escape_ascii()),\n                                    e,\n                                );\n                            }\n                        }\n                        _ => {\n                            debug!(\"Invalid request header from {:?}\", self.underlying_stream);\n                            buf.truncate(MAX_ERR_BUF_LEN);\n                            return Error::e_because(\n                                InvalidHTTPHeader,\n                                format!(\"buf: {:?}\", buf.as_bstr()),\n                                e,\n                            );\n                        }\n                    },\n                }\n            }\n        }\n    }\n\n    /// Validate the request header read. This function must be called after the request header\n    /// read.\n    /// # Panics\n    /// this function and most other functions will panic if called before [`Self::read_request()`]\n    pub fn validate_request(&self) -> Result<()> {\n        let req_header = self.req_header();\n"
+        },
+        "escape": {
+          "first_line": 1787,
+          "text": "static REQUEST_LINE_REGEX: Lazy<Regex> =\n    Lazy::new(|| Regex::new(r\"^\\w+ (?P<uri>.+) HTTP/\\d(?:\\.\\d)?\").unwrap());\n\n// the chars httparse considers illegal in URL\n// Almost https://url.spec.whatwg.org/#query-percent-encode-set + {}\nconst URI_ESC_CHARSET: &AsciiSet = &CONTROLS.add(b' ').add(b'<').add(b'>').add(b'\"');\n\nfn escape_illegal_request_line(buf: &BytesMut) -> Option<BytesMut> {\n    if let Some(captures) = REQUEST_LINE_REGEX.captures(buf) {\n        // return if nothing matches: not a request line at all\n        let uri = captures.name(\"uri\")?;\n\n        let escaped_uri = percent_encode(uri.as_bytes(), URI_ESC_CHARSET);\n\n        // rebuild the entire request buf in a new buffer\n        // TODO: this might be able to be done in place\n\n        // need to be slightly bigger than the current buf;\n        let mut new_buf = BytesMut::with_capacity(buf.len() + 32);\n        new_buf.extend_from_slice(&buf[..uri.start()]);\n\n        for s in escaped_uri {\n            new_buf.extend_from_slice(s.as_bytes());\n        }\n\n        if new_buf.len() == uri.end() {\n            // buf unchanged, nothing is escaped, return None to avoid loop\n            return None;\n        }\n\n        new_buf.extend_from_slice(&buf[uri.end()..]);\n\n        Some(new_buf)\n    } else {\n        None\n    }\n}\n"
+        },
+        "proxy_parse_order": null,
+        "custom_accept": null,
+        "default_yaml": null,
+        "dependency_lines": []
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/3f87e92c982ee27c714506e16ae362776faea4aa/pingora-proxy/src/lib.rs",
+      "fetched_at": "2026-11-11T04:43:43.254Z",
+      "sha256": "1ece4ec60c50fae05af8b60172b1a1fb7f5e671afb5dc6b17a152c6f71ecfb37",
+      "excerpts": {
+        "options": null,
+        "normalization": null,
+        "normalization_call": null,
+        "escape": null,
+        "proxy_parse_order": {
+          "first_line": 2004,
+          "text": "        let mut session = match self.handle_new_request(session).await {\n            Some(downstream_session) => Session::new(\n                downstream_session,\n                &self.downstream_modules,\n                #[cfg(feature = \"upstream_modules\")]\n                &self.upstream_modules,\n                self.shutdown_flag.clone(),\n            ),\n            None => return, // bad request\n        };\n\n        // no real downstream to keepalive, but it doesn't matter what is set here because at the end\n        // of this fn the dummy connection will be dropped\n        session.set_keepalive(None);\n\n        session.subrequest_ctx.replace(sub_req_ctx);\n        trace!(\"processing subrequest\");\n        let ctx = self.inner.new_ctx();\n        self.process_request(session, ctx).await;\n        trace!(\"subrequest done\");\n    }\n}\n\n/// A handle to the underlying HTTP proxy app that allows spawning subrequests.\npub struct SubrequestSpawner<DS = ()>\nwhere\n    DS: DownstreamSession,\n{\n    app: Arc<dyn Subrequest<DS> + Send + Sync>,\n}\n\n/// A [`PreparedSubrequest`] that is ready to run.\npub struct PreparedSubrequest<DS = ()>\nwhere\n    DS: DownstreamSession,\n{\n    app: Arc<dyn Subrequest<DS> + Send + Sync>,\n    session: Box<HttpSession<DS>>,\n    sub_req_ctx: Box<SubrequestCtx>,\n}\n\nimpl<DS> PreparedSubrequest<DS>\nwhere\n    DS: DownstreamSession,\n{\n    pub async fn run(self) {\n        self.app\n            .process_subrequest(self.session, self.sub_req_ctx)\n            .await\n    }\n\n    pub fn session(&self) -> &HttpSession<DS> {\n        self.session.as_ref()\n    }\n\n    pub fn session_mut(&mut self) -> &mut HttpSession<DS> {\n        self.session.deref_mut()\n    }\n}\n\nimpl<DS> SubrequestSpawner<DS>\nwhere\n    DS: DownstreamSession,\n{\n    /// Create a new [`SubrequestSpawner`].\n    pub fn new(app: Arc<dyn Subrequest<DS> + Send + Sync>) -> SubrequestSpawner<DS> {\n        SubrequestSpawner { app }\n    }\n\n    /// Spawn a background subrequest and return a join handle.\n    // TODO: allow configuring the subrequest session before use\n    pub fn spawn_background_subrequest(\n        &self,\n        session: &HttpSession<DS>,\n        ctx: SubrequestCtx,\n    ) -> tokio::task::JoinHandle<()> {\n        let new_app = self.app.clone(); // Clone the Arc\n        let (mut session, handle) = subrequest::create_session(session);\n        if ctx.body_mode() == BodyMode::NoBody {\n            session\n                .as_subrequest_mut()\n                .expect(\"created subrequest session\")\n                .clear_request_body_headers();\n        }\n        let sub_req_ctx = Box::new(ctx);\n        handle.drain_tasks();\n        tokio::spawn(async move {\n            new_app\n                .process_subrequest(Box::new(session), sub_req_ctx)\n                .await;\n        })\n    }\n\n    /// Create a subrequest that listens to `HttpTask`s sent from the returned `Sender`\n    /// and sends `HttpTask`s to the returned `Receiver`.\n    ///\n    /// To run that subrequest, call `run()`.\n    // TODO: allow configuring the subrequest session before use\n    pub fn create_subrequest(\n        &self,\n        session: &HttpSession<DS>,\n        ctx: SubrequestCtx,\n    ) -> (PreparedSubrequest<DS>, SubrequestHandle) {\n        let new_app = self.app.clone(); // Clone the Arc\n        let (mut session, handle) = subrequest::create_session(session);\n        if ctx.body_mode() == BodyMode::NoBody {\n            session\n                .as_subrequest_mut()\n                .expect(\"created subrequest session\")\n                .clear_request_body_headers();\n        }\n        let sub_req_ctx = Box::new(ctx);\n        (\n            PreparedSubrequest {\n                app: new_app,\n                session: Box::new(session),\n                sub_req_ctx,\n            },\n            handle,\n        )\n    }\n}\n\n#[async_trait]\nimpl<SV, C, DS> HttpServerApp<DS> for HttpProxy<SV, C, DS>\nwhere\n    SV: ProxyHttp<DS> + Send + Sync + 'static,\n    <SV as ProxyHttp<DS>>::CTX: Send + Sync,\n    C: custom::Connector,\n    DS: DownstreamSession,\n{\n    async fn process_new_http(\n        self: &Arc<Self>,\n        mut session: HttpSession<DS>,\n        shutdown: &ShutdownWatch,\n    ) -> Option<ReusedHttpStream> {\n        // Extract user context from the previous request before the session is moved into the Box\n        let prev_user_ctx = session.take_connection_user_context();\n\n        let session = Box::new(session);\n\n        // TODO: keepalive pool, use stack\n        let mut session = match self.handle_new_request(session).await {\n            Some(downstream_session) => Session::new(\n                downstream_session,\n                &self.downstream_modules,\n                #[cfg(feature = \"upstream_modules\")]\n                &self.upstream_modules,\n                self.shutdown_flag.clone(),\n            ),\n            None => return None, // bad request\n        };\n\n        if *shutdown.borrow() {\n            // stop downstream from reusing if this service is shutting down soon\n            session.set_keepalive(None);\n        }\n\n        let mut ctx = self.inner.new_ctx();\n\n        // Deliver user context from the previous request on this reused connection\n        if let Some(prev_ctx) = prev_user_ctx {\n            self.inner\n                .on_connection_reuse(&mut session, &mut ctx, prev_ctx);\n        }\n\n        self.process_request(session, ctx).await\n    }\n"
+        },
+        "custom_accept": {
+          "first_line": 2206,
+          "text": "/// Create an [`HttpProxy`] without wrapping it in a [`Service`].\n///\n/// This is useful when you need to integrate `HttpProxy` into a custom accept loop,\n/// for example when implementing SNI-based routing that decides between TLS passthrough\n/// and TLS termination on a single port.\n///\n/// The returned `HttpProxy` is fully initialized and ready to process requests via\n/// [`HttpServerApp::process_new_http()`].\n///"
+        },
+        "default_yaml": null,
+        "dependency_lines": []
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/3f87e92c982ee27c714506e16ae362776faea4aa/pingora-core/src/server/configuration/mod.rs",
+      "fetched_at": "2026-11-11T04:43:43.659Z",
+      "sha256": "3d0e57598cee293f942336a6dc7d4fc10a8faae0ff833265ffc00947443403d3",
+      "excerpts": {
+        "options": null,
+        "normalization": null,
+        "normalization_call": null,
+        "escape": null,
+        "proxy_parse_order": null,
+        "custom_accept": null,
+        "default_yaml": {
+          "first_line": 337,
+          "text": "    pub fn new() -> Option<Self> {\n        Self::from_yaml(\"---\\nversion: 1\").ok()\n    }\n\n    pub fn new_with_opt_override(opt: &Opt) -> Option<Self> {\n        let conf = Self::new();\n        match conf {\n            Some(mut c) => {\n                c.merge_with_opt(opt);\n                Some(c)\n            }\n            None => None,\n        }\n    }\n\n    pub fn from_yaml(conf_str: &str) -> Result<Self> {\n        trace!(\"Read conf file: {conf_str}\");\n        let conf: ServerConf = serde_yaml::from_str(conf_str).or_err_with(ReadError, || {\n            format!(\"Unable to parse yaml conf {conf_str}\")\n        })?;\n\n        trace!(\"Loaded conf: {conf:?}\");\n        conf.validate()\n    }\n\n    pub fn to_yaml(&self) -> String {\n        serde_yaml::to_string(self).unwrap()\n    }\n"
+        },
+        "dependency_lines": [
+          "        let conf: ServerConf = serde_yaml::from_str(conf_str).or_err_with(ReadError, || {",
+          "        serde_yaml::to_string(self).unwrap()",
+          "        let yaml = serde_yaml::to_value(&conf).unwrap();",
+          "            Some(&serde_yaml::Value::String(\"/var/lib/pingora\".to_string()))"
+        ]
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/3f87e92c982ee27c714506e16ae362776faea4aa/pingora-core/Cargo.toml",
+      "fetched_at": "2026-11-11T04:43:43.962Z",
+      "sha256": "f96684d51c9a82faad7b6b33532f2c31bc48da2c3462c1b31fddf34b6b8e30d0",
+      "excerpts": {
+        "options": null,
+        "normalization": null,
+        "normalization_call": null,
+        "escape": null,
+        "proxy_parse_order": null,
+        "custom_accept": null,
+        "default_yaml": null,
+        "dependency_lines": [
+          "derivative.workspace = true",
+          "serde_yaml = \"0.9\""
+        ]
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/3f87e92c982ee27c714506e16ae362776faea4aa/pingora-load-balancing/Cargo.toml",
+      "fetched_at": "2026-11-11T04:43:44.280Z",
+      "sha256": "e784dbb37d712a00b216edb69e21d2c4f86db8a9b2782e03287f2e6f80df9b90",
+      "excerpts": {
+        "options": null,
+        "normalization": null,
+        "normalization_call": null,
+        "escape": null,
+        "proxy_parse_order": null,
+        "custom_accept": null,
+        "default_yaml": null,
+        "dependency_lines": [
+          "derivative.workspace = true"
+        ]
+      }
+    },
+    {
+      "url": "https://api.github.com/search/issues?q=repo%3Acloudflare%2Fpingora%20strict&per_page=20",
+      "fetched_at": "2026-11-11T04:43:45.184Z",
+      "sha256": "88ca4d7f0613408668f86df6aa0deb16cbb8fb65be81ddad2ec5e33b0ea71cf4",
+      "search": {
+        "term": "strict",
+        "total_count": 20,
+        "incomplete_results": false,
+        "items": [
+          {
+            "title": "Brotli response compression never finishes the stream (flush instead of finish), strict decoders reject every `br` body",
+            "url": "https://github.com/cloudflare/pingora/issues/1013",
+            "state": "open",
+            "updated_at": "2026-09-26T03:02:02Z",
+            "pull_request": false
+          },
+          {
+            "title": "Supporting smaller TCP_INFO shapes optionally relaxing get_opt_sized response validation with strict flag",
+            "url": "https://github.com/cloudflare/pingora/pull/790",
+            "state": "open",
+            "updated_at": "2026-02-04T13:14:41Z",
+            "pull_request": true
+          },
+          {
+            "title": "Never send incorrect requests to upstream servers, ever.",
+            "url": "https://github.com/cloudflare/pingora/issues/674",
+            "state": "open",
+            "updated_at": "2025-08-08T18:08:15Z",
+            "pull_request": false
+          },
+          {
+            "title": "feat(http1): expose configurable request-header parser admission limits (#993)",
+            "url": "https://github.com/cloudflare/pingora/pull/1000",
+            "state": "open",
+            "updated_at": "2026-09-25T22:43:40Z",
+            "pull_request": true
+          },
+          {
+            "title": "HTTP/1 client TE parsing diverges from CPython http.client when multiple Transfer-Encoding headers are present (GHSA-hj7x sibling)",
+            "url": "https://github.com/cloudflare/pingora/issues/1042",
+            "state": "open",
+            "updated_at": "2026-10-04T17:05:06Z",
+            "pull_request": false
+          },
+          {
+            "title": "feat(listeners): add add_endpoint_with_filter for granular per-address L4 filtering",
+            "url": "https://github.com/cloudflare/pingora/pull/941",
+            "state": "open",
+            "updated_at": "2026-07-31T17:28:21Z",
+            "pull_request": true
+          },
+          {
+            "title": "feat: make rustls cert public",
+            "url": "https://github.com/cloudflare/pingora/pull/858",
+            "state": "open",
+            "updated_at": "2026-11-03T17:55:25Z",
+            "pull_request": true
+          },
+          {
+            "title": "fix(compression): finish the brotli stream before returning its output",
+            "url": "https://github.com/cloudflare/pingora/pull/1021",
+            "state": "closed",
+            "updated_at": "2026-11-03T04:02:43Z",
+            "pull_request": true
+          },
+          {
+            "title": "fix(limits): Fixes an attempt to subtract with overflow panic in Rate::maybe_reset() during concurrent access when overflow checks are enabled",
+            "url": "https://github.com/cloudflare/pingora/pull/1107",
+            "state": "closed",
+            "updated_at": "2026-11-04T03:41:23Z",
+            "pull_request": true
+          },
+          {
+            "title": "HTTP/2 multiple Cookie headers not concatenated when proxied to HTTP/1.1 upstream (RFC 9113 §8.2.3)",
+            "url": "https://github.com/cloudflare/pingora/issues/892",
+            "state": "open",
+            "updated_at": "2026-09-09T04:26:25Z",
+            "pull_request": false
+          },
+          {
+            "title": "current_handle() can return a NoStealRuntime that has already shut down",
+            "url": "https://github.com/cloudflare/pingora/issues/981",
+            "state": "open",
+            "updated_at": "2026-09-25T22:40:59Z",
+            "pull_request": false
+          },
+          {
+            "title": "fix: don't emit the chunked terminator for zero-length body writes",
+            "url": "https://github.com/cloudflare/pingora/pull/936",
+            "state": "closed",
+            "updated_at": "2026-10-24T02:46:13Z",
+            "pull_request": true
+          },
+          {
+            "title": "H1 upstream: chunked terminator 0\\r\\n\\r\\n written twice when an H2 downstream ends the request body with an empty DATA frame (END_STREAM), poisoning upstream keep-alive connections",
+            "url": "https://github.com/cloudflare/pingora/issues/935",
+            "state": "closed",
+            "updated_at": "2026-10-24T02:59:31Z",
+            "pull_request": false
+          },
+          {
+            "title": "Strip hop-by-hop headers in H1 upstream proxy",
+            "url": "https://github.com/cloudflare/pingora/pull/734",
+            "state": "closed",
+            "updated_at": "2026-08-20T21:32:21Z",
+            "pull_request": true
+          },
+          {
+            "title": "fix: support CONNECT and absolute-form parsing with http >= 1.4.1",
+            "url": "https://github.com/cloudflare/pingora/pull/912",
+            "state": "closed",
+            "updated_at": "2026-09-11T19:55:49Z",
+            "pull_request": true
+          },
+          {
+            "title": "`Notify`-based shutdown in `HttpProxy` causes severe lock contention on multi-core / NUMA systems",
+            "url": "https://github.com/cloudflare/pingora/issues/844",
+            "state": "closed",
+            "updated_at": "2026-09-09T21:58:11Z",
+            "pull_request": false
+          },
+          {
+            "title": "HTTP/2 stream 1 was not closed cleanly: CANCEL (err 8)",
+            "url": "https://github.com/cloudflare/pingora/issues/558",
+            "state": "closed",
+            "updated_at": "2026-08-24T19:10:07Z",
+            "pull_request": false
+          },
+          {
+            "title": "Support early request body buffering before upstream peer selection",
+            "url": "https://github.com/cloudflare/pingora/pull/816",
+            "state": "closed",
+            "updated_at": "2026-10-31T04:43:07Z",
+            "pull_request": true
+          },
+          {
+            "title": "Will we release the 0.3 sometime soon? ",
+            "url": "https://github.com/cloudflare/pingora/issues/298",
+            "state": "closed",
+            "updated_at": "2024-07-09T01:51:27Z",
+            "pull_request": false
+          },
+          {
+            "title": "chore: resolve the TODOs for the pingora client example",
+            "url": "https://github.com/cloudflare/pingora/pull/9",
+            "state": "closed",
+            "updated_at": "2024-03-16T00:34:10Z",
+            "pull_request": true
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://api.github.com/search/issues?q=repo%3Acloudflare%2Fpingora%20escape_illegal_request_line&per_page=20",
+      "fetched_at": "2026-11-11T04:43:45.549Z",
+      "sha256": "c9938edecb99d754b2d039ac9eec320a94c769b6a6417921e2dcbef9e2fe01a0",
+      "search": {
+        "term": "escape_illegal_request_line",
+        "total_count": 0,
+        "incomplete_results": false,
+        "items": []
+      }
+    },
+    {
+      "url": "https://api.github.com/search/issues?q=repo%3Acloudflare%2Fpingora%20serde_yaml&per_page=20",
+      "fetched_at": "2026-11-11T04:43:46.068Z",
+      "sha256": "233f81d41a5e71a6a36b2dcfc705f73149de6944e2e8caf95f32e530185527c8",
+      "search": {
+        "term": "serde_yaml",
+        "total_count": 6,
+        "incomplete_results": false,
+        "items": [
+          {
+            "title": "refactor(core): replace the unmaintained serde_yaml with serde-saphyr (RUSTSEC-2024-0449)",
+            "url": "https://github.com/cloudflare/pingora/pull/1117",
+            "state": "open",
+            "updated_at": "2026-11-08T17:32:31Z",
+            "pull_request": true
+          },
+          {
+            "title": "Make serde_yaml optional or configurable",
+            "url": "https://github.com/cloudflare/pingora/issues/779",
+            "state": "open",
+            "updated_at": "2026-10-14T04:23:05Z",
+            "pull_request": false
+          },
+          {
+            "title": "RUSTSEC-2024-0449: unsafe-libyaml is unmaintained",
+            "url": "https://github.com/cloudflare/pingora/issues/1058",
+            "state": "open",
+            "updated_at": "2026-11-08T18:35:42Z",
+            "pull_request": false
+          },
+          {
+            "title": "ServerConf::from_yaml() & Co. should be implemented via a trait",
+            "url": "https://github.com/cloudflare/pingora/issues/232",
+            "state": "open",
+            "updated_at": "2024-05-11T11:33:57Z",
+            "pull_request": false
+          },
+          {
+            "title": "sec: removed atty",
+            "url": "https://github.com/cloudflare/pingora/pull/697",
+            "state": "closed",
+            "updated_at": "2025-12-19T22:04:17Z",
+            "pull_request": true
+          },
+          {
+            "title": "Update serde_yaml requirement from 0.8 to 0.9",
+            "url": "https://github.com/cloudflare/pingora/pull/74",
+            "state": "closed",
+            "updated_at": "2024-03-02T00:44:27Z",
+            "pull_request": true
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://api.github.com/search/issues?q=repo%3Acloudflare%2Fpingora%20derivative&per_page=20",
+      "fetched_at": "2026-11-11T04:43:46.526Z",
+      "sha256": "7eb4e42331b1303aab41c594f156ef6a49b481ae6fce69c273c213efb73de378",
+      "search": {
+        "term": "derivative",
+        "total_count": 4,
+        "incomplete_results": false,
+        "items": [
+          {
+            "title": "RUSTSEC-2024-0388: `derivative` is unmaintained; consider using an alternative",
+            "url": "https://github.com/cloudflare/pingora/issues/889",
+            "state": "open",
+            "updated_at": "2026-10-04T06:49:25Z",
+            "pull_request": false
+          },
+          {
+            "title": "Update prometheus Dependency to Resolve Vulnerability (Currently Locked to 0.13.x)",
+            "url": "https://github.com/cloudflare/pingora/issues/875",
+            "state": "open",
+            "updated_at": "2026-05-15T17:30:47Z",
+            "pull_request": false
+          },
+          {
+            "title": "Implement the FastCGI protocol",
+            "url": "https://github.com/cloudflare/pingora/issues/133",
+            "state": "open",
+            "updated_at": "2024-05-05T08:45:08Z",
+            "pull_request": false
+          },
+          {
+            "title": "sec: removed atty",
+            "url": "https://github.com/cloudflare/pingora/pull/697",
+            "state": "closed",
+            "updated_at": "2025-12-19T22:04:17Z",
+            "pull_request": true
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/3f87e92c982ee27c714506e16ae362776faea4aa/pingora-core/src/protocols/http/custom/server.rs",
+      "fetched_at": "2026-11-11T04:43:46.608Z",
+      "sha256": "6083b456e3516daba59f53f5fb16337e92ed7ef5b5df1d59cd12b1d97e1ec0f7",
+      "custom_downstream_session": {
+        "visibility": "doc(hidden) public trait; source review only",
+        "excerpt": {
+          "first_line": 28,
+          "text": "/// A concrete custom downstream session.\n///\n/// Async operations return concrete `Send` futures so dispatch does not require\n/// an allocation per call. Implementations may use `async fn` to satisfy these\n/// methods. This trait is intentionally not dyn-compatible.\npub trait Session: Send + Sync + Unpin + 'static {\n    fn req_header(&self) -> &RequestHeader;\n\n    fn req_header_mut(&mut self) -> &mut RequestHeader;\n\n    fn read_body_bytes(&mut self) -> impl Future<Output = Result<Option<Bytes>>> + Send;\n\n    fn drain_request_body(&mut self) -> impl Future<Output = Result<()>> + Send;\n\n    fn write_response_header(\n        &mut self,\n        resp: Box<ResponseHeader>,\n        end: bool,\n    ) -> impl Future<Output = Result<()>> + Send;\n\n    fn write_response_header_ref(\n        &mut self,\n        resp: &ResponseHeader,\n        end: bool,\n    ) -> impl Future<Output = Result<()>> + Send;\n\n    fn write_body(&mut self, data: Bytes, end: bool) -> impl Future<Output = Result<()>> + Send;\n\n    fn write_trailers(&mut self, trailers: HeaderMap) -> impl Future<Output = Result<()>> + Send;\n\n    fn response_duplex_vec(\n        &mut self,\n        tasks: Vec<HttpTask>,\n    ) -> impl Future<Output = Result<bool>> + Send;\n\n    /// Whether the cancel-safe proxy task API is enabled for this session.\n    fn proxy_tasks_enabled(&self) -> bool {\n        false\n    }\n\n    /// Enable or disable the cancel-safe proxy task API for this session.\n    fn set_proxy_tasks_enabled(&mut self, _enabled: bool) {}\n\n    /// Queue a proxy task for cancel-safe writing.\n    ///\n    /// # Panics\n    /// Panics if the Custom session does not implement the proxy task API.\n    #[track_caller]\n    fn send_proxy_task(&mut self, _task: HttpTask) {\n        panic!(\"Custom proxy task API not implemented\")\n    }\n\n    /// Whether there are pending proxy tasks queued for writing.\n    fn has_pending_proxy_tasks(&self) -> bool {\n        false\n    }\n\n    /// Write queued proxy tasks in a cancel-safe manner.\n    ///\n    /// # Panics\n    /// Panics if the Custom session does not implement the proxy task API.\n    fn write_proxy_tasks(&mut self) -> impl Future<Output = Result<bool>> + Send {\n        async { panic!(\"Custom proxy task API not implemented\") }\n    }\n\n    fn set_read_timeout(&mut self, timeout: Option<Duration>);\n\n    fn get_read_timeout(&self) -> Option<Duration>;\n\n    fn set_write_timeout(&mut self, timeout: Option<Duration>);\n\n    fn get_write_timeout(&self) -> Option<Duration>;\n\n    fn set_total_drain_timeout(&mut self, timeout: Option<Duration>);\n\n    fn get_total_drain_timeout(&self) -> Option<Duration>;\n\n    fn request_summary(&self) -> String;\n\n    fn response_written(&self) -> Option<&ResponseHeader>;\n\n    /// Whether the whole response is written, so nothing is left to deliver to the client.\n    ///\n    /// The proxy uses this to tell a client that failed after receiving its whole response from\n    /// one that left before it was complete. With the default `false`, every failure the proxy\n    /// counts as the client leaving is taken as leaving before the response was complete.\n    fn is_response_complete(&self) -> bool {\n        false\n    }\n\n    fn shutdown(&mut self, code: u32, ctx: &str) -> impl Future<Output = ()> + Send;\n\n    /// Abandon the response mid-message, in a way the peer can tell apart from a\n    /// response that was completed.\n    ///\n    /// Callers use this to signal that the message they were sending cannot be\n    /// finished, so the peer must not treat what it has already received as a\n    /// whole message. It is the counterpart of [`Session::finish`], which ends a\n    /// message that *is* complete.\n    ///\n    /// Defaults to [`Session::shutdown`], preserving the behavior of\n    /// implementations that predate this method. Implementations whose protocol\n    /// can distinguish an abandoned message from a completed one should override\n    /// this; otherwise a peer may read the abandoned message as successful.\n    fn abandon(&mut self, ctx: &str) -> impl Future<Output = ()> + Send {\n        async move {\n            self.shutdown(0, ctx).await;\n        }\n    }\n\n    fn is_body_done(&mut self) -> bool;\n\n    fn finish(&mut self) -> impl Future<Output = Result<()>> + Send;\n\n    fn is_body_empty(&mut self) -> bool;\n\n    /// Read a request-body chunk, or watch for transport termination while idle.\n    ///\n    /// When `no_body_expected` is `false`, return body bytes or `Ok(None)` for EOF.\n    /// When it is `true`, no further request-body events are expected: remain pending\n    /// until a reset, disconnect, or other transport error can be returned as `Err`.\n    /// Do not return `Ok(None)` again or return additional body bytes in idle mode.\n    /// Implementations should reject either result as an internal error.\n    ///\n    /// This operation must be cancellation-safe: proxy loops may drop and recreate\n    /// its future when another request or response event becomes ready. Dropping\n    /// the future must not lose body bytes or a termination notification.\n    fn read_body_or_idle(\n        &mut self,\n        no_body_expected: bool,\n    ) -> impl Future<Output = Result<Option<Bytes>>> + Send;\n\n    fn body_bytes_sent(&self) -> usize;\n\n    fn body_bytes_read(&self) -> usize;\n\n    fn digest(&self) -> Option<&Digest>;\n\n    fn digest_mut(&mut self) -> Option<&mut Digest>;\n\n    fn client_addr(&self) -> Option<&SocketAddr>;\n\n    fn server_addr(&self) -> Option<&SocketAddr>;\n\n    fn pseudo_raw_h1_request_header(&self) -> Bytes;\n\n    fn enable_retry_buffering(&mut self);\n\n    fn retry_buffer_truncated(&self) -> bool;\n\n    fn get_retry_buffer(&self) -> Option<Bytes>;\n\n    fn finish_custom(&mut self) -> impl Future<Output = Result<()>> + Send;\n\n    fn take_custom_message_reader(\n        &mut self,\n    ) -> Option<Box<dyn Stream<Item = Result<Bytes>> + Unpin + Send + Sync + 'static>>;\n\n    fn restore_custom_message_reader(\n        &mut self,\n        reader: Box<dyn Stream<Item = Result<Bytes>> + Unpin + Send + Sync + 'static>,\n    ) -> Result<()>;\n\n    fn take_custom_message_writer(&mut self) -> Option<Box<dyn CustomMessageWrite>>;\n\n    fn restore_custom_message_writer(&mut self, writer: Box<dyn CustomMessageWrite>) -> Result<()>;\n\n    /// Whether this request is for upgrade (e.g., websocket).\n    ///\n    /// Returns `true` if the request has HTTP/1.1 version and contains an Upgrade header.\n    fn is_upgrade_req(&self) -> bool {\n        false\n    }\n\n    /// Whether this session was fully upgraded (completed Upgrade handshake).\n    ///\n    /// Returns `true` if the request was an upgrade request and a 101 response was sent.\n    fn was_upgraded(&self) -> bool {\n        false\n    }\n}\n"
+        }
+      }
+    },
+    {
+      "url": "https://api.github.com/repos/cloudflare/pingora/pulls/1000",
+      "fetched_at": "2026-11-11T04:43:46.990Z",
+      "sha256": "f82fe638685fa3e8a8df18f90da3c94c24d68cd4b04d4ad603c1bcc0ca365843",
+      "pull_request": {
+        "url": "https://github.com/cloudflare/pingora/pull/1000",
+        "title": "feat(http1): expose configurable request-header parser admission limits (#993)",
+        "state": "open",
+        "merged_at": null,
+        "head_sha": "6a90c79b61fbbc70b518709de6802165668cba2c",
+        "base_sha": "702f69015e53f7244d6ad2e743de571d859a70a4",
+        "body": "### Description\n\nThis PR addresses #993 by exposing configurable request-header admission limits (`max_header_size` and `max_headers`) on `HttpServerOptions`, propagating them through `ServerSession` to the underlying HTTP/1 `HttpSession`.\n\n### Motivation\n\nIn HTTP/1.x downstream servers, Pingora previously enforced hardcoded limits:\n- `MAX_HEADER_SIZE`: 1,048,575 bytes (~1 MiB)\n- `MAX_HEADERS`: 256 headers\n\nFor reverse proxies and security-sensitive gateways, rejecting oversized headers only in downstream application filters (e.g. `request_filter`) is often too late: the server has already buffered up to 1 MiB of untrusted header bytes into memory per connection. Enforcing configurable admission bounds directly in `HttpSession::read_request()` prevents memory exhaustion and slowloris-style buffer bloat before request processing begins. Conversely, proxies operating in trusted environments can adjust limits appropriately.\n\n### Key Changes\n\n1. **`HttpServerOptions`**:\n   - Added `pub max_header_size: Option<usize>` (bytes limit).\n   - Added `pub max_headers: Option<usize>` (header count limit).\n   - Added `validate(&self) -> Result<()>` checking that neither limit is set to `Some(0)`.\n\n2. **Session Layer Accessors**:\n   - Added `set_max_header_size`, `max_header_size`, `set_max_headers`, and `max_headers` on `ServerSession` and `HttpSession`.\n\n3. **Zero-Allocation Parser Admission (`HttpSession::read_request`)**:\n   - **Initial allocation:** Bounds initial buffer capacity to `INIT_HEADER_BUF_SIZE.min(max_header_size)`.\n   - **Slow bloat guard:** Replaced hardcoded `MAX_HEADER_SIZE` guard with `already_read > max_header_size`.\n   - **Count limit:** Slices the stack-allocated header array `&mut headers[..max_headers]` when constructing `httparse::Request`. This enforces the count limit on the stack with zero heap allocations, returning `InvalidHTTPHeader` via httparse's `TooManyHeaders`.\n   - **Single packet guard:** Checks `if s > max_header_size` in `HeaderParseState::Complete(s)` to prevent large single-chunk reads or pipelined prefixes from exceeding limits.\n\n4. **Keep-Alive Preservation**:\n   - Propagates `server_options.max_header_size` and `server_options.max_headers` across reused connections in `HttpServerApp::process_new`.\n\n5. **Backward Compatibility**:\n   - Both settings default to `None`. When unset, existing defaults (`MAX_HEADER_SIZE = 1,048,575` bytes and `MAX_HEADERS = 256`) remain strictly intact.\n\n### Testing\n\nAdded comprehensive unit tests covering:\n- `test_max_header_size_within_limit`: Valid request within custom size limit parses successfully.\n- `test_max_header_size_exceeded_multi_chunk`: Request exceeding limit across multiple chunks is rejected with `InvalidHTTPHeader`.\n- `test_max_header_size_exceeded_single_chunk`: Complete request exceeding limit in a single read is rejected.\n- `test_max_header_size_pipelined_prefix`: Pipelined prefix exceeding limit is rejected.\n- `test_max_headers_within_limit`: Header count within custom limit succeeds.\n- `test_max_headers_exceeded`: Exceeding header count limit rejects with `InvalidHTTPHeader`.\n- `test_default_limits_preserved`: Default configuration preserves existing behavior.\n- `test_http_server_options_validation`: Validates non-zero bounds on options.\n\nCloses #993\n"
+      }
+    },
+    {
+      "url": "https://api.github.com/repos/cloudflare/pingora/pulls/1117",
+      "fetched_at": "2026-11-11T04:43:47.381Z",
+      "sha256": "dcb5f01db6c0f851739927a2b5c93e100f2300482a70ade904d671207113dc51",
+      "pull_request": {
+        "url": "https://github.com/cloudflare/pingora/pull/1117",
+        "title": "refactor(core): replace the unmaintained serde_yaml with serde-saphyr (RUSTSEC-2024-0449)",
+        "state": "open",
+        "merged_at": null,
+        "head_sha": "522eb28e4b2dba6449274ed7267edca0b8137184",
+        "base_sha": "1adcb3815b70d6594379db044b5aa67f9bc1af76",
+        "body": "Refs #779 (replace the deprecated `serde_yaml`; the maintainers' answer there was that they would). Fixes #1058 (RUSTSEC-2024-0449).\n\n## Why\n\n`serde_yaml` is archived, and it pulls in `unsafe-libyaml`, which the advisory RUSTSEC-2024-0449 reports as unmaintained. It reaches every downstream project through `pingora-core`, so each of them has to ignore the advisory (#1058). `serde-saphyr` is safe Rust, maintained, and the replacement the advisory suggests.\n\n## What\n\n- `pingora-core`: `ServerConf::from_yaml` and `ServerConf::to_yaml` use `serde_saphyr::from_str` / `to_string`. The API of `pingora-core` does not change.\n- `pingora-proxy`: the `modify_response` example (and the dev-dependency) uses `serde_saphyr::to_string`.\n- The one test that inspected a `serde_yaml::Value` (`test_working_directory_deserializes_from_yaml_string`) now checks the written yaml and that it reads back as the same configuration.\n- A second commit changes the CI toolchain matrix (see below).\n\n`serde_yaml` and `unsafe-libyaml` are gone from the dependency tree of `pingora-core` and `pingora-proxy` (`cargo tree -i unsafe-libyaml` finds nothing).\n\n## The MSRV (please read)\n\n`serde-saphyr` uses let chains and declares `rust-version = \"1.89\"` (its releases from 1.2.0 on; 1.1.0 declares nothing but already fails on 1.85 with `error[E0658]: let expressions in this position are unstable`). The job that checks the oldest toolchain, 1.85.0, therefore cannot build `pingora-core` with it. This was the question raised in #779 (\"it requires rust 1.89\").\n\nI kept that change in its own commit, so it is easy to drop or rework: the oldest toolchain in `.github/workflows/build.yml` becomes `1.89.0` (same exclusions as before), and `pingora-cache`, which declares a `rust-version` and depends on `pingora-core`, declares `1.89`. I did not touch `clippy.toml` (`msrv = \"1.85\"`), because changing it can enable new lints, which is a separate decision. If you prefer to keep 1.85, the alternative is a maintained fork of the same libyaml port (for example `serde_norway`), which keeps the C-translated parser and may build on 1.85; I did not try it. Tell me which way you prefer and I will rework the PR.\n\n## Checked\n\n- `cargo test -p pingora-core --lib server::configuration`: 14 passed, on stable (1.99.1, Linux).\n- `cargo check -p pingora-core -p pingora-proxy -p pingora-cache -p pingora-load-balancing --all-targets` and `cargo check -p pingora-proxy --example modify_response` on 1.89.0 and on stable.\n- `cargo fmt --all -- --check` is clean.\n- Not run here: `cargo check --workspace` (the BoringSSL crates need libclang, which my machine lacks), the TLS-backend tests, the 1.89.0 test leg of CI.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n"
+      }
+    },
+    {
+      "url": "https://crates.io/api/v1/crates/pingora-core/0.9.1",
+      "fetched_at": "2026-11-11T04:43:48.563Z",
+      "sha256": "1f28959e2753cc71465189354e03a805d18816159375e6a2f98de392f0efc857",
+      "crate": {
+        "name": "pingora-core",
+        "version": "0.9.1",
+        "archive_sha256": "a535f47f65fdcb003f9e1df04cd18e614c128dfe9388acce3f211ae38ac14d68",
+        "matches_registry_checksum": true,
+        "source_checks": [
+          {
+            "file": "src/apps/mod.rs",
+            "sha256": "e440faec2de2104b7dce71c018f870dd181d93127b44c84553dece6dc401b712",
+            "matches_published_archive": true
+          },
+          {
+            "file": "src/protocols/http/v1/server.rs",
+            "sha256": "c4459a2b6f274cf2300b83944e62f15a9fbd06454c3867d35b34e034585b274e",
+            "matches_published_archive": true
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://crates.io/api/v1/crates/pingora-proxy/0.9.1",
+      "fetched_at": "2026-11-11T04:43:49.587Z",
+      "sha256": "d02e5dd7ccd1564217e055e1c0878a6af8f1d46189784d8908db5934dace9557",
+      "crate": {
+        "name": "pingora-proxy",
+        "version": "0.9.1",
+        "archive_sha256": "8e3d5670490740405ecc8c6f75c3fcbce4d24f7adaffb355ca44550e7918e358",
+        "matches_registry_checksum": true,
+        "source_checks": [
+          {
+            "file": "src/lib.rs",
+            "sha256": "70d42079405fde9a6a7b03565b47c1ad7eb939377383c00857f326fd9de3f435",
+            "matches_published_archive": true
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/RustSec/advisory-db/main/crates/derivative/RUSTSEC-2024-0388.md",
+      "fetched_at": "2026-11-11T04:43:49.904Z",
+      "sha256": "fb757162f87a2976590e152c73ff3912fd2a5939504c24d5563dfcbe5d533124",
+      "advisory": "```toml\n[advisory]\nid = \"RUSTSEC-2024-0388\"\npackage = \"derivative\"\ndate = \"2024-06-26\"\nurl = \"https://github.com/mcarton/rust-derivative/issues/117\"\ninformational = \"unmaintained\"\n\n[versions]\npatched = []\n\n```\n# `derivative` is unmaintained; consider using an alternative\n\nThe [`derivative`](https://crates.io/crates/derivative) crate is no longer maintained.\nConsider using any alternative, for instance:\n- [derive_more](https://crates.io/crates/derive_more)\n- [derive-where](https://crates.io/crates/derive-where)\n- [educe](https://crates.io/crates/educe)\n"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/RustSec/advisory-db/main/crates/unsafe-libyaml/RUSTSEC-2024-0449.md",
+      "fetched_at": "2026-11-11T04:43:50.375Z",
+      "sha256": "99da8fa8d7ce73ca12b32cadedef33ff160d120dd63a338447a8fa70eac0d549",
+      "advisory": "```toml\n[advisory]\nid = \"RUSTSEC-2024-0449\"\npackage = \"unsafe-libyaml\"\ndate = \"2024-03-25\"\ninformational = \"unmaintained\"\nurl = \"https://github.com/dtolnay/unsafe-libyaml\"\n\n[versions]\npatched = []\nunaffected = []\n```\n\n# unsafe-libyaml is unmaintained\n\nThe [repository](https://github.com/dtolnay/unsafe-libyaml) was archived by\nits owner on 2024-03-25 and is read-only. The last release is 0.2.11\n(March 2024).\n\n`unsafe-libyaml` is a machine translation of libyaml's C code into unsafe\nRust (c2rust). Bugs found in it will not be fixed upstream. It is used by\n`serde_yaml` (itself deprecated) and by forks such as `serde_yaml_ng`.\n\n## Alternatives\n\nConsider a YAML parser written in safe Rust, for example:\n\n- [saphyr](https://crates.io/crates/saphyr) ([serde-saphyr](https://crates.io/crates/serde-saphyr) for serde users)\n- [noyalib](https://crates.io/crates/noyalib)\n"
+    }
+  ]
+}

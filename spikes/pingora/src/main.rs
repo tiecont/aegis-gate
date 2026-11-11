@@ -325,6 +325,23 @@ mod tests {
     }
 
     #[test]
+    fn maintained_parser_distinguishes_raw_from_percent_encoded_targets() {
+        for (raw, encoded) in [
+            ("/bad target", "/bad%20target"),
+            ("/bad\ttarget", "/bad%09target"),
+            ("/bad\x01target", "/bad%01target"),
+            ("/bad\x00target", "/bad%00target"),
+        ] {
+            assert!(!safe_original_framing(
+                format!("GET {raw} HTTP/1.1\r\nHost: edge-a.test\r\n\r\n").as_bytes()
+            ));
+            assert!(safe_original_framing(
+                format!("GET {encoded} HTTP/1.1\r\nHost: edge-a.test\r\n\r\n").as_bytes()
+            ));
+        }
+    }
+
+    #[test]
     fn original_cl_te_is_rejected_regardless_of_case_or_order() {
         for headers in [
             "Content-Length: 1\r\nTransfer-Encoding: chunked",
