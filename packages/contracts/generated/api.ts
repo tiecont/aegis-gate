@@ -639,6 +639,54 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/projects/{project}/publications/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["previewConfigurationPublication"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project}/publications": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["approveConfigurationPublication"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{project}/publications/rollback": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["rollbackConfigurationPublication"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -835,6 +883,72 @@ export interface components {
             service: "control-api";
             /** @enum {string} */
             status: "alive";
+        };
+        SnapshotV1Domain: {
+            id: string;
+            tenant_id: string;
+            hostname: string;
+            verified_until: string;
+        };
+        SnapshotV1Endpoint: {
+            id: string;
+            tenant_id: string;
+            url: string;
+            generation: number;
+        };
+        SnapshotV1Pool: {
+            id: string;
+            tenant_id: string;
+            generation: number;
+            endpoints: components["schemas"]["SnapshotV1Endpoint"][];
+        };
+        SnapshotV1Policy: {
+            id: string;
+            tenant_id: string;
+            generation: number;
+            /** @enum {unknown} */
+            auth_required: true;
+            jwt_issuer: string;
+            jwt_audience: string;
+        };
+        SnapshotV1Route: {
+            id: string;
+            tenant_id: string;
+            generation: number;
+            domain_id: string;
+            origin_pool_id: string;
+            policy_id: string;
+            path: string;
+            methods: ("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS")[];
+        };
+        SnapshotV1Tenant: {
+            id: string;
+            domains: components["schemas"]["SnapshotV1Domain"][] | null;
+            origin_pools: components["schemas"]["SnapshotV1Pool"][] | null;
+            policies: components["schemas"]["SnapshotV1Policy"][] | null;
+            routes: components["schemas"]["SnapshotV1Route"][] | null;
+        };
+        SnapshotV1Payload: {
+            tenants: components["schemas"]["SnapshotV1Tenant"][] | null;
+        };
+        PublicationPreview: {
+            payload: components["schemas"]["SnapshotV1Payload"];
+            digest: string;
+        };
+        Publication: {
+            /** Format: uuid */
+            deployment_id: string;
+            generation: number;
+            payload_digest: string;
+            rollback_of?: number;
+        };
+        PublicationRequest: {
+            digest: string;
+            ttl_seconds: number;
+        };
+        PublicationRollbackRequest: {
+            generation: number;
+            ttl_seconds: number;
         };
     };
     responses: {
@@ -2521,6 +2635,106 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
+        };
+    };
+    previewConfigurationPublication: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                project: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Authorized local configuration publication operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicationPreview"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    approveConfigurationPublication: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+                Origin: string;
+            };
+            path: {
+                project: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PublicationRequest"];
+            };
+        };
+        responses: {
+            /** @description Authorized local configuration publication operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Publication"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
+        };
+    };
+    rollbackConfigurationPublication: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+                Origin: string;
+            };
+            path: {
+                project: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PublicationRollbackRequest"];
+            };
+        };
+        responses: {
+            /** @description Authorized local configuration publication operation */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Publication"];
+                };
+            };
+            400: components["responses"]["Unavailable"];
+            401: components["responses"]["Unavailable"];
+            404: components["responses"]["Unavailable"];
+            409: components["responses"]["Unavailable"];
+            429: components["responses"]["Unavailable"];
+            503: components["responses"]["Unavailable"];
         };
     };
 }

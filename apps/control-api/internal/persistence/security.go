@@ -87,12 +87,12 @@ func (s *Store) GrantRoles(ctx context.Context, runtime, maintenance string) err
 			return opaque(err)
 		}
 	}
-	for _, table := range []string{"organizations", "memberships", "projects", "resources", "domain_claims", "route_bindings", "admin_sessions", "domain_verification_jobs", "origin_pools", "origin_endpoints", "active_route_approvals"} {
+	for _, table := range []string{"organizations", "memberships", "projects", "resources", "domain_claims", "route_bindings", "admin_sessions", "domain_verification_jobs", "origin_pools", "origin_endpoints", "active_route_approvals", "config_deployments", "config_outbox"} {
 		if _, err = tx.Exec(ctx, "GRANT SELECT,INSERT,UPDATE ON "+qSchema+"."+pgx.Identifier{table}.Sanitize()+" TO "+qRun); err != nil {
 			return opaque(err)
 		}
 	}
-	for _, table := range []string{"resource_revisions", "mutation_keys", "audit_events", "route_approvals", "origin_endpoint_revisions", "origin_pool_revisions", "origin_pool_approvals", "origin_mutation_keys", "route_retirements"} {
+	for _, table := range []string{"resource_revisions", "mutation_keys", "audit_events", "route_approvals", "origin_endpoint_revisions", "origin_pool_revisions", "origin_pool_approvals", "origin_mutation_keys", "route_retirements", "config_revisions"} {
 		if _, err = tx.Exec(ctx, "GRANT SELECT,INSERT ON "+qSchema+"."+pgx.Identifier{table}.Sanitize()+" TO "+qRun); err != nil {
 			return opaque(err)
 		}
@@ -123,7 +123,7 @@ func (s *Store) RequireRuntimeRole(ctx context.Context) error {
 		AND NOT has_schema_privilege(current_user,current_schema(),'CREATE')
 		AND NOT EXISTS(SELECT 1 FROM pg_namespace n WHERE n.nspname !~ '^pg_' AND has_schema_privilege(current_user,n.oid,'CREATE'))
 		AND NOT EXISTS(SELECT 1 FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname=current_schema() AND c.relkind IN ('r','p') AND (has_table_privilege(current_user,c.oid,'DELETE') AND c.relname<>'login_attempts' OR has_table_privilege(current_user,c.oid,'TRUNCATE,TRIGGER,REFERENCES')))
-		AND NOT EXISTS(SELECT 1 FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname=current_schema() AND c.relname IN ('resource_revisions','audit_events','route_approvals','origin_endpoint_revisions','origin_pool_revisions','origin_pool_approvals','route_retirements','organization_quotas','aegis_migrations') AND has_table_privilege(current_user,c.oid,'UPDATE'))
+		AND NOT EXISTS(SELECT 1 FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname=current_schema() AND c.relname IN ('resource_revisions','audit_events','route_approvals','origin_endpoint_revisions','origin_pool_revisions','origin_pool_approvals','route_retirements','organization_quotas','aegis_migrations','config_revisions') AND has_table_privilege(current_user,c.oid,'UPDATE'))
 		AND NOT has_function_privilege(current_user,current_schema()||'.cleanup_control_state()','EXECUTE')
 		FROM pg_roles r WHERE r.rolname=current_user`).Scan(&safe)
 	if err != nil {

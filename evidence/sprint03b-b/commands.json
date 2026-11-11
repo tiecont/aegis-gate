@@ -1,0 +1,68 @@
+[
+  {
+    "source_commit": "aae3f3c7d7816a3ea7211a8ffa0bdba0ef267140",
+    "argv": [
+      "flock",
+      "/tmp/aegisgate-sprint02-fixtures.lock",
+      "env",
+      "AEGIS_TENANCY_INTEGRATION=1",
+      "go",
+      "test",
+      "-race",
+      "-v",
+      "./internal/configpublish",
+      "./apps/control-api/internal/persistence",
+      "-run",
+      "TestIntegrationJetStreamMutualTLSBoundedDurabilityNegative|TestIntegrationConfigPublicationNegativeAndRecovery",
+      "-count=1"
+    ],
+    "started_at": "2026-11-11T15:25:32.748013+00:00",
+    "finished_at": "2026-11-11T15:25:36.703353+00:00",
+    "exit_code": 0,
+    "sha256": "552d50bb3c6f05c51e1e6709c6e9fd86eed91d0dee16e26a890e50aa29ffa858"
+  },
+  {
+    "source_commit": "aae3f3c7d7816a3ea7211a8ffa0bdba0ef267140",
+    "argv": [
+      "go",
+      "test",
+      "-race",
+      "./internal/configpublish",
+      "./apps/config-publisher/...",
+      "./apps/control-api/publication/...",
+      "./packages/test-fixtures/configlab",
+      "-count=1"
+    ],
+    "started_at": "2026-11-11T15:25:36.703411+00:00",
+    "finished_at": "2026-11-11T15:25:38.328568+00:00",
+    "exit_code": 0,
+    "sha256": "a90ba66ee03c8aed0083429208c15b9860221dd1edbf2fb7fd64dc685f532c34"
+  },
+  {
+    "source_commit": "aae3f3c7d7816a3ea7211a8ffa0bdba0ef267140",
+    "argv": [
+      "go",
+      "vet",
+      "./internal/configpublish",
+      "./apps/config-publisher/...",
+      "./apps/control-api/publication/...",
+      "./packages/test-fixtures/configlab"
+    ],
+    "started_at": "2026-11-11T15:25:38.328616+00:00",
+    "finished_at": "2026-11-11T15:25:40.159629+00:00",
+    "exit_code": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source_commit": "aae3f3c7d7816a3ea7211a8ffa0bdba0ef267140",
+    "argv": [
+      "node",
+      "--check",
+      "/home/tiecont/Projects/aegis-gate/scripts/module03-contracts.mjs"
+    ],
+    "started_at": "2026-11-11T15:25:40.159664+00:00",
+    "finished_at": "2026-11-11T15:25:40.184878+00:00",
+    "exit_code": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

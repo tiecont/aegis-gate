@@ -513,6 +513,32 @@ type PoolUpdate struct {
 // PoolUpdateState defines model for PoolUpdate.State.
 type PoolUpdateState string
 
+// Publication defines model for Publication.
+type Publication struct {
+	DeploymentId  string `json:"deployment_id"`
+	Generation    int    `json:"generation"`
+	PayloadDigest string `json:"payload_digest"`
+	RollbackOf    *int   `json:"rollback_of,omitempty"`
+}
+
+// PublicationPreview defines model for PublicationPreview.
+type PublicationPreview struct {
+	Digest  string            `json:"digest"`
+	Payload SnapshotV1Payload `json:"payload"`
+}
+
+// PublicationRequest defines model for PublicationRequest.
+type PublicationRequest struct {
+	Digest     string `json:"digest"`
+	TtlSeconds int    `json:"ttl_seconds"`
+}
+
+// PublicationRollbackRequest defines model for PublicationRollbackRequest.
+type PublicationRollbackRequest struct {
+	Generation int `json:"generation"`
+	TtlSeconds int `json:"ttl_seconds"`
+}
+
 // RevisionPreview defines model for RevisionPreview.
 type RevisionPreview struct {
 	Approvable bool               `json:"approvable"`
@@ -551,6 +577,66 @@ type RouteSpec0 = interface{}
 
 // RouteSpec1 defines model for RouteSpec.1.
 type RouteSpec1 = interface{}
+
+// SnapshotV1Domain defines model for SnapshotV1Domain.
+type SnapshotV1Domain struct {
+	Hostname      string `json:"hostname"`
+	Id            string `json:"id"`
+	TenantId      string `json:"tenant_id"`
+	VerifiedUntil string `json:"verified_until"`
+}
+
+// SnapshotV1Endpoint defines model for SnapshotV1Endpoint.
+type SnapshotV1Endpoint struct {
+	Generation int    `json:"generation"`
+	Id         string `json:"id"`
+	TenantId   string `json:"tenant_id"`
+	Url        string `json:"url"`
+}
+
+// SnapshotV1Payload defines model for SnapshotV1Payload.
+type SnapshotV1Payload struct {
+	Tenants *[]SnapshotV1Tenant `json:"tenants"`
+}
+
+// SnapshotV1Policy defines model for SnapshotV1Policy.
+type SnapshotV1Policy struct {
+	AuthRequired interface{} `json:"auth_required"`
+	Generation   int         `json:"generation"`
+	Id           string      `json:"id"`
+	JwtAudience  string      `json:"jwt_audience"`
+	JwtIssuer    string      `json:"jwt_issuer"`
+	TenantId     string      `json:"tenant_id"`
+}
+
+// SnapshotV1Pool defines model for SnapshotV1Pool.
+type SnapshotV1Pool struct {
+	Endpoints  []SnapshotV1Endpoint `json:"endpoints"`
+	Generation int                  `json:"generation"`
+	Id         string               `json:"id"`
+	TenantId   string               `json:"tenant_id"`
+}
+
+// SnapshotV1Route defines model for SnapshotV1Route.
+type SnapshotV1Route struct {
+	DomainId     string        `json:"domain_id"`
+	Generation   int           `json:"generation"`
+	Id           string        `json:"id"`
+	Methods      []interface{} `json:"methods"`
+	OriginPoolId string        `json:"origin_pool_id"`
+	Path         string        `json:"path"`
+	PolicyId     string        `json:"policy_id"`
+	TenantId     string        `json:"tenant_id"`
+}
+
+// SnapshotV1Tenant defines model for SnapshotV1Tenant.
+type SnapshotV1Tenant struct {
+	Domains     *[]SnapshotV1Domain `json:"domains"`
+	Id          string              `json:"id"`
+	OriginPools *[]SnapshotV1Pool   `json:"origin_pools"`
+	Policies    *[]SnapshotV1Policy `json:"policies"`
+	Routes      *[]SnapshotV1Route  `json:"routes"`
+}
 
 // VerificationJob defines model for VerificationJob.
 type VerificationJob struct {
@@ -759,6 +845,20 @@ type Acceptance18Params struct {
 	To   int `form:"to" json:"to"`
 }
 
+// ApproveConfigurationPublicationParams defines parameters for ApproveConfigurationPublication.
+type ApproveConfigurationPublicationParams struct {
+	IdempotencyKey string `json:"Idempotency-Key"`
+	XCSRFToken     string `json:"X-CSRF-Token"`
+	Origin         string `json:"Origin"`
+}
+
+// RollbackConfigurationPublicationParams defines parameters for RollbackConfigurationPublication.
+type RollbackConfigurationPublicationParams struct {
+	IdempotencyKey string `json:"Idempotency-Key"`
+	XCSRFToken     string `json:"X-CSRF-Token"`
+	Origin         string `json:"Origin"`
+}
+
 // Management24Params defines parameters for Management24.
 type Management24Params struct {
 	After *string `form:"after,omitempty" json:"after,omitempty"`
@@ -837,6 +937,12 @@ type Management20JSONRequestBody = PolicySpec
 
 // Management22JSONRequestBody defines body for Management22 for application/json ContentType.
 type Management22JSONRequestBody = PolicySpec
+
+// ApproveConfigurationPublicationJSONRequestBody defines body for ApproveConfigurationPublication for application/json ContentType.
+type ApproveConfigurationPublicationJSONRequestBody = PublicationRequest
+
+// RollbackConfigurationPublicationJSONRequestBody defines body for RollbackConfigurationPublication for application/json ContentType.
+type RollbackConfigurationPublicationJSONRequestBody = PublicationRollbackRequest
 
 // Management25JSONRequestBody defines body for Management25 for application/json ContentType.
 type Management25JSONRequestBody = RouteSpec

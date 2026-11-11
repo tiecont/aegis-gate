@@ -1,0 +1,36 @@
+{
+  "syntax_and_whitespace": {
+    "commands": [
+      "git diff --check",
+      "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node --check spikes/envoy/recovery-config.mjs",
+      "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node --check spikes/envoy/recovery-launcher.mjs",
+      "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node --check spikes/envoy/recovery-run.mjs",
+      "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node --check spikes/envoy/recovery-raw-h2.mjs"
+    ],
+    "exit_code": 0
+  },
+  "secret_scan": {
+    "argv": [
+      "docker",
+      "run",
+      "--rm",
+      "--network",
+      "none",
+      "--user",
+      "1000:1000",
+      "-v",
+      "/tmp/aegisgate-03b-e:/repo:ro",
+      "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+      "dir",
+      "/repo/evidence/sprint03b-e",
+      "--config",
+      "/repo/.github/gitleaks.toml",
+      "--redact",
+      "--no-banner"
+    ],
+    "exit_code": 0,
+    "meaningful_scanned_bytes": 414176,
+    "result": "no leaks found",
+    "scope": "new evidence only, not fresh full repository or history scan"
+  }
+}

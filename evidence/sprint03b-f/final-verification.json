@@ -1,0 +1,106 @@
+[
+  {
+    "argv": [
+      "node",
+      "--check",
+      "evidence/sprint03b-f/finalize.mjs"
+    ],
+    "cwd": "/tmp/aegisgate-03b-f",
+    "started_at": "2026-11-11T15:54:13.309Z",
+    "ended_at": "2026-11-11T15:54:13.334Z",
+    "exit_code": 0,
+    "log": "finalize-syntax.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "--check",
+      "spikes/envoy/recovery-config.mjs"
+    ],
+    "cwd": "/tmp/aegisgate-03b-f-parser",
+    "started_at": "2026-11-11T15:54:13.334Z",
+    "ended_at": "2026-11-11T15:54:13.363Z",
+    "exit_code": 0,
+    "log": "recovery-config-syntax.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "--check",
+      "spikes/envoy/recovery-launcher.mjs"
+    ],
+    "cwd": "/tmp/aegisgate-03b-f-parser",
+    "started_at": "2026-11-11T15:54:13.363Z",
+    "ended_at": "2026-11-11T15:54:13.393Z",
+    "exit_code": 0,
+    "log": "recovery-launcher-syntax.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "--check",
+      "spikes/envoy/recovery-run.mjs"
+    ],
+    "cwd": "/tmp/aegisgate-03b-f-parser",
+    "started_at": "2026-11-11T15:54:13.393Z",
+    "ended_at": "2026-11-11T15:54:13.419Z",
+    "exit_code": 0,
+    "log": "recovery-run-syntax.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "--check",
+      "spikes/envoy/recovery-raw-h2.mjs"
+    ],
+    "cwd": "/tmp/aegisgate-03b-f-parser",
+    "started_at": "2026-11-11T15:54:13.419Z",
+    "ended_at": "2026-11-11T15:54:13.443Z",
+    "exit_code": 0,
+    "log": "recovery-raw-h2-syntax.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "cwd": "/tmp/aegisgate-03b-f",
+    "started_at": "2026-11-11T15:54:13.443Z",
+    "ended_at": "2026-11-11T15:54:13.451Z",
+    "exit_code": 0,
+    "log": "diff-check.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "docker",
+      "run",
+      "--rm",
+      "--network",
+      "none",
+      "-v",
+      "/tmp/aegisgate-03b-f/evidence/sprint03b-f:/evidence:ro",
+      "-v",
+      "/tmp/aegisgate-03b-f/.github/gitleaks.toml:/config.toml:ro",
+      "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+      "dir",
+      "/evidence",
+      "--config",
+      "/config.toml",
+      "--redact",
+      "--no-banner"
+    ],
+    "cwd": "/tmp/aegisgate-03b-f",
+    "started_at": "2026-11-11T15:54:13.451Z",
+    "ended_at": "2026-11-11T15:54:14.166Z",
+    "exit_code": 0,
+    "log": "new-evidence-secret-scan.log",
+    "log_sha256": "1e45470eb5459e3953dd2d693fb07967f80a38ef85d5e9578e3df5db474f15f8"
+  }
+]
