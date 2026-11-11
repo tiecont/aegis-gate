@@ -460,7 +460,7 @@ async function main() {
     return { first_response_chunk_ms: +first.toFixed(2), payload_bytes: Buffer.byteLength(payload) };
   });
   await test('WebSocket-upgrade-bidirectional-close', async () => {
-    const ws = new WebSocket(`wss://127.0.0.1:${port}/ws`, { servername: 'edge-a.test', ca: cert('ca'), headers: { host: 'edge-a.test' } });
+    const ws = new WebSocket(`wss://127.0.0.1:${port}/ws`, { servername: 'edge-a.test', ca: cert('ca'), headers: { host: 'edge-a.test' }, handshakeTimeout: 5000 });
     await once(ws, 'open');
     ws.send('isolated-websocket-proof');
     const [message] = await once(ws, 'message');
@@ -678,13 +678,13 @@ async function main() {
       try { assert.equal((await request(refPort)).status, 200); break; } catch (error) { if (attempt === 39) throw error; await delay(100); }
     }
     const pids = execFileSync('docker', ['top', container, '-eo', 'pid'], { encoding: 'utf8' }).trim().split('\n').slice(1).map(Number);
-    const pingora = await benchmark(port, [proxy.pid]);
+    const candidate = await benchmark(port, [proxy.pid]);
     const nginx = await benchmark(refPort, pids);
-    assert.equal(pingora.errors, 0); assert.equal(nginx.errors, 0);
+    assert.equal(candidate.errors, 0); assert.equal(nginx.errors, 0);
     evidence.benchmark = { reference: referenceImage, reference_version: 'nginx/1.30.6',
       profile: `100 warmup, 5 seconds each, closed-loop concurrency 8, 90% GET/1024B response + 10% POST/32768B echo; H1 TLS verified on both hops; keepalive; client/origin/proxy same host; ${buildProfile} Rust build`,
       measurement: 'Linux /proc cumulative user+system CPU, HZ=100; sampled summed RSS at 100ms; latency includes client scheduling and origin; no handshake in steady state',
-      pingora, nginx, limitations: ['short single-run smoke benchmark; no launch SLO or capacity inference', 'independently built binaries; default build settings and crypto libraries may differ',
+      candidate_name: candidateName, candidate, nginx, limitations: ['short single-run smoke benchmark; no launch SLO or capacity inference', 'independently built binaries; default build settings and crypto libraries may differ',
         'RSS sums shared nginx pages across processes', 'not open-loop; coordinated omission; shared host load', 'benchmark runs sequentially'] };
     return evidence.benchmark;
   });
