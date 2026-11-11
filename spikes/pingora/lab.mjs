@@ -437,8 +437,11 @@ async function main() {
     assert.equal(body.forwarded, null); assert.equal(body.tenant, null); assert.equal(body.generation, '1');
   });
   await test('cross-tenant-SNI-Host-binding', async () => {
+    const before = { handlers: originDispatches, bytes: originInboundBytes };
     assert.equal((await request(port, '/', { host: 'edge-b.test' })).status, 421);
     assert.equal((await request(port, '/', { host: 'unknown.test' })).status, 421);
+    assert.equal(originDispatches, before.handlers, 'authority denial dispatched to origin');
+    assert.equal(originInboundBytes, before.bytes, 'authority denial forwarded bytes to origin');
   });
   await test('declared-oversized-body-rejected-before-origin', async () => {
     const before = activeRequests;
@@ -452,9 +455,11 @@ async function main() {
   await test('HTTP2-authority-Host-and-SNI-confusion-rejected', async () => {
     for (const headers of [{ host: 'edge-a.test' }, { ':authority': 'edge-a.test' }, { ':authority': 'user@edge-b.test' }]) {
       const before = h2Requests;
+      const bytesBefore = originInboundBytes;
       const response = await h2Request(port, '/', undefined, headers);
       assert.ok([400, 421].includes(response.status), `unsafe authority status ${response.status}`);
       assert.equal(h2Requests, before, 'confused authority reached origin');
+      assert.equal(originInboundBytes, bytesBefore, 'confused authority forwarded bytes to origin');
     }
   });
   await test('HTTP1-and-HTTP2-body-streaming', async () => {
@@ -535,9 +540,13 @@ async function main() {
   for (const name of ['wrong', 'expired', 'untrusted']) await test(`verified-origin-TLS-rejects-${name}`, async () => {
     publish({ routes: current.routes.map((r) => r.host === 'edge-a.test' ? { ...r, origin_port: badPorts[name] } : r) });
     await delay(150);
+    const before = { handlers: originDispatches, bytes: originInboundBytes, errors: originParseErrors };
     const response = await request(port);
     assert.ok(response.status >= 500 && response.status <= 599, `unexpected TLS status ${response.status}`);
     assert.ok(!response.body.includes('MUST-NOT-BE-SEEN'));
+    assert.equal(originDispatches, before.handlers, 'invalid TLS origin handled request');
+    assert.equal(originInboundBytes, before.bytes, 'invalid TLS origin received HTTP bytes');
+    assert.equal(originParseErrors, before.errors, 'invalid TLS origin parsed HTTP bytes');
     publish({ routes: current.routes.map((r) => r.host === 'edge-a.test' ? { ...r, origin_port: originPort } : r) });
     await applied(port, generation);
   });
