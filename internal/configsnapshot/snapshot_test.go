@@ -223,7 +223,11 @@ func TestGoldenVector(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	vectors := map[string][]byte{"snapshot-v1.json": append(raw, '\n'), "snapshot-v1.signing-input.hex": []byte(hex.EncodeToString(message) + "\n"), "snapshot-v1.public-key.hex": []byte(hex.EncodeToString(public) + "\n")}
+	payload, err := canonical(env.Payload)
+	if err != nil {
+		t.Fatal(err)
+	}
+	vectors := map[string][]byte{"snapshot-v1.payload.json": append(payload, '\n'), "snapshot-v1.json": append(raw, '\n'), "snapshot-v1.signing-input.hex": []byte(hex.EncodeToString(message) + "\n"), "snapshot-v1.public-key.hex": []byte(hex.EncodeToString(public) + "\n")}
 	for path, want := range vectors {
 		path = filepath.Join("testdata", path)
 		if os.Getenv("AEGIS_UPDATE_PUBLIC_VECTORS") == "1" {
@@ -249,5 +253,53 @@ func TestRFC8785Golden(t *testing.T) {
 	got, err := canonicalRaw(raw)
 	if err != nil || string(got) != want {
 		t.Fatalf("RFC8785: %s %v", got, err)
+	}
+}
+
+func TestCheckpointAuthenticatesExpiredFloorOnly(t *testing.T) {
+	s, trust, raw := setup(t)
+	now := clock.Add(2 * time.Hour)
+	if _, err := Verify(raw, trust, "deployment-local", 0, now); Code(err) != "time" {
+		t.Fatal("expired snapshot activated", err)
+	}
+	checkpoint, err := VerifyCheckpoint(raw, trust, "deployment-local", now)
+	if err != nil || checkpoint.Generation != 1 {
+		t.Fatal("expired authenticated floor lost", err)
+	}
+	tampered := bytes.Replace(raw, []byte(`"generation":1`), []byte(`"generation":99`), 1)
+	if _, err = VerifyCheckpoint(tampered, trust, "deployment-local", now); err == nil {
+		t.Fatal("forged floor accepted")
+	}
+	retired, err := NewTrustStore([]TrustedKey{{ID: s.KeyID(), PublicKey: s.PublicKey(), NotBefore: clock.Add(-time.Hour), NotAfter: clock.Add(24 * time.Hour), RetiredAt: clock.Add(time.Hour)}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err = VerifyCheckpoint(raw, retired, "deployment-local", now); Code(err) != "signing_key" {
+		t.Fatal("retired checkpoint accepted", err)
+	}
+	if _, err = VerifyCheckpoint(raw, trust, "deployment-local", clock.Add(-time.Hour)); Code(err) != "time" {
+		t.Fatal("future floor accepted", err)
+	}
+}
+func TestScheduledActivation(t *testing.T) {
+	s, trust, _ := setup(t)
+	e := example()
+	e.ValidFrom = clock.Add(time.Minute)
+	raw, err := Sign(context.Background(), e, s)
+	if err != nil {
+		t.Fatal("scheduled signing", err)
+	}
+	if _, err = Verify(raw, trust, e.DeploymentID, 0, clock); Code(err) != "time" {
+		t.Fatal("early activation", err)
+	}
+	if _, err = Verify(raw, trust, e.DeploymentID, 0, e.ValidFrom); err != nil {
+		t.Fatal("scheduled activation", err)
+	}
+}
+func TestSchemaDefensiveCopy(t *testing.T) {
+	first := SchemaBytes()
+	first[0] ^= 0xff
+	if bytes.Equal(first, SchemaBytes()) {
+		t.Fatal("shared mutable schema")
 	}
 }
