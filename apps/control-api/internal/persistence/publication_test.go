@@ -126,6 +126,9 @@ func TestIntegrationConfigPublicationNegativeAndRecovery(t *testing.T) {
 	if err != nil || retried != approved {
 		t.Fatal("idempotency", err)
 	}
+	if _, err = s.ApprovePublication(testMFA(p), p, project, "valid-publication-key", preview.Digest, 2*time.Hour); !errors.Is(err, domain.ErrConflict) {
+		t.Fatal("changed TTL accepted for existing idempotency key", err)
+	}
 	if _, err = s.pool.Exec(ctx, "UPDATE config_revisions SET payload='{}' WHERE project_id=$1", project); err == nil {
 		t.Fatal("approved history mutable")
 	}
