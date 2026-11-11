@@ -32,6 +32,7 @@ let activeRequests = 0;
 let originDispatches = 0;
 let originInboundBytes = 0;
 let originParseErrors = 0;
+let originTransportErrors = 0;
 const originRequests = [];
 let omittedOriginRequests = 0;
 function recordOrigin(request) {
@@ -117,7 +118,8 @@ async function test(name, run) {
   const started = performance.now();
   originRequests.length = 0;
   omittedOriginRequests = 0;
-  const before = { handlers: originDispatches, bytes: originInboundBytes, errors: originParseErrors, requests: originRequests.length };
+  const before = { handlers: originDispatches, bytes: originInboundBytes, errors: originParseErrors,
+    transportErrors: originTransportErrors, requests: originRequests.length };
   try {
     const detail = await run();
     evidence.tests.push({ name, status: 'pass', milliseconds: +(performance.now() - started).toFixed(2), detail });
@@ -129,6 +131,7 @@ async function test(name, run) {
   } finally {
     Object.assign(evidence.tests.at(-1), { origin: { handler_invocations: originDispatches - before.handlers,
       decrypted_bytes: originInboundBytes - before.bytes, parser_errors: originParseErrors - before.errors,
+      transport_errors: originTransportErrors - before.transportErrors,
       requests: originRequests.slice(before.requests), omitted_request_samples: omittedOriginRequests } });
   }
 }
@@ -186,7 +189,13 @@ function origin(name, handler) {
   });
   server.on('tlsClientError', () => {});
   server.on('secureConnection', (socket) => socket.on('data', (chunk) => { originInboundBytes += chunk.length; }));
-  server.on('clientError', (_, socket) => { originParseErrors++; socket.destroy(); });
+  server.on('clientError', (error, socket) => {
+    // Node also emits clientError for TLS alerts; only HTTP parser failures
+    // carry an HPE_* code or a decrypted rawPacket.
+    if (error.code?.startsWith('HPE_') || error.rawPacket) originParseErrors++;
+    else originTransportErrors++;
+    socket.destroy();
+  });
   return server;
 }
 
