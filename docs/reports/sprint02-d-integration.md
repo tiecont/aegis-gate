@@ -39,6 +39,14 @@ tree and final status/risk updates.
 
 ## Active findings and probes
 
+- A-history-scan: root inspected Agent A's completed scan artifact and found
+  `fatal: not a git repository` and `0 commits scanned` in
+  `.local/evidence/security/history-secrets.log`, although the wrapper printed
+  PASS. The worktree `.git` file points outside the container mount and
+  gitleaks exits zero despite that failure. That history result cannot satisfy
+  the secret-scan requirement. Agent A must preserve this evidence, support
+  actual worktree Git metadata with read-only mounts, add a fail-closed
+  history preflight and demonstrate nonempty history scanning before acceptance.
 - A-layer-binding: review identified a config-only binding gap. The agent added
   layer verification before the independent probe executed, so the probe is not
   a reproduced pre-fix failure. On live validator SHA-256
@@ -56,6 +64,14 @@ tree and final status/risk updates.
   Evidence: `evidence/sprint02/c-nonpublic-prefix-before.log`. Agent C must
   assess the address registry/RFC policy, fix registration validation and retain
   positive public-address controls. Future edge dial-time checks remain gated.
+  Root tested C's live `validation.go` SHA-256
+  `81dde112d1d1318a5cc937e70eed791559fc85d2559ca0cac27499300a151243`
+  through a Go source overlay: `GOTOOLCHAIN=go1.27.4 go test -race
+  -overlay .local/evidence/sprint02-c-origin-overlay.json
+  ./apps/control-api/internal/domain -count=1 -v` (exit 0).
+  Mixed public/non-public resolver responses and public IPv4/IPv6 controls
+  also pass. Evidence: `c-nonpublic-prefix-live-review.log`. Repeat on the
+  accepted immutable integration commit is still required.
 - Repository release control: `gh api
   repos/tiecont/aegis-gate/branches/main/protection` returns HTTP 404,
   `Branch not protected`. Required branch protection/reviewer approval from
