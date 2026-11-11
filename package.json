@@ -6,8 +6,8 @@
     "node": ">=26.13.0"
   },
   "scripts": {
-    "contracts:generate": "node scripts/contracts.mjs --write",
-    "contracts:check": "node scripts/contracts.mjs --check",
+    "contracts:generate": "node scripts/module03-contracts.mjs --write && node scripts/contracts.mjs --write",
+    "contracts:check": "node scripts/module03-contracts.mjs --check && node scripts/contracts.mjs --check",
     "contracts:test": "node --test scripts/contracts.test.mjs",
     "format:check": "prettier --check package.json packages/contracts scripts/*.mjs .github infra/compose/compose.yaml",
     "format": "prettier --write package.json packages/contracts scripts/*.mjs .github infra/compose/compose.yaml"
