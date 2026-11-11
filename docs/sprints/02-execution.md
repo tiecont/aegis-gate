@@ -26,9 +26,12 @@ Historical local success does not supersede failing hosted CI evidence.
 - Shared toolchain/dependency download caches may be reused read-only. Build
   output, reports, generated bindings and .local writes stay in own tree.
 - Commit scoped changes, push assigned branch and prepare a draft PR into main
-  when reviewable. No main push or PR merge by implementation agents. Root
-  reviews and integrates accepted changes sequentially. User authorization
-  includes this sprint's implementation, branch publication and draft PRs.
+  when reviewable. The user authorizes all agents to manage branches,
+  worktrees, commits, pushes, rebases, PRs, merges and cleanup, including the
+  final root push to `main`. This does not authorize quality-gate bypasses,
+  architecture substitution, production deployment, live DNS/billing or
+  release approval. Root retains independent review, integration status and
+  gate verdicts.
 - Run real checks, retain exact redacted evidence and report failures honestly.
   Record tool/network/environment blockers; do not report unexecuted acceptance.
 
