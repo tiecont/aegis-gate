@@ -1,0 +1,205 @@
+{
+  "candidate": "envoy-independent-e-observed",
+  "mandatory_tests": 75,
+  "passed": 69,
+  "failed": [
+    "malformed-HTTP-invalid-transfer-encoding",
+    "malformed-HTTP-obsolete-folded-header",
+    "strict-ingress-TE-repeated-chunked",
+    "strict-ingress-TE-not-final-chunked",
+    "supplemental-repeated-transfer-encoding-fields",
+    "HTTP2-authority-Host-and-SNI-confusion-rejected"
+  ],
+  "unsafe_or_unproven_rejections": [
+    {
+      "name": "invalid-transfer-encoding",
+      "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0"
+    },
+    {
+      "name": "obsolete-folded-header",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "TE-repeated-chunked",
+      "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0"
+    },
+    {
+      "name": "TE-not-final-chunked",
+      "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0"
+    },
+    {
+      "name": "repeated-transfer-encoding-fields",
+      "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0"
+    }
+  ],
+  "protocol_proof_pass": false,
+  "architecture_approval": "requires independent dependency/security review and human architecture decision",
+  "lab_sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d",
+  "origin_observer": {
+    "h1": "HTTPS decrypted socket data",
+    "h2": "verified TLS relay before native HTTP2 consumption",
+    "source_sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065"
+  },
+  "same_failure_inventory_as_original_reviewer_run": true,
+  "positive_and_denial_counters": [
+    {
+      "name": "cross-tenant-SNI-Host-binding",
+      "status": "pass",
+      "milliseconds": 7.61,
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "HTTP2-downstream-and-upstream-ALPN",
+      "status": "pass",
+      "milliseconds": 17.29,
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 248,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "2"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+      "status": "fail",
+      "milliseconds": 44.13,
+      "error": "unsafe authority status 200",
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 56,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "2"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "verified-origin-TLS-rejects-wrong",
+      "status": "pass",
+      "milliseconds": 226.44,
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 239,
+        "parser_errors": 0,
+        "transport_errors": 2,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "verified-origin-TLS-rejects-expired",
+      "status": "pass",
+      "milliseconds": 223.68,
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 239,
+        "parser_errors": 0,
+        "transport_errors": 2,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "verified-origin-TLS-rejects-untrusted",
+      "status": "pass",
+      "milliseconds": 230.66,
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 240,
+        "parser_errors": 0,
+        "transport_errors": 2,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "gRPC-bidirectional-streaming-and-trailers",
+      "status": "pass",
+      "milliseconds": 69.45,
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 410,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "POST",
+            "target": "/lab.Echo/Chat",
+            "protocol": "2",
+            "transport": "grpc"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "gRPC-client-cancellation-reaches-origin",
+      "status": "pass",
+      "milliseconds": 54.7,
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 116,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "POST",
+            "target": "/lab.Echo/Chat",
+            "protocol": "2",
+            "transport": "grpc"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    }
+  ],
+  "original_results_sha256": "c5bd9d26b21f8cb9a1d43cb4be63639f59358f801fbc54d4a8c32cc6e318caa5"
+}

@@ -5,6 +5,15 @@ feasibility scope only. **All three independent full75 runs reproduce NO-GO;
 no candidate or architecture acceptance is granted.** Root owns final integration,
 checks, hosted CI and gate/status files. No additional agents were created.
 
+Observer follow-up: the native-H2 accounting defect below is **fixed and
+independently reproduced**. Updated committed harness `a442197` again yields
+Pingora63/75, Hyper70/75 and Envoy69/75 with the identical failure inventories,
+nonzero H2/gRPC positive byte counts and Envoy authority failure56 bytes/one
+handler. See [observer follow-up](sprint03a-e-observer-followup.md) for the
+current decision matrix, exact hashes/counters and root integration review.
+The original runs, calibration, inventories, build/audit/image and benchmark
+evidence remain historical; none is overwritten or retroactively corrected.
+
 ## Review Plan And Source Binding
 
 Read AGENTS, operating/orchestration rules, README, master sequencing, status,
@@ -16,6 +25,8 @@ source/dependencies/image findings, compare functional/security/resource proof,
 then commit only this report and reviewer evidence. Do not waive failed cases.
 
 - Starting harness: `4179b42b9616c2a5ff5aac0e747564e496bde346`.
+- Follow-up harness: root `bd96d00` then `502ac33`, cherry-picked as `97be33b`
+  then `a442197d9497dc64c306dff4eeba8fd4c58d95d9`; no candidate source changes.
 - Original baseline: `668b8d998d8a39f3a554a9e42ad6a1a270049d27`.
 - Pingora candidate: `ca573d2c8aee21ed1943e3e66778d1e997cd04af`, cherry-picked
   here as `f03b2db`. Runtime source and lock are unchanged from baseline/root.
@@ -64,7 +75,7 @@ then commit only this report and reviewer evidence. Do not waive failed cases.
    TLS alerts are transport errors. This avoids calling correct certificate
    rejection an HTTP parsing failure. Positive encoded controls exercise byte
    accounting; relative-target evidence proves handler-only observation is
-   insufficient. H2 origin byte counting uses a TLSSocket `data` listener while
+   insufficient. Historical H2 origin byte counting used a TLSSocket `data` listener while
    Node's native H2 implementation can consume frames internally: sibling H2
    evidence has actual handler dispatch with zero recorded decrypted bytes.
    Reviewer calibration independently confirms this: H1 receives71 bytes,
@@ -72,8 +83,12 @@ then commit only this report and reviewer evidence. Do not waive failed cases.
    expected body over verified TLS1.3; H2 ALPN is `h2`. Exact observations and
    timestamps: `evidence/sprint03a-e/origin-calibration.json`.
    Consequently zero H2 byte count alone does **not** prove zero origin frames.
-   Handler/authority checks remain useful; complete H2 wire accounting is a
-   residual instrumentation limitation, not grounds for approving a candidate.
+   That defect is fixed by the bounded verified TLS observer before native H2
+   consumption. All three fresh follow-up runs observe positive H2/gRPC bytes
+   and handlers. Semantic HTTP2 session errors are not low-level raw parser
+   proof; the relay counts decrypted byte lengths without parsing frames.
+   Exhaustive raw H2 framing/conformance remains unproven. See the follow-up
+   for exact scope and current denial counters.
 5. **Shared Envoy resource counters sample the adapter process.** The unchanged
    shared benchmark and upload-cancellation RSS check use `[proxy.pid]`. For
    the Envoy launcher this omits Envoy's container process. Preserve those
@@ -206,6 +221,7 @@ drain, long-lived stream safety, fairness, revocation or operational readiness.
 | Config/tenant identity | Existing ArcSwap integration remains isolated fixture proof | Each request holds snapshot; each route/generation owns client/pool | CDS/RDS/SDS are separate file updates; generation clusters reduce pool confusion but are not a transaction/ACK |
 | TLS | Existing maintained TLS stack; warnings unresolved | rustls/ring traffic, OpenSSL date check; resumption disabled | BoringSSL in pinned image, dynamic SDS; resumption disabled |
 | Owned obligations | Strict ingress path and maintenance removal still needed | Balancing/health, streaming bounds, upgrade, retry/cancellation, pool identity and shutdown become application responsibilities | Go xDS/SDS/policy adapter, fail-closed filters, resource naming/quotas, ACK/NACK/LKG, certificate authorization and process lifecycle |
+| Origin H2 observation | Fixed relay;139 positive bytes; authority denial zero bytes/handlers | Fixed relay;162 positive bytes; authority denial zero bytes/handlers | Fixed relay;248 positive bytes; authority failure56 bytes/one handler |
 | Release limits | No accepted Module01 gate | No signed Module03 contract, DNS/dial SSRF, downstream write/H2 idle/drain/saturation proof | No signed Module03 contract, transactional activation, Lua-error fail-closed proof or streaming total-body cap |
 
 Hyper's fixed-loopback resolver and Envoy's fixed127.0.0.1 endpoints are explicit
@@ -232,8 +248,9 @@ and wrong-name/expired/untrusted-origin tests pass. H2 handler records omit TLS
 details; successful H2 negotiation/assertions do not fill that observation gap.
 
 Threat mapping: original framing/target failures block T07/T16; required
-Host/authority rejection blocks T01/T06; H2 accounting and adapter-only RSS
-limit what can be claimed for T08; dependency maintenance/image provenance
+Host/authority rejection blocks T01/T06; corrected H2 accounting closes the
+original observation defect. Adapter-only RSS and unproven saturation/drain
+still limit T08 claims; dependency maintenance/image provenance
 remain T14 concerns. Local origin TLS negatives support the exercised T11
 controls only. They do not establish the production DNS/dial, tenancy, config,
 secret delivery or release controls required by T03/T05/T13/T17 and the full
@@ -294,9 +311,12 @@ blank lines; its full output remains committed. Those raw bytes are not
 rewritten to make an editorial check pass. The separate source/docs/JSON
 whitespace check is recorded in `source-check/`. Final scans after report
 finalization are retained separately in `final-check-02/`. Hash
-inventory is generated only after capture files finish, and verified before
-commit. Root's integrated `make check`, full security scan and hosted CI are
-not claimed by this reviewer. No gate/status/ADR/production file is edited.
+inventory was generated only after capture files finished, and verified before
+the original commit. Its report entry binds the historical report at `dbbdf3e`;
+the new `FOLLOWUP-SHA256SUMS` binds this amended report and follow-up artifacts.
+The follow-up independently reviews root's committed combined check/scan exit0
+evidence; it does not claim those executions as reviewer runs or exact-head
+hosted CI acceptance. No gate/status/ADR/production file is edited.
 
 ## Agent Completion Report
 
@@ -310,7 +330,7 @@ not claimed by this reviewer. No gate/status/ADR/production file is edited.
 - Performance: short shared-host smoke observations only; not launch SLOs,
   capacity, sustained-load, soak or candidate ranking evidence.
 - Risks/release blockers: mandatory Pingora failures, dependency maintenance,
-  required alternative failures and H2/resource instrumentation limits.
+  required alternative failures, raw H2 conformance and resource proof limits.
 - Human review needed: architecture substitution/security disposition after
   complete evidence; no architecture acceptance authorized by this report.
 - Next unblocked modules: unchanged master-plan dependencies; report opens none.

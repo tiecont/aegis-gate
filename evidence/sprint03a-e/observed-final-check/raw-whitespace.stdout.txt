@@ -1,0 +1,118 @@
+evidence/sprint03a-e/observed-envoy/lab.stderr.txt:1: trailing whitespace.
++FAIL malformed-HTTP-invalid-transfer-encoding: unsafe rejection response: HTTP/1.1 501 Not Implemented
+evidence/sprint03a-e/observed-envoy/lab.stderr.txt:2: trailing whitespace.
++content-length: 15
+evidence/sprint03a-e/observed-envoy/lab.stderr.txt:3: trailing whitespace.
++content-type: text/plain
+evidence/sprint03a-e/observed-envoy/lab.stderr.txt:9: trailing whitespace.
++FAIL strict-ingress-TE-repeated-chunked: unsafe rejection response: HTTP/1.1 501 Not Implemented
+evidence/sprint03a-e/observed-envoy/lab.stderr.txt:10: trailing whitespace.
++content-length: 15
+evidence/sprint03a-e/observed-envoy/lab.stderr.txt:11: trailing whitespace.
++content-type: text/plain
+evidence/sprint03a-e/observed-envoy/lab.stderr.txt:13: trailing whitespace.
++FAIL strict-ingress-TE-not-final-chunked: unsafe rejection response: HTTP/1.1 501 Not Implemented
+evidence/sprint03a-e/observed-envoy/lab.stderr.txt:14: trailing whitespace.
++content-length: 15
+evidence/sprint03a-e/observed-envoy/lab.stderr.txt:15: trailing whitespace.
++content-type: text/plain
+evidence/sprint03a-e/observed-envoy/lab.stderr.txt:17: trailing whitespace.
++FAIL supplemental-repeated-transfer-encoding-fields: unsafe rejection response: HTTP/1.1 501 Not Implemented
+evidence/sprint03a-e/observed-envoy/lab.stderr.txt:18: trailing whitespace.
++content-length: 15
+evidence/sprint03a-e/observed-envoy/lab.stderr.txt:19: trailing whitespace.
++content-type: text/plain
+evidence/sprint03a-e/observed-hyper/lab.stderr.txt:20: new blank line at EOF.
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:12: space before tab in indent.
++ 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard ci --ignore-scripts
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:13: space before tab in indent.
++ 	$(GO) mod download
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:14: space before tab in indent.
++ 	cargo +1.99.1 fetch --locked --manifest-path apps/edge/Cargo.toml
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:16: trailing whitespace.
++ 
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:18: space before tab in indent.
++ 	PATH="$(NODE_PATH):$$PATH" npm run contracts:generate
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:21: space before tab in indent.
++ 	gofmt -w apps/control-api apps/config-publisher internal packages/test-fixtures
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:22: space before tab in indent.
++ 	cargo +1.99.1 fmt --all --manifest-path apps/edge/Cargo.toml
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:24: space before tab in indent.
++ 	PATH="$(NODE_PATH):$$PATH" npm run format
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:25: space before tab in indent.
++ 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run fmt
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:26: trailing whitespace.
++ 
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:28: space before tab in indent.
++ 	test -z "$$(gofmt -l apps/control-api apps/config-publisher internal packages/test-fixtures)"
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:29: space before tab in indent.
++ 	cargo +1.99.1 fmt --all --check --manifest-path apps/edge/Cargo.toml
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:31: space before tab in indent.
++ 	PATH="$(NODE_PATH):$$PATH" npm run format:check
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:32: space before tab in indent.
++ 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run fmt:check
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:33: trailing whitespace.
++ 
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:35: space before tab in indent.
++ 	$(GO) vet $(GO_PACKAGES)
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:36: space before tab in indent.
++ 	cargo +1.99.1 clippy --workspace --all-targets --locked --manifest-path apps/edge/Cargo.toml -- -D warnings
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:38: space before tab in indent.
++ 	PATH="$(NODE_PATH):$$PATH" npm run contracts:check
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:39: space before tab in indent.
++ 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run lint
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:40: space before tab in indent.
++ 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run typecheck
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:42: space before tab in indent.
++ 	python3 scripts/git_history_preflight_test.py
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:43: space before tab in indent.
++ 	python3 scripts/image_identity_test.py
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:44: space before tab in indent.
++ 	"$(NODE_CMD)" --test spikes/edge-comparison/*.test.mjs
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:46: space before tab in indent.
++ 	"$(NODE_CMD)" spikes/edge-comparison/extract-baseline.mjs --check
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:47: space before tab in indent.
++ 	$(GO) test -race $(GO_PACKAGES)
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:48: space before tab in indent.
++ 	cargo +1.99.1 test --workspace --locked --manifest-path apps/edge/Cargo.toml
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:50: space before tab in indent.
++ 	PATH="$(NODE_PATH):$$PATH" npm run contracts:test
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:51: space before tab in indent.
++ 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard test
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:52: trailing whitespace.
++ 
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:54: space before tab in indent.
++ 	$(GO) build -o .local/bin/config-publisher ./apps/config-publisher/cmd/config-publisher
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:55: space before tab in indent.
++ 	$(GO) build -o .local/bin/fixtures ./packages/test-fixtures/cmd/fixtures
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:56: space before tab in indent.
++ 	cargo +1.99.1 build --workspace --locked --manifest-path apps/edge/Cargo.toml
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:58: space before tab in indent.
++ 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run build
+evidence/sprint03a-e/observed-integration-review/integration-change.stdout.txt:59: trailing whitespace.
++ 
+evidence/sprint03a-e/observed-integration-review/root-snapshot/evidence/sprint03a-d/make-check-final.log:446: trailing whitespace.
++ Container aegisgate-local-nats-1 Running 
+evidence/sprint03a-e/observed-integration-review/root-snapshot/evidence/sprint03a-d/make-check-final.log:447: trailing whitespace.
++ Container aegisgate-local-demo-origin-1 Running 
+evidence/sprint03a-e/observed-integration-review/root-snapshot/evidence/sprint03a-d/make-check-final.log:448: trailing whitespace.
++ Container aegisgate-local-postgres-1 Running 
+evidence/sprint03a-e/observed-integration-review/root-snapshot/evidence/sprint03a-d/make-check-final.log:449: trailing whitespace.
++ Container aegisgate-local-redis-1 Running 
+evidence/sprint03a-e/observed-integration-review/root-snapshot/evidence/sprint03a-d/make-check-final.log:450: trailing whitespace.
++ Container aegisgate-local-postgres-1 Waiting 
+evidence/sprint03a-e/observed-integration-review/root-snapshot/evidence/sprint03a-d/make-check-final.log:451: trailing whitespace.
++ Container aegisgate-local-redis-1 Waiting 
+evidence/sprint03a-e/observed-integration-review/root-snapshot/evidence/sprint03a-d/make-check-final.log:452: trailing whitespace.
++ Container aegisgate-local-nats-1 Waiting 
+evidence/sprint03a-e/observed-integration-review/root-snapshot/evidence/sprint03a-d/make-check-final.log:453: trailing whitespace.
++ Container aegisgate-local-demo-origin-1 Waiting 
+evidence/sprint03a-e/observed-integration-review/root-snapshot/evidence/sprint03a-d/make-check-final.log:454: trailing whitespace.
++ Container aegisgate-local-nats-1 Healthy 
+evidence/sprint03a-e/observed-integration-review/root-snapshot/evidence/sprint03a-d/make-check-final.log:455: trailing whitespace.
++ Container aegisgate-local-redis-1 Healthy 
+evidence/sprint03a-e/observed-integration-review/root-snapshot/evidence/sprint03a-d/make-check-final.log:456: trailing whitespace.
++ Container aegisgate-local-postgres-1 Healthy 
+evidence/sprint03a-e/observed-integration-review/root-snapshot/evidence/sprint03a-d/make-check-final.log:457: trailing whitespace.
++ Container aegisgate-local-demo-origin-1 Healthy 
+evidence/sprint03a-e/observed-pingora/lab.stderr.txt:48: new blank line at EOF.

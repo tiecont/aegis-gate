@@ -1,0 +1,167 @@
+{
+  "started_at": "2026-11-11T09:19:59.069Z",
+  "reviewer_head": "a442197d9497dc64c306dff4eeba8fd4c58d95d9",
+  "observer_commits": [
+    "bd96d00211a3a78d689282697788061c198bf2a1",
+    "502ac330303017b80241e024442fca724aa96462"
+  ],
+  "lock": {
+    "path": "/tmp/aegisgate-sprint02-fixtures.lock",
+    "parent_pid": 3508625
+  },
+  "harness": [
+    {
+      "file": "spikes/pingora/lab.mjs",
+      "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d"
+    },
+    {
+      "file": "spikes/edge-comparison/run.mjs",
+      "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493"
+    },
+    {
+      "file": "spikes/edge-comparison/contract.mjs",
+      "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f"
+    },
+    {
+      "file": "spikes/edge-comparison/evaluate.mjs",
+      "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/edge-comparison/supplemental.mjs",
+      "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.mjs",
+      "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.test.mjs",
+      "sha256": "9ddc71cf675cc89cb2bc2cba3770cf57f6b0eecde42885db0dccaa0718b1dbbd"
+    }
+  ],
+  "node": {
+    "path": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "version": "v26.13.0",
+    "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+  },
+  "commands": [
+    {
+      "label": "evidence-secrets",
+      "program": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate-sprint03-e:/repo:ro",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate-sprint03-e/.local/observed-scan:/review:ro",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate-sprint03-e/evidence/sprint03a-e/observed-final-check:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/evidence/sprint03a-e",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/reports/evidence-secrets.json",
+        "--no-banner"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-e",
+      "environment": {},
+      "started_at": "2026-11-11T09:19:59.308Z",
+      "ended_at": "2026-11-11T09:20:03.121Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "ebe0165810cf9f6e4fcaf2c1e41ffbf4b0c30afa3e1f1388876f9ecea9d39177"
+    },
+    {
+      "label": "report-secrets",
+      "program": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate-sprint03-e:/repo:ro",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate-sprint03-e/.local/observed-scan:/review:ro",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate-sprint03-e/evidence/sprint03a-e/observed-final-check:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/review",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/reports/report-secrets.json",
+        "--no-banner"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-e",
+      "environment": {},
+      "started_at": "2026-11-11T09:20:03.122Z",
+      "ended_at": "2026-11-11T09:20:03.584Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "d4a2c5699b1b21905da1ea2935f7956ea9fbaa5db6620b22cbd848e4062a2977"
+    },
+    {
+      "label": "raw-whitespace",
+      "program": "git",
+      "args": [
+        "diff",
+        "--check",
+        "--cached"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-e",
+      "environment": {},
+      "started_at": "2026-11-11T09:20:03.584Z",
+      "ended_at": "2026-11-11T09:20:03.592Z",
+      "exit_code": 2,
+      "signal": null,
+      "stdout_sha256": "eef694c1a5b5b58607adb9576911dd9449a7d206d0e6dbd408f7666cb91e447f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "source-doc-json-whitespace",
+      "program": "git",
+      "args": [
+        "diff",
+        "--check",
+        "--cached",
+        "--",
+        "*.mjs",
+        "*.md",
+        "*.json",
+        "*.jsonl"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-e",
+      "environment": {},
+      "started_at": "2026-11-11T09:20:03.592Z",
+      "ended_at": "2026-11-11T09:20:03.599Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "completed_at": "2026-11-11T09:20:03.600Z"
+}

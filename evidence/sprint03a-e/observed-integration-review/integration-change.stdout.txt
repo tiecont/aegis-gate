@@ -1,0 +1,102 @@
+commit 2e97ce33a4b548f71d6fb70cd19480a65a86d151
+Author: Tiecont <ties.node@outlook.com>
+Date:   Wed Nov 11 15:55:59 2026 +0700
+
+    ci: validate isolated candidate code, dependencies and pinned image
+
+diff --git a/Makefile b/Makefile
+index ea31970..17671ea 100644
+--- a/Makefile
++++ b/Makefile
+@@ -14,6 +14,7 @@ bootstrap:
+ 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard ci --ignore-scripts
+ 	$(GO) mod download
+ 	cargo +1.99.1 fetch --locked --manifest-path apps/edge/Cargo.toml
++	cargo +1.99.1 fetch --locked --manifest-path spikes/hyper/Cargo.toml
+ 
+ contracts-generate:
+ 	PATH="$(NODE_PATH):$$PATH" npm run contracts:generate
+@@ -21,18 +22,21 @@ contracts-generate:
+ fmt:
+ 	gofmt -w apps/control-api apps/config-publisher internal packages/test-fixtures
+ 	cargo +1.99.1 fmt --all --manifest-path apps/edge/Cargo.toml
++	cargo +1.99.1 fmt --all --manifest-path spikes/hyper/Cargo.toml
+ 	PATH="$(NODE_PATH):$$PATH" npm run format
+ 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run fmt
+ 
+ fmt-check:
+ 	test -z "$$(gofmt -l apps/control-api apps/config-publisher internal packages/test-fixtures)"
+ 	cargo +1.99.1 fmt --all --check --manifest-path apps/edge/Cargo.toml
++	cargo +1.99.1 fmt --all --check --manifest-path spikes/hyper/Cargo.toml
+ 	PATH="$(NODE_PATH):$$PATH" npm run format:check
+ 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run fmt:check
+ 
+ lint:
+ 	$(GO) vet $(GO_PACKAGES)
+ 	cargo +1.99.1 clippy --workspace --all-targets --locked --manifest-path apps/edge/Cargo.toml -- -D warnings
++	cargo +1.99.1 clippy --workspace --all-targets --locked --manifest-path spikes/hyper/Cargo.toml -- -D warnings
+ 	PATH="$(NODE_PATH):$$PATH" npm run contracts:check
+ 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run lint
+ 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run typecheck
+@@ -42,9 +46,11 @@ unit:
+ 	python3 scripts/git_history_preflight_test.py
+ 	python3 scripts/image_identity_test.py
+ 	"$(NODE_CMD)" --test spikes/edge-comparison/*.test.mjs
++	"$(NODE_CMD)" --test spikes/envoy/*.test.mjs
+ 	"$(NODE_CMD)" spikes/edge-comparison/extract-baseline.mjs --check
+ 	$(GO) test -race $(GO_PACKAGES)
+ 	cargo +1.99.1 test --workspace --locked --manifest-path apps/edge/Cargo.toml
++	cargo +1.99.1 test --workspace --locked --manifest-path spikes/hyper/Cargo.toml
+ 	PATH="$(NODE_PATH):$$PATH" npm run contracts:test
+ 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard test
+ 
+@@ -81,6 +87,7 @@ build:
+ 	$(GO) build -o .local/bin/config-publisher ./apps/config-publisher/cmd/config-publisher
+ 	$(GO) build -o .local/bin/fixtures ./packages/test-fixtures/cmd/fixtures
+ 	cargo +1.99.1 build --workspace --locked --manifest-path apps/edge/Cargo.toml
++	cargo +1.99.1 build --workspace --locked --manifest-path spikes/hyper/Cargo.toml
+ 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run build
+ 
+ gate-selftest:
+diff --git a/scripts/security-scan.sh b/scripts/security-scan.sh
+index a12b036..d7f8364 100755
+--- a/scripts/security-scan.sh
++++ b/scripts/security-scan.sh
+@@ -35,12 +35,15 @@ if [ "$mode" = all ] || [ "$mode" = dependencies ]; then
+     run install-cargo-audit cargo +1.99.1 install cargo-audit --version 0.23.0 --locked --root "$PWD/.local/tools"
+   fi
+   run rust-vulnerabilities .local/tools/bin/cargo-audit audit --file apps/edge/Cargo.lock --json
++  run pingora-spike-vulnerabilities .local/tools/bin/cargo-audit audit --file spikes/pingora/Cargo.lock --json
++  run hyper-spike-vulnerabilities .local/tools/bin/cargo-audit audit --file spikes/hyper/Cargo.lock --json
+   node_bin=$(scripts/node-path.sh)
+   node_directory=$(dirname "$node_bin")
+   run go-scanner-gate-selftest "$node_bin" scripts/gate-selftest.mjs --scanner
+   run go-vulnerabilities .local/bin/govulncheck -C apps/control-api/cmd/control-api -scan=module
+   run npm-root-vulnerabilities env PATH="$node_directory:$PATH" npm audit --audit-level=high --json
+   run npm-dashboard-vulnerabilities env PATH="$node_directory:$PATH" npm --prefix apps/dashboard audit --audit-level=high --json
++  run npm-spike-vulnerabilities env PATH="$node_directory:$PATH" npm --prefix spikes/pingora audit --audit-level=high --json
+ fi
+ if [ "$mode" = all ] || [ "$mode" = secrets ]; then
+   run worktree-secrets docker run --rm --user "$(id -u):$(id -g)" \
+@@ -86,6 +89,21 @@ if [ "$mode" = all ] || [ "$mode" = sbom ]; then
+ fi
+ if [ "$mode" = all ] || [ "$mode" = images ]; then
+   run image-identity-selftest python3 scripts/image_identity_test.py -v
++  # Isolated candidate images remain subject to the same severity gate.
++  envoy_image=$(python3 - <<'PYENVOY'
++import json
++import re
++from pathlib import Path
++
++image = json.loads(Path('spikes/envoy/image.lock.json').read_text())['image']
++assert re.fullmatch(r'envoyproxy/envoy@sha256:[0-9a-f]{64}', image), 'Unpinned Envoy candidate image'
++print(image)
++PYENVOY
++  ) || exit 1
++  run envoy-spike-vulnerabilities trivy_run image --image-src remote --severity HIGH,CRITICAL --exit-code 1 \
++    --format json --output /reports/envoy-spike-vulnerabilities.json "$envoy_image"
++  run envoy-spike-sbom trivy_run image --image-src remote --format cyclonedx \
++    --output /reports/envoy-spike.cdx.json "$envoy_image"
+   # Scan exactly the immutable references used by Compose, including local builds.
+   if [ ! -f .local/compose.env ] || [ ! -f .local/fixture-images.env ] || [ ! -f .local/fixture-images.lock.json ]; then
+     printf 'FAIL local fixture image environment/lock missing; run make fixture-images\n' >&2
