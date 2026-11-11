@@ -116,6 +116,9 @@ func (c *Consumer) result(notice Notice, accepted bool, code string) Ack {
 }
 
 func safeDigest(value string) string {
+	if len(value) != 64 {
+		return ""
+	}
 	decoded, err := hex.DecodeString(value)
 	if err != nil || len(decoded) != 32 {
 		return ""
