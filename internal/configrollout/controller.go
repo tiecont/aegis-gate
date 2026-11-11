@@ -46,17 +46,19 @@ type EdgeState struct {
 	AppliedGeneration uint64    `json:"applied_generation"`
 }
 type State struct {
-	Version          uint64                `json:"version"`
-	Notice           configconsumer.Notice `json:"notice"`
-	Policy           Policy                `json:"policy"`
-	Phase            string                `json:"phase"`
-	StartedAt        time.Time             `json:"started_at"`
-	UpdatedAt        time.Time             `json:"updated_at"`
-	Edges            []EdgeState           `json:"edges"`
-	Sequence         uint64                `json:"sequence"`
-	RollbackFrom     uint64                `json:"rollback_from"`
-	EventCount       int                   `json:"event_count"`
-	SecurityRejected bool                  `json:"security_rejected"`
+	Version              uint64                `json:"version"`
+	Notice               configconsumer.Notice `json:"notice"`
+	Policy               Policy                `json:"policy"`
+	Phase                string                `json:"phase"`
+	StartedAt            time.Time             `json:"started_at"`
+	UpdatedAt            time.Time             `json:"updated_at"`
+	Edges                []EdgeState           `json:"edges"`
+	Sequence             uint64                `json:"sequence"`
+	RollbackFrom         uint64                `json:"rollback_from"`
+	EventCount           int                   `json:"event_count"`
+	SecurityRejected     bool                  `json:"security_rejected"`
+	InvalidArtifactAlert bool                  `json:"invalid_artifact_alert"`
+	StaleArtifactAlert   bool                  `json:"stale_artifact_alert"`
 }
 type Event struct {
 	Sequence   uint64    `json:"sequence"`
@@ -336,6 +338,8 @@ func (c *Controller) Record(ctx context.Context, identity string, ack configcons
 	if !ack.Accepted || !healthy {
 		next.Phase = "paused"
 		next.SecurityRejected = true
+		next.InvalidArtifactAlert = next.InvalidArtifactAlert || ack.Code == "invalid_snapshot" || ack.Code == "artifact_digest"
+		next.StaleArtifactAlert = next.StaleArtifactAlert || ack.Code == "stale_snapshot"
 		typ = "nack"
 	} else if state.Phase != "paused" {
 		allCanary := true
@@ -428,7 +432,7 @@ func (c *Controller) Telemetry(ctx context.Context, deployment string) (Telemetr
 	if err != nil {
 		return Telemetry{}, err
 	}
-	m := Telemetry{Generation: state.Notice.Generation, Phase: state.Phase}
+	m := Telemetry{Generation: state.Notice.Generation, Phase: state.Phase, InvalidArtifactAlert: state.InvalidArtifactAlert, StaleArtifactAlert: state.StaleArtifactAlert}
 	for _, e := range state.Edges {
 		if e.Accepted && e.Healthy {
 			m.ACKs++

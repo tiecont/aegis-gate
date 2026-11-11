@@ -322,3 +322,44 @@ func TestNegativeHealthAndResourceBounds(t *testing.T) {
 		t.Fatal("new generation failed to reset event budget", err)
 	}
 }
+
+func TestArtifactAlertsSurviveLateACKAndResetOnlyForNewGeneration(t *testing.T) {
+	for _, code := range []string{"invalid_snapshot", "artifact_digest", "stale_snapshot"} {
+		t.Run(code, func(t *testing.T) {
+			c, _, _, _ := testController(t)
+			ctx := context.Background()
+			n := notice(1)
+			if err := c.Begin(ctx, n, edges(), policy(), 0); err != nil {
+				t.Fatal(err)
+			}
+			if err := c.Tick(ctx, n.DeploymentID); err != nil {
+				t.Fatal(err)
+			}
+			if err := c.Record(ctx, "canary-a", report(n, false, code), false); err != nil {
+				t.Fatal(err)
+			}
+			// A delayed healthy report must not erase a security rejection or its
+			// alert after the durable edge status is replaced by an ACK.
+			if err := c.Record(ctx, "canary-a", report(n, true, "applied"), true); err != nil {
+				t.Fatal(err)
+			}
+			metrics, err := c.Telemetry(ctx, n.DeploymentID)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if metrics.Phase != "paused" || (code == "stale_snapshot" && !metrics.StaleArtifactAlert) || (code != "stale_snapshot" && !metrics.InvalidArtifactAlert) {
+				t.Fatal("late ACK erased security alert")
+			}
+			if err := c.Retry(ctx, n.DeploymentID); !errors.Is(err, ErrDenied) {
+				t.Fatal("security rejection was resumable")
+			}
+			if err := c.Begin(ctx, notice(2), edges(), policy(), 0); err != nil {
+				t.Fatal(err)
+			}
+			metrics, err = c.Telemetry(ctx, n.DeploymentID)
+			if err != nil || metrics.InvalidArtifactAlert || metrics.StaleArtifactAlert {
+				t.Fatal("new signed generation did not reset alert")
+			}
+		})
+	}
+}
