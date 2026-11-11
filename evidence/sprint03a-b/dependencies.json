@@ -1,0 +1,77 @@
+{
+  "node": {
+    "version": "v26.13.0",
+    "path": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+  },
+  "runtime_javascript_dependencies": "Node builtin modules only; no npm packages",
+  "envoy": {
+    "version": "1.40.2",
+    "image": "envoyproxy/envoy@sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded",
+    "discovery_tag": "envoyproxy/envoy:distroless-v1.40.2",
+    "release": "https://github.com/envoyproxy/envoy/releases/tag/v1.40.2",
+    "source_commit": "b2d89e0ae53916f28770771fbdd49c5c99c5c5a2",
+    "license": "Apache-2.0",
+    "index_digest": "sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded",
+    "platform": "linux/amd64",
+    "platform_manifest_digest": "sha256:16e0d4dac937ffa34103aa6ba1013dc2030b9de2a249273c8d23c7c5c2989664",
+    "config_digest": "sha256:711883897f9d8a5cd5797f1ef41f49800f997291a8e9db812a8786c184466936",
+    "crypto": "BoringSSL; see envoy-version.log",
+    "identity": "image-identity.log verifies exported index/platform/config/ordered layer hashes against scanned config",
+    "scan_limit": "Trivy OS/package coverage is not a complete audit of statically linked Envoy/C++ dependencies",
+    "provenance_limit": "immutable registry content pin and binary version verified; release signature/attestation not verified"
+  },
+  "external_inputs_at_finalization": [
+    {
+      "file": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+    },
+    {
+      "file": "/home/tiecont/Projects/aegis-gate/spikes/edge-comparison/run.mjs",
+      "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493"
+    },
+    {
+      "file": "/home/tiecont/Projects/aegis-gate/spikes/edge-comparison/contract.mjs",
+      "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f"
+    },
+    {
+      "file": "/home/tiecont/Projects/aegis-gate/spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "/home/tiecont/Projects/aegis-gate/spikes/edge-comparison/supplemental.mjs",
+      "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf"
+    },
+    {
+      "file": "/home/tiecont/Projects/aegis-gate/spikes/pingora/lab.mjs",
+      "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d"
+    },
+    {
+      "file": "/home/tiecont/Projects/aegis-gate/scripts/image_identity.py",
+      "sha256": "534e18de7759a1769635274ccf3e5fe80b45b866bc79d4b0bbee3aa14d3453dd"
+    }
+  ],
+  "launch_time_inputs": {
+    "artifacts": [
+      {
+        "path": "/home/tiecont/Projects/aegis-gate-sprint03-b/spikes/envoy/launch",
+        "sha256": "0ee313b5b338486cd856415a6022ae10f6f12aeab2696f0d0399c512f723f0f1"
+      },
+      {
+        "path": "/home/tiecont/Projects/aegis-gate-sprint03-b/spikes/envoy/launcher.mjs",
+        "sha256": "26705e93f391d6fcd815ce48ef279142ab5d3463be681a8cfe11edfea6bb5da3"
+      },
+      {
+        "path": "/home/tiecont/Projects/aegis-gate-sprint03-b/spikes/envoy/config.mjs",
+        "sha256": "53fd7c0c624f8a4771ce75d6059981762694a89d61f24482803289b979cebeef"
+      },
+      {
+        "path": "/home/tiecont/Projects/aegis-gate-sprint03-b/spikes/envoy/image.lock.json",
+        "sha256": "a96054e7fe3b8994f708f54c221758ecd786b91655c641cb7648067d1f02889d"
+      }
+    ],
+    "lab_sha256": "ef8f113ffe33a24cf490f73b7039fdafadebfa786ef5081971419a7379ae12dc",
+    "manifest_sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+    "supplemental_sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf"
+  }
+}

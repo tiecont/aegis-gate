@@ -1,0 +1,126 @@
+PASS malformed-HTTP-conflicting-content-length
+PASS malformed-HTTP-CL-TE
+PASS malformed-HTTP-TE-CL
+PASS malformed-HTTP-duplicate-Host
+FAIL malformed-HTTP-invalid-transfer-encoding: unsafe rejection response: HTTP/1.1 501 Not Implemented
+content-length: 15
+content-type: text/plain
+date: Wed, 11 Nov 2026 0
+FAIL malformed-HTTP-obsolete-folded-header: malformed request reached an owned origin
+
+1 !== 0
+
+PASS malformed-HTTP-invalid-request-target
+PASS malformed-HTTP-Connection-nominates-trusted-header
+PASS strict-ingress-target-raw-tab
+PASS strict-ingress-target-raw-control
+PASS strict-ingress-target-raw-null
+PASS strict-ingress-host-missing
+PASS strict-ingress-host-empty
+PASS strict-ingress-host-duplicate-identical
+PASS strict-ingress-host-comma-list
+PASS strict-ingress-host-userinfo
+PASS strict-ingress-host-invalid-port
+PASS strict-ingress-host-whitespace-before-colon
+PASS strict-ingress-absolute-authority-SNI-mismatch
+PASS strict-ingress-absolute-authority-Host-mismatch
+PASS strict-ingress-absolute-authority-userinfo
+PASS strict-ingress-absolute-authority-without-Host
+PASS strict-ingress-absolute-unsupported-scheme
+PASS strict-ingress-target-relative-form
+PASS strict-ingress-target-fragment
+PASS strict-ingress-connect-authority-form-disabled
+PASS strict-ingress-CL-TE-pipelined
+PASS strict-ingress-TE-CL-pipelined
+PASS strict-ingress-TE-obsolete-fold
+PASS strict-ingress-CL-comma-conflict
+FAIL strict-ingress-TE-repeated-chunked: unsafe rejection response: HTTP/1.1 501 Not Implemented
+content-length: 15
+content-type: text/plain
+date: Wed, 11 Nov 2026 0
+FAIL strict-ingress-TE-not-final-chunked: unsafe rejection response: HTTP/1.1 501 Not Implemented
+content-length: 15
+content-type: text/plain
+date: Wed, 11 Nov 2026 0
+PASS valid-percent-encoded-/bad%20target
+PASS valid-percent-encoded-/bad%09target
+PASS valid-percent-encoded-/bad%01target
+PASS valid-percent-encoded-/bad%00target
+PASS valid-percent-encoded-/encoded%2Fsegment?value=%2520
+PASS valid-percent-encoded-/caf%C3%A9?x=a%20b
+PASS supplemental-space-target-before-pipelined-request
+PASS supplemental-tab-target-before-pipelined-request
+FAIL supplemental-duplicate-host-before-pipelined-request: malformed request reached an owned origin
+
+1 !== 0
+
+PASS supplemental-conflicting-length-before-pipelined-request
+PASS supplemental-signed-content-length
+PASS supplemental-negative-content-length
+FAIL supplemental-repeated-transfer-encoding-fields: unsafe rejection response: HTTP/1.1 501 Not Implemented
+content-length: 15
+content-type: text/plain
+date: Wed, 11 Nov 2026 0
+PASS supplemental-nul-in-header-value
+PASS supplemental-invalid-header-name
+PASS valid-HTTP1-pipelining-preserves-boundaries-and-encoded-targets
+PASS two-SNI-certificate-selection
+PASS unknown-and-missing-SNI-handshake-rejected
+PASS pre-TLS-filter-rejects-unapproved-lab-source
+FAIL HTTP1-routing-and-untrusted-header-stripping: Expected values to be strictly equal:
++ actual - expected
+
++ '203.0.113.6'
+- null
+
+PASS cross-tenant-SNI-Host-binding
+PASS declared-oversized-body-rejected-before-origin
+PASS HTTP2-downstream-and-upstream-ALPN
+FAIL HTTP2-authority-Host-and-SNI-confusion-rejected: unsafe authority status 200
+PASS HTTP1-and-HTTP2-body-streaming
+PASS WebSocket-upgrade-bidirectional-close
+PASS certificate-rotation-keeps-active-stream-and-snapshot
+PASS invalid-and-replayed-snapshot-retains-last-good
+PASS invalid-certificate-config-retains-last-good
+FAIL verified-origin-TLS-rejects-wrong: invalid TLS origin parsed HTTP bytes
+
+1 !== 0
+
+FAIL verified-origin-TLS-rejects-expired: invalid TLS origin parsed HTTP bytes
+
+2 !== 1
+
+FAIL verified-origin-TLS-rejects-untrusted: invalid TLS origin parsed HTTP bytes
+
+3 !== 2
+
+FAIL trust-store-swap-cannot-reuse-old-origin-TLS-session: Expected values to be strictly equal:
+
+503 !== 200
+
+PASS origin-read-timeout-is-bounded
+PASS origin-connection-pooling
+FAIL same-origin-pools-are-partitioned-between-routes: Unexpected token 'u', "upstream c"... is not valid JSON
+FAIL client-upload-cancellation-is-bounded: origin did not receive a streaming body chunk
+FAIL weighted-health-check-failover-and-recovery: Expected values to be strictly equal:
++ actual - expected
+
++ 'unhealthy'
+- 'second'
+
+FAIL upgrade-does-not-forward-preread-bytes-before-101: The input did not match the regular expression /^HTTP\/1\.1 200/. Input:
+
+'HTTP/1.1 503 Service Unavailable\r\n' +
+  'date: Wed, 11 Nov 2026 08:27:38 GMT\r\n' +
+  'content-length: 9\r\n' +
+  'x-lab-generation: 10\r\n' +
+  'server: envoy\r\n' +
+  'connection: close\r\n' +
+  '\r\n' +
+  'unhealthy'
+
+PASS gRPC-bidirectional-streaming-and-trailers
+PASS gRPC-client-cancellation-reaches-origin
+PASS bounded-reference-benchmark
+PASS secret-bearing-request-absent-from-runtime-log
+Evidence: /home/tiecont/Projects/aegis-gate/.local/edge-proof-run-00DhJH/results.json
