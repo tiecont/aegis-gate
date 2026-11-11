@@ -1,0 +1,43 @@
+{
+  "lock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "parent_pid": 3228182,
+  "commands": [
+    {
+      "label": "save",
+      "program": "docker",
+      "args": [
+        "image",
+        "save",
+        "-o",
+        "/home/tiecont/Projects/aegis-gate-sprint03-e/.local/envoy-image.tar",
+        "envoyproxy/envoy@sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-e",
+      "environment": {},
+      "started_at": "2026-11-11T08:50:12.105Z",
+      "ended_at": "2026-11-11T08:50:13.658Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "bind",
+      "program": "python3",
+      "args": [
+        "scripts/image_identity.py",
+        "/home/tiecont/Projects/aegis-gate-sprint03-e/evidence/sprint03a-e/image-review/image-vulnerabilities.json",
+        "/home/tiecont/Projects/aegis-gate-sprint03-e/.local/envoy-image.tar",
+        "sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-e",
+      "environment": {},
+      "started_at": "2026-11-11T08:50:13.661Z",
+      "ended_at": "2026-11-11T08:50:14.503Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "5fdf493dc9a6720e463c711c9860c33972fb04faf83fd31a39c3a1c87a904d5e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}
