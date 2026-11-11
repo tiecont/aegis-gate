@@ -1,0 +1,114 @@
+{
+  "started_at": "2026-11-11T09:10:14.136Z",
+  "reviewer_head": "a442197d9497dc64c306dff4eeba8fd4c58d95d9",
+  "observer_commits": [
+    "bd96d00211a3a78d689282697788061c198bf2a1",
+    "502ac330303017b80241e024442fca724aa96462"
+  ],
+  "lock": {
+    "path": "/tmp/aegisgate-sprint02-fixtures.lock",
+    "parent_pid": 3427493
+  },
+  "harness": [
+    {
+      "file": "spikes/pingora/lab.mjs",
+      "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d"
+    },
+    {
+      "file": "spikes/edge-comparison/run.mjs",
+      "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493"
+    },
+    {
+      "file": "spikes/edge-comparison/contract.mjs",
+      "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f"
+    },
+    {
+      "file": "spikes/edge-comparison/evaluate.mjs",
+      "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/edge-comparison/supplemental.mjs",
+      "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.mjs",
+      "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.test.mjs",
+      "sha256": "9ddc71cf675cc89cb2bc2cba3770cf57f6b0eecde42885db0dccaa0718b1dbbd"
+    }
+  ],
+  "node": {
+    "path": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "version": "v26.13.0",
+    "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+  },
+  "commands": [
+    {
+      "label": "lab",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/edge-comparison/run.mjs"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-e",
+      "environment": {
+        "PINGORA_SPIKE_PROFILE": "release",
+        "AEGIS_CANDIDATE_NAME": "pingora-independent-e-observed",
+        "AEGIS_CANDIDATE_COMMAND": "/home/tiecont/Projects/aegis-gate/spikes/pingora/target/release/aegisgate-pingora-feasibility",
+        "AEGIS_CANDIDATE_ARGS": "[]",
+        "AEGIS_CANDIDATE_ARTIFACTS": "[\"/home/tiecont/Projects/aegis-gate/spikes/pingora/target/release/aegisgate-pingora-feasibility\",\"/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/pingora/Cargo.toml\",\"/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/pingora/Cargo.lock\",\"/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/pingora/src/main.rs\",\"/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/pingora/src/config.rs\"]",
+        "AEGIS_RUN_ROOT": "/home/tiecont/Projects/aegis-gate-sprint03-e/.local/observed-pingora"
+      },
+      "started_at": "2026-11-11T09:10:14.405Z",
+      "ended_at": "2026-11-11T09:10:40.335Z",
+      "exit_code": 1,
+      "signal": null,
+      "stdout_sha256": "c787e163511e2261371e6e10a36bb3858cd00a1540ecb3159bcaa90c302f7774",
+      "stderr_sha256": "523649d495fc1544b666c73f59c117d184586ba5c874a44874dbef84ded32e1c"
+    },
+    {
+      "label": "evaluate",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/edge-comparison/evaluate.mjs",
+        "/home/tiecont/Projects/aegis-gate-sprint03-e/evidence/sprint03a-e/observed-pingora/results.json"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-e",
+      "environment": {},
+      "started_at": "2026-11-11T09:10:40.338Z",
+      "ended_at": "2026-11-11T09:10:40.411Z",
+      "exit_code": 1,
+      "signal": null,
+      "stdout_sha256": "6689965e09eed4027dc7256547f9e5c965c36c38aaae012893fe6e4118b68e3f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "candidate_artifacts": [
+    {
+      "path": "/home/tiecont/Projects/aegis-gate/spikes/pingora/target/release/aegisgate-pingora-feasibility",
+      "sha256": "416358486ea4221c8b0141b7d6895b81f61d42d05f65d56d5aaf6184865c0152"
+    },
+    {
+      "path": "/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/pingora/Cargo.toml",
+      "sha256": "b31a70f0e6658b7ea33cce09aa3dbcddaa24da0a1f0cfdbfed3168c3a8f42996"
+    },
+    {
+      "path": "/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/pingora/Cargo.lock",
+      "sha256": "d555e1b64824c515b30b60becb54ff949ffd96c3d31f80d55f3cd5fb9614df6e"
+    },
+    {
+      "path": "/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/pingora/src/main.rs",
+      "sha256": "43f874ff1980712c2e6c8102cf6568bf5c7f64616289ad8a794f03173caf7e5a"
+    },
+    {
+      "path": "/home/tiecont/Projects/aegis-gate-sprint03-e/spikes/pingora/src/config.rs",
+      "sha256": "5ad23b7857787222673fc4519df4830ef71e3f0ce89cfd27fcefd4a5f56b0599"
+    }
+  ],
+  "completed_at": "2026-11-11T09:10:40.422Z"
+}
