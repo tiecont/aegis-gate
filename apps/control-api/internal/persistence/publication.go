@@ -220,9 +220,10 @@ func (s *Store) approvePublication(ctx context.Context, p Principal, project, ke
 	var result Publication
 	result.DeploymentID = project
 	var oldRollback uint64
-	err = tx.QueryRow(ctx, "SELECT generation,payload_digest,COALESCE(rollback_of,0) FROM config_revisions WHERE project_id=$1 AND issuer=$2 AND subject=$3 AND request_key=$4", project, p.Issuer, p.Subject, key).Scan(&result.Generation, &result.Digest, &oldRollback)
+	var oldTTLSeconds int64
+	err = tx.QueryRow(ctx, "SELECT generation,payload_digest,COALESCE(rollback_of,0),EXTRACT(EPOCH FROM expires_at-created_at)::bigint FROM config_revisions WHERE project_id=$1 AND issuer=$2 AND subject=$3 AND request_key=$4", project, p.Issuer, p.Subject, key).Scan(&result.Generation, &result.Digest, &oldRollback, &oldTTLSeconds)
 	if err == nil {
-		if oldRollback != rollback || rollback == 0 && result.Digest != digest {
+		if oldTTLSeconds != int64(ttl/time.Second) || oldRollback != rollback || rollback == 0 && result.Digest != digest {
 			return Publication{}, domain.ErrConflict
 		}
 		result.RollbackOf = oldRollback
