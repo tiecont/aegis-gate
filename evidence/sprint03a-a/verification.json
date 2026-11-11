@@ -1,0 +1,271 @@
+{
+  "purpose": "Exact-lock scoped checks and explicit reused-baseline provenance; not a fresh binary build",
+  "script_sha256": "3e11645d00ab9cd6484d4d9d9f9b99f2c515ba2a27a839660a3effef6d88b6d5",
+  "lock": {
+    "path": "/tmp/aegisgate-sprint02-fixtures.lock",
+    "held_by_parent_pid": 2982633
+  },
+  "node": "v26.13.0",
+  "own_root": "/home/tiecont/Projects/aegis-gate-sprint03-a",
+  "baseline_root": "/home/tiecont/Projects/aegis-gate",
+  "source_binding": [
+    {
+      "file": "spikes/pingora/Cargo.toml",
+      "own_sha256": "b31a70f0e6658b7ea33cce09aa3dbcddaa24da0a1f0cfdbfed3168c3a8f42996",
+      "baseline_sha256": "b31a70f0e6658b7ea33cce09aa3dbcddaa24da0a1f0cfdbfed3168c3a8f42996",
+      "equal": true
+    },
+    {
+      "file": "spikes/pingora/Cargo.lock",
+      "own_sha256": "d555e1b64824c515b30b60becb54ff949ffd96c3d31f80d55f3cd5fb9614df6e",
+      "baseline_sha256": "d555e1b64824c515b30b60becb54ff949ffd96c3d31f80d55f3cd5fb9614df6e",
+      "equal": true
+    },
+    {
+      "file": "spikes/pingora/src/main.rs",
+      "own_sha256": "43f874ff1980712c2e6c8102cf6568bf5c7f64616289ad8a794f03173caf7e5a",
+      "baseline_sha256": "43f874ff1980712c2e6c8102cf6568bf5c7f64616289ad8a794f03173caf7e5a",
+      "equal": true
+    },
+    {
+      "file": "spikes/pingora/src/config.rs",
+      "own_sha256": "5ad23b7857787222673fc4519df4830ef71e3f0ce89cfd27fcefd4a5f56b0599",
+      "baseline_sha256": "5ad23b7857787222673fc4519df4830ef71e3f0ce89cfd27fcefd4a5f56b0599",
+      "equal": true
+    }
+  ],
+  "binary": {
+    "source": "/home/tiecont/Projects/aegis-gate/spikes/pingora/target/release/aegisgate-pingora-feasibility",
+    "copied_to": "/home/tiecont/Projects/aegis-gate-sprint03-a/spikes/pingora/target/release/aegisgate-pingora-feasibility",
+    "sha256": "416358486ea4221c8b0141b7d6895b81f61d42d05f65d56d5aaf6184865c0152",
+    "freshly_built_here": false
+  },
+  "commands": [
+    {
+      "program": "cargo",
+      "args": [
+        "+1.99.1",
+        "--version"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-a",
+      "started_at": "2026-11-11T08:25:53.375Z",
+      "ended_at": "2026-11-11T08:25:53.514Z",
+      "exit_code": 0,
+      "stdout": "cargo-version.txt",
+      "stdout_sha256": "c35608815f43d0b8788a9b826fad2bb17384f49fb328dc4fe64da9db5f5ef4d6",
+      "stderr": "cargo-version.txt.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "program": "cargo",
+      "args": [
+        "+1.99.1",
+        "fmt",
+        "--check",
+        "--manifest-path",
+        "spikes/pingora/Cargo.toml"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-a",
+      "started_at": "2026-11-11T08:25:53.514Z",
+      "ended_at": "2026-11-11T08:25:54.003Z",
+      "exit_code": 0,
+      "stdout": "fmt.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "fmt.txt.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "program": "/home/tiecont/Projects/aegis-gate/.local/tools/bin/cargo-audit",
+      "args": [
+        "audit",
+        "--file",
+        "spikes/pingora/Cargo.lock",
+        "--json"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-a",
+      "started_at": "2026-11-11T08:25:54.003Z",
+      "ended_at": "2026-11-11T08:25:56.984Z",
+      "exit_code": 0,
+      "stdout": "cargo-audit.json",
+      "stdout_sha256": "dfca65f059f0e89a167f5d8b9f1dcfc7b5450239cb420729d75c2c8ebdd84755",
+      "stderr": "cargo-audit.json.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "program": "cargo",
+      "args": [
+        "+1.99.1",
+        "tree",
+        "--locked",
+        "--offline",
+        "--manifest-path",
+        "spikes/pingora/Cargo.toml",
+        "-i",
+        "derivative"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-a",
+      "started_at": "2026-11-11T08:25:56.984Z",
+      "ended_at": "2026-11-11T08:25:57.859Z",
+      "exit_code": 0,
+      "stdout": "derivative-tree.txt",
+      "stdout_sha256": "00638ef9d20be44420d301fd51319b063ea12b0a2ed6bb747ff4a427b7c319ae",
+      "stderr": "derivative-tree.txt.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "program": "cargo",
+      "args": [
+        "+1.99.1",
+        "tree",
+        "--locked",
+        "--offline",
+        "--manifest-path",
+        "spikes/pingora/Cargo.toml",
+        "-i",
+        "unsafe-libyaml"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-a",
+      "started_at": "2026-11-11T08:25:57.860Z",
+      "ended_at": "2026-11-11T08:25:58.039Z",
+      "exit_code": 0,
+      "stdout": "unsafe-libyaml-tree.txt",
+      "stdout_sha256": "0143caf0714661432840e92485b67d1289c191a40293a6e19acebdadc7890d53",
+      "stderr": "unsafe-libyaml-tree.txt.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/npm",
+      "args": [
+        "audit",
+        "--prefix",
+        "spikes/pingora",
+        "--json"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-sprint03-a",
+      "started_at": "2026-11-11T08:25:58.039Z",
+      "ended_at": "2026-11-11T08:25:59.473Z",
+      "exit_code": 0,
+      "stdout": "npm-audit.json",
+      "stdout_sha256": "455509daddf74eaed9304146ab18e579eb067266315c03c5c030afcc9c28ad5f",
+      "stderr": "npm-audit.json.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "audit": {
+    "database": {
+      "advisory-count": 1446,
+      "last-commit": "28d73fc95e5972af3403225a217def57dcaba3c4",
+      "last-updated": "2026-11-10T14:45:03+01:00"
+    },
+    "lockfile": {
+      "dependency-count": 206
+    },
+    "settings": {
+      "target_arch": [],
+      "target_os": [],
+      "severity": null,
+      "ignore": [],
+      "informational_warnings": [
+        "unmaintained",
+        "unsound",
+        "notice"
+      ]
+    },
+    "vulnerabilities": {
+      "found": false,
+      "count": 0,
+      "list": []
+    },
+    "warnings": {
+      "unmaintained": [
+        {
+          "kind": "unmaintained",
+          "package": {
+            "name": "derivative",
+            "version": "2.2.0",
+            "source": "registry+https://github.com/rust-lang/crates.io-index",
+            "checksum": "fcc3dd5e9e9c0b295d6e1e4d811fb6f157d5ffd784b8d202fc62eac8035a770b",
+            "dependencies": [
+              {
+                "name": "proc-macro2",
+                "version": "1.0.107",
+                "source": "registry+https://github.com/rust-lang/crates.io-index"
+              },
+              {
+                "name": "quote",
+                "version": "1.0.47",
+                "source": "registry+https://github.com/rust-lang/crates.io-index"
+              },
+              {
+                "name": "syn",
+                "version": "1.0.109",
+                "source": "registry+https://github.com/rust-lang/crates.io-index"
+              }
+            ],
+            "replace": null
+          },
+          "advisory": {
+            "id": "RUSTSEC-2024-0388",
+            "package": "derivative",
+            "title": "`derivative` is unmaintained; consider using an alternative",
+            "description": "The [`derivative`](https://crates.io/crates/derivative) crate is no longer maintained.\nConsider using any alternative, for instance:\n- [derive_more](https://crates.io/crates/derive_more)\n- [derive-where](https://crates.io/crates/derive-where)\n- [educe](https://crates.io/crates/educe)",
+            "date": "2024-06-26",
+            "aliases": [],
+            "related": [],
+            "collection": "crates",
+            "categories": [],
+            "keywords": [],
+            "cvss": null,
+            "informational": "unmaintained",
+            "references": [],
+            "source": null,
+            "url": "https://github.com/mcarton/rust-derivative/issues/117",
+            "withdrawn": null,
+            "license": "CC0-1.0",
+            "expect-deleted": false
+          },
+          "affected": null,
+          "versions": {
+            "patched": [],
+            "unaffected": []
+          }
+        },
+        {
+          "kind": "unmaintained",
+          "package": {
+            "name": "unsafe-libyaml",
+            "version": "0.2.11",
+            "source": "registry+https://github.com/rust-lang/crates.io-index",
+            "checksum": "673aac59facbab8a9007c7f6108d11f63b603f7cabff99fabf650fea5c32b861",
+            "replace": null
+          },
+          "advisory": {
+            "id": "RUSTSEC-2024-0449",
+            "package": "unsafe-libyaml",
+            "title": "unsafe-libyaml is unmaintained",
+            "description": "The [repository](https://github.com/dtolnay/unsafe-libyaml) was archived by\nits owner on 2024-03-25 and is read-only. The last release is 0.2.11\n(March 2024).\n\n`unsafe-libyaml` is a machine translation of libyaml's C code into unsafe\nRust (c2rust). Bugs found in it will not be fixed upstream. It is used by\n`serde_yaml` (itself deprecated) and by forks such as `serde_yaml_ng`.\n\n## Alternatives\n\nConsider a YAML parser written in safe Rust, for example:\n\n- [saphyr](https://crates.io/crates/saphyr) ([serde-saphyr](https://crates.io/crates/serde-saphyr) for serde users)\n- [noyalib](https://crates.io/crates/noyalib)",
+            "date": "2024-03-25",
+            "aliases": [],
+            "related": [],
+            "collection": "crates",
+            "categories": [],
+            "keywords": [],
+            "cvss": null,
+            "informational": "unmaintained",
+            "references": [],
+            "source": null,
+            "url": "https://github.com/dtolnay/unsafe-libyaml",
+            "withdrawn": null,
+            "license": "CC0-1.0",
+            "expect-deleted": false
+          },
+          "affected": null,
+          "versions": {
+            "patched": [],
+            "unaffected": []
+          }
+        }
+      ]
+    }
+  }
+}
