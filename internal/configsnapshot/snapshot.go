@@ -208,7 +208,7 @@ func Sign(ctx context.Context, e Envelope, s Signer) ([]byte, error) {
 	e.Context = Context
 	e.SigningKeyID = s.KeyID()
 	e.Signature = ""
-	if err := validateEnvelope(e, e.CreatedAt); err != nil {
+	if err := validateEnvelope(e, e.ValidFrom); err != nil {
 		return nil, err
 	}
 	payload, err := canonical(e.Payload)
@@ -232,6 +232,17 @@ func Sign(ctx context.Context, e Envelope, s Signer) ([]byte, error) {
 	return canonical(e)
 }
 func Verify(raw []byte, trust *TrustStore, deploymentID string, minGeneration uint64, now time.Time) (Envelope, error) {
+	return verify(raw, trust, deploymentID, minGeneration, now, false)
+}
+
+// VerifyCheckpoint authenticates durable replay-floor metadata, including an
+// expired artifact, against keys still trusted NOW. It never grants readiness
+// or authorizes activation: callers must separately use Verify at current time.
+// This prevents an expired LKG from erasing the durable generation high-water.
+func VerifyCheckpoint(raw []byte, trust *TrustStore, deploymentID string, now time.Time) (Envelope, error) {
+	return verify(raw, trust, deploymentID, 0, now, true)
+}
+func verify(raw []byte, trust *TrustStore, deploymentID string, minGeneration uint64, now time.Time, checkpoint bool) (Envelope, error) {
 	var e Envelope
 	canon, err := canonicalRaw(raw)
 	if err != nil {
@@ -252,7 +263,14 @@ func Verify(raw []byte, trust *TrustStore, deploymentID string, minGeneration ui
 	if e.Generation <= minGeneration || e.Generation > MaxGeneration {
 		return e, fail("generation")
 	}
-	if err = validateEnvelope(e, now); err != nil {
+	semanticTime := now
+	if checkpoint {
+		if now.Before(e.ValidFrom) {
+			return e, fail("time")
+		}
+		semanticTime = e.ValidFrom
+	}
+	if err = validateEnvelope(e, semanticTime); err != nil {
 		return e, err
 	}
 	if trust == nil {

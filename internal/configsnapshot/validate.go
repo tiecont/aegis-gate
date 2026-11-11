@@ -1,6 +1,7 @@
 package configsnapshot
 
 import (
+	"bytes"
 	_ "embed"
 	"encoding/json"
 	"net/netip"
@@ -16,7 +17,11 @@ import (
 )
 
 //go:embed schema-v1.json
-var Schema []byte
+var schemaBytes []byte
+
+// SchemaBytes returns a defensive copy of the exact versioned wire schema.
+func SchemaBytes() []byte { return bytes.Clone(schemaBytes) }
+
 var schemaOnce sync.Once
 var compiled *jsonschema.Schema
 var schemaError error
@@ -24,7 +29,7 @@ var schemaError error
 func validateRequired(raw []byte) error {
 	schemaOnce.Do(func() {
 		var document any
-		schemaError = json.Unmarshal(Schema, &document)
+		schemaError = json.Unmarshal(schemaBytes, &document)
 		if schemaError != nil {
 			return
 		}
@@ -77,11 +82,11 @@ func hostname(s string) bool {
 	return true
 }
 func secureURL(raw string, origin bool) bool {
-	if len(raw) == 0 || len(raw) > 2048 || strings.Contains(raw, "\\") || strings.IndexFunc(raw, unicode.IsControl) >= 0 {
+	if len(raw) == 0 || len(raw) > 2048 || strings.ContainsAny(raw, "\\?#") || strings.IndexFunc(raw, unicode.IsControl) >= 0 {
 		return false
 	}
 	u, err := url.Parse(raw)
-	if err != nil || u.Scheme != "https" || u.User != nil || u.Opaque != "" || u.RawQuery != "" || u.Fragment != "" || !hostname(u.Hostname()) || (u.Port() != "" && u.Port() != "443") {
+	if err != nil || u.Scheme != "https" || u.User != nil || u.Opaque != "" || u.RawQuery != "" || u.ForceQuery || u.Fragment != "" || u.RawFragment != "" || !hostname(u.Hostname()) || (u.Port() != "" && u.Port() != "443") {
 		return false
 	}
 	if origin && (u.Path != "" && u.Path != "/" || u.RawPath != "") {

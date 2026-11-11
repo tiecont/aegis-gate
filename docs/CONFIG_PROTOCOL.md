@@ -1,64 +1,192 @@
 # Config Contract and Publication Protocol
 
-## Goals
+Module03 version **1.0**, frozen for Sprint03-B. This is an engine-independent
+configuration read-model. It implements no customer-facing proxy and does not
+open Module01 or Module04. The authoritative schema is
+[`internal/configsnapshot/schema-v1.json`](../internal/configsnapshot/schema-v1.json),
+embedded and enforced by the shared Go signing/verifying library. The older
+`examples/gateway-snapshot.json` is an illustrative blueprint, not a version1.0
+wire artifact. Public golden canonical payload, complete signing-input hex and public-key hex
+are retained beside `testdata/verify-vector.mjs`, which independently verifies
+Ed25519/context/envelope binding/SHA256/tamper with Node/OpenSSL. No private key
+is stored; the Go test derives a deliberately public fixture identity.
+A valid public golden artifact is
+[`snapshot-v1.json`](../internal/configsnapshot/testdata/snapshot-v1.json).
 
-Near-real-time config apply without calling the control plane per customer request; bounded stale period, signed immutable snapshots, atomic activation, canary/rollback, tenant isolation, auditable policy activation.
+## Envelope and exact signed bytes
 
-## Snapshot example
+All properties are required; unknown properties, including unsupported policy
+operators, are rejected at every object level. Duplicate JSON keys (including
+escaped aliases), invalid UTF-8, lone UTF-16 surrogates, excess nesting and
+malformed JSON fail before activation. RFC8785 JCS is implemented by the pinned
+[Cyberphone Go canonicalizer](https://github.com/cyberphone/json-canonicalization/tree/master/go),
+an implementation listed in [RFC8785 Appendix G](https://www.rfc-editor.org/rfc/rfc8785.html#appendix-G).
+No project-specific canonical encoding or cryptographic primitive is used.
 
-See `../examples/gateway-snapshot.json` (values are illustrative; it is *not* schema-validated production config).
+| Property | Meaning |
+| --- | --- |
+| `schema_version` | Exactly `1.0`; no downgrade or unknown version. |
+| `context` | Exactly `AEGISGATE_CONFIG_V1`; also used as the signature prefix. |
+| `generation` | Integer 1 through 9007199254740991, strictly newer than the consumer's durable high-water mark. |
+| `deployment_id` | Pinned deployment namespace, opaque case-sensitive ASCII identifier. Production control planes should allocate collision-resistant UUIDs. A consumer never changes its namespace from a notification. |
+| `created_at` | Signed creation time. |
+| `valid_from` | Activation not before this time; must be at or after creation. |
+| `expires_at` | Hard fail-closed time, after `valid_from`, at most24h after creation. |
+| `content_sha256` | Lowercase hex SHA256 of UTF-8 JCS of the complete `payload` object. |
+| `signing_key_id` | Identifier selected only from separately authenticated trust. |
+| `payload` | Complete immutable tenant read-model below. |
+| `signature` | Standard padded Base64 Ed25519 signature, 64 decoded bytes. |
 
-Minimum logical envelope:
+All three envelope timestamps and domain `verified_until` use the exact lexical
+form `YYYY-MM-DDTHH:MM:SSZ`, UTC and whole seconds. There is no clock-skew bypass.
+`created_at <= valid_from <= now < expires_at` must hold. Domain ownership must
+remain unexpired at verification/readiness. A stale control plane cannot extend
+these bounds. Consumer policy may impose an earlier maximum staleness.
 
-```json
-{
-  "schema_version": "1.0",
-  "generation": 173,
-  "deployment_id": "uuid",
-  "valid_from": "RFC3339 UTC",
-  "created_at": "RFC3339 UTC",
-  "content_sha256": "hex digest of canonical payload",
-  "signing_key_id": "string",
-  "signature": "base64 Ed25519 signature over defined envelope bytes",
-  "tenants": []
-}
-```
+The signature input is the concatenation of ASCII `AEGISGATE_CONFIG_V1`, one
+NUL byte, and UTF-8 JCS of the **whole envelope with the `signature` property
+removed**. This includes the context, version, deployment, generation, every
+time, signing key ID, content digest and full payload. The signature is ordinary
+Ed25519, without an added prehash. Maintained Go standard-library Ed25519 and
+SHA256 perform the cryptography. Signers implement `configsnapshot.Signer` so a
+production secret service can sign these exact bytes without exposing its key.
+`LocalSigner` generates disposable random keys in process memory only.
 
-**Signing rules**: define one canonical byte representation (e.g. RFC 8785 JCS or deterministically encoded protobuf), domain-separate the signature context (`AEGISGATE_CONFIG_V1`), sign schema version + generation + hash + expiry + content; verify before parsing as active config. Pin active public keys via authenticated bootstrap, support rotation with overlapping validity and explicit revocation. Reject wrong generation, duplicate hostname, unknown fields and invalid policy operators.
+Equivalent whitespace, property order and JCS numeric spelling may be accepted.
+Verification returns a normalized typed envelope. Consumers must use that
+verified value for compilation; interpreting the original JSON independently
+can disagree on numeric spelling. Artifact transport SHA256 is over the exact
+stored artifact bytes, separately from `content_sha256`. Both are checked.
+`VerifyCheckpoint` may authenticate an expired artifact solely to recover its
+durable generation floor, validating its semantics at signed `valid_from` while
+requiring its key and trust bundle still be trusted now. It grants no readiness
+or activation; these always need ordinary `Verify` at current time.
+JCS preserves array order; publishers sort all tenant/resource lists and methods
+when compiling a revision, and retain its exact signed artifact for retries.
 
-## Lifecycle
+## Payload and policy semantics
 
-1. Operator submits policy and receives deterministic preview + validation errors.
-2. DB transaction records approved immutable revision and outbox event atomically.
-3. Publisher claims event idempotently, builds whole usable snapshot; checks all tenant references and hostname ownership.
-4. Snapshot stored as immutable blob; digest + signature verified in publisher. No raw cert private keys or API key cleartext in snapshot.
-5. Notification provides `(generation, hash, location)` over authenticated messaging.
-6. Edge fetches snapshot securely, validates signature/schema/timestamps/bounds and precompiles all routing/policy data; load under tight memory cap.
-7. Edge stages config; canary subset applies, ACKs health/contract probes. Remaining edge instances apply when canary passes.
-8. Apply is atomic pointer swap. Old snapshot retained for in-flight requests + bounded grace. Emit applied generation and audit.
-9. On error, NACK with safe diagnostics and **keep LKG**. Alert on stale generation or missing ACK.
-10. Rollback creates **new generation**, deriving payload from approved previous generation; never roll version counter backward.
+`payload.tenants` contains at most128 tenants. Empty/null tenant lists are an
+explicit complete empty configuration, allowing total revocation. Every tenant
+has `id`, `domains`, `origin_pools`, `policies` and `routes`; resource arrays may
+be empty/null. Every resource has an identifier and explicit `tenant_id`, which
+must equal its enclosing tenant. Every pool, endpoint, policy and route carries
+an immutable resource `generation`. Identifiers match
+`[A-Za-z0-9][A-Za-z0-9_.-]{0,127}`. There is no lookup across tenant boundaries.
 
-## Edge disconnected behavior
+A domain has `id`, `tenant_id`, canonical lowercase ASCII/IDNA `hostname` and
+`verified_until`. Hostnames are globally unique across the whole snapshot;
+IP literals, localhost/internal/test suffixes and malformed authorities fail.
+The publisher derives ownership and active state from approved Module02 data;
+the snapshot cannot authorize ownership merely by asserting a tenant ID.
 
-- Boot requires an authenticated validated snapshot from disk or publisher; if none, readiness false / no customer traffic.
-- Losing control plane must not remove active auth and security. LKG stays in effect; report stale status.
-- Domain revocation and emergency denies have explicit hazard analysis: can send out-of-band emergency rule through independently authenticated channel; if unavailable, operator can remove traffic at upstream provider/LB.
-- Local cached certificates and their remaining validity are independent of config availability; never serve expired cert.
-- TTL of snapshots for regular use is a policy decision based on acceptable risk, not automatic silent bypass. After configured maximum staleness choose documented fail-safe per tenant/route class; for critical security revocations prefer fail closed.
+An origin pool has `id`, `tenant_id`, `generation`, and1–64 endpoints. Each
+endpoint has `id`, `tenant_id`, `generation` and an HTTPS `url`. Only external
+hostname syntax, default/443 port, empty or `/` path, no credentials, query,
+fragment or encoded path is supported. The compiler maps an approved legacy
+single-origin revision to a singleton pool. DNS lookup is deliberately absent
+from verification: concrete IP validation at dial time is a mandatory future
+Module04 invariant, not something a signed URL replaces.
 
-## Consistency
+A policy has `id`, `tenant_id`, `generation`, `auth_required`, `jwt_issuer` and
+`jwt_audience`. `auth_required` must be explicitly **true**. An issuer is an
+HTTPS URL with a canonical external hostname and no userinfo, query or fragment;
+the audience is1–256 characters without controls. Anonymous mode and additional
+policy operators are unsupported. Missing or invalid policies reject the whole
+candidate; no implicit anonymous fallback exists. This distribution module
+preserves declarative authentication requirements; token enforcement remains
+Module06 work behind its prerequisites.
 
-- No cross-tenant data mixed by consumer: namespace hashes/paths, cross references validated.
-- Config serves as single immutable read-model; request uses a captured generation for entire lifetime.
-- Config edge deploy visibility: per-edge ACK/NACK, % healthy, p95 propagation, version skew, degraded reason, retry state.
-- Fanout can be driven by JetStream events but edges pull from securely authorized artifact store, not arbitrary config bodies in public pubsub.
+A route has `id`, `tenant_id`, `generation`, `domain_id`, `origin_pool_id`,
+`policy_id`, `path`, and `methods`. All three references must exist in the same
+tenant. Paths are literal exact paths, not regular expressions or prefix/wildcard
+operators. A `*` character, if present, is literal. Paths must start with `/`,
+contain no controls, `%`, `?`, `#`, backslash, repeated slash or dot segments,
+and be at most1024 bytes. Methods are a unique nonempty subset of GET, HEAD,
+POST, PUT, PATCH, DELETE, OPTIONS. Duplicate domain/path/method matches reject
+the whole snapshot. Routing always captures route, policy and pool from one
+complete generation; no mutable individual-table updates are permitted.
 
-## Acceptance test contract
+A tenant has at most1024 domains,1024 pools,1024 policies and4096 routes. The
+whole snapshot has at most8192 resources including endpoints. Artifacts are at
+most4MiB and JSON nesting at most24. Downloads, retries, retained generations,
+request leases and encrypted disk data need their own bounded consumer limits.
 
-- A valid revision starts routing across all healthy edges; generation matched.
-- Corrupted signature/hash, schema downgrade, stale replay, duplicate host, invalid JWT policy or forbidden origin rejected.
-- One failed edge does not block serving from healthy edges; canary failure pauses rollout.
-- Control plane DB and NATS outage: already-active routes continue with LKG and observable stale state.
-- Atomic change of route origin under sustained load: requests use either old or new consistent snapshot, never mixed policy.
-- Rollback change deploys monotonically increasing generation and produces audit diff.
+## Authenticated bootstrap and key rotation
+
+Trust never comes from snapshot payloads or JetStream. Installation pins an
+Ed25519 root public key and environment identifier through an authenticated,
+access-restricted operator channel. The root private key belongs in a separate
+secret service, not the publisher artifact store. Use unique signing/root
+material per environment. The library's `Bootstrap(root, environment, bundle,
+now)` validates a root-signed trust bundle; `WithBundle` returns a new immutable
+trust store for rotation. `NewTrustStore` is only for already authenticated
+out-of-band configuration injection, including disposable local tests.
+
+A trust bundle requires `context=AEGISGATE_TRUST_V1`, `environment`, `version`,
+`issued_at`, `expires_at`, `keys` and `signature`. Its signature input is ASCII
+`AEGISGATE_TRUST_V1`, NUL, and JCS of the entire bundle excluding `signature`.
+The independently pinned root verifies it. Its version is strictly increasing,
+environment exact, validity at most24h, and size at most32KiB. Duplicate/unknown
+fields and missing fields fail. A bundle grants at most two keys, each carrying
+`id`, Base64 `public_key`, `not_before`, `not_after`, and `retired_at` (zero time
+means no scheduled retirement). A key lives at most30 days; the overlap of two
+key validity intervals is at most24h. A root-signed bundle may explicitly retire
+a key earlier. Omitting an old key retires its ID; later bundles cannot resurrect
+that ID. Key IDs cannot change public material or validity bounds, and a
+scheduled retirement cannot be extended. Root-key replacement itself requires
+a new authenticated installation ceremony and is not authorized by NATS.
+
+Verification checks that creation and current time are within the signing key's
+validity, and current time precedes retirement and authenticated bundle expiry.
+Retiring a key invalidates its LKG as well as newly received artifacts. Consumers
+must recheck trust and hard expiry when checking readiness/capturing requests,
+and replace immutable trust atomically. A healthy replacement signed under the
+new key must reach consumers during overlap before retiring the old key.
+Clock rollback or deletion/rollback of all local high-water state requires an
+operator recovery ceremony; signatures do not provide a hardware monotonic clock.
+
+## Publication and consumption lifecycle
+
+1. An authorized operator receives deterministic preview and validation errors.
+2. One DB transaction records the approved immutable revision, new deployment
+   generation and durable outbox event. Unapproved mutable state is not compiled.
+3. A bounded lease worker compiles the whole snapshot, validates all references,
+   signs it, verifies the result, and retains one immutable artifact per revision.
+4. Restricted local storage writes the immutable artifact. The authenticated
+   JetStream notification contains only `deployment_id`, `generation`, artifact
+   SHA256 digest and an artifact location authorized by the consumer's pinned
+   authenticated fetch endpoint. An arbitrary notification never authorizes data.
+5. The consumer uses mTLS identity and verified HTTPS server identity, enforces
+   download bounds, and checks notification binding plus the complete signed
+   contract with one shared implementation. It fully compiles staging first.
+6. Encrypted restricted LKG and monotonic metadata are committed before the
+   whole immutable generation becomes visible. A request captures the complete
+   generation for its lifetime. Interrupted staging cannot partially activate.
+7. Structured safe ACK/NACK codes bind deployment, generation and artifact digest.
+   Rejection retains the previous valid LKG. Canary NACK pauses expansion; only
+   authenticated, expected consumers and health/quorum observations count.
+8. Rollback republishes previously approved content as a **new** signed monotonic
+   generation with audit history. Neither rollback nor worker recovery lowers
+   the generation high-water mark. Retry does not change immutable artifact bytes.
+
+## Disconnection, emergency revocation and acceptance scope
+
+Boot without a valid authenticated snapshot is not ready. Control-plane,
+PostgreSQL, messaging or storage outage preserves a still-valid LKG without
+removing its auth/routing policy. Hard snapshot expiry, ownership expiry,
+retired keys, expired trust and earlier consumer staleness policy all fail closed.
+No outage extends any signed deadline. Outages may delay revocation until the
+earliest such deadline, at most24h for a newly created artifact and trust bundle;
+this is a hazard bound, not an achieved propagation SLO. An emergency channel
+must be separately authenticated; until such a production channel is reviewed,
+operators remove affected traffic at the independently controlled upstream LB.
+No unsigned emergency edits or network trust downgrade are allowed.
+
+Local tests must prove byte tamper, wrong digest/signature/context/key,
+retirement/overlap, downgrade/replay, duplicate host, cross-tenant references,
+invalid/missing auth, malformed/oversized/deep/Unicode artifacts, request
+atomicity, crash/restart/LKG, canary pause and newer-generation rollback. Actual
+integration, scanner and independent-review evidence determine the Module03
+local gate. Production secrets, deployment, signed runtime images, exhaustive
+operational recovery and human release/security signoff remain later gates.
