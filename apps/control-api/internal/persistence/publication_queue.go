@@ -100,3 +100,18 @@ func (q *publicationQueue) Retry(ctx context.Context, j configpublish.Job, delay
 	}
 	return nil
 }
+
+// VerifyPublication binds a rollout admission to a durable approval and the
+// exact immutable artifact staged by the publisher. A pubsub hint alone cannot
+// create or advance a rollout. A staged job may still be awaiting its bus ACK.
+func (s *Store) VerifyPublication(ctx context.Context, deploymentID string, generation uint64, artifactDigest string, rollbackOf uint64) error {
+	if generation == 0 || generation > configsnapshot.MaxGeneration || len(artifactDigest) != 64 {
+		return configpublish.ErrUnavailable
+	}
+	var approved bool
+	err := s.pool.QueryRow(ctx, `SELECT EXISTS(SELECT 1 FROM config_revisions r JOIN config_outbox o ON o.project_id=r.project_id AND o.generation=r.generation WHERE r.project_id=$1 AND r.generation=$2 AND o.digest=$3 AND o.artifact IS NOT NULL AND COALESCE(r.rollback_of,0)=$4 AND o.state IN ('leased','pending','published'))`, deploymentID, generation, artifactDigest, rollbackOf).Scan(&approved)
+	if err != nil || !approved {
+		return configpublish.ErrUnavailable
+	}
+	return nil
+}
