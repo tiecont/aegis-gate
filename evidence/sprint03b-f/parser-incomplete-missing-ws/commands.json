@@ -1,0 +1,88 @@
+{
+  "started_at": "2026-11-11T15:37:25.756Z",
+  "source_commit": "1cb6d00b7a42e78f5cb9433f60afceadc783530d",
+  "source_clean": true,
+  "source_hashes": [
+    {
+      "file": "spikes/pingora/lab.mjs",
+      "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/edge-comparison/contract.mjs",
+      "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f"
+    },
+    {
+      "file": "spikes/edge-comparison/supplemental.mjs",
+      "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf"
+    },
+    {
+      "file": "spikes/edge-comparison/evaluate.mjs",
+      "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.mjs",
+      "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065"
+    },
+    {
+      "file": "spikes/envoy/config.mjs",
+      "sha256": "53fd7c0c624f8a4771ce75d6059981762694a89d61f24482803289b979cebeef"
+    },
+    {
+      "file": "spikes/envoy/recovery-config.mjs",
+      "sha256": "407268e48e6dffe15220f1b2d58f6eb7b0520dd2b1f69b5250e8f685a3f44b3c"
+    },
+    {
+      "file": "spikes/envoy/recovery-launcher.mjs",
+      "sha256": "00517051e9d631adbee9c58f58f1a343404360e24e66e5c3cbecd0c17c08be23"
+    },
+    {
+      "file": "spikes/envoy/recovery-run.mjs",
+      "sha256": "ccaff2dd48099cccfb06b276f7f13717648d605dbabcad5238fa1eec74c2d42f"
+    },
+    {
+      "file": "spikes/envoy/image.lock.json",
+      "sha256": "a96054e7fe3b8994f708f54c221758ecd786b91655c641cb7648067d1f02889d"
+    }
+  ],
+  "commands": [
+    {
+      "label": "manifest",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "environment": {},
+      "started_at": "2026-11-11T15:37:25.811Z",
+      "ended_at": "2026-11-11T15:37:25.867Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "lab",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/edge-comparison/run.mjs"
+      ],
+      "environment": {
+        "AEGIS_CANDIDATE_NAME": "envoy-1.40.2-retain-original-h2-host",
+        "AEGIS_CANDIDATE_COMMAND": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "AEGIS_CANDIDATE_ARGS": "[\"/tmp/aegisgate-03b-f-parser/spikes/envoy/recovery-launcher.mjs\"]",
+        "AEGIS_CANDIDATE_ARTIFACTS": "[\"/tmp/aegisgate-03b-f-parser/spikes/envoy/config.mjs\",\"/tmp/aegisgate-03b-f-parser/spikes/envoy/recovery-config.mjs\",\"/tmp/aegisgate-03b-f-parser/spikes/envoy/recovery-launcher.mjs\",\"/tmp/aegisgate-03b-f-parser/spikes/envoy/recovery-run.mjs\",\"/tmp/aegisgate-03b-f-parser/spikes/envoy/image.lock.json\"]",
+        "AEGIS_RUN_ROOT": "/tmp/aegisgate-03b-f-parser/.local/recovery-host-retention"
+      },
+      "started_at": "2026-11-11T15:37:25.868Z",
+      "ended_at": "2026-11-11T15:37:25.921Z",
+      "exit_code": 1,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "6a55ce4d54957a258ab2b960819e490f5b0b1c79245f3bd637f641026a0365b0"
+    }
+  ]
+}
