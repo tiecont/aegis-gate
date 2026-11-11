@@ -4,7 +4,8 @@ import tls from 'node:tls';
 // implementation consumes them. It neither parses nor rewrites HTTP frames.
 export function createTlsObserver({ cert, key, ca, port, onBytes, onTransportError = () => {} }) {
   const connections = new Set();
-  const server = tls.createServer({ cert, key, minVersion: 'TLSv1.2', ALPNProtocols: ['h2'] }, (downstream) => {
+  const server = tls.createServer({ cert, key, minVersion: 'TLSv1.2', ALPNProtocols: ['h2'],
+    handshakeTimeout: 2000 }, (downstream) => {
     if (connections.size >= 64) { downstream.destroy(); return; }
     downstream.pause();
     const upstream = tls.connect({ host: '127.0.0.1', port, servername: 'lab-origin.test',
@@ -24,6 +25,7 @@ export function createTlsObserver({ cert, key, ca, port, onBytes, onTransportErr
       upstream.pipe(downstream);
     });
   });
+  server.maxConnections = 64;
   server.on('tlsClientError', () => onTransportError());
   server.closeAllConnections = () => {
     for (const { downstream, upstream } of connections) { downstream.destroy(); upstream.destroy(); }
