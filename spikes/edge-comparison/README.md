@@ -47,3 +47,12 @@ Root's first shared-harness reproduction, before supplemental additions, is
 `evidence/sprint03a-d/pingora-baseline.json`:57/65, identical eight failures.
 Relative-form bytes are190 in this ordering (generation1 rather than19); the
 security invariant remains zero bytes and the case fails unchanged.
+
+Native Node HTTP2 consumption can bypass a TLSSocket `data` listener. Final
+proofs therefore use `tls-observer.mjs`, a bounded owned-loopback TLS relay
+that counts decrypted bytes before forwarding unchanged frames to the actual
+verified TLS H2/gRPC origin. It implements no HTTP parser. The calibration
+test sends only the24-byte H2 preface and observes nonzero bytes with no
+handler dispatch, then verifies a valid encoded-target H2 request unchanged.
+The functional H2 positive control also requires observed bytes. Earlier runs
+remain retained with the H2 byte-observation limitation explicitly recorded.

@@ -35,12 +35,15 @@ if [ "$mode" = all ] || [ "$mode" = dependencies ]; then
     run install-cargo-audit cargo +1.99.1 install cargo-audit --version 0.23.0 --locked --root "$PWD/.local/tools"
   fi
   run rust-vulnerabilities .local/tools/bin/cargo-audit audit --file apps/edge/Cargo.lock --json
+  run pingora-spike-vulnerabilities .local/tools/bin/cargo-audit audit --file spikes/pingora/Cargo.lock --json
+  run hyper-spike-vulnerabilities .local/tools/bin/cargo-audit audit --file spikes/hyper/Cargo.lock --json
   node_bin=$(scripts/node-path.sh)
   node_directory=$(dirname "$node_bin")
   run go-scanner-gate-selftest "$node_bin" scripts/gate-selftest.mjs --scanner
   run go-vulnerabilities .local/bin/govulncheck -C apps/control-api/cmd/control-api -scan=module
   run npm-root-vulnerabilities env PATH="$node_directory:$PATH" npm audit --audit-level=high --json
   run npm-dashboard-vulnerabilities env PATH="$node_directory:$PATH" npm --prefix apps/dashboard audit --audit-level=high --json
+  run npm-spike-vulnerabilities env PATH="$node_directory:$PATH" npm --prefix spikes/pingora audit --audit-level=high --json
 fi
 if [ "$mode" = all ] || [ "$mode" = secrets ]; then
   run worktree-secrets docker run --rm --user "$(id -u):$(id -g)" \
@@ -86,6 +89,21 @@ if [ "$mode" = all ] || [ "$mode" = sbom ]; then
 fi
 if [ "$mode" = all ] || [ "$mode" = images ]; then
   run image-identity-selftest python3 scripts/image_identity_test.py -v
+  # Isolated candidate images remain subject to the same severity gate.
+  envoy_image=$(python3 - <<'PYENVOY'
+import json
+import re
+from pathlib import Path
+
+image = json.loads(Path('spikes/envoy/image.lock.json').read_text())['image']
+assert re.fullmatch(r'envoyproxy/envoy@sha256:[0-9a-f]{64}', image), 'Unpinned Envoy candidate image'
+print(image)
+PYENVOY
+  ) || exit 1
+  run envoy-spike-vulnerabilities trivy_run image --image-src remote --severity HIGH,CRITICAL --exit-code 1 \
+    --format json --output /reports/envoy-spike-vulnerabilities.json "$envoy_image"
+  run envoy-spike-sbom trivy_run image --image-src remote --format cyclonedx \
+    --output /reports/envoy-spike.cdx.json "$envoy_image"
   # Scan exactly the immutable references used by Compose, including local builds.
   if [ ! -f .local/compose.env ] || [ ! -f .local/fixture-images.env ] || [ ! -f .local/fixture-images.lock.json ]; then
     printf 'FAIL local fixture image environment/lock missing; run make fixture-images\n' >&2

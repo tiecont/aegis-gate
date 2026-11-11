@@ -55,5 +55,10 @@ Every agent records exact commands, actual results and immutable hashes in
 its report/evidence, commits reviewable source and sends root the commit.
 Root/E independently reruns candidates, checks exclusions and critical/high
 findings, integrates safe PoCs/evidence after checks and prepares proposed ADR.
+E uses a separate `review/sprint03a-architecture` worktree and records the
+immutable candidate commits, fresh fixtures, rebuild/rerun commands, scanner
+findings and independent limitations in its own report/evidence. Root owns the
+combined check/scan and exact-head hosted jobs; a green repository CI does not
+mean the deliberately failing architecture proof is accepted.
 Any required property failure means NO-GO. Human decision follows evidence;
 it does not turn an incomplete proof into an affirmative gate.
