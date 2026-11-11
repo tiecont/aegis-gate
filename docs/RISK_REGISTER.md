@@ -84,3 +84,42 @@ R13: patched full check and security scan passed. A newly added go-jose4.1.4
 HIGH advisory missed by govulncheck was caught by the independent filesystem
 scanner and repaired with4.1.6. Keep both scanners; no future scanner/database
 state is guaranteed by this result. All production gates remain open risks.
+
+## Sprint03-A architecture evidence
+
+R02/R14 have Sprint02 full local Module02 acceptance and independent review:
+`reports/sprint02-d-security-review.md` and `sprint02-d-integration.md` supersede
+the earlier partial checkpoint above. Production control-plane operations and
+the downstream config/data-plane trust boundaries remain separate obligations.
+
+R01/R04 remain blocking: the common75-case executable comparison currently
+reports Pingora63/75, Envoy69/75 and Hyper70/75. All three fail mandatory
+security properties, so no weighted comparison or green foundation CI can
+grant GO. The proposed decision package is
+`reports/sprint03a-architecture-decision.md`; independent final observer review
+`ed8d48d` reproduces every failure. Combined local check/scan and reviewed-head
+hosted run42992622282 pass; final-head checks/merge are recorded by PR9 and
+remain required before integration. All original65 cases and
+eight Pingora failures remain enabled, plus ten common supplemental cases.
+
+Pingora rewrites malformed targets before proxy filters. Envoy still forwards
+obs-fold and accepts an H2 authority-confusion vector; four TE cases safely
+stop before origin but violate the required rejection-response contract.
+Hyper removes CL/TE ambiguity and fragments before semantic policy checks.
+These are bounded project-policy failures, not proof of an upstream exploit
+or cross-tenant compromise. No alternative is authorized for production.
+
+R13 includes the isolated Hyper/Pingora lockfiles, lab Node dependencies and
+pinned Envoy candidate image in the common scanner. The two Pingora maintenance
+warnings remain open without ignores or accepted exceptions. Candidate-image
+scan success does not prove ingress correctness. Intermediate invalid runs
+are retained and cannot serve as release evidence. R03/config trust, R05/TLS
+lifecycle and all production release obligations remain open.
+
+The native H2 byte-accounting defect is fixed with a bounded verified TLS
+observer and independent reruns. The relay observes byte lengths without
+parsing frames; exhaustive raw H2 framing/conformance, saturation, slow-reader
+fairness and production drain are still unproven. Whole-case invalid-origin-TLS
+counters include a successful recovery request; negative-interval assertions
+separately require zero handlers and decrypted bytes. See the independent
+observer follow-up for exact counters and limitations.

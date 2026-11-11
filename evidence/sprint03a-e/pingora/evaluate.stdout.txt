@@ -1,0 +1,67 @@
+{
+  "candidate": "pingora-independent-e",
+  "mandatory_tests": 75,
+  "passed": 63,
+  "failed": [
+    "malformed-HTTP-invalid-request-target",
+    "strict-ingress-target-raw-tab",
+    "strict-ingress-target-raw-control",
+    "strict-ingress-target-raw-null",
+    "strict-ingress-absolute-unsupported-scheme",
+    "strict-ingress-target-relative-form",
+    "strict-ingress-target-fragment",
+    "strict-ingress-TE-repeated-chunked",
+    "supplemental-space-target-before-pipelined-request",
+    "supplemental-tab-target-before-pipelined-request",
+    "supplemental-repeated-transfer-encoding-fields",
+    "valid-HTTP1-pipelining-preserves-boundaries-and-encoded-targets"
+  ],
+  "unsafe_or_unproven_rejections": [
+    {
+      "name": "invalid-request-target",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "target-raw-tab",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "target-raw-control",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "target-raw-null",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "absolute-unsupported-scheme",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "target-relative-form",
+      "reason": "malformed bytes reached an owned origin\n\n190 !== 0\n"
+    },
+    {
+      "name": "target-fragment",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "TE-repeated-chunked",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "space-target-before-pipelined-request",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "tab-target-before-pipelined-request",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "repeated-transfer-encoding-fields",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    }
+  ],
+  "protocol_proof_pass": false,
+  "architecture_approval": "requires independent dependency/security review and human architecture decision"
+}

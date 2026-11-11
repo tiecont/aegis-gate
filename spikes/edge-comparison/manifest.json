@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "668b8d998d8a39f3a554a9e42ad6a1a270049d27",
+  "source": {
+    "path": "spikes/pingora/lab.mjs",
+    "sha256": "b22b9011eed47e8b9006722401081818898e9dee3de2b28e44fa729da86a51b6"
+  },
+  "evidence": {
+    "path": "evidence/sprint02-d/pingora-results.json",
+    "sha256": "012ab29ea6159214e6683bc737c9c29cd7c2975cd76cd23ac86b191a471482b0"
+  },
+  "baseline_tests": [
+    "two-SNI-certificate-selection",
+    "unknown-and-missing-SNI-handshake-rejected",
+    "pre-TLS-filter-rejects-unapproved-lab-source",
+    "HTTP1-routing-and-untrusted-header-stripping",
+    "cross-tenant-SNI-Host-binding",
+    "declared-oversized-body-rejected-before-origin",
+    "HTTP2-downstream-and-upstream-ALPN",
+    "HTTP2-authority-Host-and-SNI-confusion-rejected",
+    "HTTP1-and-HTTP2-body-streaming",
+    "WebSocket-upgrade-bidirectional-close",
+    "certificate-rotation-keeps-active-stream-and-snapshot",
+    "invalid-and-replayed-snapshot-retains-last-good",
+    "invalid-certificate-config-retains-last-good",
+    "verified-origin-TLS-rejects-wrong",
+    "verified-origin-TLS-rejects-expired",
+    "verified-origin-TLS-rejects-untrusted",
+    "trust-store-swap-cannot-reuse-old-origin-TLS-session",
+    "origin-read-timeout-is-bounded",
+    "origin-connection-pooling",
+    "same-origin-pools-are-partitioned-between-routes",
+    "client-upload-cancellation-is-bounded",
+    "weighted-health-check-failover-and-recovery",
+    "malformed-HTTP-conflicting-content-length",
+    "malformed-HTTP-CL-TE",
+    "malformed-HTTP-TE-CL",
+    "malformed-HTTP-duplicate-Host",
+    "malformed-HTTP-invalid-transfer-encoding",
+    "malformed-HTTP-obsolete-folded-header",
+    "malformed-HTTP-invalid-request-target",
+    "malformed-HTTP-Connection-nominates-trusted-header",
+    "strict-ingress-target-raw-tab",
+    "strict-ingress-target-raw-control",
+    "strict-ingress-target-raw-null",
+    "strict-ingress-host-missing",
+    "strict-ingress-host-empty",
+    "strict-ingress-host-duplicate-identical",
+    "strict-ingress-host-comma-list",
+    "strict-ingress-host-userinfo",
+    "strict-ingress-host-invalid-port",
+    "strict-ingress-host-whitespace-before-colon",
+    "strict-ingress-absolute-authority-SNI-mismatch",
+    "strict-ingress-absolute-authority-Host-mismatch",
+    "strict-ingress-absolute-authority-userinfo",
+    "strict-ingress-absolute-authority-without-Host",
+    "strict-ingress-absolute-unsupported-scheme",
+    "strict-ingress-target-relative-form",
+    "strict-ingress-target-fragment",
+    "strict-ingress-connect-authority-form-disabled",
+    "strict-ingress-CL-TE-pipelined",
+    "strict-ingress-TE-CL-pipelined",
+    "strict-ingress-TE-obsolete-fold",
+    "strict-ingress-CL-comma-conflict",
+    "strict-ingress-TE-repeated-chunked",
+    "strict-ingress-TE-not-final-chunked",
+    "valid-percent-encoded-/bad%20target",
+    "valid-percent-encoded-/bad%09target",
+    "valid-percent-encoded-/bad%01target",
+    "valid-percent-encoded-/bad%00target",
+    "valid-percent-encoded-/encoded%2Fsegment?value=%2520",
+    "valid-percent-encoded-/caf%C3%A9?x=a%20b",
+    "upgrade-does-not-forward-preread-bytes-before-101",
+    "gRPC-bidirectional-streaming-and-trailers",
+    "gRPC-client-cancellation-reaches-origin",
+    "bounded-reference-benchmark",
+    "secret-bearing-request-absent-from-runtime-log"
+  ],
+  "baseline_failures": [
+    "malformed-HTTP-invalid-request-target",
+    "strict-ingress-target-raw-tab",
+    "strict-ingress-target-raw-control",
+    "strict-ingress-target-raw-null",
+    "strict-ingress-absolute-unsupported-scheme",
+    "strict-ingress-target-relative-form",
+    "strict-ingress-target-fragment",
+    "strict-ingress-TE-repeated-chunked"
+  ],
+  "rejection_contract": {
+    "origin_dispatches": 0,
+    "origin_inbound_bytes": 0,
+    "origin_parse_errors": 0,
+    "response": "HTTP/1.x 4xx or peer closes with no response; no deadline expiry"
+  },
+  "negatives": [
+    {
+      "name": "malformed-HTTP-conflicting-content-length",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 1\r\nContent-Length: 2\r\nConnection: close\r\n\r\nx"
+    },
+    {
+      "name": "malformed-HTTP-CL-TE",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\n0\r\n\r\n"
+    },
+    {
+      "name": "malformed-HTTP-TE-CL",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nContent-Length: 4\r\nConnection: close\r\n\r\n0\r\n\r\n"
+    },
+    {
+      "name": "malformed-HTTP-duplicate-Host",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "malformed-HTTP-invalid-transfer-encoding",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: cow\r\nConnection: close\r\n\r\nx"
+    },
+    {
+      "name": "malformed-HTTP-obsolete-folded-header",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nX-Folded: first\r\n second\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "malformed-HTTP-invalid-request-target",
+      "request": "GET /bad target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "malformed-HTTP-Connection-nominates-trusted-header",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nConnection: X-Forwarded-For, close\r\nX-Forwarded-For: 127.0.0.1\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-target-raw-tab",
+      "request": "GET /bad\ttarget HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-target-raw-control",
+      "request": "GET /bad\u0001target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-target-raw-null",
+      "request": "GET /bad\u0000target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-host-missing",
+      "request": "GET / HTTP/1.1\r\nX-Lab: no-host\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-host-empty",
+      "request": "GET / HTTP/1.1\r\nHost:\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-host-duplicate-identical",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-host-comma-list",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test,edge-b.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-host-userinfo",
+      "request": "GET / HTTP/1.1\r\nHost: user@edge-a.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-host-invalid-port",
+      "request": "GET / HTTP/1.1\r\nHost: edge-a.test:abc\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-host-whitespace-before-colon",
+      "request": "GET / HTTP/1.1\r\nHost : edge-a.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-absolute-authority-SNI-mismatch",
+      "request": "GET https://edge-b.test/ HTTP/1.1\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-absolute-authority-Host-mismatch",
+      "request": "GET https://edge-a.test/ HTTP/1.1\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-absolute-authority-userinfo",
+      "request": "GET https://user@edge-a.test/ HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-absolute-authority-without-Host",
+      "request": "GET https://edge-a.test/ HTTP/1.1\r\nX-Lab: no-host\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-absolute-unsupported-scheme",
+      "request": "GET ftp://edge-a.test/ HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-target-relative-form",
+      "request": "GET relative HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-target-fragment",
+      "request": "GET /path#fragment HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-connect-authority-form-disabled",
+      "request": "CONNECT edge-a.test:443 HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-CL-TE-pipelined",
+      "request": "POST /echo HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\n\r\n0\r\n\r\nGET /smuggled HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-TE-CL-pipelined",
+      "request": "POST /echo HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nContent-Length: 4\r\n\r\n0\r\n\r\nGET /smuggled HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-TE-obsolete-fold",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding:\r\n chunked\r\nConnection: close\r\n\r\n0\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-CL-comma-conflict",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 1, 2\r\nConnection: close\r\n\r\nx"
+    },
+    {
+      "name": "strict-ingress-TE-repeated-chunked",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, chunked\r\nConnection: close\r\n\r\n0\r\n\r\n"
+    },
+    {
+      "name": "strict-ingress-TE-not-final-chunked",
+      "request": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, gzip\r\nConnection: close\r\n\r\n0\r\n\r\n"
+    }
+  ],
+  "encoded_targets": [
+    "/bad%20target",
+    "/bad%09target",
+    "/bad%01target",
+    "/bad%00target",
+    "/encoded%2Fsegment?value=%2520",
+    "/caf%C3%A9?x=a%20b"
+  ]
+}

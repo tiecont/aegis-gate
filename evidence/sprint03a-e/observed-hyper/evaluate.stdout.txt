@@ -1,0 +1,36 @@
+{
+  "candidate": "hyper-independent-e-observed",
+  "mandatory_tests": 75,
+  "passed": 70,
+  "failed": [
+    "malformed-HTTP-CL-TE",
+    "malformed-HTTP-TE-CL",
+    "strict-ingress-target-fragment",
+    "strict-ingress-CL-TE-pipelined",
+    "strict-ingress-TE-CL-pipelined"
+  ],
+  "unsafe_or_unproven_rejections": [
+    {
+      "name": "CL-TE",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "TE-CL",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "target-fragment",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "CL-TE-pipelined",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "TE-CL-pipelined",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    }
+  ],
+  "protocol_proof_pass": false,
+  "architecture_approval": "requires independent dependency/security review and human architecture decision"
+}

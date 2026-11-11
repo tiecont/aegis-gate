@@ -1,0 +1,130 @@
+{
+  "result": "fail",
+  "fatal": null,
+  "tests": 75,
+  "passed": 69,
+  "failures": [
+    {
+      "name": "malformed-HTTP-invalid-transfer-encoding",
+      "status": "fail",
+      "milliseconds": 1013.83,
+      "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "malformed-HTTP-obsolete-folded-header",
+      "status": "fail",
+      "milliseconds": 10.8,
+      "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 263,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "1.1",
+            "tls": "TLSv1.2",
+            "sni": false,
+            "alpn": "http/1.1"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-TE-repeated-chunked",
+      "status": "fail",
+      "milliseconds": 1007.7,
+      "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "strict-ingress-TE-not-final-chunked",
+      "status": "fail",
+      "milliseconds": 1007.53,
+      "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "supplemental-repeated-transfer-encoding-fields",
+      "status": "fail",
+      "milliseconds": 1011.15,
+      "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    {
+      "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+      "status": "fail",
+      "milliseconds": 18.19,
+      "error": "unsafe authority status 200",
+      "origin": {
+        "handler_invocations": 1,
+        "decrypted_bytes": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "target": "/",
+            "protocol": "2"
+          }
+        ],
+        "omitted_request_samples": 0
+      }
+    }
+  ],
+  "source_artifacts": [
+    {
+      "path": "/home/tiecont/Projects/aegis-gate-sprint03-b/spikes/envoy/launch",
+      "sha256": "0ee313b5b338486cd856415a6022ae10f6f12aeab2696f0d0399c512f723f0f1"
+    },
+    {
+      "path": "/home/tiecont/Projects/aegis-gate-sprint03-b/spikes/envoy/launcher.mjs",
+      "sha256": "26705e93f391d6fcd815ce48ef279142ab5d3463be681a8cfe11edfea6bb5da3"
+    },
+    {
+      "path": "/home/tiecont/Projects/aegis-gate-sprint03-b/spikes/envoy/config.mjs",
+      "sha256": "53fd7c0c624f8a4771ce75d6059981762694a89d61f24482803289b979cebeef"
+    },
+    {
+      "path": "/home/tiecont/Projects/aegis-gate-sprint03-b/spikes/envoy/image.lock.json",
+      "sha256": "a96054e7fe3b8994f708f54c221758ecd786b91655c641cb7648067d1f02889d"
+    }
+  ],
+  "source_note": "Only artifacts captured by the shared harness at launch are historical source bindings. Early runs captured the shell launcher only; no retroactive hash claim for their JS implementation.",
+  "root_lab_sha256": "ef8f113ffe33a24cf490f73b7039fdafadebfa786ef5081971419a7379ae12dc",
+  "test_manifest_sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+  "root_supplemental_sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf",
+  "resource_note": "shared harness CPU/RSS samples launcher only; use separate controlled-resource benchmark for actual Envoy measurements"
+}

@@ -14,6 +14,7 @@ bootstrap:
 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard ci --ignore-scripts
 	$(GO) mod download
 	cargo +1.99.1 fetch --locked --manifest-path apps/edge/Cargo.toml
+	cargo +1.99.1 fetch --locked --manifest-path spikes/hyper/Cargo.toml
 
 contracts-generate:
 	PATH="$(NODE_PATH):$$PATH" npm run contracts:generate
@@ -21,18 +22,21 @@ contracts-generate:
 fmt:
 	gofmt -w apps/control-api apps/config-publisher internal packages/test-fixtures
 	cargo +1.99.1 fmt --all --manifest-path apps/edge/Cargo.toml
+	cargo +1.99.1 fmt --all --manifest-path spikes/hyper/Cargo.toml
 	PATH="$(NODE_PATH):$$PATH" npm run format
 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run fmt
 
 fmt-check:
 	test -z "$$(gofmt -l apps/control-api apps/config-publisher internal packages/test-fixtures)"
 	cargo +1.99.1 fmt --all --check --manifest-path apps/edge/Cargo.toml
+	cargo +1.99.1 fmt --all --check --manifest-path spikes/hyper/Cargo.toml
 	PATH="$(NODE_PATH):$$PATH" npm run format:check
 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run fmt:check
 
 lint:
 	$(GO) vet $(GO_PACKAGES)
 	cargo +1.99.1 clippy --workspace --all-targets --locked --manifest-path apps/edge/Cargo.toml -- -D warnings
+	cargo +1.99.1 clippy --workspace --all-targets --locked --manifest-path spikes/hyper/Cargo.toml -- -D warnings
 	PATH="$(NODE_PATH):$$PATH" npm run contracts:check
 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run lint
 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run typecheck
@@ -41,8 +45,12 @@ unit:
 	python3 scripts/dev-secrets.test.py
 	python3 scripts/git_history_preflight_test.py
 	python3 scripts/image_identity_test.py
+	"$(NODE_CMD)" --test spikes/edge-comparison/*.test.mjs
+	"$(NODE_CMD)" --test spikes/envoy/*.test.mjs
+	"$(NODE_CMD)" spikes/edge-comparison/extract-baseline.mjs --check
 	$(GO) test -race $(GO_PACKAGES)
 	cargo +1.99.1 test --workspace --locked --manifest-path apps/edge/Cargo.toml
+	cargo +1.99.1 test --workspace --locked --manifest-path spikes/hyper/Cargo.toml
 	PATH="$(NODE_PATH):$$PATH" npm run contracts:test
 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard test
 
@@ -79,6 +87,7 @@ build:
 	$(GO) build -o .local/bin/config-publisher ./apps/config-publisher/cmd/config-publisher
 	$(GO) build -o .local/bin/fixtures ./packages/test-fixtures/cmd/fixtures
 	cargo +1.99.1 build --workspace --locked --manifest-path apps/edge/Cargo.toml
+	cargo +1.99.1 build --workspace --locked --manifest-path spikes/hyper/Cargo.toml
 	PATH="$(NODE_PATH):$$PATH" npm --prefix apps/dashboard run build
 
 gate-selftest:

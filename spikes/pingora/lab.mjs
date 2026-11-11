@@ -11,12 +11,18 @@ import { once } from 'node:events';
 import { fileURLToPath } from 'node:url';
 import { setTimeout as delay } from 'node:timers/promises';
 import { performance } from 'node:perf_hooks';
+import { createHash } from 'node:crypto';
+import { manifest as testManifest, manifestHash, assertRejected, assertInventory } from '../edge-comparison/contract.mjs';
+import { supplementalNegatives } from '../edge-comparison/supplemental.mjs';
+import { createTlsObserver } from '../edge-comparison/tls-observer.mjs';
 import { WebSocket, WebSocketServer } from 'ws';
 import grpc from '@grpc/grpc-js';
 
 process.umask(0o077);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const runDir = fs.mkdtempSync(path.join(root, '.local/pingora-run-'));
+const runRoot = process.env.AEGIS_RUN_ROOT ?? path.join(root, '.local');
+assert.ok(path.isAbsolute(runRoot), 'run root must be absolute');
+const runDir = fs.mkdtempSync(path.join(runRoot, 'edge-proof-run-'));
 const evidence = { started_at: new Date().toISOString(), node: process.version, platform: process.platform,
   cpu: os.cpus()[0]?.model, logical_cpus: os.cpus().length, memory_bytes: os.totalmem(),
   profile: 'owned loopback lab; no production claims', tests: [], benchmark: null };
@@ -27,6 +33,13 @@ let activeRequests = 0;
 let originDispatches = 0;
 let originInboundBytes = 0;
 let originParseErrors = 0;
+let originTransportErrors = 0;
+const originRequests = [];
+let omittedOriginRequests = 0;
+function recordOrigin(request) {
+  if (originRequests.length < 128) originRequests.push(request);
+  else omittedOriginRequests++;
+}
 const ingressObservations = [];
 let cancelledCalls = 0;
 let cancelledUploads = 0;
@@ -40,6 +53,23 @@ const write = (name, content) => fs.writeFileSync(path.join(runDir, name), conte
 const referenceImage = 'nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311';
 const buildProfile = process.env.PINGORA_SPIKE_PROFILE ?? 'debug';
 assert.ok(['debug', 'release'].includes(buildProfile), 'unsupported lab build profile');
+const candidateName = process.env.AEGIS_CANDIDATE_NAME ?? 'pingora';
+const candidateRoot = process.env.AEGIS_CANDIDATE_ROOT ?? root;
+const candidateCommand = process.env.AEGIS_CANDIDATE_COMMAND ?? path.join(candidateRoot, `spikes/pingora/target/${buildProfile}/aegisgate-pingora-feasibility`);
+const candidateArgs = JSON.parse(process.env.AEGIS_CANDIDATE_ARGS ?? '[]');
+const candidateArtifacts = JSON.parse(process.env.AEGIS_CANDIDATE_ARTIFACTS ?? '[]');
+assert.ok(Array.isArray(candidateArgs) && candidateArgs.every((arg) => typeof arg === 'string'));
+assert.ok(Array.isArray(candidateArtifacts) && candidateArtifacts.every((file) => typeof file === 'string' && path.isAbsolute(file)));
+const sha256 = (file) => createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+evidence.candidate = { name: candidateName, command: candidateCommand, args: candidateArgs,
+  artifacts: [...new Set([candidateCommand, ...candidateArgs.filter((arg) => path.isAbsolute(arg) && fs.existsSync(arg)), ...candidateArtifacts])]
+    .map((file) => ({ path: file, sha256: sha256(file) })) };
+evidence.test_manifest_sha256 = manifestHash;
+evidence.lab_sha256 = sha256(fileURLToPath(import.meta.url));
+evidence.supplemental_sha256 = sha256(path.join(root, 'spikes/edge-comparison/supplemental.mjs'));
+evidence.origin_observer = { h1: 'HTTPS decrypted socket data', h2: 'verified TLS relay before native HTTP2 consumption',
+  source_sha256: sha256(path.join(root, 'spikes/edge-comparison/tls-observer.mjs')) };
+evidence.openssl = execFileSync('openssl', ['version'], { encoding: 'utf8' }).trim();
 
 function processSample(pids) {
   let ticks = 0; let rss = 0;
@@ -89,6 +119,10 @@ async function benchmark(port, pids) {
 
 async function test(name, run) {
   const started = performance.now();
+  originRequests.length = 0;
+  omittedOriginRequests = 0;
+  const before = { handlers: originDispatches, bytes: originInboundBytes, errors: originParseErrors,
+    transportErrors: originTransportErrors, requests: originRequests.length };
   try {
     const detail = await run();
     evidence.tests.push({ name, status: 'pass', milliseconds: +(performance.now() - started).toFixed(2), detail });
@@ -97,6 +131,11 @@ async function test(name, run) {
     evidence.tests.push({ name, status: 'fail', milliseconds: +(performance.now() - started).toFixed(2),
       error: String(error.message).slice(0, 1000) });
     console.error(`FAIL ${name}: ${String(error.message).slice(0, 500)}`);
+  } finally {
+    Object.assign(evidence.tests.at(-1), { origin: { handler_invocations: originDispatches - before.handlers,
+      decrypted_bytes: originInboundBytes - before.bytes, parser_errors: originParseErrors - before.errors,
+      transport_errors: originTransportErrors - before.transportErrors,
+      requests: originRequests.slice(before.requests), omitted_request_samples: omittedOriginRequests } });
   }
 }
 
@@ -147,11 +186,19 @@ async function listen(server) {
 function origin(name, handler) {
   const server = https.createServer({ cert: cert(name), key: key(name), minVersion: 'TLSv1.2' }, (req, res) => {
     originDispatches++;
+    recordOrigin({ method: req.method, target: req.url, protocol: req.httpVersion,
+      tls: req.socket.getProtocol(), sni: req.socket.servername, alpn: req.socket.alpnProtocol });
     return handler(req, res);
   });
   server.on('tlsClientError', () => {});
   server.on('secureConnection', (socket) => socket.on('data', (chunk) => { originInboundBytes += chunk.length; }));
-  server.on('clientError', (_, socket) => { originParseErrors++; socket.destroy(); });
+  server.on('clientError', (error, socket) => {
+    // Node also emits clientError for TLS alerts; only HTTP parser failures
+    // carry an HPE_* code or a decrypted rawPacket.
+    if (error.code?.startsWith('HPE_') || error.rawPacket) originParseErrors++;
+    else originTransportErrors++;
+    socket.destroy();
+  });
   return server;
 }
 
@@ -215,6 +262,8 @@ async function applied(port, target) {
 
 async function raw(port, payload) {
   const socket = await connect(port);
+  const negotiated = { tls: socket.getProtocol(), alpn: socket.alpnProtocol,
+    sni: socket.servername, peer_fingerprint256: socket.getPeerCertificate().fingerprint256 };
   let data = '';
   let timedOut = false;
   socket.on('error', () => {});
@@ -225,7 +274,7 @@ async function raw(port, payload) {
   });
   socket.write(payload);
   await done;
-  return { response: data, peer_closed: !timedOut, timed_out: timedOut };
+  return { response: data, peer_closed: !timedOut, timed_out: timedOut, negotiated };
 }
 
 async function main() {
@@ -267,6 +316,7 @@ async function main() {
   let prematureUpgradeBytes = 0;
   server.on('upgrade', (req, socket, head) => {
     originDispatches++;
+    recordOrigin({ method: req.method, target: req.url, protocol: req.httpVersion, upgrade: true });
     if (req.url === '/premature') {
       prematureUpgradeBytes += head.length;
       socket.on('data', (chunk) => { prematureUpgradeBytes += chunk.length; });
@@ -278,18 +328,21 @@ async function main() {
   cleanup.push(async () => { for (const ws of wss.clients) ws.terminate(); wss.close(); });
   const originPort = await listen(server);
   const h2origin = http2.createSecureServer({ cert: cert('origin'), key: key('origin'), minVersion: 'TLSv1.2' });
-  h2origin.on('secureConnection', (socket) => socket.on('data', (chunk) => { originInboundBytes += chunk.length; }));
   h2origin.on('session', (session) => { cleanup.push(async () => session.destroy()); });
   let h2Requests = 0;
   h2origin.on('stream', (stream, headers) => {
     originDispatches++;
+    recordOrigin({ method: headers[':method'], target: headers[':path'], protocol: '2' });
     h2Requests++;
     stream.on('error', () => {});
     stream.respond({ ':status': 200, 'content-type': 'text/plain' });
     if (headers[':path'] === '/echo') stream.pipe(stream);
     else stream.end('h2-origin');
   });
-  const h2port = await listen(h2origin);
+  const observedH2Port = async (port) => listen(createTlsObserver({ cert: cert('origin'), key: key('origin'),
+    ca: cert('ca'), port, onBytes: (size) => { originInboundBytes += size; },
+    onTransportError: () => { originTransportErrors++; } }));
+  const h2port = await observedH2Port(await listen(h2origin));
   const badPorts = {};
   for (const name of ['wrong', 'expired', 'untrusted']) badPorts[name] = await listen(origin(name, (_, res) => res.end('MUST-NOT-BE-SEEN')));
   const route = (host, name, origin_port, h2 = false) => ({ host, origin_name: 'lab-origin.test', origin_port,
@@ -299,7 +352,7 @@ async function main() {
   write('manifest.json', JSON.stringify(current));
   const port = await freePort();
   const log = fs.openSync(path.join(runDir, 'proxy.log'), 'w', 0o600);
-  proxy = spawn(path.join(root, `spikes/pingora/target/${buildProfile}/aegisgate-pingora-feasibility`), [manifestPath, String(port)],
+  proxy = spawn(candidateCommand, [...candidateArgs, manifestPath, String(port)],
     { stdio: ['ignore', log, log] });
   fs.closeSync(log);
   cleanup.push(async () => {
@@ -313,6 +366,63 @@ async function main() {
       await delay(50);
     }
   }
+
+  const corpus = Object.fromEntries(testManifest.negatives.filter((entry) => entry.name.startsWith('malformed-HTTP-')).map((entry) => [entry.name.slice('malformed-HTTP-'.length), entry.request]));
+  for (const [name, payload] of Object.entries(corpus)) await test(`malformed-HTTP-${name}`, async () => {
+    const before = originDispatches; const bytesBefore = originInboundBytes; const errorsBefore = originParseErrors;
+    const observation = await raw(port, payload);
+    const result = observation.response;
+    const detail = { name, request: payload, response_status: result.match(/^HTTP\/1\.[01] (\d+)/)?.[1] ?? null,
+      origin_dispatches: originDispatches - before, origin_inbound_bytes: originInboundBytes - bytesBefore,
+      origin_parse_errors: originParseErrors - errorsBefore, ...observation };
+    ingressObservations.push(detail);
+    assertRejected(detail);
+    return detail;
+  });
+  const expandedCorpus = Object.fromEntries(testManifest.negatives.filter((entry) => entry.name.startsWith('strict-ingress-')).map((entry) => [entry.name.slice('strict-ingress-'.length), entry.request]));
+  for (const [name, payload] of Object.entries(expandedCorpus)) await test(`strict-ingress-${name}`, async () => {
+    const before = originDispatches;
+    const bytesBefore = originInboundBytes; const errorsBefore = originParseErrors;
+    const observation = await raw(port, payload);
+    const result = observation.response;
+    const detail = { name, request: payload, response_status: result.match(/^HTTP\/1\.[01] (\d+)/)?.[1] ?? null,
+      origin_dispatches: originDispatches - before, origin_inbound_bytes: originInboundBytes - bytesBefore,
+      origin_parse_errors: originParseErrors - errorsBefore, ...observation };
+    ingressObservations.push(detail);
+    assertRejected(detail);
+    return detail;
+  });
+  for (const target of testManifest.encoded_targets) await test(`valid-percent-encoded-${target}`, async () => {
+    const before = originDispatches;
+    const bytesBefore = originInboundBytes;
+    const response = await request(port, target);
+    assert.equal(response.status, 200);
+    assert.equal(originDispatches, before + 1);
+    assert.ok(originInboundBytes > bytesBefore, 'origin byte instrumentation did not observe positive control');
+    assert.equal(JSON.parse(response.body).target, target, 'valid target changed at origin');
+    return { target, origin_dispatches: originDispatches - before, origin_inbound_bytes: originInboundBytes - bytesBefore };
+  });
+  evidence.ingress_observations = ingressObservations;
+  for (const { name, request: payload } of supplementalNegatives) await test(`supplemental-${name}`, async () => {
+    const before = { handlers: originDispatches, bytes: originInboundBytes, errors: originParseErrors };
+    const observation = await raw(port, payload);
+    const detail = { name, request: payload, origin_dispatches: originDispatches - before.handlers,
+      origin_inbound_bytes: originInboundBytes - before.bytes, origin_parse_errors: originParseErrors - before.errors,
+      response_status: observation.response.match(/^HTTP\/1\.[01] (\d+)/)?.[1] ?? null, ...observation };
+    ingressObservations.push(detail);
+    assertRejected(detail);
+    return detail;
+  });
+  await test('valid-HTTP1-pipelining-preserves-boundaries-and-encoded-targets', async () => {
+    const before = originRequests.length;
+    const targets = ['/pipeline%2Ffirst?x=%2520', '/pipeline%20second'];
+    const observation = await raw(port, targets.map((target, index) =>
+      `GET ${target} HTTP/1.1\r\nHost: edge-a.test\r\nConnection: ${index ? 'close' : 'keep-alive'}\r\n\r\n`).join(''));
+    assert.equal(observation.timed_out, false);
+    assert.equal((observation.response.match(/HTTP\/1\.[01] 200/g) ?? []).length, 2);
+    assert.deepEqual(originRequests.slice(before).map(({ target }) => target), targets);
+    return observation;
+  });
 
   await test('two-SNI-certificate-selection', async () => {
     const a = await connect(port); const b = await connect(port, 'edge-b.test');
@@ -341,8 +451,11 @@ async function main() {
     assert.equal(body.forwarded, null); assert.equal(body.tenant, null); assert.equal(body.generation, '1');
   });
   await test('cross-tenant-SNI-Host-binding', async () => {
+    const before = { handlers: originDispatches, bytes: originInboundBytes };
     assert.equal((await request(port, '/', { host: 'edge-b.test' })).status, 421);
     assert.equal((await request(port, '/', { host: 'unknown.test' })).status, 421);
+    assert.equal(originDispatches, before.handlers, 'authority denial dispatched to origin');
+    assert.equal(originInboundBytes, before.bytes, 'authority denial forwarded bytes to origin');
   });
   await test('declared-oversized-body-rejected-before-origin', async () => {
     const before = activeRequests;
@@ -350,15 +463,19 @@ async function main() {
     assert.equal(activeRequests, before);
   });
   await test('HTTP2-downstream-and-upstream-ALPN', async () => {
+    const before = originInboundBytes;
     const response = await h2Request(port);
     assert.equal(response.status, 200); assert.equal(response.body, 'h2-origin');
+    assert.ok(originInboundBytes > before, 'H2 origin observation missed decrypted frames');
   });
   await test('HTTP2-authority-Host-and-SNI-confusion-rejected', async () => {
     for (const headers of [{ host: 'edge-a.test' }, { ':authority': 'edge-a.test' }, { ':authority': 'user@edge-b.test' }]) {
       const before = h2Requests;
+      const bytesBefore = originInboundBytes;
       const response = await h2Request(port, '/', undefined, headers);
       assert.ok([400, 421].includes(response.status), `unsafe authority status ${response.status}`);
       assert.equal(h2Requests, before, 'confused authority reached origin');
+      assert.equal(originInboundBytes, bytesBefore, 'confused authority forwarded bytes to origin');
     }
   });
   await test('HTTP1-and-HTTP2-body-streaming', async () => {
@@ -377,7 +494,7 @@ async function main() {
     return { first_response_chunk_ms: +first.toFixed(2), payload_bytes: Buffer.byteLength(payload) };
   });
   await test('WebSocket-upgrade-bidirectional-close', async () => {
-    const ws = new WebSocket(`wss://127.0.0.1:${port}/ws`, { servername: 'edge-a.test', ca: cert('ca'), headers: { host: 'edge-a.test' } });
+    const ws = new WebSocket(`wss://127.0.0.1:${port}/ws`, { servername: 'edge-a.test', ca: cert('ca'), headers: { host: 'edge-a.test' }, handshakeTimeout: 5000 });
     await once(ws, 'open');
     ws.send('isolated-websocket-proof');
     const [message] = await once(ws, 'message');
@@ -439,9 +556,13 @@ async function main() {
   for (const name of ['wrong', 'expired', 'untrusted']) await test(`verified-origin-TLS-rejects-${name}`, async () => {
     publish({ routes: current.routes.map((r) => r.host === 'edge-a.test' ? { ...r, origin_port: badPorts[name] } : r) });
     await delay(150);
+    const before = { handlers: originDispatches, bytes: originInboundBytes, errors: originParseErrors };
     const response = await request(port);
     assert.ok(response.status >= 500 && response.status <= 599, `unexpected TLS status ${response.status}`);
     assert.ok(!response.body.includes('MUST-NOT-BE-SEEN'));
+    assert.equal(originDispatches, before.handlers, 'invalid TLS origin handled request');
+    assert.equal(originInboundBytes, before.bytes, 'invalid TLS origin received HTTP bytes');
+    assert.equal(originParseErrors, before.errors, 'invalid TLS origin parsed HTTP bytes');
     publish({ routes: current.routes.map((r) => r.host === 'edge-a.test' ? { ...r, origin_port: originPort } : r) });
     await applied(port, generation);
   });
@@ -529,83 +650,7 @@ async function main() {
     return { healthy_weight_distribution: counts, failover_requests: 12, invalid_TLS_backend_requests: 12,
       all_unhealthy_status: 503, recovery: [...recovered] };
   });
-  const corpus = {
-    'conflicting-content-length': 'POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 1\r\nContent-Length: 2\r\nConnection: close\r\n\r\nx',
-    'CL-TE': 'POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\nConnection: close\r\n\r\n0\r\n\r\n',
-    'TE-CL': 'POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nContent-Length: 4\r\nConnection: close\r\n\r\n0\r\n\r\n',
-    'duplicate-Host': 'GET / HTTP/1.1\r\nHost: edge-a.test\r\nHost: edge-b.test\r\nConnection: close\r\n\r\n',
-    'invalid-transfer-encoding': 'POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: cow\r\nConnection: close\r\n\r\nx',
-    'obsolete-folded-header': 'GET / HTTP/1.1\r\nHost: edge-a.test\r\nX-Folded: first\r\n second\r\nConnection: close\r\n\r\n',
-    'invalid-request-target': 'GET /bad target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n',
-    'Connection-nominates-trusted-header': 'GET / HTTP/1.1\r\nHost: edge-a.test\r\nConnection: X-Forwarded-For, close\r\nX-Forwarded-For: 127.0.0.1\r\n\r\n',
-  };
-  for (const [name, payload] of Object.entries(corpus)) await test(`malformed-HTTP-${name}`, async () => {
-    const before = originDispatches; const bytesBefore = originInboundBytes; const errorsBefore = originParseErrors;
-    const observation = await raw(port, payload);
-    const result = observation.response;
-    ingressObservations.push({ name, request: payload, response_status: result.match(/^HTTP\/1\.[01] (\d+)/)?.[1] ?? null,
-      origin_dispatches: originDispatches - before, origin_inbound_bytes: originInboundBytes - bytesBefore,
-      origin_parse_errors: originParseErrors - errorsBefore, ...observation });
-    assert.equal(originDispatches, before, 'malformed request reached an owned origin');
-    assert.equal(originInboundBytes, bytesBefore, 'malformed request bytes reached an owned origin');
-    assert.equal(originParseErrors, errorsBefore, 'malformed request rejected by origin parser instead of ingress');
-    assert.ok((result === '' && observation.peer_closed) || /^HTTP\/1\.[01] 4\d\d/.test(result), `unsafe framing response: ${result.slice(0, 100)}`);
-  });
-  const requestLine = (target, headers = 'Host: edge-a.test', method = 'GET') =>
-    `${method} ${target} HTTP/1.1\r\n${headers}\r\nConnection: close\r\n\r\n`;
-  const expandedCorpus = {
-    'target-raw-tab': requestLine('/bad\ttarget'),
-    'target-raw-control': requestLine('/bad\x01target'),
-    'target-raw-null': requestLine('/bad\x00target'),
-    'host-missing': requestLine('/', 'X-Lab: no-host'),
-    'host-empty': requestLine('/', 'Host:'),
-    'host-duplicate-identical': requestLine('/', 'Host: edge-a.test\r\nHost: edge-a.test'),
-    'host-comma-list': requestLine('/', 'Host: edge-a.test,edge-b.test'),
-    'host-userinfo': requestLine('/', 'Host: user@edge-a.test'),
-    'host-invalid-port': requestLine('/', 'Host: edge-a.test:abc'),
-    'host-whitespace-before-colon': requestLine('/', 'Host : edge-a.test'),
-    'absolute-authority-SNI-mismatch': requestLine('https://edge-b.test/', 'Host: edge-b.test'),
-    'absolute-authority-Host-mismatch': requestLine('https://edge-a.test/', 'Host: edge-b.test'),
-    'absolute-authority-userinfo': requestLine('https://user@edge-a.test/'),
-    'absolute-authority-without-Host': requestLine('https://edge-a.test/', 'X-Lab: no-host'),
-    'absolute-unsupported-scheme': requestLine('ftp://edge-a.test/'),
-    'target-relative-form': requestLine('relative'),
-    'target-fragment': requestLine('/path#fragment'),
-    'connect-authority-form-disabled': requestLine('edge-a.test:443', 'Host: edge-a.test', 'CONNECT'),
-    'CL-TE-pipelined': 'POST /echo HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding: chunked\r\n\r\n0\r\n\r\n' + requestLine('/smuggled'),
-    'TE-CL-pipelined': 'POST /echo HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nContent-Length: 4\r\n\r\n0\r\n\r\n' + requestLine('/smuggled'),
-    'TE-obsolete-fold': 'POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\nTransfer-Encoding:\r\n chunked\r\nConnection: close\r\n\r\n0\r\n\r\n',
-    'CL-comma-conflict': 'POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 1, 2\r\nConnection: close\r\n\r\nx',
-    'TE-repeated-chunked': 'POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, chunked\r\nConnection: close\r\n\r\n0\r\n\r\n',
-    'TE-not-final-chunked': 'POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, gzip\r\nConnection: close\r\n\r\n0\r\n\r\n',
-  };
-  for (const [name, payload] of Object.entries(expandedCorpus)) await test(`strict-ingress-${name}`, async () => {
-    const before = originDispatches;
-    const bytesBefore = originInboundBytes; const errorsBefore = originParseErrors;
-    const observation = await raw(port, payload);
-    const result = observation.response;
-    const detail = { name, request: payload, response_status: result.match(/^HTTP\/1\.[01] (\d+)/)?.[1] ?? null,
-      origin_dispatches: originDispatches - before, origin_inbound_bytes: originInboundBytes - bytesBefore,
-      origin_parse_errors: originParseErrors - errorsBefore, ...observation };
-    ingressObservations.push(detail);
-    assert.equal(detail.origin_dispatches, 0, `rejected-input policy violated: ${JSON.stringify(detail)}`);
-    assert.equal(detail.origin_inbound_bytes, 0, `invalid bytes reached origin: ${JSON.stringify(detail)}`);
-    assert.equal(detail.origin_parse_errors, 0, 'origin parser rejected input that should have stopped at ingress');
-    assert.ok((result === '' && observation.peer_closed) || /^HTTP\/1\.[01] 4\d\d/.test(result), `unsafe response: ${result.slice(0, 100)}`);
-    return detail;
-  });
-  for (const target of ['/bad%20target', '/bad%09target', '/bad%01target', '/bad%00target',
-    '/encoded%2Fsegment?value=%2520', '/caf%C3%A9?x=a%20b']) await test(`valid-percent-encoded-${target}`, async () => {
-    const before = originDispatches;
-    const bytesBefore = originInboundBytes;
-    const response = await request(port, target);
-    assert.equal(response.status, 200);
-    assert.equal(originDispatches, before + 1);
-    assert.ok(originInboundBytes > bytesBefore, 'origin byte instrumentation did not observe positive control');
-    assert.equal(JSON.parse(response.body).target, target, 'valid target changed at origin');
-    return { target, origin_dispatches: originDispatches - before, origin_inbound_bytes: originInboundBytes - bytesBefore };
-  });
-  evidence.ingress_observations = ingressObservations;
+
   await test('upgrade-does-not-forward-preread-bytes-before-101', async () => {
     const before = activeRequests;
     // RFC 6455's public sample nonce, encoded at runtime to avoid classifying
@@ -622,14 +667,17 @@ async function main() {
     responseSerialize: (v) => Buffer.from(v), responseDeserialize: (v) => v.toString() } };
   const grpcServer = new grpc.Server();
   grpcServer.addService(echoService, { chat: (call) => {
+    originDispatches++;
+    recordOrigin({ method: 'POST', target: '/lab.Echo/Chat', protocol: '2', transport: 'grpc' });
     call.on('data', (value) => call.write(`echo:${value}`));
     call.on('cancelled', () => { cancelledCalls++; });
     call.on('end', () => { const trailer = new grpc.Metadata(); trailer.set('lab-trailer', 'complete'); call.end(trailer); });
   } });
-  const grpcPort = await new Promise((resolve, reject) => grpcServer.bindAsync('127.0.0.1:0',
+  const boundGrpcPort = await new Promise((resolve, reject) => grpcServer.bindAsync('127.0.0.1:0',
     grpc.ServerCredentials.createSsl(null, [{ private_key: key('origin'), cert_chain: cert('origin') }]),
     (error, bound) => error ? reject(error) : resolve(bound)));
   cleanup.push(async () => grpcServer.forceShutdown());
+  const grpcPort = await observedH2Port(boundGrpcPort);
   publish({ routes: current.routes.map((r) => r.host === 'edge-b.test' ? { ...r, origin_port: grpcPort, h2: true } : r) });
   await applied(port, generation);
   const Client = grpc.makeGenericClientConstructor(echoService, 'Echo');
@@ -671,13 +719,13 @@ async function main() {
       try { assert.equal((await request(refPort)).status, 200); break; } catch (error) { if (attempt === 39) throw error; await delay(100); }
     }
     const pids = execFileSync('docker', ['top', container, '-eo', 'pid'], { encoding: 'utf8' }).trim().split('\n').slice(1).map(Number);
-    const pingora = await benchmark(port, [proxy.pid]);
+    const candidate = await benchmark(port, [proxy.pid]);
     const nginx = await benchmark(refPort, pids);
-    assert.equal(pingora.errors, 0); assert.equal(nginx.errors, 0);
+    assert.equal(candidate.errors, 0); assert.equal(nginx.errors, 0);
     evidence.benchmark = { reference: referenceImage, reference_version: 'nginx/1.30.6',
-      profile: `100 warmup, 5 seconds each, closed-loop concurrency 8, 90% GET/1024B response + 10% POST/32768B echo; H1 TLS verified on both hops; keepalive; client/origin/proxy same host; ${buildProfile} Rust build`,
+      profile: `100 warmup, 5 seconds each, closed-loop concurrency 8, 90% GET/1024B response + 10% POST/32768B echo; H1 TLS verified on both hops; keepalive; client/origin/proxy same host; ${candidateName} candidate; ${buildProfile} requested profile`,
       measurement: 'Linux /proc cumulative user+system CPU, HZ=100; sampled summed RSS at 100ms; latency includes client scheduling and origin; no handshake in steady state',
-      pingora, nginx, limitations: ['short single-run smoke benchmark; no launch SLO or capacity inference', 'independently built binaries; default build settings and crypto libraries may differ',
+      candidate_name: candidateName, candidate, nginx, limitations: ['short single-run smoke benchmark; no launch SLO or capacity inference', 'independently built binaries; default build settings and crypto libraries may differ',
         'RSS sums shared nginx pages across processes', 'not open-loop; coordinated omission; shared host load', 'benchmark runs sequentially'] };
     return evidence.benchmark;
   });
@@ -689,6 +737,7 @@ async function main() {
   });
 
   evidence.pending = [];
+  assertInventory(evidence.tests);
   evidence.completed_at = new Date().toISOString();
   evidence.result = evidence.tests.some((t) => t.status === 'fail') ? 'fail' : 'pass';
 }
