@@ -284,3 +284,19 @@ module 03. Independent control-plane/config work may proceed only through its
 own dependency gates. Every production release gate remains closed until its
 own prerequisites, tests and approvals pass. No production deployment, live DNS,
 paid cloud or live billing was performed.
+
+### Sprint03-B focused resolution (proposed, not approved)
+
+One maintained Envoy1.40.2 runtime Host-retention experiment executes the
+unchanged75 corpus from committed source:69/75, same six failed IDs. H2 now
+returns expected4xx with zero handlers but nine observed origin bytes, so the
+mandatory zero-byte assertion still fails. Obs-fold still forwards263 bytes
+and one handler. Four TE501 rejection-contract failures persist. Three raw H2
+frame-error probes and a32-connection bounded drain probe pass locally; they
+do not establish exhaustive conformance or change the failed gate. No second
+credible supported track was found. Fresh release metadata remains Pingora0.9.1,
+Envoy1.40.2 and Hyper1.12.0; Pingora derivative issue889 and YAML replacement
+PR1117 remain unresolved/unreleased. The exact evidence, failure classification,
+remaining stop condition and commands are in
+`reports/sprint03b-e-parser-resolution.md`. No parser expectations, architecture
+approval, production code or downstream gate changes. Module01 stays NO-GO.

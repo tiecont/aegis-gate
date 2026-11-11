@@ -1,0 +1,114 @@
+{
+  "recorded_at": "2026-11-11T11:51:31.789066+00:00",
+  "source_commit": "1cb6d00b7a42e78f5cb9433f60afceadc783530d",
+  "upstream": [
+    {
+      "file": "envoy-balsa.cc",
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/v1.40.2/source/common/http/http1/balsa_parser.cc",
+      "http_status": 200,
+      "sha256": "9dbd0c51df40c34e9893fc8269f14c834fc53eb5f7a832ec5d13055520552951"
+    },
+    {
+      "file": "envoy-h2.cc",
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/v1.40.2/source/common/http/http2/codec_impl.cc",
+      "http_status": 200,
+      "sha256": "b789452da3c5ee2b0278b3c52f1764698d80d5bf1a639dc8a02d5139447f2e37"
+    },
+    {
+      "file": "envoy-runtime.cc",
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/v1.40.2/source/common/runtime/runtime_features.cc",
+      "http_status": 200,
+      "sha256": "02188275d7be1cda84c4b1b50d6b36063ff1e0c74048c38fef500dc883f8b644"
+    },
+    {
+      "file": "pingora-release.json",
+      "url": "https://api.github.com/repos/cloudflare/pingora/releases/latest",
+      "http_status": 200,
+      "sha256": "640a3dded0fa567d6a638df98e74384028f53508aae30493d652e6f374a9bca5"
+    },
+    {
+      "file": "envoy-release.json",
+      "url": "https://api.github.com/repos/envoyproxy/envoy/releases/latest",
+      "http_status": 200,
+      "sha256": "afb548f8053849c3237449ef30c92d9f1bc62be3b6977386ba7a956be0ad76cb"
+    },
+    {
+      "file": "hyper-release.json",
+      "url": "https://api.github.com/repos/hyperium/hyper/releases/latest",
+      "http_status": 200,
+      "sha256": "4724f390715debda6497c6abc0ae189a669fb992e0ca6b494482349cd24cdb4c"
+    },
+    {
+      "file": "pingora-derivative-issue-889.json",
+      "url": "https://api.github.com/repos/cloudflare/pingora/issues/889",
+      "http_status": 200,
+      "sha256": "a334c4e0fcc2bc0d8e390bdc3f6791e47666166e404070e905ca929137dd69c6"
+    },
+    {
+      "file": "pingora-yaml-pr.json",
+      "url": "https://api.github.com/repos/cloudflare/pingora/pulls/1117",
+      "http_status": 200,
+      "sha256": "4fdbef19ac2519e451a2a289483a1dd221b877da0f5c7847efbd7256873fbd55"
+    },
+    {
+      "file": "envoy-release-policy.md",
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/v1.40.2/RELEASES.md",
+      "http_status": 200,
+      "sha256": "95af65ff86c5e40405abd4d5abc33930e3e126289f19fa3cf37193c0cc5364b5"
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "cargo",
+        "+1.99.1",
+        "tree",
+        "--locked",
+        "--offline",
+        "--manifest-path",
+        "spikes/pingora/Cargo.toml",
+        "-i",
+        "derivative"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "cargo",
+        "+1.99.1",
+        "tree",
+        "--locked",
+        "--offline",
+        "--manifest-path",
+        "spikes/pingora/Cargo.toml",
+        "-i",
+        "unsafe-libyaml"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "failed_retrievals": [
+    {
+      "url": "https://crates.io/api/v1/crates/hyper",
+      "exit_code": 22,
+      "reason": "HTTP403; official Hyper release API and primary release page used instead"
+    },
+    {
+      "host": "api.github.com",
+      "exit_code": 6,
+      "reason": "sandbox DNS; successful escalated read-only retries retained"
+    }
+  ],
+  "raw_h2_command": {
+    "argv": [
+      "flock",
+      "/tmp/aegisgate-sprint02-fixtures.lock",
+      "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "spikes/envoy/recovery-raw-h2.mjs",
+      "/tmp/aegisgate-03b-e/.local/recovery-host-retention/edge-proof-run-EOinmu/manifest.json",
+      "/tmp/aegisgate-03b-e/evidence/sprint03b-e/raw-h2-drain.json"
+    ],
+    "exit_code": 0,
+    "source_commit": "1cb6d00"
+  }
+}
