@@ -47,12 +47,14 @@ export function decoder({ client = false, emit, maxBuffer = 65536 }) {
 
 export function createTlsObserver(options) {
   const events = []; const connections = []; let omitted = 0; let sequence = 0;
+  let totalBytes = 0; let totalConnections = 0;
   const push = (event) => {
     if (events.length < 4096) events.push({ sequence: ++sequence, time: new Date().toISOString(), ...event });
     else omitted++;
   };
-  const server = relay(options);
+  const server = relay({ ...options, onBytes: (size) => { totalBytes += size; options.onBytes(size); } });
   server.on('secureConnection', (socket) => {
+    totalConnections++;
     if (connections.length >= 64) { push({ kind: 'connection-sample-limit' }); return; }
     const id = connections.length + 1;
     const record = { id, sni: socket.servername, alpn: socket.alpnProtocol,
@@ -69,7 +71,8 @@ export function createTlsObserver(options) {
     socket.on('close', () => push({ kind: 'close', connection: id }));
   });
   server.on('tlsClientError', (error) => push({ kind: 'tls-error', code: error.code }));
-  server.wireSnapshot = () => structuredClone({ connections, events, omitted_events: omitted,
+  server.wireSnapshot = () => structuredClone({ connections, events, total_decrypted_bytes: totalBytes,
+    total_secure_connections: totalConnections, omitted_events: omitted,
     limits: { connections: 64, events: 4096, decoder_bytes_per_connection: 65536 } });
   return server;
 }
