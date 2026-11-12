@@ -1,0 +1,117 @@
+{
+  "started_at": "2026-11-12T16:49:14.574Z",
+  "argv": [
+    "/home/tiecont/.hermes/node/bin/node",
+    "/tmp/aegisgate-04a-c/evidence/sprint04a-c/research.mjs",
+    "local-followup"
+  ],
+  "cwd": "/tmp/aegisgate-04a-c",
+  "source_commit": "2b984072573057751dfe2abea738732e8d5970f0",
+  "tracked_status": "",
+  "records": [
+    {
+      "name": "audit-version",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/tools/bin/cargo-audit",
+        "--version"
+      ],
+      "started_at": "2026-11-12T16:49:14.594Z",
+      "ended_at": "2026-11-12T16:49:14.617Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "local/audit-version.stdout.txt",
+        "bytes": 19,
+        "sha256": "099b5e31c557b0bcbf0fc8152869301670c0fac7bf23306539fb83030a46ec54"
+      },
+      "stderr": {
+        "file": "local/audit-version.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "pingora-audit-pinned",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/tools/bin/cargo-audit",
+        "audit",
+        "--no-fetch",
+        "--db",
+        "/home/tiecont/.cargo/advisory-db",
+        "--file",
+        "spikes/pingora/Cargo.lock",
+        "--json"
+      ],
+      "started_at": "2026-11-12T16:49:14.619Z",
+      "ended_at": "2026-11-12T16:49:14.988Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "local/pingora-audit-pinned.stdout.txt",
+        "bytes": 3004,
+        "sha256": "fe9920fd391f98fa3692cf3e2ca95148ac7bd9b4264d38f7c565c3c88b3e2f90"
+      },
+      "stderr": {
+        "file": "local/pingora-audit-pinned.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "advisory-db-head",
+      "argv": [
+        "git",
+        "-C",
+        "/home/tiecont/.cargo/advisory-db",
+        "log",
+        "-1",
+        "--format=%H %cI"
+      ],
+      "started_at": "2026-11-12T16:49:14.989Z",
+      "ended_at": "2026-11-12T16:49:14.995Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "local/advisory-db-head.stdout.txt",
+        "bytes": 67,
+        "sha256": "a6f42b9349a2756908ac91f92911713fba06ee61c2149cf79d5fe919e32c79e3"
+      },
+      "stderr": {
+        "file": "local/advisory-db-head.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "hyper-metadata-linux",
+      "argv": [
+        "cargo",
+        "+1.99.1",
+        "metadata",
+        "--format-version",
+        "1",
+        "--locked",
+        "--offline",
+        "--filter-platform",
+        "x86_64-unknown-linux-gnu",
+        "--manifest-path",
+        "spikes/hyper/Cargo.toml"
+      ],
+      "started_at": "2026-11-12T16:49:14.995Z",
+      "ended_at": "2026-11-12T16:49:15.369Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "local/hyper-metadata-linux.stdout.txt",
+        "bytes": 374186,
+        "sha256": "ff2518cd4b61310711639d45fbbe8028ee347d2c090437ae23ee84d553750a78"
+      },
+      "stderr": {
+        "file": "local/hyper-metadata-linux.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "ended_at": "2026-11-12T16:49:15.369Z"
+}
