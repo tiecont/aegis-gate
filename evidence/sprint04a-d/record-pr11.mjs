@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { spawnSync, execFileSync } from 'node:child_process';
 
 const root = '/tmp/aegisgate-04a-pr11';
-const output = path.resolve('evidence/sprint04a-d/pr11');
+const output = path.resolve(process.argv[2] ?? 'evidence/sprint04a-d/pr11');
 assert.ok(!fs.existsSync(output), 'never overwrite immutable evidence');
 fs.mkdirSync(output, { recursive: true, mode: 0o700 });
 const source = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
@@ -24,7 +24,7 @@ function run(label, argv, environment = {}) {
   const started = new Date().toISOString();
   const result = spawnSync(argv[0], argv.slice(1), { cwd: root, env: { ...process.env, ...environment }, stdio: ['ignore', fd, fd] });
   fs.closeSync(fd);
-  records.push({ source_commit: source, argv, environment, started_at: started, ended_at: new Date().toISOString(), exit_code: result.status, signal: result.signal, log: path.relative(process.cwd(), log), sha256: crypto.createHash('sha256').update(fs.readFileSync(log)).digest('hex') });
+  records.push({ source_commit: source, runner_sha256: crypto.createHash('sha256').update(fs.readFileSync(new URL(import.meta.url))).digest('hex'), argv, environment, started_at: started, ended_at: new Date().toISOString(), exit_code: result.status, signal: result.signal, log: path.relative(process.cwd(), log), sha256: crypto.createHash('sha256').update(fs.readFileSync(log)).digest('hex') });
   fs.writeFileSync(path.join(output, 'commands.json'), JSON.stringify(records, null, 2) + '\n');
   console.log(`${label}: exit=${result.status}`);
   failed ||= result.status !== 0;
