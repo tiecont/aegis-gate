@@ -115,6 +115,51 @@ if (mode === 'upstream') {
     ['rustsec/RUSTSEC-2024-0388.md', 'https://raw.githubusercontent.com/RustSec/advisory-db/main/crates/derivative/RUSTSEC-2024-0388.md'],
     ['rustsec/RUSTSEC-2024-0449.md', 'https://raw.githubusercontent.com/RustSec/advisory-db/main/crates/unsafe-libyaml/RUSTSEC-2024-0449.md'],
   ]) await fetchSource(`upstream/${file}`, url);
+} else if (mode === 'followup') {
+  for (const [name, repo] of Object.entries(repositories)) {
+    const commit = await fetchSource(`upstream/${name}/main-commit.json`,
+      `https://api.github.com/repos/${repo}/commits/main`);
+    if (!commit) continue;
+    const revision = JSON.parse(commit).sha;
+    const files = name === 'envoy'
+      ? ['source/common/http/http1/balsa_parser.cc', 'api/envoy/extensions/http/header_validators/envoy_default/v3/header_validator.proto']
+      : name === 'pingora'
+        ? ['pingora-core/Cargo.toml', 'pingora-core/src/protocols/http/v1/server.rs', 'pingora-core/src/server/configuration/mod.rs', 'pingora-load-balancing/Cargo.toml']
+        : ['src/proto/h1/role.rs', 'src/server/conn/http1.rs'];
+    for (const file of files) await fetchSource(`upstream/${name}/main/${file}`,
+      `https://raw.githubusercontent.com/${repo}/${revision}/${file}`);
+  }
+  const revision = JSON.parse(fs.readFileSync(path.join(output, 'upstream/envoy/commit.json'))).sha;
+  for (const file of [
+    'source/extensions/http/header_validators/envoy_default/header_validator.cc',
+    'envoy/http/header_validator.h', 'source/common/http/http1/balsa_parser.h',
+    'source/common/http/conn_manager_impl.cc',
+    'api/envoy/extensions/filters/http/header_to_metadata/v3/header_to_metadata.proto',
+    'bazel/repositories.bzl',
+  ]) await fetchSource(`upstream/envoy/${file}`,
+    `https://raw.githubusercontent.com/envoyproxy/envoy/${revision}/${file}`);
+  for (const [name, repo, files] of [
+    ['pingora', 'cloudflare/pingora', ['pingora-core/src/upstreams/peer.rs',
+      'pingora-core/src/server/mod.rs', 'pingora-core/src/apps/mod.rs',
+      'pingora-core/src/protocols/http/server.rs', 'pingora-core/src/protocols/http/authority.rs']],
+  ]) {
+    const revision = JSON.parse(fs.readFileSync(path.join(output, `upstream/${name}/commit.json`))).sha;
+    for (const file of files) await fetchSource(`upstream/${name}/${file}`,
+      `https://raw.githubusercontent.com/${repo}/${revision}/${file}`);
+  }
+  for (const [file, url] of [
+    ['envoy/bazel-directory.json', `https://api.github.com/repos/envoyproxy/envoy/contents/bazel?ref=${revision}`],
+    ['rustsec/commit.json', 'https://api.github.com/repos/RustSec/advisory-db/commits/main'],
+  ]) await fetchSource(`upstream/${file}`, url);
+} else if (mode === 'local-followup') {
+  command('audit-version', ['/home/tiecont/Projects/aegis-gate/.local/tools/bin/cargo-audit', '--version']);
+  command('pingora-audit-pinned', ['/home/tiecont/Projects/aegis-gate/.local/tools/bin/cargo-audit',
+    'audit', '--no-fetch', '--db', '/home/tiecont/.cargo/advisory-db',
+    '--file', 'spikes/pingora/Cargo.lock', '--json']);
+  command('advisory-db-head', ['git', '-C', '/home/tiecont/.cargo/advisory-db', 'log', '-1', '--format=%H %cI']);
+  command('hyper-metadata-linux', ['cargo', '+1.99.1', 'metadata', '--format-version', '1',
+    '--locked', '--offline', '--filter-platform', 'x86_64-unknown-linux-gnu',
+    '--manifest-path', 'spikes/hyper/Cargo.toml']);
 } else if (mode === 'local') {
   command('node-version', ['node', '--version']);
   command('cargo-version', ['cargo', '+1.99.1', '--version']);
