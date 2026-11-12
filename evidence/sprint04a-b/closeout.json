@@ -1,0 +1,34 @@
+{
+  "branch": "test/module01-wire-boundary",
+  "worktree": "/tmp/aegisgate-04a-b",
+  "report_commit": "06b950e",
+  "report_path": "docs/reports/sprint04a-b-wire-review.md",
+  "report_sha256": "b997d0914a5ccf0d9c6aebf059197842755a511eb21a233668039c6f9057d89e",
+  "verification": {
+    "command": ["flock", "/tmp/aegisgate-sprint02-fixtures.lock", ".local/toolchains/node/bin/node", "spikes/envoy/wire-closeout.mjs"],
+    "exit_code": 0,
+    "focused_tests": {"total": 12, "passed": 12, "failed": 0},
+    "historical_source_hashes": "all four attempts matched committed Git objects",
+    "immutable_raw_expected": "75 IDs and41 raw negative hashes; baseline source/assertion hashes unchanged",
+    "source_secrets": "exit0;106950 bytes;no leaks",
+    "evidence_secrets": "exit0;993304 bytes;no leaks"
+  },
+  "report_verification": {
+    "command": ["flock", "/tmp/aegisgate-sprint02-fixtures.lock", ".local/toolchains/node/bin/node", "spikes/envoy/wire-closeout.mjs", "--report-only"],
+    "exit_code": 0,
+    "scanned_bytes": 13982,
+    "findings": 0,
+    "commands_sha256": "50b2a85ccc6c835dc750a8760155d9497fabe27e844406d13715280fa47abb2b"
+  },
+  "source_and_report_whitespace": {
+    "command": ["git", "diff", "--check", "6e113e1", "--", "spikes/envoy", "docs/reports/sprint04a-b-wire-review.md"],
+    "exit_code": 0
+  },
+  "candidate_result": "NO-GO;zero-byte contract unchanged",
+  "unchanged75": "attempt02 completed68/75 including persistent six failures and weighted health-distribution failure;lab/evaluator exit1",
+  "diagnostic75": "attempt01 and02 completed69/75 with persistent six failures;lab/evaluator exit1",
+  "nine_bytes": "000000040100000000;SETTINGS ACK stream0 length0 on prior valid origin connection",
+  "final_probes": "attempt04 completed23 probes;16 observation/assertion passes and7 failures;process/recorder exit1",
+  "limits": "test-only reterminating verified TLS relay;64 sampled connections,4096 events,65536 decoder bytes per sampled connection;scalar bytes continue;no exhaustive H2/HPACK,mTLS identity,timing,small-buffer,production drain or capacity claim",
+  "agents_merges_gate_edits": "none"
+}
