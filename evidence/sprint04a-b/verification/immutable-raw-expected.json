@@ -1,0 +1,333 @@
+{
+  "baseline": "e5adeb4c3ea163d0028c9f29bed07b1128fb1065",
+  "test_ids": [
+    "two-SNI-certificate-selection",
+    "unknown-and-missing-SNI-handshake-rejected",
+    "pre-TLS-filter-rejects-unapproved-lab-source",
+    "HTTP1-routing-and-untrusted-header-stripping",
+    "cross-tenant-SNI-Host-binding",
+    "declared-oversized-body-rejected-before-origin",
+    "HTTP2-downstream-and-upstream-ALPN",
+    "HTTP2-authority-Host-and-SNI-confusion-rejected",
+    "HTTP1-and-HTTP2-body-streaming",
+    "WebSocket-upgrade-bidirectional-close",
+    "certificate-rotation-keeps-active-stream-and-snapshot",
+    "invalid-and-replayed-snapshot-retains-last-good",
+    "invalid-certificate-config-retains-last-good",
+    "verified-origin-TLS-rejects-wrong",
+    "verified-origin-TLS-rejects-expired",
+    "verified-origin-TLS-rejects-untrusted",
+    "trust-store-swap-cannot-reuse-old-origin-TLS-session",
+    "origin-read-timeout-is-bounded",
+    "origin-connection-pooling",
+    "same-origin-pools-are-partitioned-between-routes",
+    "client-upload-cancellation-is-bounded",
+    "weighted-health-check-failover-and-recovery",
+    "malformed-HTTP-conflicting-content-length",
+    "malformed-HTTP-CL-TE",
+    "malformed-HTTP-TE-CL",
+    "malformed-HTTP-duplicate-Host",
+    "malformed-HTTP-invalid-transfer-encoding",
+    "malformed-HTTP-obsolete-folded-header",
+    "malformed-HTTP-invalid-request-target",
+    "malformed-HTTP-Connection-nominates-trusted-header",
+    "strict-ingress-target-raw-tab",
+    "strict-ingress-target-raw-control",
+    "strict-ingress-target-raw-null",
+    "strict-ingress-host-missing",
+    "strict-ingress-host-empty",
+    "strict-ingress-host-duplicate-identical",
+    "strict-ingress-host-comma-list",
+    "strict-ingress-host-userinfo",
+    "strict-ingress-host-invalid-port",
+    "strict-ingress-host-whitespace-before-colon",
+    "strict-ingress-absolute-authority-SNI-mismatch",
+    "strict-ingress-absolute-authority-Host-mismatch",
+    "strict-ingress-absolute-authority-userinfo",
+    "strict-ingress-absolute-authority-without-Host",
+    "strict-ingress-absolute-unsupported-scheme",
+    "strict-ingress-target-relative-form",
+    "strict-ingress-target-fragment",
+    "strict-ingress-connect-authority-form-disabled",
+    "strict-ingress-CL-TE-pipelined",
+    "strict-ingress-TE-CL-pipelined",
+    "strict-ingress-TE-obsolete-fold",
+    "strict-ingress-CL-comma-conflict",
+    "strict-ingress-TE-repeated-chunked",
+    "strict-ingress-TE-not-final-chunked",
+    "valid-percent-encoded-/bad%20target",
+    "valid-percent-encoded-/bad%09target",
+    "valid-percent-encoded-/bad%01target",
+    "valid-percent-encoded-/bad%00target",
+    "valid-percent-encoded-/encoded%2Fsegment?value=%2520",
+    "valid-percent-encoded-/caf%C3%A9?x=a%20b",
+    "upgrade-does-not-forward-preread-bytes-before-101",
+    "gRPC-bidirectional-streaming-and-trailers",
+    "gRPC-client-cancellation-reaches-origin",
+    "bounded-reference-benchmark",
+    "secret-bearing-request-absent-from-runtime-log",
+    "supplemental-space-target-before-pipelined-request",
+    "supplemental-tab-target-before-pipelined-request",
+    "supplemental-duplicate-host-before-pipelined-request",
+    "supplemental-conflicting-length-before-pipelined-request",
+    "supplemental-signed-content-length",
+    "supplemental-negative-content-length",
+    "supplemental-repeated-transfer-encoding-fields",
+    "supplemental-nul-in-header-value",
+    "supplemental-invalid-header-name",
+    "valid-HTTP1-pipelining-preserves-boundaries-and-encoded-targets"
+  ],
+  "rejection_contract": {
+    "origin_dispatches": 0,
+    "origin_inbound_bytes": 0,
+    "origin_parse_errors": 0,
+    "response": "HTTP/1.x 4xx or peer closes with no response; no deadline expiry"
+  },
+  "encoded_targets": [
+    "/bad%20target",
+    "/bad%09target",
+    "/bad%01target",
+    "/bad%00target",
+    "/encoded%2Fsegment?value=%2520",
+    "/caf%C3%A9?x=a%20b"
+  ],
+  "raw_negatives": [
+    {
+      "name": "malformed-HTTP-conflicting-content-length",
+      "bytes": 96,
+      "sha256": "07057b15e6526b0f05e1c480bf1befff3d350eb9142d45f8128fe1450b3848ae"
+    },
+    {
+      "name": "malformed-HTTP-CL-TE",
+      "bytes": 109,
+      "sha256": "efc39b604e50a21b1e1f6b36f1a6dd9735639960a4c3f413b5eb9e1106e38440"
+    },
+    {
+      "name": "malformed-HTTP-TE-CL",
+      "bytes": 109,
+      "sha256": "892715b046105b0d34ab9c6e1f2f476f7c7ade3159d1b03d6c860d9936dfa0fa"
+    },
+    {
+      "name": "malformed-HTTP-duplicate-Host",
+      "bytes": 75,
+      "sha256": "08bd3c10725f8aeff1865cd7e71905fb0904bab4120edced7d45d9701c58812e"
+    },
+    {
+      "name": "malformed-HTTP-invalid-transfer-encoding",
+      "bytes": 82,
+      "sha256": "c9b39ca183e97c6c2f21ef486005d0fc92b07b55543db8361e4d227ac2986edb"
+    },
+    {
+      "name": "malformed-HTTP-obsolete-folded-header",
+      "bytes": 82,
+      "sha256": "2fd5c8bf85674e67a1e8d75c11b53d58904ca3b56d8cb3be3d264d53f16eba9f"
+    },
+    {
+      "name": "malformed-HTTP-invalid-request-target",
+      "bytes": 66,
+      "sha256": "8e2692c949594b20bdd994ea2f77a911358a432ec12ee6fb80524bb55f001c29"
+    },
+    {
+      "name": "malformed-HTTP-Connection-nominates-trusted-header",
+      "bytes": 101,
+      "sha256": "5b74d44a9b4ed4cc93700114ec3f4d84571f0e45cb2861fd5a72092fe86d8e06"
+    },
+    {
+      "name": "strict-ingress-target-raw-tab",
+      "bytes": 66,
+      "sha256": "ec7210599fd1c8aa2ec74898ba1d96ae7377162e82bc80b2ac5d527fc4ca16a6"
+    },
+    {
+      "name": "strict-ingress-target-raw-control",
+      "bytes": 66,
+      "sha256": "db25226109a030629dddcf789e5707e7d3b73735515bc9dfbcd68fc1761c97d5"
+    },
+    {
+      "name": "strict-ingress-target-raw-null",
+      "bytes": 66,
+      "sha256": "6d04ed38e6735d11108660e4bbe47cf7c50e27c9009fa9cf49c272068847672e"
+    },
+    {
+      "name": "strict-ingress-host-missing",
+      "bytes": 53,
+      "sha256": "856b9566bc5ed9a9d98a7ad826ebfecec30012da9eacb0be9345a262a6271116"
+    },
+    {
+      "name": "strict-ingress-host-empty",
+      "bytes": 44,
+      "sha256": "c0b54a15ab127212afa4fbaa1af1952e6684d555502d680ed48b1db48c0ab35d"
+    },
+    {
+      "name": "strict-ingress-host-duplicate-identical",
+      "bytes": 75,
+      "sha256": "967f1514f2fe60d3f3716f191d9aae0fc8e70cd2cc66b8fbb1ce80747ebbf089"
+    },
+    {
+      "name": "strict-ingress-host-comma-list",
+      "bytes": 68,
+      "sha256": "f0c00d2ae9c3a1d0c045147b6082c6a3231698e84ce141008a7f729d25a6da97"
+    },
+    {
+      "name": "strict-ingress-host-userinfo",
+      "bytes": 61,
+      "sha256": "d50fdc3dc704468c3f58f765376463c9dd36145938e719dd7649f4054105eefc"
+    },
+    {
+      "name": "strict-ingress-host-invalid-port",
+      "bytes": 60,
+      "sha256": "5dd18d41f908eca24c83b703eca1a66bfcd96a76d8e5030cfa9b3577d02060aa"
+    },
+    {
+      "name": "strict-ingress-host-whitespace-before-colon",
+      "bytes": 57,
+      "sha256": "659945f46278fcb3702620a868d9bc6929442180b51f28b5653343cc8e00d6cc"
+    },
+    {
+      "name": "strict-ingress-absolute-authority-SNI-mismatch",
+      "bytes": 75,
+      "sha256": "07e607533a5aa6d6493f4e3a4c2ccb4dd750d4c711c791dcedff1841ad4fec68"
+    },
+    {
+      "name": "strict-ingress-absolute-authority-Host-mismatch",
+      "bytes": 75,
+      "sha256": "7512fde999cf11a04318359833d620f2bfe62ac9ccad176866644e88e557a266"
+    },
+    {
+      "name": "strict-ingress-absolute-authority-userinfo",
+      "bytes": 80,
+      "sha256": "c60c006ecb036662b51a4e7de2e49cd3522bfb66a6bd9deba9f7ade5c662f783"
+    },
+    {
+      "name": "strict-ingress-absolute-authority-without-Host",
+      "bytes": 72,
+      "sha256": "04809f29944fae91c8bccac2788b683b8ce15c45cb2973b17b4a9ed38562f546"
+    },
+    {
+      "name": "strict-ingress-absolute-unsupported-scheme",
+      "bytes": 73,
+      "sha256": "1763e4ce59debbf51862c03f7e3bc4680274bb4a7019f11136a5672479a78c16"
+    },
+    {
+      "name": "strict-ingress-target-relative-form",
+      "bytes": 63,
+      "sha256": "d7afa9568166c044fd70497b67dc21236250eea48ecebad78b89f244f0d09dfd"
+    },
+    {
+      "name": "strict-ingress-target-fragment",
+      "bytes": 69,
+      "sha256": "6c3b972bb1021c018802d56f8cc331eb8bef155d5afe340605ceda07177c0c3e"
+    },
+    {
+      "name": "strict-ingress-connect-authority-form-disabled",
+      "bytes": 74,
+      "sha256": "cf5850a251ffcc458d69e1b18e32f934361de06311757f36956878b54fea4367"
+    },
+    {
+      "name": "strict-ingress-CL-TE-pipelined",
+      "bytes": 158,
+      "sha256": "b73660189a1fce9a6b9c1d5256c39b6a60ec4ac92b9851dcbf07da158a23642d"
+    },
+    {
+      "name": "strict-ingress-TE-CL-pipelined",
+      "bytes": 158,
+      "sha256": "e457f3e3b00594926529df4bc046e5fc1946a5fd976e816105fc3aebf974a7ba"
+    },
+    {
+      "name": "strict-ingress-TE-obsolete-fold",
+      "bytes": 111,
+      "sha256": "e9d3ff8fc8dff3411cc84fb3d60f46dfbcda5218ae8b1ff082e08512fbe3967a"
+    },
+    {
+      "name": "strict-ingress-CL-comma-conflict",
+      "bytes": 80,
+      "sha256": "8c81e5bc14aa8795471d10cee89211bd2a912d6385eadd80e6711a4fe78c12e1"
+    },
+    {
+      "name": "strict-ingress-TE-repeated-chunked",
+      "bytes": 99,
+      "sha256": "896ca844f7a408f8e12304cf302b0c3ea31b94930b5923aa7f32d10f1e871d42"
+    },
+    {
+      "name": "strict-ingress-TE-not-final-chunked",
+      "bytes": 96,
+      "sha256": "88c42d855422b7bb57f8691174d90be612a3e3073d59c1cfdd16af8de8d0df0a"
+    },
+    {
+      "name": "supplemental-space-target-before-pipelined-request",
+      "bytes": 121,
+      "sha256": "ecc0b66ff5e456b23e3aa1a90b130c87e5b8b933c61ea476d94bd69221f0b17e"
+    },
+    {
+      "name": "supplemental-tab-target-before-pipelined-request",
+      "bytes": 121,
+      "sha256": "ab694b5a0a84db42f7cc346d216132181963d269c49a176ddd030f6d8cfe23d7"
+    },
+    {
+      "name": "supplemental-duplicate-host-before-pipelined-request",
+      "bytes": 130,
+      "sha256": "6f7ab1e54cb784303900e4327896a889c273b25050ac7da8d7951dfc4f6a7416"
+    },
+    {
+      "name": "supplemental-conflicting-length-before-pipelined-request",
+      "bytes": 150,
+      "sha256": "4d3afde5bb1daa9fd42e7ee782ae7b866685e15ee88ce2db4762a7982ddabccd"
+    },
+    {
+      "name": "supplemental-signed-content-length",
+      "bytes": 132,
+      "sha256": "5379a6edb5d1a08ffb7eb0448c5e02c83c353c782341be8cf4ac3dcf7ac17c4d"
+    },
+    {
+      "name": "supplemental-negative-content-length",
+      "bytes": 132,
+      "sha256": "0d658a97c7ca16b2254e14f6bda9cd8c439297ade2aa08309498245247ac218c"
+    },
+    {
+      "name": "supplemental-repeated-transfer-encoding-fields",
+      "bytes": 118,
+      "sha256": "0691db9909996eeb07d4ad4b06c79391c752ae060ea0d12dc793c4e43f68ddec"
+    },
+    {
+      "name": "supplemental-nul-in-header-value",
+      "bytes": 132,
+      "sha256": "c61a32db0020bfdd42a3cbc1274c9562a266b519266baeac4257dec5b69cba8c"
+    },
+    {
+      "name": "supplemental-invalid-header-name",
+      "bytes": 130,
+      "sha256": "e3c7df2ad974fcaec71b349550422992a7dc14df1144611ea744e347560b4103"
+    }
+  ],
+  "raw_and_expected_source_hashes": [
+    {
+      "file": "spikes/pingora/lab.mjs",
+      "baseline_sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d",
+      "current_sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "baseline_sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+      "current_sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/edge-comparison/contract.mjs",
+      "baseline_sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f",
+      "current_sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f"
+    },
+    {
+      "file": "spikes/edge-comparison/supplemental.mjs",
+      "baseline_sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf",
+      "current_sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf"
+    },
+    {
+      "file": "spikes/edge-comparison/evaluate.mjs",
+      "baseline_sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf",
+      "current_sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.mjs",
+      "baseline_sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065",
+      "current_sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065"
+    }
+  ]
+}
