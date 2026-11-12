@@ -20,6 +20,11 @@ const handlers = []; let parserErrors = 0; let transportErrors = 0;
 let child; let childExit; let log; let observer; let port;
 const material = pki(fixtureDir);
 const ca = material.read('ca.pem');
+async function bounded(promise, ms = 3500) {
+  let timer;
+  try { return await Promise.race([promise, new Promise((_, reject) => { timer = setTimeout(() => reject(new Error('explicit operation deadline')), ms); })]); }
+  finally { clearTimeout(timer); }
+}
 const preface = Buffer.from('PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n');
 const literal = (name, value) => Buffer.concat([Buffer.from([0, name.length]), Buffer.from(name), Buffer.from([value.length]), Buffer.from(value)]);
 const headers = (target = '/') => Buffer.concat([Buffer.from([0x82, 0x87, 0x04, target.length]), Buffer.from(target), literal(':authority', 'edge-b.test')]);
@@ -33,6 +38,7 @@ async function probe(name, fn) {
   catch (error) { result.tests.push({ name, started_at, status: 'fail', error: error.stack,
     ...(before ? { origin: difference(before) } : {}) }); result.failures.push(name); }
   console.log(`${name}: ${result.tests.at(-1).status}`);
+  fs.writeFileSync(`${output}.progress.json`, JSON.stringify(result, null, 2) + '\n');
 }
 function own(socket) {
   sockets.add(socket); socket.on('close', () => sockets.delete(socket)); socket.on('error', () => {});
@@ -41,20 +47,21 @@ function own(socket) {
 async function connect(alpn = 'h2') {
   const socket = own(tls.connect({ host: '127.0.0.1', port, servername: alpn === 'h2' ? 'edge-b.test' : 'edge-a.test',
     ca, rejectUnauthorized: true, ALPNProtocols: [alpn], minVersion: 'TLSv1.2' }));
-  socket.setTimeout(4500, () => socket.destroy()); await once(socket, 'secureConnect');
+  socket.setTimeout(4500, () => socket.destroy()); await bounded(once(socket, 'secureConnect'));
   assert.equal(socket.alpnProtocol, alpn); return socket;
 }
 async function client() {
   const session = http2.connect(`https://127.0.0.1:${port}`, { servername: 'edge-b.test', ca, rejectUnauthorized: true });
   sessions.add(session); session.on('error', () => {}); session.on('close', () => sessions.delete(session));
-  session.setTimeout(4500, () => session.destroy()); await once(session, 'connect'); return session;
+  session.setTimeout(4500, () => session.destroy()); await bounded(once(session, 'connect')); return session;
 }
 async function request(session, extra = {}, target = '/') {
   const stream = session.request({ ':method': 'GET', ':path': target, ':authority': 'edge-b.test', ...extra });
   stream.on('error', () => {}); stream.setTimeout(3000, () => stream.destroy(new Error('request deadline')));
   const response = once(stream, 'response'); const ended = once(stream, 'end'); const chunks = [];
   stream.on('data', (c) => chunks.push(c)); stream.end();
-  const [[h]] = await Promise.all([response, ended]); return { status: h[':status'], body: Buffer.concat(chunks).toString() };
+  try { const [[h]] = await bounded(Promise.all([response, ended])); return { status: h[':status'], body: Buffer.concat(chunks).toString() }; }
+  finally { stream.destroy(); }
 }
 async function raw(bytes, expectedCode) {
   const socket = await connect(); const frames = []; let terminal = false;
@@ -165,7 +172,7 @@ try {
   });
   await probe('slow-reader-backpressure-and-response-cancellation', async () => {
     const session = await client(); const stream = session.request({ ':path': '/large', ':authority': 'edge-b.test' });
-    stream.on('error', () => {}); stream.end(); await once(stream, 'response'); stream.pause();
+    stream.on('error', () => {}); stream.end(); await bounded(once(stream, 'response')); stream.pause();
     await until(() => handlers.some((h) => h.path === '/large'));
     const sample = handlers.findLast((h) => h.path === '/large'); await delay(200);
     const paused = { produced: sample.produced, pauses: sample.pauses };
