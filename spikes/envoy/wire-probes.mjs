@@ -29,13 +29,14 @@ const preface = Buffer.from('PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n');
 const literal = (name, value) => Buffer.concat([Buffer.from([0, name.length]), Buffer.from(name), Buffer.from([value.length]), Buffer.from(value)]);
 const headers = (target = '/') => Buffer.concat([Buffer.from([0x82, 0x87, 0x04, target.length]), Buffer.from(target), literal(':authority', 'edge-b.test')]);
 const snapshot = () => ({ connections: observer.wireSnapshot().connections.length,
-  bytes: observer.wireSnapshot().connections.reduce((n, c) => n + c.bytes, 0), handlers: handlers.length,
+  bytes: observer.wireSnapshot().total_decrypted_bytes, handlers: handlers.length,
   parser_errors: parserErrors, transport_errors: transportErrors, events: observer.wireSnapshot().events.length });
 const difference = (before) => Object.fromEntries(Object.entries(snapshot()).map(([key, n]) => [key, n - before[key]]));
 async function probe(name, fn) {
   const before = observer ? snapshot() : undefined; const started_at = new Date().toISOString();
   try { result.tests.push({ name, started_at, ...(await fn()), status: 'pass', ...(before ? { origin: difference(before) } : {}) }); }
   catch (error) { result.tests.push({ name, started_at, status: 'fail', error: error.stack,
+    observation: error.observation,
     ...(before ? { origin: difference(before) } : {}) }); result.failures.push(name); }
   console.log(`${name}: ${result.tests.at(-1).status}`);
   fs.writeFileSync(`${output}.progress.json`, JSON.stringify(result, null, 2) + '\n');
@@ -56,12 +57,17 @@ async function client() {
   session.setTimeout(4500, () => session.destroy()); await bounded(once(session, 'connect')); return session;
 }
 async function request(session, extra = {}, target = '/') {
+  const observed = { target, headers: extra, goaway: [] };
+  const goaway = (code, lastStream) => observed.goaway.push({ code, last_stream: lastStream });
+  session.on('goaway', goaway);
   const stream = session.request({ ':method': 'GET', ':path': target, ':authority': 'edge-b.test', ...extra });
   stream.on('error', () => {}); stream.setTimeout(3000, () => stream.destroy(new Error('request deadline')));
   const response = once(stream, 'response'); const ended = once(stream, 'end'); const chunks = [];
   stream.on('data', (c) => chunks.push(c)); stream.end();
   try { const [[h]] = await bounded(Promise.all([response, ended])); return { status: h[':status'], body: Buffer.concat(chunks).toString() }; }
-  finally { stream.destroy(); }
+  catch (error) { error.observation = { ...observed, stream_closed: stream.closed, rst_code: stream.rstCode,
+    session_closed: session.closed, session_destroyed: session.destroyed }; throw error; }
+  finally { session.off('goaway', goaway); stream.destroy(); }
 }
 async function raw(bytes, expectedCode) {
   const socket = await connect(); const frames = []; let terminal = false;
@@ -78,7 +84,9 @@ async function raw(bytes, expectedCode) {
     assert.ok(errors.length, 'no protocol error frame');
     if (expectedCode !== undefined) assert.ok(errors.some((e) => e.code === expectedCode), JSON.stringify(errors));
     return errors;
-  } finally { socket.destroy(); }
+  } catch (error) { error.observation = { received_frames: frames, peer_closed: socket.destroyed,
+    sent_hex: bytes.toString('hex') }; throw error; }
+  finally { socket.destroy(); }
 }
 
 try {
@@ -95,8 +103,8 @@ try {
     if (h[':path'] === '/hold') return;
     if (h[':path'] === '/upload') { stream.on('end', () => { if (!stream.destroyed) { stream.respond({ ':status': 200 }); stream.end('done'); } }); return; }
     stream.respond({ ':status': 200 });
-    if (h[':path'] === '/large') {
-      const chunk = Buffer.alloc(16384, 0x61); const total = 8 * 1024 * 1024;
+    if (['/large', '/large-raw'].includes(h[':path'])) {
+      const chunk = Buffer.alloc(16384, 0x61); const total = (h[':path'] === '/large-raw' ? 64 : 8) * 1024 * 1024;
       const pump = () => {
         while (!stream.destroyed && sample.produced < total) {
           sample.produced += chunk.length;
@@ -155,6 +163,14 @@ try {
       return { observations, identities: handlers.map(({ path, authority, sni, alpn, tls }) => ({ path, authority, sni, alpn, tls })) };
     } finally { session.destroy(); }
   });
+  for (const [name, extra] of [['Host', { host: 'edge-a.test' }], ['authority', { ':authority': 'edge-a.test' }],
+    ['userinfo', { ':authority': 'user@edge-b.test' }]]) await probe(`individual-settled-${name}-denial`, async () => {
+    await delay(100); const c = await client(); const before = snapshot();
+    try { const response = await request(c, extra); assert.ok([400, 421].includes(response.status));
+      const delta = difference(before); assert.equal(delta.bytes, 0); assert.equal(delta.handlers, 0);
+      return { status_code: response.status, interval: delta }; }
+    finally { c.destroy(); }
+  });
   for (const [name, bytes, expected] of [
     ['SETTINGS-ACK-payload', frame(4, 1, 0, Buffer.alloc(6)), 6],
     ['PING-seven-bytes', frame(6, 0, 0, Buffer.alloc(7)), 6],
@@ -172,15 +188,43 @@ try {
   });
   await probe('slow-reader-backpressure-and-response-cancellation', async () => {
     const session = await client(); const stream = session.request({ ':path': '/large', ':authority': 'edge-b.test' });
+    try {
     stream.on('error', () => {}); stream.end(); await bounded(once(stream, 'response')); stream.pause();
     await until(() => handlers.some((h) => h.path === '/large'));
     const sample = handlers.findLast((h) => h.path === '/large'); await delay(200);
     const paused = { produced: sample.produced, pauses: sample.pauses };
-    assert.ok(paused.produced < 8 * 1024 * 1024); assert.ok(paused.pauses > 0);
+    if (paused.produced >= 8 * 1024 * 1024) {
+      const error = new Error('entire 8MiB response produced despite paused native reader'); error.observation = paused; throw error;
+    }
+    assert.ok(paused.pauses > 0);
     const started = Date.now(); stream.close(http2.constants.NGHTTP2_CANCEL);
     await until(() => sample.closed, 2500); session.destroy();
     return { response_limit_bytes: 8 * 1024 * 1024, paused_after_ms: 200, ...paused,
       origin_cancel_ms: Date.now() - started, origin_rst_code: sample.rst_code };
+    } finally { stream.destroy(); session.destroy(); }
+  });
+  await probe('raw-slow-reader-window-starvation-and-response-cancellation', async () => {
+    const socket = await connect(); let dataBytes = 0; const received = [];
+    const consume = decoder({ emit: (e) => {
+      if (received.length < 32) received.push(e);
+      if (e.kind === 'frame' && e.type === 4 && e.flags === 0) socket.write(frame(4, 1, 0));
+      if (e.kind === 'frame' && e.type === 0) dataBytes += e.length;
+    } });
+    socket.on('data', consume);
+    try {
+      // Advertise a 1KiB receive window, then deliberately send no WINDOW_UPDATE.
+      socket.write(Buffer.concat([preface, frame(4, 0, 0, Buffer.from([0, 4, 0, 0, 4, 0])), frame(1, 5, 1, headers('/large-raw'))]));
+      await until(() => handlers.some((h) => h.path === '/large-raw'));
+      const sample = handlers.findLast((h) => h.path === '/large-raw'); await delay(300);
+      const observed = { produced: sample.produced, pauses: sample.pauses, downstream_data_bytes: dataBytes, receive_window: 1024,
+        response_limit_bytes: 64 * 1024 * 1024, observation_ms: 300, received_frames: received };
+      assert.ok(dataBytes <= 1024);
+      if (sample.produced >= observed.response_limit_bytes) { const error = new Error('64MiB producer exhausted under window starvation'); error.observation = observed; throw error; }
+      assert.ok(sample.pauses > 0);
+      const start = Date.now(); socket.write(frame(3, 0, 1, Buffer.from([0, 0, 0, 8])));
+      await until(() => sample.closed, 2500);
+      return { ...observed, origin_cancel_ms: Date.now() - start, origin_rst_code: sample.rst_code };
+    } finally { socket.destroy(); }
   });
   await probe('partial-upload-cancellation', async () => {
     const session = await client(); const stream = session.request({ ':method': 'POST', ':path': '/upload', ':authority': 'edge-b.test' });

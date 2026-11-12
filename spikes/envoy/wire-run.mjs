@@ -8,6 +8,8 @@ import { assertLock } from './wire-fixtures.mjs';
 
 process.umask(0o077); assertLock();
 const root = process.cwd(); const output = path.resolve(process.argv[2] ?? 'evidence/sprint04a-b/attempt01');
+const probesOnly = process.argv[3] === '--probes-only';
+assert.ok(process.argv.length <= 4 || (process.argv.length === 5 && probesOnly), 'only optional --probes-only is supported');
 assert.ok(output.startsWith(path.join(root, 'evidence/sprint04a-b/')));
 assert.ok(!fs.existsSync(output), 'immutable evidence requires a fresh directory');
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
@@ -65,7 +67,7 @@ try {
     AEGIS_CANDIDATE_COMMAND: process.execPath, AEGIS_CANDIDATE_ARGS: JSON.stringify([launcher]),
     AEGIS_CANDIDATE_ARTIFACTS: JSON.stringify(sources.filter((f) => f.startsWith('spikes/envoy/')).map((f) => path.join(root, f))),
     AEGIS_RUN_ROOT: runRoot };
-  for (const mode of ['unchanged75', 'diagnostic75']) {
+  for (const mode of probesOnly ? [] : ['unchanged75', 'diagnostic75']) {
     const extra = mode === 'diagnostic75' ? { AEGIS_WIRE_TRACE: path.join(output, 'diagnostic-wire.json') } : {};
     const args = mode === 'diagnostic75' ? ['--import', './spikes/envoy/wire-trace.mjs', 'spikes/edge-comparison/run.mjs'] : ['spikes/edge-comparison/run.mjs'];
     const run = capture(mode, process.execPath, args, { ...environment, ...extra });

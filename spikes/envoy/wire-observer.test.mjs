@@ -67,6 +67,7 @@ test('observer preserves bytes, configured identity and verified TLS; bounds sam
     }
     const snapshot = observer.wireSnapshot();
     assert.equal(snapshot.connections[0].bytes, payload.length);
+    assert.equal(snapshot.total_decrypted_bytes, payload.length); assert.equal(snapshot.total_secure_connections, 1);
     assert.equal(snapshot.events.length, 4096); assert.ok(snapshot.omitted_events > 0);
     for (const name of ['wrong', 'expired', 'untrusted']) {
       let bytes = 0; let errors = 0;
