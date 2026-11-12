@@ -1,0 +1,9 @@
+{
+  "source_commit": "c168a18",
+  "command": ["flock", "/tmp/aegisgate-sprint02-fixtures.lock", ".local/toolchains/node/bin/node", "spikes/envoy/wire-run.mjs", "evidence/sprint04a-b/attempt01"],
+  "exit_code": 1,
+  "phase": "before fixtures or output directory creation",
+  "error": "AssertionError: commit sources before proof; git status reported ?? node_modules and ?? spikes/pingora/node_modules",
+  "cause": "Git's directory ignore pattern does not ignore a symlink with the directory's name",
+  "resolution": "Replace only the newly created symlinks with real ignored directories containing links to existing dependencies; no shared dependency files changed"
+}
