@@ -107,6 +107,14 @@ commands/times/exits/stdout/stderr/hashes are in command receipts:
 | `node evidence/sprint04a-c/research.mjs followup` | 1; source200s, wrong Hyper main422 and old Bazel path404 retained |
 | `node evidence/sprint04a-c/research.mjs local-followup` | 0; pinned audit0, Linux-filtered Hyper metadata0, tool/database versions0 |
 | `python3 evidence/sprint04a-c/verify-provenance.py` | 0; 7 archives/382 files match lock/source |
+| `node evidence/sprint04a-c/closeout.mjs` | 0; syntax, archive verification, immutable baseline, owned-source whitespace and pinned offline Gitleaks all0;96 fetched/log file hashes verified |
+
+The scoped Gitleaks scan processes4.18MB of owned evidence and reports no leaks;
+it is not a repository/history security-scan claim. `verification.json` records
+each exact command, source commit, time, exit and stdout/stderr digest.
+`SHA256SUMS` binds the report and all owned evidence except the manifest itself.
+No full repository `make check`/`make security-scan` was run by C; root owns
+integration regression gates, and runtime sources were not edited.
 
 `drafts/upstream-requests.md` contains local-only request drafts and conditional
 reproducer commands. No draft was published and no traffic probe was executed.
