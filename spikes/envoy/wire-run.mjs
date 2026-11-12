@@ -31,12 +31,24 @@ const save = () => fs.writeFileSync(path.join(output, 'commands.json'), JSON.str
 function capture(label, program, args, env = {}) {
   const started_at = new Date().toISOString();
   const child = spawnSync(program, args, { cwd: root, env: { ...process.env, ...env }, encoding: 'utf8',
-    maxBuffer: 64 * 1024 * 1024, timeout: 240000, killSignal: 'SIGTERM' });
+    maxBuffer: 64 * 1024 * 1024, timeout: 100000, killSignal: 'SIGTERM' });
   for (const stream of ['stdout', 'stderr']) fs.writeFileSync(path.join(output, `${label}.${stream}.txt`), child[stream] ?? '');
   record.commands.push({ label, program, args, environment: env, cwd: root, started_at,
     ended_at: new Date().toISOString(), exit_code: child.status, signal: child.signal, error: child.error?.message,
     stdout_sha256: hash(path.join(output, `${label}.stdout.txt`)), stderr_sha256: hash(path.join(output, `${label}.stderr.txt`)) });
   save(); console.log(`${label}: exit=${child.status}`); return child;
+}
+function cleanupOwnedLaunchers() {
+  // spawnSync timeout does not terminate grandchildren. Match this worktree only.
+  for (const entry of fs.readdirSync('/proc').filter((s) => /^\d+$/.test(s))) {
+    try {
+      const args = fs.readFileSync(`/proc/${entry}/cmdline`, 'utf8').split('\0');
+      if (args[1] !== path.join(root, 'spikes/envoy/recovery-launcher.mjs')) continue;
+      const pid = Number(entry);
+      capture(`cleanup-${pid}`, 'docker', ['stop', '--timeout', '2', `aegis-envoy-${pid}`]);
+      process.kill(pid, 'SIGTERM');
+    } catch {}
+  }
 }
 let incomplete = false;
 try {
@@ -57,6 +69,7 @@ try {
     const extra = mode === 'diagnostic75' ? { AEGIS_WIRE_TRACE: path.join(output, 'diagnostic-wire.json') } : {};
     const args = mode === 'diagnostic75' ? ['--import', './spikes/envoy/wire-trace.mjs', 'spikes/edge-comparison/run.mjs'] : ['spikes/edge-comparison/run.mjs'];
     const run = capture(mode, process.execPath, args, { ...environment, ...extra });
+    cleanupOwnedLaunchers();
     const resultsPath = run.stdout?.match(/^Evidence: (.+\/results\.json)$/m)?.[1];
     if (!resultsPath?.startsWith(runRoot)) { incomplete = true; continue; }
     for (const file of ['results.json', 'proxy.log']) fs.copyFileSync(path.join(path.dirname(resultsPath), file), path.join(output, `${mode}-${file}`));
@@ -64,9 +77,11 @@ try {
     fs.writeFileSync(path.join(output, `${mode}-decision.json`), JSON.stringify(evaluate(JSON.parse(fs.readFileSync(resultsPath))), null, 2) + '\n');
   }
   const probes = capture('probes', process.execPath, ['spikes/envoy/wire-probes.mjs', path.join(output, 'probes.json'), path.join(runRoot, 'bounded-probes')]);
+  cleanupOwnedLaunchers();
   if (probes.status !== 0) incomplete = true;
 } catch (error) { record.fatal = error.stack; incomplete = true; }
 finally {
+  cleanupOwnedLaunchers();
   record.ended_at = new Date().toISOString(); record.recording_complete = !incomplete;
   for (const { file, sha256 } of record.source_hashes) assert.equal(hash(file), sha256, `source mutation: ${file}`);
   save();
