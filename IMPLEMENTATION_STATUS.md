@@ -1,5 +1,21 @@
 # Implementation status
 
+## Sprint04-A Final Closeout / Sprint04-B Start
+
+PR12 is merged as `cbb5f71db84b9489bf4a6260696bbba29ab4a561`; exact PR-head
+hosted43457905154 and exact merge hosted43466312855 both pass the two required
+jobs. Fresh independent Phase0 ACCEPT verifies sources, manifests, full local
+gate/cleanup receipts and retained failures. See
+`docs/reports/sprint04a-closeout-addendum.md`; it supersedes historical pending
+merge/hosted fields without rewriting receipts. Modules00/02/03 retain scoped
+local PASS. Module01 remains NO-GO;04-12 LOCKED; production BLOCKED.
+
+Sprint04-B work starts from this verified main. The requesting human delegated
+research choices; maintained Envoy strict-ingress API research is the selected
+default. Formal architecture/security owner/GO remain pending, and the current
+zero-origin-byte requirement is unchanged. Execution contract:
+`docs/sprints/04b-execution.md`.
+
 Last updated: 2026-11-13. Scope: local implementation only. No production deployment or live DNS/payment action is authorized.
 
 ## Sprint04-A strict-ingress disposition
