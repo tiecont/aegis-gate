@@ -222,7 +222,16 @@ try {
 finally {
   clearTimeout(watchdog); assertLock(); await stop();
   if (docker) {
-    const exit = docker.exitCode === null ? await once(docker, 'exit') : [docker.exitCode, docker.signalCode];
+    let exit = docker.exitCode === null ? await Promise.race([
+      once(docker, 'exit'), delay(3000).then(() => null),
+    ]) : [docker.exitCode, docker.signalCode];
+    if (exit === null) {
+      proof.record.cleanup_cli_timeout = true;
+      docker.kill('SIGTERM');
+      exit = await Promise.race([once(docker, 'exit'), delay(1000).then(() => null)]);
+      if (exit === null) { docker.kill('SIGKILL'); exit = [null, 'SIGKILL']; }
+      proof.record.error ??= 'Attached Docker CLI exceeded cleanup deadline';
+    }
     proof.record.container_command.ended_at = new Date().toISOString();
     proof.record.container_command.exit_code = exit[0]; proof.record.container_command.signal = exit[1];
   }
@@ -232,6 +241,6 @@ finally {
   if (clean && fixture) fs.rmSync(fixture, { recursive: true });
   proof.record.cleanup = { lock_held_through_cleanup: true, container_absent: clean,
     fixture_removed: fixture ? !fs.existsSync(fixture) : null, wall_ms: Date.now() - started };
-  if (!clean || proof.record.completed_observations === false) process.exitCode = 1;
+  if (!clean || proof.record.completed_observations !== true) process.exitCode = 1;
   proof.finish();
 }

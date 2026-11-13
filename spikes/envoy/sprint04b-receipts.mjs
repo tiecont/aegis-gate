@@ -10,7 +10,8 @@ export function receipt(output) {
   assert.match(output, /^evidence\/sprint04b-b\/[a-z]+-\d+$/);
   assert.equal(git('status', '--porcelain', '--untracked-files=no'), '', 'commit source first');
   fs.mkdirSync(output); // Every attempt is retained in a fresh, bounded directory.
-  const sources = git('ls-files', 'spikes/envoy', 'spikes/edge-comparison', 'evidence/sprint04b-b/PLAN.md')
+  const sources = git('ls-files', 'spikes/envoy', 'spikes/edge-comparison', 'evidence/sprint04b-b/PLAN.md',
+    'evidence/sprint04b-b/upstream-requests.md', 'docs/reports/sprint04b-b-upstream.md')
     .split('\n').filter(Boolean);
   const record = { started_at: new Date().toISOString(), cwd: process.cwd(), argv: process.argv,
     source_commit: git('rev-parse', 'HEAD'), source_tree: git('rev-parse', 'HEAD^{tree}'),

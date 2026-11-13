@@ -23,13 +23,19 @@ Standalone reproduction from committed source, local listeners only:
 ```sh
 flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock \
   /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node \
-  spikes/envoy/sprint04b-repro.mjs evidence/sprint04b-b/repro-02
+  spikes/envoy/sprint04b-repro.mjs evidence/sprint04b-b/repro-04
 ```
 
 Use an unused output directory. This uses the existing digest-pinned release
 image, verifies downstream certificate/ALPN and origin certificate/SAN, generates
 disposable PKI, retains raw requests/responses and origin observations, and
 cleans up before releasing the lock. It is a bounded standalone H1 demo.
+Actual retained execution: repro03 confirms normalized folded headers forwarded,
+but its trailer assertion fails because both trailer controls reach the handler
+with an empty trailer map. It is an unsuccessful overall run, not a passing
+trailer-normalization proof. Repro01's DPE/501 mapper also fails (still501);
+the status501-only alternative in current source was not reached in repro03.
+Do not present proposed inputs or unexecuted later probes as passing results.
 
 Suggested upstream regression inputs (not a patch): folded headers and trailers,
 SP and HTAB continuations, splitting CRLF/continuation across reads, folded TE,

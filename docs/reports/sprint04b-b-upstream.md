@@ -18,7 +18,11 @@ No PR, upstream publication, production change or shared status/ADR edit by B.
 Source precedes proof: `007fc31` adds plan/collector; `35c7db0` retains the failed
 anonymous API attempt and adds authenticated refresh/reproducer; `644a844`
 retains successful release receipts and isolates hostile-request counters;
-`4deca66` adds unpublished requests. Exact subsequent source/tree/argv/cwd,
+`4deca66` adds unpublished requests; `aeaa0bc` records the research checkpoint;
+`b867d02` retains repro01 and adds a positively controlled TLS observer;
+`fd9b3c1` retains repro02/recovery and fixes delayed-create startup ordering.
+The final verifier is `spikes/envoy/sprint04b-upstream-verify.mjs`, renamed from
+the earlier B filename to avoid C's separately owned verifier. Exact source/tree/argv/cwd,
 tool versions, UTC times, raw logs, exits, input hashes and cleanup are bound in
 each `commands.json` and directory `SHA256SUMS`. The final owned manifest binds
 this report, sources, drafts and all retained evidence without self-reference.
@@ -62,9 +66,9 @@ Line numbers refer to the unmodified upstream file, not generated summaries.
 
 | Requirement | Released API / Source Finding | Classification |
 | --- | --- | --- |
-| Reject folded headers/trailers before normalization | Envoy `balsa_parser.cc:181` sets `disallow_header_continuation_lines=false`; `:304-305` raw callbacks are no-ops; `:428-464` shares header/trailer processing and removes CR/LF. `balsa_parser.h:39-45` makes callbacks private; `HeaderValidator:54,69,96,104` takes parsed maps. | Missing public strict-fold/provenance API in inspected release. Parsed-map filtering cannot reconstruct removed CR/LF. |
+| Reject folded headers/trailers before normalization | Envoy `balsa_parser.cc:181` sets `disallow_header_continuation_lines=false`; `:304-305` raw callbacks are no-ops; `:428-464` shares header/trailer processing and removes CR/LF. `balsa_parser.h:39-45` makes callbacks private; `HeaderValidator:54,69,96,104` takes parsed maps. | Missing public strict-fold/provenance API in inspected release. Folded-header forwarding is executed; trailer normalization remains unproven at runtime. Parsed-map filtering cannot reconstruct removed CR/LF. |
 | Preserve Host/:authority/verified SNI | H2 `codec_impl.cc:2188` permits differing Host/authority; `:2523-2524,2585-2607` controls Host discard via `http2_discard_host_header`. | Released partial information-retention hook. It does not prove an identity check before all upstream effects. No new H2 runtime proof by B. |
-| Unsupported TE gives4xx and actual close | H1 `codec_impl.cc:917-925` selects501; `:1376-1396` creates a logical stream if absent and calls decoder `sendLocalReply`. HCM proto `:1004,1160-1221`, accesslog proto `:56,80,227-260` and `local_reply.cc:109-126` expose status/flag matching and status mapping. | Released partial hook, tested in the standalone experiment. Do not claim no supported status mapper exists. No blanket proof for every error path. |
+| Unsupported TE gives4xx and actual close | H1 `codec_impl.cc:917-925` selects501; `:1376-1396` creates a logical stream if absent and calls decoder `sendLocalReply`. HCM proto `:1004,1160-1221`, accesslog proto `:56,80,227-260` and `local_reply.cc:109-126` expose status/flag matching and status mapping. | Released partial hook. The tested DPE AND501 mapper fails to remap; status-only mapper is unexecuted. No complete4xx proof; actual peer close observed. Do not claim the released mapper is absent. |
 | Preserve valid encoded targets and ordered pipeline | HCM `normalize_path=false`, `merge_slashes=false`, `KEEP_UNCHANGED`; normal H1 keepalive remains enabled. | Released controls, tested locally below. No whole-engine acceptance follows. |
 | Pingora strict targets/framing | `v1/server.rs:400-432,437-455` removes CL with TE and retries illegal target parsing via `escape_illegal_request_line`; `apps/mod.rs:64-96` lacks a no-retry strict option. | Missing inspected released no-normalization policy. Existing raw/session hooks do not by themselves repair target provenance. Source-only this sprint. |
 | Pingora ordered pipeline | `set_pipelining_enabled:1014`, `set_pipelined_prefix:1024`, `reuse`, persistent session options in `apps/mod.rs`. | Released low-level partial APIs; ordered ProxyHttp integration still needs execution after strict prerequisites. No new Pingora run. |
@@ -90,25 +94,44 @@ Command (fresh destination required):
 ```sh
 flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock \
   /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node \
-  spikes/envoy/sprint04b-repro.mjs evidence/sprint04b-b/repro-01
+  spikes/envoy/sprint04b-repro.mjs evidence/sprint04b-b/repro-03
 ```
 
-Runtime receipt and outcome are pending fixture-lock acquisition at this source
-checkpoint. This sentence will be replaced with actual results before handoff.
-No new passing runtime claim is made by the source checkpoint.
+All three attempts exit1 and remain unchanged. No new full candidate or75-case
+suite ran. These are actual local observations, with explicit limits:
 
-The two intended listeners differ only by a released local reply mapper:
-`status_code=501 AND response_flag=DPE -> status_code400`. It is deliberately
-narrower than remapping all501 responses. The probe sends no client FIN for
-keepalive negatives, records peer `end` separately from a close header and
-deadline, and splits prior valid warmup observations from the hostile request.
-It captures raw request/response hex, verified downstream SNI/certificate/ALPN,
-origin decrypted bytes, handlers, connections, parser/TLS errors and cleanup.
-Origin certificate verification is configured with CA and exact DNS SAN/SNI.
-No TLS verification is disabled. Keys are disposable and excluded from evidence.
+| Receipt / Source / UTC | Executed Result | Limit / Cleanup |
+| --- | --- | --- |
+| repro01 / `4deca66` / 17:07:15.940Z-17:07:36.337Z |29 probes. Folded/unfolded headers both200 with `first second` at handler. Four TE variants on fresh/reused downstream connections all501 with actual peer `end`, both default and DPE AND501 mapper. Legitimate origin501 stays501. All six encoded targets preserved at handler; pipeline returns200/200 in expected URL order. |20.076s measured lifecycle. Byte observer reports zero even on valid traffic, so **all its origin byte counts are invalid**. Handler/status/peer-close observations remain separate evidence. Mapper fails8 expected400 observations. No zero-byte security PASS. |
+| repro02 / `b867d02` / 17:08:55.873Z-17:10:52.519Z |Direct relay control exact76/76 bytes. Envoy not ready in8s; no Envoy probes run. Delayed async Docker creation raced early cleanup stop. |116.476s lifecycle exceeded intended90s; failed startup/lifecycle, not conformance. Exact owned container stopped under the original lock; see `repro-02-recovery.md`. |
+| repro03 / `fd9b3c1` / 17:11:41.359Z-17:11:43.101Z |Direct relay control exact76/76 bytes. Four probes then assertion failure: headers both200,177 decrypted origin bytes/one handler each, normalized value `first second`; trailer inputs both200,214 bytes/one handler each but **empty handler trailers**. |1.593s measured lifecycle. No new origin connection for these four probes (the control established the reused origin connection); zero origin parser/TLS errors. Trailer normalization/delivery is unproven. TE/status-only mapper/encoded/pipeline probes are not reached in this attempt. |
 
-The repro is bounded to40 requests,90s wall time,2.5s per observation,32KiB
-response capture,256MiB/one CPU/64 container PIDs. It does not exercise H2,
+Every attempt records container absence, removed disposable PKI and lock held
+through cleanup. Repro03 source uses `docker create` before `start --attach`,
+removing the observed delayed-create/early-stop race. Final source also bounds
+the attached Docker CLI exit wait to3s, then own-CLI SIGTERM1s/SIGKILL; this
+latest source cleanup change is syntax/integrity checked, not runtime re-proven.
+No further runtime attempt follows the unexpected trailer result.
+
+Repro01 used `status_code501 AND response_flagDPE ->400`; it stayed501. The
+corrected source has a status501-only **local reply** mapper, but its probes
+were not reached. No passing remap is claimed. Repro01's fourth TE was
+`gzip, chunked`; corrected source instead includes the historical duplicate TE
+field case, also unexecuted. The original75 expectations remain untouched.
+Empty handler trailers do not show the original wire trailer was normalized
+or delivered; upstream trailer forwarding/configuration or probe semantics
+needs separate investigation. The common source transformation is source-only
+evidence for trailers.
+
+The probe sends no client FIN, records peer `end` separately from a close header
+and deadline, and splits prior valid warmup counters from the hostile request.
+Requests/responses and corrected origin bytes are retained as hex. Downstream
+SNI/certificate/ALPN is verified; origin/relay TLS uses the disposable CA and
+exact DNS SAN/SNI. No verification is disabled or key retained in evidence.
+
+Intended bounds are40 requests,90s wall time,2.5s per observation,32KiB
+response capture,256MiB/one CPU/64 container PIDs; repro02 violated the wall
+bound as explicitly recorded above. This work does not exercise H2,
 dynamic certificates/config, resource soak, gRPC/WS or cancellation. In
 particular it does not establish the current H2 zero-origin-byte contract.
 Those controls and C's seven supplemental dispositions remain other owners'
@@ -143,14 +166,18 @@ architecture/security decision remain PENDING with root and the human.
 ## Agent Completion Report
 
 - Module: Sprint04-B B, maintained strict-ingress research for Module01.
-- Status: source research complete; runtime/verification checkpoint pending.
+- Status: research complete with explicit upstream NO-GO; runtime reproduction
+  partial/unsuccessful, failures and cleanup retained.
 - Commits/files changed: B-owned plan, four additive scripts, receipts,
   unpublished upstream requests and this report; exact source objects in receipts.
 - Architecture/ADR decisions: upstream NO-GO retained; no substitution/approval.
 - Contracts changed: none; original75 and zero-byte assertion remain mandatory.
-- Positive tests executed: release/API refresh exit0; runtime results pending.
-- Security negative tests executed: no new full-candidate execution; standalone
-  results pending; historical failures above retained.
+- Positive tests executed: release/API refresh exit0; direct byte controls76/76;
+  header normalization177 bytes/handler; historical encoded/pipeline preservation
+  re-observed in repro01 with byte-count limitation. Exact commands in receipts.
+- Security negative tests executed: three standalone attempts exit1 as above;
+  folded header forwarded, DPE mapper fails, trailer semantics unproven.
+  No full-candidate execution or new security PASS; historical failures retained.
 - Performance data: no benchmark/capacity claim; bounded correctness experiment.
 - Known risks/release blockers: strict-fold/provenance and H2 all-byte boundary;
   original6 Envoy failures,7 supplemental failures and full engine gate persist.
