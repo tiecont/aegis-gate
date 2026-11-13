@@ -17,7 +17,7 @@ the separate security-contract/alternative-test memos are proposed only: no
 origin-byte waiver, handler-only oracle, control-byte subtraction or shifted
 interval. The9-byte SETTINGS ACK remains a failed original assertion.
 
-R08/T08 protocol-resource closure remains unproven. C reproduces the same six
+R04/T08 protocol-resource closure remains unproven. C reproduces the same six
 of75 and seven of23 failures. Settled/immediate malformed H2 diagnostics close
 without error frames and without origin dispatch; their exact internal cause
 and protocol conformance remain unresolved. Userinfo closes without a response;
