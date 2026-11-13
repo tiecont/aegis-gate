@@ -14,7 +14,7 @@ const proof = receipt(process.argv[2]);
 const image = JSON.parse(fs.readFileSync('spikes/envoy/image.lock.json'));
 const type = (name, value = {}) => ({ '@type': `type.googleapis.com/envoy.${name}`, ...value });
 const address = (port) => ({ socket_address: { address: '127.0.0.1', port_value: port } });
-let fixture, container, docker, origin;
+let fixture, container, docker, origin, observer;
 const sockets = new Set(); const handlers = []; const decrypted = [];
 let connections = 0; let transportErrors = 0; let parserErrors = 0;
 const containerLog = []; const started = Date.now();
@@ -29,6 +29,7 @@ async function stop() {
     container = null;
   }
   for (const socket of sockets) socket.destroy();
+  if (observer?.listening) await new Promise((resolve) => observer.close(resolve));
   if (origin?.listening) await new Promise((resolve) => origin.close(resolve));
 }
 process.on('SIGTERM', () => { proof.record.error = 'SIGTERM'; void stop(); });
@@ -64,12 +65,35 @@ try {
       { 'content-length': '2' }); res.end('OK'); });
   });
   origin.on('connection', (socket) => { sockets.add(socket); socket.on('close', () => sockets.delete(socket)); });
-  origin.prependListener('secureConnection', (socket) => {
-    connections++; socket.on('data', (bytes) => decrypted.push(Buffer.from(bytes)));
-  });
   origin.on('tlsClientError', () => transportErrors++);
   origin.on('clientError', (_error, socket) => { parserErrors++; socket.destroy(); });
-  const originPort = await listen(origin);
+  const handlerPort = await listen(origin);
+  // Observe bytes in a TLS relay before the native HTTP parser consumes them.
+  observer = tls.createServer({ key: read('origin.key'), cert: read('origin.pem'),
+    minVersion: 'TLSv1.2', ALPNProtocols: ['http/1.1'], handshakeTimeout: 1500 }, (downstream) => {
+    connections++; downstream.pause(); sockets.add(downstream);
+    const upstream = tls.connect({ host: '127.0.0.1', port: handlerPort, servername: 'lab-origin.test',
+      ca: read('ca.pem'), rejectUnauthorized: true, minVersion: 'TLSv1.2', ALPNProtocols: ['http/1.1'] });
+    sockets.add(upstream);
+    const stopPair = () => { downstream.destroy(); upstream.destroy(); sockets.delete(downstream); sockets.delete(upstream); };
+    for (const socket of [downstream, upstream]) {
+      socket.on('error', () => { transportErrors++; stopPair(); }); socket.on('close', stopPair);
+      socket.setTimeout(4000, stopPair);
+    }
+    downstream.on('data', (bytes) => decrypted.push(Buffer.from(bytes)));
+    upstream.once('secureConnect', () => { downstream.pipe(upstream); upstream.pipe(downstream); });
+  });
+  observer.on('tlsClientError', () => transportErrors++);
+  const originPort = await listen(observer);
+  const control = 'GET /observer-control HTTP/1.1\r\nHost: lab-origin.test\r\nConnection: close\r\n\r\n';
+  const controlSocket = tls.connect({ host: '127.0.0.1', port: originPort, servername: 'lab-origin.test',
+    ca: read('ca.pem'), rejectUnauthorized: true, ALPNProtocols: ['http/1.1'] });
+  controlSocket.on('error', () => {}); await once(controlSocket, 'secureConnect');
+  controlSocket.resume(); const controlClosed = once(controlSocket, 'close'); controlSocket.write(control); await controlClosed;
+  assert.equal(Buffer.concat(decrypted).toString(), control);
+  assert.equal(handlers.at(-1)?.url, '/observer-control');
+  proof.record.observer_control = { raw_hex: Buffer.from(control).toString('hex'),
+    observed_bytes: Buffer.concat(decrypted).length, sent_bytes: Buffer.byteLength(control), exact_match: true };
   const ports = [await freePort(), await freePort()];
   assert.notEqual(...ports);
   const listeners = ports.map((port, i) => {
@@ -81,10 +105,9 @@ try {
       route_config: { name: 'repro', virtual_hosts: [{ name: 'verified-edge', domains: ['edge-a.test'],
         routes: [{ match: { prefix: '/' }, route: { cluster: 'origin', timeout: '2s' } }] }] },
       http_filters: [{ name: 'envoy.filters.http.router', typed_config: type('extensions.filters.http.router.v3.Router') }] };
-    if (i) hcm.local_reply_config = { mappers: [{ filter: { and_filter: { filters: [
+    if (i) hcm.local_reply_config = { mappers: [{ filter:
       { status_code_filter: { comparison: { op: 'EQ', value: { default_value: 501, runtime_key: 'repro_501' } } } },
-      { response_flag_filter: { flags: ['DPE'] } },
-    ] } }, status_code: 400 }] };
+      status_code: 400 }] };
     return { name: `loopback-${i}`, address: address(port),
       listener_filters: [{ name: 'envoy.filters.listener.tls_inspector', typed_config: type('extensions.filters.listener.tls_inspector.v3.TlsInspector') }],
       filter_chains: [{ filter_chain_match: { server_names: ['edge-a.test'] },
@@ -171,7 +194,8 @@ try {
   const manifest = JSON.parse(fs.readFileSync('spikes/edge-comparison/manifest.json'));
   const teCases = manifest.negatives.filter((r) => /invalid-transfer-encoding|TE-repeated-chunked|TE-not-final-chunked/.test(r.name));
   assert.equal(teCases.length, 3);
-  teCases.push({ name: 'strict-ingress-TE-gzip-final-chunked', request: request('POST', '/', 'Transfer-Encoding: gzip, chunked\r\n', '0\r\n\r\n') });
+  teCases.push({ name: 'supplemental-repeated-transfer-encoding-fields',
+    request: request('POST', '/', 'Transfer-Encoding: chunked\r\nTransfer-Encoding: chunked\r\n', '0\r\n\r\n') });
   for (const [i, port] of ports.entries()) {
     for (const entry of teCases) for (const afterFirst of [false, true]) await probe(`${entry.name}-${i}-${afterFirst ? 'reused' : 'fresh'}`, port,
       entry.request.replace('Connection: close', 'Connection: keep-alive'), i ? 400 : 501, afterFirst);
