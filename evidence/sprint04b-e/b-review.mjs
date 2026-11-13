@@ -44,7 +44,7 @@ try {
   }
   const first = json('evidence/sprint04b-b/repro-01/commands.json');
   assert.equal(first.probes.length, 29); assert.ok(first.probes.every(p => p.origin.decrypted_bytes === 0));
-  const mapper = first.probes.filter(p => p.listener === 'local-reply-501-to-400' && p.expected === 400);
+  const mapper = first.probes.filter(p => p.listener === 'DPE-501-to-400' && p.expected === 400);
   assert.equal(mapper.length, 8); assert.ok(mapper.every(p => p.status.at(-1) === 501 && p.peer_end && !p.matches_observation));
   const second = json('evidence/sprint04b-b/repro-02/commands.json'); assert.ok(!second.probes?.length); assert.ok(second.cleanup.wall_ms > 90000);
   const third = json('evidence/sprint04b-b/repro-03/commands.json'); assert.equal(third.probes.length, 4);
