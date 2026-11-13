@@ -79,15 +79,23 @@ Receipts and hashes:
 15a39eee0b3ef04d74a67b1b00c191bb84a04301559b6282584e586a5e4f621f  boundary-checks-01/commands.json
 771847912000a77825f58c1a6e70e9667229cb16f9a6151b4fa5bbb99f0585ee  boundary-checks-01/integrity.json
 5393acb5299d044624f6720fdc84c1bc2830e56ce3b858584d21a37a9ff16f39  SHA256SUMS (historical, unchanged)
+e96f2341e8c9a58f165a0179d0306835ac2e7f37bb3f4c350a141f2d39e12f83  boundary-checks-02/commands.json
+d2580fc4505c096479751dfa8f8534d379346f84aa0954f59829c8485e1227c7  boundary-checks-02/SHA256SUMS
 ```
 
 The earlier lost `upstream-01` attempt remains explicitly ineligible; its raw
 bytes/times/hashes cannot be recovered. The retained failed404 `upstream-02`
 attempt is unchanged. No fresh retrieval/check attempt failed. Updating this
 report does not rewrite the historical manifest: its report entry is verified
-against the original `4d2d0c7` Git object. Final report-inclusive verification
-will be recorded separately as `boundary-checks-02`, including a new checksum
-manifest, after this report/source is committed.
+against the original `4d2d0c7` Git object. Report-inclusive verification at
+**`141490831c76fd5ad0ef3db5be8f8650b68c1d5e`** is retained as
+`boundary-checks-02`: all12 nested commands exit0,295 files are bound by its
+new checksum manifest, and3.17MB of owned evidence is scanned without leaks.
+The exact second command above was repeated with output argument
+`evidence/sprint04a-a/boundary-checks-02`. After committing this completed
+handoff, `boundary-checks-03` is the final receipt/checksum directory binding
+the final report/source; its own `commands.json` records the exact source,
+argv, times and outcome without a self-referential report commit.
 
 ### Required independent handoff
 
