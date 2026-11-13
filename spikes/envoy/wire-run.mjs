@@ -16,6 +16,8 @@ const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const hash = (file) => sha(fs.readFileSync(file));
 const status = git('status', '--porcelain'); assert.equal(status, '', 'commit sources before proof');
+const initialFixtureDirs = new Set(fs.existsSync('.local') ? fs.readdirSync('.local') : []);
+let runRoot;
 const sources = git('ls-files', 'spikes/envoy', 'spikes/edge-comparison', 'spikes/pingora/lab.mjs', 'spikes/pingora/package.json', 'spikes/pingora/package-lock.json').split('\n');
 const immutable = ['spikes/pingora/lab.mjs', ...['manifest.json', 'contract.mjs', 'supplemental.mjs', 'evaluate.mjs', 'tls-observer.mjs'].map((f) => `spikes/edge-comparison/${f}`)];
 const baseline = 'e5adeb4c3ea163d0028c9f29bed07b1128fb1065';
@@ -49,8 +51,20 @@ function cleanupOwnedLaunchers() {
       const pid = Number(entry);
       capture(`cleanup-${pid}`, 'docker', ['stop', '--timeout', '2', `aegis-envoy-${pid}`]);
       process.kill(pid, 'SIGTERM');
-    } catch {}
+      const deadline = Date.now() + 5000;
+      while (fs.existsSync(`/proc/${pid}/cmdline`) && Date.now() < deadline) Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 25);
+      assert.ok(!fs.existsSync(`/proc/${pid}/cmdline`), `owned launcher ${pid} still alive`);
+    } catch (error) {
+      if (error.code !== 'ENOENT' && error.code !== 'ESRCH') throw error;
+    }
   }
+}
+function ownedContainers() {
+  const ids = execFileSync('docker', ['ps', '-aq', '--filter', 'name=aegis-envoy-'], { encoding: 'utf8' }).trim().split('\n').filter(Boolean);
+  if (!ids.length) return [];
+  return JSON.parse(execFileSync('docker', ['inspect', ...ids], { encoding: 'utf8' }))
+    .filter((container) => container.Mounts.some((mount) => mount.Source.startsWith(path.join(root, '.local/'))))
+    .map((container) => container.Name.replace(/^\//, ''));
 }
 let incomplete = false;
 try {
@@ -60,7 +74,7 @@ try {
   const unit = capture('observer-unit', process.execPath, ['--test', 'spikes/envoy/wire-observer.test.mjs']);
   if (unit.status !== 0) incomplete = true;
   const local = path.join(root, '.local'); fs.mkdirSync(local, { recursive: true, mode: 0o700 });
-  const runRoot = fs.mkdtempSync(path.join(local, 'wire-proof-'));
+  runRoot = fs.mkdtempSync(path.join(local, 'wire-proof-'));
   record.fixture_root = runRoot; save();
   const launcher = path.join(root, 'spikes/envoy/recovery-launcher.mjs');
   const environment = { AEGIS_CANDIDATE_NAME: 'envoy-1.40.2-retain-original-h2-host',
@@ -84,6 +98,19 @@ try {
 } catch (error) { record.fatal = error.stack; incomplete = true; }
 finally {
   cleanupOwnedLaunchers();
+  const remaining = ownedContainers();
+  for (const name of remaining) capture(`cleanup-container-${name}`, 'docker', ['stop', '--timeout', '2', name]);
+  const after = ownedContainers();
+  record.cleanup = { stopped_remaining_containers: remaining, remaining_owned_containers: after,
+    lock_held_through_cleanup: true, removed_fixture_directories: [] };
+  assertLock();
+  if (after.length) { incomplete = true; record.cleanup.error = 'owned containers remain; fixtures retained'; }
+  else {
+    for (const name of fs.existsSync('.local') ? fs.readdirSync('.local') : []) {
+      if (initialFixtureDirs.has(name) || !(name.startsWith('envoy-run-') || path.join(root, '.local', name) === runRoot)) continue;
+      fs.rmSync(path.join(root, '.local', name), { recursive: true }); record.cleanup.removed_fixture_directories.push(name);
+    }
+  }
   record.ended_at = new Date().toISOString(); record.recording_complete = !incomplete;
   for (const { file, sha256 } of record.source_hashes) assert.equal(hash(file), sha256, `source mutation: ${file}`);
   save();

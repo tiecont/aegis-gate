@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import tls from 'node:tls';
+import http2 from 'node:http2';
 import { once } from 'node:events';
 import { createHash } from 'node:crypto';
 import { createTlsObserver, decoder, frame } from './wire-observer.mjs';
@@ -19,6 +20,67 @@ test('fragmented envelopes classify controls and preserve bounded decoder state'
   const limited = []; const bounded = decoder({ emit: (e) => limited.push(e), maxBuffer: 32 });
   bounded(Buffer.alloc(33)); bounded(frame(4, 1, 0));
   assert.deepEqual(limited, [{ kind: 'decode-limit' }]);
+});
+
+test('native H2 direct and observed controls preserve authority, SNI, targets and reuse', { timeout: 30000 }, async () => {
+  assertLock(); process.umask(0o077);
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'aegis-wire-identity-'));
+  const material = pki(dir); const sessions = new Set(); const servers = [];
+  const samples = []; let sequence = 0; let counted = 0;
+  const cert = material.read('origin.pem'); const key = material.read('origin.key'); const ca = material.read('ca.pem');
+  try {
+    const origin = http2.createSecureServer({ cert, key, minVersion: 'TLSv1.2' }); servers.push(origin);
+    const ids = new WeakMap();
+    origin.on('session', (session) => {
+      ids.set(session, ++sequence); sessions.add(session); session.on('error', () => {});
+      session.on('close', () => sessions.delete(session));
+    });
+    origin.on('stream', (stream, headers) => {
+      const sample = { connection: ids.get(stream.session), stream: stream.id,
+        method: headers[':method'], target: headers[':path'], authority: headers[':authority'],
+        marker: headers['x-wire-probe'] ?? null, sni: stream.session.socket.servername,
+        alpn: stream.session.socket.alpnProtocol, tls: stream.session.socket.getProtocol() };
+      samples.push(sample); stream.on('error', () => {});
+      stream.respond({ ':status': 200 }); stream.end(JSON.stringify(sample));
+    });
+    const nativePort = await listen(origin);
+    const observer = createTlsObserver({ cert, key, ca, port: nativePort, onBytes: (n) => { counted += n; } });
+    servers.push(observer); const observedPort = await listen(observer);
+    const controls = [];
+    for (const port of [nativePort, observedPort]) {
+      const session = http2.connect(`https://127.0.0.1:${port}`, { servername: 'lab-origin.test', ca,
+        rejectUnauthorized: true, minVersion: 'TLSv1.2' });
+      sessions.add(session); session.on('error', () => {}); session.on('close', () => sessions.delete(session));
+      session.setTimeout(3000, () => session.destroy()); await once(session, 'connect');
+      assert.equal(session.socket.authorized, true); assert.equal(session.socket.alpnProtocol, 'h2');
+      const start = samples.length;
+      for (const [index, target] of ['/bad%20target', '/encoded%2Fsegment?value=%2520'].entries()) {
+        const stream = session.request({ ':method': 'GET', ':path': target, ':authority': 'synthetic-authority.test',
+          ...(index === 0 ? { 'x-wire-probe': 'first-only' } : {}) });
+        stream.on('error', () => {}); const chunks = [];
+        stream.on('data', (chunk) => chunks.push(chunk)); stream.end(); await once(stream, 'end');
+        const sample = JSON.parse(Buffer.concat(chunks));
+        assert.equal(sample.target, target); assert.equal(sample.authority, 'synthetic-authority.test');
+        assert.equal(sample.sni, 'lab-origin.test'); assert.equal(sample.method, 'GET'); assert.equal(sample.alpn, 'h2');
+        assert.equal(sample.marker, index === 0 ? 'first-only' : null);
+      }
+      const observed = samples.slice(start); assert.equal(observed.length, 2);
+      assert.equal(observed[0].connection, observed[1].connection);
+      assert.deepEqual(observed.map((sample) => sample.stream), [1, 3]);
+      controls.push({ peer_fingerprint: session.socket.getPeerCertificate().fingerprint256,
+        downstream_tls: session.socket.getProtocol(), samples: observed }); session.destroy();
+    }
+    assert.equal(controls[0].peer_fingerprint, controls[1].peer_fingerprint);
+    assert.deepEqual(controls[0].samples.map(({ connection, ...sample }) => sample),
+      controls[1].samples.map(({ connection, ...sample }) => sample));
+    assert.ok(counted > 24); assert.equal(observer.wireSnapshot().total_secure_connections, 1);
+    console.log(JSON.stringify({ native_h2_identity_controls: controls, observed_decrypted_bytes: counted,
+      identity_scope: 'configured origin SNI preserved; HTTP authority forwarded without binding or rewriting' }));
+  } finally {
+    for (const session of sessions) session.destroy();
+    for (const server of servers.reverse()) { server.closeAllConnections?.(); if (server.listening) await new Promise((resolve) => server.close(resolve)); }
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test('observer preserves bytes, configured identity and verified TLS; bounds samples', { timeout: 30000 }, async () => {

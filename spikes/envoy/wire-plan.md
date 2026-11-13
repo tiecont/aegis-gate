@@ -19,3 +19,11 @@ No engine, parser, candidate configuration, shared gate or corpus edits.
 Acceptance is honest reproduction and useful bounded observations, never a
 GO decision. Setup/TLS/control frames, request frames, handlers, parser errors
 and transport errors remain distinct; the zero-byte contract is unchanged.
+
+Current continuation: restored old branch at256de386, created
+test/module01-origin-boundary and rebased its nine commits onto origin/main
+3e039408. Preserve historical evidence against original source objects.
+Add a native H2 direct/observed authority/SNI/encoded-target/reuse control and
+verify owned process/container cleanup before removing fresh fixture secrets.
+Commit these sources, reproduce unchanged75/diagnostic75 and all bounded probes
+into fresh attempt05, then write sprint04a-b-origin-boundary.md for root/E.
