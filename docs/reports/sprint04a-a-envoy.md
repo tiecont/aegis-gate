@@ -1,5 +1,111 @@
 # Sprint04-A Agent A - Envoy strict ingress
 
+## Current codec-boundary handoff (2026-11-13)
+
+**Investigation complete; implementation stopped at the same released API
+boundary. Module01 remains NO-GO.** Current owned branch is
+`fix/module01-envoy-codec-boundary`, worktree `/tmp/aegisgate-04a-a`, rebased onto
+fetched `origin/main` **`3e03940848c81751c87bbcec131238abb7d28e1b`**. The original
+branch `fix/module01-envoy-strict-ingress` remains at `4d2d0c7`; its evidence,
+receipts and checksum manifest are unchanged. The inherited coordinator-document
+commit was excluded when rebasing the seven owned historical commits. This
+branch changes only `spikes/envoy/strict-*`, `evidence/sprint04a-a/` and this
+report. No other worktree, shared gate, corpus, image, TLS or production source
+was edited; no other agents were started or branches merged.
+
+Mandatory guidance and the current coordinator execution contract were read.
+The executable plan in `codec-boundary-status.json` requires historical-object
+verification, fresh official release/source retrieval, immutable-contract checks,
+and a precise stop without repeating a failed proxy experiment.
+
+### Fresh supported-release verification
+
+Committed source **`0ce9ada1232a7aecde06318ca17829e6ab8e3d31`** collected official
+metadata and all23 previously inspected source files at
+`2026-11-13T09:51:25.152Z` through `09:51:37.866Z`, using supported Node26.13.0.
+The26 captured commands all exit0. Latest remains **Envoy v1.40.2**, published
+`2026-10-27T01:51:56Z`, exact source
+`b2d89e0ae53916f28770771fbdd49c5c99c5c5a2`. Every retrieved source file, including
+release policy, public protocol/validator APIs, Balsa/H1/H2 implementations and
+upstream parser tests, is byte-identical to `upstream-03`. The API/source
+citations in the historical report below therefore apply directly to
+`upstream-04` at the same line numbers. These are source inspections, not
+executed upstream test results.
+
+The exact stop remains: Balsa sets
+`disallow_header_continuation_lines=false` (:181), exposes no constructor
+strict-fold setting, keeps raw callbacks private/no-op (:304-305; header:39-45),
+and removes CR/LF before `onHeaderValue` (:451-464). Public validation receives
+a `RequestHeaderMap` (`validator-api`:54), after the distinguishing raw bytes
+are gone. No released public strict-fold configuration or maintained adapter
+was established in these inspected interfaces. H2 Host retention and supported
+local-reply TE status remapping remain separate prospects; neither repairs the
+lost H1 folding information or supplies a new complete candidate.
+
+**New candidate count0; new runtime executions0.** The previous failed69/75
+Host-retention proof was not repeated. Its six failure IDs,263 obs-fold origin
+bytes/one handler, nine H2 bytes/zero handlers and four TE501 responses remain
+historical failures under the unchanged contract. B owns fresh wire
+classification. This report neither classifies those nine bytes nor waives
+the mandatory zero-byte assertion. No protocol/resource/performance or new
+origin observation is claimed by this continuation.
+
+### Verification and immutable evidence
+
+From `/tmp/aegisgate-04a-a`:
+
+```sh
+/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node spikes/envoy/strict-research.mjs evidence/sprint04a-a/upstream-04
+/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node spikes/envoy/strict-boundary-check.mjs evidence/sprint04a-a/upstream-04 evidence/sprint04a-a/boundary-checks-01
+```
+
+Both exit0. The checker validates157 original manifest entries against original
+Git objects, requires every historical evidence file to remain byte-identical,
+verifies26 fresh command stream hashes and their launch-time source objects,
+compares all23 source responses, and checks all12 protected contract files
+against both current baseline3e039408 and original75 baselinee5adeb4. The
+baseline extractor confirms the original65 cases plus ten supplemental cases;
+raw inputs, expected results, encoded/pipeline positives and zero-byte assertions
+are unchanged. All12 nested syntax/baseline/whitespace/version/scoped secret
+commands pass. Gitleaks8.30.1 uses its existing immutable image pin and no
+network; `flock /tmp/aegisgate-sprint02-fixtures.lock` covers each complete
+container lifetime. No HTTP fixture/listener/proxy was started. These scoped
+checks are not full repository/image SCA, hosted gates or independent review.
+
+Receipts and hashes:
+
+```text
+82e58c1fa69abf4ad36ad8979c4dc0975b660cca23b63cb0dc7b25da3851ccd5  upstream-04/commands.json
+15a39eee0b3ef04d74a67b1b00c191bb84a04301559b6282584e586a5e4f621f  boundary-checks-01/commands.json
+771847912000a77825f58c1a6e70e9667229cb16f9a6151b4fa5bbb99f0585ee  boundary-checks-01/integrity.json
+5393acb5299d044624f6720fdc84c1bc2830e56ce3b858584d21a37a9ff16f39  SHA256SUMS (historical, unchanged)
+```
+
+The earlier lost `upstream-01` attempt remains explicitly ineligible; its raw
+bytes/times/hashes cannot be recovered. The retained failed404 `upstream-02`
+attempt is unchanged. No fresh retrieval/check attempt failed. Updating this
+report does not rewrite the historical manifest: its report entry is verified
+against the original `4d2d0c7` Git object. Final report-inclusive verification
+will be recorded separately as `boundary-checks-02`, including a new checksum
+manifest, after this report/source is committed.
+
+### Required independent handoff
+
+Root/E must review the precise stop, historical-object interpretation and
+lost-attempt limitation, reproduce the offline verifier with a fresh output
+directory and verify the final manifest against its recorded source commit.
+**Independent E review is required and pending; no integration acceptance is
+claimed.** Preserve the original branch/objects referenced by old receipts.
+Root owns full locked check/scan and exact-head hosted gates before integration.
+The next upstream prerequisite is a maintained released pre-normalization
+fold-rejection API applied on every H1 request/trailer. Only after a credible
+complete path exists should the six known failures be tested first, then all75
+unchanged plus required protocol/TLS/identity/resource positives and negatives.
+Independent review and explicit human architecture approval remain required.
+Modules04-12 stay locked and production stays blocked.
+
+## Historical strict-ingress handoff (retained verbatim)
+
 Result: **investigation complete; no eligible executable candidate**. Module01
 remains NO-GO. Branch `fix/module01-envoy-strict-ingress`, restored worktree
 `/tmp/aegisgate-04a-a`; source review completed 2026-11-13 UTC. Root owns

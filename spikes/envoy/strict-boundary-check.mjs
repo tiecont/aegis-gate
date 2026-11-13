@@ -54,6 +54,12 @@ function verifyReceipt(directory) {
   }
   return receipt;
 }
+function files(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const file = path.join(directory, entry.name);
+    return entry.isDirectory() ? files(file) : [file];
+  });
+}
 try {
   for (const file of git('ls-files', 'spikes/envoy', 'spikes/edge-comparison', 'spikes/pingora/lab.mjs',
     'docs/reports/sprint04a-a-envoy.md').toString().trim().split('\n')) {
@@ -132,4 +138,9 @@ try {
   record.ended_at = new Date().toISOString();
   record.exit_code = process.exitCode ?? 0;
   save();
+  const manifest = path.join(output, 'SHA256SUMS');
+  const inventory = [...files(root), ...record.source_hashes.map((entry) => entry.file)]
+    .filter((file) => file !== manifest);
+  fs.writeFileSync(manifest, [...new Set(inventory)].sort()
+    .map((file) => `${hash(fs.readFileSync(file))}  ${file}\n`).join(''));
 }
