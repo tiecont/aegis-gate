@@ -118,7 +118,10 @@ try {
     const cwd = checkout('f', suppliedHead);
     receipt.immutable_schema = hash(fs.readFileSync(path.join(cwd, 'internal/configsnapshot/schema-v1.json')));
     assert.equal(receipt.immutable_schema, hash(execFileSync('git', ['show', `${baseline}:internal/configsnapshot/schema-v1.json`])));
-    must('f-race', 'flock', ['/tmp/aegisgate-sprint02-fixtures.lock', 'go', 'test', '-race', './internal/configconsumer', './internal/configpublish', './internal/configsnapshot', './internal/configrollout'], cwd, 0, { GOTOOLCHAIN: 'go1.27.4' });
+    receipt.reviewed_f_head = suppliedHead;
+    must('fixture-dependencies', npm, ['ci', '--ignore-scripts', '--strict-peer-deps'], path.join(cwd, 'spikes/pingora'));
+    must('f-independent-integration', 'flock', ['/tmp/aegisgate-sprint02-fixtures.lock', node,
+      path.join(root, 'evidence/sprint04a-e/f-execute.mjs'), cwd, path.join(output, 'recovery')], root);
   } else throw new Error('unknown review mode');
 } catch (error) {
   receipt.error = error.stack; process.exitCode = 1;
