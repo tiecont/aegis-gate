@@ -1,0 +1,1998 @@
+{
+  "started_at": "2026-11-13T09:50:53.103Z",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-04a-c/evidence/sprint04a-c/capability-refresh.mjs",
+    "collect",
+    "current-01"
+  ],
+  "cwd": "/tmp/aegisgate-04a-c",
+  "source_commit": "1272faa3273c9db8675dcdd463201eb544bf14d1",
+  "tracked_status": "",
+  "sources": [
+    {
+      "file": "docs/reports/sprint04a-c-upstream.md",
+      "sha256": "6ad0d9339d907ef55d631ff331e02cd575279ace71be90130152e1ba6de6c410"
+    },
+    {
+      "file": "evidence/sprint04a-c/PLAN.md",
+      "sha256": "a14af0c12966c528ec11d44ab28eaac55a5a3e31222c7394f8b25409e96ac448"
+    },
+    {
+      "file": "evidence/sprint04a-c/capability-refresh.mjs",
+      "sha256": "f98f7df990b03cf4f0320f7c5816d893bbd597810a04266a174b89b4cb9ff480"
+    },
+    {
+      "file": "evidence/sprint04a-c/closeout.mjs",
+      "sha256": "9773503129e76ce6c80caabc8c098b218de7f6be89988506a78326085d7c83d0"
+    },
+    {
+      "file": "evidence/sprint04a-c/drafts/upstream-requests.md",
+      "sha256": "507d891116eeed58843a323bd987e3deffe767e42f61b392b521cab260512af7"
+    },
+    {
+      "file": "evidence/sprint04a-c/research.mjs",
+      "sha256": "48eca342843596b51e057fe5d55c47d01ae316ccc76306999edcaf32adda96bd"
+    },
+    {
+      "file": "evidence/sprint04a-c/upstream/envoy/RELEASES.md",
+      "sha256": "95af65ff86c5e40405abd4d5abc33930e3e126289f19fa3cf37193c0cc5364b5"
+    },
+    {
+      "file": "evidence/sprint04a-c/upstream/rustsec/RUSTSEC-2024-0388.md",
+      "sha256": "fb757162f87a2976590e152c73ff3912fd2a5939504c24d5563dfcbe5d533124"
+    },
+    {
+      "file": "evidence/sprint04a-c/upstream/rustsec/RUSTSEC-2024-0449.md",
+      "sha256": "99da8fa8d7ce73ca12b32cadedef33ff160d120dd63a338447a8fa70eac0d549"
+    },
+    {
+      "file": "evidence/sprint04a-c/verify-cached-archives.py",
+      "sha256": "05d7864d6673de9269833b96bf4e5f9fec62d3ac8e3aa50fa0a76daf29183683"
+    },
+    {
+      "file": "evidence/sprint04a-c/verify-provenance.py",
+      "sha256": "616ecfe991aa1faf772b401b62ca6abb77701fcbe8707c410ccd3a67b732b44a"
+    }
+  ],
+  "records": [
+    {
+      "name": "node-version",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--version"
+      ],
+      "started_at": "2026-11-13T09:50:53.122Z",
+      "ended_at": "2026-11-13T09:50:53.129Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/node-version.stdout",
+        "sha256": "d4b8a831ea4925f1c54be7746ec0b846cb04bbc35295b64ccdb2101bfcf5d70c",
+        "bytes": 9
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/node-version.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "curl-version",
+      "argv": [
+        "curl",
+        "--version"
+      ],
+      "started_at": "2026-11-13T09:50:53.132Z",
+      "ended_at": "2026-11-13T09:50:53.149Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/curl-version.stdout",
+        "sha256": "8f55d8206f49496974db5bc2bd27016a8a9953c7e34f9fc41afd4a7e41324f9b",
+        "bytes": 525
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/curl-version.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "envoy/release.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/envoy/release.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/envoyproxy/envoy/releases/latest"
+      ],
+      "url": "https://api.github.com/repos/envoyproxy/envoy/releases/latest",
+      "started_at": "2026-11-13T09:50:53.150Z",
+      "ended_at": "2026-11-13T09:50:53.817Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/envoy/release.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/envoy/release.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/envoy/release.json",
+        "sha256": "14b1769bb5def25934bcc0446bbf45c4f4c4d450bd1ed23f954e050eb53fc78d",
+        "bytes": 12858
+      }
+    },
+    {
+      "name": "envoy/commit.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/envoy/commit.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/envoyproxy/envoy/commits/v1.40.2"
+      ],
+      "url": "https://api.github.com/repos/envoyproxy/envoy/commits/v1.40.2",
+      "started_at": "2026-11-13T09:50:53.818Z",
+      "ended_at": "2026-11-13T09:50:54.683Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/envoy/commit.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/envoy/commit.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/envoy/commit.json",
+        "sha256": "3e2b18849d14f380562bcf3fb3a9090641f2e92af78321eefdaae332dfd760b1",
+        "bytes": 54344
+      }
+    },
+    {
+      "name": "envoy/RELEASES.md",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/envoy/RELEASES.md",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/RELEASES.md"
+      ],
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/RELEASES.md",
+      "started_at": "2026-11-13T09:50:54.684Z",
+      "ended_at": "2026-11-13T09:50:55.206Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/envoy/RELEASES.md.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/envoy/RELEASES.md.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/envoy/RELEASES.md",
+        "sha256": "95af65ff86c5e40405abd4d5abc33930e3e126289f19fa3cf37193c0cc5364b5",
+        "bytes": 12187
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "envoy/source/common/http/http1/balsa_parser.cc",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/envoy/source/common/http/http1/balsa_parser.cc",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http1/balsa_parser.cc"
+      ],
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http1/balsa_parser.cc",
+      "started_at": "2026-11-13T09:50:55.206Z",
+      "ended_at": "2026-11-13T09:50:55.760Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/envoy/source/common/http/http1/balsa_parser.cc.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/envoy/source/common/http/http1/balsa_parser.cc.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/envoy/source/common/http/http1/balsa_parser.cc",
+        "sha256": "9dbd0c51df40c34e9893fc8269f14c834fc53eb5f7a832ec5d13055520552951",
+        "bytes": 16888
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "envoy/source/common/http/http1/balsa_parser.h",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/envoy/source/common/http/http1/balsa_parser.h",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http1/balsa_parser.h"
+      ],
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http1/balsa_parser.h",
+      "started_at": "2026-11-13T09:50:55.761Z",
+      "ended_at": "2026-11-13T09:50:56.313Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/envoy/source/common/http/http1/balsa_parser.h.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/envoy/source/common/http/http1/balsa_parser.h.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/envoy/source/common/http/http1/balsa_parser.h",
+        "sha256": "1afe7bf610c0a6dd06623fd8d8b80c4874b6fd3fadeaaec826ae871abc3e4bb8",
+        "bytes": 3945
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "envoy/envoy/http/header_validator.h",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/envoy/envoy/http/header_validator.h",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/envoy/http/header_validator.h"
+      ],
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/envoy/http/header_validator.h",
+      "started_at": "2026-11-13T09:50:56.313Z",
+      "ended_at": "2026-11-13T09:50:56.983Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/envoy/envoy/http/header_validator.h.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/envoy/envoy/http/header_validator.h.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/envoy/envoy/http/header_validator.h",
+        "sha256": "55bb8fef7b0443272f3d260b77ced8fc1c219be3ec8d5af66fb409d026c57d41",
+        "bytes": 7666
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "envoy/api/envoy/config/core/v3/protocol.proto",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/envoy/api/envoy/config/core/v3/protocol.proto",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/api/envoy/config/core/v3/protocol.proto"
+      ],
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/api/envoy/config/core/v3/protocol.proto",
+      "started_at": "2026-11-13T09:50:56.983Z",
+      "ended_at": "2026-11-13T09:50:57.586Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/envoy/api/envoy/config/core/v3/protocol.proto.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/envoy/api/envoy/config/core/v3/protocol.proto.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/envoy/api/envoy/config/core/v3/protocol.proto",
+        "sha256": "cd3e8569d0ffdd9963f85ab20e4247c3cef97742430a74edf35cb7a62b964ba2",
+        "bytes": 51174
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "envoy/api/envoy/extensions/http/header_validators/envoy_default/v3/header_validator.proto",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/envoy/api/envoy/extensions/http/header_validators/envoy_default/v3/header_validator.proto",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/api/envoy/extensions/http/header_validators/envoy_default/v3/header_validator.proto"
+      ],
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/api/envoy/extensions/http/header_validators/envoy_default/v3/header_validator.proto",
+      "started_at": "2026-11-13T09:50:57.587Z",
+      "ended_at": "2026-11-13T09:50:58.148Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/envoy/api/envoy/extensions/http/header_validators/envoy_default/v3/header_validator.proto.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/envoy/api/envoy/extensions/http/header_validators/envoy_default/v3/header_validator.proto.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/envoy/api/envoy/extensions/http/header_validators/envoy_default/v3/header_validator.proto",
+        "sha256": "6d28be682f9fc8861eb8344901acb820f24ea864a79f5b4a1a5a6557ca557280",
+        "bytes": 11928
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "envoy/source/common/http/http1/codec_impl.cc",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/envoy/source/common/http/http1/codec_impl.cc",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http1/codec_impl.cc"
+      ],
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http1/codec_impl.cc",
+      "started_at": "2026-11-13T09:50:58.149Z",
+      "ended_at": "2026-11-13T09:50:58.975Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/envoy/source/common/http/http1/codec_impl.cc.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/envoy/source/common/http/http1/codec_impl.cc.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/envoy/source/common/http/http1/codec_impl.cc",
+        "sha256": "ba5a60bc4ab3bfc12379a5b78a7beea6c0b2ac19e61c1a6342bf147d3e72b3bd",
+        "bytes": 70210
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "envoy/source/common/http/http2/codec_impl.cc",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/envoy/source/common/http/http2/codec_impl.cc",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http2/codec_impl.cc"
+      ],
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http2/codec_impl.cc",
+      "started_at": "2026-11-13T09:50:58.975Z",
+      "ended_at": "2026-11-13T09:50:59.659Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/envoy/source/common/http/http2/codec_impl.cc.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/envoy/source/common/http/http2/codec_impl.cc.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/envoy/source/common/http/http2/codec_impl.cc",
+        "sha256": "b789452da3c5ee2b0278b3c52f1764698d80d5bf1a639dc8a02d5139447f2e37",
+        "bytes": 112582
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "envoy/repository.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/envoy/repository.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/envoyproxy/envoy"
+      ],
+      "url": "https://api.github.com/repos/envoyproxy/envoy",
+      "started_at": "2026-11-13T09:50:59.660Z",
+      "ended_at": "2026-11-13T09:51:00.363Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/envoy/repository.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/envoy/repository.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/envoy/repository.json",
+        "sha256": "fb2b7f1f3bd6fa5710d5c7c9286c48fda74a86bae4b6168069aa1901b7c8573b",
+        "bytes": 6342
+      }
+    },
+    {
+      "name": "envoy/head.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/envoy/head.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/envoyproxy/envoy/commits/main"
+      ],
+      "url": "https://api.github.com/repos/envoyproxy/envoy/commits/main",
+      "started_at": "2026-11-13T09:51:00.364Z",
+      "ended_at": "2026-11-13T09:51:01.007Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/envoy/head.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/envoy/head.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/envoy/head.json",
+        "sha256": "e567df3507fe708f743b2563ba36dd4525639f51a558db23d724aca0923a4290",
+        "bytes": 48055
+      }
+    },
+    {
+      "name": "envoy/head/source/common/http/http1/balsa_parser.cc",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/envoy/head/source/common/http/http1/balsa_parser.cc",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/8ce942ce56c433e352d2657603d7bf33d4dbb4b4/source/common/http/http1/balsa_parser.cc"
+      ],
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/8ce942ce56c433e352d2657603d7bf33d4dbb4b4/source/common/http/http1/balsa_parser.cc",
+      "started_at": "2026-11-13T09:51:01.008Z",
+      "ended_at": "2026-11-13T09:51:01.626Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/envoy/head/source/common/http/http1/balsa_parser.cc.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/envoy/head/source/common/http/http1/balsa_parser.cc.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/envoy/head/source/common/http/http1/balsa_parser.cc",
+        "sha256": "9dbd0c51df40c34e9893fc8269f14c834fc53eb5f7a832ec5d13055520552951",
+        "bytes": 16888
+      }
+    },
+    {
+      "name": "envoy/head/source/common/http/http1/balsa_parser.h",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/envoy/head/source/common/http/http1/balsa_parser.h",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/8ce942ce56c433e352d2657603d7bf33d4dbb4b4/source/common/http/http1/balsa_parser.h"
+      ],
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/8ce942ce56c433e352d2657603d7bf33d4dbb4b4/source/common/http/http1/balsa_parser.h",
+      "started_at": "2026-11-13T09:51:01.626Z",
+      "ended_at": "2026-11-13T09:51:02.282Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/envoy/head/source/common/http/http1/balsa_parser.h.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/envoy/head/source/common/http/http1/balsa_parser.h.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/envoy/head/source/common/http/http1/balsa_parser.h",
+        "sha256": "1afe7bf610c0a6dd06623fd8d8b80c4874b6fd3fadeaaec826ae871abc3e4bb8",
+        "bytes": 3945
+      }
+    },
+    {
+      "name": "pingora/release.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/pingora/release.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/cloudflare/pingora/releases/latest"
+      ],
+      "url": "https://api.github.com/repos/cloudflare/pingora/releases/latest",
+      "started_at": "2026-11-13T09:51:02.282Z",
+      "ended_at": "2026-11-13T09:51:02.750Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/pingora/release.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/pingora/release.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/pingora/release.json",
+        "sha256": "79360c00549b18a6f28db490f068e2b6b32e4f4ef233913b7873afcb7a753ad8",
+        "bytes": 3068
+      }
+    },
+    {
+      "name": "pingora/commit.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/pingora/commit.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/cloudflare/pingora/commits/0.9.1"
+      ],
+      "url": "https://api.github.com/repos/cloudflare/pingora/commits/0.9.1",
+      "started_at": "2026-11-13T09:51:02.751Z",
+      "ended_at": "2026-11-13T09:51:03.388Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/pingora/commit.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/pingora/commit.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/pingora/commit.json",
+        "sha256": "f4fd78db94244ef7a64826e967077134a6ddb09008c99d5bf18fcb49fb8d56ff",
+        "bytes": 32676
+      }
+    },
+    {
+      "name": "pingora/pingora-core/Cargo.toml",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/pingora/pingora-core/Cargo.toml",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/cloudflare/pingora/f86ffda5d3ae5c3baf5125682138b33b26c01b08/pingora-core/Cargo.toml"
+      ],
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/f86ffda5d3ae5c3baf5125682138b33b26c01b08/pingora-core/Cargo.toml",
+      "started_at": "2026-11-13T09:51:03.389Z",
+      "ended_at": "2026-11-13T09:51:03.947Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-core/Cargo.toml.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-core/Cargo.toml.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-core/Cargo.toml",
+        "sha256": "addf1c55813d22220ceaa0935526abce6699d812cef57d93e1487ce31aad4451",
+        "bytes": 4492
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "pingora/pingora-load-balancing/Cargo.toml",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/pingora/pingora-load-balancing/Cargo.toml",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/cloudflare/pingora/f86ffda5d3ae5c3baf5125682138b33b26c01b08/pingora-load-balancing/Cargo.toml"
+      ],
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/f86ffda5d3ae5c3baf5125682138b33b26c01b08/pingora-load-balancing/Cargo.toml",
+      "started_at": "2026-11-13T09:51:03.947Z",
+      "ended_at": "2026-11-13T09:51:04.456Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-load-balancing/Cargo.toml.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-load-balancing/Cargo.toml.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-load-balancing/Cargo.toml",
+        "sha256": "66e7386f11193fa703af767b55701d0d813143e447a06f1d24d2e2d7e89d10c7",
+        "bytes": 1392
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "pingora/pingora-core/src/protocols/http/v1/server.rs",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/pingora/pingora-core/src/protocols/http/v1/server.rs",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/cloudflare/pingora/f86ffda5d3ae5c3baf5125682138b33b26c01b08/pingora-core/src/protocols/http/v1/server.rs"
+      ],
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/f86ffda5d3ae5c3baf5125682138b33b26c01b08/pingora-core/src/protocols/http/v1/server.rs",
+      "started_at": "2026-11-13T09:51:04.456Z",
+      "ended_at": "2026-11-13T09:51:05.149Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-core/src/protocols/http/v1/server.rs.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-core/src/protocols/http/v1/server.rs.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-core/src/protocols/http/v1/server.rs",
+        "sha256": "c4459a2b6f274cf2300b83944e62f15a9fbd06454c3867d35b34e034585b274e",
+        "bytes": 192727
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "pingora/pingora-core/src/apps/mod.rs",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/pingora/pingora-core/src/apps/mod.rs",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/cloudflare/pingora/f86ffda5d3ae5c3baf5125682138b33b26c01b08/pingora-core/src/apps/mod.rs"
+      ],
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/f86ffda5d3ae5c3baf5125682138b33b26c01b08/pingora-core/src/apps/mod.rs",
+      "started_at": "2026-11-13T09:51:05.151Z",
+      "ended_at": "2026-11-13T09:51:05.642Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-core/src/apps/mod.rs.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-core/src/apps/mod.rs.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-core/src/apps/mod.rs",
+        "sha256": "e440faec2de2104b7dce71c018f870dd181d93127b44c84553dece6dc401b712",
+        "bytes": 16877
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "pingora/pingora-core/src/server/mod.rs",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/pingora/pingora-core/src/server/mod.rs",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/cloudflare/pingora/f86ffda5d3ae5c3baf5125682138b33b26c01b08/pingora-core/src/server/mod.rs"
+      ],
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/f86ffda5d3ae5c3baf5125682138b33b26c01b08/pingora-core/src/server/mod.rs",
+      "started_at": "2026-11-13T09:51:05.643Z",
+      "ended_at": "2026-11-13T09:51:06.305Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-core/src/server/mod.rs.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-core/src/server/mod.rs.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pingora-core/src/server/mod.rs",
+        "sha256": "c1d5d88419c4d8c9e60efdfc8118b889000ba2d6ae9fc3b0a2ac046c54cb8d66",
+        "bytes": 31842
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "pingora/repository.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/pingora/repository.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/cloudflare/pingora"
+      ],
+      "url": "https://api.github.com/repos/cloudflare/pingora",
+      "started_at": "2026-11-13T09:51:06.306Z",
+      "ended_at": "2026-11-13T09:51:07.070Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/pingora/repository.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/pingora/repository.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/pingora/repository.json",
+        "sha256": "dde8f49850da8ea8609bab6b84bed20d500eeeb5eebf68dc4415bddc048f2b02",
+        "bytes": 6302
+      }
+    },
+    {
+      "name": "pingora/head.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/pingora/head.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/cloudflare/pingora/commits/main"
+      ],
+      "url": "https://api.github.com/repos/cloudflare/pingora/commits/main",
+      "started_at": "2026-11-13T09:51:07.071Z",
+      "ended_at": "2026-11-13T09:51:07.629Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/pingora/head.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/pingora/head.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/pingora/head.json",
+        "sha256": "ac0e60ad0f19d39953cd81bc9c4a7bfbff7e12a362f89f93614f651d5b54d7a9",
+        "bytes": 5566
+      }
+    },
+    {
+      "name": "pingora/head/pingora-core/Cargo.toml",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/pingora/head/pingora-core/Cargo.toml",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/cloudflare/pingora/3f87e92c982ee27c714506e16ae362776faea4aa/pingora-core/Cargo.toml"
+      ],
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/3f87e92c982ee27c714506e16ae362776faea4aa/pingora-core/Cargo.toml",
+      "started_at": "2026-11-13T09:51:07.629Z",
+      "ended_at": "2026-11-13T09:51:08.245Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/pingora/head/pingora-core/Cargo.toml.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/pingora/head/pingora-core/Cargo.toml.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/pingora/head/pingora-core/Cargo.toml",
+        "sha256": "f96684d51c9a82faad7b6b33532f2c31bc48da2c3462c1b31fddf34b6b8e30d0",
+        "bytes": 4639
+      }
+    },
+    {
+      "name": "pingora/head/pingora-load-balancing/Cargo.toml",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/pingora/head/pingora-load-balancing/Cargo.toml",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/cloudflare/pingora/3f87e92c982ee27c714506e16ae362776faea4aa/pingora-load-balancing/Cargo.toml"
+      ],
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/3f87e92c982ee27c714506e16ae362776faea4aa/pingora-load-balancing/Cargo.toml",
+      "started_at": "2026-11-13T09:51:08.245Z",
+      "ended_at": "2026-11-13T09:51:08.912Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/pingora/head/pingora-load-balancing/Cargo.toml.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/pingora/head/pingora-load-balancing/Cargo.toml.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/pingora/head/pingora-load-balancing/Cargo.toml",
+        "sha256": "e784dbb37d712a00b216edb69e21d2c4f86db8a9b2782e03287f2e6f80df9b90",
+        "bytes": 1392
+      }
+    },
+    {
+      "name": "pingora/head/pingora-core/src/protocols/http/v1/server.rs",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/pingora/head/pingora-core/src/protocols/http/v1/server.rs",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/cloudflare/pingora/3f87e92c982ee27c714506e16ae362776faea4aa/pingora-core/src/protocols/http/v1/server.rs"
+      ],
+      "url": "https://raw.githubusercontent.com/cloudflare/pingora/3f87e92c982ee27c714506e16ae362776faea4aa/pingora-core/src/protocols/http/v1/server.rs",
+      "started_at": "2026-11-13T09:51:08.912Z",
+      "ended_at": "2026-11-13T09:51:09.631Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/pingora/head/pingora-core/src/protocols/http/v1/server.rs.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/pingora/head/pingora-core/src/protocols/http/v1/server.rs.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/pingora/head/pingora-core/src/protocols/http/v1/server.rs",
+        "sha256": "122a2b1c0a37c4caf9052729de6587f87be15189b93c2d8b7acdc58e4a0e87ef",
+        "bytes": 194435
+      }
+    },
+    {
+      "name": "hyper/release.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/hyper/release.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/hyperium/hyper/releases/latest"
+      ],
+      "url": "https://api.github.com/repos/hyperium/hyper/releases/latest",
+      "started_at": "2026-11-13T09:51:09.632Z",
+      "ended_at": "2026-11-13T09:51:10.192Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/hyper/release.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/hyper/release.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/hyper/release.json",
+        "sha256": "5b020c970b05b173c05cbb1dbbc849f0be0cd76b2c7644c4cbc6debabb6e43e5",
+        "bytes": 7582
+      }
+    },
+    {
+      "name": "hyper/commit.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/hyper/commit.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/hyperium/hyper/commits/v1.12.0"
+      ],
+      "url": "https://api.github.com/repos/hyperium/hyper/commits/v1.12.0",
+      "started_at": "2026-11-13T09:51:10.192Z",
+      "ended_at": "2026-11-13T09:51:10.823Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/hyper/commit.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/hyper/commit.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/hyper/commit.json",
+        "sha256": "ba544a634284dd80b28649c77bcf97224c4999d2b78b2964c2e2ce0f0804803b",
+        "bytes": 5892
+      }
+    },
+    {
+      "name": "hyper/src/proto/h1/role.rs",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/hyper/src/proto/h1/role.rs",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/hyperium/hyper/7f67699ce32d717081deb7018b4da7d679277ac0/src/proto/h1/role.rs"
+      ],
+      "url": "https://raw.githubusercontent.com/hyperium/hyper/7f67699ce32d717081deb7018b4da7d679277ac0/src/proto/h1/role.rs",
+      "started_at": "2026-11-13T09:51:10.824Z",
+      "ended_at": "2026-11-13T09:51:11.587Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/hyper/src/proto/h1/role.rs.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/hyper/src/proto/h1/role.rs.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/hyper/src/proto/h1/role.rs",
+        "sha256": "ee27600c6d7ae2f23e148af5cef02fa029def6ea5999cce84af4aac058ceb03e",
+        "bytes": 126261
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "hyper/src/server/conn/http1.rs",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/hyper/src/server/conn/http1.rs",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/hyperium/hyper/7f67699ce32d717081deb7018b4da7d679277ac0/src/server/conn/http1.rs"
+      ],
+      "url": "https://raw.githubusercontent.com/hyperium/hyper/7f67699ce32d717081deb7018b4da7d679277ac0/src/server/conn/http1.rs",
+      "started_at": "2026-11-13T09:51:11.588Z",
+      "ended_at": "2026-11-13T09:51:12.188Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/hyper/src/server/conn/http1.rs.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/hyper/src/server/conn/http1.rs.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/hyper/src/server/conn/http1.rs",
+        "sha256": "6f84d0e780f49dc8745b9e54125edf1360b1ec54cada21c0a238e5098decf162",
+        "bytes": 20465
+      },
+      "matches_retained_source": true
+    },
+    {
+      "name": "hyper/repository.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/hyper/repository.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/hyperium/hyper"
+      ],
+      "url": "https://api.github.com/repos/hyperium/hyper",
+      "started_at": "2026-11-13T09:51:12.189Z",
+      "ended_at": "2026-11-13T09:51:12.755Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/hyper/repository.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/hyper/repository.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/hyper/repository.json",
+        "sha256": "e302662781efe9f7a668a8ebfb7862aa4b8416d739b943b8e5b22a348b1c8df7",
+        "bytes": 6071
+      }
+    },
+    {
+      "name": "hyper/head.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/hyper/head.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/hyperium/hyper/commits/master"
+      ],
+      "url": "https://api.github.com/repos/hyperium/hyper/commits/master",
+      "started_at": "2026-11-13T09:51:12.755Z",
+      "ended_at": "2026-11-13T09:51:13.877Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/hyper/head.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/hyper/head.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/hyper/head.json",
+        "sha256": "67f9e5e20fd6ba5eb1147795e64a6ab0b619315d5e0b338fdfe99d8e3d339046",
+        "bytes": 7071
+      }
+    },
+    {
+      "name": "hyper/head/src/proto/h1/role.rs",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/hyper/head/src/proto/h1/role.rs",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/hyperium/hyper/b638fc0de351987f3eaffa2bdabd393c8679a9e8/src/proto/h1/role.rs"
+      ],
+      "url": "https://raw.githubusercontent.com/hyperium/hyper/b638fc0de351987f3eaffa2bdabd393c8679a9e8/src/proto/h1/role.rs",
+      "started_at": "2026-11-13T09:51:13.878Z",
+      "ended_at": "2026-11-13T09:51:14.612Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/hyper/head/src/proto/h1/role.rs.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/hyper/head/src/proto/h1/role.rs.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/hyper/head/src/proto/h1/role.rs",
+        "sha256": "dcec77165725995925ae165ef53f5ffd031a3e6558b58aed4a905f3d21049944",
+        "bytes": 126217
+      }
+    },
+    {
+      "name": "hyper/head/src/server/conn/http1.rs",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/hyper/head/src/server/conn/http1.rs",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/hyperium/hyper/b638fc0de351987f3eaffa2bdabd393c8679a9e8/src/server/conn/http1.rs"
+      ],
+      "url": "https://raw.githubusercontent.com/hyperium/hyper/b638fc0de351987f3eaffa2bdabd393c8679a9e8/src/server/conn/http1.rs",
+      "started_at": "2026-11-13T09:51:14.612Z",
+      "ended_at": "2026-11-13T09:51:15.431Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/hyper/head/src/server/conn/http1.rs.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/hyper/head/src/server/conn/http1.rs.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/hyper/head/src/server/conn/http1.rs",
+        "sha256": "e0303429ffc67a682ea829430068a5c5ec0b7b756da2a1de65ec8264bd6e9696",
+        "bytes": 20463
+      }
+    },
+    {
+      "name": "pingora/issue-889.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/pingora/issue-889.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/cloudflare/pingora/issues/889"
+      ],
+      "url": "https://api.github.com/repos/cloudflare/pingora/issues/889",
+      "started_at": "2026-11-13T09:51:15.431Z",
+      "ended_at": "2026-11-13T09:51:15.963Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/pingora/issue-889.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/pingora/issue-889.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/pingora/issue-889.json",
+        "sha256": "406b3763ee27857f1dcd2c74f7904a67e60a3acb3dd2161fa95456a1e75a43ab",
+        "bytes": 3799
+      }
+    },
+    {
+      "name": "pingora/pr-1117.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/pingora/pr-1117.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/cloudflare/pingora/pulls/1117"
+      ],
+      "url": "https://api.github.com/repos/cloudflare/pingora/pulls/1117",
+      "started_at": "2026-11-13T09:51:15.964Z",
+      "ended_at": "2026-11-13T09:51:16.583Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pr-1117.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pr-1117.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/pingora/pr-1117.json",
+        "sha256": "423622da81df59cc12525a4f6202c797c77d763674e32e7105dbc2b8b7fdcf83",
+        "bytes": 18499
+      }
+    },
+    {
+      "name": "rustsec/commit.json",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/rustsec/commit.json",
+        "--write-out",
+        "%{http_code}",
+        "https://api.github.com/repos/RustSec/advisory-db/commits/main"
+      ],
+      "url": "https://api.github.com/repos/RustSec/advisory-db/commits/main",
+      "started_at": "2026-11-13T09:51:16.583Z",
+      "ended_at": "2026-11-13T09:51:17.082Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/rustsec/commit.json.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/rustsec/commit.json.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/rustsec/commit.json",
+        "sha256": "e4babc9ac713a231787c9827ab6a9045512dccf0b0c1ac706e5fcea11366d885",
+        "bytes": 16819
+      }
+    },
+    {
+      "name": "rustsec/RUSTSEC-2024-0388.md",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/rustsec/RUSTSEC-2024-0388.md",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/RustSec/advisory-db/af7b3ec33460b8e2de8d422e16d628518891a519/crates/derivative/RUSTSEC-2024-0388.md"
+      ],
+      "url": "https://raw.githubusercontent.com/RustSec/advisory-db/af7b3ec33460b8e2de8d422e16d628518891a519/crates/derivative/RUSTSEC-2024-0388.md",
+      "started_at": "2026-11-13T09:51:17.083Z",
+      "ended_at": "2026-11-13T09:51:17.592Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/rustsec/RUSTSEC-2024-0388.md.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/rustsec/RUSTSEC-2024-0388.md.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/rustsec/RUSTSEC-2024-0388.md",
+        "sha256": "fb757162f87a2976590e152c73ff3912fd2a5939504c24d5563dfcbe5d533124",
+        "bytes": 558
+      }
+    },
+    {
+      "name": "rustsec/RUSTSEC-2024-0449.md",
+      "argv": [
+        "curl",
+        "--silent",
+        "--show-error",
+        "--fail-with-body",
+        "--location",
+        "--max-time",
+        "40",
+        "--retry",
+        "0",
+        "--user-agent",
+        "AegisGate-local-source-review",
+        "--output",
+        "evidence/sprint04a-c/current-01/rustsec/RUSTSEC-2024-0449.md",
+        "--write-out",
+        "%{http_code}",
+        "https://raw.githubusercontent.com/RustSec/advisory-db/af7b3ec33460b8e2de8d422e16d628518891a519/crates/unsafe-libyaml/RUSTSEC-2024-0449.md"
+      ],
+      "url": "https://raw.githubusercontent.com/RustSec/advisory-db/af7b3ec33460b8e2de8d422e16d628518891a519/crates/unsafe-libyaml/RUSTSEC-2024-0449.md",
+      "started_at": "2026-11-13T09:51:17.593Z",
+      "ended_at": "2026-11-13T09:51:18.119Z",
+      "exit_code": 0,
+      "signal": null,
+      "http_status": 200,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/rustsec/RUSTSEC-2024-0449.md.curl-stdout",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "bytes": 3
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/rustsec/RUSTSEC-2024-0449.md.curl-stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "body": {
+        "file": "evidence/sprint04a-c/current-01/rustsec/RUSTSEC-2024-0449.md",
+        "sha256": "99da8fa8d7ce73ca12b32cadedef33ff160d120dd63a338447a8fa70eac0d549",
+        "bytes": 870
+      }
+    },
+    {
+      "name": "cargo-version",
+      "argv": [
+        "cargo",
+        "+1.99.1",
+        "--version"
+      ],
+      "started_at": "2026-11-13T09:51:18.120Z",
+      "ended_at": "2026-11-13T09:51:18.166Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/cargo-version.stdout",
+        "sha256": "c35608815f43d0b8788a9b826fad2bb17384f49fb328dc4fe64da9db5f5ef4d6",
+        "bytes": 36
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/cargo-version.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "rust-version",
+      "argv": [
+        "rustc",
+        "+1.99.1",
+        "--version",
+        "--verbose"
+      ],
+      "started_at": "2026-11-13T09:51:18.166Z",
+      "ended_at": "2026-11-13T09:51:18.356Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/rust-version.stdout",
+        "sha256": "f22d5e4e9ced367e774ce5bc140d9e6b1235c1882fec80d011044851f3ae6369",
+        "bytes": 196
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/rust-version.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "derivative-tree",
+      "argv": [
+        "cargo",
+        "+1.99.1",
+        "tree",
+        "--locked",
+        "--offline",
+        "--manifest-path",
+        "spikes/pingora/Cargo.toml",
+        "-i",
+        "derivative"
+      ],
+      "started_at": "2026-11-13T09:51:18.356Z",
+      "ended_at": "2026-11-13T09:51:18.700Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/derivative-tree.stdout",
+        "sha256": "3d113773a13811d4c097a39a7cea5934e234a0e4a0d6f73abead7666c626e0d1",
+        "bytes": 486
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/derivative-tree.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "unsafe-libyaml-tree",
+      "argv": [
+        "cargo",
+        "+1.99.1",
+        "tree",
+        "--locked",
+        "--offline",
+        "--manifest-path",
+        "spikes/pingora/Cargo.toml",
+        "-i",
+        "unsafe-libyaml"
+      ],
+      "started_at": "2026-11-13T09:51:18.701Z",
+      "ended_at": "2026-11-13T09:51:18.832Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/unsafe-libyaml-tree.stdout",
+        "sha256": "72d62e800479c34401fd950eacaf938f04ce836a98f9d84c7ca0bce5e915ce3d",
+        "bytes": 494
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/unsafe-libyaml-tree.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "serde_yaml-tree",
+      "argv": [
+        "cargo",
+        "+1.99.1",
+        "tree",
+        "--locked",
+        "--offline",
+        "--manifest-path",
+        "spikes/pingora/Cargo.toml",
+        "-i",
+        "serde_yaml"
+      ],
+      "started_at": "2026-11-13T09:51:18.833Z",
+      "ended_at": "2026-11-13T09:51:18.960Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/serde_yaml-tree.stdout",
+        "sha256": "26426ecad95e8753c6c83eccf83ce9ae85d809afd2f643eb47cdfe9e02345253",
+        "bytes": 425
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/serde_yaml-tree.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "audit-version",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/tools/bin/cargo-audit",
+        "--version"
+      ],
+      "started_at": "2026-11-13T09:51:18.960Z",
+      "ended_at": "2026-11-13T09:51:18.981Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/audit-version.stdout",
+        "sha256": "099b5e31c557b0bcbf0fc8152869301670c0fac7bf23306539fb83030a46ec54",
+        "bytes": 19
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/audit-version.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "audit-db",
+      "argv": [
+        "git",
+        "-C",
+        "/home/tiecont/.cargo/advisory-db",
+        "log",
+        "-1",
+        "--format=%H %cI"
+      ],
+      "started_at": "2026-11-13T09:51:18.981Z",
+      "ended_at": "2026-11-13T09:51:18.989Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/audit-db.stdout",
+        "sha256": "a6f42b9349a2756908ac91f92911713fba06ee61c2149cf79d5fe919e32c79e3",
+        "bytes": 67
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/audit-db.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "name": "audit",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/tools/bin/cargo-audit",
+        "audit",
+        "--no-fetch",
+        "--db",
+        "/home/tiecont/.cargo/advisory-db",
+        "--file",
+        "spikes/pingora/Cargo.lock",
+        "--json"
+      ],
+      "started_at": "2026-11-13T09:51:18.990Z",
+      "ended_at": "2026-11-13T09:51:19.227Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04a-c/current-01/audit.stdout",
+        "sha256": "fe9920fd391f98fa3692cf3e2ca95148ac7bd9b4264d38f7c565c3c88b3e2f90",
+        "bytes": 3004
+      },
+      "stderr": {
+        "file": "evidence/sprint04a-c/current-01/audit.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    }
+  ],
+  "observations": {
+    "runtime_candidates": 0,
+    "corpus_executions": 0,
+    "origin_bytes": null,
+    "origin_handlers": null,
+    "parser_errors": null,
+    "transport": "Research only; no fixture or traffic listener started"
+  },
+  "release_comparison": [
+    {
+      "project": "envoy",
+      "tag": "v1.40.2",
+      "published_at": "2026-10-27T01:51:56Z",
+      "draft": false,
+      "prerelease": false,
+      "revision": "b2d89e0ae53916f28770771fbdd49c5c99c5c5a2",
+      "previous_revision": "b2d89e0ae53916f28770771fbdd49c5c99c5c5a2",
+      "same_revision": true
+    },
+    {
+      "project": "pingora",
+      "tag": "0.9.1",
+      "published_at": "2026-11-03T01:07:23Z",
+      "draft": false,
+      "prerelease": false,
+      "revision": "f86ffda5d3ae5c3baf5125682138b33b26c01b08",
+      "previous_revision": "f86ffda5d3ae5c3baf5125682138b33b26c01b08",
+      "same_revision": true
+    },
+    {
+      "project": "hyper",
+      "tag": "v1.12.0",
+      "published_at": "2026-10-06T15:58:27Z",
+      "draft": false,
+      "prerelease": false,
+      "revision": "7f67699ce32d717081deb7018b4da7d679277ac0",
+      "previous_revision": "7f67699ce32d717081deb7018b4da7d679277ac0",
+      "same_revision": true
+    }
+  ],
+  "ended_at": "2026-11-13T09:51:19.227Z"
+}
