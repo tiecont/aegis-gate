@@ -1,6 +1,13 @@
 # Implementation status
 
-## Sprint04-B Local Closeout
+## Sprint04-B Complete / Module01 NO-GO
+
+PR13 merged as `826656f2469ae225a1617438fbb4b3b3a454cc98`. Exact final
+head9600b120 hosted43475127149 and merge hosted43476258655 both pass
+foundation-quality and supply-chain-security. Full local gates and independent
+integration ACCEPT are bound below. The additive
+`docs/reports/sprint04b-closeout-addendum.md` supersedes checkpoint pending
+fields. Formal human architecture/security owner/decision remain PENDING.
 
 Sprint04-B component work is complete: fresh unchanged Envoy69/75 and23-probe
 16/23 results retain all mandatory failures. Maintained released sources/APIs

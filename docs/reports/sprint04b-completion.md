@@ -1,8 +1,13 @@
 # Sprint04-B Completion And Handoff
 
-Status: component work and full local integration gates complete; final hosted
-integration/merge verification pending. Module01 **NO-GO**, Modules04-12 **LOCKED**,
+Status: Sprint04-B research/evidence closeout complete; PR13 merged with both
+exact-head/main hosted jobs PASS. Module01 **NO-GO**, Modules04-12 **LOCKED**,
 production **BLOCKED**. This record is updated only from actual receipts.
+
+Final observed integration merge is `826656f2469ae225a1617438fbb4b3b3a454cc98`.
+[The additive closeout receipt](sprint04b-closeout-addendum.md) supersedes
+checkpoint pending fields and binds exact source/CI without a self-hash claim.
+Formal human architecture/security ownership and decision remain PENDING.
 
 ## PR12 Closure
 
@@ -197,11 +202,15 @@ final-head quality receipt. Both required jobs must pass on the final PR head,
 followed by both jobs on its main merge. The PR and run metadata supply exact
 successor identities; no commit claims to contain its own hash.
 
-## Remaining Closeout Work
+## Final Closeout
 
-Verify both required hosted jobs on the exact final reviewed PR head, merge,
-then verify the exact main merge jobs. Final receipt addenda bind prior source
-commits and external run IDs without claiming a self-referential commit hash.
+Final PR head9600b120 passes both required jobs in43475127149 and merges as
+826656f2469ae225a1617438fbb4b3b3a454cc98. Its identical-tree main passes both
+jobs in43476258655. Exact jobs and retained cancelled/earlier attempts are in
+the closeout addendum and raw `pr13-*` receipts. The receipt-only successor PR
+is identified externally by GitHub; root also verifies its exact head/main jobs.
+No implementation or security research work remains authorized by this sprint
+without the stated upstream capability trigger and formal human decision.
 All changes are additive research/test/evidence/docs; no application, dependency,
 workflow, threat-model, quality-gate or original corpus/evaluator changes.
 No Module04 implementation or production action is permitted by this record.
