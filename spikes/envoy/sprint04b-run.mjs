@@ -69,10 +69,10 @@ try {
     AEGIS_CANDIDATE_ARTIFACTS: JSON.stringify(sources.filter((f) => f.startsWith('spikes/envoy/')).map((f) => path.join(root, f))), AEGIS_RUN_ROOT: runRoot };
   if (!protocolOnly) {
     await capture('unchanged75', process.execPath, ['spikes/edge-comparison/run.mjs'], env);
-  const resultPath = fs.readFileSync(path.join(output, 'unchanged75.stdout'), 'utf8').match(/^Evidence: (.+\/results\.json)$/m)?.[1];
-  assert.ok(resultPath?.startsWith(runRoot), '75-case proof incomplete; preserve attempt');
-  for (const file of ['results.json', 'proxy.log']) fs.copyFileSync(path.join(path.dirname(resultPath), file), path.join(output, `unchanged75-${file}`));
-  await capture('evaluate75', process.execPath, ['spikes/edge-comparison/evaluate.mjs', path.join(output, 'unchanged75-results.json')]);
+    const resultPath = fs.readFileSync(path.join(output, 'unchanged75.stdout'), 'utf8').match(/^Evidence: (.+\/results\.json)$/m)?.[1];
+    assert.ok(resultPath?.startsWith(runRoot), '75-case proof incomplete; preserve attempt');
+    for (const file of ['results.json', 'proxy.log']) fs.copyFileSync(path.join(path.dirname(resultPath), file), path.join(output, `unchanged75-${file}`));
+    await capture('evaluate75', process.execPath, ['spikes/edge-comparison/evaluate.mjs', path.join(output, 'unchanged75-results.json')]);
     await capture('unchanged23', process.execPath, ['spikes/envoy/wire-probes.mjs', path.join(output, 'unchanged23.json'), path.join(runRoot, 'historical23')]);
   }
   await capture('protocol', process.execPath, ['spikes/envoy/sprint04b-protocol.mjs', path.join(output, 'protocol.json'), path.join(runRoot, 'protocol')], {}, 120000);
