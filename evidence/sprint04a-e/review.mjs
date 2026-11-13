@@ -105,11 +105,12 @@ try {
       must(`immutable-${letter}`, node, ['spikes/edge-comparison/extract-baseline.mjs', '--check'], cwd);
       if (letter === 'a') {
         const target = path.join(output, 'a-verification');
-        must('a-boundary-verifier', node, ['spikes/envoy/strict-boundary-check.mjs', 'evidence/sprint04a-a/upstream-03', target], cwd);
+        must('a-boundary-verifier', node, ['spikes/envoy/strict-boundary-check.mjs', 'evidence/sprint04a-a/upstream-04', target], cwd);
       } else {
-        must('c-verifier', node, ['evidence/sprint04a-c/capability-refresh.mjs', 'verify', 'e-independent', 'current-01'], cwd);
-        preserve(path.join(cwd, 'evidence/sprint04a-c/e-independent'), 'c-verification');
-        must('c-manifest', 'sha256sum', ['--check', 'evidence/sprint04a-c/SHA256SUMS', '--quiet'], cwd);
+        must('c-original-manifest', 'sha256sum', ['--check', 'evidence/sprint04a-c/SHA256SUMS', '--quiet'], cwd);
+        must('c-verifier', node, ['evidence/sprint04a-c/capability-refresh.mjs', 'verify', 'review-01', 'current-01'], cwd);
+        preserve(path.join(cwd, 'evidence/sprint04a-c/review-01'), 'c-verification');
+        must('c-refreshed-manifest', 'sha256sum', ['--check', 'evidence/sprint04a-c/SHA256SUMS', '--quiet'], cwd);
       }
     }
   } else if (mode === 'f') {
@@ -117,7 +118,7 @@ try {
     const cwd = checkout('f', suppliedHead);
     receipt.immutable_schema = hash(fs.readFileSync(path.join(cwd, 'internal/configsnapshot/schema-v1.json')));
     assert.equal(receipt.immutable_schema, hash(execFileSync('git', ['show', `${baseline}:internal/configsnapshot/schema-v1.json`])));
-    must('f-race', 'flock', ['/tmp/aegisgate-sprint02-fixtures.lock', 'make', 'test-go'], cwd);
+    must('f-race', 'flock', ['/tmp/aegisgate-sprint02-fixtures.lock', 'go', 'test', '-race', './internal/configconsumer', './internal/configpublish', './internal/configsnapshot', './internal/configrollout'], cwd, 0, { GOTOOLCHAIN: 'go1.27.4' });
   } else throw new Error('unknown review mode');
 } catch (error) {
   receipt.error = error.stack; process.exitCode = 1;
