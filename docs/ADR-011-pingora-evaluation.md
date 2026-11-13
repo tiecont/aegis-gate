@@ -1,10 +1,34 @@
 # ADR-011: Pingora feasibility evaluation
 
-- Status: **proposed**; **No-Go at the current proof state**. Expanded strict-ingress proof fails eight of65 cases, independently reproduced by root. This is not a general claim of Pingora insecurity or a permanent framework rejection.
-- Date: 2026-11-11.
+- Status: **proposed**; **No-Go at the current proof state**. Common immutable75: Pingora63/75, Envoy69/75, Hyper70/75. Sprint04-A independently reproduces Envoy69/75 and establishes a scoped upstream-dependent stop; no architecture replacement is accepted.
+- Date: 2026-11-13 (original evaluation2026-11-11).
 - Scope: module 01, `M0-PROXY-GO-NOGO`; isolated `spikes/pingora` workspace only.
 - Supersedes: no accepted decision. Supplies evidence for pending ADR-002 in `docs/DECISIONS.md`.
 - Implementation owner: module 01 implementation agent. Responsible human owner/reviewer: **not assigned**. Approval link/date: **none**.
+
+## Sprint04-A decision boundary
+
+Released Envoy1.40.2 accepts obsolete folding in its Balsa adapter and removes
+CR/LF before public parsed-map validation. The inspected supported APIs expose
+no pre-normalization strict rejection hook. Pingora0.9.1 still rewrites invalid
+targets; Hyper1.12.0 still removes CL/TE ambiguity and fragment provenance before
+service policy. A/C pin current release/source/API evidence in their Sprint04-A
+reports. No new complete candidate was technically credible, so no broad rebuild
+or private parser modification was attempted.
+
+B reproduces the same six Envoy failures and classifies the nine H2 origin bytes
+as a SETTINGS ACK on a reused valid connection. Zero handler dispatch does not
+waive the zero-origin-byte contract. Seven additional bounded probes fail and
+remain limitations. TE response mapping and Host retention alone cannot resolve
+the primary codec blocker. The unchanged75 and mandatory positive protocols
+remain eligibility prerequisites, alongside resource/configuration safety,
+maintained dependencies, independent review and explicit human approval.
+
+`reports/sprint04a-architecture-decision.md` gives bounded upstream tracks and
+unpublished escalation requirements. `reports/sprint04a-completion.md` binds
+the final review, gate and integration receipts. Research completion or safe
+evidence integration does not grant GO. Modules04-12 remain locked; production
+remains blocked. The original evaluation below is retained as historical evidence.
 
 ## Context and decision
 

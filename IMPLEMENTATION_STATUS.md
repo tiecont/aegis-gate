@@ -1,6 +1,37 @@
 # Implementation status
 
-Last updated: 2026-11-11. Scope: local implementation only. No production deployment or live DNS/payment action is authorized.
+Last updated: 2026-11-13. Scope: local implementation only. No production deployment or live DNS/payment action is authorized.
+
+## Sprint04-A strict-ingress disposition
+
+**M0-PROXY-GO-NOGO: NO-GO.** Current Envoy1.40.2 source still normalizes
+obsolete folding before its public header validator, with no supported strict
+rejection hook found in the inspected released API. Independent upstream
+inspection agrees. No complete maintained path was identified, so no new
+production parser or replacement candidate was built. This is a bounded
+upstream-dependent stop, not a claim about every older branch or future extension.
+
+Fresh unchanged and diagnostic Envoy runs both reproduce69/75. The six failures
+remain obs-fold, four Transfer-Encoding rejection responses and H2 identity's
+zero-byte assertion. The H2 nine bytes decode to a SETTINGS ACK on a previously
+valid reused connection; zero handlers does not satisfy zero origin bytes.
+Seven of23 additional bounded probes fail and remain open. Historical68/75
+weighted-health and incomplete attempts are preserved. All original75 inputs,
+expectations and encoded/pipeline controls remain unchanged.
+
+Pingora63/75 and Hyper70/75 remain historical NO-GO results; no broad rerun is
+claimed. Current released APIs still lack the original framing/target
+distinctions required by the policy. Pingora's two maintenance warnings remain.
+The proposed human decision is `docs/reports/sprint04a-architecture-decision.md`;
+source, wire, dependency, recovery and independent review reports are linked by
+`docs/reports/sprint04a-completion.md`. No human architecture approval is recorded.
+
+The current dashboard dependency pins resolve normally and pass dashboard
+checks. TypeScript7.0.2 is blocked by typescript-eslint8.72.2's declared
+TypeScript `<6.1.0` peer range. Manifests, locks and minimatch11.0.7 override
+remain unchanged. PR11's go-jose4.1.9 upgrade is already in the sprint baseline.
+Full integration/review disposition and exact-head gate receipts are recorded
+in the completion report; research and green CI cannot authorize Module04.
 
 ## Sprint03-B accepted local result
 
