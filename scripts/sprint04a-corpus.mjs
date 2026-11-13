@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import path from "node:path";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 
@@ -63,7 +64,7 @@ const records = files.map(([candidate, file, provenance]) => {
     note: "Evidence inventory only; this command does not execute or accept a candidate.",
   };
 });
-fs.mkdirSync(new URL(".", `file://${process.cwd()}/${output}`).pathname, {
+fs.mkdirSync(path.dirname(output), {
   recursive: true,
 });
 fs.writeFileSync(
