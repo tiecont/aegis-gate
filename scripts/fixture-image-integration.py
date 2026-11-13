@@ -11,6 +11,12 @@ lock=json.loads((root/'.local/fixture-images.lock.json').read_text())
 image=lock['postgres']['image_id']
 name='aegisgate-foundation-pg-'+secrets.token_hex(6)
 secret=root/'.local/postgres-password'
+compose=['docker','compose','--env-file',str(root/'.local/compose.env'),
+         '--env-file',str(root/'.local/fixture-images.env'),
+         '-f',str(root/'infra/compose/compose.yaml')]
+config=json.loads(subprocess.check_output(compose+['config','--format','json'],text=True))
+network=config['networks']['lab']['name']
+assert isinstance(network,str) and network,'Compose lab network missing'
 def docker(*args,check=True):
     return subprocess.run(['docker',*args],check=check,capture_output=True,text=True)
 def ready():
@@ -26,7 +32,7 @@ def sql(statement,valid=True):
     command='PGPASSWORD='+password+' psql -h '+name+' -U aegisgate_local -d aegisgate_local -v ON_ERROR_STOP=1 -tAc "$1"'
     return docker('exec',name,'sh','-c',command,'local-pg-check',statement,check=valid)
 try:
-    docker('run','-d','--name',name,'--network','aegisgate-local_lab',
+    docker('run','-d','--name',name,'--network',network,
            '-e','POSTGRES_DB=aegisgate_local','-e','POSTGRES_USER=aegisgate_local',
            '-e','POSTGRES_PASSWORD_FILE=/run/secrets/postgres-password',
            '--mount','type=bind,src='+str(secret)+',dst=/run/secrets/postgres-password,readonly',image)
