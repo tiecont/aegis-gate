@@ -38,6 +38,8 @@ through ignored directories only. Required source commits precede proofs:
 | `9deb50b9e4eb1eb1f6f8139a590202deea9d454a` | Native H2 direct/observer identity control; verified locked fixture cleanup |
 | `1ca8a5492000181672daa30db6547c160082303d` | Retained dependency preflight failure; clean source for attempt05 |
 | `50112658defa32645fa2dce4f683a301ce3ff5c9` | attempt05 evidence; committed source for origin verification |
+| `f9f9942` | Report and first origin-verification evidence |
+| `ac07468efa90d2e14cd38f15716ec4f34808985e` | Strengthened invalid-origin attempted-byte control; source for fresh TLS follow-up |
 
 The report/evidence and receipt commits follow these sources. Root can inspect
 the full branch against `origin/main`; do not independently replay original
@@ -102,7 +104,12 @@ in origin verification with no skips. The byte control sends/echoes exactly
 `814492f3243b52ec0c40be131e59025e439d93efe4286906d2a4c61b121615ca`.
 Direct/observed certificates match within each fixture; both negotiate verified
 TLS1.3 and H2. Wrong SAN, expired and untrusted upstream certificates yield
-transport errors with zero decrypted bytes. Wrong downstream hostname and
+transport errors with zero decrypted bytes. Final review identified that the
+original standalone negative waited for closure without sending application
+bytes. The committed TLS follow-up attempts all37843 bytes for each wrong-SAN,
+expired and untrusted origin and again observes zero bytes/transport failure;
+all13 focused tests pass. Earlier evidence is preserved unchanged.
+Wrong downstream hostname and
 untrusted CA reject. TLS verification remains enabled on every client hop.
 
 The new native H2 direct/observed controls preserve GET, `/bad%20target`,
@@ -163,6 +170,7 @@ Actual commands from this worktree:
 ```sh
 flock /tmp/aegisgate-sprint02-fixtures.lock .local/toolchains/node/bin/node spikes/envoy/wire-run.mjs evidence/sprint04a-b/attempt05
 flock /tmp/aegisgate-sprint02-fixtures.lock .local/toolchains/node/bin/node spikes/envoy/wire-closeout.mjs --origin
+flock /tmp/aegisgate-sprint02-fixtures.lock .local/toolchains/node/bin/node spikes/envoy/wire-closeout.mjs --origin -tls-followup
 ```
 
 The first exits1, `2026-11-13T09:52:13.688Z` through09:54:50.877Z. The prior
@@ -191,7 +199,11 @@ Offline pinned Gitleaks source/evidence scans exit0:117188/1550433 bytes,
 no leaks. Exact scanner digest/options and hashes are in
 `origin-verification/commands.json`. This is scoped secret scanning; no full
 repository gate, SCA, hosted CI or independent acceptance is claimed by B.
-Report-only scan and final status/manifest receipts follow separately.
+The third command exits0 on clean source `ac07468`, repeating all provenance,
+immutable-source, syntax, whitespace and13 focused checks with the stronger TLS
+negative. Its scoped source/evidence scans inspect117469/1592259 bytes and find
+no leaks; `origin-verification-tls-followup/` retains exact commands and hashes.
+Report-only scans and final status/manifest receipts follow separately.
 
 Node26.13.0 SHA256
 `0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b`,

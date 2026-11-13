@@ -1,0 +1,273 @@
+{
+  "source_commit": "1ca8a5492000181672daa30db6547c160082303d",
+  "modes": [
+    {
+      "mode": "unchanged75",
+      "result_sha256": "21baa8697b314070855a99695ad0f5edaa5a6c476a42ed1f3c4bf389418fb761",
+      "decision": {
+        "candidate": "envoy-1.40.2-retain-original-h2-host",
+        "mandatory_tests": 75,
+        "passed": 69,
+        "failed": [
+          "malformed-HTTP-invalid-transfer-encoding",
+          "malformed-HTTP-obsolete-folded-header",
+          "strict-ingress-TE-repeated-chunked",
+          "strict-ingress-TE-not-final-chunked",
+          "supplemental-repeated-transfer-encoding-fields",
+          "HTTP2-authority-Host-and-SNI-confusion-rejected"
+        ],
+        "unsafe_or_unproven_rejections": [
+          {
+            "name": "invalid-transfer-encoding",
+            "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 0"
+          },
+          {
+            "name": "obsolete-folded-header",
+            "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+          },
+          {
+            "name": "TE-repeated-chunked",
+            "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 0"
+          },
+          {
+            "name": "TE-not-final-chunked",
+            "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 0"
+          },
+          {
+            "name": "repeated-transfer-encoding-fields",
+            "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 0"
+          }
+        ],
+        "protocol_proof_pass": false,
+        "architecture_approval": "requires independent dependency/security review and human architecture decision"
+      },
+      "h2": {
+        "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+        "status": "fail",
+        "milliseconds": 6.1,
+        "error": "confused authority forwarded bytes to origin\n\n3045 !== 3036\n",
+        "origin": {
+          "handler_invocations": 0,
+          "decrypted_bytes": 9,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "requests": [],
+          "omitted_request_samples": 0
+        }
+      }
+    },
+    {
+      "mode": "diagnostic75",
+      "result_sha256": "21c64e8fde2e6b846bbf13720d5ac0c483760e69dd0d488cb1a5a7f8806976a2",
+      "decision": {
+        "candidate": "envoy-1.40.2-retain-original-h2-host",
+        "mandatory_tests": 75,
+        "passed": 69,
+        "failed": [
+          "malformed-HTTP-invalid-transfer-encoding",
+          "malformed-HTTP-obsolete-folded-header",
+          "strict-ingress-TE-repeated-chunked",
+          "strict-ingress-TE-not-final-chunked",
+          "supplemental-repeated-transfer-encoding-fields",
+          "HTTP2-authority-Host-and-SNI-confusion-rejected"
+        ],
+        "unsafe_or_unproven_rejections": [
+          {
+            "name": "invalid-transfer-encoding",
+            "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 0"
+          },
+          {
+            "name": "obsolete-folded-header",
+            "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+          },
+          {
+            "name": "TE-repeated-chunked",
+            "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 0"
+          },
+          {
+            "name": "TE-not-final-chunked",
+            "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 0"
+          },
+          {
+            "name": "repeated-transfer-encoding-fields",
+            "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 0"
+          }
+        ],
+        "protocol_proof_pass": false,
+        "architecture_approval": "requires independent dependency/security review and human architecture decision"
+      },
+      "h2": {
+        "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+        "status": "fail",
+        "milliseconds": 5.89,
+        "error": "confused authority forwarded bytes to origin\n\n3045 !== 3036\n",
+        "origin": {
+          "handler_invocations": 0,
+          "decrypted_bytes": 9,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "requests": [],
+          "omitted_request_samples": 0
+        }
+      }
+    }
+  ],
+  "warm_rejection_interval": {
+    "name": "warm-valid-then-Host-denial-observation",
+    "started_at": "2026-11-13T09:54:32.268Z",
+    "status_code": 421,
+    "rejection_interval": {
+      "connections": 0,
+      "bytes": 9,
+      "handlers": 0,
+      "parser_errors": 0,
+      "transport_errors": 0,
+      "events": 2
+    },
+    "frames": [
+      {
+        "sequence": 8,
+        "time": "2026-11-13T09:54:32.292Z",
+        "connection": 1,
+        "kind": "frame",
+        "type": 4,
+        "name": "SETTINGS",
+        "flags": 1,
+        "stream": 0,
+        "length": 0,
+        "bytes": 9,
+        "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+        "hex": "000000040100000000"
+      }
+    ],
+    "zero_byte_contract": "FAIL: nonzero bytes; classification does not waive contract",
+    "status": "pass",
+    "origin": {
+      "connections": 1,
+      "bytes": 277,
+      "handlers": 1,
+      "parser_errors": 0,
+      "transport_errors": 0,
+      "events": 8
+    }
+  },
+  "diagnostic_connection_setup": [
+    {
+      "sequence": 1,
+      "time": "2026-11-13T09:54:05.582Z",
+      "kind": "secure",
+      "connection": 1,
+      "id": 1,
+      "sni": "lab-origin.test",
+      "alpn": "h2",
+      "tls": "TLSv1.2",
+      "peer": "127.0.0.1",
+      "bytes": 0,
+      "chunks": 0
+    },
+    {
+      "sequence": 2,
+      "time": "2026-11-13T09:54:05.587Z",
+      "kind": "chunk",
+      "connection": 1,
+      "bytes": 248,
+      "sha256": "369f6f686b07d9664a9a09e561a70824b5a644ee87b3786401353fdd73ee2b28"
+    },
+    {
+      "sequence": 3,
+      "time": "2026-11-13T09:54:05.587Z",
+      "connection": 1,
+      "kind": "preface",
+      "bytes": 24
+    },
+    {
+      "sequence": 4,
+      "time": "2026-11-13T09:54:05.587Z",
+      "connection": 1,
+      "kind": "frame",
+      "type": 4,
+      "name": "SETTINGS",
+      "flags": 0,
+      "stream": 0,
+      "length": 30,
+      "bytes": 39,
+      "sha256": "d979ee280f72f20e711086e5fe074144e564797adff46b930446c2361694e9f5"
+    },
+    {
+      "sequence": 5,
+      "time": "2026-11-13T09:54:05.587Z",
+      "connection": 1,
+      "kind": "frame",
+      "type": 8,
+      "name": "WINDOW_UPDATE",
+      "flags": 0,
+      "stream": 0,
+      "length": 4,
+      "bytes": 13,
+      "sha256": "3a4631461c8af8f01378774b105d15da36f29834ff95d9f5a12c4704a3c783bb",
+      "hex": "000004080000000000017f0001"
+    },
+    {
+      "sequence": 6,
+      "time": "2026-11-13T09:54:05.587Z",
+      "connection": 1,
+      "kind": "frame",
+      "type": 1,
+      "name": "HEADERS",
+      "flags": 5,
+      "stream": 1,
+      "length": 163,
+      "bytes": 172,
+      "sha256": "4c8245ff0cbb0588b0d6891963b57f5a34388846ed9c89ac40087233b6d2c27f"
+    },
+    {
+      "sequence": 7,
+      "time": "2026-11-13T09:54:05.593Z",
+      "kind": "chunk",
+      "connection": 1,
+      "bytes": 9,
+      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6"
+    },
+    {
+      "sequence": 8,
+      "time": "2026-11-13T09:54:05.593Z",
+      "connection": 1,
+      "kind": "frame",
+      "type": 4,
+      "name": "SETTINGS",
+      "flags": 1,
+      "stream": 0,
+      "length": 0,
+      "bytes": 9,
+      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+      "hex": "000000040100000000"
+    }
+  ],
+  "zero_byte_contract": "FAIL: nine control bytes remain nonzero",
+  "probe_count": 23,
+  "probe_passes": 16,
+  "probe_failures": [
+    "settled-reuse-identity-and-three-authority-negatives",
+    "individual-settled-userinfo-denial",
+    "raw-H2-HEADERS-stream-zero",
+    "raw-H2-zero-WINDOW_UPDATE",
+    "raw-H2-uppercase-header-name",
+    "raw-H2-connection-specific-header",
+    "slow-reader-backpressure-and-response-cancellation"
+  ],
+  "fatal": null,
+  "cleanup": {
+    "stopped_remaining_containers": [],
+    "remaining_owned_containers": [],
+    "lock_held_through_cleanup": true,
+    "removed_fixture_directories": [
+      "envoy-run-D5zOOh",
+      "envoy-run-e3czC3",
+      "envoy-run-iTPf3n",
+      "wire-proof-zL15EQ"
+    ]
+  },
+  "recorder_complete_flag": false,
+  "recorder_flag_scope": "false because failed probes return exit1; all75 modes and23 probes have final results",
+  "observer_limitations": "separate TLS sessions; configured SNI only; no peer-IP, mTLS, cipher, timing or resumption transparency"
+}
