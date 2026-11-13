@@ -1,0 +1,13 @@
+{
+  "attempt": "upstream-01",
+  "source_commit": "70813bde6342b64d247eb779c4a5e1c78490f874",
+  "argv": ["node", "spikes/envoy/strict-research.mjs", "evidence/sprint04a-a/upstream-01"],
+  "observed_exit_code": 1,
+  "observation_source": "tool transcript before environment restart",
+  "observed_failure": "repository-locations: curl exit22, 14 response bytes (404)",
+  "retained_raw_files": false,
+  "raw_hashes_and_exact_times": null,
+  "reason": "Environment restart removed the entire /tmp worktree including uncommitted evidence. Git source commit survived; owned worktree restored with git worktree add --force.",
+  "proof_eligible": false,
+  "replacement": "upstream-02 preserves the same uncorrected failed attempt; upstream-03 corrects paths. Neither reconstructs the lost bytes or original timing."
+}
