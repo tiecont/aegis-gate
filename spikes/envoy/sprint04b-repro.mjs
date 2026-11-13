@@ -24,10 +24,7 @@ const openssl = (...args) => {
   assert.equal(result.status, 0);
 };
 async function stop() {
-  if (container) {
-    proof.command('container-stop', ['docker', 'stop', '--timeout', '1', container]);
-    container = null;
-  }
+  if (container) proof.command('container-stop', ['docker', 'stop', '--timeout', '1', container]);
   for (const socket of sockets) socket.destroy();
   if (observer?.listening) await new Promise((resolve) => observer.close(resolve));
   if (origin?.listening) await new Promise((resolve) => origin.close(resolve));
@@ -126,18 +123,20 @@ try {
   fs.writeFileSync(`${fixture}/bootstrap.json`, JSON.stringify(config));
   proof.file('bootstrap.json', JSON.stringify(config, null, 2) + '\n');
   container = `aegis-sprint04b-b-${process.pid}`;
-  const dockerArgs = ['run', '--rm', '--pull', 'never', '--name', container, '--network', 'host', '--read-only',
+  const dockerArgs = ['create', '--rm', '--pull', 'never', '--name', container, '--network', 'host', '--read-only',
     '--user', `${process.getuid()}:${process.getgid()}`, '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges:true',
     '--pids-limit', '64', '--memory', '256m', '--cpus', '1', '-v', `${fixture}:${fixture}:ro`,
     '--entrypoint', '/usr/local/bin/envoy', image.image, '-c', `${fixture}/bootstrap.json`,
     '--concurrency', '1', '--log-level', 'warn', '--disable-hot-restart'];
-  proof.record.container_command = { argv: ['docker', ...dockerArgs], cwd: process.cwd(), started_at: new Date().toISOString() };
-  docker = spawn('docker', dockerArgs, { stdio: ['ignore', 'pipe', 'pipe'] });
+  assert.equal(proof.command('container-create', ['docker', ...dockerArgs]).status, 0);
+  const startArgs = ['start', '--attach', container];
+  proof.record.container_command = { argv: ['docker', ...startArgs], cwd: process.cwd(), started_at: new Date().toISOString() };
+  docker = spawn('docker', startArgs, { stdio: ['ignore', 'pipe', 'pipe'] });
   docker.stdout.on('data', (b) => containerLog.push(b)); docker.stderr.on('data', (b) => containerLog.push(b));
   const options = (port) => ({ host: '127.0.0.1', port, servername: 'edge-a.test', ca: read('ca.pem'),
     rejectUnauthorized: true, ALPNProtocols: ['http/1.1'], minVersion: 'TLSv1.2' });
   for (const port of ports) {
-    const deadline = Date.now() + 8000;
+    const deadline = Date.now() + 30000;
     while (true) {
       try { const socket = tls.connect(options(port)); socket.on('error', () => {});
         socket.setTimeout(500, () => socket.destroy(new Error('readiness timeout')));
@@ -172,7 +171,7 @@ try {
     await closed; clearTimeout(timer); await delay(30);
     const response = Buffer.concat(received); const bytes = Buffer.concat(decrypted).subarray(before.bytes);
     const status = [...response.toString().matchAll(/HTTP\/1\.1 (\d{3})/g)].map((m) => Number(m[1]));
-    const row = { name, started_at: at, ended_at: new Date().toISOString(), listener: ports.indexOf(port) ? 'DPE-501-to-400' : 'default',
+    const row = { name, started_at: at, ended_at: new Date().toISOString(), listener: ports.indexOf(port) ? 'local-reply-501-to-400' : 'default',
       request_utf8: request, request_hex: Buffer.from(request).toString('hex'), after_valid_request: afterFirst, warmup,
       identity, response_utf8: response.toString(), response_hex: response.toString('hex'), status,
       client_sent_fin: false, peer_end: peerEnd, timed_out: timedOut, error,
@@ -180,7 +179,8 @@ try {
         new_connections: connections - before.connections, handlers: handlers.slice(before.handlers),
         parser_errors: parserErrors - before.parserErrors, transport_errors: transportErrors - before.transportErrors }, expected };
     row.matches_observation = !timedOut && peerEnd && status.at(-1) === expected &&
-      (name.startsWith('strict-ingress-TE-') || name.startsWith('malformed-HTTP-invalid-transfer-encoding')
+      (name.startsWith('strict-ingress-TE-') || name.startsWith('malformed-HTTP-invalid-transfer-encoding') ||
+        name.startsWith('supplemental-repeated-transfer-encoding-fields')
         ? bytes.length === 0 && row.origin.handlers.length === 0 && row.origin.new_connections === 0 : true);
     proof.record.probes.push(row); proof.save(); console.log(`${name}: ${JSON.stringify(status)} peer_end=${peerEnd} bytes=${bytes.length}`);
   }
@@ -191,6 +191,12 @@ try {
   for (const folded of [false, true]) await probe(`${folded ? 'folded' : 'unfolded'}-trailer`, ports[0],
     request('POST', '/trailers', 'Transfer-Encoding: chunked\r\nTrailer: X-Folded\r\n',
       `0\r\nX-Folded: first${folded ? '\r\n ' : ' '}second\r\n\r\n`), 200);
+  const field = (raw) => raw[raw.findIndex((s) => s.toLowerCase() === 'x-folded') + 1];
+  assert.equal(field(proof.record.probes[0].origin.handlers[0].headers), 'first second');
+  assert.equal(field(proof.record.probes[1].origin.handlers[0].headers), 'first second');
+  assert.equal(field(proof.record.probes[2].origin.handlers[0].trailers), 'first second');
+  assert.equal(field(proof.record.probes[3].origin.handlers[0].trailers), 'first second');
+  assert.ok(proof.record.probes.slice(0, 4).every((p) => p.origin.decrypted_bytes > 0));
   const manifest = JSON.parse(fs.readFileSync('spikes/edge-comparison/manifest.json'));
   const teCases = manifest.negatives.filter((r) => /invalid-transfer-encoding|TE-repeated-chunked|TE-not-final-chunked/.test(r.name));
   assert.equal(teCases.length, 3);
