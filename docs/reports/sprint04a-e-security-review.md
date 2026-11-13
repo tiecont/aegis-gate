@@ -41,3 +41,9 @@ because that non-contract file does not exist; proof records executable
 - A/C exact pinned heads await independent receipt verification. F awaits
   final report/evidence head and independent recovery execution. No final
   combined acceptance or integration recommendation yet.
+
+Update2026-11-13T10:13Z: A/C offline verifiers and manifests pass. F source
+`99e41a2438d42c9588620d7766d2b03ebc557a14` passes E's independently owned
+Compose/race integration in all seven Module03 packages without skips, plus
+vet and Node golden vector. E accepts this source for local scope; final F
+evidence/report head and final receipt scan are pending. No gate/waiver/merge.
