@@ -23,14 +23,14 @@ custom codec/raw scanner or post-codec whitespace heuristic does not satisfy
 the authorized maintained-parser requirement.
 
 The following references use line numbers in the retained unmodified upstream
-sources (`upstream-03/<name>.stdout`, losslessly gzip-compressed after scanning).
+sources (`upstream-03/<name>.stdout`, retained as retrieved).
 The corresponding GitHub source is pinned to the commit above.
 
 | Surface | Evidence and implication |
 | --- | --- |
 | H1 parser construction | `h1-codec`:520-527 constructs `BalsaParser` directly. A deprecated hidden `use_balsa_parser` field remains in `protocol-api`:508-514, but this constructor does not select a legacy parser. Merely setting it is not a credible strict candidate. |
 | Pre-normalization policy | `balsa-parser`:180-193 sets `disallow_header_continuation_lines=false` before passing the policy to the framer. Its constructor has no strict-fold argument (`balsa-parser-header`:22-23). `strict_chunk_parsing` controls stray chunk data, not header folding. |
-| Raw callback | `balsa-parser`:304-305 defines no-op `OnHeaderInput`/`OnTrailerInput`; these overrides and the framer are private (`balsa-parser-header`:39-45,75-76). The internal callback is not an exposed extension hook. |
+| Raw callback | `balsa-parser`:304-305 defines no-op `OnHeaderInput`/`OnTrailerInput`; these overrides and the framer are private (`balsa-parser-header`:39-45,71-72). The internal callback is not an exposed extension hook. |
 | Irreversible normalization | `balsa-parser`:451-464 strips CR/LF before `connection_->onHeaderValue`. A later semantic filter sees a value indistinguishable from an originally unfolded value. |
 | Public validator | `validator-api`:48-54 validates a `RequestHeaderMap`; transformation also takes maps (:87-96). `validator-config` exposes path, method, underscore and CL/TE policy, with no raw folding switch. UHV build/runtime selection in `hcm-config`:143-200 does not change Balsa's earlier normalization. |
 | Legacy alternative | `legacy-tests`:4944-4971 explicitly expects both http-parser and Balsa to strip folding and decode the normalized request successfully. These are inspected upstream tests, not locally executed tests. `legacy-parser-readme` identifies the vendored historical http-parser source. No maintained strict selector is established. |
@@ -78,7 +78,7 @@ node spikes/envoy/strict-research.mjs evidence/sprint04a-a/upstream-03
 
 `upstream-02` exits1: the obsolete `bazel/repository_locations.bzl` URL returns
 404/curl22. All raw outputs and exact command hashes remain. `upstream-03`
-exits0, with all25 nested commands successful. It uses corrected released
+exits0, with all26 nested commands successful. It uses corrected released
 `bazel/external/http_parser/` paths. Both collectors ran tracked-clean sources
 and record Node26.9.0, exact curl version, bounded HTTPS argv and immutable
 upstream/source hashes. That system Node is below the repository's declared
@@ -92,6 +92,12 @@ the pinned baseline extractor and source whitespace validation. Pinned offline
 Gitleaks8.30.1 scans owned Envoy source, all new raw evidence and the report with
 no leaks; all exit0. This is scoped secret evidence, not repository-wide SCA,
 image vulnerability scanning, `make check` or hosted quality gates.
+
+`checks-02` independently repeats the same eight commands after the final
+investigation report and source evidence are committed at `2625846`; all exit0.
+The evidence scan examines1.91MB of actual raw inputs. `checks-03` is the final
+receipt after correcting the count/citation above and adding manifest tooling;
+its exit0 again verifies the unchanged contracts and scans the completed report.
 
 An earlier `upstream-01` attempt exited1 with the same404 according to the tool
 transcript, but the environment restart deleted the entire `/tmp` worktree and
