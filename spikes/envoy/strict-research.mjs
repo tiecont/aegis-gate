@@ -61,7 +61,12 @@ try {
     ['protocol-api', 'api/envoy/config/core/v3/protocol.proto'],
     ['runtime-features', 'source/common/runtime/runtime_features.cc'],
     ['local-reply', 'source/common/local_reply/local_reply.cc'],
-    ['repository-locations', 'bazel/repository_locations.bzl'],
+    ['parser-api', 'source/common/http/http1/parser.h'],
+    ['legacy-parser-source', 'bazel/external/http_parser/http_parser.c'],
+    ['legacy-parser-header', 'bazel/external/http_parser/http_parser.h'],
+    ['legacy-parser-readme', 'bazel/external/http_parser/README.md'],
+    ['hcm-codec-calls', 'source/common/http/conn_manager_impl.cc'],
+    ['hcm-config', 'source/extensions/filters/network/http_connection_manager/config.cc'],
     ['balsa-tests', 'test/common/http/http1/balsa_parser_test.cc'],
     ['legacy-tests', 'test/common/http/http1/codec_impl_test.cc'],
   ];
