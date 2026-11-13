@@ -1,0 +1,33 @@
+{
+  "source_commit": "a1f6b9e26a15402d0ae82188d28367c1aec930a4",
+  "source_tree": "4726a918a6bce1f479e3760c317642c86e63a559",
+  "source_clean": true,
+  "started_at": "2026-11-13T09:51:21.884Z",
+  "cwd": "/tmp/aegisgate-04a-d",
+  "command": "flock",
+  "args": [
+    "/tmp/aegisgate-sprint02-fixtures.lock",
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "-v",
+    "/tmp/aegisgate-04a-d:/repo:ro",
+    "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+    "dir",
+    "/repo/evidence/sprint04a-d",
+    "--config",
+    "/repo/.github/gitleaks.toml",
+    "--redact",
+    "--no-banner"
+  ],
+  "node_version": "v26.13.0",
+  "node_binary": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+  "environment": {},
+  "exit_code": 0,
+  "signal": null,
+  "ended_at": "2026-11-13T09:51:22.659Z",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "19cc50ae0dd473ef19c58a417c6879d5225868182d69b43b85766dfb977c5a34"
+}
