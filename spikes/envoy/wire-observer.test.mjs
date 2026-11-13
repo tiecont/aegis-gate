@@ -136,13 +136,15 @@ test('observer preserves bytes, configured identity and verified TLS; bounds sam
       const negative = createTlsObserver({ cert, key, ca, port: await origin(name), onBytes: (n) => { bytes += n; },
         onTransportError: () => { errors++; } }); servers.push(negative);
       const socket = await connect(await listen(negative));
+      assert.equal(socket.destroyed, false); socket.write(payload);
       await once(socket, 'close'); assert.equal(bytes, 0); assert.ok(errors > 0);
     }
     for (const [name, trust] of [['wrong.test', ca], ['lab-origin.test', material.read('untrusted.pem')]]) {
       await assert.rejects(connect(observedPort, name, trust));
     }
     console.log(JSON.stringify({ payload_bytes: payload.length, sha256: createHash('sha256').update(payload).digest('hex'),
-      direct_and_observed: result, samples: snapshot.events.length, omitted: snapshot.omitted_events }));
+      direct_and_observed: result, invalid_origin_attempted_payload_bytes: payload.length,
+      samples: snapshot.events.length, omitted: snapshot.omitted_events }));
   } finally {
     for (const socket of sockets) socket.destroy();
     for (const server of servers) { server.closeAllConnections?.(); if (server.listening) await new Promise((resolve) => server.close(resolve)); }
