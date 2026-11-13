@@ -33,6 +33,15 @@ remain unchanged. PR11's go-jose4.1.9 upgrade is already in the sprint baseline.
 Full integration/review disposition and exact-head gate receipts are recorded
 in the completion report; research and green CI cannot authorize Module04.
 
+Independent E ACCEPTS the exact A/B/C/D/F heads. Added local consumer drain,
+conservative durable-reference orphan pruning and six recovery regressions
+pass independent race/integration reproduction. Full locked `make check` and
+`make security-scan` pass at2133b63, including cleanup. Earlier stale shared DB,
+hardcoded fixture network and hosted missing-lock failures are preserved; the
+isolated-project/network and complete CI lock-lifetime fixes are included.
+Final-head hosted checks/main merge remain recorded by PR12 and the completion
+report. No production monotonic service, secret custody or stream drain is claimed.
+
 ## Sprint03-B accepted local result
 
 **M1-CONFIG-SAFETY: PASS (local scope).** Canonical Ed25519 snapshots and

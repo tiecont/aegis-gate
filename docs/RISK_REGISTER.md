@@ -37,6 +37,17 @@ review/integration evidence and the unchanged gate matrix are in
 `reports/sprint04a-architecture-decision.md`. Module01 stays NO-GO,04-12 locked,
 00/02/03 PASS local and production BLOCKED. No risk acceptance is recorded.
 
+Independent E accepts bounded local consumer drain and durable-reference orphan
+pruning plus six recovery regressions. Full locked check/scan at2133b63 pass.
+The external floor remains authenticated provisioning, not an implemented
+monotonic service. Drain cannot recall copied configuration or cancel engine
+I/O. Archive coverage and external reservations require operator coordination.
+R16: integration exposed old default-project credentials and a hardcoded Docker
+network; dedicated disposable root volumes and structured Compose network
+resolution repair the local test path. Hosted observer units also exposed a
+missing CI lock; workflow now holds it through setup/check/cleanup and scanning.
+Failed attempts remain evidence. No production operational risk is closed by this.
+
 ## Sprint03-B disposition
 
 R03 is closed for the Module03 local acceptance scope: canonical Ed25519

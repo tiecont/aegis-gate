@@ -1,24 +1,29 @@
 # Sprint04-A Completion And Blocker Closure
 
-Status: integration in progress; **Module01 NO-GO**, production BLOCKED.
-This document is a working closeout until the review and gate receipts below
-are populated. No pending check is claimed as passed.
+Status: independently accepted scope and full local gates pass; exact final-head
+hosted acceptance and main merge pending. **Module01 NO-GO**, production BLOCKED.
 
 ## Baseline And Integration
 
 Baseline main: `3e03940848c81751c87bbcec131238abb7d28e1b` (merged PR11,
 go-jose4.1.9). Integration branch: `sprint/04a-integration`; isolated component
 worktrees and sequential independent acceptance are required. Final merge and
-PR receipts: pending. No component PR or approval is invented.
+PR: [12](https://github.com/tiecont/aegis-gate/pull/12). Final merge receipt:
+pending. This is the single integration PR; separate component PRs are not claimed.
 
 | Agent / branch | Reviewed source and deliverable | Disposition |
 | --- | --- | --- |
-| A / `fix/module01-envoy-codec-boundary` | `8d83ece`; [Envoy report](sprint04a-a-envoy.md) | Complete scoped upstream stop; E acceptance pending |
-| B / `test/module01-origin-boundary` | `93dc122`; [origin report](sprint04a-b-origin-boundary.md) | Fresh69/75 and classified control bytes; E acceptance pending |
-| C / `research/module01-upstream-capability` | `6acbe0f`; [upstream matrix](sprint04a-c-upstream.md) | No eligible released alternative; E acceptance pending |
-| D / `fix/dashboard-dependency-resolution` | `b42bae1`; [dependency report](sprint04a-d-dependencies.md) | Compatible existing set; TS7 upstream peer stop; E pending |
-| F / `hardening/module03-local-recovery` | source `99e41a2438d42c9588620d7766d2b03ebc557a14`, handoff `bf5785e`; [recovery report](sprint04a-f-config-recovery.md) | Independent source acceptance; final report/scan pending |
-| E / `review/sprint04a-security` | [independent verdict](sprint04a-e-security-review.md) | Review/reproduction in progress |
+| A / `fix/module01-envoy-codec-boundary` | `8d83ece166290b7c81e757281e5b1778e83dede4`; [Envoy report](sprint04a-a-envoy.md) | ACCEPT scoped upstream stop; merge `fcd5ef5` |
+| B / `test/module01-origin-boundary` | `93dc1223ae09d2562a9b4c5b307b173f960b9ea4`; [origin report](sprint04a-b-origin-boundary.md) | ACCEPT failed-candidate evidence; owned commits replayed through `b2c96a4` |
+| C / `research/module01-upstream-capability` | `6acbe0f55d50334a14b95c4d3e9888f5d1aebecf`; [upstream matrix](sprint04a-c-upstream.md) | ACCEPT upstream matrix; merge `ad92cd8` |
+| D / `fix/dashboard-dependency-resolution` | `b42bae1e9ffa63b4dfd4c94c9a6376f7129077ce`; [dependency report](sprint04a-d-dependencies.md) | ACCEPT compatible tree/peer stop; replay through `1d30c1b` |
+| F / `hardening/module03-local-recovery` | `bf5785eb8bd6449fc34915b7c2f392bd1d46350f`; [recovery report](sprint04a-f-config-recovery.md) | ACCEPT; source `99e41a2` replayed as `02df40c`, report `a8a01d4` |
+| E / `review/sprint04a-security` | [independent verdict](sprint04a-e-security-review.md), accepted heads/report `e8868ca` | ACCEPT scoped changes; merge `9beace0`; final seal and integration follow-up retained on E branch |
+
+All A/B/C/D/F owned file contents match their exact accepted heads; inherited
+obsolete coordinator-contract commits from B/D were excluded. Root's current
+contract is preserved. Root integration adds gate/corpus recorders, shared
+status/risk/ADR/decision/completion documentation and the fixture/CI fixes below.
 
 Historical pre-rebase branches `fix/module01-envoy-strict-ingress`,
 `test/module01-wire-boundary` and `research/module01-upstream-resolution` are
@@ -195,9 +200,36 @@ lifetimes and cleanup hold `/tmp/aegisgate-sprint02-fixtures.lock`.
 | B locked `wire-closeout.mjs --origin -tls-followup` |0;13 focused tests, immutable/provenance/scoped scans |
 | D `dashboard-reproduce.mjs` and compatible update |0 recorder; required TS7 nested failure1, others0 |
 | F locked `sprint04a-f-evidence.mjs attempt-01` |0; race/integration seven packages, vet/vector, cleanup; manifest13 entries |
-| E independent B/D/A/C/F reproduction |0 reviewer receipts; B nested candidate/probes1 and TS7 nested1 are expected retained failures; final verdict pending |
-| Locked `make check` / `make security-scan` | pending |
-| Hosted `foundation-quality` / `supply-chain-security` | pending on exact integration head |
+| E independent B/D/A/C/F reproduction |0 reviewer receipts and final seals; B nested candidate/probes1 and TS7 nested1 are expected retained failures; ACCEPT scoped changes |
+| Locked full gates01 at `9beace00414f8eb8a9dd9ebc00f8abe8e9ee29ee` | check2: old default-project persisted DB did not match fresh credentials; scan0; cleanup0 |
+| Locked full gates02 at `1d1262e121de02f5cfc074205c9bff18ada9ce08` | check2: hardcoded default Docker network after isolated DB passed; scan0; cleanup/volume removal0 |
+| Locked full gates03 at `2133b6303c05158c37ed539c23347376d67b0b3c` | **check0, security-scan0, cleanup0, volume removal0** |
+| Hosted run43408513539 at `9beace0` | foundation failure: required fixture lock absent in CI; supply-chain success. Logs retained; no acceptance claimed |
+| Hosted final reviewed integration head | pending; exact head/job receipts will be verified before merge |
+
+Actual full gate invocation, from the integration worktree (pinned Node26.13.0):
+
+```sh
+env AEGIS_NODE_BIN=/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node flock /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint04a-gates.mjs evidence/sprint04a-root/gates-03
+```
+
+The recorder executes `make check`, `make security-scan`, `make dev-down` and
+project-specific `docker compose ... down --volumes` under that outer lock.
+Dedicated project `aegisgate-04a-root` avoids old shared volume credentials.
+The restart fixture now derives its network from structured Compose JSON,
+instead of hardcoding `aegisgate-local_lab`. CI holds the same lock across
+fixture image setup, check and trapped cleanup; the scanner holds it across
+fixture setup and scan. Assertions, TLS, credentials and expected results were
+not weakened. Failed gates01/02 and initial hosted-log retrieval failures remain.
+
+gates03 runs2026-11-13T10:25:47.916Z-10:28:18.228Z, including cleanup. The scan
+inspects235 history commits/45.51MB history and28.12MB worktree input, generates
+repository/image SBOMs, checks exact local image identities and pinned Envoy,
+and reports no gate-triggering secret/vulnerability finding. Pingora's two
+unmaintained warnings remain open. This is dated scanner evidence, not future
+database freshness or maintenance approval. Rendered Compose credentials and
+private fixtures are excluded from committed evidence; raw safe scan receipts
+and all security findings remain retained.
 
 B attempt05 key SHA256:
 
@@ -208,6 +240,14 @@ b2e286a6fe7f3aa19c6cb03f2515c9c034c82afffa9d546cb90771e917e250d4 diagnostic-wire
 cf2ae06c5594871f6f8947fc9acb22eed99d69212a0f26b3ba9f758f4a903101 probes.json
 ```
 
+gates03 key stream SHA256 (complete manifest in its directory):
+
+```text
+99904fb885432becaba4de78bb625ab18b86b8771321413c60e26a7c633f707d check.stdout.log
+876c2024842f8c0ed0a4cf29181e9fd53a015169e5f63f4b65c20a7033de859f check.stderr.log
+8f9869b2cf6f974be8699ef4de9ec66f30d21fe378b4cfdf12835c8f35244b32 security-scan.stdout.log
+```
+
 Agent evidence directories retain complete manifests and receipts; the root
 corpus inventory lists all retained75-case result hashes/failure IDs. Scoped
 scans and research commands do not stand in for full local/hosted gates.
@@ -216,10 +256,10 @@ scans and research commands do not stand in for full local/hosted gates.
 
 | Module / gate | Disposition |
 | --- | --- |
-|00 / M0-FOUNDATION | PASS local; regression acceptance pending integration |
+|00 / M0-FOUNDATION | PASS local; full regression checks/scans pass |
 |01 / M0-PROXY-GO-NOGO | NO-GO; no eligible candidate or human approval |
-|02 / M1-ADMIN-TENANCY | PASS local; regression acceptance pending integration |
-|03 / M1-CONFIG-SAFETY | PASS local; recovery additions pending independent acceptance |
+|02 / M1-ADMIN-TENANCY | PASS local; full regression checks/scans pass |
+|03 / M1-CONFIG-SAFETY | PASS local; recovery additions independently accepted; full checks/scans pass |
 |04-12 | LOCKED under existing task prerequisites |
 | Production | BLOCKED; no release authorization |
 

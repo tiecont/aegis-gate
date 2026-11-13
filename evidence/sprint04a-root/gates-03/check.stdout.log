@@ -1,0 +1,337 @@
+test -z "$(gofmt -l apps/control-api apps/config-publisher internal packages/test-fixtures)"
+cargo +1.99.1 fmt --all --check --manifest-path apps/edge/Cargo.toml
+cargo +1.99.1 fmt --all --check --manifest-path spikes/hyper/Cargo.toml
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm run format:check
+
+> aegisgate-contract-tools@0.0.0 format:check
+> prettier --check package.json packages/contracts scripts/*.mjs .github infra/compose/compose.yaml
+
+Checking formatting...
+All matched files use Prettier code style!
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run fmt:check
+
+> @aegisgate/dashboard@0.1.0 fmt:check
+> prettier --check app lib tests *.mjs *.json *.md
+
+Checking formatting...
+All matched files use Prettier code style!
+GOTOOLCHAIN=go1.27.4 go vet ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/...
+cargo +1.99.1 clippy --workspace --all-targets --locked --manifest-path apps/edge/Cargo.toml -- -D warnings
+cargo +1.99.1 clippy --workspace --all-targets --locked --manifest-path spikes/hyper/Cargo.toml -- -D warnings
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm run contracts:check
+
+> aegisgate-contract-tools@0.0.0 contracts:check
+> node scripts/module03-contracts.mjs --check && node scripts/contracts.mjs --check
+
+Module03 contract synchronized with shared snapshot schema
+Contracts validated: OpenAPI, Go, TypeScript, JSON Schema, baseline, fixture
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run lint
+
+> @aegisgate/dashboard@0.1.0 lint
+> eslint . --max-warnings=0
+
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run typecheck
+
+> @aegisgate/dashboard@0.1.0 typecheck
+> tsc --noEmit
+
+python3 scripts/dev-secrets.test.py
+python3 scripts/git_history_preflight_test.py
+python3 scripts/image_identity_test.py
+"$(scripts/node-path.sh)" --test spikes/edge-comparison/*.test.mjs
+✔ rejection permits explicit400 or immediate closed peer (1.225238ms)
+✔ negative: status and zero handlers cannot hide forwarded bytes or parser errors (1.849399ms)
+✔ negative: missing or duplicated functional and security cases cannot pass inventory (2.334648ms)
+✔ evaluator checks original wire bytes even when every test is labeled pass (5.940727ms)
+✔ negative: claimed pass cannot conceal forwarded bytes or origin parser errors (1.260989ms)
+✔ negative: wrong manifest, fatal setup, skipped cases and dishonest summary fail closed (4.935803ms)
+✔ H2 observer counts decrypted preface without handler dispatch and preserves valid frames (164.023552ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 265.227788
+"$(scripts/node-path.sh)" --test spikes/envoy/*.test.mjs
+✔ manifest rejects replay, unknown fields, duplicate hosts, invalid ports and weights (97.866449ms)
+✔ private key permissions, SAN mismatch, symlinks and fixture bounds fail closed (184.493772ms)
+✔ compiled origin trust and pools change across route and generation boundaries (107.814143ms)
+✔ fragmented envelopes classify controls and preserve bounded decoder state (3.189104ms)
+{"native_h2_identity_controls":[{"peer_fingerprint":"0C:C4:C5:D6:A4:23:99:2C:DE:86:27:10:9F:EC:B3:0F:2C:3B:76:BF:4B:8C:A5:6A:C1:2D:E3:4D:CD:33:BE:3B","downstream_tls":"TLSv1.3","samples":[{"connection":1,"stream":1,"method":"GET","target":"/bad%20target","authority":"synthetic-authority.test","marker":"first-only","sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"},{"connection":1,"stream":3,"method":"GET","target":"/encoded%2Fsegment?value=%2520","authority":"synthetic-authority.test","marker":null,"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"}]},{"peer_fingerprint":"0C:C4:C5:D6:A4:23:99:2C:DE:86:27:10:9F:EC:B3:0F:2C:3B:76:BF:4B:8C:A5:6A:C1:2D:E3:4D:CD:33:BE:3B","downstream_tls":"TLSv1.3","samples":[{"connection":2,"stream":1,"method":"GET","target":"/bad%20target","authority":"synthetic-authority.test","marker":"first-only","sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"},{"connection":2,"stream":3,"method":"GET","target":"/encoded%2Fsegment?value=%2520","authority":"synthetic-authority.test","marker":null,"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"}]}],"observed_decrypted_bytes":139,"identity_scope":"configured origin SNI preserved; HTTP authority forwarded without binding or rewriting"}
+✔ native H2 direct and observed controls preserve authority, SNI, targets and reuse (779.971805ms)
+{"payload_bytes":37843,"sha256":"814492f3243b52ec0c40be131e59025e439d93efe4286906d2a4c61b121615ca","direct_and_observed":[{"fingerprint":"30:FE:00:48:BE:83:9B:E0:51:25:D8:80:A2:FA:9D:44:56:A9:85:76:D2:51:A2:25:32:92:C6:E5:F5:BD:AC:B1","tls":"TLSv1.3","alpn":"h2"},{"fingerprint":"30:FE:00:48:BE:83:9B:E0:51:25:D8:80:A2:FA:9D:44:56:A9:85:76:D2:51:A2:25:32:92:C6:E5:F5:BD:AC:B1","tls":"TLSv1.3","alpn":"h2"}],"invalid_origin_attempted_payload_bytes":37843,"samples":4096,"omitted":112}
+✔ observer preserves bytes, configured identity and verified TLS; bounds samples (1080.545676ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1972.116099
+"$(scripts/node-path.sh)" spikes/edge-comparison/extract-baseline.mjs --check
+PASS immutable baseline manifest matches pinned source and all65 test IDs
+GOTOOLCHAIN=go1.27.4 go test -race ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/...
+?   	aegisgate.dev/aegisgate/apps/control-api/cmd/control-api	[no test files]
+?   	aegisgate.dev/aegisgate/apps/control-api/internal/application	[no test files]
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/domain	(cached)
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/identity	(cached)
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/persistence	(cached)
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/transport	(cached)
+?   	aegisgate.dev/aegisgate/apps/control-api/publication	[no test files]
+?   	aegisgate.dev/aegisgate/apps/config-publisher/cmd/config-publisher	[no test files]
+ok  	aegisgate.dev/aegisgate/internal/configconsumer	(cached)
+ok  	aegisgate.dev/aegisgate/internal/configpublish	(cached)
+ok  	aegisgate.dev/aegisgate/internal/configreview	(cached)
+ok  	aegisgate.dev/aegisgate/internal/configrollout	(cached)
+ok  	aegisgate.dev/aegisgate/internal/configsnapshot	(cached)
+ok  	aegisgate.dev/aegisgate/internal/contracts	(cached)
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/cmd/fixtures	[no test files]
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/configlab	[no test files]
+ok  	aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab	(cached)
+cargo +1.99.1 test --workspace --locked --manifest-path apps/edge/Cargo.toml
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test shared_fixture_is_consumed_without_configuration_activation ... ok
+test negative_missing_file_does_not_disclose_path ... ok
+test negative_malformed_and_oversized_inputs_rejected_without_echo ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test offline_check_reports_unready ... ok
+test negative_runtime_cannot_be_enabled_by_untrusted_flags ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 8 tests
+test tests::generation_is_monotonic_and_bounded ... ok
+test tests::negative_generation_replay_and_rollback_denied ... ok
+test tests::negative_oversized_error_rejected_before_parsing ... ok
+test tests::negative_untrusted_codes_and_messages_denied ... ok
+test tests::negative_diagnostics_never_echo_secret_input ... ok
+test tests::valid_wire_round_trip ... ok
+test tests::negative_noncanonical_or_nonrandom_uuid_denied ... ok
+test tests::negative_unknown_duplicate_fields_and_trailing_data_denied ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test tests::negative_bootstrap_never_authorizes_or_becomes_ready ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+cargo +1.99.1 test --workspace --locked --manifest-path spikes/hyper/Cargo.toml
+
+running 4 tests
+test config::tests::authority_rejects_ambiguous_hosts ... ok
+test config::tests::invalid_manifest_cannot_bootstrap ... ok
+test tests::preserved_encoded_targets_survive_uri_and_policy_layers ... ok
+test tests::parsed_policy_rejects_ambiguous_authority_and_framing ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm run contracts:test
+
+> aegisgate-contract-tools@0.0.0 contracts:test
+> node --test scripts/contracts.test.mjs
+
+✔ foundation error fixture follows generated JSON schema (44.579633ms)
+✔ negative: unknown fields, tenant header injection, malformed IDs and unbounded errors rejected (18.322999ms)
+✔ negative: intentionally broken schema and operation changes fail compatibility (10.038841ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 726.703742
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard test
+
+> @aegisgate/dashboard@0.1.0 test
+> node --test tests/unit.test.mjs
+
+✔ unconfigured dashboard never advertises live tenant services (0.858545ms)
+✔ browser security policy blocks framing and external connections on every path (0.414575ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 69.633945
+mkdir -p .local/bin
+GOTOOLCHAIN=go1.27.4 go build -o .local/bin/control-api ./apps/control-api/cmd/control-api
+GOTOOLCHAIN=go1.27.4 go build -o .local/bin/config-publisher ./apps/config-publisher/cmd/config-publisher
+GOTOOLCHAIN=go1.27.4 go build -o .local/bin/fixtures ./packages/test-fixtures/cmd/fixtures
+cargo +1.99.1 build --workspace --locked --manifest-path apps/edge/Cargo.toml
+cargo +1.99.1 build --workspace --locked --manifest-path spikes/hyper/Cargo.toml
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run build
+
+> @aegisgate/dashboard@0.1.0 build
+> NEXT_TELEMETRY_DISABLED=1 next build --webpack
+
+▲ Next.js 16.4.6 (webpack)
+✓ Running next.config.mjs took 20ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1015ms
+  Running TypeScript ...
+  Finished TypeScript in 1130ms ...
+  Collecting page data using 4 workers ...
+  Generating static pages using 4 workers (0/3) ...
+✓ Generating static pages using 4 workers (3/3) in 415ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ○ /
+└ ○ /_not-found
+
+
+○  (Static)  prerendered as static content
+
+python3 scripts/dev-secrets.py
+Local development secrets ready (material not logged)
+python3 scripts/build-fixture-images.py
+Local fixture images built and locked by immutable image ID; no publication
+docker compose --env-file .local/compose.env --env-file .local/fixture-images.env -f infra/compose/compose.yaml up -d --wait --wait-timeout 90
+AEGIS_TENANCY_INTEGRATION=1 GOTOOLCHAIN=go1.27.4 go test -race ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/... -run Integration -count=1
+?   	aegisgate.dev/aegisgate/apps/control-api/cmd/control-api	[no test files]
+?   	aegisgate.dev/aegisgate/apps/control-api/internal/application	[no test files]
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/domain	1.018s [no tests to run]
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/identity	1.051s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/persistence	15.100s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/transport	24.456s
+?   	aegisgate.dev/aegisgate/apps/control-api/publication	[no test files]
+?   	aegisgate.dev/aegisgate/apps/config-publisher/cmd/config-publisher	[no test files]
+ok  	aegisgate.dev/aegisgate/internal/configconsumer	1.076s [no tests to run]
+ok  	aegisgate.dev/aegisgate/internal/configpublish	3.563s
+ok  	aegisgate.dev/aegisgate/internal/configreview	1.073s [no tests to run]
+ok  	aegisgate.dev/aegisgate/internal/configrollout	1.577s
+ok  	aegisgate.dev/aegisgate/internal/configsnapshot	1.071s [no tests to run]
+ok  	aegisgate.dev/aegisgate/internal/contracts	1.029s [no tests to run]
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/cmd/fixtures	[no test files]
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/configlab	[no test files]
+ok  	aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab	1.736s
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" "$(scripts/node-path.sh)" scripts/contract-integration.mjs
+PASS: actual OpenAPI-generated Go envelope consumed by Rust CLI and validated against JSON Schema
+python3 scripts/integration.py
+PASS: local Postgres transaction + credential positive/negative, authenticated Redis/NATS, JetStream, TLS origin + wrong-host/untrusted negatives, loopback/digest policy
+python3 scripts/fixture-image-integration.py
+PASS: exact local Postgres image fresh initialization, su-exec UID drop, persisted-volume restart and password positive/negative; no public port
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run integration
+
+> @aegisgate/dashboard@0.1.0 integration
+> node --test tests/integration.test.mjs
+
+✔ local Next.js app serves public status and denies tenant-resource paths (635.788249ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 731.27911
+python3 scripts/dev-secrets.test.py
+python3 scripts/image_identity_test.py
+GOTOOLCHAIN=go1.27.4 go test -race ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/... -run 'Negative|IntegrationLocalPKI' -count=1
+?   	aegisgate.dev/aegisgate/apps/control-api/cmd/control-api	[no test files]
+?   	aegisgate.dev/aegisgate/apps/control-api/internal/application	[no test files]
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/domain	1.019s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/identity	1.312s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/persistence	1.066s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/transport	1.926s
+?   	aegisgate.dev/aegisgate/apps/control-api/publication	[no test files]
+?   	aegisgate.dev/aegisgate/apps/config-publisher/cmd/config-publisher	[no test files]
+ok  	aegisgate.dev/aegisgate/internal/configconsumer	1.420s
+ok  	aegisgate.dev/aegisgate/internal/configpublish	1.144s
+ok  	aegisgate.dev/aegisgate/internal/configreview	1.087s [no tests to run]
+ok  	aegisgate.dev/aegisgate/internal/configrollout	1.097s
+ok  	aegisgate.dev/aegisgate/internal/configsnapshot	1.223s
+ok  	aegisgate.dev/aegisgate/internal/contracts	1.043s [no tests to run]
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/cmd/fixtures	[no test files]
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/configlab	[no test files]
+ok  	aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab	1.727s
+cargo +1.99.1 test --workspace --locked --manifest-path apps/edge/Cargo.toml negative_
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test negative_missing_file_does_not_disclose_path ... ok
+test negative_malformed_and_oversized_inputs_rejected_without_echo ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test negative_runtime_cannot_be_enabled_by_untrusted_flags ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+
+
+running 6 tests
+test tests::negative_generation_replay_and_rollback_denied ... ok
+test tests::negative_oversized_error_rejected_before_parsing ... ok
+test tests::negative_diagnostics_never_echo_secret_input ... ok
+test tests::negative_untrusted_codes_and_messages_denied ... ok
+test tests::negative_noncanonical_or_nonrandom_uuid_denied ... ok
+test tests::negative_unknown_duplicate_fields_and_trailing_data_denied ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+
+running 1 test
+test tests::negative_bootstrap_never_authorizes_or_becomes_ready ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" "$(scripts/node-path.sh)" --test --test-name-pattern='negative' scripts/contracts.test.mjs
+✔ negative: unknown fields, tenant header injection, malformed IDs and unbounded errors rejected (36.946214ms)
+✔ negative: intentionally broken schema and operation changes fail compatibility (6.902393ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 487.844038
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" "$(scripts/node-path.sh)" scripts/gate-selftest.mjs
+PASS: formatting, Go vet, schema compatibility and negative fixture reject deliberate defects; restored inputs pass

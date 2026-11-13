@@ -1,0 +1,147 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.07s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.10s
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.545s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 3.062s
+
+OK
+...............................
+----------------------------------------------------------------------
+Ran 31 tests in 0.102s
+
+OK
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.06s
+     Running unittests src/main.rs (apps/edge/target/debug/deps/config_agent-9b9476539948c025)
+     Running tests/error_contract.rs (apps/edge/target/debug/deps/error_contract-9a2ebe0b37bbadf3)
+     Running unittests src/main.rs (apps/edge/target/debug/deps/edge_server-8fedd0e3d252c8c9)
+     Running tests/bootstrap.rs (apps/edge/target/debug/deps/bootstrap-ff19012fff994869)
+     Running unittests src/lib.rs (apps/edge/target/debug/deps/edge_types-9fe729b93620f3b0)
+     Running unittests src/lib.rs (apps/edge/target/debug/deps/policy_engine-0c57bc4d36d0b17d)
+   Doc-tests edge_types
+   Doc-tests policy_engine
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.11s
+     Running unittests src/main.rs (spikes/hyper/target/debug/deps/aegisgate_hyper_feasibility-e4c90df2b14a02f2)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.03s
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.postgres
+#1 transferring dockerfile: 644B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395
+#2 DONE 1.9s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 102B done
+#3 DONE 0.0s
+
+#4 [1/4] FROM docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395
+#4 resolve docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 39B done
+#5 DONE 0.0s
+
+#6 [2/4] RUN apk add --no-cache krb5-libs=1.22.3-r0 libxslt=1.1.43-r4 su-exec=0.3-r0     && rm /usr/local/bin/gosu
+#6 CACHED
+
+#7 [3/4] COPY su-exec-wrapper.sh /usr/local/bin/gosu
+#7 CACHED
+
+#8 [4/4] RUN chmod 0755 /usr/local/bin/gosu     && /usr/local/bin/gosu postgres id -u | grep -qx 70
+#8 CACHED
+
+#9 exporting to image
+#9 exporting layers done
+#9 exporting manifest sha256:a0b1b4366e56ca38f5fa6084e53cbb7773e2b01fb0ff84391e5184bec8fba47a done
+#9 exporting config sha256:2a85fb76e2bb30167e8339b3e08d4148781d2882506c34053d3af2a5e6ba4205 done
+#9 naming to moby-dangling@sha256:a0b1b4366e56ca38f5fa6084e53cbb7773e2b01fb0ff84391e5184bec8fba47a done
+#9 unpacking to moby-dangling@sha256:a0b1b4366e56ca38f5fa6084e53cbb7773e2b01fb0ff84391e5184bec8fba47a done
+#9 DONE 0.0s
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.origin
+#1 transferring dockerfile: 658B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894
+#2 DONE 1.8s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 102B done
+#3 DONE 0.0s
+
+#4 [1/2] FROM docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894
+#4 resolve docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894 0.0s done
+#4 DONE 0.1s
+
+#5 [2/2] RUN rm -rf /usr/local/lib/python3.14/site-packages/*       /usr/local/lib/python3.14/ensurepip /root/.cache     && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.14     && python -I -c "import http.server, ssl; assert ssl.OPENSSL_VERSION"
+#5 CACHED
+
+#6 exporting to image
+#6 exporting layers done
+#6 exporting manifest sha256:96ecc820bddcd34ba08bfa9ababc57588e6a1ddce19ed5ef20e14a7261cb538e done
+#6 exporting config sha256:72a695d361743fd7888cf7bf26158ded55712bed32e79fc3a6916c921d11b398 done
+#6 naming to moby-dangling@sha256:96ecc820bddcd34ba08bfa9ababc57588e6a1ddce19ed5ef20e14a7261cb538e done
+#6 unpacking to moby-dangling@sha256:96ecc820bddcd34ba08bfa9ababc57588e6a1ddce19ed5ef20e14a7261cb538e 0.0s done
+#6 DONE 0.0s
+ Network aegisgate-04a-root_lab Creating 
+ Volume aegisgate-04a-root_postgres-data Creating 
+ Volume aegisgate-04a-root_postgres-data Creating 
+ Network aegisgate-04a-root_lab Creating 
+ Volume aegisgate-04a-root_nats-data Creating 
+ Volume aegisgate-04a-root_nats-data Creating 
+ Volume aegisgate-04a-root_nats-data Created 
+ Volume aegisgate-04a-root_nats-data Created 
+ Volume aegisgate-04a-root_postgres-data Created 
+ Volume aegisgate-04a-root_postgres-data Created 
+ Network aegisgate-04a-root_lab Created 
+ Network aegisgate-04a-root_lab Created 
+ Container aegisgate-04a-root-redis-1 Creating 
+ Container aegisgate-04a-root-postgres-1 Creating 
+ Container aegisgate-04a-root-nats-1 Creating 
+ Container aegisgate-04a-root-demo-origin-1 Creating 
+ Container aegisgate-04a-root-redis-1 Created 
+ Container aegisgate-04a-root-nats-1 Created 
+ Container aegisgate-04a-root-postgres-1 Created 
+ Container aegisgate-04a-root-demo-origin-1 Created 
+ Container aegisgate-04a-root-nats-1 Starting 
+ Container aegisgate-04a-root-demo-origin-1 Starting 
+ Container aegisgate-04a-root-postgres-1 Starting 
+ Container aegisgate-04a-root-redis-1 Starting 
+ Container aegisgate-04a-root-nats-1 Started 
+ Container aegisgate-04a-root-demo-origin-1 Started 
+ Container aegisgate-04a-root-postgres-1 Started 
+ Container aegisgate-04a-root-redis-1 Started 
+ Container aegisgate-04a-root-postgres-1 Waiting 
+ Container aegisgate-04a-root-redis-1 Waiting 
+ Container aegisgate-04a-root-nats-1 Waiting 
+ Container aegisgate-04a-root-demo-origin-1 Waiting 
+ Container aegisgate-04a-root-demo-origin-1 Healthy 
+ Container aegisgate-04a-root-nats-1 Healthy 
+ Container aegisgate-04a-root-redis-1 Healthy 
+ Container aegisgate-04a-root-postgres-1 Healthy 
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.549s
+
+OK
+...............................
+----------------------------------------------------------------------
+Ran 31 tests in 0.106s
+
+OK
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.01s
+     Running unittests src/main.rs (apps/edge/target/debug/deps/config_agent-9b9476539948c025)
+     Running tests/error_contract.rs (apps/edge/target/debug/deps/error_contract-9a2ebe0b37bbadf3)
+     Running unittests src/main.rs (apps/edge/target/debug/deps/edge_server-8fedd0e3d252c8c9)
+     Running tests/bootstrap.rs (apps/edge/target/debug/deps/bootstrap-ff19012fff994869)
+     Running unittests src/lib.rs (apps/edge/target/debug/deps/edge_types-9fe729b93620f3b0)
+     Running unittests src/lib.rs (apps/edge/target/debug/deps/policy_engine-0c57bc4d36d0b17d)

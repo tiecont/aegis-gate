@@ -1,0 +1,108 @@
+{
+  "source_commit": "2133b6303c05158c37ed539c23347376d67b0b3c",
+  "source_tree": "30254ee38e17b3ed2e22c5b50e7aed2ef6e53f5d",
+  "source_clean": true,
+  "started_at": "2026-11-13T10:25:47.915Z",
+  "lock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "invocation": "flock /tmp/aegisgate-sprint02-fixtures.lock node scripts/sprint04a-gates.mjs <fresh-output>",
+  "node": "v26.13.0",
+  "compose_project": "aegisgate-04a-root",
+  "commands": [
+    {
+      "label": "check",
+      "command": "make",
+      "args": [
+        "check"
+      ],
+      "started_at": "2026-11-13T10:25:47.916Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-13T10:27:07.092Z",
+      "streams": [
+        {
+          "file": "evidence/sprint04a-root/gates-03/check.stdout.log",
+          "sha256": "99904fb885432becaba4de78bb625ab18b86b8771321413c60e26a7c633f707d"
+        },
+        {
+          "file": "evidence/sprint04a-root/gates-03/check.stderr.log",
+          "sha256": "876c2024842f8c0ed0a4cf29181e9fd53a015169e5f63f4b65c20a7033de859f"
+        }
+      ]
+    },
+    {
+      "label": "security-scan",
+      "command": "make",
+      "args": [
+        "security-scan"
+      ],
+      "started_at": "2026-11-13T10:27:07.093Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-13T10:28:07.464Z",
+      "streams": [
+        {
+          "file": "evidence/sprint04a-root/gates-03/security-scan.stdout.log",
+          "sha256": "8f9869b2cf6f974be8699ef4de9ec66f30d21fe378b4cfdf12835c8f35244b32"
+        },
+        {
+          "file": "evidence/sprint04a-root/gates-03/security-scan.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "cleanup",
+      "command": "make",
+      "args": [
+        "dev-down"
+      ],
+      "started_at": "2026-11-13T10:28:07.465Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-13T10:28:18.035Z",
+      "streams": [
+        {
+          "file": "evidence/sprint04a-root/gates-03/cleanup.stdout.log",
+          "sha256": "54a436c053a8cdd9d5d9c057ba2076828e35449457b540d8847a89df29ff6a90"
+        },
+        {
+          "file": "evidence/sprint04a-root/gates-03/cleanup.stderr.log",
+          "sha256": "8a22888b96dfb0bfd3dcf8b1a1fd49ec55e22edc34709d202d3e3dc1e69622aa"
+        }
+      ]
+    },
+    {
+      "label": "cleanup-volumes",
+      "command": "docker",
+      "args": [
+        "compose",
+        "-p",
+        "aegisgate-04a-root",
+        "--env-file",
+        ".local/compose.env",
+        "--env-file",
+        ".local/fixture-images.env",
+        "-f",
+        "infra/compose/compose.yaml",
+        "down",
+        "--volumes"
+      ],
+      "started_at": "2026-11-13T10:28:18.035Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-13T10:28:18.228Z",
+      "streams": [
+        {
+          "file": "evidence/sprint04a-root/gates-03/cleanup-volumes.stdout.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04a-root/gates-03/cleanup-volumes.stderr.log",
+          "sha256": "e11d1608aeabab6fef6c628d6932e6d33cc0ee80a613657f55524338c04af56f"
+        }
+      ]
+    }
+  ],
+  "ended_at": "2026-11-13T10:28:18.231Z",
+  "passed": true
+}
