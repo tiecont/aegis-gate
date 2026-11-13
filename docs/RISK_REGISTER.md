@@ -50,6 +50,10 @@ source/receipt/scanner acceptance is213416c. Exact final-head/main hosted
 verification is a separate merge requirement recorded by PR13 and addenda.
 Module01 NO-GO,04-12 LOCKED, production BLOCKED; no risk exception recorded.
 
+PR13 final head9600b120 and merge826656f both pass the two required hosted
+jobs in43475127149/43476258655. The additive Sprint04-B closeout receipt binds
+the completed integration gate; it closes no runtime/production security risk.
+
 ## Sprint04-A disposition
 
 R01/R04 remain blocking. Inspected Envoy1.40.2 Balsa source irreversibly removes
