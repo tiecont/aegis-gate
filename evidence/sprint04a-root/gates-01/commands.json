@@ -1,0 +1,76 @@
+{
+  "source_commit": "9beace00414f8eb8a9dd9ebc00f8abe8e9ee29ee",
+  "source_tree": "081d8e87ccd40037dbf848f88a520570fe3084b4",
+  "source_clean": true,
+  "started_at": "2026-11-13T10:19:01.630Z",
+  "lock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "invocation": "flock /tmp/aegisgate-sprint02-fixtures.lock node scripts/sprint04a-gates.mjs <fresh-output>",
+  "node": "v26.13.0",
+  "commands": [
+    {
+      "label": "check",
+      "command": "make",
+      "args": [
+        "check"
+      ],
+      "started_at": "2026-11-13T10:19:01.631Z",
+      "exit_code": 2,
+      "signal": null,
+      "ended_at": "2026-11-13T10:20:22.747Z",
+      "streams": [
+        {
+          "file": "evidence/sprint04a-root/gates-01/check.stdout.log",
+          "sha256": "e00492bf6574674a1f8178a61c8ccbb4cea691506653518a339d4069761bf6e7"
+        },
+        {
+          "file": "evidence/sprint04a-root/gates-01/check.stderr.log",
+          "sha256": "1d12d0d1568d4210a4253ff98214d365aeff69f31a5d49b3e059d274d5ef8f16"
+        }
+      ]
+    },
+    {
+      "label": "security-scan",
+      "command": "make",
+      "args": [
+        "security-scan"
+      ],
+      "started_at": "2026-11-13T10:20:22.751Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-13T10:21:23.219Z",
+      "streams": [
+        {
+          "file": "evidence/sprint04a-root/gates-01/security-scan.stdout.log",
+          "sha256": "8f9869b2cf6f974be8699ef4de9ec66f30d21fe378b4cfdf12835c8f35244b32"
+        },
+        {
+          "file": "evidence/sprint04a-root/gates-01/security-scan.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "cleanup",
+      "command": "make",
+      "args": [
+        "dev-down"
+      ],
+      "started_at": "2026-11-13T10:21:23.220Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-13T10:21:33.891Z",
+      "streams": [
+        {
+          "file": "evidence/sprint04a-root/gates-01/cleanup.stdout.log",
+          "sha256": "54a436c053a8cdd9d5d9c057ba2076828e35449457b540d8847a89df29ff6a90"
+        },
+        {
+          "file": "evidence/sprint04a-root/gates-01/cleanup.stderr.log",
+          "sha256": "3b5804977a47f4adf7b5cd292b6726ff728744441e2c1730c82300bb6ed733e4"
+        }
+      ]
+    }
+  ],
+  "ended_at": "2026-11-13T10:21:33.896Z",
+  "passed": false
+}

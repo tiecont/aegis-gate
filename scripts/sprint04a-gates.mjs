@@ -9,6 +9,8 @@ assert.ok(output && !fs.existsSync(output), "fresh output required");
 const git = (...args) => execFileSync("git", args, { encoding: "utf8" }).trim();
 assert.equal(git("status", "--porcelain", "--untracked-files=no"), "");
 fs.mkdirSync(output, { recursive: true });
+const composeProject = "aegisgate-04a-root";
+process.env.COMPOSE_PROJECT_NAME = composeProject;
 const receipt = {
   source_commit: git("rev-parse", "HEAD"),
   source_tree: git("rev-parse", "HEAD^{tree}"),
@@ -18,6 +20,7 @@ const receipt = {
   invocation:
     "flock /tmp/aegisgate-sprint02-fixtures.lock node scripts/sprint04a-gates.mjs <fresh-output>",
   node: process.version,
+  compose_project: composeProject,
   commands: [],
 };
 const hash = (file) =>
@@ -55,6 +58,20 @@ try {
   passed = (await run("security-scan", "make", ["security-scan"])) && passed;
 } finally {
   passed = (await run("cleanup", "make", ["dev-down"])) && passed;
+  passed =
+    (await run("cleanup-volumes", "docker", [
+      "compose",
+      "-p",
+      composeProject,
+      "--env-file",
+      ".local/compose.env",
+      "--env-file",
+      ".local/fixture-images.env",
+      "-f",
+      "infra/compose/compose.yaml",
+      "down",
+      "--volumes",
+    ])) && passed;
 }
 // Compose's rendered config contains disposable credentials. Retain scanner
 // results and provenance, never the rendered service environment or archives.
