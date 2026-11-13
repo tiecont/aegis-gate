@@ -89,10 +89,13 @@ type Consumer struct {
 	initialized   bool
 	startupErr    error
 	recoveryFloor uint64
+	draining      bool
+	drainDone     chan struct{}
+	drained       atomic.Bool
 }
 
 func New(options Options) (*Consumer, error) {
-	if options.DeploymentID == "" || options.Trust == nil || options.Persistence == nil || options.MaxStaleness <= 0 || options.MaxStaleness > 24*time.Hour || options.MaxReaders < 1 || options.MaxReaders > 4096 || options.MaxRetainedGenerations < 1 || options.MaxRetainedGenerations > 8 {
+	if options.DeploymentID == "" || options.Trust == nil || options.Persistence == nil || options.MinimumGeneration > configsnapshot.MaxGeneration || options.MaxStaleness <= 0 || options.MaxStaleness > 24*time.Hour || options.MaxReaders < 1 || options.MaxReaders > 4096 || options.MaxRetainedGenerations < 1 || options.MaxRetainedGenerations > 8 {
 		return nil, errors.New("invalid consumer options")
 	}
 	if options.Clock == nil {
@@ -168,6 +171,9 @@ func (c *Consumer) Apply(ctx context.Context, notice Notice, raw []byte) Ack {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	if ctx.Err() != nil {
+		return c.result(notice, false, "cancelled")
+	}
+	if c.draining {
 		return c.result(notice, false, "cancelled")
 	}
 	if err := c.startupLocked(ctx); err != nil {
@@ -277,6 +283,9 @@ func (c *Consumer) UpdateTrust(trust *configsnapshot.TrustStore) error {
 }
 
 func (c *Consumer) readyLocked() bool {
+	if c.draining {
+		return false
+	}
 	active := c.active.Load()
 	if active == nil {
 		return false
@@ -331,12 +340,40 @@ type Captured struct {
 	view     *view
 }
 
+// Drain permanently stops admission and waits for captured operations to close.
+// A deadline is mandatory. On expiry all remaining capture access is refused;
+// the caller must separately cancel engine I/O and remove upstream traffic.
+// Restart requires a new consumer and authenticated provisioning, not an undrain.
+func (c *Consumer) Drain(ctx context.Context) error {
+	if _, ok := ctx.Deadline(); !ok {
+		return errors.New("drain deadline required")
+	}
+	c.mu.Lock()
+	if !c.draining {
+		c.draining = true
+		c.drainDone = make(chan struct{})
+		if c.readerCount == 0 {
+			close(c.drainDone)
+		}
+	}
+	done := c.drainDone
+	c.mu.Unlock()
+	select {
+	case <-done:
+		c.drained.Store(true)
+		return nil
+	case <-ctx.Done():
+		c.drained.Store(true)
+		return ctx.Err()
+	}
+}
+
 // Resolve uses exact, case-sensitive path/method matching and canonical hostnames
 // as defined by schema 1.0. Returned slices are copies, never active storage.
 func (r *Captured) Resolve(host, path, method string) (CompiledRoute, bool) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
-	if r.view == nil {
+	if r.view == nil || r.consumer.drained.Load() {
 		return CompiledRoute{}, false
 	}
 	value, ok := r.view.routes[routeKey{host, path, method}]
@@ -351,7 +388,7 @@ func (r *Captured) Resolve(host, path, method string) (CompiledRoute, bool) {
 func (r *Captured) Snapshot() (configsnapshot.Envelope, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
-	if r.view == nil {
+	if r.view == nil || r.consumer.drained.Load() {
 		return configsnapshot.Envelope{}, errors.New("capture closed")
 	}
 	// Return an independent copy: exported schema slices cannot mutate the active
@@ -379,6 +416,9 @@ func (r *Captured) Close() {
 		delete(c.readers, r.view)
 	}
 	c.readerCount--
+	if c.draining && c.readerCount == 0 {
+		close(c.drainDone)
+	}
 	r.view = nil
 }
 
