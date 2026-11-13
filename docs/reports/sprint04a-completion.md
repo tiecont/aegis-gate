@@ -60,7 +60,7 @@ research collection is not a runtime proof.
 | Historical Envoy1.40.2, Sprint03-A E |69/75 | E1-E6 below |
 | Historical Hyper1.12.0, Sprint03-A E |70/75 | H1-H5 below |
 | Historical Envoy Host-retention, Sprint03-B F |69/75 | E1-E6 below |
-| Sprint04-A B attempt02 unchanged |68/75 | E1-E6 plus `weighted-load-balancing-and-active-health-checks` (24 !==30; exact recorded ID in inventory) |
+| Sprint04-A B attempt02 unchanged |68/75 | E1-E6 plus `weighted-health-check-failover-and-recovery` (24 !==30) |
 | Sprint04-A B attempt02 diagnostic |69/75 | E1-E6 below |
 | Sprint04-A B attempt05 unchanged and diagnostic |69/75 each | E1-E6 below |
 | Independent E fresh reproduction | pending | No result claimed yet |
