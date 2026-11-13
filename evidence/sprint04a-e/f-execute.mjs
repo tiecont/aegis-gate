@@ -7,7 +7,18 @@ import { execFileSync, spawnSync } from 'node:child_process';
 const [cwd, output] = process.argv.slice(2);
 assert.ok(cwd?.startsWith('/tmp/aegisgate-04a-e/.local/review/f-'));
 assert.ok(output?.startsWith('/tmp/aegisgate-04a-e/evidence/sprint04a-e/f-'));
-const { assertLock } = await import(path.join(cwd, 'spikes/envoy/wire-fixtures.mjs'));
+function assertLock() {
+  const inode = fs.statSync('/tmp/aegisgate-sprint02-fixtures.lock').ino;
+  const ancestors = new Set(); let pid = process.ppid;
+  while (pid > 1 && !ancestors.has(pid)) {
+    ancestors.add(pid);
+    pid = Number(fs.readFileSync(`/proc/${pid}/status`, 'utf8').match(/^PPid:\s+(\d+)/m)[1]);
+  }
+  assert.ok(fs.readFileSync('/proc/locks', 'utf8').split('\n').some((line) => {
+    const fields = line.trim().split(/\s+/);
+    return fields[1] === 'FLOCK' && fields[3] === 'WRITE' && ancestors.has(Number(fields[4])) && fields[5]?.endsWith(`:${inode}`);
+  }), 'shared lock must cover complete fixture lifetime');
+}
 assertLock();
 assert.equal(execFileSync('git', ['status', '--porcelain'], { cwd, encoding: 'utf8' }).trim(), '');
 fs.mkdirSync(output, { recursive: true, mode: 0o700 });
