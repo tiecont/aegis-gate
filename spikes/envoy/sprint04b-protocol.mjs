@@ -24,6 +24,8 @@ const material = pki(fixture); const ca = material.read('ca.pem');
 const servers = []; const sockets = new Set(); const sessions = new Set(); const handlers = [];
 let child; let observer; let port; let log; let parserErrors = 0; let transportErrors = 0; let nativeId = 0;
 const nativeIds = new WeakMap();
+const unavailableNativeTrace = { available: false,
+  reason: 'Node native HTTP2 consumes TLSSocket internally; JavaScript data tap is not a wire observer. Use separate raw-client and origin relay evidence.' };
 const preface = Buffer.from('PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n');
 const literal = (n, v) => Buffer.concat([Buffer.from([0, n.length]), Buffer.from(n), Buffer.from([v.length]), Buffer.from(v)]);
 const headerBlock = (authority = 'edge-b.test', target = '/') => Buffer.concat([
@@ -51,10 +53,10 @@ async function connect() {
   await bound(once(s, 'secureConnect')); assert.equal(s.alpnProtocol, 'h2'); return s;
 }
 async function nativeClient() {
-  const s = await connect(); const trace = traceFrames(); s.on('data', trace.consume);
+  const s = await connect();
   const c = http2.connect(`https://127.0.0.1:${port}`, { createConnection: () => s });
   sessions.add(c); c.on('error', () => {}); c.on('close', () => sessions.delete(c));
-  await bound(once(c, 'connect')); return { c, trace, tls: identity(s) };
+  await bound(once(c, 'connect')); return { c, socket: s, tls: identity(s) };
 }
 async function rawCase(bytes, settled) {
   const s = await connect(); const ident = identity(s); const trace = traceFrames(); const lifecycle = []; const started = performance.now();
@@ -137,20 +139,25 @@ try {
     ['HEADERS-stream-zero', frame(1, 5, 0, headerBlock())], ['zero-WINDOW_UPDATE', frame(8, 0, 0, Buffer.alloc(4))],
     ['uppercase-header-name', frame(1, 5, 1, Buffer.concat([headerBlock(), literal('X-Lab', 'x')]))],
     ['connection-specific-header', frame(1, 5, 1, Buffer.concat([headerBlock(), literal('connection', 'close')]))],
-  ]) for (const settled of [false, true]) await probe(`${name}-${settled ? 'settled' : 'immediate'}`, () => rawCase(bytes, settled));
+  ]) for (const settled of [false, true]) await probe(`${name}-${settled ? 'settled' : 'immediate'}`, async () => {
+    const observed = await rawCase(bytes, settled);
+    return { ...observed, historical_error_frame_expectation: observed.error_frame_observed ? 'observed; historical results unchanged' : 'FAIL retained' };
+  });
 
   for (const combined of [true, false]) await probe(`userinfo-native-${combined ? 'after-Host-and-authority-controls' : 'independent'}`, async () => {
     const observations = [];
     for (const extra of combined ? [{ host: 'edge-a.test' }, { ':authority': 'edge-a.test' }, { ':authority': 'user@edge-b.test' }] : [{ ':authority': 'user@edge-b.test' }]) {
-      const { c, trace, tls: ident } = await nativeClient(); const events = []; const started = performance.now(); let local = false;
+      const { c, socket, tls: ident } = await nativeClient(); const events = []; const started = performance.now(); let local = false;
       c.on('goaway', (code, last) => events.push({ event: 'session-goaway', code, last, ms: performance.now() - started }));
       c.on('error', (e) => events.push({ event: 'session-error', code: e.code, ms: performance.now() - started }));
+      c.on('close', () => events.push({ event: 'session-close', local_cleanup_started: local, ms: performance.now() - started }));
+      for (const event of ['end', 'close']) socket.on(event, () => events.push({ event: `socket-${event}`, local_cleanup_started: local, ms: performance.now() - started }));
       const s = c.request({ ':method': 'GET', ':path': '/', ':authority': 'edge-b.test', ...extra }); s.on('error', () => {});
       for (const event of ['response', 'end', 'close', 'aborted', 'error']) s.on(event, (v) => events.push({ event,
         ms: performance.now() - started, local_cleanup_started: local, status: v?.[':status'], code: v?.code, rst_code: s.rstCode }));
       s.resume(); s.end();
       await delay(3200);
-      observations.push({ headers: extra, tls: ident, events, received: structuredClone(trace.result),
+      observations.push({ headers: extra, tls: ident, events, received_wire_trace: unavailableNativeTrace,
         stream_closed_before_local_cleanup: s.closed, rst_code_before_local_cleanup: s.rstCode, observation_ms: 3200,
         historical_response_and_end_expectation: events.some((e) => e.event === 'response') && events.some((e) => e.event === 'end') ? 'observed' : 'FAIL retained' });
       local = true; s.destroy(); c.destroy();
@@ -160,7 +167,7 @@ try {
   await probe('userinfo-raw-settled', () => rawCase(frame(1, 5, 1, headerBlock('user@edge-b.test')), true));
 
   for (const target of ['/large8', '/large32']) await probe(`paused-native-reader-${target.slice(1)}`, async () => {
-    const { c, trace, tls: ident } = await nativeClient(); const s = c.request({ ':path': target, ':authority': 'edge-b.test' });
+    const { c, tls: ident } = await nativeClient(); const s = c.request({ ':path': target, ':authority': 'edge-b.test' });
     s.on('error', () => {}); s.end(); await bound(once(s, 'response')); s.pause();
     await until(() => handlers.some((r) => r.path === target)); const row = handlers.findLast((r) => r.path === target);
     const samples = [];
@@ -168,21 +175,25 @@ try {
       if (ms) await delay(ms === 200 ? 200 : 300);
       samples.push({ after_ms: ms, produced: row.produced, pauses: row.pauses, origin_last_backpressure_writable_length: row.writable_length,
         client_readable_length: s.readableLength, stream_state: s.state, session_state: c.state,
-        received: structuredClone(trace.result), resources: resource() });
+        received_wire_trace: unavailableNativeTrace, origin_wire_at_sample: observer.snapshot(), origin_closed: row.closed, resources: resource() });
     }
+    const closedBeforeCancel = row.closed;
     const cancel = performance.now(); s.close(http2.constants.NGHTTP2_CANCEL); await until(() => row.closed, 2500);
     c.destroy();
-    return { tls: ident, samples, cancel_ms: row.closed_ms - cancel, origin_rst_code: row.rst_code,
+    return { tls: ident, samples, origin_closed_before_client_cancel: closedBeforeCancel,
+      cancel_ms: closedBeforeCancel ? null : row.closed_ms - cancel, origin_rst_code: row.rst_code,
+      cancellation_proven: !closedBeforeCancel, actual_cancel_started_ms: cancel,
       historical_8MiB_expectation: target === '/large8' && samples[1].produced >= 8388608 ? 'FAIL retained' : 'not a historical PASS',
       caveat: 'producer write count, transport DATA/window state and process RSS are distinct measurements' };
   });
   await probe('partial-upload-native-cancel', async () => {
-    const { c, trace } = await nativeClient(); const s = c.request({ ':method': 'POST', ':path': '/upload', ':authority': 'edge-b.test' });
+    const { c } = await nativeClient(); const s = c.request({ ':method': 'POST', ':path': '/upload', ':authority': 'edge-b.test' });
     s.on('error', () => {}); s.write(Buffer.alloc(16384));
     await until(() => handlers.some((r) => r.path === '/upload' && r.received === 16384));
     const row = handlers.findLast((r) => r.path === '/upload'); const start = performance.now();
     s.close(http2.constants.NGHTTP2_CANCEL); await until(() => row.closed, 2500); c.destroy();
-    return { received: row.received, cancel_ms: row.closed_ms - start, origin_rst_code: row.rst_code, downstream_frames: trace.result };
+    return { received: row.received, cancel_ms: row.closed_ms - start, origin_rst_code: row.rst_code, downstream_wire_trace: unavailableNativeTrace,
+      origin_wire: observer.snapshot() };
   });
   await probe('WebSocket-two-messages-and-close', async () => {
     const ws = new WebSocket(`wss://127.0.0.1:${port}/ws`, { servername: 'edge-a.test', ca, rejectUnauthorized: true,

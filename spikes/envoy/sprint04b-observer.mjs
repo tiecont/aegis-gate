@@ -3,12 +3,19 @@ import tls from 'node:tls';
 import { decoder } from './wire-observer.mjs';
 
 export function traceFrames(client = false) {
-  const result = { bytes: 0, frames: 0, data_bytes: 0, headers: 0, events: [], omitted: 0 };
+  const result = { bytes: 0, frames: 0, data_bytes: 0, headers: 0, streams: {}, events: [], omitted: 0 };
   const decode = decoder({ client, emit: (event) => {
     if (event.kind === 'frame') {
       result.frames++;
       if (event.type === 0) result.data_bytes += event.length;
       if (event.type === 1) result.headers++;
+      if (event.stream && (Object.hasOwn(result.streams, event.stream) || Object.keys(result.streams).length < 32)) {
+        const s = result.streams[event.stream] ??= { frames: 0, data_bytes: 0, headers: 0, resets: [] };
+        s.frames++;
+        if (event.type === 0) s.data_bytes += event.length;
+        if (event.type === 1) s.headers++;
+        if (event.type === 3) s.resets.push(event.error_code);
+      }
     }
     if (event.kind !== 'frame' || event.type !== 0) {
       if (result.events.length < 256) result.events.push({ ms: performance.now(), ...event });
