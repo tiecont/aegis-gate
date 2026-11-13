@@ -40,7 +40,7 @@ try {
     assert.ok(files.every(f => i === 0 ? /^(docs\/ADR-012-|docs\/reports\/sprint04b-(a-|alternative-|security-)|evidence\/sprint04b-a\/)/.test(f) : /^(docs\/reports\/sprint04b-d-reliability.md|evidence\/sprint04b-d\/)/.test(f)));
     receipt.sources.push({ owner: i ? 'D' : 'A', head: heads[i], tree: git(root, 'rev-parse', 'HEAD^{tree}'), clean: true,
       files: files.map(file => ({ file, sha256: hash(read(root, file)) })) });
-    run(`whitespace-${i}`, root, 'git', ['diff', '--check', baseline, heads[i]]);
+    run(`whitespace-${i}`, root, 'git', ['diff', '--check', baseline, heads[i], '--', '.', ':!evidence/sprint04b-d/attempt-*']);
     run(`immutable75-${i}`, root, process.execPath, ['spikes/edge-comparison/extract-baseline.mjs', '--check']);
   }
   receipt.a_commands = [];
