@@ -17,7 +17,7 @@ PR receipts: pending. No component PR or approval is invented.
 | B / `test/module01-origin-boundary` | `93dc122`; [origin report](sprint04a-b-origin-boundary.md) | Fresh69/75 and classified control bytes; E acceptance pending |
 | C / `research/module01-upstream-capability` | `6acbe0f`; [upstream matrix](sprint04a-c-upstream.md) | No eligible released alternative; E acceptance pending |
 | D / `fix/dashboard-dependency-resolution` | `b42bae1`; [dependency report](sprint04a-d-dependencies.md) | Compatible existing set; TS7 upstream peer stop; E pending |
-| F / `hardening/module03-local-recovery` | [recovery report](sprint04a-f-config-recovery.md) | Implementation/review pending |
+| F / `hardening/module03-local-recovery` | source `99e41a2438d42c9588620d7766d2b03ebc557a14`, handoff `bf5785e`; [recovery report](sprint04a-f-config-recovery.md) | Independent source acceptance; final report/scan pending |
 | E / `review/sprint04a-security` | [independent verdict](sprint04a-e-security-review.md) | Review/reproduction in progress |
 
 Historical pre-rebase branches `fix/module01-envoy-strict-ingress`,
@@ -63,7 +63,7 @@ research collection is not a runtime proof.
 | Sprint04-A B attempt02 unchanged |68/75 | E1-E6 plus `weighted-health-check-failover-and-recovery` (24 !==30) |
 | Sprint04-A B attempt02 diagnostic |69/75 | E1-E6 below |
 | Sprint04-A B attempt05 unchanged and diagnostic |69/75 each | E1-E6 below |
-| Independent E fresh reproduction | pending | No result claimed yet |
+| Independent E fresh unchanged and diagnostic |69/75 each | E1-E6 below; same seven additional probe failures |
 
 Pingora failure IDs (historical):
 
@@ -154,6 +154,31 @@ zero vulnerabilities. No force/legacy-peer mode, manifest/lock edit, minimatch
 override removal or advisory ignore is used. The major update remains an exact
 upstream peer-support stop. PR11 is not redone.
 
+## Local Recovery Changes
+
+F adds bounded `Consumer.Drain`, rejects impossible provisioning floors, and
+adds explicit `Store.PrunePublicationArtifacts` under PostgreSQL SHARE/NOWAIT
+reference locks through deletion/fsync. All durable outbox and rollout/audit
+references, plus externally coordinated LKG/capture reservations, are retained.
+Missing tables, conflicting writers, invalid references or excessive keep sets
+refuse cleanup. Only aged unreferenced orphan objects can be pruned; immutable
+approval/journal history is retained.
+
+Six new tests exercise encrypted full-state rollback against the independently
+provisioned floor, cache-key failure, signer outage/staged retry/retirement,
+captured-generation grace/deadline drain, disconnected security expiry, and
+durable-reference/archive cleanup with restart. Race-enabled integration in
+all seven Module03 packages passes without skips, plus vet and the frozen
+Node/OpenSSL vector. E independently reproduces those checks on99e41a2.
+
+The external generation floor is an existing provisioning interface, not an
+implemented hardware counter/service. Drain cannot recall copied values or
+terminate engine I/O/LB traffic. Archive coverage is verified before passing a
+checksum to CleanupAudit; a checksum string alone is not archive proof. The
+[recovery runbook](../CONFIG_RECOVERY_RUNBOOK.md) documents these limits and
+production secret custody, HA/backup, certificate lifecycle and emergency gaps.
+Snapshot v1 and all acceptance contracts remain unchanged; Module10 stays locked.
+
 ## Evidence And Acceptance
 
 Committed sources precede proofs. Receipts retain exact argv/cwd, source/tree,
@@ -169,8 +194,8 @@ lifetimes and cleanup hold `/tmp/aegisgate-sprint02-fixtures.lock`.
 | B locked `wire-run.mjs .../attempt05` |1; both75 runs69/75,23 probes16/7, cleanup verified |
 | B locked `wire-closeout.mjs --origin -tls-followup` |0;13 focused tests, immutable/provenance/scoped scans |
 | D `dashboard-reproduce.mjs` and compatible update |0 recorder; required TS7 nested failure1, others0 |
-| F focused/integration proof | pending |
-| E independent reproduction | pending |
+| F locked `sprint04a-f-evidence.mjs attempt-01` |0; race/integration seven packages, vet/vector, cleanup; manifest13 entries |
+| E independent B/D/A/C/F reproduction |0 reviewer receipts; B nested candidate/probes1 and TS7 nested1 are expected retained failures; final verdict pending |
 | Locked `make check` / `make security-scan` | pending |
 | Hosted `foundation-quality` / `supply-chain-security` | pending on exact integration head |
 
