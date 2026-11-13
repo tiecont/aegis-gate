@@ -26,14 +26,14 @@ assert.ok(status.split('\n').every(line => !line || /^evidence\/sprint04b-d\/att
 fs.mkdirSync(output, { recursive: true });
 const source = git('rev-parse', 'HEAD');
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
-const environment = { ...process.env, PATH: `${path.dirname(process.execPath)}:${process.env.PATH}`,
+const environment = { ...process.env, PATH: [path.dirname(process.execPath), process.env.AEGIS_D_GO_DIRECTORY, process.env.PATH].filter(Boolean).join(':'),
   AEGIS_NODE_BIN: process.execPath, GOTOOLCHAIN: 'go1.27.4', COMPOSE_PROJECT_NAME: 'aegisgate-04b-d' };
 const files = git('ls-files').split('\n').filter(name =>
   !name.startsWith('evidence/') && !name.startsWith('docs/reports/') && !name.startsWith('spikes/') ||
   name.startsWith('evidence/sprint04b-d/'));
 const json = (name, value) => fs.writeFileSync(path.join(output, name), JSON.stringify(value, null, 2) + '\n');
 json('source.json', { source_commit: source, source_tree: git('rev-parse', 'HEAD^{tree}'), initial_status: status,
-  cwd, fixture_lock: lock, lock_requested_at: process.env.AEGIS_D_LOCK_REQUESTED,
+  cwd, tool_path: environment.PATH, node_binary: nodeExecutable(), fixture_lock: lock, lock_requested_at: process.env.AEGIS_D_LOCK_REQUESTED,
   lock_acquired_before: new Date().toISOString(), project: environment.COMPOSE_PROJECT_NAME,
   files: files.map(name => ({ path: name, sha256: hash(fs.readFileSync(name)) })) });
 const records = [];
@@ -57,6 +57,7 @@ function run(label, argv, options = {}) {
 function pass(label, argv, options) { const result = run(label, argv, options); assert.equal(result.status, 0, label); return result; }
 function held(stage) { assert.equal(run(`lock-${stage}`, ['flock', '--nonblock', lock, 'true']).status, 1, 'fixture lock released early'); }
 const node = process.execPath;
+function nodeExecutable() { return process.execPath; }
 const npm = path.join(path.dirname(node), 'npm');
 const compose = ['docker', 'compose', '--env-file', '.local/compose.env', '--env-file', '.local/fixture-images.env', '-f', 'infra/compose/compose.yaml'];
 let composeAttempted = false;
@@ -64,6 +65,7 @@ let ok = false;
 let failure = null;
 try {
   held('before-setup');
+  pass('tool-locations', ['which', 'go', 'gofmt', 'cargo', 'rustc', 'node', 'npm', 'docker', 'gh']);
   pass('node-version', [node, '--version']);
   pass('npm-version', [npm, '--version']);
   pass('go-version', ['go', 'version']);
