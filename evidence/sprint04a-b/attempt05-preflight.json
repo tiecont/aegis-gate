@@ -1,0 +1,12 @@
+{
+  "source_commit": "9deb50b",
+  "cwd": "/tmp/aegisgate-04a-b",
+  "argv": ["flock", "/tmp/aegisgate-sprint02-fixtures.lock", ".local/toolchains/node/bin/node", "spikes/envoy/wire-run.mjs", "evidence/sprint04a-b/attempt05"],
+  "exit_code": 1,
+  "stage": "clean-source preflight, before evidence directory or fixtures",
+  "error": "AssertionError [ERR_ASSERTION]: commit sources before proof; actual '?? spikes/pingora/node_modules', expected ''",
+  "node": "v26.13.0",
+  "cause": "node_modules directory symlink is untracked rather than ignored by directory-only ignore pattern",
+  "repair": "Remove owned symlink; create ignored real node_modules directory containing ws and @grpc/grpc-js package symlinks to existing installation. No shared files changed.",
+  "no_fixture_started": true
+}
