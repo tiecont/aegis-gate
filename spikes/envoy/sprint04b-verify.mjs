@@ -47,7 +47,7 @@ try {
   assert.deepEqual(fresh75.tests.filter((t) => t.status !== 'pass').map((t) => t.name), original75.tests.filter((t) => t.status !== 'pass').map((t) => t.name));
   record.historical23 = { probes: 23, failed: fresh.failures, failed_count: fresh.failures.length };
   record.unchanged75 = { tests: 75, failed: fresh75.tests.filter((t) => t.status !== 'pass').map((t) => t.name) };
-  command('whitespace', 'git', ['diff', '--check', 'cbb5f71']);
+  command('whitespace', 'git', ['diff', '--check', 'cbb5f71', '--', 'spikes/envoy/sprint04b-*', 'docs/reports/sprint04b-c-protocol.md']);
   command('observer-transparency', process.execPath, ['--test', 'spikes/envoy/sprint04b-observer.test.mjs']);
   for (const file of git('ls-files', 'spikes/envoy/sprint04b-*').split('\n').filter((f) => f.endsWith('.mjs'))) command(`syntax-${path.basename(file)}`, process.execPath, ['--check', file]);
   const scanner = 'ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f';

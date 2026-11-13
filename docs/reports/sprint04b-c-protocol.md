@@ -30,7 +30,7 @@ Source commits: `e8c6fb2648b62ee6779c1c89aa48954175539138` (initial suite),
 `160abb4` (native trace/cancellation labeling correction). First receipts are
 committed in `77c2101`; focused corrected receipts in `a6d12bb`. The final
 verifier and transparency test are additive; exact committed source/tree and
-receipt provenance appear in `evidence/sprint04b-c/verification01/commands.json`.
+receipt provenance appear in `evidence/sprint04b-c/verification02/commands.json`.
 No new candidate or production engine was implemented.
 
 ## Seven Historical Dispositions
@@ -164,7 +164,7 @@ Actual commands from this worktree (Node absolute path retained in receipts):
 ```sh
 flock /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node spikes/envoy/sprint04b-run.mjs evidence/sprint04b-c/attempt01
 flock /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node spikes/envoy/sprint04b-run.mjs evidence/sprint04b-c/attempt02 --protocol-only
-flock /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node spikes/envoy/sprint04b-verify.mjs evidence/sprint04b-c/verification01
+flock /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node spikes/envoy/sprint04b-verify.mjs evidence/sprint04b-c/verification02
 ```
 
 First two collectors exit0, meaning receipt collection completed; nested
@@ -181,7 +181,11 @@ The verifier checks both manifests, command stream hashes, source Git objects,
 historical receipt preservation, original23 names/failure set, original75 IDs
 and six failure IDs. It executes the focused new relay tests, syntax/whitespace
 and offline pinned Gitleaks source/evidence/report scans; nested commands and
-outcomes are in `verification01/commands.json`. It is not a whole-repo security
+outcomes are in `verification02/commands.json`. The first verification attempt
+stopped at whitespace: the unmodified raw HTTP stderr includes CRLF and a final
+blank line. Its receipt is preserved in `verification01`; the second check
+scopes whitespace to source/report and verifies raw receipts by hashes without
+rewriting protocol bytes. It is not a whole-repo security
 scan, hosted CI or independent E acceptance. Root owns those gates.
 
 Principal SHA256:

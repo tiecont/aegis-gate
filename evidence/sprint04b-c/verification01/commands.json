@@ -1,0 +1,71 @@
+{
+  "source_commit": "8a82f0c4f8b2cf307d3d1473a62600c021db69fa",
+  "source_tree": "96ab3220059b96fd96bb6e20bf36d6933fd13d3e",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/home/tiecont/Projects/aegis-gate-04b-c/spikes/envoy/sprint04b-verify.mjs",
+    "evidence/sprint04b-c/verification01"
+  ],
+  "cwd": "/home/tiecont/Projects/aegis-gate-04b-c",
+  "node": "v26.13.0",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "started_at": "2026-11-13T17:12:01.070Z",
+  "commands": [
+    {
+      "label": "whitespace",
+      "program": "git",
+      "args": [
+        "diff",
+        "--check",
+        "cbb5f71"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-04b-c",
+      "started_at": "2026-11-13T17:12:01.714Z",
+      "ended_at": "2026-11-13T17:12:01.731Z",
+      "exit_code": 2,
+      "signal": null,
+      "stdout_sha256": "de5510007578f5655ad5f373bf3d68df70a60b6c5005351b589136a65e670c73",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "attempts": [
+    {
+      "dir": "attempt01",
+      "source_commit": "e8c6fb2648b62ee6779c1c89aa48954175539138",
+      "files": 28,
+      "sha256sums": "f55dc1a9648786be117da09edafca7deae0d5b0d3190edf6bdd9a2ce787164ec"
+    },
+    {
+      "dir": "attempt02",
+      "source_commit": "160abb4fc71ea7be708f46d6d6e97a7478d521e4",
+      "files": 17,
+      "sha256sums": "56aecf4bdafffe3ed41d37d0d1eaa708ddb3bbcef053c4ea60288099d7bb849c"
+    }
+  ],
+  "historical23": {
+    "probes": 23,
+    "failed": [
+      "settled-reuse-identity-and-three-authority-negatives",
+      "individual-settled-userinfo-denial",
+      "raw-H2-HEADERS-stream-zero",
+      "raw-H2-zero-WINDOW_UPDATE",
+      "raw-H2-uppercase-header-name",
+      "raw-H2-connection-specific-header",
+      "slow-reader-backpressure-and-response-cancellation"
+    ],
+    "failed_count": 7
+  },
+  "unchanged75": {
+    "tests": 75,
+    "failed": [
+      "malformed-HTTP-invalid-transfer-encoding",
+      "malformed-HTTP-obsolete-folded-header",
+      "strict-ingress-TE-repeated-chunked",
+      "strict-ingress-TE-not-final-chunked",
+      "supplemental-repeated-transfer-encoding-fields",
+      "HTTP2-authority-Host-and-SNI-confusion-rejected"
+    ]
+  },
+  "fatal": "AssertionError [ERR_ASSERTION]: whitespace\n\n2 !== 0\n\n    at command (file:///home/tiecont/Projects/aegis-gate-04b-c/spikes/envoy/sprint04b-verify.mjs:25:53)\n    at file:///home/tiecont/Projects/aegis-gate-04b-c/spikes/envoy/sprint04b-verify.mjs:50:3\n    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)\n    at async node:internal/modules/esm/loader:650:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:105:5)",
+  "ended_at": "2026-11-13T17:12:01.746Z"
+}
