@@ -34,11 +34,16 @@ const files = [
     "historical",
   ],
 ];
-for (const name of ["unchanged75", "diagnostic75"]) {
-  const file = `evidence/sprint04a-b/attempt02/${name}-results.json`;
-  if (fs.existsSync(file))
-    files.push([`Sprint04-A-B-${name}`, file, "retained-current-sprint"]);
-}
+for (const attempt of ["02", "05"])
+  for (const name of ["unchanged75", "diagnostic75"]) {
+    const file = `evidence/sprint04a-b/attempt${attempt}/${name}-results.json`;
+    if (fs.existsSync(file))
+      files.push([
+        `Sprint04-A-B-attempt${attempt}-${name}`,
+        file,
+        "retained-current-sprint",
+      ]);
+  }
 const records = files.map(([candidate, file, provenance]) => {
   const bytes = fs.readFileSync(file);
   const result = JSON.parse(bytes);
