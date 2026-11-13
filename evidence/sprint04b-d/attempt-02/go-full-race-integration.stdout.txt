@@ -1,0 +1,510 @@
+?   	aegisgate.dev/aegisgate/apps/control-api/cmd/control-api	[no test files]
+?   	aegisgate.dev/aegisgate/apps/control-api/internal/application	[no test files]
+=== RUN   TestNegativePublicAddressSpecialPurpose
+--- PASS: TestNegativePublicAddressSpecialPurpose (0.00s)
+=== RUN   TestNegativeSprint02RootNonPublicOriginPrefixes
+=== RUN   TestNegativeSprint02RootNonPublicOriginPrefixes/fec0::1
+=== RUN   TestNegativeSprint02RootNonPublicOriginPrefixes/3fff::1
+=== RUN   TestNegativeSprint02RootNonPublicOriginPrefixes/5f00::1
+=== RUN   TestNegativeSprint02RootNonPublicOriginPrefixes/100:0:0:1::1
+=== RUN   TestNegativeSprint02RootNonPublicOriginPrefixes/192.88.99.1
+--- PASS: TestNegativeSprint02RootNonPublicOriginPrefixes (0.00s)
+    --- PASS: TestNegativeSprint02RootNonPublicOriginPrefixes/fec0::1 (0.00s)
+    --- PASS: TestNegativeSprint02RootNonPublicOriginPrefixes/3fff::1 (0.00s)
+    --- PASS: TestNegativeSprint02RootNonPublicOriginPrefixes/5f00::1 (0.00s)
+    --- PASS: TestNegativeSprint02RootNonPublicOriginPrefixes/100:0:0:1::1 (0.00s)
+    --- PASS: TestNegativeSprint02RootNonPublicOriginPrefixes/192.88.99.1 (0.00s)
+=== RUN   TestHostnameAndOrigin
+--- PASS: TestHostnameAndOrigin (0.00s)
+=== RUN   TestNegativeHostAndSSRF
+--- PASS: TestNegativeHostAndSSRF (0.00s)
+=== RUN   TestNegativeRolesAndPolicies
+--- PASS: TestNegativeRolesAndPolicies (0.00s)
+PASS
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/domain	1.025s
+=== RUN   TestNegativeOIDCCrossOriginJWKS
+--- PASS: TestNegativeOIDCCrossOriginJWKS (0.01s)
+=== RUN   TestNegativeOIDCUnknownLengthDiscoveryLimit
+--- PASS: TestNegativeOIDCUnknownLengthDiscoveryLimit (0.04s)
+=== RUN   TestNegativeOIDCConfiguration
+--- PASS: TestNegativeOIDCConfiguration (0.00s)
+=== RUN   TestIntegrationOIDCTLSAndClaims
+=== RUN   TestIntegrationOIDCTLSAndClaims/signature
+=== RUN   TestIntegrationOIDCTLSAndClaims/issuer
+=== RUN   TestIntegrationOIDCTLSAndClaims/audience
+=== RUN   TestIntegrationOIDCTLSAndClaims/expiry
+=== RUN   TestIntegrationOIDCTLSAndClaims/nonce
+=== RUN   TestIntegrationOIDCTLSAndClaims/subject
+=== RUN   TestIntegrationOIDCTLSAndClaims/old_issuance
+=== RUN   TestIntegrationOIDCTLSAndClaims/future_issuance
+=== RUN   TestIntegrationOIDCTLSAndClaims/not_before
+=== RUN   TestIntegrationOIDCTLSAndClaims/authorized_party
+=== RUN   TestIntegrationOIDCTLSAndClaims/multiple_audience
+--- PASS: TestIntegrationOIDCTLSAndClaims (0.02s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/signature (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/issuer (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/audience (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/expiry (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/nonce (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/subject (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/old_issuance (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/future_issuance (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/not_before (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/authorized_party (0.00s)
+    --- PASS: TestIntegrationOIDCTLSAndClaims/multiple_audience (0.00s)
+=== RUN   TestNegativeOIDCTLSAndFetching
+=== RUN   TestNegativeOIDCTLSAndFetching/untrusted_issuer_certificate
+=== RUN   TestNegativeOIDCTLSAndFetching/expired_certificate
+=== RUN   TestNegativeOIDCTLSAndFetching/wrong_hostname_certificate
+=== RUN   TestNegativeOIDCTLSAndFetching/redirect
+=== RUN   TestNegativeOIDCTLSAndFetching/oversize_discovery
+=== RUN   TestNegativeOIDCTLSAndFetching/plaintext_JWKS
+=== RUN   TestNegativeOIDCTLSAndFetching/unavailable_JWKS
+--- PASS: TestNegativeOIDCTLSAndFetching (0.31s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/untrusted_issuer_certificate (0.20s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/expired_certificate (0.01s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/wrong_hostname_certificate (0.01s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/redirect (0.01s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/oversize_discovery (0.04s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/plaintext_JWKS (0.01s)
+    --- PASS: TestNegativeOIDCTLSAndFetching/unavailable_JWKS (0.01s)
+PASS
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/identity	1.412s
+=== RUN   TestIntegrationOriginPoolLifecycleAndRuntimePermissions
+--- PASS: TestIntegrationOriginPoolLifecycleAndRuntimePermissions (0.73s)
+=== RUN   TestIntegrationNonSuperuserMigrationOwner
+--- PASS: TestIntegrationNonSuperuserMigrationOwner (1.45s)
+=== RUN   TestIntegrationQuotaConcurrentKeysAndMissingDefaults
+--- PASS: TestIntegrationQuotaConcurrentKeysAndMissingDefaults (1.01s)
+=== RUN   TestIntegrationSensitiveDirectCallerAuditAndFreshness
+--- PASS: TestIntegrationSensitiveDirectCallerAuditAndFreshness (1.81s)
+=== RUN   TestIntegrationDNSLeaseFenceAndReverification
+--- PASS: TestIntegrationDNSLeaseFenceAndReverification (0.82s)
+=== RUN   TestIntegrationDomainClaimLifecycleAndIsolation
+--- PASS: TestIntegrationDomainClaimLifecycleAndIsolation (0.51s)
+=== RUN   TestIntegrationDomainConcurrentClaimsAndMembershipRevocation
+--- PASS: TestIntegrationDomainConcurrentClaimsAndMembershipRevocation (0.50s)
+=== RUN   TestIntegrationLoginReplayBrowserBindingAndWebSession
+--- PASS: TestIntegrationLoginReplayBrowserBindingAndWebSession (0.68s)
+=== RUN   TestIntegrationDomainJobLeaseRetryAndScope
+--- PASS: TestIntegrationDomainJobLeaseRetryAndScope (0.58s)
+=== RUN   TestIntegrationRecoveryDurableReferencesPruneAndRestart
+--- PASS: TestIntegrationRecoveryDurableReferencesPruneAndRestart (0.64s)
+=== RUN   TestIntegrationConfigPublicationNegativeAndRecovery
+--- PASS: TestIntegrationConfigPublicationNegativeAndRecovery (0.75s)
+=== RUN   TestIntegrationRouteReferencesApprovalAndImmutablePreview
+--- PASS: TestIntegrationRouteReferencesApprovalAndImmutablePreview (0.67s)
+=== RUN   TestIntegrationSprint03BIndependentPublicationToCanaryACKRollback
+--- PASS: TestIntegrationSprint03BIndependentPublicationToCanaryACKRollback (5.59s)
+=== RUN   TestIntegrationTenantIsolationIdempotencyAndSession
+--- PASS: TestIntegrationTenantIsolationIdempotencyAndSession (0.56s)
+=== RUN   TestNegativeDatabaseTLS
+--- PASS: TestNegativeDatabaseTLS (0.00s)
+PASS
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/persistence	17.338s
+=== RUN   TestIntegrationPoolHTTPRoutesPreviewAndRetirement
+--- PASS: TestIntegrationPoolHTTPRoutesPreviewAndRetirement (4.38s)
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/rotation-and-outage
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/jwks-outage
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/nonce
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/audience
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/expired
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/signature
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/no-mfa
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/stale-mfa
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/future-mfa
+=== RUN   TestIntegrationOIDCRotationOutageCallbacksAndMFA/callback-query
+--- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA (10.39s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/rotation-and-outage (1.79s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/jwks-outage (3.96s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/nonce (0.43s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/audience (0.68s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/expired (0.71s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/signature (0.66s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/no-mfa (0.71s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/stale-mfa (0.50s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/future-mfa (0.53s)
+    --- PASS: TestIntegrationOIDCRotationOutageCallbacksAndMFA/callback-query (0.43s)
+=== RUN   TestIntegrationAdminNegativeSessionAuthorityAndMembership
+--- PASS: TestIntegrationAdminNegativeSessionAuthorityAndMembership (0.94s)
+=== RUN   TestIntegrationAdminHTTPIsolationAndOIDC
+=== RUN   TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_domains
+=== RUN   TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_origins
+=== RUN   TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_policies
+=== RUN   TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_routes
+--- PASS: TestIntegrationAdminHTTPIsolationAndOIDC (3.13s)
+    --- PASS: TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_domains (0.29s)
+    --- PASS: TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_origins (0.32s)
+    --- PASS: TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_policies (0.33s)
+    --- PASS: TestIntegrationAdminHTTPIsolationAndOIDC/cross_tenant_routes (0.33s)
+=== RUN   TestNegativePrivateConfigurationFiles
+--- PASS: TestNegativePrivateConfigurationFiles (0.00s)
+=== RUN   TestNegativeAdminRateLimitsBounded
+--- PASS: TestNegativeAdminRateLimitsBounded (0.90s)
+=== RUN   TestIntegrationPublicationHTTPPreviewApprovalRollbackNegative
+--- PASS: TestIntegrationPublicationHTTPPreviewApprovalRollbackNegative (1.86s)
+=== RUN   TestIntegrationHTTPExplicitRoleMatrix
+=== RUN   TestIntegrationHTTPExplicitRoleMatrix/owner
+=== RUN   TestIntegrationHTTPExplicitRoleMatrix/admin
+=== RUN   TestIntegrationHTTPExplicitRoleMatrix/security-admin
+=== RUN   TestIntegrationHTTPExplicitRoleMatrix/developer
+=== RUN   TestIntegrationHTTPExplicitRoleMatrix/billing-admin
+=== RUN   TestIntegrationHTTPExplicitRoleMatrix/viewer
+--- PASS: TestIntegrationHTTPExplicitRoleMatrix (1.85s)
+    --- PASS: TestIntegrationHTTPExplicitRoleMatrix/owner (0.18s)
+    --- PASS: TestIntegrationHTTPExplicitRoleMatrix/admin (0.26s)
+    --- PASS: TestIntegrationHTTPExplicitRoleMatrix/security-admin (0.24s)
+    --- PASS: TestIntegrationHTTPExplicitRoleMatrix/developer (0.20s)
+    --- PASS: TestIntegrationHTTPExplicitRoleMatrix/billing-admin (0.23s)
+    --- PASS: TestIntegrationHTTPExplicitRoleMatrix/viewer (0.21s)
+=== RUN   TestHealth
+--- PASS: TestHealth (0.00s)
+=== RUN   TestNegativeSpoofedTenantAndSecrets
+--- PASS: TestNegativeSpoofedTenantAndSecrets (0.00s)
+=== RUN   TestNegativePublicListener
+--- PASS: TestNegativePublicListener (0.00s)
+=== RUN   TestIntegrationHTTP
+--- PASS: TestIntegrationHTTP (0.00s)
+PASS
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/transport	24.573s
+?   	aegisgate.dev/aegisgate/apps/control-api/publication	[no test files]
+?   	aegisgate.dev/aegisgate/apps/config-publisher/cmd/config-publisher	[no test files]
+=== RUN   TestNegativeTamperReplayCrossTenantAndPriorLKG
+=== RUN   TestNegativeTamperReplayCrossTenantAndPriorLKG/digest
+=== RUN   TestNegativeTamperReplayCrossTenantAndPriorLKG/signature
+=== RUN   TestNegativeTamperReplayCrossTenantAndPriorLKG/cross_tenant
+=== RUN   TestNegativeTamperReplayCrossTenantAndPriorLKG/schema
+=== RUN   TestNegativeTamperReplayCrossTenantAndPriorLKG/wrong_generation
+=== RUN   TestNegativeTamperReplayCrossTenantAndPriorLKG/wrong_deployment
+=== RUN   TestNegativeTamperReplayCrossTenantAndPriorLKG/missing_auth
+=== RUN   TestNegativeTamperReplayCrossTenantAndPriorLKG/oversized
+--- PASS: TestNegativeTamperReplayCrossTenantAndPriorLKG (0.25s)
+    --- PASS: TestNegativeTamperReplayCrossTenantAndPriorLKG/digest (0.01s)
+    --- PASS: TestNegativeTamperReplayCrossTenantAndPriorLKG/signature (0.02s)
+    --- PASS: TestNegativeTamperReplayCrossTenantAndPriorLKG/cross_tenant (0.02s)
+    --- PASS: TestNegativeTamperReplayCrossTenantAndPriorLKG/schema (0.02s)
+    --- PASS: TestNegativeTamperReplayCrossTenantAndPriorLKG/wrong_generation (0.02s)
+    --- PASS: TestNegativeTamperReplayCrossTenantAndPriorLKG/wrong_deployment (0.01s)
+    --- PASS: TestNegativeTamperReplayCrossTenantAndPriorLKG/missing_auth (0.03s)
+    --- PASS: TestNegativeTamperReplayCrossTenantAndPriorLKG/oversized (0.02s)
+=== RUN   TestConcurrentAtomicGenerationAndReaderBounds
+--- PASS: TestConcurrentAtomicGenerationAndReaderBounds (1.62s)
+=== RUN   TestCrashStagingAndColdRestart
+--- PASS: TestCrashStagingAndColdRestart (0.04s)
+=== RUN   TestNegativeRetirementStalenessAndExpiredOwnership
+--- PASS: TestNegativeRetirementStalenessAndExpiredOwnership (0.03s)
+=== RUN   TestEncryptedRestrictedLKG
+--- PASS: TestEncryptedRestrictedLKG (0.01s)
+=== RUN   TestNotificationAndControlPlaneOutageRetainLKG
+--- PASS: TestNotificationAndControlPlaneOutageRetainLKG (0.04s)
+=== RUN   TestKeyRotationOverlapAndRetiredCandidate
+--- PASS: TestKeyRotationOverlapAndRetiredCandidate (0.03s)
+=== RUN   TestRetentionBudgetAndStartupReplayWithoutExplicitRestore
+--- PASS: TestRetentionBudgetAndStartupReplayWithoutExplicitRestore (0.05s)
+=== RUN   TestNegativeBoundedArtifactDownload
+--- PASS: TestNegativeBoundedArtifactDownload (0.06s)
+=== RUN   TestExpiredCheckpointPreservesFloorAndRecoversWithNewSignedGeneration
+--- PASS: TestExpiredCheckpointPreservesFloorAndRecoversWithNewSignedGeneration (0.03s)
+=== RUN   TestLostACKRetransmissionDoesNotApplyReplay
+--- PASS: TestLostACKRetransmissionDoesNotApplyReplay (0.02s)
+=== RUN   TestAuthenticatedHTTPSFetchAndEndpointNegatives
+--- PASS: TestAuthenticatedHTTPSFetchAndEndpointNegatives (0.04s)
+=== RUN   TestNegativeHTTPSRedirectAndArtifactReplacement
+--- PASS: TestNegativeHTTPSRedirectAndArtifactReplacement (0.05s)
+=== RUN   TestRecoveryExternalProvisioningRejectsEncryptedFullStateRollback
+--- PASS: TestRecoveryExternalProvisioningRejectsEncryptedFullStateRollback (0.06s)
+=== RUN   TestRecoveryCapturedGenerationDrain
+=== RUN   TestRecoveryCapturedGenerationDrain/graceful
+=== RUN   TestRecoveryCapturedGenerationDrain/deadline
+--- PASS: TestRecoveryCapturedGenerationDrain (1.09s)
+    --- PASS: TestRecoveryCapturedGenerationDrain/graceful (0.04s)
+    --- PASS: TestRecoveryCapturedGenerationDrain/deadline (1.04s)
+=== RUN   TestRecoveryDisconnectedEmergencyFailClosed
+=== RUN   TestRecoveryDisconnectedEmergencyFailClosed/staleness
+=== RUN   TestRecoveryDisconnectedEmergencyFailClosed/snapshot
+=== RUN   TestRecoveryDisconnectedEmergencyFailClosed/ownership
+=== RUN   TestRecoveryDisconnectedEmergencyFailClosed/trust
+=== RUN   TestRecoveryDisconnectedEmergencyFailClosed/retirement
+--- PASS: TestRecoveryDisconnectedEmergencyFailClosed (0.14s)
+    --- PASS: TestRecoveryDisconnectedEmergencyFailClosed/staleness (0.04s)
+    --- PASS: TestRecoveryDisconnectedEmergencyFailClosed/snapshot (0.02s)
+    --- PASS: TestRecoveryDisconnectedEmergencyFailClosed/ownership (0.03s)
+    --- PASS: TestRecoveryDisconnectedEmergencyFailClosed/trust (0.03s)
+    --- PASS: TestRecoveryDisconnectedEmergencyFailClosed/retirement (0.02s)
+PASS
+ok  	aegisgate.dev/aegisgate/internal/configconsumer	4.656s
+=== RUN   TestIntegrationJetStreamMutualTLSBoundedDurabilityNegative
+--- PASS: TestIntegrationJetStreamMutualTLSBoundedDurabilityNegative (4.03s)
+=== RUN   TestRecoverySignerOutageStagedRestartAndRetirement
+--- PASS: TestRecoverySignerOutageStagedRestartAndRetirement (0.05s)
+=== RUN   TestNegativeImmutableStorageCrashRecoveryAndRetention
+--- PASS: TestNegativeImmutableStorageCrashRecoveryAndRetention (0.00s)
+=== RUN   TestNegativeArtifactHandlerRequiresVerifiedIdentityAndDeployment
+=== RUN   TestNegativeArtifactHandlerRequiresVerifiedIdentityAndDeployment/plaintext
+=== RUN   TestNegativeArtifactHandlerRequiresVerifiedIdentityAndDeployment/unverified
+=== RUN   TestNegativeArtifactHandlerRequiresVerifiedIdentityAndDeployment/valid
+=== RUN   TestNegativeArtifactHandlerRequiresVerifiedIdentityAndDeployment/traversal
+--- PASS: TestNegativeArtifactHandlerRequiresVerifiedIdentityAndDeployment (0.00s)
+    --- PASS: TestNegativeArtifactHandlerRequiresVerifiedIdentityAndDeployment/plaintext (0.00s)
+    --- PASS: TestNegativeArtifactHandlerRequiresVerifiedIdentityAndDeployment/unverified (0.00s)
+    --- PASS: TestNegativeArtifactHandlerRequiresVerifiedIdentityAndDeployment/valid (0.00s)
+    --- PASS: TestNegativeArtifactHandlerRequiresVerifiedIdentityAndDeployment/traversal (0.00s)
+=== RUN   TestNegativeWorkerBindsPersistedArtifactToExactApproval
+=== RUN   TestNegativeWorkerBindsPersistedArtifactToExactApproval/higher-generation
+=== RUN   TestNegativeWorkerBindsPersistedArtifactToExactApproval/expiry-rewrite
+=== RUN   TestNegativeWorkerBindsPersistedArtifactToExactApproval/different-approved-payload
+--- PASS: TestNegativeWorkerBindsPersistedArtifactToExactApproval (0.01s)
+    --- PASS: TestNegativeWorkerBindsPersistedArtifactToExactApproval/higher-generation (0.00s)
+    --- PASS: TestNegativeWorkerBindsPersistedArtifactToExactApproval/expiry-rewrite (0.00s)
+    --- PASS: TestNegativeWorkerBindsPersistedArtifactToExactApproval/different-approved-payload (0.00s)
+PASS
+ok  	aegisgate.dev/aegisgate/internal/configpublish	5.181s
+=== RUN   TestIndependentSignedUnsafePayloadsRetainEncryptedLKG
+=== RUN   TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_schema_downgrade
+=== RUN   TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_anonymous_policy
+=== RUN   TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_missing_auth_property
+=== RUN   TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_duplicate_hostname
+=== RUN   TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_wrong_context
+=== RUN   TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_wrong_deployment
+=== RUN   TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_excess_validity
+=== RUN   TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_cross_tenant_domain
+=== RUN   TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_missing_policy
+=== RUN   TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_unsupported_operator
+=== RUN   TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_private_origin
+=== RUN   TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_expired_ownership
+--- PASS: TestIndependentSignedUnsafePayloadsRetainEncryptedLKG (0.29s)
+    --- PASS: TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_schema_downgrade (0.01s)
+    --- PASS: TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_anonymous_policy (0.01s)
+    --- PASS: TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_missing_auth_property (0.02s)
+    --- PASS: TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_duplicate_hostname (0.01s)
+    --- PASS: TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_wrong_context (0.01s)
+    --- PASS: TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_wrong_deployment (0.01s)
+    --- PASS: TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_excess_validity (0.01s)
+    --- PASS: TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_cross_tenant_domain (0.01s)
+    --- PASS: TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_missing_policy (0.02s)
+    --- PASS: TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_unsupported_operator (0.02s)
+    --- PASS: TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_private_origin (0.03s)
+    --- PASS: TestIndependentSignedUnsafePayloadsRetainEncryptedLKG/signed_expired_ownership (0.02s)
+=== RUN   TestIndependentRestartGenerationAndStaleRecovery
+--- PASS: TestIndependentRestartGenerationAndStaleRecovery (0.06s)
+=== RUN   TestIndependentEnvelopeBindingAndDuplicateKeys
+--- PASS: TestIndependentEnvelopeBindingAndDuplicateKeys (0.02s)
+PASS
+ok  	aegisgate.dev/aegisgate/internal/configreview	1.460s
+=== RUN   TestAuthenticatedAdmissionBeforeGenerationAdvance
+=== RUN   TestAuthenticatedAdmissionBeforeGenerationAdvance/unapproved_generation
+=== RUN   TestAuthenticatedAdmissionBeforeGenerationAdvance/wrong_digest
+=== RUN   TestAuthenticatedAdmissionBeforeGenerationAdvance/wrong_deployment
+=== RUN   TestAuthenticatedAdmissionBeforeGenerationAdvance/wrong_rollback
+=== RUN   TestAuthenticatedAdmissionBeforeGenerationAdvance/oversized_location
+--- PASS: TestAuthenticatedAdmissionBeforeGenerationAdvance (0.09s)
+    --- PASS: TestAuthenticatedAdmissionBeforeGenerationAdvance/unapproved_generation (0.00s)
+    --- PASS: TestAuthenticatedAdmissionBeforeGenerationAdvance/wrong_digest (0.00s)
+    --- PASS: TestAuthenticatedAdmissionBeforeGenerationAdvance/wrong_deployment (0.00s)
+    --- PASS: TestAuthenticatedAdmissionBeforeGenerationAdvance/wrong_rollback (0.00s)
+    --- PASS: TestAuthenticatedAdmissionBeforeGenerationAdvance/oversized_location (0.00s)
+=== RUN   TestNegativeCorruptRolloutCheckpointFailsClosed
+=== RUN   TestNegativeCorruptRolloutCheckpointFailsClosed/phase
+=== RUN   TestNegativeCorruptRolloutCheckpointFailsClosed/policy
+=== RUN   TestNegativeCorruptRolloutCheckpointFailsClosed/canary_bypass
+=== RUN   TestNegativeCorruptRolloutCheckpointFailsClosed/duplicate_identity
+=== RUN   TestNegativeCorruptRolloutCheckpointFailsClosed/fake_complete
+--- PASS: TestNegativeCorruptRolloutCheckpointFailsClosed (0.00s)
+    --- PASS: TestNegativeCorruptRolloutCheckpointFailsClosed/phase (0.00s)
+    --- PASS: TestNegativeCorruptRolloutCheckpointFailsClosed/policy (0.00s)
+    --- PASS: TestNegativeCorruptRolloutCheckpointFailsClosed/canary_bypass (0.00s)
+    --- PASS: TestNegativeCorruptRolloutCheckpointFailsClosed/duplicate_identity (0.00s)
+    --- PASS: TestNegativeCorruptRolloutCheckpointFailsClosed/fake_complete (0.00s)
+=== RUN   TestCanaryQuorumExpansionAndStickyRejection
+--- PASS: TestCanaryQuorumExpansionAndStickyRejection (0.00s)
+=== RUN   TestHealthyCanariesThenAllEdgesAdmittedBeforeQuorum
+--- PASS: TestHealthyCanariesThenAllEdgesAdmittedBeforeQuorum (0.00s)
+=== RUN   TestOutageRetryControllerRestartAndBoundedAttempts
+--- PASS: TestOutageRetryControllerRestartAndBoundedAttempts (0.00s)
+=== RUN   TestNegativeForgedACKRollbackAndIdempotency
+=== RUN   TestNegativeForgedACKRollbackAndIdempotency/identity
+=== RUN   TestNegativeForgedACKRollbackAndIdempotency/generation
+=== RUN   TestNegativeForgedACKRollbackAndIdempotency/digest
+=== RUN   TestNegativeForgedACKRollbackAndIdempotency/deployment
+=== RUN   TestNegativeForgedACKRollbackAndIdempotency/code
+--- PASS: TestNegativeForgedACKRollbackAndIdempotency (0.00s)
+    --- PASS: TestNegativeForgedACKRollbackAndIdempotency/identity (0.00s)
+    --- PASS: TestNegativeForgedACKRollbackAndIdempotency/generation (0.00s)
+    --- PASS: TestNegativeForgedACKRollbackAndIdempotency/digest (0.00s)
+    --- PASS: TestNegativeForgedACKRollbackAndIdempotency/deployment (0.00s)
+    --- PASS: TestNegativeForgedACKRollbackAndIdempotency/code (0.00s)
+=== RUN   TestNegativeHealthAndResourceBounds
+--- PASS: TestNegativeHealthAndResourceBounds (0.00s)
+=== RUN   TestArtifactAlertsSurviveLateACKAndResetOnlyForNewGeneration
+=== RUN   TestArtifactAlertsSurviveLateACKAndResetOnlyForNewGeneration/invalid_snapshot
+=== RUN   TestArtifactAlertsSurviveLateACKAndResetOnlyForNewGeneration/artifact_digest
+=== RUN   TestArtifactAlertsSurviveLateACKAndResetOnlyForNewGeneration/stale_snapshot
+--- PASS: TestArtifactAlertsSurviveLateACKAndResetOnlyForNewGeneration (0.00s)
+    --- PASS: TestArtifactAlertsSurviveLateACKAndResetOnlyForNewGeneration/invalid_snapshot (0.00s)
+    --- PASS: TestArtifactAlertsSurviveLateACKAndResetOnlyForNewGeneration/artifact_digest (0.00s)
+    --- PASS: TestArtifactAlertsSurviveLateACKAndResetOnlyForNewGeneration/stale_snapshot (0.00s)
+=== RUN   TestIntegrationAuthenticatedACKBoundary
+--- PASS: TestIntegrationAuthenticatedACKBoundary (0.08s)
+=== RUN   TestIntegrationDurableCASAuditRecoveryAndPermissions
+--- PASS: TestIntegrationDurableCASAuditRecoveryAndPermissions (0.40s)
+=== RUN   TestIntegrationRecoveryArchiveRoundTripBeforeAuditCleanup
+--- PASS: TestIntegrationRecoveryArchiveRoundTripBeforeAuditCleanup (0.20s)
+PASS
+ok  	aegisgate.dev/aegisgate/internal/configrollout	1.883s
+=== RUN   TestSignedSnapshotRoundTrip
+--- PASS: TestSignedSnapshotRoundTrip (0.09s)
+=== RUN   TestNegativeSnapshotEnvelope
+=== RUN   TestNegativeSnapshotEnvelope/unknown_field
+=== RUN   TestNegativeSnapshotEnvelope/missing_auth
+=== RUN   TestNegativeSnapshotEnvelope/schema_downgrade
+=== RUN   TestNegativeSnapshotEnvelope/oversize
+=== RUN   TestNegativeSnapshotEnvelope/malformed
+=== RUN   TestNegativeSnapshotEnvelope/lone_surrogate
+=== RUN   TestNegativeSnapshotEnvelope/timestamp_offset
+=== RUN   TestNegativeSnapshotEnvelope/duplicate
+=== RUN   TestNegativeSnapshotEnvelope/duplicate_escaped
+=== RUN   TestNegativeSnapshotEnvelope/operator
+=== RUN   TestNegativeSnapshotEnvelope/single_byte
+=== RUN   TestNegativeSnapshotEnvelope/context
+=== RUN   TestNegativeSnapshotEnvelope/depth
+=== RUN   TestNegativeSnapshotEnvelope/invalid_utf8
+=== RUN   TestNegativeSnapshotEnvelope/digest
+=== RUN   TestNegativeSnapshotEnvelope/signature
+=== RUN   TestNegativeSnapshotEnvelope/unknown_key
+--- PASS: TestNegativeSnapshotEnvelope (0.08s)
+    --- PASS: TestNegativeSnapshotEnvelope/unknown_field (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/missing_auth (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/schema_downgrade (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/oversize (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/malformed (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/lone_surrogate (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/timestamp_offset (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/duplicate (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/duplicate_escaped (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/operator (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/single_byte (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/context (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/depth (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/invalid_utf8 (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/digest (0.00s)
+    --- PASS: TestNegativeSnapshotEnvelope/signature (0.01s)
+    --- PASS: TestNegativeSnapshotEnvelope/unknown_key (0.01s)
+=== RUN   TestNegativePayloadValidation
+=== RUN   TestNegativePayloadValidation/cross_tenant_resource
+=== RUN   TestNegativePayloadValidation/missing_auth
+=== RUN   TestNegativePayloadValidation/origin_internal
+=== RUN   TestNegativePayloadValidation/domain_expired
+=== RUN   TestNegativePayloadValidation/duplicate_route
+=== RUN   TestNegativePayloadValidation/resource_bounds
+=== RUN   TestNegativePayloadValidation/cross_tenant_reference
+=== RUN   TestNegativePayloadValidation/invalid_auth
+=== RUN   TestNegativePayloadValidation/issuer_http
+=== RUN   TestNegativePayloadValidation/issuer_credentials
+=== RUN   TestNegativePayloadValidation/origin_private
+=== RUN   TestNegativePayloadValidation/unsafe_generation
+=== RUN   TestNegativePayloadValidation/validity_unbounded
+=== RUN   TestNegativePayloadValidation/duplicate_hostname
+--- PASS: TestNegativePayloadValidation (0.01s)
+    --- PASS: TestNegativePayloadValidation/cross_tenant_resource (0.00s)
+    --- PASS: TestNegativePayloadValidation/missing_auth (0.00s)
+    --- PASS: TestNegativePayloadValidation/origin_internal (0.00s)
+    --- PASS: TestNegativePayloadValidation/domain_expired (0.00s)
+    --- PASS: TestNegativePayloadValidation/duplicate_route (0.00s)
+    --- PASS: TestNegativePayloadValidation/resource_bounds (0.00s)
+    --- PASS: TestNegativePayloadValidation/cross_tenant_reference (0.00s)
+    --- PASS: TestNegativePayloadValidation/invalid_auth (0.00s)
+    --- PASS: TestNegativePayloadValidation/issuer_http (0.00s)
+    --- PASS: TestNegativePayloadValidation/issuer_credentials (0.00s)
+    --- PASS: TestNegativePayloadValidation/origin_private (0.00s)
+    --- PASS: TestNegativePayloadValidation/unsafe_generation (0.00s)
+    --- PASS: TestNegativePayloadValidation/validity_unbounded (0.00s)
+    --- PASS: TestNegativePayloadValidation/duplicate_hostname (0.00s)
+=== RUN   TestSignatureBindsEveryEnvelopeField
+=== RUN   TestSignatureBindsEveryEnvelopeField/generation
+=== RUN   TestSignatureBindsEveryEnvelopeField/deployment_id
+=== RUN   TestSignatureBindsEveryEnvelopeField/created_at
+=== RUN   TestSignatureBindsEveryEnvelopeField/valid_from
+=== RUN   TestSignatureBindsEveryEnvelopeField/expires_at
+=== RUN   TestSignatureBindsEveryEnvelopeField/content_sha256
+=== RUN   TestSignatureBindsEveryEnvelopeField/signing_key_id
+=== RUN   TestSignatureBindsEveryEnvelopeField/context
+=== RUN   TestSignatureBindsEveryEnvelopeField/schema_version
+=== RUN   TestSignatureBindsEveryEnvelopeField/payload
+--- PASS: TestSignatureBindsEveryEnvelopeField (0.08s)
+    --- PASS: TestSignatureBindsEveryEnvelopeField/generation (0.01s)
+    --- PASS: TestSignatureBindsEveryEnvelopeField/deployment_id (0.00s)
+    --- PASS: TestSignatureBindsEveryEnvelopeField/created_at (0.02s)
+    --- PASS: TestSignatureBindsEveryEnvelopeField/valid_from (0.01s)
+    --- PASS: TestSignatureBindsEveryEnvelopeField/expires_at (0.01s)
+    --- PASS: TestSignatureBindsEveryEnvelopeField/content_sha256 (0.01s)
+    --- PASS: TestSignatureBindsEveryEnvelopeField/signing_key_id (0.01s)
+    --- PASS: TestSignatureBindsEveryEnvelopeField/context (0.00s)
+    --- PASS: TestSignatureBindsEveryEnvelopeField/schema_version (0.00s)
+    --- PASS: TestSignatureBindsEveryEnvelopeField/payload (0.00s)
+=== RUN   TestTrustCopiesPublicKey
+--- PASS: TestTrustCopiesPublicKey (0.01s)
+=== RUN   TestGoldenVector
+--- PASS: TestGoldenVector (0.01s)
+=== RUN   TestRFC8785Golden
+--- PASS: TestRFC8785Golden (0.00s)
+=== RUN   TestCheckpointAuthenticatesExpiredFloorOnly
+--- PASS: TestCheckpointAuthenticatesExpiredFloorOnly (0.03s)
+=== RUN   TestScheduledActivation
+--- PASS: TestScheduledActivation (0.02s)
+=== RUN   TestSchemaDefensiveCopy
+--- PASS: TestSchemaDefensiveCopy (0.00s)
+=== RUN   TestAuthenticatedTrustRotation
+--- PASS: TestAuthenticatedTrustRotation (0.07s)
+=== RUN   TestNegativeTrustBootstrap
+--- PASS: TestNegativeTrustBootstrap (0.03s)
+=== RUN   TestNegativeTrustKeyBounds
+=== RUN   TestNegativeTrustKeyBounds/none
+=== RUN   TestNegativeTrustKeyBounds/duplicate
+=== RUN   TestNegativeTrustKeyBounds/unbounded
+=== RUN   TestNegativeTrustKeyBounds/bad_key
+=== RUN   TestNegativeTrustKeyBounds/unbounded_overlap
+--- PASS: TestNegativeTrustKeyBounds (0.01s)
+    --- PASS: TestNegativeTrustKeyBounds/none (0.00s)
+    --- PASS: TestNegativeTrustKeyBounds/duplicate (0.00s)
+    --- PASS: TestNegativeTrustKeyBounds/unbounded (0.00s)
+    --- PASS: TestNegativeTrustKeyBounds/bad_key (0.00s)
+    --- PASS: TestNegativeTrustKeyBounds/unbounded_overlap (0.00s)
+=== RUN   TestNegativeValidSignatureCannotAuthorizeUnsafePayload
+=== RUN   TestNegativeValidSignatureCannotAuthorizeUnsafePayload/cross_tenant
+=== RUN   TestNegativeValidSignatureCannotAuthorizeUnsafePayload/missing_auth
+=== RUN   TestNegativeValidSignatureCannotAuthorizeUnsafePayload/disabled_auth
+=== RUN   TestNegativeValidSignatureCannotAuthorizeUnsafePayload/duplicate_host
+--- PASS: TestNegativeValidSignatureCannotAuthorizeUnsafePayload (0.03s)
+    --- PASS: TestNegativeValidSignatureCannotAuthorizeUnsafePayload/cross_tenant (0.01s)
+    --- PASS: TestNegativeValidSignatureCannotAuthorizeUnsafePayload/missing_auth (0.01s)
+    --- PASS: TestNegativeValidSignatureCannotAuthorizeUnsafePayload/disabled_auth (0.00s)
+    --- PASS: TestNegativeValidSignatureCannotAuthorizeUnsafePayload/duplicate_host (0.00s)
+PASS
+ok  	aegisgate.dev/aegisgate/internal/configsnapshot	1.569s
+=== RUN   TestRequestID
+--- PASS: TestRequestID (0.13s)
+PASS
+ok  	aegisgate.dev/aegisgate/internal/contracts	1.184s
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/cmd/fixtures	[no test files]
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/configlab	[no test files]
+=== RUN   TestIntegrationLocalPKIAndJWT
+=== RUN   TestIntegrationLocalPKIAndJWT/origin-a-origin-a.test-trusted=yes
+=== RUN   TestIntegrationLocalPKIAndJWT/origin-b-origin-b.test-trusted=yes
+=== RUN   TestIntegrationLocalPKIAndJWT/origin-a-wrong.test-trusted=yes
+2026/11/14 00:00:24 http: TLS handshake error from 127.0.0.1:34268: read tcp 127.0.0.1:37327->127.0.0.1:34268: use of closed network connection
+=== RUN   TestIntegrationLocalPKIAndJWT/wrong-host-origin-a.test-trusted=yes
+2026/11/14 00:00:24 http: TLS handshake error from 127.0.0.1:40924: remote error: tls: bad certificate
+=== RUN   TestIntegrationLocalPKIAndJWT/expired-origin-a.test-trusted=yes
+2026/11/14 00:00:24 http: TLS handshake error from 127.0.0.1:34006: remote error: tls: bad certificate
+=== RUN   TestIntegrationLocalPKIAndJWT/origin-a-origin-a.test-trusted=no
+2026/11/14 00:00:24 http: TLS handshake error from 127.0.0.1:44448: remote error: tls: bad certificate
+--- PASS: TestIntegrationLocalPKIAndJWT (1.07s)
+    --- PASS: TestIntegrationLocalPKIAndJWT/origin-a-origin-a.test-trusted=yes (0.01s)
+    --- PASS: TestIntegrationLocalPKIAndJWT/origin-b-origin-b.test-trusted=yes (0.02s)
+    --- PASS: TestIntegrationLocalPKIAndJWT/origin-a-wrong.test-trusted=yes (0.01s)
+    --- PASS: TestIntegrationLocalPKIAndJWT/wrong-host-origin-a.test-trusted=yes (0.01s)
+    --- PASS: TestIntegrationLocalPKIAndJWT/expired-origin-a.test-trusted=yes (0.01s)
+    --- PASS: TestIntegrationLocalPKIAndJWT/origin-a-origin-a.test-trusted=no (0.22s)
+PASS
+ok  	aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab	2.116s
