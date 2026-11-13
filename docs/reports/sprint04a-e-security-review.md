@@ -23,3 +23,21 @@ Initial inspection found F still at baseline with uncommitted work. No F
 acceptance is claimed. Preflight `cat .local/toolchains/node/VERSION` exited1
 because that non-contract file does not exist; proof records executable
 `--version` and SHA256 directly using the pinned main-worktree Node instead.
+
+## Review Progress For Root Coordination
+
+- B `93dc1223ae09d2562a9b4c5b307b173f960b9ea4`: independent unchanged and
+  diagnostic runs both69/75, same six failures. Warm rejection reproduces
+  SETTINGS ACK `000000040100000000`, nine bytes, zero new connections/handlers.
+  All23 probes complete; same seven failures retained. Cleanup confirms no
+  owned containers and removes all fixture directories before lock release.
+  Three observer focused tests pass including attempted invalid-origin bytes.
+  Acceptable as failed-candidate investigation, never as a passing engine.
+- D `b42bae1e9ffa63b4dfd4c94c9a6376f7129077ce`: independently reproduced
+  explicit TypeScript7 ERESOLVE and supported strict install plus dashboard
+  lint/typecheck/test/build/integration/audit and normal update dry run, all0
+  except the expected incompatible update1. Manifests/override unchanged.
+  Acceptable as a documented upstream blocker; no TypeScript7 repair claimed.
+- A/C exact pinned heads await independent receipt verification. F awaits
+  final report/evidence head and independent recovery execution. No final
+  combined acceptance or integration recommendation yet.
