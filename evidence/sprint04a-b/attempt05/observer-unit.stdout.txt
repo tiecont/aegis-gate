@@ -1,0 +1,13 @@
+✔ fragmented envelopes classify controls and preserve bounded decoder state (3.153604ms)
+{"native_h2_identity_controls":[{"peer_fingerprint":"49:A1:E3:FD:F4:C6:23:EA:CD:D8:57:8D:56:E3:84:15:B8:7D:E5:4C:1F:1F:3E:99:C9:F9:C3:F9:1B:B7:55:74","downstream_tls":"TLSv1.3","samples":[{"connection":1,"stream":1,"method":"GET","target":"/bad%20target","authority":"synthetic-authority.test","marker":"first-only","sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"},{"connection":1,"stream":3,"method":"GET","target":"/encoded%2Fsegment?value=%2520","authority":"synthetic-authority.test","marker":null,"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"}]},{"peer_fingerprint":"49:A1:E3:FD:F4:C6:23:EA:CD:D8:57:8D:56:E3:84:15:B8:7D:E5:4C:1F:1F:3E:99:C9:F9:C3:F9:1B:B7:55:74","downstream_tls":"TLSv1.3","samples":[{"connection":2,"stream":1,"method":"GET","target":"/bad%20target","authority":"synthetic-authority.test","marker":"first-only","sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"},{"connection":2,"stream":3,"method":"GET","target":"/encoded%2Fsegment?value=%2520","authority":"synthetic-authority.test","marker":null,"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"}]}],"observed_decrypted_bytes":139,"identity_scope":"configured origin SNI preserved; HTTP authority forwarded without binding or rewriting"}
+✔ native H2 direct and observed controls preserve authority, SNI, targets and reuse (901.034988ms)
+{"payload_bytes":37843,"sha256":"814492f3243b52ec0c40be131e59025e439d93efe4286906d2a4c61b121615ca","direct_and_observed":[{"fingerprint":"27:E0:8E:1B:67:6C:DF:C9:96:27:8D:50:BE:49:A8:A5:E5:65:53:49:63:0F:1B:59:7A:5E:84:85:45:67:E6:34","tls":"TLSv1.3","alpn":"h2"},{"fingerprint":"27:E0:8E:1B:67:6C:DF:C9:96:27:8D:50:BE:49:A8:A5:E5:65:53:49:63:0F:1B:59:7A:5E:84:85:45:67:E6:34","tls":"TLSv1.3","alpn":"h2"}],"samples":4096,"omitted":112}
+✔ observer preserves bytes, configured identity and verified TLS; bounds samples (996.529987ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1995.762061
