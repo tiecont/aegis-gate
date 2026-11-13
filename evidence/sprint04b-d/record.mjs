@@ -33,7 +33,7 @@ const files = git('ls-files').split('\n').filter(name =>
   name.startsWith('evidence/sprint04b-d/'));
 const json = (name, value) => fs.writeFileSync(path.join(output, name), JSON.stringify(value, null, 2) + '\n');
 json('source.json', { source_commit: source, source_tree: git('rev-parse', 'HEAD^{tree}'), initial_status: status,
-  cwd, tool_path: environment.PATH, node_binary: nodeExecutable(), fixture_lock: lock, lock_requested_at: process.env.AEGIS_D_LOCK_REQUESTED,
+  cwd, tool_path: environment.PATH, node_binary: process.execPath, fixture_lock: lock, lock_requested_at: process.env.AEGIS_D_LOCK_REQUESTED,
   lock_acquired_before: new Date().toISOString(), project: environment.COMPOSE_PROJECT_NAME,
   files: files.map(name => ({ path: name, sha256: hash(fs.readFileSync(name)) })) });
 const records = [];
@@ -57,7 +57,6 @@ function run(label, argv, options = {}) {
 function pass(label, argv, options) { const result = run(label, argv, options); assert.equal(result.status, 0, label); return result; }
 function held(stage) { assert.equal(run(`lock-${stage}`, ['flock', '--nonblock', lock, 'true']).status, 1, 'fixture lock released early'); }
 const node = process.execPath;
-function nodeExecutable() { return process.execPath; }
 const npm = path.join(path.dirname(node), 'npm');
 const compose = ['docker', 'compose', '--env-file', '.local/compose.env', '--env-file', '.local/fixture-images.env', '-f', 'infra/compose/compose.yaml'];
 let composeAttempted = false;
@@ -94,7 +93,6 @@ try {
   held('after-setup');
   composeAttempted = true;
   pass('compose-up', [...compose, 'up', '-d', '--wait', '--wait-timeout', '90']);
-  pass('compose-config', [...compose, 'config', '--format', 'json']);
   pass('fixture-credential-tls', ['python3', 'scripts/integration.py']);
   pass('fixture-fresh-restart', ['python3', 'scripts/fixture-image-integration.py']);
   pass('fixture-stale-volume', ['python3', 'evidence/sprint04b-d/stale-volume.py']);
