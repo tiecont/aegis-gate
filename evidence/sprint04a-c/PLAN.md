@@ -24,3 +24,18 @@ traffic tests, fixture services, shared lock, merges or external publication.
 Acceptance: exact source URLs/versions/SHAs, commands/exits/timestamps/hashes;
 source-backed capability limits; no new passing runtime claims from research;
 unchanged75 corpus and gates; reviewable report and concrete stop conditions.
+
+## 2026-11-13 capability assignment
+
+Restore a795e619 with worktree add --force, branch to
+research/module01-upstream-capability and rebase onto origin/main3e039408.
+Exclude the inherited coordinator contract commit from C's review range.
+Reuse all committed research unchanged; verify its original139-file manifest
+against historical Git objects. Independently review A's4d2d0c7 scoped stop.
+Refresh official releases, immutable source, default-branch snapshots, issue889,
+PR1117 and RustSec status into new per-attempt directories. Recheck cached
+published archives, offline inverse trees and the explicitly dated audit DB.
+Commit collection/verification tools before execution. Keep every failed
+attempt; use the shared fixture lock for the complete offline scanner lifetime.
+Update only owned evidence and C report/drafts. Hand exact commits to E;
+no agents, merges, runtime candidate, external publication or gate change.
