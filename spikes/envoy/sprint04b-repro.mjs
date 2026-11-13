@@ -36,7 +36,7 @@ process.on('SIGINT', () => { proof.record.error = 'SIGINT'; void stop(); });
 try {
   proof.record.scope = 'Standalone H1 parser/partial mapper reproduction; not a full candidate or immutable75 execution';
   proof.record.bounds = { wall_ms: 90000, request_deadline_ms: 2500, response_bytes: 32768,
-    docker_memory: '256m', docker_cpus: '1', docker_pids: 64, maximum_requests: 30 };
+    docker_memory: '256m', docker_cpus: '1', docker_pids: 64, maximum_requests: 40 };
   proof.record.image = image;
   assert.equal(proof.command('openssl-version', ['openssl', 'version']).status, 0);
   assert.equal(proof.command('docker-version', ['docker', 'version', '--format', '{{json .}}']).status, 0);
@@ -123,7 +123,8 @@ try {
     }
   }
   async function probe(name, port, request, expected, afterFirst = false) {
-    const before = { bytes: Buffer.concat(decrypted).length, connections, handlers: handlers.length, parserErrors, transportErrors };
+    const snapshot = () => ({ bytes: Buffer.concat(decrypted).length, connections, handlers: handlers.length, parserErrors, transportErrors });
+    let before = snapshot(); let warmup = null;
     const at = new Date().toISOString(); const socket = tls.connect(options(port));
     socket.on('error', () => {}); await once(socket, 'secureConnect');
     const identity = { authorized: socket.authorized, servername: socket.servername, alpn: socket.alpnProtocol,
@@ -139,19 +140,25 @@ try {
       while (!Buffer.concat(received).toString().includes('\r\n\r\nOK')) {
         assert.ok(Date.now() < deadline, 'warmup response'); await delay(5);
       }
+      warmup = { request_utf8: 'GET /warmup HTTP/1.1\r\nHost: edge-a.test\r\n\r\n',
+        origin_decrypted_bytes: Buffer.concat(decrypted).length - before.bytes,
+        handlers: handlers.slice(before.handlers), new_connections: connections - before.connections };
+      before = snapshot();
     }
     socket.write(request); // Never send client FIN: distinguish response header from actual peer closure.
     await closed; clearTimeout(timer); await delay(30);
     const response = Buffer.concat(received); const bytes = Buffer.concat(decrypted).subarray(before.bytes);
     const status = [...response.toString().matchAll(/HTTP\/1\.1 (\d{3})/g)].map((m) => Number(m[1]));
     const row = { name, started_at: at, ended_at: new Date().toISOString(), listener: ports.indexOf(port) ? 'DPE-501-to-400' : 'default',
-      request_utf8: request, request_hex: Buffer.from(request).toString('hex'), after_valid_request: afterFirst,
+      request_utf8: request, request_hex: Buffer.from(request).toString('hex'), after_valid_request: afterFirst, warmup,
       identity, response_utf8: response.toString(), response_hex: response.toString('hex'), status,
       client_sent_fin: false, peer_end: peerEnd, timed_out: timedOut, error,
       origin: { decrypted_bytes: bytes.length, decrypted_hex: bytes.toString('hex'),
         new_connections: connections - before.connections, handlers: handlers.slice(before.handlers),
         parser_errors: parserErrors - before.parserErrors, transport_errors: transportErrors - before.transportErrors }, expected };
-    row.matches_observation = !timedOut && peerEnd && status.at(-1) === expected;
+    row.matches_observation = !timedOut && peerEnd && status.at(-1) === expected &&
+      (name.startsWith('strict-ingress-TE-') || name.startsWith('malformed-HTTP-invalid-transfer-encoding')
+        ? bytes.length === 0 && row.origin.handlers.length === 0 && row.origin.new_connections === 0 : true);
     proof.record.probes.push(row); proof.save(); console.log(`${name}: ${JSON.stringify(status)} peer_end=${peerEnd} bytes=${bytes.length}`);
   }
   proof.record.probes = [];
@@ -173,6 +180,11 @@ try {
   for (const target of manifest.encoded_targets) await probe(`encoded-${target}`, ports[1], request('GET', target), 200);
   await probe('ordered-pipeline', ports[1], 'GET /first%2Fsegment HTTP/1.1\r\nHost: edge-a.test\r\n\r\n' +
     request('GET', '/second?x=%2520'), 200);
+  const pipeline = proof.record.probes.at(-1);
+  assert.deepEqual(pipeline.status, [200, 200]);
+  assert.deepEqual(pipeline.origin.handlers.map((h) => h.url), ['/first%2Fsegment', '/second?x=%2520']);
+  for (const target of manifest.encoded_targets) assert.equal(proof.record.probes.find((p) =>
+    p.name === `encoded-${target}`).origin.handlers[0]?.url, target);
   assert.equal(proof.record.probes.length, 29);
   proof.record.completed_observations = proof.record.probes.every((p) => p.matches_observation);
   proof.record.security_acceptance = 'NO-GO: observing normalization/partial hooks does not grant a security pass';
