@@ -1,0 +1,954 @@
+{
+  "head": "71a3dc6381223d54fa8b23ecf84ff205e0b52ea6",
+  "tree": "fa99ceeeccd961ee97b57159b8a3f2e6910b5b2c",
+  "reviewer": "eaf0d812859e86cf78e957f89ef8988b49b2e9b0",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/home/tiecont/Projects/aegis-gate-04b-e/evidence/sprint04b-e/c-review.mjs",
+    "/home/tiecont/Projects/aegis-gate-04b-e-c",
+    "evidence/sprint04b-e/c-01"
+  ],
+  "node": "v26.13.0",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "started_at": "2026-11-13T17:18:59.603Z",
+  "commands": [
+    {
+      "label": "immutable75",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-04b-e-c",
+      "started_at": "2026-11-13T17:19:02.272Z",
+      "ended_at": "2026-11-13T17:19:02.360Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": {
+        "stdout": {
+          "file": "evidence/sprint04b-e/c-01/immutable75.stdout",
+          "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+        },
+        "stderr": {
+          "file": "evidence/sprint04b-e/c-01/immutable75.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "source-whitespace",
+      "program": "git",
+      "args": [
+        "diff",
+        "--check",
+        "cbb5f71db84b9489bf4a6260696bbba29ab4a561",
+        "71a3dc6381223d54fa8b23ecf84ff205e0b52ea6",
+        "--",
+        "spikes/envoy/sprint04b-*",
+        "docs/reports/sprint04b-c-protocol.md"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-04b-e-c",
+      "started_at": "2026-11-13T17:19:02.360Z",
+      "ended_at": "2026-11-13T17:19:02.365Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": {
+        "stdout": {
+          "file": "evidence/sprint04b-e/c-01/source-whitespace.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "file": "evidence/sprint04b-e/c-01/source-whitespace.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "relay-independent",
+      "program": "flock",
+      "args": [
+        "/tmp/aegisgate-sprint02-fixtures.lock",
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--test",
+        "spikes/envoy/sprint04b-observer.test.mjs"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-04b-e-c",
+      "started_at": "2026-11-13T17:19:02.366Z",
+      "ended_at": "2026-11-13T17:19:03.252Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": {
+        "stdout": {
+          "file": "evidence/sprint04b-e/c-01/relay-independent.stdout",
+          "sha256": "d8ae3e3d5832e1ae5aaeb1015d5a3fac30d72efc28f59ee29b91002e4f6bf25a"
+        },
+        "stderr": {
+          "file": "evidence/sprint04b-e/c-01/relay-independent.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "secrets-source",
+      "program": "flock",
+      "args": [
+        "/tmp/aegisgate-sprint02-fixtures.lock",
+        "docker",
+        "run",
+        "--rm",
+        "--pull=never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate-04b-e-c:/repo:ro",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate-04b-e/evidence/sprint04b-e/c-01:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/spikes/envoy",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-04b-e-c",
+      "started_at": "2026-11-13T17:19:03.252Z",
+      "ended_at": "2026-11-13T17:19:04.356Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": {
+        "stdout": {
+          "file": "evidence/sprint04b-e/c-01/secrets-source.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "file": "evidence/sprint04b-e/c-01/secrets-source.stderr",
+          "sha256": "c3adaf516806eb7d4796932ac270c3cc858d16676c1b82029cc7d553b15408bf"
+        }
+      }
+    },
+    {
+      "label": "secrets-evidence",
+      "program": "flock",
+      "args": [
+        "/tmp/aegisgate-sprint02-fixtures.lock",
+        "docker",
+        "run",
+        "--rm",
+        "--pull=never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate-04b-e-c:/repo:ro",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate-04b-e/evidence/sprint04b-e/c-01:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/evidence/sprint04b-c",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-04b-e-c",
+      "started_at": "2026-11-13T17:19:04.356Z",
+      "ended_at": "2026-11-13T17:19:05.377Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": {
+        "stdout": {
+          "file": "evidence/sprint04b-e/c-01/secrets-evidence.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "file": "evidence/sprint04b-e/c-01/secrets-evidence.stderr",
+          "sha256": "481e7f1ea451b7de1013591b1ad14b0a2c897b3455042a9183f424fb94e2b560"
+        }
+      }
+    },
+    {
+      "label": "secrets-report",
+      "program": "flock",
+      "args": [
+        "/tmp/aegisgate-sprint02-fixtures.lock",
+        "docker",
+        "run",
+        "--rm",
+        "--pull=never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate-04b-e-c:/repo:ro",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate-04b-e/evidence/sprint04b-e/c-01:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/docs/reports/sprint04b-c-protocol.md",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-04b-e-c",
+      "started_at": "2026-11-13T17:19:05.377Z",
+      "ended_at": "2026-11-13T17:19:05.881Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": {
+        "stdout": {
+          "file": "evidence/sprint04b-e/c-01/secrets-report.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "file": "evidence/sprint04b-e/c-01/secrets-report.stderr",
+          "sha256": "90444732f47c512e8032dbe1b0f6b6575154958006687af592c590eeb22702a5"
+        }
+      }
+    }
+  ],
+  "attempts": [
+    {
+      "dir": "attempt01",
+      "source": "e8c6fb2648b62ee6779c1c89aa48954175539138",
+      "source_files": 48,
+      "historical_files": 227,
+      "manifest_entries": 27,
+      "commands": [
+        [
+          "syntax",
+          0
+        ],
+        [
+          "observer-unit",
+          0
+        ],
+        [
+          "baseline-manifest",
+          0
+        ],
+        [
+          "image",
+          0
+        ],
+        [
+          "openssl",
+          0
+        ],
+        [
+          "unchanged75",
+          1
+        ],
+        [
+          "evaluate75",
+          1
+        ],
+        [
+          "unchanged23",
+          1
+        ],
+        [
+          "protocol",
+          0
+        ]
+      ]
+    },
+    {
+      "dir": "attempt02",
+      "source": "160abb4fc71ea7be708f46d6d6e97a7478d521e4",
+      "source_files": 48,
+      "historical_files": 227,
+      "manifest_entries": 16,
+      "commands": [
+        [
+          "syntax",
+          0
+        ],
+        [
+          "observer-unit",
+          0
+        ],
+        [
+          "baseline-manifest",
+          0
+        ],
+        [
+          "image",
+          0
+        ],
+        [
+          "openssl",
+          0
+        ],
+        [
+          "protocol",
+          0
+        ]
+      ]
+    },
+    {
+      "dir": "verification01",
+      "source": "8a82f0c4f8b2cf307d3d1473a62600c021db69fa",
+      "source_files": 0,
+      "historical_files": 0,
+      "manifest_entries": 3,
+      "commands": [
+        [
+          "whitespace",
+          2
+        ]
+      ]
+    },
+    {
+      "dir": "verification02",
+      "source": "07bb13f1ecb2be18efd3739fbf25a9d92b517a2e",
+      "source_files": 0,
+      "historical_files": 0,
+      "manifest_entries": 24,
+      "commands": [
+        [
+          "whitespace",
+          0
+        ],
+        [
+          "observer-transparency",
+          0
+        ],
+        [
+          "syntax-sprint04b-observer.mjs",
+          0
+        ],
+        [
+          "syntax-sprint04b-observer.test.mjs",
+          0
+        ],
+        [
+          "syntax-sprint04b-protocol.mjs",
+          0
+        ],
+        [
+          "syntax-sprint04b-run.mjs",
+          0
+        ],
+        [
+          "syntax-sprint04b-verify.mjs",
+          0
+        ],
+        [
+          "secrets-source",
+          0
+        ],
+        [
+          "secrets-evidence",
+          0
+        ],
+        [
+          "secrets-report",
+          0
+        ]
+      ]
+    }
+  ],
+  "files": [
+    {
+      "file": "docs/reports/sprint04b-c-protocol.md",
+      "sha256": "831374042114e182ee5c1cf41072f937f41378c37a276b1856644709af1a79bf"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/SHA256SUMS",
+      "sha256": "f55dc1a9648786be117da09edafca7deae0d5b0d3190edf6bdd9a2ce787164ec"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/baseline-manifest.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/baseline-manifest.stdout",
+      "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/commands.json",
+      "sha256": "db6494104fac10ea8ccee67e391d099005870ced3df23e9d62b8308fd0f63c9e"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/evaluate75.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/evaluate75.stdout",
+      "sha256": "81bf93e6256b1e385d4c4f73a15856902d11b9487ddb5f330c6bb236f4571f81"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/image.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/image.stdout",
+      "sha256": "27a467ca17e2fc31a8f523832c7c31b6c62b3d69e77dc72a3cc0bd4d72bb0920"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/observer-unit.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/observer-unit.stdout",
+      "sha256": "ea6e3dbb7aecaedbf7d750b764d889994f25ee4ab3fbe4f8c85e7667c1648b6b"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/openssl.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/openssl.stdout",
+      "sha256": "bdd7122ae3788e889ce96da25f99fe5023a80a88ab0e6db9f93cf3174187301c"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/protocol.json",
+      "sha256": "21f804896fad3789a25bbe94550ff14ee48e5c357c3c59bb6c2609280b660377"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/protocol.json.progress.json",
+      "sha256": "4ebfc8f2a78bea30a5c7de31bbdcea461249267352cd08b937a83f6d65f6c741"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/protocol.json.proxy.log",
+      "sha256": "1c772f106dc56a900cae897187f2e182286e0bc8ed656d55cf47d7db319b35bb"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/protocol.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/protocol.stdout",
+      "sha256": "49c6daa22d277d7551149c021e9c7d062309510860d24b5b94ae392bdad81609"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/syntax.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/syntax.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/unchanged23.json",
+      "sha256": "a8d9864a723e97bfe6211cb0b7ff8ce1bebad4699c4d464982a9b292b92f15b5"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/unchanged23.json.progress.json",
+      "sha256": "1caf446580770296c0de7e25ed7ac45ce214785eef67bc6b05d6e322f7f15d35"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/unchanged23.json.proxy.log",
+      "sha256": "f41fb02dec21a8cade70c8d6daf8c85003ad62c0645645a028e466f7c22ff07f"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/unchanged23.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/unchanged23.stdout",
+      "sha256": "8e77d7345f847a55eacb540d5322be22225c717ca6c5b2977ca42df9ca2dc098"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/unchanged75-proxy.log",
+      "sha256": "e40a9b2999cd264d93670df9156bf46e1265033bf68014f0adaca55085a6e4da"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/unchanged75-results.json",
+      "sha256": "c0c7b7921da805294c59ae71be28b8aa7063b18ce9eb6d73c3472a6a6cbe1424"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/unchanged75.stderr",
+      "sha256": "6f1a6dede71add5770cfb685683a7885a8adfe8b469009cfda894909384efd64"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt01/unchanged75.stdout",
+      "sha256": "b745a6c249db9dda4443bf44eff37b453bbdf9ff3e0e3ea10c36a705ab062860"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/SHA256SUMS",
+      "sha256": "56aecf4bdafffe3ed41d37d0d1eaa708ddb3bbcef053c4ea60288099d7bb849c"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/baseline-manifest.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/baseline-manifest.stdout",
+      "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/commands.json",
+      "sha256": "087e1aa0bb46b844dd0b49e664a6ee6e93299be74a5d9edc80480e9eeb0177b4"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/image.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/image.stdout",
+      "sha256": "27a467ca17e2fc31a8f523832c7c31b6c62b3d69e77dc72a3cc0bd4d72bb0920"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/observer-unit.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/observer-unit.stdout",
+      "sha256": "5b19a4108432619afbb5cca585d984cff90711778a012b6f52d214377528132d"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/openssl.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/openssl.stdout",
+      "sha256": "bdd7122ae3788e889ce96da25f99fe5023a80a88ab0e6db9f93cf3174187301c"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/protocol.json",
+      "sha256": "6518e607b82fe70259cb9f8d3ae2e9f5e93d459a12882a132e59c42d3638ab11"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/protocol.json.progress.json",
+      "sha256": "ef8d05cecd4538ad61aebc81cbbae21b2498f77dcff4aa34deb8a082f1dab691"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/protocol.json.proxy.log",
+      "sha256": "88f394f7ffd4c12d2db0cc4aabea7cab4f89ef978ab95b3b7416ebfba940b759"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/protocol.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/protocol.stdout",
+      "sha256": "49c6daa22d277d7551149c021e9c7d062309510860d24b5b94ae392bdad81609"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/syntax.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/attempt02/syntax.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification01/SHA256SUMS",
+      "sha256": "204783f3b0a71caf91d931c51422fdaba5d8ccf51f6e297b01bc16ebacd762d6"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification01/commands.json",
+      "sha256": "fa9f64d0e59f197494fc2edd7ad6ddf54cde9646e282052ca4db03024c3bc91c"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification01/whitespace.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification01/whitespace.stdout",
+      "sha256": "de5510007578f5655ad5f373bf3d68df70a60b6c5005351b589136a65e670c73"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/SHA256SUMS",
+      "sha256": "6d0c33a85e50ce2489e8f302089c34036464f9b9f3e45d48b8efcbbe40ebac4b"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/commands.json",
+      "sha256": "8e499570b0caabbc7176ab0301911c4484cb8f5442ebbd78cc5ec15810ce9431"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/evidence-secrets.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/observer-transparency.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/observer-transparency.stdout",
+      "sha256": "f19f9067824fbb30b5524ab6601f5f6ddb291d8bce52d6ed5b6174240fcccfa8"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/report-secrets.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/secrets-evidence.stderr",
+      "sha256": "cb0755303be4f81fe9153a89dba45c6cede8a4c55291df3a1eca688068830806"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/secrets-evidence.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/secrets-report.stderr",
+      "sha256": "1607590e70629d8bd7cb8fdefca6583c4aa1701b0cfc7daf49fe27365a6ad3c8"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/secrets-report.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/secrets-source.stderr",
+      "sha256": "33853c04b2839d582239cf81c24ff059c01d5a0e0b46c6fe1c8c53f04254acf7"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/secrets-source.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/source-secrets.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/syntax-sprint04b-observer.mjs.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/syntax-sprint04b-observer.mjs.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/syntax-sprint04b-observer.test.mjs.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/syntax-sprint04b-observer.test.mjs.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/syntax-sprint04b-protocol.mjs.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/syntax-sprint04b-protocol.mjs.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/syntax-sprint04b-run.mjs.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/syntax-sprint04b-run.mjs.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/syntax-sprint04b-verify.mjs.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/syntax-sprint04b-verify.mjs.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/whitespace.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04b-c/verification02/whitespace.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-observer.mjs",
+      "sha256": "2b711290f5d7dcc8831a85a1d2299fefcab7d8a3ec3fb1256308c831287142a7"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-observer.test.mjs",
+      "sha256": "afcf2f3a3726afab9d128d78780a79cc9ff98c5bf9af3ac0e4d81a151c525082"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-protocol.mjs",
+      "sha256": "c00b465407778cab9bdd9df987fb48d9e9c4ec1625c51ad7ef90946e2732ccb4"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-run.mjs",
+      "sha256": "b56b2b82d436b22895a16f545d6504e3add2ae800f16b1b7dd8893c82f588ed6"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-verify.mjs",
+      "sha256": "ead5e86838792f316759cd7d6a2aa74d6dcb53815772707ac309069021bd74ba"
+    }
+  ],
+  "corpus75": {
+    "passed": 69,
+    "failed": [
+      "malformed-HTTP-invalid-transfer-encoding",
+      "malformed-HTTP-obsolete-folded-header",
+      "strict-ingress-TE-repeated-chunked",
+      "strict-ingress-TE-not-final-chunked",
+      "supplemental-repeated-transfer-encoding-fields",
+      "HTTP2-authority-Host-and-SNI-confusion-rejected"
+    ]
+  },
+  "corpus23": {
+    "passed": 16,
+    "failed": [
+      "settled-reuse-identity-and-three-authority-negatives",
+      "individual-settled-userinfo-denial",
+      "raw-H2-HEADERS-stream-zero",
+      "raw-H2-zero-WINDOW_UPDATE",
+      "raw-H2-uppercase-header-name",
+      "raw-H2-connection-specific-header",
+      "slow-reader-backpressure-and-response-cancellation"
+    ]
+  },
+  "malformed": [
+    {
+      "name": "HEADERS-stream-zero-immediate",
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00000004000000000000001d010500000000828704012f000a3a617574686f726974790b656467652d622e74657374",
+      "received_bytes": 0,
+      "close": {
+        "event": "close",
+        "ms": 1004.9869869999998,
+        "local_cleanup_started": false
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "HEADERS-stream-zero-settled",
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00000004000000000000000004010000000000001d010500000000828704012f000a3a617574686f726974790b656467652d622e74657374",
+      "received_bytes": 55,
+      "close": {
+        "event": "close",
+        "ms": 1053.5468149999997,
+        "local_cleanup_started": false
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "zero-WINDOW_UPDATE-immediate",
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00000004000000000000000408000000000000000000",
+      "received_bytes": 0,
+      "close": {
+        "event": "close",
+        "ms": 1002.5092720000002,
+        "local_cleanup_started": false
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "zero-WINDOW_UPDATE-settled",
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00000004000000000000000004010000000000000408000000000000000000",
+      "received_bytes": 55,
+      "close": {
+        "event": "close",
+        "ms": 1052.7215770000003,
+        "local_cleanup_started": false
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "uppercase-header-name-immediate",
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a000000040000000000000026010500000001828704012f000a3a617574686f726974790b656467652d622e746573740005582d4c61620178",
+      "received_bytes": 0,
+      "close": {
+        "event": "close",
+        "ms": 1001.9874390000004,
+        "local_cleanup_started": false
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "uppercase-header-name-settled",
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a000000040000000000000000040100000000000026010500000001828704012f000a3a617574686f726974790b656467652d622e746573740005582d4c61620178",
+      "received_bytes": 55,
+      "close": {
+        "event": "close",
+        "ms": 1052.7123179999999,
+        "local_cleanup_started": false
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "connection-specific-header-immediate",
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00000004000000000000002f010500000001828704012f000a3a617574686f726974790b656467652d622e74657374000a636f6e6e656374696f6e05636c6f7365",
+      "received_bytes": 0,
+      "close": {
+        "event": "close",
+        "ms": 1001.1205140000002,
+        "local_cleanup_started": false
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "connection-specific-header-settled",
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00000004000000000000000004010000000000002f010500000001828704012f000a3a617574686f726974790b656467652d622e74657374000a636f6e6e656374696f6e05636c6f7365",
+      "received_bytes": 55,
+      "close": {
+        "event": "close",
+        "ms": 1052.922575999999,
+        "local_cleanup_started": false
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    }
+  ],
+  "userinfo": [
+    {
+      "name": "userinfo-native-after-Host-and-authority-controls",
+      "events": [
+        {
+          "event": "socket-end",
+          "local_cleanup_started": false,
+          "ms": 1000.5366999999969
+        },
+        {
+          "event": "socket-close",
+          "local_cleanup_started": false,
+          "ms": 1001.580152999999
+        },
+        {
+          "event": "end",
+          "ms": 1001.5969849999965,
+          "local_cleanup_started": false,
+          "rst_code": 8
+        },
+        {
+          "event": "close",
+          "ms": 1001.6116519999996,
+          "local_cleanup_started": false,
+          "rst_code": 8
+        },
+        {
+          "event": "session-close",
+          "local_cleanup_started": false,
+          "ms": 1001.6217799999977
+        }
+      ],
+      "trace": {
+        "available": false,
+        "reason": "Node native HTTP2 consumes TLSSocket internally; JavaScript data tap is not a wire observer. Use separate raw-client and origin relay evidence."
+      }
+    },
+    {
+      "name": "userinfo-native-independent",
+      "events": [
+        {
+          "event": "socket-end",
+          "local_cleanup_started": false,
+          "ms": 1001.3849279999995
+        },
+        {
+          "event": "socket-close",
+          "local_cleanup_started": false,
+          "ms": 1002.474338
+        },
+        {
+          "event": "end",
+          "ms": 1002.5091890000003,
+          "local_cleanup_started": false,
+          "rst_code": 8
+        },
+        {
+          "event": "close",
+          "ms": 1002.5564029999987,
+          "local_cleanup_started": false,
+          "rst_code": 8
+        },
+        {
+          "event": "session-close",
+          "local_cleanup_started": false,
+          "ms": 1002.5702319999982
+        }
+      ],
+      "trace": {
+        "available": false,
+        "reason": "Node native HTTP2 consumes TLSSocket internally; JavaScript data tap is not a wire observer. Use separate raw-client and origin relay evidence."
+      }
+    }
+  ],
+  "corrected_labels": {
+    "completed_8MiB_before_cancel": true,
+    "cancellation_proven_8MiB": false,
+    "native_wire_unavailable": true
+  },
+  "buffering": {
+    "produced8": [
+      196608,
+      8388608,
+      8388608
+    ],
+    "produced32": [
+      196608,
+      11468800,
+      16842752
+    ],
+    "cancel32_ms": 16.953182000001107,
+    "upload_cancel_ms": 4.643926000000647,
+    "grpc_cancel_ms": 1.5947239999986778
+  },
+  "verdict": "ACCEPT scoped diagnostic investigation; six/seven failures and protocol conformance unresolved",
+  "exit_code": 0,
+  "ended_at": "2026-11-13T17:19:05.898Z",
+  "scope": "Read-only exact C provenance and observation review, independent three relay tests and offline scans. No candidate/full75/full23 rerun, gate waiver or GO."
+}
