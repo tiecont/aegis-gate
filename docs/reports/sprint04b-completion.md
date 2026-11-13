@@ -1,6 +1,7 @@
 # Sprint04-B Completion And Handoff
 
-Status: execution in progress. Module01 **NO-GO**, Modules04-12 **LOCKED**,
+Status: component work and full local integration gates complete; final hosted
+integration/merge verification pending. Module01 **NO-GO**, Modules04-12 **LOCKED**,
 production **BLOCKED**. This record is updated only from actual receipts.
 
 ## PR12 Closure
@@ -20,16 +21,16 @@ human's session authorization: "you just choice, i approve anything you choice".
 This selects research, not an engine substitution, contract waiver or technical
 GO. Formal human architecture/security owner and approval reference remain
 **PENDING / not supplied**. The decision package is prepared by root as Agent A
-on `docs/sprint04b-architecture-decision`; independent review is required.
+on `docs/sprint04b-architecture-decision`; E independently accepts it as a proposal.
 
 | Owner | Branch | Scope / current source |
 | --- | --- | --- |
 | A / root | `docs/sprint04b-architecture-decision` | source9378c8f, receipt3348ca0; architecture alternatives, proposed ADR012, contract memo and separate alternative test design |
-| B | `research/sprint04b-maintained-ingress` | `5de81795963d07486d0621822131d4e1554ccadc`; released API refresh and minimal reproducers complete, independent review pending |
+| B | `research/sprint04b-maintained-ingress` | `5de81795963d07486d0621822131d4e1554ccadc`; released API refresh and minimal reproducers complete, E ACCEPT research/failed evidence only |
 | C | `test/sprint04b-protocol-resilience` | `71a3dc6381223d54fa8b23ecf84ff205e0b52ea6`; unchanged baseline and bounded lifecycle/resource evidence, E ACCEPT |
 | D | `hardening/sprint04b-local-reliability` | `ab4e1f642e2bcbac1723d156390cc1cbebdad157`;00/02/03, fixture and dashboard regression, E ACCEPT |
-| E | `review/sprint04b-security` | Phase0 accepted at3d2d056; A/D reviewfb23460 and C review8ca7e4f; B/integration review to follow |
-| Root | `sprint/04b-integration` | exact-source accepted integration and final local/hosted gates to follow |
+| E | `review/sprint04b-security` | Phase0 accepted at3d2d056; A/D reviewfb23460, C review8ca7e4f, B/helper reviewa48ad72; final integration/receipt audit to follow |
+| Root | `sprint/04b-integration` | clean full local proof `0cf24f494001711bfb87695536db20732dcb7b1a`; final hosted gates to follow |
 
 ## Gate Matrix
 
@@ -135,6 +136,14 @@ receipt/immutable hashes and scoped offline scans verify; independent recovery
 and three relay tests pass. These verdicts do not activate ADR012, appoint a
 human owner or waive any failed original assertion.
 
+E independently ACCEPTs B5de8179 as upstream NO-GO research/unsuccessful
+standalone evidence in `sprint04b-e-b-review.md` at
+`a48ad72aa9628774b472b86f900e1009778b01d8`. Seven manifests, receipt streams and
+source objects verify. Fresh independent release/tag metadata for all three
+projects and eight immutable upstream files match. E also accepts the root
+gate helper's scoped invocation and output exclusions; final integration/receipt
+audit remains distinct from these component verdicts.
+
 Next executable sprint trigger: a maintained released strict parser capability
 with exact provenance and demonstrated change in the historical failing cases.
 Then targeted failures, unchanged75, complete TLS/identity/stream/cancellation/
@@ -142,10 +151,40 @@ pool/config/resource proof, maintenance review, independent reproduction,
 local/hosted gates and recorded affirmative human architecture approval.
 Without that trigger, stop candidate builds and retain the upstream dependency.
 
+## Full Local Integration Gates
+
+Exact clean source `0cf24f494001711bfb87695536db20732dcb7b1a`, tree
+`1775707ec26ca995400569b031f271f1acec602a`, passes root attempt01:
+2026-11-13T17:29:05.243Z through17:33:13.150Z. `make check` exits0,
+`make security-scan` exits0, `make dev-down` exits0 and Compose volume teardown
+exits0. No project containers remain. The actual fixture lock is asserted
+before/after every child and held through final cleanup. Node26.13.0 and the
+official cached Go1.27.4 toolchain avoid the recorded incompatible system Go.
+
+```sh
+env PATH="/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin:/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin:$PATH" \
+  AEGIS_NODE_BIN=/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node \
+  flock /tmp/aegisgate-sprint02-fixtures.lock \
+  /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node \
+  scripts/sprint04b-gates.mjs evidence/sprint04b-root/gates-01
+```
+
+The full check includes formatting/lint, race tests, Rust/dashboard builds,
+contract compatibility, actual PostgreSQL/Redis/NATS/TLS fixtures, negative
+controls and deliberate gate-defect self-tests. Scans cover Go/npm/Rust,
+282 history commits,34.49MB worktree secret inputs, filesystem and pinned
+fixture/Envoy images with SBOMs and image identity checks. No suppressions or
+dependency changes. Raw safe outputs, exact argv/exits/stream hashes and
+`SHA256SUMS` are in `evidence/sprint04b-root/gates-01/`; all hashes verify.
+Rendered Compose credentials are excluded from committed evidence. Historical
+component failures and ineligible attempts stay retained with explanations.
+
 ## Remaining Closeout Work
 
-Finalize B upstream/source/API/reproducer receipts and independent acceptance,
-root full locked checks/scans/cleanup,
-and exact integration-head/main hosted jobs. Record all raw origin/H2 counters,
-current75 failure IDs, actual implementation changes and future resume trigger.
+Finish final independent integration/receipt audit, open the integration PR,
+verify both required hosted jobs on its exact final head, merge if accepted,
+then verify the exact main merge jobs. Final receipt addenda bind prior source
+commits and external run IDs without claiming a self-referential commit hash.
+All changes are additive research/test/evidence/docs; no application, dependency,
+workflow, threat-model, quality-gate or original corpus/evaluator changes.
 No Module04 implementation or production action is permitted by this record.
