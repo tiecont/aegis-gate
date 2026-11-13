@@ -4,7 +4,7 @@ import os from 'node:os';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-const output = path.resolve('evidence/sprint04a-d/dashboard');
+const output = path.resolve(process.argv[2] ?? 'evidence/sprint04a-d/dashboard');
 assert.ok(!fs.existsSync(output));
 fs.mkdirSync(output, { recursive: true, mode: 0o700 });
 const source = spawnSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).stdout.trim();
@@ -27,7 +27,7 @@ function run(label, program, args, cwd = process.cwd()) {
   return child;
 }
 assert.equal(run('versions', npm, ['--version']).status, 0);
-for (const dependency of ['typescript', 'typescript-eslint', '@typescript-eslint/eslint-plugin', '@typescript-eslint/parser', '@typescript-eslint/typescript-estree']) {
+for (const dependency of ['typescript', 'typescript-eslint', '@typescript-eslint/eslint-plugin', '@typescript-eslint/parser', '@typescript-eslint/typescript-estree', 'next', 'eslint', '@next/eslint-plugin-next']) {
   assert.equal(run(`metadata-${dependency.replaceAll('/', '-').replaceAll('@', '')}`, npm, ['view', dependency, 'version', 'peerDependencies', '--json']).status, 0);
 }
 assert.equal(run('historical-dependabot', 'gh', ['api', 'repos/tiecont/aegis-gate/actions/jobs/130788796380/logs', '--allow-escape-sequences']).status, 0);
