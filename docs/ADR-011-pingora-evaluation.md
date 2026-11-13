@@ -6,6 +6,18 @@
 - Supersedes: no accepted decision. Supplies evidence for pending ADR-002 in `docs/DECISIONS.md`.
 - Implementation owner: module 01 implementation agent. Responsible human owner/reviewer: **not assigned**. Approval link/date: **none**.
 
+## Sprint04-B Proposed Amendment
+
+[ADR012](ADR-012-strict-ingress-decision-proposed.md) and
+[the human decision package](reports/sprint04b-a-architecture.md) propose a
+bounded maintained Envoy API research track and analyze H2 origin-isolation
+properties separately. Released-source refresh finds no new complete maintained
+capability. The existing zero-byte contract and all original failures remain
+effective; no architecture/security owner or affirmative GO is recorded.
+The [completion report](reports/sprint04b-completion.md) binds current evidence,
+independent review and integration gates. This pointer does not supersede the
+historical receipts or accept the proposed amendment.
+
 ## Sprint04-A decision boundary
 
 Released Envoy1.40.2 accepts obsolete folding in its Balsa adapter and removes

@@ -2,6 +2,15 @@
 
 ## Sprint04-A Final Closeout / Sprint04-B Start
 
+Sprint04-B component work is complete: fresh unchanged Envoy69/75 and23-probe
+16/23 results retain all mandatory failures. Maintained released sources/APIs
+are unchanged; no credible complete strict-ingress candidate exists. Additive
+bounded protocol diagnostics classify observer/lifecycle limits without granting
+security PASS. Modules00/02/03 recovery, fixture and supported dashboard
+regressions pass. Formal architecture owner/decision remain PENDING; ADR012 is
+proposed only. See `docs/reports/sprint04b-completion.md` for exact component
+sources, independent verdicts and final integration gate receipts as recorded.
+
 PR12 is merged as `cbb5f71db84b9489bf4a6260696bbba29ab4a561`; exact PR-head
 hosted43457905154 and exact merge hosted43466312855 both pass the two required
 jobs. Fresh independent Phase0 ACCEPT verifies sources, manifests, full local

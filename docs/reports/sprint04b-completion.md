@@ -25,7 +25,7 @@ on `docs/sprint04b-architecture-decision`; independent review is required.
 | Owner | Branch | Scope / current source |
 | --- | --- | --- |
 | A / root | `docs/sprint04b-architecture-decision` | source9378c8f, receipt3348ca0; architecture alternatives, proposed ADR012, contract memo and separate alternative test design |
-| B | `research/sprint04b-maintained-ingress` | released API refresh, minimal reproducers, unpublished upstream requirements; execution underway |
+| B | `research/sprint04b-maintained-ingress` | `5de81795963d07486d0621822131d4e1554ccadc`; released API refresh and minimal reproducers complete, independent review pending |
 | C | `test/sprint04b-protocol-resilience` | `71a3dc6381223d54fa8b23ecf84ff205e0b52ea6`; unchanged baseline and bounded lifecycle/resource evidence, E ACCEPT |
 | D | `hardening/sprint04b-local-reliability` | `ab4e1f642e2bcbac1723d156390cc1cbebdad157`;00/02/03, fixture and dashboard regression, E ACCEPT |
 | E | `review/sprint04b-security` | Phase0 accepted at3d2d056; A/D reviewfb23460 and C review8ca7e4f; B/integration review to follow |
@@ -47,8 +47,6 @@ Envoy69/75 and Hyper70/75, the six mandatory Envoy failures and all seven
 supplemental failures remain unchanged until separately documented observations
 are available. Nine H2 bytes remain a failed zero-byte assertion, regardless
 of their SETTINGS ACK classification on a previously valid reused connection.
-
-## Remaining Closeout Work
 
 ## Current75 And Supplemental Evidence
 
@@ -76,6 +74,32 @@ propagation is not claimed. Independent WS two-message close1000, gRPC
 streaming/trailers/cancel and three relay transparency/negative tests pass.
 All raw bytes, frames, TLS identities, lifecycle and bounded counters are in
 `evidence/sprint04b-c/`; exact report is `sprint04b-c-protocol.md`.
+
+## Maintained Upstream Resolution
+
+Fresh released-source/API collection is unchanged: Envoy1.40.2
+`b2d89e0ae53916f28770771fbdd49c5c99c5c5a2`, Pingora0.9.1
+`f86ffda5d3ae5c3baf5125682138b33b26c01b08`, Hyper1.12.0
+`7f67699ce32d717081deb7018b4da7d679277ac0`. All16 overlapping inspected
+released files match Sprint04-A. Default-branch snapshots are unreleased source
+research. No complete supported strict-fold/target/framing path was established;
+there is no trigger for a rebuilt/full candidate. Public Envoy Host retention
+and local-reply mapping remain partial APIs, with no new passing identity or
+TE4xx proof. Exact paths, hashes, version receipts, missing-capability/API
+specifications and unpublished upstream requests are in
+`sprint04b-b-upstream.md` and `evidence/sprint04b-b/`.
+
+Three standalone attempts exit1 and remain preserved. Repro01's byte tap is
+invalid even for positive traffic; its handler/status/peer-close observations
+are separate evidence. Its DPE AND501 mapper stays501. Repro02 validates76/76
+relay bytes but startup/cleanup ordering exceeds its intended90s bound; owned
+container recovery completes under the same lock. Repro03 validates76/76 bytes
+and demonstrates folded/unfolded header200,177 origin bytes/one handler,
+`first second` after normalization. Both trailer requests return200/214 bytes
+but handler trailer maps are empty: trailer normalization/delivery is unproven.
+Corrected status-only mapping is unexecuted. Final cleanup hardening is checked
+for syntax/integrity, not runtime re-proven. No failed observation grants a
+security PASS. No upstream issue was published or production codec fork built.
 
 ## Local Reliability And Dependencies
 

@@ -17,6 +17,12 @@ the separate security-contract/alternative-test memos are proposed only: no
 origin-byte waiver, handler-only oracle, control-byte subtraction or shifted
 interval. The9-byte SETTINGS ACK remains a failed original assertion.
 
+B refreshes exact released Envoy1.40.2/Pingora0.9.1/Hyper1.12.0 sources and finds
+no relevant released change. Standalone folded headers still normalize/forward;
+trailer delivery and status-only TE mapping remain unproven. Invalid early byte
+observations and startup cleanup failure are explicitly retained and excluded
+from security claims. No new complete candidate or public upstream request.
+
 R04/T08 protocol-resource closure remains unproven. C reproduces the same six
 of75 and seven of23 failures. Settled/immediate malformed H2 diagnostics close
 without error frames and without origin dispatch; their exact internal cause
