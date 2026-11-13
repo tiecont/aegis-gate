@@ -1,0 +1,15 @@
+✔ trace drains coalesced input over old decoder chunk bound (4.848366ms)
+✔ fragmented control and bounded control samples preserve totals (6.652011ms)
+✔ fragmented envelopes classify controls and preserve bounded decoder state (4.101486ms)
+{"native_h2_identity_controls":[{"peer_fingerprint":"99:2E:0B:C5:6C:76:67:2A:78:B9:2E:01:00:FE:F9:3B:55:90:E6:A4:9D:06:44:07:E4:2E:3A:D6:86:B5:D3:A9","downstream_tls":"TLSv1.3","samples":[{"connection":1,"stream":1,"method":"GET","target":"/bad%20target","authority":"synthetic-authority.test","marker":"first-only","sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"},{"connection":1,"stream":3,"method":"GET","target":"/encoded%2Fsegment?value=%2520","authority":"synthetic-authority.test","marker":null,"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"}]},{"peer_fingerprint":"99:2E:0B:C5:6C:76:67:2A:78:B9:2E:01:00:FE:F9:3B:55:90:E6:A4:9D:06:44:07:E4:2E:3A:D6:86:B5:D3:A9","downstream_tls":"TLSv1.3","samples":[{"connection":2,"stream":1,"method":"GET","target":"/bad%20target","authority":"synthetic-authority.test","marker":"first-only","sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"},{"connection":2,"stream":3,"method":"GET","target":"/encoded%2Fsegment?value=%2520","authority":"synthetic-authority.test","marker":null,"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"}]}],"observed_decrypted_bytes":139,"identity_scope":"configured origin SNI preserved; HTTP authority forwarded without binding or rewriting"}
+✔ native H2 direct and observed controls preserve authority, SNI, targets and reuse (737.571891ms)
+{"payload_bytes":37843,"sha256":"814492f3243b52ec0c40be131e59025e439d93efe4286906d2a4c61b121615ca","direct_and_observed":[{"fingerprint":"E6:D5:F2:F1:5F:CA:94:AA:35:60:6B:AC:52:FD:76:AF:72:69:24:93:56:51:83:C9:3F:B4:8A:D3:8E:E9:50:DD","tls":"TLSv1.3","alpn":"h2"},{"fingerprint":"E6:D5:F2:F1:5F:CA:94:AA:35:60:6B:AC:52:FD:76:AF:72:69:24:93:56:51:83:C9:3F:B4:8A:D3:8E:E9:50:DD","tls":"TLSv1.3","alpn":"h2"}],"invalid_origin_attempted_payload_bytes":37843,"samples":4096,"omitted":112}
+✔ observer preserves bytes, configured identity and verified TLS; bounds samples (926.56318ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1795.783224
