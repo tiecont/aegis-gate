@@ -72,7 +72,7 @@ try {
     receipt.heads[letter] = { branch, head, owner_clean: true };
   }
   const fDirectory = `/tmp/aegisgate-04a-f`;
-  run('f-owner-manifest', 'sha256sum', ['--check', 'evidence/sprint04a-f/SHA256SUMS', '--quiet'], fDirectory);
+  run('f-owner-manifest', 'sha256sum', ['--check', 'evidence/sprint04a-f/attempt-01/SHA256SUMS', '--quiet'], fDirectory);
   const fSource = JSON.parse(fs.readFileSync(path.join(fDirectory, 'evidence/sprint04a-f/attempt-01/source.json')));
   assert.equal(fSource.initial_status, ''); assert.equal(fSource.source_commit, checkpoint);
   for (const entry of fSource.files) {
