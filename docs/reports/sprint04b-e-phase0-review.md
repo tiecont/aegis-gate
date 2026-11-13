@@ -25,7 +25,7 @@ Both exited0. Proof ran 2026-11-13T16:45:19.263Z-16:45:38.373Z on pinned
 Node26.13.0. Receipt records source/reviewer trees, binary hash, invocations,
 times, raw stream hashes and outcomes. Source remained entirely clean.
 
-- All 2,537 entries across 34 Sprint04-A manifests checked with their recorded
+- All 2,537 entries across 35 Sprint04-A manifests checked with their recorded
   repository-relative or manifest-relative paths. Six expected historical
   differences verify against original Git objects: A original report at
   `4d2d0c751cdc22cb06ec1bb305b321921a06ba7e`; A boundary02 report/status at
@@ -73,7 +73,7 @@ closeout; this reviewer neither merged nor published anything.
 
 `evidence/sprint04b-e/phase0-02/verification.json` SHA256:
 `ab75fdb5afb3bf200413602d52db88a891454431ff01c3e4b9f44b49d5b3fdf8`.
-Its nine-file output manifest SHA256:
+Its eight-entry output manifest SHA256:
 `8eb01c012ffdf97c96a55eb0a6c3969ac2f11d8ea641ca52fc4d50d2cb1d1d36`.
 Hash integrity does not imply hermetic builds or authenticate original test
 observations independently of their recorded provenance.
