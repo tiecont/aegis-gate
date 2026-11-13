@@ -1,0 +1,574 @@
+{
+  "source_commit": "b1ee1cf71665ae896e25e9155390a6c4c50f58b3",
+  "source_clean": true,
+  "timestamp": "2026-11-13T09:56:24.366Z",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-04a-root/scripts/sprint04a-corpus.mjs",
+    "evidence/sprint04a-root/historical-corpus.json"
+  ],
+  "records": [
+    {
+      "candidate": "Pingora0.9.1",
+      "file": "evidence/sprint03a-e/observed-pingora/results.json",
+      "provenance": "historical",
+      "sha256": "743323bef814c6bc5061721610f954a36f445045423ee7c97e341c782d9f85e5",
+      "total": 75,
+      "passed": 63,
+      "failures": [
+        {
+          "name": "malformed-HTTP-invalid-request-target",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 100,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/bad%20target",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "strict-ingress-target-raw-tab",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 100,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/bad%09target",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "strict-ingress-target-raw-control",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 100,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/bad%01target",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "strict-ingress-target-raw-null",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 100,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/bad%00target",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "strict-ingress-absolute-unsupported-scheme",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 109,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "ftp://lab-origin.test/",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "strict-ingress-target-relative-form",
+          "error": "malformed bytes reached an owned origin\n\n190 !== 0\n",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 190,
+            "parser_errors": 2,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "strict-ingress-target-fragment",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 92,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/path",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "strict-ingress-TE-repeated-chunked",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 122,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "POST",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "supplemental-space-target-before-pipelined-request",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 100,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/bad%20target",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "supplemental-tab-target-before-pipelined-request",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 100,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/bad%09target",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "supplemental-repeated-transfer-encoding-fields",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 122,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "POST",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "valid-HTTP1-pipelining-preserves-boundaries-and-encoded-targets",
+          "error": "Expected values to be strictly equal:\n\n1 !== 2\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 112,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/pipeline%2Ffirst?x=%2520",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        }
+      ],
+      "note": "Evidence inventory only; this command does not execute or accept a candidate."
+    },
+    {
+      "candidate": "Envoy1.40.2",
+      "file": "evidence/sprint03a-e/observed-envoy/results.json",
+      "provenance": "historical",
+      "sha256": "1df57c9ec9cd09b2b48f64c4f7215c2ba07cc1dfd1035970c2c786bac2cc55c4",
+      "total": 75,
+      "passed": 69,
+      "failures": [
+        {
+          "name": "malformed-HTTP-invalid-transfer-encoding",
+          "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 0,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "malformed-HTTP-obsolete-folded-header",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 263,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.2",
+                "sni": false,
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "strict-ingress-TE-repeated-chunked",
+          "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 0,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "strict-ingress-TE-not-final-chunked",
+          "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 0,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "supplemental-repeated-transfer-encoding-fields",
+          "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 0",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 0,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+          "error": "unsafe authority status 200",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 56,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/",
+                "protocol": "2"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        }
+      ],
+      "note": "Evidence inventory only; this command does not execute or accept a candidate."
+    },
+    {
+      "candidate": "Hyper1.12.0",
+      "file": "evidence/sprint03a-e/observed-hyper/results.json",
+      "provenance": "historical",
+      "sha256": "39797137f9995184d4c2d1ecaad604edd5af46853f6aa491a4fcb89562ba3682",
+      "total": 75,
+      "passed": 70,
+      "failures": [
+        {
+          "name": "malformed-HTTP-CL-TE",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 122,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "POST",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": false
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "malformed-HTTP-TE-CL",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 122,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "POST",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": false
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "strict-ingress-target-fragment",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 92,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/path",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": false
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "strict-ingress-CL-TE-pipelined",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 126,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "POST",
+                "target": "/echo",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": false
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "strict-ingress-TE-CL-pipelined",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 126,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "POST",
+                "target": "/echo",
+                "protocol": "1.1",
+                "tls": "TLSv1.3",
+                "sni": "lab-origin.test",
+                "alpn": false
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        }
+      ],
+      "note": "Evidence inventory only; this command does not execute or accept a candidate."
+    },
+    {
+      "candidate": "Envoy1.40.2-retain-Host",
+      "file": "evidence/sprint03b-f/parser-runtime-host-retention/results.json",
+      "provenance": "historical",
+      "sha256": "78fc79ab38610c927d3d0eb6aa5a280605f559b7224ff52cd8088875c1eda688",
+      "total": 75,
+      "passed": 69,
+      "failures": [
+        {
+          "name": "malformed-HTTP-invalid-transfer-encoding",
+          "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 1",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 0,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "malformed-HTTP-obsolete-folded-header",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 263,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.2",
+                "sni": false,
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "strict-ingress-TE-repeated-chunked",
+          "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 1",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 0,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "strict-ingress-TE-not-final-chunked",
+          "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 1",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 0,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "supplemental-repeated-transfer-encoding-fields",
+          "error": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Wed, 11 Nov 2026 1",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 0,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+          "error": "confused authority forwarded bytes to origin\n\n3045 !== 3036\n",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 9,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        }
+      ],
+      "note": "Evidence inventory only; this command does not execute or accept a candidate."
+    }
+  ],
+  "module01": "NO-GO",
+  "human_architecture_approval": null
+}

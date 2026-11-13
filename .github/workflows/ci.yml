@@ -33,9 +33,12 @@ jobs:
           toolchain: 1.99.1
           components: rustfmt, clippy
       - run: make bootstrap
-      - run: make check
-      - if: always()
-        run: make dev-down
+      - run: |
+          flock /tmp/aegisgate-sprint02-fixtures.lock bash -euo pipefail -c '
+            trap "make dev-down" EXIT
+            make fixture-images
+            make check
+          '
   supply-chain:
     name: supply-chain-security
     runs-on: ubuntu-24.04
@@ -59,8 +62,11 @@ jobs:
         with:
           toolchain: 1.99.1
       - run: make bootstrap
-      - run: make fixture-images
-      - run: make security-scan
+      - run: |
+          flock /tmp/aegisgate-sprint02-fixtures.lock bash -euo pipefail -c '
+            make fixture-images
+            make security-scan
+          '
       - name: Upload scan logs and SBOM evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

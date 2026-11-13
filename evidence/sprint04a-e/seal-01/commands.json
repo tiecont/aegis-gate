@@ -1,0 +1,244 @@
+{
+  "reviewer_commit": "02753c778b0fd7900a4f7836991e5ee639629ce4",
+  "reviewer_clean": true,
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-04a-e/evidence/sprint04a-e/seal.mjs",
+    "seal-01",
+    "bf5785eb8bd6449fc34915b7c2f392bd1d46350f"
+  ],
+  "started_at": "2026-11-13T10:17:37.080Z",
+  "node": "v26.13.0",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "reviewed_final_f": "bf5785eb8bd6449fc34915b7c2f392bd1d46350f",
+  "commands": [
+    {
+      "label": "f-source-equality",
+      "program": "git",
+      "args": [
+        "diff",
+        "--exit-code",
+        "99e41a2438d42c9588620d7766d2b03ebc557a14",
+        "bf5785eb8bd6449fc34915b7c2f392bd1d46350f",
+        "--",
+        "apps",
+        "internal",
+        "scripts",
+        "go.mod",
+        "go.sum",
+        "packages",
+        "spikes",
+        "docs/CONFIG_PROTOCOL.md",
+        "docs/CONFIG_RECOVERY_RUNBOOK.md"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e",
+      "started_at": "2026-11-13T10:17:37.369Z",
+      "ended_at": "2026-11-13T10:17:37.375Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "f-owner-manifest",
+      "program": "sha256sum",
+      "args": [
+        "--check",
+        "evidence/sprint04a-f/attempt-01/SHA256SUMS",
+        "--quiet"
+      ],
+      "cwd": "/tmp/aegisgate-04a-f",
+      "started_at": "2026-11-13T10:17:37.459Z",
+      "ended_at": "2026-11-13T10:17:37.465Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "syntax-review.mjs",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "evidence/sprint04a-e/review.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e",
+      "started_at": "2026-11-13T10:17:37.845Z",
+      "ended_at": "2026-11-13T10:17:37.892Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "syntax-f-execute.mjs",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "evidence/sprint04a-e/f-execute.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e",
+      "started_at": "2026-11-13T10:17:37.892Z",
+      "ended_at": "2026-11-13T10:17:37.931Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "syntax-seal.mjs",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "evidence/sprint04a-e/seal.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e",
+      "started_at": "2026-11-13T10:17:37.932Z",
+      "ended_at": "2026-11-13T10:17:37.989Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "review-source-whitespace",
+      "program": "git",
+      "args": [
+        "diff",
+        "--check",
+        "3e039408",
+        "--",
+        "evidence/sprint04a-e/*.mjs",
+        "docs/reports/sprint04a-e-security-review.md"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e",
+      "started_at": "2026-11-13T10:17:37.990Z",
+      "ended_at": "2026-11-13T10:17:37.999Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "review-secrets",
+      "program": "flock",
+      "args": [
+        "/tmp/aegisgate-sprint02-fixtures.lock",
+        "docker",
+        "run",
+        "--rm",
+        "--pull=never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-04a-e/evidence/sprint04a-e:/review/evidence:ro",
+        "-v",
+        "/tmp/aegisgate-04a-e/docs/reports/sprint04a-e-security-review.md:/review/report.md:ro",
+        "-v",
+        "/tmp/aegisgate-04a-e/.github/gitleaks.toml:/config.toml:ro",
+        "-v",
+        "/tmp/aegisgate-04a-e/evidence/sprint04a-e/seal-01:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/review",
+        "--config",
+        "/config.toml",
+        "--redact",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/reports/secrets.json",
+        "--no-banner"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e",
+      "started_at": "2026-11-13T10:17:37.999Z",
+      "ended_at": "2026-11-13T10:17:39.457Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "b33ca9dfaed0089bfcbc287691035b24ea2baa3263f5fe64d2674029cdbca70c"
+    }
+  ],
+  "failures": [],
+  "attempts": [
+    {
+      "attempt": "b-01",
+      "reviewer_commit": "109f56af561b5a86fcc6439feeff823bc276ad65",
+      "command_count": 5,
+      "manifest_entries": 41,
+      "commands_sha256": "8a37a9145409ac1b38e32a1a0bf3b3cff9425e96b7bdb48760e94e69c02c03b4"
+    },
+    {
+      "attempt": "d-01",
+      "reviewer_commit": "56653bca5b7e4f87be55f181109961cc8723bbd4",
+      "command_count": 5,
+      "manifest_entries": 50,
+      "commands_sha256": "16da28d7e83972ef7c251e5c1643005edd5c14c177b071be1c1ac5aca059498b"
+    },
+    {
+      "attempt": "ac-01",
+      "reviewer_commit": "fb139f4530f20d55dccc8901c102ca48e9d42e66",
+      "command_count": 10,
+      "manifest_entries": 64,
+      "commands_sha256": "c24b77ae076eccc8b0fd09b5f3f350d4ea948048d4d0852de49553bb213504a6"
+    },
+    {
+      "attempt": "f-01",
+      "reviewer_commit": "989b97191111c01631a3f7ac4b9b12d116e5cc69",
+      "command_count": 5,
+      "manifest_entries": 31,
+      "commands_sha256": "6faf36f6a8b3234b81184e1c7bf1848d30ca556e6b6ddc2cbcd565bf4c913d34"
+    }
+  ],
+  "f_changes_after_proof": [
+    "docs/reports/sprint04a-f-config-recovery.md",
+    "evidence/sprint04a-f/attempt-01/SHA256SUMS",
+    "evidence/sprint04a-f/attempt-01/commands.json",
+    "evidence/sprint04a-f/attempt-01/docker-version.log",
+    "evidence/sprint04a-f/attempt-01/fixture-images.log",
+    "evidence/sprint04a-f/attempt-01/go-version.log",
+    "evidence/sprint04a-f/attempt-01/golden.log",
+    "evidence/sprint04a-f/attempt-01/module03-integration.log",
+    "evidence/sprint04a-f/attempt-01/node-version.log",
+    "evidence/sprint04a-f/attempt-01/postgres-down.log",
+    "evidence/sprint04a-f/attempt-01/postgres-up.log",
+    "evidence/sprint04a-f/attempt-01/source-whitespace.log",
+    "evidence/sprint04a-f/attempt-01/source.json",
+    "evidence/sprint04a-f/attempt-01/unit.log",
+    "evidence/sprint04a-f/attempt-01/vet.log"
+  ],
+  "heads": {
+    "a": {
+      "branch": "fix/module01-envoy-codec-boundary",
+      "head": "8d83ece166290b7c81e757281e5b1778e83dede4",
+      "owner_clean": true
+    },
+    "b": {
+      "branch": "test/module01-origin-boundary",
+      "head": "93dc1223ae09d2562a9b4c5b307b173f960b9ea4",
+      "owner_clean": true
+    },
+    "c": {
+      "branch": "research/module01-upstream-capability",
+      "head": "6acbe0f55d50334a14b95c4d3e9888f5d1aebecf",
+      "owner_clean": true
+    },
+    "d": {
+      "branch": "fix/dashboard-dependency-resolution",
+      "head": "b42bae1e9ffa63b4dfd4c94c9a6376f7129077ce",
+      "owner_clean": true
+    },
+    "f": {
+      "branch": "hardening/module03-local-recovery",
+      "head": "bf5785eb8bd6449fc34915b7c2f392bd1d46350f",
+      "owner_clean": true
+    }
+  },
+  "f_integrated_top_level_tests": 76,
+  "f_integrated_packages": 7,
+  "f_proof_source": "99e41a2438d42c9588620d7766d2b03ebc557a14",
+  "ended_at": "2026-11-13T10:17:39.457Z",
+  "exit_code": 0
+}

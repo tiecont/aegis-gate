@@ -2,6 +2,52 @@
 
 This register tracks residual implementation and release risks. It does not accept risks on behalf of a human reviewer. The current module states and actual executed evidence are recorded in `IMPLEMENTATION_STATUS.md`; T01–T20 mappings are maintained in `docs/SECURITY_COVERAGE.md`.
 
+## Sprint04-A disposition
+
+R01/R04 remain blocking. Inspected Envoy1.40.2 Balsa source irreversibly removes
+folding syntax before public validator callbacks; no supported strict
+pre-normalization hook was found. A and C independently pin this missing API.
+Host retention and local reply mapping are partial capabilities, not a complete
+candidate. The maintained Pingora/Hyper paths also still lose required original
+target/framing distinctions. No private parser fork or replacement is approved.
+
+B's fresh unchanged/diagnostic runs reproduce69/75. The nine origin bytes are
+SETTINGS ACK `000000040100000000` on an existing valid H2 connection, with zero
+handlers. They still fail the unchanged zero-byte contract. Obsolete folding
+reaches origin (263 bytes, one handler); four TE cases return501 instead of the
+required rejection response. Seven of23 additional bounded probes fail: two
+authority/userinfo deadlines, four missing error-frame observations and one
+paused-reader buffering assertion. These do not establish exhaustive H2 or
+production resource safety. Earlier68/75 weighted-health and incomplete attempts
+remain retained, not waived. Reports `sprint04a-a-envoy.md`,
+`sprint04a-b-origin-boundary.md` and `sprint04a-c-upstream.md` bind these limits.
+
+R15: the existing dashboard set resolves and passes strict-peer install and
+dashboard acceptance; no manifest/lock/override change is justified. The failed
+Dependabot TypeScript7.0.2 update needs a maintained typescript-eslint release
+whose declared peer range includes7; current8.72.2 excludes it. A forced install
+or scanner exception is not a repair. The minimatch11.0.7 override is preserved.
+PR11's go-jose4.1.9 upgrade is already merged. See `sprint04a-d-dependencies.md`.
+
+R03/R10/R12 retain production secret custody, authenticated monotonic anchor,
+HA/backup/restore, certificate lifecycle and measured stream/revocation/drain
+obligations. Local recovery work cannot accept these production risks. Final
+review/integration evidence and the unchanged gate matrix are in
+`reports/sprint04a-completion.md`; proposed human action is in
+`reports/sprint04a-architecture-decision.md`. Module01 stays NO-GO,04-12 locked,
+00/02/03 PASS local and production BLOCKED. No risk acceptance is recorded.
+
+Independent E accepts bounded local consumer drain and durable-reference orphan
+pruning plus six recovery regressions. Full locked check/scan at2133b63 pass.
+The external floor remains authenticated provisioning, not an implemented
+monotonic service. Drain cannot recall copied configuration or cancel engine
+I/O. Archive coverage and external reservations require operator coordination.
+R16: integration exposed old default-project credentials and a hardcoded Docker
+network; dedicated disposable root volumes and structured Compose network
+resolution repair the local test path. Hosted observer units also exposed a
+missing CI lock; workflow now holds it through setup/check/cleanup and scanning.
+Failed attempts remain evidence. No production operational risk is closed by this.
+
 ## Sprint03-B disposition
 
 R03 is closed for the Module03 local acceptance scope: canonical Ed25519

@@ -1,0 +1,220 @@
+{
+  "source_commit": "99e41a2438d42c9588620d7766d2b03ebc557a14",
+  "source_clean": true,
+  "started_at": "2026-11-13T10:11:46.020Z",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-04a-e/evidence/sprint04a-e/f-execute.mjs",
+    "/tmp/aegisgate-04a-e/.local/review/f-99e41a2438d4-01",
+    "/tmp/aegisgate-04a-e/evidence/sprint04a-e/f-01/recovery"
+  ],
+  "node": "v26.13.0",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "compose_project": "aegisgate-04a-e-review",
+  "commands": [
+    {
+      "label": "go-version",
+      "program": "go",
+      "args": [
+        "version"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e/.local/review/f-99e41a2438d4-01",
+      "environment": {},
+      "started_at": "2026-11-13T10:11:46.208Z",
+      "ended_at": "2026-11-13T10:11:46.229Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "a29205bd83967c2f70e6768fae009600038d6056499fa289de9d5f9b79beaef4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "fixture-images",
+      "program": "make",
+      "args": [
+        "fixture-images"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e/.local/review/f-99e41a2438d4-01",
+      "environment": {},
+      "started_at": "2026-11-13T10:11:46.230Z",
+      "ended_at": "2026-11-13T10:11:49.272Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "5469282763904ffe51657ab45558b7f4107a09611978a0299dcd872934fc00fa",
+      "stderr_sha256": "4bc560c70a16c722cef6dcc42a50b237db2e2398a08e8270e4c148a130a134aa"
+    },
+    {
+      "label": "postgres-up",
+      "program": "docker",
+      "args": [
+        "compose",
+        "-p",
+        "aegisgate-04a-e-review",
+        "--env-file",
+        ".local/compose.env",
+        "--env-file",
+        ".local/fixture-images.env",
+        "-f",
+        "infra/compose/compose.yaml",
+        "up",
+        "-d",
+        "--wait",
+        "--wait-timeout",
+        "90",
+        "postgres"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e/.local/review/f-99e41a2438d4-01",
+      "environment": {},
+      "started_at": "2026-11-13T10:11:49.273Z",
+      "ended_at": "2026-11-13T10:11:54.470Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "d4bfb1320917a0beb05888856dbea7be756eff0b7e3be32d35a67727e4a637bc"
+    },
+    {
+      "label": "module03-race-integration",
+      "program": "go",
+      "args": [
+        "test",
+        "-race",
+        "-v",
+        "./apps/control-api/internal/persistence",
+        "./apps/control-api/internal/transport",
+        "./internal/configreview",
+        "./internal/configconsumer",
+        "./internal/configsnapshot",
+        "./internal/configrollout",
+        "./internal/configpublish",
+        "-count=1"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e/.local/review/f-99e41a2438d4-01",
+      "environment": {
+        "AEGIS_TENANCY_INTEGRATION": "1"
+      },
+      "started_at": "2026-11-13T10:11:54.470Z",
+      "ended_at": "2026-11-13T10:12:21.564Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "88e330cac67232aefbbf8e5bca16ad9809d158661426a43f9f33603d7a1d27af",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "vet",
+      "program": "go",
+      "args": [
+        "vet",
+        "./apps/control-api/internal/persistence",
+        "./apps/control-api/internal/transport",
+        "./internal/configreview",
+        "./internal/configconsumer",
+        "./internal/configsnapshot",
+        "./internal/configrollout",
+        "./internal/configpublish"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e/.local/review/f-99e41a2438d4-01",
+      "environment": {},
+      "started_at": "2026-11-13T10:12:21.564Z",
+      "ended_at": "2026-11-13T10:12:22.733Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "golden-vector",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "internal/configsnapshot/testdata/verify-vector.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e/.local/review/f-99e41a2438d4-01",
+      "environment": {},
+      "started_at": "2026-11-13T10:12:22.733Z",
+      "ended_at": "2026-11-13T10:12:22.785Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "feea068447486c3553f7dda051c552b7aeec006802107404b12ba76f574e8c1a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "f-source-whitespace",
+      "program": "git",
+      "args": [
+        "diff",
+        "--check",
+        "3e039408",
+        "--",
+        "apps",
+        "internal",
+        "scripts",
+        "docs"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e/.local/review/f-99e41a2438d4-01",
+      "environment": {},
+      "started_at": "2026-11-13T10:12:22.786Z",
+      "ended_at": "2026-11-13T10:12:22.792Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "postgres-down",
+      "program": "docker",
+      "args": [
+        "compose",
+        "-p",
+        "aegisgate-04a-e-review",
+        "--env-file",
+        ".local/compose.env",
+        "--env-file",
+        ".local/fixture-images.env",
+        "-f",
+        "infra/compose/compose.yaml",
+        "down",
+        "--volumes",
+        "--remove-orphans"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e/.local/review/f-99e41a2438d4-01",
+      "environment": {},
+      "started_at": "2026-11-13T10:12:22.792Z",
+      "ended_at": "2026-11-13T10:12:25.572Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "ba7bec6e9d04b9c2954ba1ae8d07d6528d49e6ffc9f7dff659ca4c5d153f9398"
+    },
+    {
+      "label": "remaining-owned-containers",
+      "program": "docker",
+      "args": [
+        "ps",
+        "-aq",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-04a-e-review"
+      ],
+      "cwd": "/tmp/aegisgate-04a-e/.local/review/f-99e41a2438d4-01",
+      "environment": {},
+      "started_at": "2026-11-13T10:12:25.572Z",
+      "ended_at": "2026-11-13T10:12:25.589Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "failures": [],
+  "remaining_owned_containers": "",
+  "fixture_secret_cleanup": true,
+  "lock_held_through_cleanup": true,
+  "ended_at": "2026-11-13T10:12:25.602Z",
+  "exit_code": 0
+}

@@ -1,0 +1,37 @@
+{
+  "candidate": "envoy-1.40.2-retain-original-h2-host",
+  "mandatory_tests": 75,
+  "passed": 69,
+  "failed": [
+    "malformed-HTTP-invalid-transfer-encoding",
+    "malformed-HTTP-obsolete-folded-header",
+    "strict-ingress-TE-repeated-chunked",
+    "strict-ingress-TE-not-final-chunked",
+    "supplemental-repeated-transfer-encoding-fields",
+    "HTTP2-authority-Host-and-SNI-confusion-rejected"
+  ],
+  "unsafe_or_unproven_rejections": [
+    {
+      "name": "invalid-transfer-encoding",
+      "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 1"
+    },
+    {
+      "name": "obsolete-folded-header",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "TE-repeated-chunked",
+      "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 1"
+    },
+    {
+      "name": "TE-not-final-chunked",
+      "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 1"
+    },
+    {
+      "name": "repeated-transfer-encoding-fields",
+      "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 1"
+    }
+  ],
+  "protocol_proof_pass": false,
+  "architecture_approval": "requires independent dependency/security review and human architecture decision"
+}

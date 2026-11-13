@@ -1,0 +1,310 @@
+test -z "$(gofmt -l apps/control-api apps/config-publisher internal packages/test-fixtures)"
+cargo +1.99.1 fmt --all --check --manifest-path apps/edge/Cargo.toml
+cargo +1.99.1 fmt --all --check --manifest-path spikes/hyper/Cargo.toml
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm run format:check
+
+> aegisgate-contract-tools@0.0.0 format:check
+> prettier --check package.json packages/contracts scripts/*.mjs .github infra/compose/compose.yaml
+
+Checking formatting...
+All matched files use Prettier code style!
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run fmt:check
+
+> @aegisgate/dashboard@0.1.0 fmt:check
+> prettier --check app lib tests *.mjs *.json *.md
+
+Checking formatting...
+All matched files use Prettier code style!
+GOTOOLCHAIN=go1.27.4 go vet ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/...
+cargo +1.99.1 clippy --workspace --all-targets --locked --manifest-path apps/edge/Cargo.toml -- -D warnings
+cargo +1.99.1 clippy --workspace --all-targets --locked --manifest-path spikes/hyper/Cargo.toml -- -D warnings
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm run contracts:check
+
+> aegisgate-contract-tools@0.0.0 contracts:check
+> node scripts/module03-contracts.mjs --check && node scripts/contracts.mjs --check
+
+Module03 contract synchronized with shared snapshot schema
+Contracts validated: OpenAPI, Go, TypeScript, JSON Schema, baseline, fixture
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run lint
+
+> @aegisgate/dashboard@0.1.0 lint
+> eslint . --max-warnings=0
+
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run typecheck
+
+> @aegisgate/dashboard@0.1.0 typecheck
+> tsc --noEmit
+
+python3 scripts/dev-secrets.test.py
+python3 scripts/git_history_preflight_test.py
+python3 scripts/image_identity_test.py
+"$(scripts/node-path.sh)" --test spikes/edge-comparison/*.test.mjs
+✔ rejection permits explicit400 or immediate closed peer (0.975029ms)
+✔ negative: status and zero handlers cannot hide forwarded bytes or parser errors (1.495339ms)
+✔ negative: missing or duplicated functional and security cases cannot pass inventory (2.005541ms)
+✔ evaluator checks original wire bytes even when every test is labeled pass (4.640274ms)
+✔ negative: claimed pass cannot conceal forwarded bytes or origin parser errors (1.088721ms)
+✔ negative: wrong manifest, fatal setup, skipped cases and dishonest summary fail closed (1.466465ms)
+✔ H2 observer counts decrypted preface without handler dispatch and preserves valid frames (162.141515ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 253.257751
+"$(scripts/node-path.sh)" --test spikes/envoy/*.test.mjs
+✔ manifest rejects replay, unknown fields, duplicate hosts, invalid ports and weights (145.928287ms)
+✔ private key permissions, SAN mismatch, symlinks and fixture bounds fail closed (118.087935ms)
+✔ compiled origin trust and pools change across route and generation boundaries (45.658914ms)
+✔ fragmented envelopes classify controls and preserve bounded decoder state (2.779584ms)
+{"native_h2_identity_controls":[{"peer_fingerprint":"85:B5:72:91:7F:F5:B6:A7:50:F5:A8:54:64:99:1C:7A:83:7D:33:E1:29:4F:3F:58:80:50:2D:35:B4:83:52:1D","downstream_tls":"TLSv1.3","samples":[{"connection":1,"stream":1,"method":"GET","target":"/bad%20target","authority":"synthetic-authority.test","marker":"first-only","sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"},{"connection":1,"stream":3,"method":"GET","target":"/encoded%2Fsegment?value=%2520","authority":"synthetic-authority.test","marker":null,"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"}]},{"peer_fingerprint":"85:B5:72:91:7F:F5:B6:A7:50:F5:A8:54:64:99:1C:7A:83:7D:33:E1:29:4F:3F:58:80:50:2D:35:B4:83:52:1D","downstream_tls":"TLSv1.3","samples":[{"connection":2,"stream":1,"method":"GET","target":"/bad%20target","authority":"synthetic-authority.test","marker":"first-only","sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"},{"connection":2,"stream":3,"method":"GET","target":"/encoded%2Fsegment?value=%2520","authority":"synthetic-authority.test","marker":null,"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"}]}],"observed_decrypted_bytes":139,"identity_scope":"configured origin SNI preserved; HTTP authority forwarded without binding or rewriting"}
+✔ native H2 direct and observed controls preserve authority, SNI, targets and reuse (937.849027ms)
+{"payload_bytes":37843,"sha256":"814492f3243b52ec0c40be131e59025e439d93efe4286906d2a4c61b121615ca","direct_and_observed":[{"fingerprint":"02:4C:BA:96:6E:E6:9A:C0:0D:4B:82:F0:0E:B2:D0:5A:AA:A1:1A:6A:A5:ED:D7:67:2E:6F:1A:13:98:FA:41:0A","tls":"TLSv1.3","alpn":"h2"},{"fingerprint":"02:4C:BA:96:6E:E6:9A:C0:0D:4B:82:F0:0E:B2:D0:5A:AA:A1:1A:6A:A5:ED:D7:67:2E:6F:1A:13:98:FA:41:0A","tls":"TLSv1.3","alpn":"h2"}],"invalid_origin_attempted_payload_bytes":37843,"samples":4096,"omitted":112}
+✔ observer preserves bytes, configured identity and verified TLS; bounds samples (813.961395ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1849.531492
+"$(scripts/node-path.sh)" spikes/edge-comparison/extract-baseline.mjs --check
+PASS immutable baseline manifest matches pinned source and all65 test IDs
+GOTOOLCHAIN=go1.27.4 go test -race ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/...
+?   	aegisgate.dev/aegisgate/apps/control-api/cmd/control-api	[no test files]
+?   	aegisgate.dev/aegisgate/apps/control-api/internal/application	[no test files]
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/domain	1.021s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/identity	1.311s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/persistence	1.046s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/transport	1.942s
+?   	aegisgate.dev/aegisgate/apps/control-api/publication	[no test files]
+?   	aegisgate.dev/aegisgate/apps/config-publisher/cmd/config-publisher	[no test files]
+ok  	aegisgate.dev/aegisgate/internal/configconsumer	4.243s
+ok  	aegisgate.dev/aegisgate/internal/configpublish	1.153s
+ok  	aegisgate.dev/aegisgate/internal/configreview	1.299s
+ok  	aegisgate.dev/aegisgate/internal/configrollout	1.213s
+ok  	aegisgate.dev/aegisgate/internal/configsnapshot	1.367s
+ok  	aegisgate.dev/aegisgate/internal/contracts	1.156s
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/cmd/fixtures	[no test files]
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/configlab	[no test files]
+ok  	aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab	1.813s
+cargo +1.99.1 test --workspace --locked --manifest-path apps/edge/Cargo.toml
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test negative_missing_file_does_not_disclose_path ... ok
+test shared_fixture_is_consumed_without_configuration_activation ... ok
+test negative_malformed_and_oversized_inputs_rejected_without_echo ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test offline_check_reports_unready ... ok
+test negative_runtime_cannot_be_enabled_by_untrusted_flags ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 8 tests
+test tests::generation_is_monotonic_and_bounded ... ok
+test tests::negative_generation_replay_and_rollback_denied ... ok
+test tests::negative_diagnostics_never_echo_secret_input ... ok
+test tests::negative_oversized_error_rejected_before_parsing ... ok
+test tests::negative_noncanonical_or_nonrandom_uuid_denied ... ok
+test tests::negative_unknown_duplicate_fields_and_trailing_data_denied ... ok
+test tests::valid_wire_round_trip ... ok
+test tests::negative_untrusted_codes_and_messages_denied ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test tests::negative_bootstrap_never_authorizes_or_becomes_ready ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+cargo +1.99.1 test --workspace --locked --manifest-path spikes/hyper/Cargo.toml
+
+running 4 tests
+test config::tests::authority_rejects_ambiguous_hosts ... ok
+test config::tests::invalid_manifest_cannot_bootstrap ... ok
+test tests::parsed_policy_rejects_ambiguous_authority_and_framing ... ok
+test tests::preserved_encoded_targets_survive_uri_and_policy_layers ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm run contracts:test
+
+> aegisgate-contract-tools@0.0.0 contracts:test
+> node --test scripts/contracts.test.mjs
+
+✔ foundation error fixture follows generated JSON schema (34.932282ms)
+✔ negative: unknown fields, tenant header injection, malformed IDs and unbounded errors rejected (12.590346ms)
+✔ negative: intentionally broken schema and operation changes fail compatibility (6.415416ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 487.103381
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard test
+
+> @aegisgate/dashboard@0.1.0 test
+> node --test tests/unit.test.mjs
+
+✔ unconfigured dashboard never advertises live tenant services (0.620656ms)
+✔ browser security policy blocks framing and external connections on every path (0.271492ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 58.3112
+mkdir -p .local/bin
+GOTOOLCHAIN=go1.27.4 go build -o .local/bin/control-api ./apps/control-api/cmd/control-api
+GOTOOLCHAIN=go1.27.4 go build -o .local/bin/config-publisher ./apps/config-publisher/cmd/config-publisher
+GOTOOLCHAIN=go1.27.4 go build -o .local/bin/fixtures ./packages/test-fixtures/cmd/fixtures
+cargo +1.99.1 build --workspace --locked --manifest-path apps/edge/Cargo.toml
+cargo +1.99.1 build --workspace --locked --manifest-path spikes/hyper/Cargo.toml
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run build
+
+> @aegisgate/dashboard@0.1.0 build
+> NEXT_TELEMETRY_DISABLED=1 next build --webpack
+
+▲ Next.js 16.4.6 (webpack)
+✓ Running next.config.mjs took 19ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.6s
+  Running TypeScript ...
+  Finished TypeScript in 1269ms ...
+  Collecting page data using 4 workers ...
+  Generating static pages using 4 workers (0/3) ...
+✓ Generating static pages using 4 workers (3/3) in 440ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ○ /
+└ ○ /_not-found
+
+
+○  (Static)  prerendered as static content
+
+python3 scripts/dev-secrets.py
+Local development secrets ready (material not logged)
+python3 scripts/build-fixture-images.py
+Local fixture images built and locked by immutable image ID; no publication
+docker compose --env-file .local/compose.env --env-file .local/fixture-images.env -f infra/compose/compose.yaml up -d --wait --wait-timeout 90
+AEGIS_TENANCY_INTEGRATION=1 GOTOOLCHAIN=go1.27.4 go test -race ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/... -run Integration -count=1
+?   	aegisgate.dev/aegisgate/apps/control-api/cmd/control-api	[no test files]
+?   	aegisgate.dev/aegisgate/apps/control-api/internal/application	[no test files]
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/domain	1.015s [no tests to run]
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/identity	1.056s
+--- FAIL: TestIntegrationOriginPoolLifecycleAndRuntimePermissions (0.03s)
+    acceptance_test.go:30: local PostgreSQL unavailable
+--- FAIL: TestIntegrationNonSuperuserMigrationOwner (0.03s)
+    acceptance_test.go:189: local PostgreSQL unavailable
+--- FAIL: TestIntegrationQuotaConcurrentKeysAndMissingDefaults (0.02s)
+    acceptance_test.go:246: local PostgreSQL unavailable
+--- FAIL: TestIntegrationSensitiveDirectCallerAuditAndFreshness (0.02s)
+    acceptance_test.go:291: local PostgreSQL unavailable
+--- FAIL: TestIntegrationDNSLeaseFenceAndReverification (0.02s)
+    acceptance_test.go:340: local PostgreSQL unavailable
+--- FAIL: TestIntegrationDomainClaimLifecycleAndIsolation (0.02s)
+    domains_test.go:22: local PostgreSQL unavailable
+--- FAIL: TestIntegrationDomainConcurrentClaimsAndMembershipRevocation (0.02s)
+    domains_test.go:124: local PostgreSQL unavailable
+--- FAIL: TestIntegrationLoginReplayBrowserBindingAndWebSession (0.02s)
+    login_test.go:15: local PostgreSQL unavailable
+--- FAIL: TestIntegrationDomainJobLeaseRetryAndScope (0.02s)
+    login_test.go:89: local PostgreSQL unavailable
+--- FAIL: TestIntegrationRecoveryDurableReferencesPruneAndRestart (0.02s)
+    publication_retention_test.go:22: local PostgreSQL unavailable
+--- FAIL: TestIntegrationConfigPublicationNegativeAndRecovery (0.02s)
+    publication_test.go:77: local PostgreSQL unavailable
+--- FAIL: TestIntegrationRouteReferencesApprovalAndImmutablePreview (0.02s)
+    routes_test.go:14: local PostgreSQL unavailable
+--- FAIL: TestIntegrationSprint03BIndependentPublicationToCanaryACKRollback (0.02s)
+    sprint03b_independent_e2e_test.go:90: local PostgreSQL unavailable
+--- FAIL: TestIntegrationTenantIsolationIdempotencyAndSession (0.02s)
+    store_test.go:116: local PostgreSQL unavailable
+FAIL
+FAIL	aegisgate.dev/aegisgate/apps/control-api/internal/persistence	0.414s
+--- FAIL: TestIntegrationPoolHTTPRoutesPreviewAndRetirement (0.02s)
+    acceptance_test.go:20: fixture schema failed
+--- FAIL: TestIntegrationOIDCRotationOutageCallbacksAndMFA (0.21s)
+    --- FAIL: TestIntegrationOIDCRotationOutageCallbacksAndMFA/rotation-and-outage (0.02s)
+        acceptance_test.go:112: fixture schema failed
+    --- FAIL: TestIntegrationOIDCRotationOutageCallbacksAndMFA/jwks-outage (0.02s)
+        acceptance_test.go:139: fixture schema failed
+    --- FAIL: TestIntegrationOIDCRotationOutageCallbacksAndMFA/nonce (0.02s)
+        acceptance_test.go:158: fixture schema failed
+    --- FAIL: TestIntegrationOIDCRotationOutageCallbacksAndMFA/audience (0.02s)
+        acceptance_test.go:158: fixture schema failed
+    --- FAIL: TestIntegrationOIDCRotationOutageCallbacksAndMFA/expired (0.02s)
+        acceptance_test.go:158: fixture schema failed
+    --- FAIL: TestIntegrationOIDCRotationOutageCallbacksAndMFA/signature (0.02s)
+        acceptance_test.go:158: fixture schema failed
+    --- FAIL: TestIntegrationOIDCRotationOutageCallbacksAndMFA/no-mfa (0.02s)
+        acceptance_test.go:169: fixture schema failed
+    --- FAIL: TestIntegrationOIDCRotationOutageCallbacksAndMFA/stale-mfa (0.02s)
+        acceptance_test.go:169: fixture schema failed
+    --- FAIL: TestIntegrationOIDCRotationOutageCallbacksAndMFA/future-mfa (0.03s)
+        acceptance_test.go:169: fixture schema failed
+    --- FAIL: TestIntegrationOIDCRotationOutageCallbacksAndMFA/callback-query (0.02s)
+        acceptance_test.go:187: fixture schema failed
+--- FAIL: TestIntegrationAdminNegativeSessionAuthorityAndMembership (0.02s)
+    admin_negative_test.go:16: fixture schema failed
+--- FAIL: TestIntegrationAdminHTTPIsolationAndOIDC (0.02s)
+    admin_test.go:16: fixture schema failed
+--- FAIL: TestIntegrationPublicationHTTPPreviewApprovalRollbackNegative (0.02s)
+    publication_test.go:15: fixture schema failed
+--- FAIL: TestIntegrationHTTPExplicitRoleMatrix (0.02s)
+    roles_test.go:10: fixture schema failed
+FAIL
+FAIL	aegisgate.dev/aegisgate/apps/control-api/internal/transport	0.433s
+?   	aegisgate.dev/aegisgate/apps/control-api/publication	[no test files]
+?   	aegisgate.dev/aegisgate/apps/config-publisher/cmd/config-publisher	[no test files]
+ok  	aegisgate.dev/aegisgate/internal/configconsumer	1.092s [no tests to run]
+ok  	aegisgate.dev/aegisgate/internal/configpublish	2.597s
+ok  	aegisgate.dev/aegisgate/internal/configreview	1.096s [no tests to run]
+--- FAIL: TestIntegrationDurableCASAuditRecoveryAndPermissions (0.02s)
+    postgres_test.go:82: fixture schema unavailable
+--- FAIL: TestIntegrationRecoveryArchiveRoundTripBeforeAuditCleanup (0.02s)
+    recovery_test.go:16: fixture schema unavailable
+FAIL
+FAIL	aegisgate.dev/aegisgate/internal/configrollout	0.251s
+ok  	aegisgate.dev/aegisgate/internal/configsnapshot	1.098s [no tests to run]
+ok  	aegisgate.dev/aegisgate/internal/contracts	1.048s [no tests to run]
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/cmd/fixtures	[no test files]
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/configlab	[no test files]
+ok  	aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab	2.492s
+FAIL

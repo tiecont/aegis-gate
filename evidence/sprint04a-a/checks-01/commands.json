@@ -1,0 +1,191 @@
+{
+  "started_at": "2026-11-13T02:22:20.954Z",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-04a-a/spikes/envoy/strict-check.mjs",
+    "evidence/sprint04a-a/checks-01"
+  ],
+  "cwd": "/tmp/aegisgate-04a-a",
+  "source_commit": "39ea76d974568bbab2c320d7e978fcc083f9388a",
+  "source_clean": true,
+  "node_version": "v26.13.0",
+  "commands": [
+    {
+      "name": "collector-syntax",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "spikes/envoy/strict-research.mjs"
+      ],
+      "started_at": "2026-11-13T02:22:21.240Z",
+      "ended_at": "2026-11-13T02:22:21.267Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "checker-syntax",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "spikes/envoy/strict-check.mjs"
+      ],
+      "started_at": "2026-11-13T02:22:21.267Z",
+      "ended_at": "2026-11-13T02:22:21.294Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "immutable-baseline",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "started_at": "2026-11-13T02:22:21.294Z",
+      "ended_at": "2026-11-13T02:22:21.348Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "source-whitespace",
+      "program": "git",
+      "args": [
+        "diff",
+        "--check",
+        "e5adeb4",
+        "--",
+        "spikes/envoy/strict-research.mjs",
+        "spikes/envoy/strict-check.mjs",
+        "docs/reports/sprint04a-a-envoy.md"
+      ],
+      "started_at": "2026-11-13T02:22:21.348Z",
+      "ended_at": "2026-11-13T02:22:21.352Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "scanner-version",
+      "program": "flock",
+      "args": [
+        "/tmp/aegisgate-sprint02-fixtures.lock",
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "version"
+      ],
+      "started_at": "2026-11-13T02:22:21.352Z",
+      "ended_at": "2026-11-13T02:22:22.236Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "b97aeb08738a6b820b40be4f64f93adaecec6842397d90dfdc999404c88bdad6",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "source-secrets",
+      "program": "flock",
+      "args": [
+        "/tmp/aegisgate-sprint02-fixtures.lock",
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-04a-a:/repo:ro",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/spikes/envoy",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-13T02:22:22.236Z",
+      "ended_at": "2026-11-13T02:22:22.629Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "f2bf270fee5de4020684f4b007a56b9933d8f26127745e8763932f648a657f4b"
+    },
+    {
+      "name": "evidence-secrets",
+      "program": "flock",
+      "args": [
+        "/tmp/aegisgate-sprint02-fixtures.lock",
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-04a-a:/repo:ro",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/evidence/sprint04a-a",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-13T02:22:22.629Z",
+      "ended_at": "2026-11-13T02:22:23.337Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "ed73ed8b02a8c42ed780062dfacc2e30217107da044ae5d85adf19d6397b855c"
+    },
+    {
+      "name": "report-secrets",
+      "program": "flock",
+      "args": [
+        "/tmp/aegisgate-sprint02-fixtures.lock",
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-04a-a:/repo:ro",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/docs/reports/sprint04a-a-envoy.md",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-13T02:22:23.337Z",
+      "ended_at": "2026-11-13T02:22:23.705Z",
+      "exit_code": 0,
+      "signal": null,
+      "error": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "bd173ece35648238ad922e1eefd14878aaf75004b42376f2119342808f12de4f"
+    }
+  ],
+  "ended_at": "2026-11-13T02:22:23.706Z"
+}

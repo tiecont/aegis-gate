@@ -1,0 +1,51 @@
+{
+  "source_commit": "f9f99429c07a6322ad7f5a554cd5c34c20827065",
+  "source_clean": true,
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-04a-b/spikes/envoy/wire-closeout.mjs",
+    "--origin-report-only"
+  ],
+  "started_at": "2026-11-13T09:58:29.351Z",
+  "node": "v26.13.0",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "tool_sha256": "86e96b0765d0192bfb024036146a012514f450d6ad3d39398cfcbfe13c81ce42",
+  "commands": [
+    {
+      "label": "report-secrets",
+      "program": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-04a-b:/repo:ro",
+        "-v",
+        "/tmp/aegisgate-04a-b/evidence/sprint04a-b/origin-report-verification:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/docs/reports/sprint04a-b-origin-boundary.md",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/reports/report-secrets.json",
+        "--no-banner"
+      ],
+      "cwd": "/tmp/aegisgate-04a-b",
+      "started_at": "2026-11-13T09:58:29.526Z",
+      "ended_at": "2026-11-13T09:58:30.087Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "288506122a9c282e358f634c9f0f9fab8a0a2b18e582961001cc8c34dceab76e"
+    }
+  ],
+  "failures": [],
+  "ended_at": "2026-11-13T09:58:30.088Z"
+}

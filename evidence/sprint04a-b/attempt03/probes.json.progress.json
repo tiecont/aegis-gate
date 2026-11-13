@@ -1,0 +1,571 @@
+{
+  "started_at": "2026-11-12T17:05:29.004Z",
+  "tests": [
+    {
+      "name": "cold-Host-authority-denial-zero-byte",
+      "started_at": "2026-11-12T17:05:30.221Z",
+      "connections": 0,
+      "bytes": 0,
+      "handlers": 0,
+      "parser_errors": 0,
+      "transport_errors": 0,
+      "events": 0,
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "warm-valid-then-Host-denial-observation",
+      "started_at": "2026-11-12T17:05:30.333Z",
+      "status_code": 421,
+      "rejection_interval": {
+        "connections": 0,
+        "bytes": 9,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 2
+      },
+      "frames": [
+        {
+          "sequence": 8,
+          "time": "2026-11-12T17:05:30.358Z",
+          "connection": 1,
+          "kind": "frame",
+          "type": 4,
+          "name": "SETTINGS",
+          "flags": 1,
+          "stream": 0,
+          "length": 0,
+          "bytes": 9,
+          "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+          "hex": "000000040100000000"
+        }
+      ],
+      "zero_byte_contract": "FAIL: nonzero bytes; classification does not waive contract",
+      "status": "pass",
+      "origin": {
+        "connections": 1,
+        "bytes": 277,
+        "handlers": 1,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 8
+      }
+    },
+    {
+      "name": "settled-reuse-identity-and-three-authority-negatives",
+      "started_at": "2026-11-12T17:05:30.360Z",
+      "status": "fail",
+      "error": "Error: explicit operation deadline\n    at Timeout.<anonymous> (file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:25:106)\n    at listOnTimeout (node:internal/timers:685:17)\n    at process.processTimers (node:internal/timers:618:7)",
+      "observation": {
+        "target": "/",
+        "headers": {
+          ":authority": "user@edge-b.test"
+        },
+        "goaway": [],
+        "stream_closed": true,
+        "rst_code": 8,
+        "session_closed": true,
+        "session_destroyed": true
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 126,
+        "handlers": 2,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 4
+      }
+    },
+    {
+      "name": "individual-settled-Host-denial",
+      "started_at": "2026-11-12T17:05:34.177Z",
+      "status_code": 421,
+      "interval": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      },
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "individual-settled-authority-denial",
+      "started_at": "2026-11-12T17:05:34.287Z",
+      "status_code": 421,
+      "interval": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      },
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "individual-settled-userinfo-denial",
+      "started_at": "2026-11-12T17:05:34.396Z",
+      "status": "fail",
+      "error": "Error: explicit operation deadline\n    at Timeout.<anonymous> (file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:25:106)\n    at listOnTimeout (node:internal/timers:685:17)\n    at process.processTimers (node:internal/timers:618:7)",
+      "observation": {
+        "target": "/",
+        "headers": {
+          ":authority": "user@edge-b.test"
+        },
+        "goaway": [],
+        "stream_closed": true,
+        "rst_code": 8,
+        "session_closed": true,
+        "session_destroyed": true
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 1
+      }
+    },
+    {
+      "name": "raw-H2-SETTINGS-ACK-payload",
+      "started_at": "2026-11-12T17:05:38.004Z",
+      "error_frames": [
+        {
+          "kind": "frame",
+          "type": 7,
+          "name": "GOAWAY",
+          "flags": 0,
+          "stream": 0,
+          "length": 8,
+          "bytes": 17,
+          "sha256": "463989c64bcf6d7910bd3a7342eff21d729b7401b709124113f1848205cd8e99",
+          "error_code": 6,
+          "hex": "0000080700000000000000000000000006",
+          "code": 6
+        }
+      ],
+      "sent_sha256_note": "exact bytes generated by committed source",
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "raw-H2-PING-seven-bytes",
+      "started_at": "2026-11-12T17:05:38.048Z",
+      "error_frames": [
+        {
+          "kind": "frame",
+          "type": 7,
+          "name": "GOAWAY",
+          "flags": 0,
+          "stream": 0,
+          "length": 8,
+          "bytes": 17,
+          "sha256": "463989c64bcf6d7910bd3a7342eff21d729b7401b709124113f1848205cd8e99",
+          "error_code": 6,
+          "hex": "0000080700000000000000000000000006",
+          "code": 6
+        }
+      ],
+      "sent_sha256_note": "exact bytes generated by committed source",
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "raw-H2-DATA-stream-zero",
+      "started_at": "2026-11-12T17:05:38.094Z",
+      "error_frames": [
+        {
+          "kind": "frame",
+          "type": 7,
+          "name": "GOAWAY",
+          "flags": 0,
+          "stream": 0,
+          "length": 28,
+          "bytes": 37,
+          "sha256": "71ced16701d2cc4cb6306e8e240cee017bc742e8b0f4dc2f1990fb415277c78f",
+          "error_code": 1,
+          "code": 1
+        }
+      ],
+      "sent_sha256_note": "exact bytes generated by committed source",
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "raw-H2-HEADERS-stream-zero",
+      "started_at": "2026-11-12T17:05:38.141Z",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: no protocol error frame\n    at raw (file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:84:12)\n    at async file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:185:47\n    at async probe (file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:37:51)\n    at async file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:184:6",
+      "observation": {
+        "received_frames": [],
+        "peer_closed": true,
+        "sent_hex": "00001d010500000000828704012f000a3a617574686f726974790b656467652d622e74657374"
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "raw-H2-unexpected-CONTINUATION",
+      "started_at": "2026-11-12T17:05:39.150Z",
+      "error_frames": [
+        {
+          "kind": "frame",
+          "type": 7,
+          "name": "GOAWAY",
+          "flags": 0,
+          "stream": 0,
+          "length": 32,
+          "bytes": 41,
+          "sha256": "9f5b317f0c488c086ab628036a96b87acfbd647e17e23ba6b521b0c33d748288",
+          "error_code": 1,
+          "code": 1
+        }
+      ],
+      "sent_sha256_note": "exact bytes generated by committed source",
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "raw-H2-zero-WINDOW_UPDATE",
+      "started_at": "2026-11-12T17:05:39.194Z",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: no protocol error frame\n    at raw (file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:84:12)\n    at async file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:185:47\n    at async probe (file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:37:51)\n    at async file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:184:6",
+      "observation": {
+        "received_frames": [],
+        "peer_closed": true,
+        "sent_hex": "00000408000000000000000000"
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "raw-H2-invalid-HPACK-index-zero",
+      "started_at": "2026-11-12T17:05:40.201Z",
+      "error_frames": [
+        {
+          "kind": "frame",
+          "type": 7,
+          "name": "GOAWAY",
+          "flags": 0,
+          "stream": 0,
+          "length": 8,
+          "bytes": 17,
+          "sha256": "1c8d1857a528ea79ba083217db02a1d31e83e7f34a0d53423e6a1c0a42ed01aa",
+          "error_code": 9,
+          "hex": "0000080700000000000000000100000009",
+          "code": 9
+        }
+      ],
+      "sent_sha256_note": "exact bytes generated by committed source",
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "raw-H2-uppercase-header-name",
+      "started_at": "2026-11-12T17:05:40.250Z",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: no protocol error frame\n    at raw (file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:84:12)\n    at async file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:185:47\n    at async probe (file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:37:51)\n    at async file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:184:6",
+      "observation": {
+        "received_frames": [],
+        "peer_closed": true,
+        "sent_hex": "000026010500000001828704012f000a3a617574686f726974790b656467652d622e746573740005582d4c61620178"
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "raw-H2-connection-specific-header",
+      "started_at": "2026-11-12T17:05:41.260Z",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: no protocol error frame\n    at raw (file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:84:12)\n    at async file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:185:47\n    at async probe (file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:37:51)\n    at async file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:184:6",
+      "observation": {
+        "received_frames": [],
+        "peer_closed": true,
+        "sent_hex": "00002f010500000001828704012f000a3a617574686f726974790b656467652d622e74657374000a636f6e6e656374696f6e05636c6f7365"
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "slow-reader-backpressure-and-response-cancellation",
+      "started_at": "2026-11-12T17:05:42.267Z",
+      "status": "fail",
+      "error": "Error: entire 8MiB response produced despite paused native reader\n    at file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:197:21\n    at async probe (file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:37:51)\n    at async file:///tmp/aegisgate-04a-b/spikes/envoy/wire-probes.mjs:189:3",
+      "observation": {
+        "produced": 8388608,
+        "pauses": 128
+      },
+      "origin": {
+        "connections": 1,
+        "bytes": 263,
+        "handlers": 1,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 8
+      }
+    },
+    {
+      "name": "raw-slow-reader-window-starvation-and-response-cancellation",
+      "started_at": "2026-11-12T17:05:42.490Z",
+      "produced": 16842752,
+      "pauses": 257,
+      "downstream_data_bytes": 1024,
+      "receive_window": 1024,
+      "response_limit_bytes": 67108864,
+      "observation_ms": 300,
+      "received_frames": [
+        {
+          "kind": "frame",
+          "type": 4,
+          "name": "SETTINGS",
+          "flags": 0,
+          "stream": 0,
+          "length": 24,
+          "bytes": 33,
+          "sha256": "feb923637348f05328b8273d0adae370436408a4b6dd29bdd52099d31b2ae7c4"
+        },
+        {
+          "kind": "frame",
+          "type": 4,
+          "name": "SETTINGS",
+          "flags": 1,
+          "stream": 0,
+          "length": 0,
+          "bytes": 9,
+          "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+          "hex": "000000040100000000"
+        },
+        {
+          "kind": "frame",
+          "type": 8,
+          "name": "WINDOW_UPDATE",
+          "flags": 0,
+          "stream": 0,
+          "length": 4,
+          "bytes": 13,
+          "sha256": "3a4631461c8af8f01378774b105d15da36f29834ff95d9f5a12c4704a3c783bb",
+          "hex": "000004080000000000017f0001"
+        },
+        {
+          "kind": "frame",
+          "type": 1,
+          "name": "HEADERS",
+          "flags": 4,
+          "stream": 1,
+          "length": 72,
+          "bytes": 81,
+          "sha256": "35d7a2bb66f8c8bd2fceb7e6346c188cb0107275eeec38b5ebf9ddbe669c72e9"
+        },
+        {
+          "kind": "frame",
+          "type": 0,
+          "name": "DATA",
+          "flags": 0,
+          "stream": 1,
+          "length": 1024,
+          "bytes": 1033,
+          "sha256": "3d0e98761dfa5899f73adfe5f4dc4a5fe3ddd1ffd7b10501acdce14473d6ae36"
+        }
+      ],
+      "origin_cancel_ms": 11,
+      "origin_rst_code": 2,
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 82,
+        "handlers": 1,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 5
+      }
+    },
+    {
+      "name": "partial-upload-cancellation",
+      "started_at": "2026-11-12T17:05:42.817Z",
+      "origin_received": 16384,
+      "origin_cancel_ms": 11,
+      "origin_rst_code": 0,
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 16467,
+        "handlers": 1,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 8
+      }
+    },
+    {
+      "name": "raw-65-concurrent-stream-cap",
+      "started_at": "2026-11-12T17:05:42.868Z",
+      "attempted": 65,
+      "origin_handlers": 64,
+      "refusal_frames": [
+        {
+          "kind": "frame",
+          "type": 3,
+          "name": "RST_STREAM",
+          "flags": 0,
+          "stream": 129,
+          "length": 4,
+          "bytes": 13,
+          "sha256": "61382de30acfdf15cfba2720d0c7baac4abce872f7d48de3f2e06d850649a9d9",
+          "error_code": 7,
+          "hex": "00000403000000008100000007"
+        }
+      ],
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 4215,
+        "handlers": 64,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 130
+      }
+    },
+    {
+      "name": "eight-partial-header-timeouts",
+      "started_at": "2026-11-12T17:05:43.091Z",
+      "connections": 8,
+      "elapsed_ms": 3042,
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "270-connection-admission-cap",
+      "started_at": "2026-11-12T17:05:46.164Z",
+      "attempted": 270,
+      "admitted": 256,
+      "refused": 14,
+      "configured_cap": 256,
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "32-partial-header-connections-termination-drain",
+      "started_at": "2026-11-12T17:05:46.522Z",
+      "connections": 32,
+      "elapsed_ms": 350,
+      "child_exit": 0,
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 1
+      }
+    }
+  ],
+  "failures": [
+    "settled-reuse-identity-and-three-authority-negatives",
+    "individual-settled-userinfo-denial",
+    "raw-H2-HEADERS-stream-zero",
+    "raw-H2-zero-WINDOW_UPDATE",
+    "raw-H2-uppercase-header-name",
+    "raw-H2-connection-specific-header",
+    "slow-reader-backpressure-and-response-cancellation"
+  ]
+}

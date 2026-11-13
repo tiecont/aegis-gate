@@ -1,0 +1,13 @@
+✔ fragmented envelopes classify controls and preserve bounded decoder state (3.123257ms)
+{"native_h2_identity_controls":[{"peer_fingerprint":"CF:8C:34:05:76:97:76:E3:6E:C7:37:C3:35:53:90:E1:1A:06:64:F0:4C:07:75:E2:76:4D:C9:A5:63:1C:66:F4","downstream_tls":"TLSv1.3","samples":[{"connection":1,"stream":1,"method":"GET","target":"/bad%20target","authority":"synthetic-authority.test","marker":"first-only","sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"},{"connection":1,"stream":3,"method":"GET","target":"/encoded%2Fsegment?value=%2520","authority":"synthetic-authority.test","marker":null,"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"}]},{"peer_fingerprint":"CF:8C:34:05:76:97:76:E3:6E:C7:37:C3:35:53:90:E1:1A:06:64:F0:4C:07:75:E2:76:4D:C9:A5:63:1C:66:F4","downstream_tls":"TLSv1.3","samples":[{"connection":2,"stream":1,"method":"GET","target":"/bad%20target","authority":"synthetic-authority.test","marker":"first-only","sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"},{"connection":2,"stream":3,"method":"GET","target":"/encoded%2Fsegment?value=%2520","authority":"synthetic-authority.test","marker":null,"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"}]}],"observed_decrypted_bytes":139,"identity_scope":"configured origin SNI preserved; HTTP authority forwarded without binding or rewriting"}
+✔ native H2 direct and observed controls preserve authority, SNI, targets and reuse (991.934914ms)
+{"payload_bytes":37843,"sha256":"814492f3243b52ec0c40be131e59025e439d93efe4286906d2a4c61b121615ca","direct_and_observed":[{"fingerprint":"F3:81:90:13:77:F8:18:DF:86:53:20:70:C3:0F:F1:8B:3D:16:30:D4:68:A3:6A:93:E0:0C:D9:C8:22:A6:46:92","tls":"TLSv1.3","alpn":"h2"},{"fingerprint":"F3:81:90:13:77:F8:18:DF:86:53:20:70:C3:0F:F1:8B:3D:16:30:D4:68:A3:6A:93:E0:0C:D9:C8:22:A6:46:92","tls":"TLSv1.3","alpn":"h2"}],"invalid_origin_attempted_payload_bytes":37843,"samples":4096,"omitted":112}
+✔ observer preserves bytes, configured identity and verified TLS; bounds samples (1033.361649ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2124.175261
