@@ -29,7 +29,7 @@ on `docs/sprint04b-architecture-decision`; E independently accepts it as a propo
 | B | `research/sprint04b-maintained-ingress` | `5de81795963d07486d0621822131d4e1554ccadc`; released API refresh and minimal reproducers complete, E ACCEPT research/failed evidence only |
 | C | `test/sprint04b-protocol-resilience` | `71a3dc6381223d54fa8b23ecf84ff205e0b52ea6`; unchanged baseline and bounded lifecycle/resource evidence, E ACCEPT |
 | D | `hardening/sprint04b-local-reliability` | `ab4e1f642e2bcbac1723d156390cc1cbebdad157`;00/02/03, fixture and dashboard regression, E ACCEPT |
-| E | `review/sprint04b-security` | Phase0 accepted at3d2d056; A/D reviewfb23460, C review8ca7e4f, B/helper reviewa48ad72; final integration/receipt audit to follow |
+| E | `review/sprint04b-security` | Phase0 accepted at3d2d056; A/D reviewfb23460, C review8ca7e4f, B/helper reviewa48ad72; integration/local-gate ACCEPT213416c |
 | Root | `sprint/04b-integration` | clean full local proof `0cf24f494001711bfb87695536db20732dcb7b1a`; final hosted gates to follow |
 
 ## Gate Matrix
@@ -144,6 +144,13 @@ projects and eight immutable upstream files match. E also accepts the root
 gate helper's scoped invocation and output exclusions; final integration/receipt
 audit remains distinct from these component verdicts.
 
+Final independent integration/local-gate ACCEPT is retained at
+`213416c` in `sprint04b-e-integration-review.md`. E verifies667 accepted owner
+files,2,291 protected baseline objects, all56 gate manifest entries, eight
+streams and26 scanner operations. Clean receipt/docs heada58f4cc has identical
+executable bytes to tested0cf24f4. No new blocking integration finding; the
+unchanged runtime failures, proposed ADR and pending human owner remain explicit.
+
 Next executable sprint trigger: a maintained released strict parser capability
 with exact provenance and demonstrated change in the historical failing cases.
 Then targeted failures, unchanged75, complete TLS/identity/stream/cancellation/
@@ -179,10 +186,20 @@ dependency changes. Raw safe outputs, exact argv/exits/stream hashes and
 Rendered Compose credentials are excluded from committed evidence. Historical
 component failures and ineligible attempts stay retained with explanations.
 
+## Hosted Integration And Merge Receipt
+
+[PR13](https://github.com/tiecont/aegis-gate/pull/13) integrates this work from
+verified PR12 main. Initial head `a58f4cc628e8c56f0c7ccf105b26581ceb9484e1`
+starts hosted run43474141994; its captured intermediate state is retained in
+`evidence/sprint04b-root/pr13-initial-ci/`. This earlier head is superseded by
+the additive final independent review and receipt documentation. It is not the
+final-head quality receipt. Both required jobs must pass on the final PR head,
+followed by both jobs on its main merge. The PR and run metadata supply exact
+successor identities; no commit claims to contain its own hash.
+
 ## Remaining Closeout Work
 
-Finish final independent integration/receipt audit, open the integration PR,
-verify both required hosted jobs on its exact final head, merge if accepted,
+Verify both required hosted jobs on the exact final reviewed PR head, merge,
 then verify the exact main merge jobs. Final receipt addenda bind prior source
 commits and external run IDs without claiming a self-referential commit hash.
 All changes are additive research/test/evidence/docs; no application, dependency,

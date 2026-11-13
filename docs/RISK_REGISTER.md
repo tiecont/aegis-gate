@@ -45,6 +45,9 @@ R15: fresh strict TypeScript7 resolution still fails the declared parser peer
 range. Existing compatible stack, minimatch override and scanners are unchanged.
 R13 full final integration scan/hosted receipts are recorded in Sprint04-B
 completion after execution; component scans alone do not supply that gate.
+Full locked local integration check/scan/cleanup passes at0cf24f4; independent
+source/receipt/scanner acceptance is213416c. Exact final-head/main hosted
+verification is a separate merge requirement recorded by PR13 and addenda.
 Module01 NO-GO,04-12 LOCKED, production BLOCKED; no risk exception recorded.
 
 ## Sprint04-A disposition
