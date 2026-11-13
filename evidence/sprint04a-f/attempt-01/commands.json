@@ -1,0 +1,197 @@
+[
+  {
+    "source_commit": "99e41a2438d42c9588620d7766d2b03ebc557a14",
+    "argv": [
+      "go",
+      "version"
+    ],
+    "started_at": "2026-11-13T10:09:09.511Z",
+    "ended_at": "2026-11-13T10:09:09.588Z",
+    "exit_code": 0,
+    "signal": null,
+    "error_code": null,
+    "log_sha256": "a29205bd83967c2f70e6768fae009600038d6056499fa289de9d5f9b79beaef4"
+  },
+  {
+    "source_commit": "99e41a2438d42c9588620d7766d2b03ebc557a14",
+    "argv": [
+      "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "--version"
+    ],
+    "started_at": "2026-11-13T10:09:09.589Z",
+    "ended_at": "2026-11-13T10:09:09.595Z",
+    "exit_code": 0,
+    "signal": null,
+    "error_code": null,
+    "log_sha256": "d4b8a831ea4925f1c54be7746ec0b846cb04bbc35295b64ccdb2101bfcf5d70c"
+  },
+  {
+    "source_commit": "99e41a2438d42c9588620d7766d2b03ebc557a14",
+    "argv": [
+      "docker",
+      "version",
+      "--format",
+      "{{.Client.Version}} {{.Server.Version}}"
+    ],
+    "started_at": "2026-11-13T10:09:09.595Z",
+    "ended_at": "2026-11-13T10:09:09.619Z",
+    "exit_code": 0,
+    "signal": null,
+    "error_code": null,
+    "log_sha256": "8bfab057b84661152e9de8f4e965e1ffeb4d88b672c2c33fbcbe04d1f63070f3"
+  },
+  {
+    "source_commit": "99e41a2438d42c9588620d7766d2b03ebc557a14",
+    "argv": [
+      "go",
+      "test",
+      "-race",
+      "-v",
+      "./internal/configconsumer",
+      "./internal/configpublish",
+      "./internal/configsnapshot",
+      "./internal/configreview",
+      "-count=1"
+    ],
+    "started_at": "2026-11-13T10:09:09.619Z",
+    "ended_at": "2026-11-13T10:09:15.681Z",
+    "exit_code": 0,
+    "signal": null,
+    "error_code": null,
+    "log_sha256": "eb22c7284d349071d0727d21ec798e926246c84f96d0aedd1b48beb9066138c7"
+  },
+  {
+    "source_commit": "99e41a2438d42c9588620d7766d2b03ebc557a14",
+    "argv": [
+      "make",
+      "fixture-images"
+    ],
+    "started_at": "2026-11-13T10:09:15.681Z",
+    "ended_at": "2026-11-13T10:09:21.899Z",
+    "exit_code": 0,
+    "signal": null,
+    "error_code": null,
+    "log_sha256": "2a40954d5665e2ab2d55be3c90b24c6de25588cc90cd83d406aeb7780c765b03"
+  },
+  {
+    "source_commit": "99e41a2438d42c9588620d7766d2b03ebc557a14",
+    "argv": [
+      "docker",
+      "compose",
+      "-p",
+      "aegisgate-04a-f",
+      "--env-file",
+      ".local/compose.env",
+      "--env-file",
+      ".local/fixture-images.env",
+      "-f",
+      "infra/compose/compose.yaml",
+      "up",
+      "-d",
+      "--wait",
+      "--wait-timeout",
+      "90",
+      "postgres"
+    ],
+    "started_at": "2026-11-13T10:09:21.899Z",
+    "ended_at": "2026-11-13T10:09:27.135Z",
+    "exit_code": 0,
+    "signal": null,
+    "error_code": null,
+    "log_sha256": "22a7ceffbc30f16adf170bfdc510cc1b5910ca18bb9476bd96e89fd2a7d8ae7c"
+  },
+  {
+    "source_commit": "99e41a2438d42c9588620d7766d2b03ebc557a14",
+    "argv": [
+      "env",
+      "AEGIS_TENANCY_INTEGRATION=1",
+      "go",
+      "test",
+      "-race",
+      "-v",
+      "./apps/control-api/internal/persistence",
+      "./apps/control-api/internal/transport",
+      "./internal/configreview",
+      "./internal/configconsumer",
+      "./internal/configsnapshot",
+      "./internal/configrollout",
+      "./internal/configpublish",
+      "-count=1"
+    ],
+    "started_at": "2026-11-13T10:09:27.135Z",
+    "ended_at": "2026-11-13T10:09:52.903Z",
+    "exit_code": 0,
+    "signal": null,
+    "error_code": null,
+    "log_sha256": "32f57b56d06d7bd0d6d1c3158e99a9bd677ef87da4c9dd503b884d2d1758bfbe"
+  },
+  {
+    "source_commit": "99e41a2438d42c9588620d7766d2b03ebc557a14",
+    "argv": [
+      "go",
+      "vet",
+      "./apps/control-api/internal/persistence",
+      "./internal/configconsumer",
+      "./internal/configpublish",
+      "./internal/configsnapshot",
+      "./internal/configrollout",
+      "./internal/configreview"
+    ],
+    "started_at": "2026-11-13T10:09:52.903Z",
+    "ended_at": "2026-11-13T10:09:54.420Z",
+    "exit_code": 0,
+    "signal": null,
+    "error_code": null,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source_commit": "99e41a2438d42c9588620d7766d2b03ebc557a14",
+    "argv": [
+      "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "internal/configsnapshot/testdata/verify-vector.mjs"
+    ],
+    "started_at": "2026-11-13T10:09:54.420Z",
+    "ended_at": "2026-11-13T10:09:54.460Z",
+    "exit_code": 0,
+    "signal": null,
+    "error_code": null,
+    "log_sha256": "feea068447486c3553f7dda051c552b7aeec006802107404b12ba76f574e8c1a"
+  },
+  {
+    "source_commit": "99e41a2438d42c9588620d7766d2b03ebc557a14",
+    "argv": [
+      "git",
+      "diff",
+      "HEAD",
+      "--check"
+    ],
+    "started_at": "2026-11-13T10:09:54.461Z",
+    "ended_at": "2026-11-13T10:09:54.469Z",
+    "exit_code": 0,
+    "signal": null,
+    "error_code": null,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source_commit": "99e41a2438d42c9588620d7766d2b03ebc557a14",
+    "argv": [
+      "docker",
+      "compose",
+      "-p",
+      "aegisgate-04a-f",
+      "--env-file",
+      ".local/compose.env",
+      "--env-file",
+      ".local/fixture-images.env",
+      "-f",
+      "infra/compose/compose.yaml",
+      "down"
+    ],
+    "started_at": "2026-11-13T10:09:54.469Z",
+    "ended_at": "2026-11-13T10:09:56.546Z",
+    "exit_code": 0,
+    "signal": null,
+    "error_code": null,
+    "log_sha256": "de62382235ac0236eb08c67e140c1d9a02217517851f090ef855190b39111d35"
+  }
+]
