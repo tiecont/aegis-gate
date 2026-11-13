@@ -142,8 +142,9 @@ RustSec source records corroborate both warnings; neither has patched versions.
 Issue889 is open; PR1117 is open/unmerged at
 `522eb28e4b2dba6449274ed7267edca0b8137184` in `current-01/pingora/pr-1117.json`.
 Fresh official RustSec head also resolves to the exact same DB commit above;
-both advisory bodies are retained at that immutable revision. Its serde-saphyr/MSRV1.89 proposal
-and reported tests are author claims, not released code or C test results.
+both advisory bodies are retained at that immutable revision. PR1117's
+serde-saphyr/MSRV1.89 proposal and reported tests are author claims, not released
+code or C test results.
 No scanner exception/private fork is accepted.
 
 ## Execution, Drafts and Stop
@@ -161,8 +162,8 @@ commands/times/exits/stdout/stderr/hashes are in command receipts:
 | `python3 evidence/sprint04a-c/verify-provenance.py` | 0; 7 archives/382 files match lock/source |
 | `node evidence/sprint04a-c/closeout.mjs` | 0; syntax, archive verification, immutable baseline, owned-source whitespace and pinned offline Gitleaks all0;96 fetched/log file hashes verified |
 
-The scoped Gitleaks scan processes4.18MB of owned evidence and reports no leaks;
-it is not a repository/history security-scan claim. `verification.json` records
+The historical scoped Gitleaks scan processed4.18MB of owned evidence with no
+leaks; it is not a repository/history security-scan claim. `verification.json` records
 each exact command, source commit, time, exit and stdout/stderr digest.
 `SHA256SUMS` binds the report and all owned evidence except the manifest itself.
 No full repository `make check`/`make security-scan` was run by C; root owns
@@ -197,11 +198,35 @@ against3e039408, syntax, whitespace, and offline pinned Gitleaks for actual owne
 evidence plus this report. The scanner uses `flock --no-fork` for its entire
 container lifetime, including cleanup; no fixture service or public listener.
 
-Verification results will be recorded after executing the committed verifier.
+`verify-01/commands.json` records exit0 at source
+`055f8cd954c73abad1cd2fea821c184b44b9238b`; all7 nested commands exit0. It
+verifies139 original manifest entries,96 previous receipt files and137 fresh
+body/stdout/stderr files with zero mismatches. Published archive verification
+again checks7 packages/382 files, no mismatch; original65 IDs/extraction pass
+and the unchanged full `spikes/` diff preserves all75 inputs/expectations,
+encoded/pipeline positives and mandatory zero-byte assertions. The offline
+Gitleaks scan inspected5.61MB of actual owned evidence/report and found no leaks.
+This is a scoped scan, not a full repository, image vulnerability or release gate.
+
 The original139-entry manifest remains in `historical-SHA256SUMS` and original
 Git objects; current `SHA256SUMS` binds the full owned handoff. Failed initial
 fetches/tool/cache attempts remain retained, not reclassified as successes.
 Root/E own full repository check/scan, hosted gates and independent acceptance.
+
+E can repeat the offline verifier from a clean committed checkout using a fresh
+output directory; never rerun the historical collectors over retained paths:
+
+```sh
+/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node evidence/sprint04a-c/capability-refresh.mjs verify review-01 current-01
+sha256sum --check evidence/sprint04a-c/SHA256SUMS --quiet
+```
+
+The verifier deliberately refuses to overwrite an existing attempt directory.
+The final evidence commit contains a second verification receipt after this
+completed report is committed, plus the generated whole-handoff manifest.
+Review range is `origin/main..research/module01-upstream-capability`; every
+changed file is under `evidence/sprint04a-c/` or this report. No integration,
+merge, downstream-module opening or architecture selection was performed by C.
 
 Stop/dependency: obtain a maintained released pre-normalization obs-fold
 rejection API; prove Host/:authority/verified-SNI denial before **any** origin
@@ -214,10 +239,20 @@ Independent E review and explicit human architecture approval remain necessary.
 ## Agent Completion Report
 
 - Module:01 upstream research. Status: complete investigation; eligible engine blocked.
-- Changes: owned report/evidence/tools/local drafts only; no contracts/ADRs/gates changed.
-- Positive checks: versioned source retrieval, inverse trees, Linux metadata, archive integrity.
-- Negative checks: failed retrieval/tool/cache attempts retained; no runtime negative tests rerun.
-- Supply chain: snapshot audit0 with two disclosed maintenance warnings; no ignores.
-- Performance: none measured. Security/production readiness: not claimed.
-- Human review: root/E evidence acceptance; later architecture decision after full proof.
-- Next unblocked work: focused upstream remediation and independent00/02/03 maintenance.
+- Commits/files changed: rebased research2dfa584,d3d5dc7,55eab22,959b794,723e781;
+  current collection tool1272faa and current evidence/verifier055f8cd; completed
+  report/proof commits follow on this branch. Only C report/evidence/tools/drafts.
+- Architecture/ADR decisions: retain scoped upstream stop and Module01 NO-GO;
+  no architecture approval, contract change or risk acceptance.
+- Contracts changed: none; immutable75, TLS, authorization and zero-byte rules intact.
+- Positive tests: exact collection/verification commands above exit0; inverse trees,
+  dated audit, archives, historical/current provenance and immutable corpus pass.
+- Security negative tests: none newly executed; historical failures remain failures.
+  Scoped offline Gitleaks/whitespace/syntax checks exit0; no scanner ignore.
+- Performance: none measured; research records origin counters as unobserved/null.
+- Known risks/release blockers: missing released strict APIs, unresolved Pingora
+  maintenance chain; Module01 NO-GO,04-12 locked, production BLOCKED.
+- Human review: root/E evidence acceptance; explicit architecture decision only
+  after a complete eligible technical proof. Drafts remain unpublished.
+- Next unblocked modules: focused upstream remediation and independent00/02/03
+  maintenance only; no dependent production-edge implementation.
