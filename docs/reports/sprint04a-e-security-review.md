@@ -4,7 +4,7 @@
 `3e03940848c81751c87bbcec131238abb7d28e1b`.
 
 Verdict: **ACCEPT A/B/C/D investigation evidence and F local recovery changes**
-at the exact heads below, subject to final receipt verification. No new blocking
+at the exact heads below. Final receipt verification passes. No new blocking
 defect was found in these scoped changes. This accepts research/test evidence
 and engine-independent local Module03 work, not a passing Module01 candidate,
 TypeScript7 update, release decision or architecture approval. Module01 stays
@@ -161,9 +161,17 @@ f1315c5fa18aab4562521c6b7cfa9f5e55031c488afedc4bec9a1b1d1864afe1  f-01/recovery/
 ```
 
 Final seal command: `node evidence/sprint04a-e/seal.mjs seal-01
-bf5785eb8bd6449fc34915b7c2f392bd1d46350f`. Receipt verification and E scoped
-offline Gitleaks are pending execution at this report commit. A/C scoped scans
-already pass independently; none substitutes for root's full scanner.
+bf5785eb8bd6449fc34915b7c2f392bd1d46350f` exits0 at02753c7. All recorded
+proof checksums/command expectations and five current clean heads verify;
+F final source matches the independently tested source. Scoped pinned offline
+Gitleaks8.30.1 scans1.82MB of actual E evidence/report with no leaks. Receipt
+SHA256 `4518e49132b26802f8b2dcefa67c7766f1edff114f885fc3e7b3ec1dae234906`;
+manifest `5c03da8d911e8fd32ee6bf2d61c04d259df9a6ef1b676576bfcdda8840c47bce`.
+The identical command with fresh output `seal-02` binds this completed report
+after commit and writes the whole E `SHA256SUMS`; its receipt records actual
+source/time/outcome. A/C scoped scans also pass independently; none substitutes
+for root's full scanner. Root can verify from E's directory with
+`sha256sum --check evidence/sprint04a-e/SHA256SUMS --quiet`.
 
 Only preflight errors outside proof were reading nonexistent Node VERSION and
 F report before its creation, and a search naming nonexistent store.go. They
@@ -190,7 +198,7 @@ network emergency transport or active H2/WS/gRPC drain is implemented/claimed.
 ## Agent Completion Report
 
 - Module: Sprint04-A E independent review; scoped01/03/dependency maintenance.
-- Status: review proofs complete; final seal pending, root integration separate.
+- Status: complete scoped independent review; final seal passes, root integration separate.
 - Commits/files changed: only E report and `evidence/sprint04a-e/`; source and
   attempt commits109f56a,56653bc,fb139f4,d754a0a,989b971,0caa7f3 precede closeout.
 - Architecture/ADR decisions/contracts changed: none; no merge or gate edits.

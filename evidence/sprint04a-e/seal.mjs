@@ -96,4 +96,8 @@ try {
 finally {
   receipt.ended_at = new Date().toISOString(); receipt.exit_code = process.exitCode ?? 0; save();
   fs.writeFileSync(path.join(output, 'SHA256SUMS'), fs.readdirSync(output).sort().map((file) => `${hash(fs.readFileSync(path.join(output, file)))}  ${file}`).join('\n') + '\n');
+  const walk = (directory) => fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => entry.isDirectory() ? walk(path.join(directory, entry.name)) : [path.join(directory, entry.name)]);
+  const manifest = path.join(base, 'SHA256SUMS');
+  const files = [...walk(base).filter((file) => file !== manifest), 'docs/reports/sprint04a-e-security-review.md'].sort();
+  fs.writeFileSync(manifest, files.map((file) => `${hash(fs.readFileSync(file))}  ${file}`).join('\n') + '\n');
 }
