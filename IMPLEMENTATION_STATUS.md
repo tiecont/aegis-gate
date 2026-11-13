@@ -1,5 +1,37 @@
 # Implementation status
 
+## Sprint04-B Local Closeout
+
+Sprint04-B component work is complete: fresh unchanged Envoy69/75 and23-probe
+16/23 results retain all mandatory failures. Maintained released sources/APIs
+are unchanged; no credible complete strict-ingress candidate exists. Additive
+bounded protocol diagnostics classify observer/lifecycle limits without granting
+security PASS. Modules00/02/03 recovery, fixture and supported dashboard
+regressions pass. Formal architecture owner/decision remain PENDING; ADR012 is
+proposed only. See `docs/reports/sprint04b-completion.md` for exact component
+sources, independent verdicts and final integration gate receipts as recorded.
+
+Full locked root `make check`, `make security-scan`, fixture teardown and volume
+cleanup pass at `0cf24f494001711bfb87695536db20732dcb7b1a`. Independent E accepts
+integrated source equality and all local gate receipts at213416c. PR13 carries
+the accepted docs/research/tests/evidence; exact final-head/main hosted closeout
+is recorded by its metadata and completion addenda after execution. No product,
+dependency, workflow, threat-model, quality-gate or original corpus changes.
+
+PR12 is merged as `cbb5f71db84b9489bf4a6260696bbba29ab4a561`; exact PR-head
+hosted43457905154 and exact merge hosted43466312855 both pass the two required
+jobs. Fresh independent Phase0 ACCEPT verifies sources, manifests, full local
+gate/cleanup receipts and retained failures. See
+`docs/reports/sprint04a-closeout-addendum.md`; it supersedes historical pending
+merge/hosted fields without rewriting receipts. Modules00/02/03 retain scoped
+local PASS. Module01 remains NO-GO;04-12 LOCKED; production BLOCKED.
+
+Sprint04-B work starts from this verified main. The requesting human delegated
+research choices; maintained Envoy strict-ingress API research is the selected
+default. Formal architecture/security owner/GO remain pending, and the current
+zero-origin-byte requirement is unchanged. Execution contract:
+`docs/sprints/04b-execution.md`.
+
 Last updated: 2026-11-13. Scope: local implementation only. No production deployment or live DNS/payment action is authorized.
 
 ## Sprint04-A strict-ingress disposition

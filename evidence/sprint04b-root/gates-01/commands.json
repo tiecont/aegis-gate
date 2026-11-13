@@ -1,0 +1,120 @@
+{
+  "source_commit": "0cf24f494001711bfb87695536db20732dcb7b1a",
+  "source_tree": "1775707ec26ca995400569b031f271f1acec602a",
+  "tracked_clean": true,
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/home/tiecont/Projects/aegis-gate-04b-closeout/scripts/sprint04b-gates.mjs",
+    "evidence/sprint04b-root/gates-01"
+  ],
+  "cwd": "/home/tiecont/Projects/aegis-gate-04b-closeout",
+  "started_at": "2026-11-13T17:29:05.243Z",
+  "node": "v26.13.0",
+  "node_binary": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "fixture_lock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "compose_project": "aegisgate-04b-root",
+  "commands": [
+    {
+      "label": "check",
+      "command": "make",
+      "args": [
+        "check"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-04b-closeout",
+      "started_at": "2026-11-13T17:29:05.400Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-13T17:31:37.785Z",
+      "streams": [
+        {
+          "file": "evidence/sprint04b-root/gates-01/check.stdout.log",
+          "sha256": "2e49801d3202e5192bbc5293344202743c4331d4fb59af3cbb1db64ab7daea66"
+        },
+        {
+          "file": "evidence/sprint04b-root/gates-01/check.stderr.log",
+          "sha256": "396f851b73574d2d60e7aa599eac434ef62182efe704af4316e246d2e949d887"
+        }
+      ]
+    },
+    {
+      "label": "security-scan",
+      "command": "make",
+      "args": [
+        "security-scan"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-04b-closeout",
+      "started_at": "2026-11-13T17:31:37.798Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-13T17:33:02.411Z",
+      "streams": [
+        {
+          "file": "evidence/sprint04b-root/gates-01/security-scan.stdout.log",
+          "sha256": "8f9869b2cf6f974be8699ef4de9ec66f30d21fe378b4cfdf12835c8f35244b32"
+        },
+        {
+          "file": "evidence/sprint04b-root/gates-01/security-scan.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "cleanup",
+      "command": "make",
+      "args": [
+        "dev-down"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-04b-closeout",
+      "started_at": "2026-11-13T17:33:02.419Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-13T17:33:12.948Z",
+      "streams": [
+        {
+          "file": "evidence/sprint04b-root/gates-01/cleanup.stdout.log",
+          "sha256": "54a436c053a8cdd9d5d9c057ba2076828e35449457b540d8847a89df29ff6a90"
+        },
+        {
+          "file": "evidence/sprint04b-root/gates-01/cleanup.stderr.log",
+          "sha256": "ea87eaed04d3e7c2004c24a3dcd33cb1fa8ed179796bea2739df37de39d6e7a4"
+        }
+      ]
+    },
+    {
+      "label": "cleanup-volumes",
+      "command": "docker",
+      "args": [
+        "compose",
+        "--env-file",
+        ".local/compose.env",
+        "--env-file",
+        ".local/fixture-images.env",
+        "-f",
+        "infra/compose/compose.yaml",
+        "down",
+        "--volumes",
+        "--remove-orphans"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate-04b-closeout",
+      "started_at": "2026-11-13T17:33:12.958Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-13T17:33:13.114Z",
+      "streams": [
+        {
+          "file": "evidence/sprint04b-root/gates-01/cleanup-volumes.stdout.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04b-root/gates-01/cleanup-volumes.stderr.log",
+          "sha256": "23ebd0b4649afb365ef17381caeb63ee6dbd5f8323f7e19c114ec24a9b605289"
+        }
+      ]
+    }
+  ],
+  "remaining_project_containers": [],
+  "ended_at": "2026-11-13T17:33:13.150Z",
+  "passed": true,
+  "lock_held_through_cleanup": true
+}

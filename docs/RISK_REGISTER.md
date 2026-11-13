@@ -2,6 +2,54 @@
 
 This register tracks residual implementation and release risks. It does not accept risks on behalf of a human reviewer. The current module states and actual executed evidence are recorded in `IMPLEMENTATION_STATUS.md`; T01–T20 mappings are maintained in `docs/SECURITY_COVERAGE.md`.
 
+## Sprint04-B Disposition
+
+PR12 is merged at `cbb5f71db84b9489bf4a6260696bbba29ab4a561`; both required
+jobs pass on its exact PR head and merge commit. The additive Sprint04-A
+closeout and independent Phase0 review bind retained source/evidence hashes,
+local gates and historical failures. Main protection absence did not waive
+review/CI requirements. No production risk is accepted by that merge.
+
+R01/R04 remain blocking. Root selects maintained Envoy strict-ingress API
+research under session delegation, with no engine substitution. Formal human
+architecture/security ownership and affirmative GO remain PENDING. ADR012 and
+the separate security-contract/alternative-test memos are proposed only: no
+origin-byte waiver, handler-only oracle, control-byte subtraction or shifted
+interval. The9-byte SETTINGS ACK remains a failed original assertion.
+
+B refreshes exact released Envoy1.40.2/Pingora0.9.1/Hyper1.12.0 sources and finds
+no relevant released change. Standalone folded headers still normalize/forward;
+trailer delivery and status-only TE mapping remain unproven. Invalid early byte
+observations and startup cleanup failure are explicitly retained and excluded
+from security claims. No new complete candidate or public upstream request.
+
+R04/T08 protocol-resource closure remains unproven. C reproduces the same six
+of75 and seven of23 failures. Settled/immediate malformed H2 diagnostics close
+without error frames and without origin dispatch; their exact internal cause
+and protocol conformance remain unresolved. Userinfo closes without a response;
+native code8 after socket close is not proof of peer-sent CANCEL.8MiB producer
+exhaustion is retained; larger producer/window/RSS observations do not prove
+production memory bounds or fairness. Unavailable native socket taps and
+already-completed origin cancellation are explicitly corrected, not relabeled
+as silent-wire or successful cancellation evidence.
+
+R03/R10/R12: fresh D00/02/03 local regressions and independent A/D acceptance
+preserve prune/archive/tenant/drain/encrypted rollback protections. External
+floor remains a provisioning API; no production monotonic storage service or
+engine stream drain exists. Corrected fixture recorder omits rendered Compose
+credentials. The initial uncommitted rendered output was removed; that attempt
+is explicitly ineligible and only fresh corrected-source proof is accepted.
+Historical missing-output hashes remain for transparency, without secrets.
+
+R15: fresh strict TypeScript7 resolution still fails the declared parser peer
+range. Existing compatible stack, minimatch override and scanners are unchanged.
+R13 full final integration scan/hosted receipts are recorded in Sprint04-B
+completion after execution; component scans alone do not supply that gate.
+Full locked local integration check/scan/cleanup passes at0cf24f4; independent
+source/receipt/scanner acceptance is213416c. Exact final-head/main hosted
+verification is a separate merge requirement recorded by PR13 and addenda.
+Module01 NO-GO,04-12 LOCKED, production BLOCKED; no risk exception recorded.
+
 ## Sprint04-A disposition
 
 R01/R04 remain blocking. Inspected Envoy1.40.2 Balsa source irreversibly removes
