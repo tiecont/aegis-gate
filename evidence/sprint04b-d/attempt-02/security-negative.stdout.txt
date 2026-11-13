@@ -1,0 +1,72 @@
+python3 scripts/dev-secrets.test.py
+python3 scripts/image_identity_test.py
+GOTOOLCHAIN=go1.27.4 go test -race ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/... -run 'Negative|IntegrationLocalPKI' -count=1
+?   	aegisgate.dev/aegisgate/apps/control-api/cmd/control-api	[no test files]
+?   	aegisgate.dev/aegisgate/apps/control-api/internal/application	[no test files]
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/domain	1.054s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/identity	1.640s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/persistence	1.082s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/transport	2.396s
+?   	aegisgate.dev/aegisgate/apps/control-api/publication	[no test files]
+?   	aegisgate.dev/aegisgate/apps/config-publisher/cmd/config-publisher	[no test files]
+ok  	aegisgate.dev/aegisgate/internal/configconsumer	1.666s
+ok  	aegisgate.dev/aegisgate/internal/configpublish	1.247s
+ok  	aegisgate.dev/aegisgate/internal/configreview	1.131s [no tests to run]
+ok  	aegisgate.dev/aegisgate/internal/configrollout	1.165s
+ok  	aegisgate.dev/aegisgate/internal/configsnapshot	1.407s
+ok  	aegisgate.dev/aegisgate/internal/contracts	1.073s [no tests to run]
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/cmd/fixtures	[no test files]
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/configlab	[no test files]
+ok  	aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab	2.502s
+cargo +1.99.1 test --workspace --locked --manifest-path apps/edge/Cargo.toml negative_
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test negative_missing_file_does_not_disclose_path ... ok
+test negative_malformed_and_oversized_inputs_rejected_without_echo ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test negative_runtime_cannot_be_enabled_by_untrusted_flags ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.01s
+
+
+running 6 tests
+test tests::negative_diagnostics_never_echo_secret_input ... ok
+test tests::negative_oversized_error_rejected_before_parsing ... ok
+test tests::negative_noncanonical_or_nonrandom_uuid_denied ... ok
+test tests::negative_generation_replay_and_rollback_denied ... ok
+test tests::negative_unknown_duplicate_fields_and_trailing_data_denied ... ok
+test tests::negative_untrusted_codes_and_messages_denied ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+
+running 1 test
+test tests::negative_bootstrap_never_authorizes_or_becomes_ready ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" "$(scripts/node-path.sh)" --test --test-name-pattern='negative' scripts/contracts.test.mjs
+✔ negative: unknown fields, tenant header injection, malformed IDs and unbounded errors rejected (90.980756ms)
+✔ negative: intentionally broken schema and operation changes fail compatibility (14.13115ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 955.106196
