@@ -2,12 +2,48 @@
 
 Result: research complete; **no eligible released alternative identified**.
 Module01 NO-GO is retained. No runtime candidate, broad PoC, shared fixture,
-architecture/gate edit, scanner ignore, external request or merge was performed.
-Branch `research/module01-upstream-resolution`, `/tmp/aegisgate-04a-c`.
+architecture/gate edit, scanner ignore, maintainer publication or merge was performed.
+Branch `research/module01-upstream-capability`, `/tmp/aegisgate-04a-c`.
+
+## Current Assignment and Independent Stop
+
+Restored the missing owned worktree using `git worktree add --force
+/tmp/aegisgate-04a-c research/module01-upstream-resolution` at original
+`a795e619e528c08b5f22b0a3f8701e7284e96b52`; created the current branch and
+rebased onto `origin/main` = `3e03940848c81751c87bbcec131238abb7d28e1b`.
+The inherited coordinator-only execution-contract commit was excluded with
+`git rebase --onto origin/main 5cfc6db`; the final diff owns only C evidence
+and this report. Original committed research and failed attempts remain intact.
+
+Fresh collection from clean committed source
+`1272faa3273c9db8675dcdd463201eb544bf14d1` ran2026-11-13
+09:50:53.103Z-09:51:19.227Z. `current-01/commands.json` retains49 successful
+nested commands, exact argv/URLs, statuses, tool versions, times, source hashes
+and raw body/stdout/stderr digests. The15 re-fetched released source/API files
+are byte-identical to the prior committed evidence; latest versions and their
+source revisions below are unchanged. Read-only official source/API retrieval
+is the only external activity; no external traffic probes or publication.
+
+C independently confirms A's `4d2d0c751cdc22cb06ec1bb305b321921a06ba7e`
+scoped stop using its own fresh upstream source, rather than treating A's report
+as proof. Envoy1.40.2 Balsa hardcodes continuation acceptance (:181), strips
+CR/LF before value callbacks (:450-464), and implements raw-header/trailer
+callbacks as no-ops (:304-305). Those overrides and the framer are private
+(`balsa_parser.h:39-45,71`). Public `HeaderValidator` takes parsed request/trailer
+maps (:48-54,64-69); its transforms also take maps (:87-108). A validator hook
+cannot reconstruct erased folding provenance. No strict-fold option was found
+in the inspected released constructor, protocol/default-validator proto and
+runtime sources. This conclusion does not exhaust all older supported branches
+or future extensions, and does not assert an upstream vulnerability.
+
+Candidate count0; new75-case runtime executions0. A has stopped; no credible
+complete maintained alternative is identified, so no broad candidate rebuild
+or replacement was attempted. H2 bytes remain B's independent wire assignment;
+C makes no new origin-byte/handler/parser/transport observation or passing claim.
 
 ## Release and Source Matrix
 
-Fresh official GitHub latest-release API responses were retrieved2026-11-12.
+Official GitHub latest-release API responses were refreshed2026-11-13.
 All are stable/non-draft. Commit endpoints resolve tags to immutable source:
 
 | Project | Latest released version / published UTC | Immutable source revision |
@@ -24,13 +60,24 @@ the missing incoming strict mode. No equivalent LTS window was established for
 Pingora/Hyper; latest stable is not an invented support-service guarantee.
 Retained licenses are Envoy/Pingora Apache-2.0 and Hyper MIT.
 
+| Versioned track | Released | Supported API / policy | Proposed, not released proof | Missing prerequisite |
+| --- | --- | --- | --- | --- |
+| Envoy1.40.2 | Latest stable, unchanged immutable source below |12-month stable maintenance policy; Host retention, local reply mapping and parsed-map validator surfaces exist | Local strict-fold upstream request; focused TE mapping remains unexecuted | Public pre-normalization fold rejection; complete H2 zero-byte identity denial and TE4xx/close proof |
+| Pingora0.9.1 | Latest stable | Public pipeline/session/startup APIs exist; no LTS/support SLA established | PR1117 YAML replacement open/unmerged; strict target/framing and ordered ProxyHttp pipeline requests | Released strict mode before target rewriting, valid pipeline integration, dependency removal and proof |
+| Hyper1.12.0 | Latest stable | Maintained server Builder exposes bounds/keepalive/upgrades; no LTS/support SLA established | Local reject-both/raw-target API request; default-branch inspection is source-only | Incoming CL+TE rejection and fragment provenance before service dispatch; equivalent proxy integration proof |
+
+None of these partial supported interfaces meets the whole eligibility contract.
+Proposed means a local request or unmerged upstream change, not a supported
+released fix. Source review and a successful collector do not provide runtime
+capability evidence.
+
 All source references below are relative to `evidence/sprint04a-c/upstream/<project>/`
 at the revision above. `*-commands.json` retain exact URL/argv/time/status/hash
 for every fetch; full raw source and metadata are kept, including failed paths.
 
 | Property | Released source/API evidence | Supported capability / exact remaining condition |
 | --- | --- | --- |
-| Envoy obs-fold | `source/common/http/http1/balsa_parser.cc:181,451-465`; `envoy/http/header_validator.h:54` | Balsa continuation rejection is hardcoded false; CR/LF removed before onHeaderValue. Validator consumes a parsed map. No config/runtime switch exposing pre-normalization rejection was found in inspected proto/constructor/runtime APIs. |
+| Envoy obs-fold | `source/common/http/http1/balsa_parser.cc:181,304-305,450-464`; `.h:39-45,71`; `envoy/http/header_validator.h:54` | Balsa continuation rejection is hardcoded false; raw input callbacks are private no-ops; CR/LF removed before onHeaderValue. Public validator consumes parsed maps. No config/runtime strict switch found in inspected APIs. |
 | Envoy H2 identity | `source/common/http/http2/codec_impl.cc:2188,2523-2524,2585-2608` | Host retention runtime guard exists; codec allows differing Host/authority. Retention is necessary for application equality/SNI policy but does not establish zero bytes before denial. B owns classification of historical nine bytes. |
 | Envoy TE | `source/common/http/http1/codec_impl.cc:902-927,1375-1416`; HCM proto `LocalReplyConfig:1160`, `ResponseMapper:1208` | CL/TE default rejection exists; unsupported TE sets501. Local reply status mapping is a credible **partial** released API, but decoder-less direct-error fallback and close need runtime proof. It cannot fix obs-fold. No blanket claim that a supported TE mapping is absent. |
 | Envoy UHV | HCM proto `typed_header_validation_config:1073-1095`; default validator proto | Field remains `not-implemented-hide`; build/runtime details matter. Parsed-map UHV can validate syntax/CL-TE but does not recover folded wire provenance. A owns any build/config feasibility claim. |
@@ -43,13 +90,16 @@ for every fetch; full raw source and metadata are kept, including failed paths.
 | Hyper fragments | same URI constructor; archive-verified `registry/http-1.5.0/src/uri/path.rs:20-30` | Dynamic PathAndQuery truncates fragments; service receives normalized Uri. Static constructor's fragment rejection does not control Hyper's dynamic parse. Missing reject-before-normalization/raw-target API. |
 | Hyper bounds/pipeline | H1 Builder `max_headers`, `max_header_size`, `max_buf_size`, `header_read_timeout`, `keep_alive`, `pipeline_flush`; H2 Builder retained | Supported resource controls are present. They do not recover removed CL/fragment provenance. Preserve positive encoded/pipeline cases rather than disable keepalive. |
 
-Additional source-only main snapshots: Envoy
-`0dfc4642465775abe162d9fe94ca8aed2a0e3a0d` still hardcodes continuation false;
-Pingora `3f87e92c982ee27c714506e16ae362776faea4aa` retains the retry and flagged
-dependencies. These are unexecuted, unreleased source observations. Hyper main
-lookup returned422 because that ref was unavailable; released source was fully
-retrieved and suffices for this bounded conclusion. No claim of exhaustive
-inspection of every extension, supported branch or third-party parser is made.
+Fresh source-only default-branch snapshots in `current-01/`: Envoy main
+`8ce942ce56c433e352d2657603d7bf33d4dbb4b4` still has continuation false/private
+no-op callbacks; Pingora main `3f87e92c982ee27c714506e16ae362776faea4aa` retains
+the target retry and flagged dependencies. Hyper's default branch is **master**,
+resolved through its repository API to `b638fc0de351987f3eaffa2bdabd393c8679a9e8`.
+Its incoming parser still removes/skips CL (:280-299) and merely disables
+keepalive when CL+TE coexist (:359-361); Builder still exposes no inspected
+reject-both/raw-target policy. These are unexecuted, unreleased observations.
+Earlier Envoy main0dfc464 and wrong Hyper main422 remain historical evidence,
+not overwritten. No exhaustive search of all extensions/older branches is claimed.
 
 ## Dependency Provenance and Exposure
 
@@ -84,13 +134,15 @@ dependency risk. A useful supported partial alternative exists:
 (`server/mod.rs:448-478`). C has not applied/runtime-tested it; the nonoptional
 serde_yaml/unsafe-libyaml dependency remains in the binary dependency graph.
 
-Pinned cargo-audit0.23.0 exits0: zero known vulnerabilities, two unmaintained
+Fresh pinned cargo-audit0.23.0 exits0: zero known vulnerabilities, two unmaintained
 warnings, RUSTSEC-2024-0388 and0449. Database has1490 advisories; separate Git
 receipt pins `af7b3ec33460b8e2de8d422e16d628518891a519`. `--no-fetch` means a
 snapshot audit, not a claim of future/current database completeness. The fresh
 RustSec source records corroborate both warnings; neither has patched versions.
 Issue889 is open; PR1117 is open/unmerged at
-`522eb28e4b2dba6449274ed7267edca0b8137184`. Its serde-saphyr/MSRV1.89 proposal
+`522eb28e4b2dba6449274ed7267edca0b8137184` in `current-01/pingora/pr-1117.json`.
+Fresh official RustSec head also resolves to the exact same DB commit above;
+both advisory bodies are retained at that immutable revision. Its serde-saphyr/MSRV1.89 proposal
 and reported tests are author claims, not released code or C test results.
 No scanner exception/private fork is accepted.
 
@@ -121,13 +173,35 @@ reproducer commands. No draft was published and no traffic probe was executed.
 Historical counts/bytes here are explicitly inherited from Sprint03-B, not new
 runtime observations. Research itself observes no origins, handlers or transport.
 
-At C closeout, A branch head is `70813bde6342b64d247eb779c4a5e1c78490f874`;
-A's report is still investigation-in-progress, not an authoritative stop.
-Root supplied the same status. Therefore C does not advance an alternative
-before A stops. Independently, neither released Pingora nor Hyper meets all
-identified prerequisites, so no credible complete alternative is available to
-hand off as runnable. The partial TE mapping, pipeline API and programmatic
-startup paths above are concrete supported interfaces, not an eligible engine.
+The earlier C closeout observed A at70813bd while still investigating. That
+historical status is superseded by A's4d2d0c7 completed scoped stop, independently
+confirmed above. Neither released Pingora nor Hyper meets all prerequisites.
+The partial TE mapping, pipeline API and programmatic startup paths are concrete
+supported interfaces, not an eligible engine. No alternative is advanced.
+
+## Current Verification and E Handoff
+
+Collection command (exit0, all49 nested commands exit0):
+
+```sh
+/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node evidence/sprint04a-c/capability-refresh.mjs collect current-01
+```
+
+Verification uses `capability-refresh.mjs verify verify-01 current-01` with the
+same pinned Node26.13.0. It checks historical manifest bytes against original
+a795e619 Git objects, previous command receipts, new launch-time source objects
+and fresh raw receipt hashes. The read-only archive checker verifies all7
+published archives/382 files against locked checksums and cached/retained source.
+It also checks the immutable corpus and byte-identical runtime/security files
+against3e039408, syntax, whitespace, and offline pinned Gitleaks for actual owned
+evidence plus this report. The scanner uses `flock --no-fork` for its entire
+container lifetime, including cleanup; no fixture service or public listener.
+
+Verification results will be recorded after executing the committed verifier.
+The original139-entry manifest remains in `historical-SHA256SUMS` and original
+Git objects; current `SHA256SUMS` binds the full owned handoff. Failed initial
+fetches/tool/cache attempts remain retained, not reclassified as successes.
+Root/E own full repository check/scan, hosted gates and independent acceptance.
 
 Stop/dependency: obtain a maintained released pre-normalization obs-fold
 rejection API; prove Host/:authority/verified-SNI denial before **any** origin

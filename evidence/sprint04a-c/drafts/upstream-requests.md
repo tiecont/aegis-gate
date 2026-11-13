@@ -18,6 +18,17 @@ before that transformation? If absent, please consider a strict codec option
 connected to Balsa's existing policy. A post-codec value check cannot recover
 whether `X-Lab: first second` originally contained a continuation line.
 
+The internal `OnHeaderInput` and `OnTrailerInput` overrides are no-ops
+(`balsa_parser.cc:304-305`), declared private with the framer
+(`balsa_parser.h:39-45,71`). They are not public extension callbacks.
+Please expose and document a supported per-listener strict option that rejects
+continuation lines in headers and trailers on every request, before callbacks
+receive normalized values. Acceptance should include first/later pipelined
+requests, same-read and split-read input, valid unfolded values containing
+spaces/tabs, encoded targets, verified TLS, bounded header limits and close
+behavior. A maintainer-owned released fix and immutable provenance are needed;
+an unmerged parser patch is insufficient for our project's gate.
+
 Minimal wire shape (escaped text; use actual CR/LF bytes in the local harness):
 
 ```text
@@ -94,6 +105,33 @@ or provide immutable raw-target/framing provenance to application policy.
 Header-case/order preservation, max-header-size, disabling keepalive and
 pipeline_flush do not recover these lost distinctions. No custom IO parser or
 production fork is proposed.
+
+Current default-branch source, independently retrieved2026-11-13, still
+removes/skips CL and only sets `keep_alive=false` when both headers exist
+(`src/proto/h1/role.rs:280-299,359-361`). Closing after a successfully parsed
+request does not provide reject-before-service behavior. Please consider an
+opt-in Builder policy that rejects CL+TE in either order before creating the
+service request, plus raw-fragment rejection before dynamic Uri construction.
+Require both pipeline negative orders and unchanged positive encoded pipelines.
+Header-order preservation is not proof of this complete strict policy; the
+inspected server Builder does not expose it.
+
+## Maintainer handoff checklist (local, unpublished)
+
+The official release/source refresh is in `current-01/commands.json`.
+Current issue889 remains open. PR1117 remains open/unmerged at
+522eb28e4b2dba6449274ed7267edca0b8137184; serde-saphyr/MSRV1.89 and its reported
+test results are a proposal and author assertions. Before adoption, request a
+released dependency removal and exact compatible feature/TLS/MSRV matrix;
+verify `cargo tree --locked -i derivative` and `-i unsafe-libyaml` no longer
+resolve them, then a fresh audit, startup/load/dump compatibility tests and
+all mandatory protocol/security proofs. Do not suppress informational warnings.
+
+For every response, request an exact supported release, public configuration/API
+name, immutable source and applicable support policy. These drafts describe
+project-policy mismatches; no new upstream vulnerability or exploit is asserted.
+No issue/comment/email/PR was posted. The next owner must obtain authorization
+for publication separately from this local research assignment.
 
 ## Conditional Local Reproduction Commands
 

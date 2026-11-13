@@ -151,6 +151,19 @@ try {
       if (digest(git('show', `${previous}:${file}`)) !== expected) throw new Error(`Historical mismatch: ${file}`);
       receipt.historical_files_verified++;
     }
+    receipt.previous_receipt_files_verified = 0;
+    for (const file of ['upstream-commands.json', 'followup-commands.json',
+      'local-commands.json', 'local-followup-commands.json']) {
+      const historical = JSON.parse(fs.readFileSync(`${owned}/${file}`));
+      for (const row of historical.records) {
+        for (const entry of row.file ? [row] : [row.stdout, row.stderr].filter(Boolean)) {
+          if (digest(fs.readFileSync(`${owned}/${entry.file}`)) !== entry.sha256) {
+            throw new Error(`Previous receipt mismatch: ${entry.file}`);
+          }
+          receipt.previous_receipt_files_verified++;
+        }
+      }
+    }
     receipt.collection_files_verified = 0;
     const collected = JSON.parse(fs.readFileSync(`${owned}/${collection}/commands.json`));
     if (collected.tracked_status) throw new Error('Collection sources were dirty');
@@ -163,7 +176,7 @@ try {
       if (digest(fs.readFileSync(entry.file)) !== entry.sha256) throw new Error(`Receipt mismatch: ${entry.file}`);
       receipt.collection_files_verified++;
     }
-    command('secrets', ['flock', '/tmp/aegisgate-sprint02-fixtures.lock', 'docker', 'run', '--rm',
+    command('secrets', ['flock', '-w', '45', '--no-fork', '/tmp/aegisgate-sprint02-fixtures.lock', 'docker', 'run', '--rm',
       '--pull', 'never', '--network', 'none', '--user', `${process.getuid()}:${process.getgid()}`,
       '-v', `${root}/${owned}:/review/evidence:ro`,
       '-v', `${root}/docs/reports/sprint04a-c-upstream.md:/review/report.md:ro`,
@@ -179,4 +192,15 @@ try {
   receipt.ended_at = new Date().toISOString();
   fs.writeFileSync(`${output}/commands.json`, `${JSON.stringify(receipt, null, 2)}\n`);
   if (receipt.records.some((row) => row.exit_code !== 0)) process.exitCode = 1;
+  if (mode === 'verify') {
+    const historicalManifest = `${owned}/historical-SHA256SUMS`;
+    if (!fs.existsSync(historicalManifest)) fs.writeFileSync(historicalManifest,
+      git('show', `a795e619e528c08b5f22b0a3f8701e7284e96b52:${owned}/SHA256SUMS`));
+    const walk = (directory) => fs.readdirSync(directory, { withFileTypes: true })
+      .flatMap((entry) => entry.isDirectory() ? walk(`${directory}/${entry.name}`) : [`${directory}/${entry.name}`]);
+    const files = [...walk(owned).filter((file) => file !== `${owned}/SHA256SUMS`),
+      'docs/reports/sprint04a-c-upstream.md'].sort();
+    fs.writeFileSync(`${owned}/SHA256SUMS`, files.map((file) =>
+      `${digest(fs.readFileSync(file))}  ${file}`).join('\n') + '\n');
+  }
 }
