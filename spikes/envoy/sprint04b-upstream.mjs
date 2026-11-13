@@ -4,16 +4,20 @@ import { receipt, hash } from './sprint04b-receipts.mjs';
 
 const proof = receipt(process.argv[2]);
 function fetch(name, url) {
-  const result = proof.command(name, ['curl', '--fail-with-body', '--silent', '--show-error',
+  const argv = url.startsWith('https://api.github.com/')
+    ? ['gh', 'api', '--hostname', 'github.com', url.slice('https://api.github.com/'.length)]
+    : ['curl', '--fail-with-body', '--silent', '--show-error',
     '--location', '--proto', '=https', '--proto-redir', '=https', '--tlsv1.2',
     '--connect-timeout', '10', '--max-time', '30', '--max-filesize', '8388608',
-    '--user-agent', 'AegisGate-read-only-source-review', url]);
+    '--user-agent', 'AegisGate-read-only-source-review', url];
+  const result = proof.command(name, argv);
   assert.equal(result.status, 0, `retain failed fetch: ${name}`);
   return result.stdout;
 }
 try {
   proof.command('curl-version', ['curl', '--version']);
   proof.command('git-version', ['git', '--version']);
+  proof.command('gh-version', ['gh', '--version']);
   proof.record.releases = [];
   const projects = [
     ['envoy', 'envoyproxy/envoy', [
