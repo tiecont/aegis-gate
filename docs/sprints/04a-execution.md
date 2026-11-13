@@ -1,6 +1,51 @@
 # Sprint 04-A Execution Contract
 
-Baseline: `e5adeb4c3ea163d0028c9f29bed07b1128fb1065`.
+Baseline: `3e03940848c81751c87bbcec131238abb7d28e1b` (PR11 already merged).
+The user's 2026-11-13 Sprint04-A blocker-closure brief supersedes the earlier
+assignment names below. Root now coordinates the complete sprint, performs D
+while A/B/C occupy the three available worker slots, then starts F and E.
+Integration remains `sprint/04a-integration` at `/tmp/aegisgate-04a-root`.
+
+## Current Assignments and Acceptance
+
+- A: `fix/module01-envoy-codec-boundary`, `/tmp/aegisgate-04a-a`. Continue
+  committed prior A research, verify against current main/upstream. Report
+  `docs/reports/sprint04a-a-envoy.md`; own `strict-*` sources/evidence only.
+- B: `test/module01-origin-boundary`, `/tmp/aegisgate-04a-b`. Continue prior B
+  committed wire work, independently reproduce/classify nine H2 bytes, verify
+  TLS/identity/byte transparency, reuse/invalid-frame/partial-client probes.
+  Required report `docs/reports/sprint04a-b-origin-boundary.md`.
+- C: `research/module01-upstream-capability`, `/tmp/aegisgate-04a-c`. Continue
+  prior committed upstream work; versioned released/supported/proposed/missing
+  matrix, exact missing API and unpublished actionable maintainer drafts.
+  Report `docs/reports/sprint04a-c-upstream.md`.
+- D: root uses `fix/dashboard-dependency-resolution`, `/tmp/aegisgate-04a-d`.
+  Reproduce run43100142886 TypeScript peer error and repair supported normal
+  resolution; preserve minimatch override; do not redo merged PR11. Lint,
+  typecheck, tests, integration, build, dependency/security checks and report
+  `docs/reports/sprint04a-d-dependencies.md`.
+- F: `hardening/module03-local-recovery`, `/tmp/aegisgate-04a-f`. Local monotonic
+  anchor/rollback, signer outage/retirement, safe durable-reference archival,
+  restart/revocation/drain tests and recovery runbook. Frozen v1 unchanged.
+  Report `docs/reports/sprint04a-f-config-recovery.md`.
+- E: independent reviewer at `/tmp/aegisgate-04a-e`, branch
+  `review/sprint04a-security`; inspect A/B/C/D/F commits and reproduce critical
+  evidence. Root owns integration branch; E supplies independent verdict in
+  `docs/reports/sprint04a-e-security-review.md` before sequential integration.
+
+No candidate without a credible maintained pre-normalization path. If one
+exists, run six known failing cases first, then all75 unchanged and mandatory
+protocol/security positives. Otherwise record precise upstream stop and human
+architecture decision. No zero-byte waiver, parser fork, TLS downgrade, scan
+ignore, third-party abuse test or external maintainer publication. Root must
+complete final report, locked full check/scan and exact-head hosted jobs,
+independent acceptance and authorized safe main merge. Module01 remains NO-GO
+absent complete proof and explicit human architecture approval;04-12 locked,
+00/02/03 PASS local, production BLOCKED. Preserve all attempts and hashes;
+commit source before proofs, lock complete shared fixture/container lifetimes.
+
+The older assignment table is retained below as historical scope, not current
+branch/report naming. Each agent reads all mandatory project/prior reports.
 Authorized scope: isolated Module01 maintained-parser resolution, independent
 wire/security review, dependency maintenance and local Module03 operational
 preparation. Modules00/02/03 retain local PASS;01 remains NO-GO pending complete
