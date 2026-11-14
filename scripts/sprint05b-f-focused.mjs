@@ -65,10 +65,42 @@ async function run(label, program, args) {
   );
   clearTimeout(timer);
   const files = ["stdout", "stderr"].map((name, i) => {
-    const bytes = Buffer.concat(streams[i]),
+    const raw = Buffer.concat(streams[i]);
+    let redacted = 0;
+    const bytes = Buffer.from(
+        raw.toString().replace(/https?:\/\/[^\s"<>]+/g, (value) => {
+          let parsed;
+          try {
+            parsed = new URL(value);
+          } catch {
+            return value;
+          }
+          let changed = false;
+          for (const key of ["code", "state"])
+            if (parsed.searchParams.has(key)) {
+              parsed.searchParams.set(key, "REDACTED");
+              changed = true;
+            }
+          if (changed) {
+            redacted++;
+            return parsed.href;
+          }
+          return value;
+        }),
+      ),
       file = `${output}/${label}.${name}`;
     fs.writeFileSync(file, bytes);
-    return { file, sha256: sha(bytes), bytes: bytes.length };
+    return {
+      file,
+      sha256: sha(bytes),
+      bytes: bytes.length,
+      raw_sha256: sha(raw),
+      raw_bytes: raw.length,
+      redacted_callback_urls: redacted,
+      retention: redacted
+        ? "sanitized derivative; raw bytes not retained"
+        : "unchanged",
+    };
   });
   record.commands.push({
     label,
