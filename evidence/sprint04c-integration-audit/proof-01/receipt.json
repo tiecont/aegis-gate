@@ -1,0 +1,287 @@
+{
+  "verifier_commit": "64b3f7dd90839ea685e65a8ef036ac6fd56458be",
+  "verifier_tree": "0ec7ee21511aa4d31afbe175a631d1e9296486da",
+  "source_commit": "abcb79a073cc628fce4bfd96b922c0b8060594f3",
+  "source_tree": "9b4d0a4200b5abb7bff431ba2fc163dd4398958f",
+  "baseline": "a325b9ecc086e09467f61b49f17da241bf8e43ea",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-04c-integration-audit/evidence/sprint04c-integration-audit/verify.mjs",
+    "abcb79a073cc628fce4bfd96b922c0b8060594f3",
+    "evidence/sprint04c-integration-audit/proof-01"
+  ],
+  "cwd": "/tmp/aegisgate-04c-integration-audit",
+  "started_at": "2026-11-14T09:36:29.934Z",
+  "node": "v26.13.0",
+  "node_binary_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "git": "git version 2.56.1",
+  "commands": [
+    {
+      "label": "remote-refresh",
+      "program": "git",
+      "args": [
+        "fetch",
+        "origin",
+        "main"
+      ],
+      "started_at": "2026-11-14T09:36:30.249Z",
+      "ended_at": "2026-11-14T09:36:33.159Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-integration-audit/proof-01/remote-refresh.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-integration-audit/proof-01/remote-refresh.stderr",
+          "sha256": "29bcf7d920e8853b910742d7bd550e4a9b7c6443cd9cdca054a7ba9159f0cae7"
+        }
+      ]
+    },
+    {
+      "label": "baseline-ancestry",
+      "program": "git",
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "a325b9ecc086e09467f61b49f17da241bf8e43ea",
+        "abcb79a073cc628fce4bfd96b922c0b8060594f3"
+      ],
+      "started_at": "2026-11-14T09:36:33.172Z",
+      "ended_at": "2026-11-14T09:36:33.177Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-integration-audit/proof-01/baseline-ancestry.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-integration-audit/proof-01/baseline-ancestry.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "immutable75",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "started_at": "2026-11-14T09:36:54.328Z",
+      "ended_at": "2026-11-14T09:36:54.416Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-integration-audit/proof-01/immutable75.stdout",
+          "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+        },
+        {
+          "file": "evidence/sprint04c-integration-audit/proof-01/immutable75.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "authored-whitespace",
+      "program": "git",
+      "args": [
+        "diff",
+        "--check",
+        "a325b9ecc086e09467f61b49f17da241bf8e43ea",
+        "abcb79a073cc628fce4bfd96b922c0b8060594f3",
+        "--",
+        "scripts",
+        "spikes/envoy/sprint04c-*",
+        "docs",
+        "IMPLEMENTATION_STATUS.md"
+      ],
+      "started_at": "2026-11-14T09:36:54.416Z",
+      "ended_at": "2026-11-14T09:36:54.433Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-integration-audit/proof-01/authored-whitespace.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-integration-audit/proof-01/authored-whitespace.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "classification": "preliminary-source-audit-only",
+  "final_integration_accepted": false,
+  "refreshed_remote_main": "a325b9ecc086e09467f61b49f17da241bf8e43ea",
+  "rejected_E_ancestor_absent": true,
+  "protected_baseline_objects": 3115,
+  "allowed_shared_documents": [
+    "IMPLEMENTATION_STATUS.md",
+    "docs/RISK_REGISTER.md",
+    "docs/ADR-012-strict-ingress-decision-proposed.md"
+  ],
+  "accepted_component_objects": [
+    {
+      "owner": "A",
+      "commit": "02bad67b51a8171493ad3ff1eee245e3f07d6e2f",
+      "files": 20
+    },
+    {
+      "owner": "B",
+      "commit": "12abd255b754b553480544edbf9452b7f65d9a4d",
+      "files": 137
+    },
+    {
+      "owner": "C",
+      "commit": "49f2d554d30fd9002f6d15e7ee39999a6e866d5c",
+      "files": 33
+    },
+    {
+      "owner": "D",
+      "commit": "d9a2004167a178a3a1d4549cc97378fe4b02c360",
+      "files": 70
+    }
+  ],
+  "manifests": [
+    {
+      "file": "evidence/sprint04c-a/verification-01/SHA256SUMS",
+      "verified": 7,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-a/verification-02/SHA256SUMS",
+      "verified": 7,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-b/SHA256SUMS",
+      "verified": 136,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-b/checks-01/SHA256SUMS",
+      "verified": 17,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-b/reproh-01/SHA256SUMS",
+      "verified": 27,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-b/reprot-01/SHA256SUMS",
+      "verified": 12,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-b/reprot-02/SHA256SUMS",
+      "verified": 12,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-b/upstream-01/SHA256SUMS",
+      "verified": 55,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-c/source-01/SHA256SUMS",
+      "verified": 3,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-c/source-02/SHA256SUMS",
+      "verified": 9,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-c/verification-01/SHA256SUMS",
+      "verified": 7,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-c/verification-02/SHA256SUMS",
+      "verified": 7,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/SHA256SUMS",
+      "verified": 29,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-d/verification-01/SHA256SUMS",
+      "verified": 1,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-d/verification-02/SHA256SUMS",
+      "verified": 28,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-f/ace-01/SHA256SUMS",
+      "verified": 1,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-f/ace-02/SHA256SUMS",
+      "verified": 20,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-f/bd-01/SHA256SUMS",
+      "verified": 74,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-f/receipts-01/SHA256SUMS",
+      "verified": 3,
+      "excluded_redacted": 1,
+      "eligible": false
+    },
+    {
+      "file": "evidence/sprint04c-f/receipts-bd-02/SHA256SUMS",
+      "verified": 4,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-root/baseline-jobs/SHA256SUMS",
+      "verified": 3,
+      "excluded_redacted": 0,
+      "eligible": true
+    },
+    {
+      "file": "evidence/sprint04c-root/baseline-main/SHA256SUMS",
+      "verified": 3,
+      "excluded_redacted": 0,
+      "eligible": true
+    }
+  ],
+  "result": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: syntax source differs: scripts/sprint04c-gates.mjs\n+ actual - expected\n\n+ '052922dd93c87ee9f5aae99d27cd6b283562549cbc65d0a8e628809c57da59bd'\n- '8900209131660583d5294dc12e947b1360dbc796f329e5b9ee00279af51b915d'\n\n    at file:///tmp/aegisgate-04c-integration-audit/evidence/sprint04c-integration-audit/verify.mjs:106:12\n    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)\n    at async node:internal/modules/esm/loader:650:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:105:5)",
+  "ended_at": "2026-11-14T09:36:54.450Z"
+}
