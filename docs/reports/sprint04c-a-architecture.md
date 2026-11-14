@@ -51,13 +51,13 @@ Option2 is **not proved equivalent to or universally stronger than Option1**.
 It explicitly admits some traffic Option1 forbids; Option1 does not establish
 some causal new-dial/HPACK properties Option2 demands. Under the actual threat
 model, complete Option2 could more directly measure T01 tenant/authority
-isolation, T07 smuggling, T08 parser abuse and T16/T17 connection lifecycle,
+isolation, T07 smuggling, T08 resource/lifecycle limits and T16 origin rewriting,
 but observer incompleteness could hide precisely those leaks. Control traffic
 can disclose timing/connection state and consume resources even when request
 content never reaches origin. An explicit residual-risk decision is required.
 No claim of equal protection can precede that decision and observer proof.
 
-T11 signed-generation capture must bind every admitted request through both
+T05/T17 signed-generation capture must bind every admitted request through both
 hops. Neither contract replaces verified TLS, tenant isolation, strict H1
 rejection, TE4xx/close, resource fairness, cancellation or valid streaming.
 Handler-only and response-code-only acceptance are rejected: they miss partial
