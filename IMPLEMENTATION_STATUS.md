@@ -1,5 +1,27 @@
 # Implementation status
 
+## Sprint04-C execution / Module01 NO-GO
+
+Baseline main `a325b9ecc086e09467f61b49f17da241bf8e43ea` is refreshed and its
+foundation-quality/supply-chain-security jobs pass in43478235586. Isolated
+A-F worktrees preserve Sprint04-B evidence. Execution contract:
+`docs/sprints/04c-execution.md`; completion: `docs/reports/sprint04c-completion.md`.
+
+Root recommends retaining the original aggregate zero-byte contract. ADR012 and
+its Sprint04-C addendum remain PROPOSED; actual named architecture/security
+owners and formal approval reference/date remain PENDING. Delegated engineering
+choices do not supply a runtime GO. Option2 needs a complete independently
+validated observer and explicit formal requirement revision; original75/23
+inputs/expectations/evaluators remain unchanged.
+
+Released Envoy/Pingora/Hyper source screening finds no strict-provenance change;
+no complete candidate rebuild is justified. Separate HAProxy3.4.7 boundary
+screening is source/design only and establishes no released strict solution.
+Additive H2/HPACK diagnostics and fresh00/02/03 regressions are independently
+reviewed before integration; local/hosted integration evidence is recorded only
+after execution. Current gates:00/02/03 PASS local;01 NO-GO;04-12 LOCKED;
+production BLOCKED. No upstream content is published.
+
 ## Sprint04-B Complete / Module01 NO-GO
 
 PR13 merged as `826656f2469ae225a1617438fbb4b3b3a454cc98`. Exact final

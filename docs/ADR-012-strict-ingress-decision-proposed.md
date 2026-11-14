@@ -65,3 +65,12 @@ codec/parser fork, policy waiver or public maintainer request is authorized here
 
 Completing research or integrating this proposal cannot fill these approval
 fields. Only supplied/formally recorded human decisions may do so.
+
+## Sprint 04-C proposed decision handoff
+
+The [proposed addendum](ADR-012-sprint04c-decision-addendum-proposed.md),
+[security comparison](reports/sprint04c-a-architecture.md) and
+[human checklist](reports/sprint04c-human-approval-checklist.md) recommend
+retaining Option1 and make the owner/approval fields explicit. They do not
+activate Option2 or a substitute runtime. Original75/23 and every failed
+assertion remain unchanged. Formal named owners and approval remain PENDING.
