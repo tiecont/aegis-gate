@@ -226,7 +226,7 @@ try {
     if (!cancel) { assert.deepEqual(row.status, expected, name); assert.equal(peerEnd, true, name); }
     assert.equal(timedOut, false, name);
     if (!expected.includes(200)) zero(row.origin);
-    if (expected.every((status) => status === 200)) {
+    if (expected.length && expected.every((status) => status === 200)) {
       assert.equal(row.origin.bytes, Buffer.byteLength(raw), name);
       assert.equal(row.origin.sha256, hash(Buffer.from(raw)), name);
     }
@@ -268,32 +268,44 @@ try {
   await probe('oversized-header', request(`X-Large: ${'a'.repeat(33000)}\r\nContent-Length: 0\r\n`), { expected: [413] });
   await probe('slow-client-idle', incomplete, { expected: [408] });
   const beforeSlow = snapshot(), slow = await connect(); const slowResponse = [];
+  const slowStarted = performance.now();
   slow.on('data', (b) => slowResponse.push(b)); const slowClosed = once(slow, 'close');
   slow.write(incomplete);
   const trickle = setInterval(() => { if (!slow.destroyed) slow.write('x'); }, 150);
   await slowClosed; clearInterval(trickle);
   assert.match(Buffer.concat(slowResponse).toString(), /HTTP\/1.1 408/); zero(delta(beforeSlow));
-  record.absoluteDeadline = { observedMs: limits.requestDeadlineMs, zeroOrigin: true };
+  record.absoluteDeadline = { observedMs: performance.now() - slowStarted,
+    configuredMs: limits.requestDeadlineMs, zeroOrigin: true };
+  assert.ok(record.absoluteDeadline.observedMs >= limits.requestDeadlineMs - 100);
+  assert.ok(record.absoluteDeadline.observedMs < 2200);
 
   // A client waiting for origin progress before sending its final trailer cannot progress.
   const beforeWait = snapshot(), waiting = await connect(); const waitingResponse = [];
   waiting.on('data', (b) => waitingResponse.push(b)); const waitingClosed = once(waiting, 'close');
   waiting.write(validTrailer.slice(0, trailerSplit)); await delay(100);
-  zero(delta(beforeWait)); assert.equal(waitingResponse.length, 0);
+  const originAt100ms = delta(beforeWait);
+  zero(originAt100ms); assert.equal(waitingResponse.length, 0);
   await waitingClosed; assert.match(Buffer.concat(waitingResponse).toString(), /HTTP\/1.1 408/);
-  record.streamingCounterexample = { prefixBytes: trailerSplit, originAt100ms: delta(beforeWait),
+  record.streamingCounterexample = { prefixBytes: trailerSplit, originAt100ms,
     status: 408, result: 'full-message admission prevents upload streaming and origin progress before final trailers' };
 
   const beforeCancel = front.metrics.upstreamCancelled;
+  const beforeOriginClose = originClosed;
   const held = await connect(); held.write(request('Content-Length: 0\r\n', '', '/hold'));
-  await until(() => handlers.at(-1)?.url === '/hold'); const heldClosed = once(held, 'close'); held.destroy(); await heldClosed;
+  await until(() => handlers.at(-1)?.url === '/hold'); const heldClosed = once(held, 'close');
+  const cancelStarted = performance.now(); held.destroy(); await heldClosed;
   await until(() => front.metrics.upstreamCancelled > beforeCancel);
-  await delay(30); record.upstreamCancellation = { cancelled: true, originResponseClosures: originClosed };
+  await until(() => originClosed > beforeOriginClose);
+  record.upstreamCancellation = { cancelled: true, observedMs: performance.now() - cancelStarted,
+    originResponseClosures: originClosed - beforeOriginClose };
 
+  const responsePausesBefore = front.metrics.responsePauses;
   const paused = await connect(); paused.pause(); paused.write(request('Content-Length: 0\r\n', '', '/large'));
   await until(() => handlers.at(-1)?.url === '/large'); await delay(150);
+  assert.ok(front.metrics.responsePauses > responsePausesBefore, 'response pauses before client cancellation');
+  const responsePausesDuring = front.metrics.responsePauses - responsePausesBefore;
   const pausedClosed = once(paused, 'close'); paused.destroy(); await pausedClosed; await delay(40);
-  assert.ok(front.metrics.responsePauses > 0); record.slowResponse = { pauses: front.metrics.responsePauses,
+  record.slowResponse = { pausesDuringStall: responsePausesDuring,
     peakWritableBytes: front.metrics.peakClientWritable, cancelled: true };
 
   const queueBefore = front.metrics.pauses;
@@ -318,6 +330,7 @@ try {
   const badClosed = once(bad, 'close'); const beforeBad = snapshot(); bad.write(good); await badClosed;
   assert.match(Buffer.concat(badResponse).toString(), /HTTP\/1.1 502/);
   assert.equal(delta(beforeBad).bytes, 0); await badFront.close();
+  await delay(40);
   record.originTLSMismatch = { status: 502, requestBytes: 0, verificationEnabled: true };
 
   // Disk staging raises the finite upload cap without admitting a prefix.
