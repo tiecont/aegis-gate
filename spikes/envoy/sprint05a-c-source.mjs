@@ -15,7 +15,7 @@ const paths = [
   ['api/envoy/config/core/v3/protocol.proto', /initial_stream_window_size|initial_connection_window_size|custom_settings_parameters|hpack_table_size|max_requests_per_connection/],
   ['api/envoy/config/cluster/v3/cluster.proto', /connection_pool_per_downstream_connection|per_upstream_preconnect_ratio/],
   ['source/common/http/http2/codec_impl.cc', /sendSettingsHelper|SubmitSettings|INITIAL_CONNECTION_WINDOW_SIZE|OnSettingsStart|OnSettingsEnd/],
-  ['source/common/http/http2/conn_pool.cc', /newStream|Http2ActiveClient|drain|onGoAway/],
+  ['source/common/http/http2/conn_pool.cc', /calculateInitialStreamsLimit|maxRequestsPerConnection|allocateConnPool|ActiveClient::ActiveClient/],
   ['source/common/conn_pool/conn_pool_base.cc', /maxRequestsPerConnection|remaining_requests|drainConnections|shouldConnect/],
 ];
 try {

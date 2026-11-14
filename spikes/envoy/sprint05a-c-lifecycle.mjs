@@ -64,12 +64,12 @@ try {
   const connect = async (host = 'edge-b.test') => {
     const c = http2.connect(`https://127.0.0.1:${edgePort}`, { servername: host, ca, rejectUnauthorized: true, ALPNProtocols: ['h2'] });
     clients.add(c); c.on('error', () => {}); c.on('close', () => clients.delete(c));
-    await bound(once(c, 'connect')); assert.equal(c.socket.authorized, true); return c;
+    await bound(once(c, 'connect')); assert.equal(c.socket.authorized, true); c.proofHost = host; return c;
   };
   const ready = Date.now() + 15000;
   while (true) { try { const c = await connect(); c.destroy(); break; } catch { assert.ok(Date.now() < ready); await delay(50); } }
   const request = async (c, extra = {}) => {
-    const s = c.request({ ':path': '/', ...extra }); let headers; const data = [];
+    const s = c.request({ ':path': '/', ':authority': c.proofHost, ...extra }); let headers; const data = [];
     s.on('response', (h) => { headers = h; }); s.on('data', (b) => data.push(b)); s.end();
     await bound(once(s, 'end')); return { status: headers[':status'], connection: headers['x-origin-connection'], generation: headers['x-origin-generation'], body: Buffer.concat(data).toString() };
   };
