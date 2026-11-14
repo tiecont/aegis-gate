@@ -1,0 +1,780 @@
+{
+  "source_commit": "c6cef2ae4c4470ca26a53d05642aa13d44c4ca59",
+  "source_tree": "bb57c562cb9f8ba432cd264d2c073214d35ea00d",
+  "reviewed_commit": "c117d96a0216de301c2a8033e79edee21a936f4a",
+  "reviewed_tree": "e47d07a6fcdd88c4d827e725bcd8abd263f648d9",
+  "mode": "audit",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05a-gate-review/scripts/sprint05a-gate-audit.mjs",
+    "audit",
+    "evidence/sprint05a-gate-review/audit-02"
+  ],
+  "cwd": "/tmp/aegisgate-05a-gate-review",
+  "node": "v26.13.0",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "started_at": "2026-11-14T16:34:02.237Z",
+  "checks": [
+    {
+      "name": "baseline-and-scope",
+      "passed": true,
+      "result": {
+        "baseline_objects": 4003,
+        "identical": 3999,
+        "reviewed_exceptions": [
+          "IMPLEMENTATION_STATUS.md",
+          "README.md",
+          "docs/RISK_REGISTER.md",
+          "scripts/sprint04c-gates.mjs"
+        ],
+        "additions": 1460,
+        "protected_inventory_sha256": "64ea14b98deb42bfdee040d91431c8cdbff5736dace48f3c97d484a51d4cac77",
+        "baseline_inventory_sha256": "b61ba9f93eda71565e3d802f3d546f3a75f918f4c86b8abca24de1204890e4bd"
+      }
+    },
+    {
+      "name": "ancestry-and-clone",
+      "passed": true,
+      "result": {
+        "clone": "/tmp/aegisgate-05a-gates",
+        "tree_equal": true,
+        "full_ancestry_commits": 402,
+        "clone_refs": [
+          "refs/heads/sprint/05a-integration",
+          "refs/remotes/origin/sprint/05a-integration"
+        ],
+        "common_object_files_not_hardlinked": 5801,
+        "rejected_commits": [
+          {
+            "commit": "551591395880ce87863b4e861c05d266c719b91f",
+            "root_ancestor": false,
+            "remote_refs": [],
+            "retained_local_refs": [
+              "refs/heads/hardening/sprint04c-regressions",
+              "refs/heads/sprint/04c-integration"
+            ]
+          },
+          {
+            "commit": "cd8f4a760239086616809db8b55a651d3cc28d8e",
+            "root_ancestor": false,
+            "remote_refs": [],
+            "retained_local_refs": [
+              "refs/heads/review/sprint04c-integration"
+            ]
+          }
+        ],
+        "remote_scope": "locally available refs/remotes; no live fetch"
+      }
+    },
+    {
+      "name": "formatting-and-receipt-helper",
+      "passed": true,
+      "result": {
+        "formatted": [
+          "scripts/sprint04c-gates.mjs",
+          "scripts/sprint05a-f-final-scan.mjs",
+          "scripts/sprint05a-f-final-verify.mjs"
+        ],
+        "pure_ast_equal": true,
+        "ast_parser_file": "/tmp/aegisgate-05a-gates/node_modules/prettier/plugins/acorn.mjs",
+        "ast_parser_sha256": "f1230c52b2387e8ba21b474958b705bf8fff469c16cd3767d6a00a7bf7d6a84f",
+        "helper_unchanged_since": "cda448eb25cb05f7a69a0a3f8c1482b37cbd35ef",
+        "helper_sha256": "6cf47d49ce2fd267ccd4b65408bb0563a6501ee2bfde2727e47f16ead7f22de5",
+        "helper_scope": "static command receipt only; no implicit fixture lock, redaction or hosted acceptance"
+      }
+    },
+    {
+      "name": "all-sprint05a-manifests",
+      "passed": true,
+      "result": {
+        "manifests": [
+          {
+            "file": "evidence/sprint05a-a/attempt-01/SHA256SUMS",
+            "sha256": "e8d514847f30a9e64854cd15620e9c07c1732423227a7351c7a40d0f207bfed1",
+            "entries": 20
+          },
+          {
+            "file": "evidence/sprint05a-a/attempt-02/SHA256SUMS",
+            "sha256": "3658a8c2e8cca01c172cb54872d6380563b082c4227641265e9f3924a4a62f4d",
+            "entries": 42
+          },
+          {
+            "file": "evidence/sprint05a-a/attempt-03/SHA256SUMS",
+            "sha256": "89b3a08c10bddca22a9c08479f3bc18eb92ed16468ad191003d89d14ea437cfd",
+            "entries": 39
+          },
+          {
+            "file": "evidence/sprint05a-a/attempt-04/SHA256SUMS",
+            "sha256": "e958447054b2df012201c15a3e5f7264465b231437b2eb340572a644cc13ec61",
+            "entries": 39
+          },
+          {
+            "file": "evidence/sprint05a-a/checks-01/SHA256SUMS",
+            "sha256": "c297a19c96e07d06d7e8f6201b088e0ed4a7827a706a55fd451c3909a6a5413d",
+            "entries": 27
+          },
+          {
+            "file": "evidence/sprint05a-a/checks-02/SHA256SUMS",
+            "sha256": "126fa91c949b9b743a614653b9bc82885ef01e473392f2543933f752fb68833f",
+            "entries": 27
+          },
+          {
+            "file": "evidence/sprint05a-b/envoy-01/SHA256SUMS",
+            "sha256": "780511b5169f98125a05921ae41a089062fbe6cb32667fe9fd5cc0fc8c6c7006",
+            "entries": 27
+          },
+          {
+            "file": "evidence/sprint05a-b/envoy-02/SHA256SUMS",
+            "sha256": "e2c855f3c960260b9eff818a596f4cbbbbe7eff53695ed59ce606c7e9a1c6b5c",
+            "entries": 27
+          },
+          {
+            "file": "evidence/sprint05a-b/llhttp-01/SHA256SUMS",
+            "sha256": "bedbdf214e27ff6f5b3dac14efff463951edc71ccfb37c7319f7d8464503ae66",
+            "entries": 18
+          },
+          {
+            "file": "evidence/sprint05a-b/llhttp-02/SHA256SUMS",
+            "sha256": "3d87b2a9b0764a04cc1ea31721ca91d44febf66b67e1ec79ea870860fc2010d6",
+            "entries": 120
+          },
+          {
+            "file": "evidence/sprint05a-b/llhttp-03/SHA256SUMS",
+            "sha256": "68897fc77a1d5fc145d6d5bca8ad282ae9d40f567847c3d13021b2db6c9eaab3",
+            "entries": 124
+          },
+          {
+            "file": "evidence/sprint05a-b/nginx-01/SHA256SUMS",
+            "sha256": "149ddfb867da8fd269280f0c7988cfe01e946b38534b3cb947f08dcd7799484b",
+            "entries": 27
+          },
+          {
+            "file": "evidence/sprint05a-b/nginx-02/SHA256SUMS",
+            "sha256": "8db70d019dedd5537e3e18858260c57b7f795740ac49b165cc2eeceaf27514cb",
+            "entries": 27
+          },
+          {
+            "file": "evidence/sprint05a-b/source-01/SHA256SUMS",
+            "sha256": "c03c79547d5d6634d3413b29e469c0fafd53a6004ea1f8fa2861c5595ab334df",
+            "entries": 46
+          },
+          {
+            "file": "evidence/sprint05a-b/validator-01/SHA256SUMS",
+            "sha256": "76dd3778e116616c939d2082f6525c651163030e579b951d76a00c72a47afb30",
+            "entries": 27
+          },
+          {
+            "file": "evidence/sprint05a-b/verify-01/SHA256SUMS",
+            "sha256": "a9b54a54c5800164cbd41c2a0269adbfc86edd7c38c8b8c8e45bab1f25029f71",
+            "entries": 5
+          },
+          {
+            "file": "evidence/sprint05a-b/verify-02/SHA256SUMS",
+            "sha256": "c808706a6d214e29af9b6abe56c3012d51535f5a386ec3881c90133815fd7f03",
+            "entries": 9
+          },
+          {
+            "file": "evidence/sprint05a-b/verify-03/SHA256SUMS",
+            "sha256": "933bc030c66a97eca27a87051f71ff64f13cb21950cd557fa255ed7f8aabc048",
+            "entries": 9
+          },
+          {
+            "file": "evidence/sprint05a-c/SHA256.json",
+            "sha256": "ff248ee5f98ef46869decb2432398ddf5523767afeb05d22371a267b88b5b926",
+            "entries": 192
+          },
+          {
+            "file": "evidence/sprint05a-c/bounded-02/SHA256.json",
+            "sha256": "c405c56b2b365751a19259a102a95c731882b1c1f31c2d24fff3ba5411a4988e",
+            "entries": 13
+          },
+          {
+            "file": "evidence/sprint05a-c/identity-01/SHA256.json",
+            "sha256": "cf88d5749aa48b4f6277710e534f005bb3307c653c1c0a40cc922d4f9ec1ced7",
+            "entries": 13
+          },
+          {
+            "file": "evidence/sprint05a-c/lifecycle-bounded-01/SHA256.json",
+            "sha256": "90f3dd988aa31da56d015aa3ee85f92a6e908638c96764474fc1c112c4d1909e",
+            "entries": 2
+          },
+          {
+            "file": "evidence/sprint05a-c/lifecycle-bounded-02/SHA256.json",
+            "sha256": "a254b80a63ac9dd91094620e83093b7ac3cc83774ae6af5ea17f21f9f8ab6685",
+            "entries": 2
+          },
+          {
+            "file": "evidence/sprint05a-c/lifecycle-partition-01/SHA256.json",
+            "sha256": "0266560d0dbcafc8a725b0b27295ca9846170c77c268fed37a504f1388897217",
+            "entries": 2
+          },
+          {
+            "file": "evidence/sprint05a-c/lifecycle-partition-02/SHA256.json",
+            "sha256": "f1df0728712c0e3fb7c6aa61773971aefbc44ebf7dde01e5687604f344b8563c",
+            "entries": 2
+          },
+          {
+            "file": "evidence/sprint05a-c/lifecycle-windows-02/SHA256.json",
+            "sha256": "be6a8d46ce890389cc7684c2f31020546e4a834edab170e0e50703a2412d85fd",
+            "entries": 2
+          },
+          {
+            "file": "evidence/sprint05a-c/lifecycle-windows-03/SHA256.json",
+            "sha256": "7caa77b300868ee48810c004245a440764492d69c333743305e29b7ab2658c48",
+            "entries": 2
+          },
+          {
+            "file": "evidence/sprint05a-c/partition-01/SHA256.json",
+            "sha256": "fc1c3283d5328572bf07b05321f4757b639c560f78bf330f42c5f697ee006010",
+            "entries": 13
+          },
+          {
+            "file": "evidence/sprint05a-c/recovery-01/SHA256.json",
+            "sha256": "e4e6d92b60096640a1c956f96abdcfca18a39a3b00dfe63bf9df022063f9e156",
+            "entries": 13
+          },
+          {
+            "file": "evidence/sprint05a-c/source-01/SHA256.json",
+            "sha256": "7e8398462e13210d82a01025a59faec63c98d4121fc332697596136d5202646f",
+            "entries": 7
+          },
+          {
+            "file": "evidence/sprint05a-c/source-02/SHA256.json",
+            "sha256": "5bcd6a029bd288d92c533b6f4498366559c22115d080a6197c3cec3895d03b3d",
+            "entries": 7
+          },
+          {
+            "file": "evidence/sprint05a-c/verify-01/SHA256.json",
+            "sha256": "77b91b31f4f8c6ee85ed445ac6fc76538812d09f219ede98e6abe06f1b8539cf",
+            "entries": 19
+          },
+          {
+            "file": "evidence/sprint05a-c/verify-02/SHA256.json",
+            "sha256": "5f62d69f98bac01f53f3e26f41aa180f06972f6b30d59b6ba466eb838915430f",
+            "entries": 19
+          },
+          {
+            "file": "evidence/sprint05a-c/windows-01/SHA256.json",
+            "sha256": "da3f08f448bcf0f40c1a0a7167ca7d530aa841f13643d09ec4006a99a9c206ce",
+            "entries": 13
+          },
+          {
+            "file": "evidence/sprint05a-c/windows-plain-01/SHA256.json",
+            "sha256": "a1335764f497cf8f1194d9c48493e0e4b492950a3e6bcbad30d60427bfc077fe",
+            "entries": 12
+          },
+          {
+            "file": "evidence/sprint05a-d/attempt-01/SHA256SUMS",
+            "sha256": "0c7ebbe2f77bffae2d98194ecdce01e1268b729dc7142a57d75312eb1323a968",
+            "entries": 29
+          },
+          {
+            "file": "evidence/sprint05a-d/attempt-02/SHA256SUMS",
+            "sha256": "26015f651c87c16f5cbcbb1d5bb4952199acfe9010d21872255ad374601067c4",
+            "entries": 14
+          },
+          {
+            "file": "evidence/sprint05a-d/attempt-03/SHA256SUMS",
+            "sha256": "4016a77de241549b75753f10496372495f732ebf9686c079717686d02ec46bda",
+            "entries": 14
+          },
+          {
+            "file": "evidence/sprint05a-e/attempt-01/SHA256SUMS",
+            "sha256": "7090fd309cc5a639c03677490d354cf3dd551c42327538ff6a7c0063360b6f47",
+            "entries": 14
+          },
+          {
+            "file": "evidence/sprint05a-e/verification-01/SHA256SUMS",
+            "sha256": "aff9863ad557bd9bd59a58ecc53cbf23c158289c26cdbaf35c238dc226b86643",
+            "entries": 4
+          },
+          {
+            "file": "evidence/sprint05a-e/verification-final/SHA256SUMS",
+            "sha256": "f28e56eb8d86b7c8418958ae80513e1d0626db5b149489c237c5f9553d2e19dd",
+            "entries": 4
+          },
+          {
+            "file": "evidence/sprint05a-f-final/scan-01/SHA256SUMS",
+            "sha256": "f7a264110a3f53a988a943e79f6b10c39247176e12b02e7c34f1d77abfc9bf74",
+            "entries": 3
+          },
+          {
+            "file": "evidence/sprint05a-f-final/verify-01/SHA256SUMS",
+            "sha256": "a9eb3ba3ef944094832ab305e45a30aa86585f491c1daa9642bde2d69287a790",
+            "entries": 5
+          },
+          {
+            "file": "evidence/sprint05a-f-final/verify-02/SHA256SUMS",
+            "sha256": "bbcaf325766b82ded954e60bf454d60cf28629ee81886f325541b1cf58314a72",
+            "entries": 19
+          },
+          {
+            "file": "evidence/sprint05a-f/ad-01/SHA256SUMS",
+            "sha256": "30a9357586f174abced43704c256ebbc534fcb223e919d1c752e15f437bf60cf",
+            "entries": 7
+          },
+          {
+            "file": "evidence/sprint05a-f/ad-02/SHA256SUMS",
+            "sha256": "b8cb819699b5b4127244f0e52140d86ddd394b34ddf960e23181183344febb24",
+            "entries": 12
+          },
+          {
+            "file": "evidence/sprint05a-f/ad-03/SHA256SUMS",
+            "sha256": "db98443c0c4a3eb6e38d4443733b1e095f3715d1154f4fa1377e6f7b7546c86e",
+            "entries": 31
+          },
+          {
+            "file": "evidence/sprint05a-f/checks-01/SHA256SUMS",
+            "sha256": "de09a6c4f4cde74fcbb15691031ea77383b7914c4881aa830ce4427787fd3ef5",
+            "entries": 21
+          },
+          {
+            "file": "evidence/sprint05a-f/checks-02/SHA256SUMS",
+            "sha256": "a5751c02bc8dcb1a5caa8eba882424a4c4948c1b8e1f041ea5ca1663005c5d20",
+            "entries": 7
+          },
+          {
+            "file": "evidence/sprint05a-f/checks-03/SHA256SUMS",
+            "sha256": "68ceb48352e25f88b027372e445b5e8ed6fecef2f43e25a1813059f60ff9808e",
+            "entries": 7
+          },
+          {
+            "file": "evidence/sprint05a-f/checks-04/SHA256SUMS",
+            "sha256": "ffdd4ed0723712bc9f85b70fff3384924e01b5917a42e2bec92dee8cac15d682",
+            "entries": 7
+          },
+          {
+            "file": "evidence/sprint05a-f/extended-01/SHA256SUMS",
+            "sha256": "e5452e5d7b2221f45250ce77c9dffdeac34249ae6d8b546a9fe72742e912a940",
+            "entries": 194
+          },
+          {
+            "file": "evidence/sprint05a-f/extended-01/b-llhttp/SHA256SUMS",
+            "sha256": "254a1a52af85c704c90eb669f7205b44422c3922b02284f0a1f36fff0ce2c70d",
+            "entries": 124
+          },
+          {
+            "file": "evidence/sprint05a-f/extended-01/c-lifecycle/SHA256.json",
+            "sha256": "793378adb3919ba467781de171c0be7f1ca1f99ac46edad9a04376c017f1b893",
+            "entries": 2
+          },
+          {
+            "file": "evidence/sprint05a-f/extended-01/c-original75/SHA256.json",
+            "sha256": "b23716ad8b82aecfab8227d6ebd48c58d9e8603d6e46de1867bf7120eb4d10df",
+            "entries": 13
+          },
+          {
+            "file": "evidence/sprint05a-f/extended-01/combined/SHA256SUMS",
+            "sha256": "4163d215069391eb1eac410a4800131283a98faccbaf0ed9af30f15798f39e5f",
+            "entries": 24
+          },
+          {
+            "file": "evidence/sprint05a-f/extendedchecks-01/SHA256SUMS",
+            "sha256": "c0337a3fefd52ba6e42f6c69c1ab5e944819f748dc16ba991f26818c0d699c2f",
+            "entries": 7
+          },
+          {
+            "file": "evidence/sprint05a-f/extendedchecks-02/SHA256SUMS",
+            "sha256": "858fc555dbe9a94e8ef81cd2af3ef03007b30e9991a79446caa857af5d5e93c6",
+            "entries": 35
+          },
+          {
+            "file": "evidence/sprint05a-root/baseline-ci/SHA256SUMS",
+            "sha256": "8a9277da5dc43b467cd460ff62cf3d09d79a5ba8edb52827eb7e19dc95910619",
+            "entries": 3
+          },
+          {
+            "file": "evidence/sprint05a-root/baseline-objects/SHA256SUMS",
+            "sha256": "c58a677d7ef0b8f7f47f6281b27381e896f9bf7075dcfa569a6ac76d28a8bd1f",
+            "entries": 3
+          },
+          {
+            "file": "evidence/sprint05a-root/baseline-tests/SHA256SUMS",
+            "sha256": "5ae084c6ffdea93f0ef3037ddc686e2efedc99372242ba51dffdbab84169cf2b",
+            "entries": 3
+          },
+          {
+            "file": "evidence/sprint05a-root/candidate-01/SHA256SUMS",
+            "sha256": "e83845a352fc489ee9e920fa9e90dd5e773156848341b78b98f01459d4680b78",
+            "entries": 11
+          },
+          {
+            "file": "evidence/sprint05a-root/candidate-02/SHA256SUMS",
+            "sha256": "85e4968d3da9ce4381f6cae77073376c2cf6164ca3d278a42489abe2f00a9017",
+            "entries": 24
+          },
+          {
+            "file": "evidence/sprint05a-root/gates-01/SHA256SUMS",
+            "sha256": "390979a405714f420647e7c0a9082b012ba0e88af8914f0ba5baaad766935a6e",
+            "entries": 32
+          },
+          {
+            "file": "evidence/sprint05a-root/install-dashboard/SHA256SUMS",
+            "sha256": "c0a2a0eabd2687916f5a8851b0d35829e07ea7a6a9ea8cd3f916f2e35af1ee78",
+            "entries": 3
+          },
+          {
+            "file": "evidence/sprint05a-root/install-root/SHA256SUMS",
+            "sha256": "28cba74f9f616b6f365c59d7dbd7bc143f344e977e3a0715c34e8bedb0d1779b",
+            "entries": 3
+          },
+          {
+            "file": "evidence/sprint05a-root/install-spike/SHA256SUMS",
+            "sha256": "a09a0df70a6d8196fa8c600bfbd658ce9911a0fe0d8dc9d533ef29712f7c0e2c",
+            "entries": 3
+          }
+        ],
+        "total_entries": 1675
+      }
+    },
+    {
+      "name": "receipt-sources-streams-withheld",
+      "passed": false,
+      "error": "Command failed: git show 51cfbb44147fdb8da46765a6c9abafa35ba976d4:undefined\nfatal: path 'undefined' does not exist in '51cfbb44147fdb8da46765a6c9abafa35ba976d4'\n"
+    },
+    {
+      "name": "completed-root-gates02",
+      "passed": true,
+      "result": {
+        "source_commit": "c117d96a0216de301c2a8033e79edee21a936f4a",
+        "source_tree": "e47d07a6fcdd88c4d827e725bcd8abd263f648d9",
+        "started_at": "2026-11-14T16:20:08.406Z",
+        "ended_at": "2026-11-14T16:25:49.006Z",
+        "receipt_sha256": "c84a12d94da71fa895da03c9df8df535c3798fee4946a09bb12313dd0b52e7b9",
+        "manifest": {
+          "file": "evidence/sprint05a-root/gates-02/SHA256SUMS",
+          "sha256": "b5bfab7f59bf39c5eab6fda6c73be545f2efa9d0d6968aab586e36f45faa9eec",
+          "entries": 56
+        },
+        "exits": [
+          {
+            "label": "check",
+            "exit_code": 0
+          },
+          {
+            "label": "security-scan",
+            "exit_code": 0
+          },
+          {
+            "label": "cleanup",
+            "exit_code": 0
+          },
+          {
+            "label": "cleanup-volumes",
+            "exit_code": 0
+          }
+        ],
+        "history_log_sha256": "662d2711d89807a9821095d7205112ad757c7ae4646197d0b638c24579f9b7a6",
+        "history_available": "402 commits available for history scan",
+        "vulnerability_reports": 6,
+        "high_critical_findings": 0,
+        "private_cleanup_paths": 8,
+        "earlier_gate_rejected": true,
+        "local_gates_accept": true
+      }
+    },
+    {
+      "name": "post-gate-owned-inventories",
+      "passed": true,
+      "result": [
+        {
+          "kind": "container",
+          "label": "com.docker.compose.project",
+          "remaining": []
+        },
+        {
+          "kind": "container",
+          "label": "aegisgate.fixture.owner",
+          "remaining": []
+        },
+        {
+          "kind": "network",
+          "label": "com.docker.compose.project",
+          "remaining": []
+        },
+        {
+          "kind": "network",
+          "label": "aegisgate.fixture.owner",
+          "remaining": []
+        },
+        {
+          "kind": "volume",
+          "label": "com.docker.compose.project",
+          "remaining": []
+        },
+        {
+          "kind": "volume",
+          "label": "aegisgate.fixture.owner",
+          "remaining": []
+        }
+      ]
+    },
+    {
+      "name": "independent-worktree-secret-scan",
+      "passed": true,
+      "result": {
+        "scanner": "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "container_absent": true,
+        "scope": "review worktree files; retained bad history evaluated separately"
+      }
+    }
+  ],
+  "commands": [
+    {
+      "label": "immutable75",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "started_at": "2026-11-14T16:34:02.454Z",
+      "ended_at": "2026-11-14T16:34:02.535Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/immutable75.stdout.log",
+          "bytes": 74,
+          "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+        },
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/immutable75.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "inventory-container-com.docker.compose.project",
+      "argv": [
+        "docker",
+        "container",
+        "ls",
+        "-q",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-05a-root"
+      ],
+      "started_at": "2026-11-14T16:34:07.972Z",
+      "ended_at": "2026-11-14T16:34:08.006Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/inventory-container-com.docker.compose.project.stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/inventory-container-com.docker.compose.project.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "inventory-container-aegisgate.fixture.owner",
+      "argv": [
+        "docker",
+        "container",
+        "ls",
+        "-q",
+        "--filter",
+        "label=aegisgate.fixture.owner=aegisgate-05a-root"
+      ],
+      "started_at": "2026-11-14T16:34:08.018Z",
+      "ended_at": "2026-11-14T16:34:08.054Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/inventory-container-aegisgate.fixture.owner.stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/inventory-container-aegisgate.fixture.owner.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "inventory-network-com.docker.compose.project",
+      "argv": [
+        "docker",
+        "network",
+        "ls",
+        "-q",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-05a-root"
+      ],
+      "started_at": "2026-11-14T16:34:08.062Z",
+      "ended_at": "2026-11-14T16:34:08.097Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/inventory-network-com.docker.compose.project.stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/inventory-network-com.docker.compose.project.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "inventory-network-aegisgate.fixture.owner",
+      "argv": [
+        "docker",
+        "network",
+        "ls",
+        "-q",
+        "--filter",
+        "label=aegisgate.fixture.owner=aegisgate-05a-root"
+      ],
+      "started_at": "2026-11-14T16:34:08.105Z",
+      "ended_at": "2026-11-14T16:34:08.134Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/inventory-network-aegisgate.fixture.owner.stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/inventory-network-aegisgate.fixture.owner.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "inventory-volume-com.docker.compose.project",
+      "argv": [
+        "docker",
+        "volume",
+        "ls",
+        "-q",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-05a-root"
+      ],
+      "started_at": "2026-11-14T16:34:08.141Z",
+      "ended_at": "2026-11-14T16:34:08.177Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/inventory-volume-com.docker.compose.project.stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/inventory-volume-com.docker.compose.project.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "inventory-volume-aegisgate.fixture.owner",
+      "argv": [
+        "docker",
+        "volume",
+        "ls",
+        "-q",
+        "--filter",
+        "label=aegisgate.fixture.owner=aegisgate-05a-root"
+      ],
+      "started_at": "2026-11-14T16:34:08.187Z",
+      "ended_at": "2026-11-14T16:34:08.215Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/inventory-volume-aegisgate.fixture.owner.stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/inventory-volume-aegisgate.fixture.owner.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "gitleaks",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--name",
+        "aegisgate-05a-gate-audit-1546601",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05a-gate-review:/repo:ro",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-14T16:34:08.225Z",
+      "ended_at": "2026-11-14T16:34:20.194Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/gitleaks.stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/gitleaks.stderr.log",
+          "bytes": 133,
+          "sha256": "ce9ee430ef1468a7d402ce0ece64c1a21f125fc1a5752b146fd5d3cd7574ae83"
+        }
+      ]
+    },
+    {
+      "label": "scanner-cleanup",
+      "argv": [
+        "docker",
+        "ps",
+        "-aq",
+        "--filter",
+        "name=^/aegisgate-05a-gate-audit-1546601$"
+      ],
+      "started_at": "2026-11-14T16:34:20.201Z",
+      "ended_at": "2026-11-14T16:34:20.240Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/scanner-cleanup.stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-gate-review/audit-02/scanner-cleanup.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "ended_at": "2026-11-14T16:34:20.247Z",
+  "lock_held_through_scanner_inventory_hashing": true,
+  "passed": false
+}

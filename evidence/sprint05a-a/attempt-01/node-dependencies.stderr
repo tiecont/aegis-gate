@@ -1,0 +1,21 @@
+node:internal/modules/cjs/loader:1603
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'ws/package.json'
+Require stack:
+- /tmp/aegisgate-05a-a/[eval1]
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1603:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1145:27)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1196:12)
+    at require.resolve (node:internal/modules/helpers:336:31)
+    at file:///tmp/aegisgate-05a-a/[eval1]:1:192
+    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)
+    at async node:internal/modules/esm/loader:226:26
+    at async ModuleLoader.executeModuleJob (node:internal/modules/esm/loader:223:20)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:105:5) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [ '/tmp/aegisgate-05a-a/[eval1]' ]
+}
+
+Node.js v26.13.0

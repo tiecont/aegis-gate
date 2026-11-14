@@ -1,0 +1,647 @@
+{
+  "source_commit": "9ec2765305aae1e5aa94501ca18b41542f22bf55",
+  "source_tree": "ffefbb2177e94d464e898c78b69642a9eb7bd661",
+  "owners": {
+    "a": "9391ba922bc8daa2c68c86bb5e770d8685b6a4d7",
+    "d": "d06728676bcf63a0464a665b9447b69c423a27ef"
+  },
+  "source_clean": true,
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05a-f/spikes/envoy/sprint05a-f-review.mjs",
+    "evidence/sprint05a-f/ad-02",
+    "evidence/sprint05a-a/attempt-04"
+  ],
+  "started_at": "2026-11-14T14:29:00.658Z",
+  "node": {
+    "binary": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "version": "v26.13.0",
+    "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+  },
+  "fixture_lock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "commands": [
+    {
+      "label": "strict-dependencies",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/lib/node_modules/npm/bin/npm-cli.js",
+        "ci",
+        "--prefix",
+        "spikes/pingora",
+        "--ignore-scripts",
+        "--engine-strict",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:29:01.807Z",
+      "ended_at": "2026-11-14T14:29:05.076Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/ad-02/strict-dependencies.stdout",
+          "bytes": 25,
+          "sha256": "2122a920cb8c58ec6a0ae6e22be1035cd403eb8cada695657c0877b477361d35"
+        },
+        {
+          "file": "evidence/sprint05a-f/ad-02/strict-dependencies.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "a-runner",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/envoy/sprint05a-a-run.mjs",
+        "evidence/sprint05a-a/attempt-04"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:29:05.088Z",
+      "ended_at": "2026-11-14T14:31:07.797Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/ad-02/a-runner.stdout",
+          "bytes": 302,
+          "sha256": "d058d339b5f92edb6f49a422eef455d7f0156e94d9b436f6bc2b824860795a8c"
+        },
+        {
+          "file": "evidence/sprint05a-f/ad-02/a-runner.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "d-baseline",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/envoy/wire-probes.mjs",
+        "/tmp/aegisgate-05a-f/evidence/sprint05a-f/ad-02/d-baseline.json",
+        "/tmp/aegisgate-05a-f/.local/sprint05a-f-azXiTs/baseline"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:31:07.828Z",
+      "ended_at": "2026-11-14T14:31:29.166Z",
+      "exit_code": 1,
+      "signal": null,
+      "timed_out": false,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/ad-02/d-baseline.stdout",
+          "bytes": 952,
+          "sha256": "829a7f1ea1c79b5ecace2c7ec0d59bb857a1545f4890f16303d1cb7c09e5c6d6"
+        },
+        {
+          "file": "evidence/sprint05a-f/ad-02/d-baseline.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "cleanup-candidates",
+      "argv": [
+        "docker",
+        "ps",
+        "-a",
+        "--filter",
+        "name=^/aegis-envoy-",
+        "--filter",
+        "name=^/aegis-sprint05a-a-",
+        "--format",
+        "{{.ID}} {{.Names}}"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:31:29.180Z",
+      "ended_at": "2026-11-14T14:31:29.269Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/ad-02/cleanup-candidates.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/ad-02/cleanup-candidates.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "results": [],
+  "sources": [
+    {
+      "file": "scripts/sprint04c-gates.mjs",
+      "sha256": "052922dd93c87ee9f5aae99d27cd6b283562549cbc65d0a8e628809c57da59bd"
+    },
+    {
+      "file": "spikes/edge-comparison/README.md",
+      "sha256": "644f383a67436bdea26dd8668f33137701d421f45c76da2e343141b122cd99f3"
+    },
+    {
+      "file": "spikes/edge-comparison/contract.mjs",
+      "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f"
+    },
+    {
+      "file": "spikes/edge-comparison/contract.test.mjs",
+      "sha256": "b8ddf59505a5e342eea217ff49fd6a3d3ec64b0cdfe036000257d1191b6df223"
+    },
+    {
+      "file": "spikes/edge-comparison/evaluate.mjs",
+      "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf"
+    },
+    {
+      "file": "spikes/edge-comparison/evaluate.test.mjs",
+      "sha256": "6b6ee9e2116c94d3a1f737dc8f5c6e34468891bae2bbcc0af9c469c8c8cb544e"
+    },
+    {
+      "file": "spikes/edge-comparison/extract-baseline.mjs",
+      "sha256": "a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/edge-comparison/run.mjs",
+      "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493"
+    },
+    {
+      "file": "spikes/edge-comparison/supplemental.mjs",
+      "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.mjs",
+      "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.test.mjs",
+      "sha256": "9ddc71cf675cc89cb2bc2cba3770cf57f6b0eecde42885db0dccaa0718b1dbbd"
+    },
+    {
+      "file": "spikes/envoy/PLAN.md",
+      "sha256": "a3df75367c072812bc7a05dd1c46038becc87e803c95bf0af71bda8984dee7b6"
+    },
+    {
+      "file": "spikes/envoy/README.md",
+      "sha256": "6dfb2c5408b0cb1e956cf04750a730bdc5a5743431c0fffced947fa1224cadaf"
+    },
+    {
+      "file": "spikes/envoy/benchmark.mjs",
+      "sha256": "1625cbd3c85dd68d27dd479fa51f291f0a0b09376369827d9e32e860b6c831b0"
+    },
+    {
+      "file": "spikes/envoy/collect.mjs",
+      "sha256": "ecdaa37055d38adeb726fce2fb5828ace54401bc1775518a14a8161c6773e938"
+    },
+    {
+      "file": "spikes/envoy/config.mjs",
+      "sha256": "53fd7c0c624f8a4771ce75d6059981762694a89d61f24482803289b979cebeef"
+    },
+    {
+      "file": "spikes/envoy/config.test.mjs",
+      "sha256": "bc143535d181e428e7322862fdfbaa0e918fa314ad814bd355a4e8e51c584a3d"
+    },
+    {
+      "file": "spikes/envoy/example-manifest.json",
+      "sha256": "01ff8ad3357dafa78604113ae53d61c602b9023360e742c5d7b050e2f6a3f51a"
+    },
+    {
+      "file": "spikes/envoy/finalize-evidence.mjs",
+      "sha256": "6c2353c081a7a2419dd5ecac6fc677370449322361e7e05224193f5733580594"
+    },
+    {
+      "file": "spikes/envoy/image.lock.json",
+      "sha256": "a96054e7fe3b8994f708f54c221758ecd786b91655c641cb7648067d1f02889d"
+    },
+    {
+      "file": "spikes/envoy/launch",
+      "sha256": "0ee313b5b338486cd856415a6022ae10f6f12aeab2696f0d0399c512f723f0f1"
+    },
+    {
+      "file": "spikes/envoy/launcher.mjs",
+      "sha256": "26705e93f391d6fcd815ce48ef279142ab5d3463be681a8cfe11edfea6bb5da3"
+    },
+    {
+      "file": "spikes/envoy/recovery-config.mjs",
+      "sha256": "407268e48e6dffe15220f1b2d58f6eb7b0520dd2b1f69b5250e8f685a3f44b3c"
+    },
+    {
+      "file": "spikes/envoy/recovery-launcher.mjs",
+      "sha256": "00517051e9d631adbee9c58f58f1a343404360e24e66e5c3cbecd0c17c08be23"
+    },
+    {
+      "file": "spikes/envoy/recovery-raw-h2.mjs",
+      "sha256": "646e4a009c41269db90c97656c4b228db9ec65a170ae49f3c4b73540eb06e22a"
+    },
+    {
+      "file": "spikes/envoy/recovery-run.mjs",
+      "sha256": "ccaff2dd48099cccfb06b276f7f13717648d605dbabcad5238fa1eec74c2d42f"
+    },
+    {
+      "file": "spikes/envoy/research.mjs",
+      "sha256": "c6af39bac12b35b99dbe77e6aa3de37c3629cd8ecee1d61e64a875cd0c07909c"
+    },
+    {
+      "file": "spikes/envoy/scan-owned-secrets.sh",
+      "sha256": "29893d4bca45c2ac9497bd7c0f4574a95f6bbe22a0c68766d24543e764d5ea04"
+    },
+    {
+      "file": "spikes/envoy/scan.sh",
+      "sha256": "26eec5e058d9d56fc833254589eed4561efc78163dd7287ea167e2d7757ee85a"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-observer.mjs",
+      "sha256": "2b711290f5d7dcc8831a85a1d2299fefcab7d8a3ec3fb1256308c831287142a7"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-observer.test.mjs",
+      "sha256": "afcf2f3a3726afab9d128d78780a79cc9ff98c5bf9af3ac0e4d81a151c525082"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-protocol.mjs",
+      "sha256": "c00b465407778cab9bdd9df987fb48d9e9c4ec1625c51ad7ef90946e2732ccb4"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-receipts.mjs",
+      "sha256": "757e0cf106a7dee16fc8acaec1893b34bcdd7d363b90346490e81af5d17a272d"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-repro.mjs",
+      "sha256": "689be974b677daf833bfcdaee247a571a8740c7bb8a226e11cdedc260020fe3b"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-run.mjs",
+      "sha256": "b56b2b82d436b22895a16f545d6504e3add2ae800f16b1b7dd8893c82f588ed6"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-upstream-verify.mjs",
+      "sha256": "58f56e36a8780e4e53452c6434e9fe4a9eda28908968db5a4a6a99332afd1f8a"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-upstream.mjs",
+      "sha256": "c8143ded99d9dc887a85848febe2fa7c75d486281f481a2b8940f018c3863520"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-verify.mjs",
+      "sha256": "ead5e86838792f316759cd7d6a2aa74d6dcb53815772707ac309069021bd74ba"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-attribution/main.go",
+      "sha256": "c42020f2b987cf9e3b18cb0ed0476735d46905664ed3fe6b99960868b76e8741"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-attribution/main_test.go",
+      "sha256": "a6bf965416d0ed1f3ba06a78c03dbe54ba8f6a838e847f6e7c0cf14e7a83924b"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-observer.mjs",
+      "sha256": "215012524eaaab2133ee0c711d1b29e1bf7ddd0338d996290a73624ca827514b"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-observer.test.mjs",
+      "sha256": "7cd1bbce7d5a0b6c08ee82789670d59c9968ba5bad84a2c1ccf5804f7ac0e831"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-protocol.mjs",
+      "sha256": "ce75ff5a3e91cc4c650607ffb8db1bd21f8fed0583b95baf937cd99293753738"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-repro-h1.mjs",
+      "sha256": "be5e8b2fa85f885be30b28a976d31e4463584bc4755a3a9527be70b3f48e5e55"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-repro-h2.mjs",
+      "sha256": "ba7c7dbe272ea6f8763aac06986b71e0d19067efaecd34eb4b5bfdfbcc167a35"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-repro-receipts.mjs",
+      "sha256": "69b1cd45537ff3efcfbee4c595e012f9c8f9eecdc3b50a40636a8b74b863114a"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-run.mjs",
+      "sha256": "ee0aec3526cae4136f59323fd26570b48d35b9728c4d6c9775c5b7759838d6d1"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-upstream-verify.mjs",
+      "sha256": "2bf3eda9c341a149038a4462256dbfde583366c7ab0fe58f80fe3194cd1cc6cb"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-upstream.mjs",
+      "sha256": "abce7f263a936ca42f63db72bd5b36bc9b83d53c71d4e09b703b8ed5823ecafa"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-verify.mjs",
+      "sha256": "4a73ba77d3c22f47a7eec24a696d7d8e1ebc963056ae5c916903fb691cda23be"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-a-config.mjs",
+      "sha256": "a0d86c1e292a68d2c78faeb6b9e6ea3c67d5b5e55d74f3d5d0e1faa0bca312d2"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-a-config.test.mjs",
+      "sha256": "d5f05ae62d043e247454d8d5c021a9fd499302dbe55dd1252606a305c5e285ab"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-a-focused.mjs",
+      "sha256": "831fafbf3da9153cb44033fb67c287b26f1fac77145ec6fd0d1768f0de138529"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-a-launcher.mjs",
+      "sha256": "a367a0c33168ad6508f801ac6529918cddde462f785cca26ea25bf54987e5fbe"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-a-run.mjs",
+      "sha256": "88b040aa5e1dcfe0dcddc394b87587caf052b474592a778afacc3680f64a1993"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-a-verify.mjs",
+      "sha256": "29d1dcea06adeaa1da5988e605b6214f538b0a3ddc6b252bf2f032bf2553df02"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-d-config.mjs",
+      "sha256": "be681dcc6506a3da0f69a561feca32b59d350a675dd57ab979df945de1e0b9ed"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-d-run.mjs",
+      "sha256": "b53dcc8e34027d7572dec7163114fc44104f570fb08abdeab28327981b3f43e5"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-d-select.mjs",
+      "sha256": "26a8d914364842d01b530d8c33c540561c9dda9cd1d8efda85d3413c9b09340a"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-f-review.mjs",
+      "sha256": "2501965d29f15a2d8935089b2b995fe39dd0d0a8ca768a814df9af40cb1b1cb0"
+    },
+    {
+      "file": "spikes/envoy/strict-boundary-check.mjs",
+      "sha256": "4017485afc16c1813c0d23745af9c8c72a9db40c7fe2a1c93f17af204e743abe"
+    },
+    {
+      "file": "spikes/envoy/strict-check.mjs",
+      "sha256": "4fb5ed53b3160fd0df4c774d7cc6bbeb97479e3563d31fe004ad520e19389bd7"
+    },
+    {
+      "file": "spikes/envoy/strict-finalize.mjs",
+      "sha256": "6e98c6bd885bd43e5b18e21849cc0d81e4d3c0c311e460c6941adc974334f9ce"
+    },
+    {
+      "file": "spikes/envoy/strict-research.mjs",
+      "sha256": "83c8488a46862ec789c5e6430e110f4e89151ef26fd8fc5d7ec9519e3cb423ad"
+    },
+    {
+      "file": "spikes/envoy/wire-closeout.mjs",
+      "sha256": "221d45747dfdc36d27fd79098dd8012501b00cd4b73065dbdc5a6141f460569a"
+    },
+    {
+      "file": "spikes/envoy/wire-fixtures.mjs",
+      "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278"
+    },
+    {
+      "file": "spikes/envoy/wire-observer.mjs",
+      "sha256": "bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3"
+    },
+    {
+      "file": "spikes/envoy/wire-observer.test.mjs",
+      "sha256": "1bdd293bc39956883f6a76d5924e8464e4d623d6b7217189140c372ae1b846b3"
+    },
+    {
+      "file": "spikes/envoy/wire-plan.md",
+      "sha256": "3b299daa2ca9ff77abb7496d23bcb0b143ef265ed5645b5b0a19a34425004b8a"
+    },
+    {
+      "file": "spikes/envoy/wire-probes.mjs",
+      "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a"
+    },
+    {
+      "file": "spikes/envoy/wire-run.mjs",
+      "sha256": "2cf5a83b900a9dfffdd5c7314ac69c3a8e61f987c912c4f8ac44d70a775bb95a"
+    },
+    {
+      "file": "spikes/envoy/wire-trace.mjs",
+      "sha256": "76b5dcf1a2bb80fcdbcbb76fc86828aed91ae8b1f94388ef187f2406b883f5bd"
+    },
+    {
+      "file": "spikes/pingora/Cargo.lock",
+      "sha256": "d555e1b64824c515b30b60becb54ff949ffd96c3d31f80d55f3cd5fb9614df6e"
+    },
+    {
+      "file": "spikes/pingora/Cargo.toml",
+      "sha256": "b31a70f0e6658b7ea33cce09aa3dbcddaa24da0a1f0cfdbfed3168c3a8f42996"
+    },
+    {
+      "file": "spikes/pingora/PLAN.md",
+      "sha256": "e5edd6406090ed70d8e7b6ac98eae8d358d2d4e543d302c1503b34d127815ad8"
+    },
+    {
+      "file": "spikes/pingora/README.md",
+      "sha256": "576f16ce6bb15d05d6ee18e8c45bc33b880dae42cf8be3d99237274c1e01b459"
+    },
+    {
+      "file": "spikes/pingora/evidence.mjs",
+      "sha256": "760d631d2258aeaf0653e3922e85a644dd6c3ef06a4090ccd11d67fc6195bb77"
+    },
+    {
+      "file": "spikes/pingora/evidence/dependency-review-2026-11-11.json",
+      "sha256": "85c4ac11b6006ff80d5c538746f07d3bfdec94f81985b9b268af4f47df80b816"
+    },
+    {
+      "file": "spikes/pingora/evidence/local-run-2026-11-11.json",
+      "sha256": "ac19bb7994774f10d3c8a5502050e3a205af8283f1456dccee95b336c48cf280"
+    },
+    {
+      "file": "spikes/pingora/evidence/sprint02-runs.json",
+      "sha256": "c26f7a43018c19cee073b5ea609b0b6d220de0b6fbd0a0611227eaec4208d580"
+    },
+    {
+      "file": "spikes/pingora/evidence/sprint02-upstream.json",
+      "sha256": "b9b4ce39aed0ee64161578380a54156bfe56ac672f7fbf0be1eb039487e970b8"
+    },
+    {
+      "file": "spikes/pingora/export-sprint02.mjs",
+      "sha256": "24e1c936f7791612cfc679210458029a2926b3e7b4df6c7a30c38d5f25aaeb14"
+    },
+    {
+      "file": "spikes/pingora/lab.mjs",
+      "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d"
+    },
+    {
+      "file": "spikes/pingora/package-lock.json",
+      "sha256": "9c56b70504e411a736f637d65ea5b6e73ccc8d321fb90cc7c9906a4d4cc3e503"
+    },
+    {
+      "file": "spikes/pingora/package.json",
+      "sha256": "cc967f3d084ba85b02a78cd3b0d170fe35eeff691d5f1e94c18e055cd24aeef2"
+    },
+    {
+      "file": "spikes/pingora/research.mjs",
+      "sha256": "1e4d159896cee3c0ed4176159353ea88bac9acb71638439083a60cdac9b7bd54"
+    },
+    {
+      "file": "spikes/pingora/sprint03a-research.mjs",
+      "sha256": "2b63a9ba5a1eabda2668110dfc4b374b4ddb155c37fe30f8eaa7e473b0fb061b"
+    },
+    {
+      "file": "spikes/pingora/sprint03a-run.mjs",
+      "sha256": "f26c742d38ef3231a0429cbd838328751f63a0dad048b487ae8b4408bbc9f355"
+    },
+    {
+      "file": "spikes/pingora/sprint03a-verify.mjs",
+      "sha256": "3e11645d00ab9cd6484d4d9d9f9b99f2c515ba2a27a839660a3effef6d88b6d5"
+    },
+    {
+      "file": "spikes/pingora/src/config.rs",
+      "sha256": "5ad23b7857787222673fc4519df4830ef71e3f0ce89cfd27fcefd4a5f56b0599"
+    },
+    {
+      "file": "spikes/pingora/src/main.rs",
+      "sha256": "43f874ff1980712c2e6c8102cf6568bf5c7f64616289ad8a794f03173caf7e5a"
+    }
+  ],
+  "security_acceptance": false,
+  "baseline_before": {
+    "commit": "541d1d915ce6a3b679dc3fed3ea0a98f908ce001",
+    "tree": "89eff9430f2bb7044683eaf9e62e6657a7295a86",
+    "objects": 4003,
+    "inventory_sha256": "0006bf530e2c928baf928089d4d709294cd09f3552a7d511bed1fa3a85ba9225"
+  },
+  "owner_files": [
+    {
+      "owner": "a",
+      "commit": "9391ba922bc8daa2c68c86bb5e770d8685b6a4d7",
+      "file": "spikes/envoy/sprint05a-a-config.mjs",
+      "sha256": "a0d86c1e292a68d2c78faeb6b9e6ea3c67d5b5e55d74f3d5d0e1faa0bca312d2"
+    },
+    {
+      "owner": "a",
+      "commit": "9391ba922bc8daa2c68c86bb5e770d8685b6a4d7",
+      "file": "spikes/envoy/sprint05a-a-config.test.mjs",
+      "sha256": "d5f05ae62d043e247454d8d5c021a9fd499302dbe55dd1252606a305c5e285ab"
+    },
+    {
+      "owner": "a",
+      "commit": "9391ba922bc8daa2c68c86bb5e770d8685b6a4d7",
+      "file": "spikes/envoy/sprint05a-a-focused.mjs",
+      "sha256": "831fafbf3da9153cb44033fb67c287b26f1fac77145ec6fd0d1768f0de138529"
+    },
+    {
+      "owner": "a",
+      "commit": "9391ba922bc8daa2c68c86bb5e770d8685b6a4d7",
+      "file": "spikes/envoy/sprint05a-a-launcher.mjs",
+      "sha256": "a367a0c33168ad6508f801ac6529918cddde462f785cca26ea25bf54987e5fbe"
+    },
+    {
+      "owner": "a",
+      "commit": "9391ba922bc8daa2c68c86bb5e770d8685b6a4d7",
+      "file": "spikes/envoy/sprint05a-a-run.mjs",
+      "sha256": "88b040aa5e1dcfe0dcddc394b87587caf052b474592a778afacc3680f64a1993"
+    },
+    {
+      "owner": "a",
+      "commit": "9391ba922bc8daa2c68c86bb5e770d8685b6a4d7",
+      "file": "spikes/envoy/sprint05a-a-verify.mjs",
+      "sha256": "29d1dcea06adeaa1da5988e605b6214f538b0a3ddc6b252bf2f032bf2553df02"
+    },
+    {
+      "owner": "d",
+      "commit": "d06728676bcf63a0464a665b9447b69c423a27ef",
+      "file": "spikes/envoy/sprint05a-d-config.mjs",
+      "sha256": "be681dcc6506a3da0f69a561feca32b59d350a675dd57ab979df945de1e0b9ed"
+    },
+    {
+      "owner": "d",
+      "commit": "d06728676bcf63a0464a665b9447b69c423a27ef",
+      "file": "spikes/envoy/sprint05a-d-run.mjs",
+      "sha256": "b53dcc8e34027d7572dec7163114fc44104f570fb08abdeab28327981b3f43e5"
+    },
+    {
+      "owner": "d",
+      "commit": "d06728676bcf63a0464a665b9447b69c423a27ef",
+      "file": "spikes/envoy/sprint05a-d-select.mjs",
+      "sha256": "26a8d914364842d01b530d8c33c540561c9dda9cd1d8efda85d3413c9b09340a"
+    }
+  ],
+  "a": {
+    "output": "evidence/sprint05a-a/attempt-04",
+    "summary": {
+      "candidate": "envoy-sprint05a-a-te",
+      "mandatory_tests": 75,
+      "passed": 73,
+      "failed": [
+        "malformed-HTTP-obsolete-folded-header",
+        "HTTP2-authority-Host-and-SNI-confusion-rejected"
+      ],
+      "unsafe_or_unproven_rejections": [
+        {
+          "name": "obsolete-folded-header",
+          "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+        }
+      ],
+      "protocol_proof_pass": false,
+      "architecture_approval": "requires independent dependency/security review and human architecture decision"
+    },
+    "failures": [
+      {
+        "name": "malformed-HTTP-obsolete-folded-header",
+        "status": "fail",
+        "milliseconds": 15.7,
+        "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+        "origin": {
+          "handler_invocations": 1,
+          "decrypted_bytes": 263,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "requests": [
+            {
+              "method": "GET",
+              "target": "/",
+              "protocol": "1.1",
+              "tls": "TLSv1.2",
+              "sni": false,
+              "alpn": "http/1.1"
+            }
+          ],
+          "omitted_request_samples": 0
+        }
+      },
+      {
+        "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+        "status": "fail",
+        "milliseconds": 13.96,
+        "error": "confused authority forwarded bytes to origin\n\n3045 !== 3036\n",
+        "origin": {
+          "handler_invocations": 0,
+          "decrypted_bytes": 9,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "requests": [],
+          "omitted_request_samples": 0
+        }
+      }
+    ]
+  },
+  "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n17 !== 16\n\n    at file:///tmp/aegisgate-05a-f/spikes/envoy/sprint05a-f-review.mjs:115:12\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+  "cleanup": {
+    "stopped": []
+  },
+  "baseline_after": {
+    "commit": "541d1d915ce6a3b679dc3fed3ea0a98f908ce001",
+    "tree": "89eff9430f2bb7044683eaf9e62e6657a7295a86",
+    "objects": 4003,
+    "inventory_sha256": "0006bf530e2c928baf928089d4d709294cd09f3552a7d511bed1fa3a85ba9225"
+  },
+  "new_fixture_directories": [],
+  "lock_held_through_cleanup": true,
+  "ended_at": "2026-11-14T14:31:29.545Z"
+}

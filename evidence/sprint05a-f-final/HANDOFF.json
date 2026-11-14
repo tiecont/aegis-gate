@@ -1,0 +1,42 @@
+{
+  "branch": "review/sprint05a-final",
+  "worktree": "/tmp/aegisgate-05a-final-review",
+  "inspection_assembly": "2e387add587123dd79c84cea767bca8579d2ba5b",
+  "source_commit": "a1b17c9c09818add4cefc685f559366cd5f25246",
+  "source_tree": "9b33fd6b0e03f0a64a1e3b18383c3e47844dbdc0",
+  "report_commit": "862f1ad5e11f4c2b3f206a797382fdc41eba60fc",
+  "report_tree": "047483ef91fdcf91366337f8ea211ac09a81cde9",
+  "report": {
+    "file": "docs/reports/sprint05a-f-integration-review.md",
+    "sha256": "bf7e7b75e361ce51ec668e481e0b106ab0928bd3f43bf12ad464ce9e4b0fdc22"
+  },
+  "commands": [
+    {
+      "argv": ["flock", "-w", "60", "/tmp/aegisgate-sprint02-fixtures.lock", "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node", "scripts/sprint05a-f-final-verify.mjs", "evidence/sprint05a-f-final/verify-01"],
+      "exit_code": 1,
+      "reason": "Preserved reviewer lookup error: audit warnings are in separate structured logs, not the summary stream"
+    },
+    {
+      "argv": ["flock", "-w", "60", "/tmp/aegisgate-sprint02-fixtures.lock", "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node", "scripts/sprint05a-f-final-verify.mjs", "evidence/sprint05a-f-final/verify-02"],
+      "exit_code": 0,
+      "receipt_sha256": "e74c514295a1a0d25a95fe2789a0a039b9247c0b6f8302a03aeec1edfed7bf5b",
+      "manifest_sha256": "bbcaf325766b82ded954e60bf454d60cf28629ee81886f325541b1cf58314a72"
+    },
+    {
+      "argv": ["flock", "-w", "60", "/tmp/aegisgate-sprint02-fixtures.lock", "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node", "scripts/sprint05a-f-final-scan.mjs", "evidence/sprint05a-f-final/scan-01"],
+      "exit_code": 0,
+      "receipt_sha256": "6e778f0677a90b6928802b1b356348579990882accbaa9075fae96e1b21c528c",
+      "manifest_sha256": "f7a264110a3f53a988a943e79f6b10c39247176e12b02e7c34f1d77abfc9bf74",
+      "scope": "30 tracked review source/report/receipt files, offline digest-pinned Gitleaks, no leaks; container removed under lock"
+    }
+  ],
+  "accept": ["B narrow released-parser proof", "C honest failed experiment/report", "E actual00/02/03 local regression receipts", "D corrected mount-only cleanup collector", "static gate-helper parameterization", "A four TE assertions and D two header assertions plus bounded controls preserved in combined candidate"],
+  "reject": ["C H2 zero-byte repair", "B adapter as complete ingress", "remaining two original75 and four original23 repairs", "deterministic D16-to19 baseline transition", "Module01 or production eligibility"],
+  "measured": {"combined75": "73/75", "combined23": "19/23", "controls": 17, "B_wire": 22, "B_direct": 24, "C_lifecycle": 7, "E_commands": 64, "E_slices": 128, "E_Go_packages": 11, "E_Go_top_level": 88, "E_Go_subtests": 151, "E_Go_skips": 0},
+  "protected_baseline": "541d1d915ce6a3b679dc3fed3ea0a98f908ce001",
+  "protected75_23_objects_equal": true,
+  "original_tests": {"passed": 7, "failed": 0, "skipped": 0},
+  "root_full_local_security_and_exact_head_main_hosted_gates": "separate pending root work",
+  "module01": "NO-GO",
+  "production": "BLOCKED"
+}

@@ -1,0 +1,83 @@
+716:     // for example proxying HTTP/1.1 if keep-alive were false and each stream resulted in connection
+717:     // termination. It would likely be overkill for long lived connections, such as TCP proxying SMTP
+718:     // or regular HTTP/1.1 with keep-alive. For long lived traffic, a value of 1.05 would be more
+719:     // reasonable, where for every 100 connections, 5 preconnected connections would be in the queue
+720:     // in case of unexpected disconnects where the connection could not be reused.
+721:     //
+722:     // If this value is not set, or set explicitly to one, Envoy will fetch as many connections
+723:     // as needed to serve streams in flight. This means in steady state if a connection is torn down,
+724:     // a subsequent streams will pay an upstream-rtt latency penalty waiting for a new connection.
+725:     //
+726:     // This is limited somewhat arbitrarily to 3 because preconnecting too aggressively can
+727:     // harm latency more than the preconnecting helps.
+728:     google.protobuf.DoubleValue per_upstream_preconnect_ratio = 1
+729:         [(validate.rules).double = {lte: 3.0 gte: 1.0}];
+730: 
+731:     // Indicates how many streams (rounded up) can be anticipated across a cluster for each
+732:     // stream, useful for low QPS services. This is currently supported for a subset of
+733:     // deterministic non-hash-based load-balancing algorithms (weighted round robin, random).
+734:     // Unlike ``per_upstream_preconnect_ratio`` this preconnects across the upstream instances in a
+735:     // cluster, doing best effort predictions of what upstream would be picked next and
+736:     // pre-establishing a connection.
+737:     //
+738:     // Preconnecting will be limited to one preconnect per configured upstream in the cluster and will
+739:     // only be done if there are healthy upstreams and the cluster has traffic.
+740:     //
+741:     // For example if preconnecting is set to 2 for a round robin HTTP/2 cluster, on the first
+742:     // incoming stream, 2 connections will be preconnected - one to the first upstream for this
+743:     // cluster, one to the second on the assumption there will be a follow-up stream.
+744:     //
+745:     // If this value is not set, or set explicitly to one, Envoy will fetch as many connections
+746:     // as needed to serve streams in flight, so during warm up and in steady state if a connection
+747:     // is closed (and per_upstream_preconnect_ratio is not set), there will be a latency hit for
+748:     // connection establishment.
+749:     //
+750:     // If both this and preconnect_ratio are set, Envoy will make sure both predicted needs are met,
+751:     // basically preconnecting max(predictive-preconnect, per-upstream-preconnect), for each
+752:     // upstream.
+753:     //
+754:     // This is limited somewhat arbitrarily to 3 because preconnecting too aggressively can
+755:     // harm latency more than the preconnecting helps.
+756:     google.protobuf.DoubleValue predictive_preconnect_ratio = 2
+757:         [(validate.rules).double = {lte: 3.0 gte: 1.0}];
+758: 
+759:     // Restricts anticipatory connections to hosts whose endpoint metadata matches this matcher.
+760:     // Non-matching hosts are never preconnected, and instead get connections only on demand, as they
+761:     // serve real requests. If unset, all healthy hosts are eligible.
+762:     type.matcher.v3.MetadataMatcher preconnect_enabled_metadata = 3;
+763:   }
+764: 
+765:   // Queueing policies for the cluster.
+1311:   // If users desire custom connection pool or upstream behavior, for example terminating
+1312:   // CONNECT only if a custom filter indicates it is appropriate, the custom factories
+1313:   // can be registered and configured here.
+1314:   // [#extension-category: envoy.upstreams]
+1315:   core.v3.TypedExtensionConfig upstream_config = 48;
+1316: 
+1317:   // Configuration to track optional cluster stats.
+1318:   TrackClusterStats track_cluster_stats = 49;
+1319: 
+1320:   // Preconnect configuration for this cluster.
+1321:   PreconnectPolicy preconnect_policy = 50;
+1322: 
+1323:   // If ``connection_pool_per_downstream_connection`` is true, the cluster will use a separate
+1324:   // connection pool for every downstream connection
+1325:   bool connection_pool_per_downstream_connection = 51;
+1326: 
+1327:   // Queueing policies for the cluster (e.g. the queue policy for cluster pending requests).
+1328:   QueuingPolicies queuing_policies = 62;
+1329: }
+1330: 
+1331: // Extensible load balancing policy configuration.
+1332: //
+1333: // Every LB policy defined via this mechanism will be identified via a unique name using reverse
+1334: // DNS notation. If the policy needs configuration parameters, it must define a message for its
+1335: // own configuration, which will be stored in the config field. The name of the policy will tell
+1336: // clients which type of message they should expect to see in the config field.
+1337: //
+1338: // Note that there are cases where it is useful to be able to independently select LB policies
+1339: // for choosing a locality and for choosing an endpoint within that locality. For example, a
+1340: // given deployment may always use the same policy to choose the locality, but for choosing the
+1341: // endpoint within the locality, some clusters may use weighted-round-robin, while others may
+1342: // use some sort of session-based balancing.
+1343: //

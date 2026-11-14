@@ -1,0 +1,60 @@
+{
+  "branch": "review/sprint05a-gates",
+  "worktree": "/tmp/aegisgate-05a-gate-review",
+  "reviewed_root": "c117d96a0216de301c2a8033e79edee21a936f4a",
+  "reviewed_tree": "e47d07a6fcdd88c4d827e725bcd8abd263f648d9",
+  "audit_source_commit": "73b9feb",
+  "report_commit": "b4c4201930e725e43d78fe446b756d9b2560c69c",
+  "report_tree": "9648db6a1636c6b6e34125de1e1e588836de27f0",
+  "report": {
+    "file": "docs/reports/sprint05a-f-gate-review.md",
+    "sha256": "80107b3574813e5bfcb0f282518d1a5df6a794f44fa0d8b0212b35f633bca874"
+  },
+  "audit": {
+    "directory": "evidence/sprint05a-gate-review/audit-03",
+    "exit_code": 0,
+    "checks_passed": 8,
+    "receipt_sha256": "73e018409f1c2c132395bbb290c7bb4dff6d8e7e21f76a2b60ea0b5d871878c7",
+    "manifest_sha256": "dc061a9092983acecda60a7ee7a5bbc924212dd2957640dbba8fd990768f141e",
+    "retained_reviewer_failures": ["audit-01", "audit-02"]
+  },
+  "report_scan": {
+    "directory": "evidence/sprint05a-gate-review/scan-01",
+    "source_commit": "b4c4201930e725e43d78fe446b756d9b2560c69c",
+    "exit_code": 0,
+    "receipt_sha256": "76c810f955e444c3035168b76863bed402f8cd04c4dbdb879554ffedd1daff35",
+    "manifest_sha256": "d4d3575d6dc3af8b5903dfd8be1c6bb95e86cf9682198dcd18a8be15d78c1e3d",
+    "fixture_lock_held_through_scanner_inventory_hashing": true,
+    "container_absent": true
+  },
+  "root_gates02": {
+    "worktree": "/tmp/aegisgate-05a-gates",
+    "source_commit": "c117d96a0216de301c2a8033e79edee21a936f4a",
+    "receipt_sha256": "c84a12d94da71fa895da03c9df8df535c3798fee4946a09bb12313dd0b52e7b9",
+    "manifest_sha256": "b5bfab7f59bf39c5eab6fda6c73be545f2efa9d0d6968aab586e36f45faa9eec",
+    "exits": { "check": 0, "security-scan": 0, "cleanup": 0, "cleanup-volumes": 0 },
+    "verdict": "ACCEPT exact-source local gates; earlier gates01 remains rejected"
+  },
+  "accept": [
+    "Exact c117d96 Sprint05A research/test/documentation delta",
+    "Unchanged protected75/23 and baseline policy/evaluator bytes",
+    "2993cc0 formatting-only pure AST equality",
+    "cda448e unchanged static command receipt helper",
+    "Full publishable ancestry and identical clone tree without scanner weakening",
+    "67 manifests,1278 source hashes and1104 retained streams/slices",
+    "Completed gates02 local checks/security/cleanup and independent empty inventories"
+  ],
+  "reject": [
+    "gates01 as a passing gate",
+    "Four withheld A inspection streams as eligible evidence",
+    "Unavailable retired02b0a65 source tree as independently verified",
+    "Complete runtime eligibility or Module01 GO"
+  ],
+  "limits": [
+    "No full runtime corpus rerun",
+    "Live advertised remote ref proof is a point-in-time read-only observation",
+    "Later root docs/receipts and hosted exact final head/merge are separate",
+    "Module01 NO-GO; Modules04-12 LOCKED; production BLOCKED; formal approvals PENDING",
+    "This final handoff and scan receipts are additive receipt-only after the report scan"
+  ]
+}

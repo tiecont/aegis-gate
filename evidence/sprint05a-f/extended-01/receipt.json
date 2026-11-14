@@ -1,0 +1,829 @@
+{
+  "source_commit": "1ba8b5be198afb6c7ec943cbaab74ff11bb7c8c1",
+  "source_tree": "edfce0f3a2721de4cbb0f8d900330f707f18452b",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05a-f/spikes/envoy/sprint05a-f-extended.mjs",
+    "evidence/sprint05a-f/extended-01"
+  ],
+  "started_at": "2026-11-14T14:52:02.498Z",
+  "node": "v26.13.0",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "commands": [
+    {
+      "label": "checkout-b",
+      "cwd": "/tmp/aegisgate-05a-f",
+      "argv": [
+        "git",
+        "worktree",
+        "add",
+        "--detach",
+        "/tmp/aegisgate-05a-f-exact-b",
+        "133d3eae70fa6dfe6b27ee0b4ca0ce08b8d44dcf"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:52:03.021Z",
+      "ended_at": "2026-11-14T14:52:03.770Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extended-01/checkout-b.stdout",
+          "bytes": 102,
+          "sha256": "87279c1f7fe5d29c21513c80474c82e97497b669dc5bf14db19bc917fee84f9e"
+        },
+        {
+          "file": "evidence/sprint05a-f/extended-01/checkout-b.stderr",
+          "bytes": 43,
+          "sha256": "c746eddc1bc4682cc769fcc19f2c086e6f1fe257e53b09fef624b12acd82f826"
+        }
+      ]
+    },
+    {
+      "label": "manifest-b",
+      "cwd": "/tmp/aegisgate-05a-f-exact-b",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:52:03.845Z",
+      "ended_at": "2026-11-14T14:52:03.944Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extended-01/manifest-b.stdout",
+          "bytes": 74,
+          "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+        },
+        {
+          "file": "evidence/sprint05a-f/extended-01/manifest-b.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "b-restore",
+      "cwd": "/tmp/aegisgate-05a-f-exact-b",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/envoy/sprint05a-b-restore.mjs"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:52:03.963Z",
+      "ended_at": "2026-11-14T14:52:04.049Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extended-01/b-restore.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extended-01/b-restore.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "b-llhttp",
+      "cwd": "/tmp/aegisgate-05a-f-exact-b",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/envoy/sprint05a-b-run.mjs",
+        "llhttp",
+        "evidence/sprint05a-b/llhttp-90"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:52:04.057Z",
+      "ended_at": "2026-11-14T14:52:17.264Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extended-01/b-llhttp.stdout",
+          "bytes": 2488,
+          "sha256": "1563fd7e431d841b4801250fcbaa5827697722f27fbd82fc07cd3bfa8e006f90"
+        },
+        {
+          "file": "evidence/sprint05a-f/extended-01/b-llhttp.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "checkout-c",
+      "cwd": "/tmp/aegisgate-05a-f",
+      "argv": [
+        "git",
+        "worktree",
+        "add",
+        "--detach",
+        "/tmp/aegisgate-05a-f-exact-c",
+        "d4fc4b1460d846142c05beb854697efe89a10352"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:52:17.331Z",
+      "ended_at": "2026-11-14T14:52:17.618Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extended-01/checkout-c.stdout",
+          "bytes": 94,
+          "sha256": "3b7010ff672e0360682bcf9467db06d136ddba06ee4d0b699bf02c65c4329b71"
+        },
+        {
+          "file": "evidence/sprint05a-f/extended-01/checkout-c.stderr",
+          "bytes": 43,
+          "sha256": "c30d8b8865e034293a8a7e78d264ee20edd94c51c90d08218349a8f2af969590"
+        }
+      ]
+    },
+    {
+      "label": "manifest-c",
+      "cwd": "/tmp/aegisgate-05a-f-exact-c",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:52:17.689Z",
+      "ended_at": "2026-11-14T14:52:17.814Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extended-01/manifest-c.stdout",
+          "bytes": 74,
+          "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+        },
+        {
+          "file": "evidence/sprint05a-f/extended-01/manifest-c.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "dependencies-c",
+      "cwd": "/tmp/aegisgate-05a-f-exact-c",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/lib/node_modules/npm/bin/npm-cli.js",
+        "ci",
+        "--prefix",
+        "spikes/pingora",
+        "--ignore-scripts",
+        "--engine-strict",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:52:17.822Z",
+      "ended_at": "2026-11-14T14:52:19.037Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extended-01/dependencies-c.stdout",
+          "bytes": 25,
+          "sha256": "3545bb93e21701798a49d8c6a59fa32b9ee19726e83a0cfa6651cb76a665eba6"
+        },
+        {
+          "file": "evidence/sprint05a-f/extended-01/dependencies-c.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "c-original75",
+      "cwd": "/tmp/aegisgate-05a-f-exact-c",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/envoy/sprint05a-c-run.mjs",
+        "evidence/sprint05a-f/c-original75",
+        "bounded",
+        "tap"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:52:19.057Z",
+      "ended_at": "2026-11-14T14:53:30.861Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extended-01/c-original75.stdout",
+          "bytes": 67,
+          "sha256": "ecb916fef56a4ad7f858af00a186d2c8c5f61af9066f2e26517c355e71da45d8"
+        },
+        {
+          "file": "evidence/sprint05a-f/extended-01/c-original75.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "c-lifecycle",
+      "cwd": "/tmp/aegisgate-05a-f-exact-c",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/envoy/sprint05a-c-lifecycle.mjs",
+        "evidence/sprint05a-f/c-lifecycle"
+      ],
+      "environment": {
+        "AEGIS_SPRINT05A_C_POLICY": "bounded"
+      },
+      "started_at": "2026-11-14T14:53:30.875Z",
+      "ended_at": "2026-11-14T14:53:37.979Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extended-01/c-lifecycle.stdout",
+          "bytes": 291,
+          "sha256": "eca6ab3a262124ee7b5362b76a63dcf8c8242378db69972dad518b11d243d07f"
+        },
+        {
+          "file": "evidence/sprint05a-f/extended-01/c-lifecycle.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "checkout-combined",
+      "cwd": "/tmp/aegisgate-05a-f",
+      "argv": [
+        "git",
+        "worktree",
+        "add",
+        "--detach",
+        "/tmp/aegisgate-05a-f-exact-combined",
+        "8d293c8ad7ab5c2deaac868462913243852adde7"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:53:38.024Z",
+      "ended_at": "2026-11-14T14:53:38.344Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extended-01/checkout-combined.stdout",
+          "bytes": 113,
+          "sha256": "f82955887c1b263c02e9f345f41292e26abd6059b1a93eb573cbe410a0bbe5c2"
+        },
+        {
+          "file": "evidence/sprint05a-f/extended-01/checkout-combined.stderr",
+          "bytes": 43,
+          "sha256": "20fc4126246ff79340ac569fa23cd9eb36bbe541a0d6d0dd9d2c0eaf5963a8fe"
+        }
+      ]
+    },
+    {
+      "label": "manifest-combined",
+      "cwd": "/tmp/aegisgate-05a-f-exact-combined",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:53:38.383Z",
+      "ended_at": "2026-11-14T14:53:38.459Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extended-01/manifest-combined.stdout",
+          "bytes": 74,
+          "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+        },
+        {
+          "file": "evidence/sprint05a-f/extended-01/manifest-combined.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "dependencies-combined",
+      "cwd": "/tmp/aegisgate-05a-f-exact-combined",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/lib/node_modules/npm/bin/npm-cli.js",
+        "ci",
+        "--prefix",
+        "spikes/pingora",
+        "--ignore-scripts",
+        "--engine-strict",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:53:38.468Z",
+      "ended_at": "2026-11-14T14:53:39.162Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extended-01/dependencies-combined.stdout",
+          "bytes": 28,
+          "sha256": "3fd7d57621f417d74be46e4d522c70bd9a0c06e4bd2a6515344645c5e086a246"
+        },
+        {
+          "file": "evidence/sprint05a-f/extended-01/dependencies-combined.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "combined",
+      "cwd": "/tmp/aegisgate-05a-f-exact-combined",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/envoy/sprint05a-combined-run.mjs",
+        "evidence/sprint05a-f/candidate-90"
+      ],
+      "environment": {},
+      "started_at": "2026-11-14T14:53:39.173Z",
+      "ended_at": "2026-11-14T14:55:24.873Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extended-01/combined.stdout",
+          "bytes": 139,
+          "sha256": "eab40075b07ad4a8219676355d60cb9f59423bd94a82751b12b0e0b743bcafcd"
+        },
+        {
+          "file": "evidence/sprint05a-f/extended-01/combined.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "checkouts": [
+    {
+      "name": "b",
+      "cwd": "/tmp/aegisgate-05a-f-exact-b",
+      "commit": "133d3eae70fa6dfe6b27ee0b4ca0ce08b8d44dcf",
+      "tree": "d3a126941eba127152ff485b722a3c1242370913",
+      "baseline": {
+        "objects": 4003,
+        "baseline": "541d1d915ce6a3b679dc3fed3ea0a98f908ce001",
+        "inventory_sha256": "b61ba9f93eda71565e3d802f3d546f3a75f918f4c86b8abca24de1204890e4bd"
+      },
+      "baseline_after": {
+        "objects": 4003,
+        "baseline": "541d1d915ce6a3b679dc3fed3ea0a98f908ce001",
+        "inventory_sha256": "b61ba9f93eda71565e3d802f3d546f3a75f918f4c86b8abca24de1204890e4bd"
+      }
+    },
+    {
+      "name": "c",
+      "cwd": "/tmp/aegisgate-05a-f-exact-c",
+      "commit": "d4fc4b1460d846142c05beb854697efe89a10352",
+      "tree": "33c0bdece42397a91083deffacee447fcf81b7da",
+      "baseline": {
+        "objects": 4003,
+        "baseline": "541d1d915ce6a3b679dc3fed3ea0a98f908ce001",
+        "inventory_sha256": "b61ba9f93eda71565e3d802f3d546f3a75f918f4c86b8abca24de1204890e4bd"
+      },
+      "baseline_after": {
+        "objects": 4003,
+        "baseline": "541d1d915ce6a3b679dc3fed3ea0a98f908ce001",
+        "inventory_sha256": "b61ba9f93eda71565e3d802f3d546f3a75f918f4c86b8abca24de1204890e4bd"
+      }
+    },
+    {
+      "name": "combined",
+      "cwd": "/tmp/aegisgate-05a-f-exact-combined",
+      "commit": "8d293c8ad7ab5c2deaac868462913243852adde7",
+      "tree": "03b61ba9303c4dfc7538b2b8feb8f4658d0ad53c",
+      "baseline": {
+        "objects": 4003,
+        "baseline": "541d1d915ce6a3b679dc3fed3ea0a98f908ce001",
+        "inventory_sha256": "b61ba9f93eda71565e3d802f3d546f3a75f918f4c86b8abca24de1204890e4bd"
+      },
+      "baseline_after": {
+        "objects": 4003,
+        "baseline": "541d1d915ce6a3b679dc3fed3ea0a98f908ce001",
+        "inventory_sha256": "b61ba9f93eda71565e3d802f3d546f3a75f918f4c86b8abca24de1204890e4bd"
+      }
+    }
+  ],
+  "security_pass": false,
+  "b": {
+    "fold_rejections": [
+      {
+        "name": "folded-header-sp",
+        "pass": true
+      },
+      {
+        "name": "folded-header-sp-reused",
+        "pass": true
+      },
+      {
+        "name": "folded-header-htab",
+        "pass": true
+      },
+      {
+        "name": "folded-header-htab-reused",
+        "pass": true
+      },
+      {
+        "name": "folded-trailer-sp",
+        "pass": true
+      },
+      {
+        "name": "folded-trailer-sp-reused",
+        "pass": true
+      },
+      {
+        "name": "folded-trailer-htab",
+        "pass": true
+      },
+      {
+        "name": "folded-trailer-htab-reused",
+        "pass": true
+      },
+      {
+        "name": "delayed-folded-trailer",
+        "pass": true
+      },
+      {
+        "name": "fragmented-folded-header",
+        "pass": true
+      }
+    ],
+    "fragment_checks": [
+      {
+        "name": "header",
+        "step": 1,
+        "mode": "strict",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 53
+      },
+      {
+        "name": "header",
+        "step": 1,
+        "mode": "relaxed",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 53
+      },
+      {
+        "name": "header",
+        "step": 2,
+        "mode": "strict",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 53
+      },
+      {
+        "name": "header",
+        "step": 2,
+        "mode": "relaxed",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 53
+      },
+      {
+        "name": "header",
+        "step": 7,
+        "mode": "strict",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 53
+      },
+      {
+        "name": "header",
+        "step": 7,
+        "mode": "relaxed",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 53
+      },
+      {
+        "name": "header",
+        "step": 65536,
+        "mode": "strict",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 53
+      },
+      {
+        "name": "header",
+        "step": 65536,
+        "mode": "relaxed",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 53
+      },
+      {
+        "name": "trailer",
+        "step": 1,
+        "mode": "strict",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 130
+      },
+      {
+        "name": "trailer",
+        "step": 1,
+        "mode": "relaxed",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 130
+      },
+      {
+        "name": "trailer",
+        "step": 2,
+        "mode": "strict",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 130
+      },
+      {
+        "name": "trailer",
+        "step": 2,
+        "mode": "relaxed",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 130
+      },
+      {
+        "name": "trailer",
+        "step": 7,
+        "mode": "strict",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 130
+      },
+      {
+        "name": "trailer",
+        "step": 7,
+        "mode": "relaxed",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 130
+      },
+      {
+        "name": "trailer",
+        "step": 65536,
+        "mode": "strict",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 130
+      },
+      {
+        "name": "trailer",
+        "step": 65536,
+        "mode": "relaxed",
+        "error": "HPE_INVALID_HEADER_TOKEN",
+        "complete_count": 0,
+        "reason": "Unexpected whitespace after header value",
+        "consumed": 130
+      },
+      {
+        "name": "valid-trailer",
+        "step": 1,
+        "mode": "strict",
+        "error": "HPE_OK",
+        "complete_count": 1,
+        "reason": "on_message_complete pause",
+        "consumed": 114
+      },
+      {
+        "name": "valid-trailer",
+        "step": 1,
+        "mode": "relaxed",
+        "error": "HPE_OK",
+        "complete_count": 1,
+        "reason": "on_message_complete pause",
+        "consumed": 114
+      },
+      {
+        "name": "valid-trailer",
+        "step": 2,
+        "mode": "strict",
+        "error": "HPE_OK",
+        "complete_count": 1,
+        "reason": "on_message_complete pause",
+        "consumed": 114
+      },
+      {
+        "name": "valid-trailer",
+        "step": 2,
+        "mode": "relaxed",
+        "error": "HPE_OK",
+        "complete_count": 1,
+        "reason": "on_message_complete pause",
+        "consumed": 114
+      },
+      {
+        "name": "valid-trailer",
+        "step": 7,
+        "mode": "strict",
+        "error": "HPE_OK",
+        "complete_count": 1,
+        "reason": "on_message_complete pause",
+        "consumed": 114
+      },
+      {
+        "name": "valid-trailer",
+        "step": 7,
+        "mode": "relaxed",
+        "error": "HPE_OK",
+        "complete_count": 1,
+        "reason": "on_message_complete pause",
+        "consumed": 114
+      },
+      {
+        "name": "valid-trailer",
+        "step": 65536,
+        "mode": "strict",
+        "error": "HPE_OK",
+        "complete_count": 1,
+        "reason": "on_message_complete pause",
+        "consumed": 114
+      },
+      {
+        "name": "valid-trailer",
+        "step": 65536,
+        "mode": "relaxed",
+        "error": "HPE_OK",
+        "complete_count": 1,
+        "reason": "on_message_complete pause",
+        "consumed": 114
+      }
+    ],
+    "narrow_accept": true
+  },
+  "c": {
+    "decision": {
+      "candidate": "sprint05a-c-bounded",
+      "mandatory_tests": 75,
+      "passed": 69,
+      "failed": [
+        "malformed-HTTP-invalid-transfer-encoding",
+        "malformed-HTTP-obsolete-folded-header",
+        "strict-ingress-TE-repeated-chunked",
+        "strict-ingress-TE-not-final-chunked",
+        "supplemental-repeated-transfer-encoding-fields",
+        "HTTP2-authority-Host-and-SNI-confusion-rejected"
+      ],
+      "unsafe_or_unproven_rejections": [
+        {
+          "name": "invalid-transfer-encoding",
+          "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 1"
+        },
+        {
+          "name": "obsolete-folded-header",
+          "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+        },
+        {
+          "name": "TE-repeated-chunked",
+          "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 1"
+        },
+        {
+          "name": "TE-not-final-chunked",
+          "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 1"
+        },
+        {
+          "name": "repeated-transfer-encoding-fields",
+          "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 1"
+        }
+      ],
+      "protocol_proof_pass": false,
+      "architecture_approval": "requires independent dependency/security review and human architecture decision"
+    },
+    "h2": {
+      "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+      "status": "fail",
+      "milliseconds": 16.83,
+      "error": "confused authority forwarded bytes to origin\n\n3033 !== 3024\n",
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 9,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    "raw_capture_sha256": "a0b6d25df5e82f9539ce9756aac77c8902cdec0464455065add2e0166f23b9d7",
+    "repair_accept": false,
+    "lifecycle_tests": [
+      {
+        "name": "cold-denials-no-origin-dial-or-bytes",
+        "status": "pass"
+      },
+      {
+        "name": "valid-cold-warm-sequential-reuse",
+        "status": "pass"
+      },
+      {
+        "name": "concurrent-streams-share-valid-pool",
+        "status": "pass"
+      },
+      {
+        "name": "warm-denials-retain-all-origin-bytes",
+        "status": "pass"
+      },
+      {
+        "name": "route-pools-partitioned",
+        "status": "pass"
+      },
+      {
+        "name": "generation-swap-retains-inflight-and-retires-pool",
+        "status": "pass"
+      },
+      {
+        "name": "trust-retirement-cannot-reuse-old-pool",
+        "status": "pass"
+      }
+    ]
+  },
+  "combined": {
+    "original75": {
+      "passed": 73,
+      "failures": [
+        {
+          "name": "malformed-HTTP-obsolete-folded-header",
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 263,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.2",
+                "sni": false,
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+          "error": "confused authority forwarded bytes to origin\n\n3032 !== 3023\n",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 9,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        }
+      ]
+    },
+    "original23": {
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ]
+    },
+    "security_pass": false
+  },
+  "completed": true,
+  "lock_held_through_capture_cleanup_hashing": true,
+  "ended_at": "2026-11-14T14:55:24.934Z"
+}

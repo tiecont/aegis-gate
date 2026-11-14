@@ -1,0 +1,209 @@
+{
+  "source_commit": "51cfbb44147fdb8da46765a6c9abafa35ba976d4",
+  "source_tree": "9234c0979e15840446441e539310a4b5e11b21b4",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05a-final-review/scripts/sprint05a-f-final-verify.mjs",
+    "evidence/sprint05a-f-final/verify-01"
+  ],
+  "cwd": "/tmp/aegisgate-05a-final-review",
+  "node": "v26.13.0",
+  "node_binary_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "started_at": "2026-11-14T15:28:27.883Z",
+  "reused_independent_commit": "acec5e67c46cd703145ee8ed13ee731b8db57a0d",
+  "manifests": [
+    {
+      "file": "evidence/sprint05a-f/extended-01/SHA256SUMS",
+      "sha256": "e5452e5d7b2221f45250ce77c9dffdeac34249ae6d8b546a9fe72742e912a940",
+      "entries": 194
+    },
+    {
+      "file": "evidence/sprint05a-root/candidate-02/SHA256SUMS",
+      "sha256": "85e4968d3da9ce4381f6cae77073376c2cf6164ca3d278a42489abe2f00a9017",
+      "entries": 24
+    },
+    {
+      "file": "evidence/sprint05a-d/attempt-03/SHA256SUMS",
+      "sha256": "4016a77de241549b75753f10496372495f732ebf9686c079717686d02ec46bda",
+      "entries": 14
+    },
+    {
+      "file": "evidence/sprint05a-e/attempt-01/SHA256SUMS",
+      "sha256": "7090fd309cc5a639c03677490d354cf3dd551c42327538ff6a7c0063360b6f47",
+      "entries": 14
+    }
+  ],
+  "sources": [
+    {
+      "commit": "133d3eae70fa6dfe6b27ee0b4ca0ce08b8d44dcf",
+      "tree": "d3a126941eba127152ff485b722a3c1242370913",
+      "files": 9
+    },
+    {
+      "commit": "d4fc4b1460d846142c05beb854697efe89a10352",
+      "tree": "33c0bdece42397a91083deffacee447fcf81b7da",
+      "files": 22
+    },
+    {
+      "commit": "8d293c8ad7ab5c2deaac868462913243852adde7",
+      "tree": "03b61ba9303c4dfc7538b2b8feb8f4658d0ad53c",
+      "files": 75
+    },
+    {
+      "commit": "8d293c8ad7ab5c2deaac868462913243852adde7",
+      "tree": "03b61ba9303c4dfc7538b2b8feb8f4658d0ad53c",
+      "files": 75
+    },
+    {
+      "commit": "c698a4af61195aad5a8a80d2b8d0d090f0f1d068",
+      "tree": "e71e8a89b786d17f5d3b1cfc12024a193bf8e50b",
+      "files": 66
+    }
+  ],
+  "commands": [
+    {
+      "label": "immutable75",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "started_at": "2026-11-14T15:28:27.963Z",
+      "ended_at": "2026-11-14T15:28:28.020Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f-final/verify-01/immutable75.stdout",
+          "bytes": 74,
+          "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+        },
+        {
+          "file": "evidence/sprint05a-f-final/verify-01/immutable75.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "original-tests",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--test",
+        "spikes/edge-comparison/contract.test.mjs",
+        "spikes/edge-comparison/evaluate.test.mjs",
+        "spikes/edge-comparison/tls-observer.test.mjs"
+      ],
+      "started_at": "2026-11-14T15:28:28.030Z",
+      "ended_at": "2026-11-14T15:28:28.300Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f-final/verify-01/original-tests.stdout",
+          "bytes": 780,
+          "sha256": "34631cf349dda1e344a54e274b779dcec22e15bd7bb451eb37d294f0b9f11832"
+        },
+        {
+          "file": "evidence/sprint05a-f-final/verify-01/original-tests.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "baseline": {
+    "commit": "541d1d915ce6a3b679dc3fed3ea0a98f908ce001",
+    "tree": "89eff9430f2bb7044683eaf9e62e6657a7295a86",
+    "objects": 4003,
+    "reviewed_exceptions": [
+      "scripts/sprint04c-gates.mjs"
+    ],
+    "inventory_sha256": "b61ba9f93eda71565e3d802f3d546f3a75f918f4c86b8abca24de1204890e4bd",
+    "protected_inventory_sha256": "4fb93b05f5fcd796bedafcc8a7bb5154e9ab7b2f2c4f046a878e83a934483662"
+  },
+  "b": {
+    "source_commit": "133d3eae70fa6dfe6b27ee0b4ca0ce08b8d44dcf",
+    "wire_probes": 22,
+    "fold_rejections": 10,
+    "fragment_controls": 24,
+    "exact_originals": 2,
+    "pin_files": 22,
+    "narrow_accept": true,
+    "complete_ingress_accept": false
+  },
+  "c": {
+    "original75": 69,
+    "h2": {
+      "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+      "status": "fail",
+      "milliseconds": 16.83,
+      "error": "confused authority forwarded bytes to origin\n\n3033 !== 3024\n",
+      "origin": {
+        "handler_invocations": 0,
+        "decrypted_bytes": 9,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "requests": [],
+        "omitted_request_samples": 0
+      }
+    },
+    "ack_hex": "000000040100000000",
+    "lifecycle": 7,
+    "repair_accept": false
+  },
+  "combined": {
+    "passed75": 73,
+    "passed23": 19,
+    "controls": 17,
+    "security_accept": false,
+    "failures75": [
+      {
+        "name": "malformed-HTTP-obsolete-folded-header",
+        "status": "fail",
+        "milliseconds": 9.37,
+        "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+        "origin": {
+          "handler_invocations": 1,
+          "decrypted_bytes": 263,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "requests": [
+            {
+              "method": "GET",
+              "target": "/",
+              "protocol": "1.1",
+              "tls": "TLSv1.2",
+              "sni": false,
+              "alpn": "http/1.1"
+            }
+          ],
+          "omitted_request_samples": 0
+        }
+      },
+      {
+        "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+        "status": "fail",
+        "milliseconds": 6.8,
+        "error": "confused authority forwarded bytes to origin\n\n3032 !== 3023\n",
+        "origin": {
+          "handler_invocations": 0,
+          "decrypted_bytes": 9,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "requests": [],
+          "omitted_request_samples": 0
+        }
+      }
+    ],
+    "failures23": [
+      "settled-reuse-identity-and-three-authority-negatives",
+      "individual-settled-userinfo-denial",
+      "raw-H2-HEADERS-stream-zero",
+      "raw-H2-zero-WINDOW_UPDATE"
+    ]
+  },
+  "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /RUSTSEC-2024-0388/. Input:\n\n'Running rust-vulnerabilities\\n' +\n  'PASS rust-vulnerabilities\\n' +\n  'Running pingora-spike-vulnerabilities\\n' +\n  'PASS pingora-spike-vulnerabilities\\n' +\n  'Running hyper-spike-vulnerabilities\\n' +\n  'PASS hyper-spike-vulnerabilities\\n' +\n  'Running go-scanner-gate-selftest\\n' +\n  'PASS go-scanner-gate-selftest\\n' +\n  'Running go-vulnerabilities\\n' +\n  'PASS go-vulnerabilities\\n' +\n  'Running npm-root-vulnerabilities\\n' +\n  'PASS npm-root-vulnerabilities\\n' +\n  'Running npm-dashboard-vulnerabilities\\n' +\n  'PASS npm-dashboard-vulnerabilities\\n' +\n  'Running npm-spike-vulnerabilities\\n' +\n  'PASS npm-spike-vulnerabilities\\n'\n\n    at file:///tmp/aegisgate-05a-final-review/scripts/sprint05a-f-final-verify.mjs:187:10\n    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)\n    at async node:internal/modules/esm/loader:650:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:105:5)",
+  "ended_at": "2026-11-14T15:28:30.634Z",
+  "lock_held_through_hashing": true
+}

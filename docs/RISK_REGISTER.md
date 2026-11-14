@@ -2,6 +2,40 @@
 
 This register tracks residual implementation and release risks. It does not accept risks on behalf of a human reviewer. The current module states and actual executed evidence are recorded in `IMPLEMENTATION_STATUS.md`; T01–T20 mappings are maintained in `docs/SECURITY_COVERAGE.md`.
 
+## Sprint05-A measured disposition
+
+R01/R04 remain blocking. The isolated supported Envoy TE mapper repairs four
+original assertions on unchanged75, giving73/75. It maps all locally generated
+501 responses to400; a genuine origin501 is preserved. Broader local-status
+policy and production routing still need runtime review before adoption.
+Obs-fold263 origin bytes and reused-H2 SETTINGS ACK9 bytes still fail. Five
+supported pool/identity/window variants do not repair the latter. No control
+traffic subtraction, measurement-window change or acceptance exception exists.
+
+Released llhttp9.4.4 establishes strict pre-normalization header/trailer rejection
+in an isolated bounded adapter. Whole-message buffering and subprocess use are
+test-only limitations, not a deployable ingress boundary. Full streaming,
+H2/HPACK, identity, signed-generation, cancellation and resource proof remain
+required before proposing a production architecture. Nginx1.30.6 rejects header
+folding but accepts/discards folded trailers and fails a required encoded target.
+
+R04/T08: combined unchanged23 measures19/23. Two malformed-header error-frame
+assertions now pass; smaller supported H2 windows bound the observed paused
+8/32MiB producers to196608 bytes before cancellation. Fresh independent baseline
+17/23 differs from historical16/23 at the timing-sensitive paused-reader case;
+short RSS/window observations do not establish sustained fairness or capacity.
+Two userinfo deadline and two connection-error-frame failures stay mandatory.
+Attribution remains incomplete and cannot approve ADR012 Option2.
+
+R03/R10/R12/R15: actual local00/02/03, tenancy/OIDC/mTLS/JetStream, signedv1,
+encrypted LKG/rollback/floor/drain/archive/prune and isolated fixture regressions
+pass. External floor is still a provisioned interface, not a production monotonic
+service. TS7 strict resolution still fails supported peers; compatible TS6 pins,
+minimatch override and all scans remain. Pingora unmaintained derivative and
+unsafe-libyaml warnings remain visible and unsuppressed. Root final gates and
+review receipts are recorded in `reports/sprint05a-completion.md`; no local
+improvement closes production risks or supplies a human architecture approval.
+
 ## Sprint04-C disposition (accepted scope; hosted closeout in progress)
 
 R01/R04 remain blocking: no maintained released strict-provenance repair or
