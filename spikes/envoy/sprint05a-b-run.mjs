@@ -72,6 +72,7 @@ try {
     req.on('end', () => { row.trailers = req.rawTrailers;
       res.writeHead(200, { 'content-length': '2' }); res.end('OK'); });
   });
+  origin.keepAliveTimeout = 50;
   servers.push(origin); origin.on('connection', track);
   origin.on('clientError', (_e, s) => { parserErrors++; s.destroy(); });
   origin.on('tlsClientError', () => transportErrors++);
@@ -106,7 +107,9 @@ try {
     const upstream = `${fixture}/upstream`; fs.mkdirSync(upstream);
     for (const f of ['include/llhttp.h', 'src/api.c', 'src/http.c', 'src/llhttp.c'])
       fs.copyFileSync(pins.downloads.find((d) => d.name === `llhttp/${f}`).cache, `${upstream}/${path.basename(f)}`);
-    cmd('build-llhttp', ['cc', '-std=c11', '-O2', '-Wall', '-Wextra', '-Werror', `-I${upstream}`,
+    cmd('check-driver', ['cc', '-std=c11', '-Wall', '-Wextra', '-Werror', '-fsyntax-only', `-I${upstream}`,
+      'spikes/envoy/sprint05a-b-llhttp.c']);
+    cmd('build-llhttp', ['cc', '-std=c11', '-O2', '-Wall', '-Werror', `-I${upstream}`,
       'spikes/envoy/sprint05a-b-llhttp.c', `${upstream}/api.c`, `${upstream}/http.c`, `${upstream}/llhttp.c`, '-o', driver]);
     proof.record.driver_sha256 = hash(fs.readFileSync(driver));
     const front = tls.createServer(tlsServerOptions('edge'), (client) => {
@@ -119,7 +122,7 @@ try {
         const response = []; up.on('data', (b) => response.push(b));
         await once(up, 'secureConnect'); const done = once(up, 'close');
         // Input is unmodified and admitted only at llhttp's on_message_complete.
-        up.end(message); await done;
+        up.write(message); await done;
         client.write(Buffer.concat(response));
       };
       client.on('data', (b) => {
@@ -137,9 +140,8 @@ try {
           rejected = true;
           queued = queued.then(() => client.end('HTTP/1.1 400 Bad Request\r\nContent-Length: 0\r\nConnection: close\r\n\r\n'));
         } else if (parsed.messages.length) {
-          // Fixture clients use a final Connection: close; parser owns that state.
           const last = parsed.messages.at(-1);
-          if (last && pending.length === 0) queued = queued.then(() => client.end());
+          if (!last.keep_alive) queued = queued.then(() => client.end());
         }
         queued.catch((e) => { logs.push(Buffer.from(`${e.stack}\n`)); client.destroy(); });
       });
@@ -275,7 +277,7 @@ http {
   for (const trailer of [false, true]) for (const space of [' ', '\t']) {
     const name = `folded-${trailer ? 'trailer' : 'header'}-${space === ' ' ? 'sp' : 'htab'}`;
     await probe(name, folded(space, trailer));
-    if (runtime !== 'llhttp') await probe(`${name}-reused`, folded(space, trailer), { warmup: true });
+    await probe(`${name}-reused`, folded(space, trailer), { warmup: true });
   }
   const delayed = folded(' ', true); const split = delayed.indexOf('0\r\nX-Folded:');
   await probe('delayed-folded-trailer', delayed, { parts: [delayed.slice(0, split), delayed.slice(split)] });

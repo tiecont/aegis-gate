@@ -9,6 +9,7 @@ static char url[8192];
 static size_t url_len;
 static unsigned completed;
 static int first_event = 1;
+static int keep_alive[128];
 
 static void hex(const char *p, size_t n) {
   putchar('"');
@@ -31,7 +32,11 @@ static int target(llhttp_t *p, const char *at, size_t n) {
 static int field(llhttp_t *p, const char *at, size_t n) { event("field", p, at, n); return 0; }
 static int value(llhttp_t *p, const char *at, size_t n) { event("value", p, at, n); return 0; }
 static int headers(llhttp_t *p) { (void) p; return 0; }
-static int complete(llhttp_t *p) { (void) p; completed++; return HPE_PAUSED; }
+static int complete(llhttp_t *p) {
+  if (completed == 128) return HPE_USER;
+  keep_alive[completed] = llhttp_should_keep_alive(p);
+  completed++; return HPE_PAUSED;
+}
 
 int main(int argc, char **argv) {
   char input[65537];
@@ -71,7 +76,8 @@ int main(int argc, char **argv) {
   printf("],\"messages\":[");
   for (unsigned i = 0; i < completed; i++) {
     if (i) putchar(',');
-    printf("{\"end\":%zu,\"target_hex\":", ends[i]); hex(urls[i], lengths[i]); putchar('}');
+    printf("{\"end\":%zu,\"keep_alive\":%s,\"target_hex\":", ends[i], keep_alive[i] ? "true" : "false");
+    hex(urls[i], lengths[i]); putchar('}');
   }
   printf("],\"consumed\":%zu,\"input_bytes\":%zu,\"error\":\"%s\",\"reason_hex\":",
          pos, n, llhttp_errno_name(err));
