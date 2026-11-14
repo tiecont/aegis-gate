@@ -5,6 +5,11 @@
 #include <stdlib.h>
 #include "llhttp.h"
 
+#define STRINGIFY_INNER(value) #value
+#define STRINGIFY(value) STRINGIFY_INNER(value)
+#define RELEASE_VERSION STRINGIFY(LLHTTP_VERSION_MAJOR) "." \
+  STRINGIFY(LLHTTP_VERSION_MINOR) "." STRINGIFY(LLHTTP_VERSION_PATCH)
+
 #define MAX_FEED (32u * 1024u)
 #define MAX_WIRE (16u * 1024u * 1024u)
 #define MAX_BODY (8u * 1024u * 1024u)
@@ -269,6 +274,6 @@ NAPI_MODULE_INIT() {
   set(env, exports, "maxTargetBytes", number(env, MAX_TARGET));
   set(env, exports, "maxMessages", number(env, MAX_MESSAGES));
   set(env, exports, "stateBytes", number(env, sizeof(parser_state)));
-  set(env, exports, "llhttpVersion", string(env, LLHTTP_VERSION_STRING));
+  set(env, exports, "llhttpVersion", string(env, RELEASE_VERSION));
   return exports;
 }
