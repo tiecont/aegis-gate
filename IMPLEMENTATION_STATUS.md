@@ -1,5 +1,32 @@
 # Implementation status
 
+## Sprint 05-B Execution / Module 01 NO-GO
+
+Baseline main `8758b1c84b4186449cd79fabae461ca53ee05100`, hosted
+`43620722442` passes both required jobs. Fresh exact-image native diagnostics
+at source `34cf5b0` retain **73/75** original cases and **19/23** supplemental
+probes. Additive 17-control observations complete, including native RSS sampling;
+this native fixture lacks container cgroup memory/PID isolation and is not a
+complete runtime/resource eligibility proof. Original evaluators remain unchanged.
+
+The new in-process incremental llhttp 9.4.4 feasibility binding rejects exact
+historical folded inputs before origin admission. Source `95ded76`, wire run 06,
+also exercises fragmented input, valid targets/pipelines, bounded admission,
+trailers and cancellation. This is an isolated H1 capability, not an accepted
+production ingress boundary or an increase to the Envoy corpus PASS count.
+Independent streaming counterexample `eba8445` records 1,049,201 origin bytes
+before rejecting a late folded trailer when streaming; finite staging prevents
+those effects but waits for complete requests. H2 causal tracing attributes the
+unchanged nine-byte failure to origin SETTINGS/Envoy ACK on a valid reused pool.
+Supported H2 rejection-setting variants retain all four supplemental failures.
+
+Module 00/02/03 real fixture regressions pass locally; no production or dependency
+replacement is introduced. Independent F review, final integrated local gates,
+hosted CI and merge receipts are pending at this checkpoint. See
+`docs/sprints/05b-execution.md` and `docs/reports/sprint05b-completion.md`.
+Module 01 remains NO-GO; 04-12 LOCKED; production BLOCKED. ADR-012 and actual
+human architecture/security owners/approval remain PENDING.
+
 ## Sprint05-A complete / Module01 NO-GO
 
 PR17 merged as `581a609df8c3c3a0ce62d75f4f58fa6db8f76816`, with exact

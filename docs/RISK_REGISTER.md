@@ -320,3 +320,29 @@ fairness and production drain are still unproven. Whole-case invalid-origin-TLS
 counters include a successful recovery request; negative-interval assertions
 separately require zero handlers and decrypted bytes. See the independent
 observer follow-up for exact counters and limitations.
+
+## Sprint 05-B Additive Risk Checkpoint
+
+R01/R04 remain blocking. The exact-image Envoy candidate still measures 73/75
+and 19/23; no original failure is newly repaired. Incremental in-process llhttp
+rejects the exact folded H1 input before origin in a finite H1 feasibility
+adapter, but does not supply H2/identity/tenant/generation or streaming eligibility.
+Streaming accepted prefixes before late trailer validation produces 1,049,201
+origin bytes in the bounded counterexample. Whole-message staging prevents that
+leak only by waiting for completion and enforcing finite size/deadline limits.
+Neither mode is accepted as a complete runtime. The unchanged aggregate H2
+failure remains nine SETTINGS ACK bytes on an existing valid origin connection;
+supported lifecycle/flush/timeout controls have not repaired it. Userinfo peer
+RST_STREAM errors and absent error frames remain supplemental failures.
+
+R13/R16: native exact-image extraction addresses unreliable Docker startup for
+protocol diagnostics only. It uses verified binary identity and finite prlimits,
+but lacks cgroup memory/PID/read-only-rootfs isolation. Native RSS observations
+cannot establish container resource eligibility. Failed startup, compile, harness
+and cleanup receipts are retained with explicit corrections. Independent review
+and final full local/hosted gate receipts remain pending at this checkpoint.
+No original acceptance, TLS verification, scanner policy, human approval,
+Module 04 lock or production restriction changes. Component reports and final
+closeout receipts in `docs/reports/sprint05b-completion.md` supersede checkpoint
+pending fields only after actual execution.
+
