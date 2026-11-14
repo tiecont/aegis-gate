@@ -1,0 +1,54 @@
+865:                 return NGX_HTTP_INTERNAL_SERVER_ERROR;
+866:             }
+867: 
+868:             r->request_body = rb;
+869:         }
+870: 
+871:         for ( ;; ) {
+872: 
+873:             rc = ngx_http_parse_chunked(r, b, rb->chunked, 0);
+874: 
+875:             if (rc == NGX_OK) {
+876: 
+877:                 /* a chunk has been parsed successfully */
+878: 
+879:                 size = b->last - b->pos;
+880: 
+881:                 if ((off_t) size > rb->chunked->size) {
+882:                     b->pos += (size_t) rb->chunked->size;
+883:                     rb->chunked->size = 0;
+884: 
+885:                 } else {
+886:                     rb->chunked->size -= size;
+887:                     b->pos = b->last;
+888:                 }
+889: 
+890:                 continue;
+891:             }
+1126:                            "http body chunked buf "
+1127:                            "t:%d f:%d %p, pos %p, size: %z file: %O, size: %O",
+1128:                            cl->buf->temporary, cl->buf->in_file,
+1129:                            cl->buf->start, cl->buf->pos,
+1130:                            cl->buf->last - cl->buf->pos,
+1131:                            cl->buf->file_pos,
+1132:                            cl->buf->file_last - cl->buf->file_pos);
+1133: 
+1134:             rc = ngx_http_parse_chunked(r, cl->buf, rb->chunked, 0);
+1135: 
+1136:             if (rc == NGX_OK) {
+1137: 
+1138:                 /* a chunk has been parsed successfully */
+1139: 
+1140:                 clcf = ngx_http_get_module_loc_conf(r, ngx_http_core_module);
+1141: 
+1142:                 if (clcf->client_max_body_size
+1143:                     && clcf->client_max_body_size
+1144:                        - r->headers_in.content_length_n < rb->chunked->size)
+1145:                 {
+1146:                     ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
+1147:                                   "client intended to send too large chunked "
+1148:                                   "body: %O+%O bytes",
+1149:                                   r->headers_in.content_length_n,
+1150:                                   rb->chunked->size);
+1151: 
+1152:                     r->lingering_close = 1;

@@ -1,0 +1,163 @@
+2188:           goto s_n_llhttp__internal__n_header_value_discard_lws;
+2189:         }
+2190:         default: {
+2191:           goto s_n_llhttp__internal__n_invoke_test_lenient_flags_16;
+2192:         }
+2193:       }
+2194:       UNREACHABLE;
+2195:     }
+2196:     case s_n_llhttp__internal__n_header_value_lws:
+2197:     s_n_llhttp__internal__n_header_value_lws: {
+2198:       if (p == endp) {
+2199:         return s_n_llhttp__internal__n_header_value_lws;
+2200:       }
+2201:       switch (*p) {
+2202:         case 9: {
+2203:           goto s_n_llhttp__internal__n_invoke_test_lenient_flags_18;
+2204:         }
+2205:         case ' ': {
+2206:           goto s_n_llhttp__internal__n_invoke_test_lenient_flags_18;
+2207:         }
+2208:         default: {
+2209:           goto s_n_llhttp__internal__n_invoke_load_header_state_5;
+2210:         }
+2211:       }
+2212:       UNREACHABLE;
+2213:     }
+2214:     case s_n_llhttp__internal__n_header_value_almost_done:
+2215:     s_n_llhttp__internal__n_header_value_almost_done: {
+2387:           goto s_n_llhttp__internal__n_header_value_otherwise;
+2388:         }
+2389:       }
+2390:       UNREACHABLE;
+2391:     }
+2392:     case s_n_llhttp__internal__n_error_56:
+2393:     s_n_llhttp__internal__n_error_56: {
+2394:       state->error = 0xa;
+2395:       state->reason = "Invalid header value char";
+2396:       state->error_pos = (const char*) p;
+2397:       state->_current = (void*) (intptr_t) s_error;
+2398:       return s_error;
+2399:       UNREACHABLE;
+2400:     }
+2401:     case s_n_llhttp__internal__n_header_value_relaxed:
+2402:     s_n_llhttp__internal__n_header_value_relaxed: {
+2403:       static uint8_t lookup_table[] = {
+2404:         0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1,
+2405:         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+2406:         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+2407:         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+2408:         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+2409:         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+2410:         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+2411:         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+2412:         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+2413:         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+2430:           goto s_n_llhttp__internal__n_span_end_llhttp__on_header_value_4;
+2431:         }
+2432:       }
+2433:       UNREACHABLE;
+2434:     }
+2435:     case s_n_llhttp__internal__n_error_55:
+2436:     s_n_llhttp__internal__n_error_55: {
+2437:       state->error = 0xa;
+2438:       state->reason = "Invalid header value char";
+2439:       state->error_pos = (const char*) p;
+2440:       state->_current = (void*) (intptr_t) s_error;
+2441:       return s_error;
+2442:       UNREACHABLE;
+2443:     }
+2444:     case s_n_llhttp__internal__n_header_value_otherwise:
+2445:     s_n_llhttp__internal__n_header_value_otherwise: {
+2446:       if (p == endp) {
+2447:         return s_n_llhttp__internal__n_header_value_otherwise;
+2448:       }
+2449:       switch (*p) {
+2450:         case 10: {
+2451:           goto s_n_llhttp__internal__n_span_end_llhttp__on_header_value_1;
+2452:         }
+2453:         case 13: {
+2454:           goto s_n_llhttp__internal__n_span_end_llhttp__on_header_value_2;
+2455:         }
+2456:         default: {
+7987:     state->reason = "Content-Length can't be present with Transfer-Encoding";
+7988:     state->error_pos = (const char*) p;
+7989:     state->_current = (void*) (intptr_t) s_error;
+7990:     return s_error;
+7991:     UNREACHABLE;
+7992:   }
+7993:   s_n_llhttp__internal__n_error_47: {
+7994:     state->error = 0xa;
+7995:     state->reason = "Invalid header value char";
+7996:     state->error_pos = (const char*) p;
+7997:     state->_current = (void*) (intptr_t) s_error;
+7998:     return s_error;
+7999:     UNREACHABLE;
+8000:   }
+8001:   s_n_llhttp__internal__n_invoke_test_lenient_flags_15: {
+8002:     switch (llhttp__internal__c_test_lenient_flags(state, p, endp)) {
+8003:       case 1:
+8004:         goto s_n_llhttp__internal__n_header_value_discard_ws;
+8005:       default:
+8006:         goto s_n_llhttp__internal__n_error_47;
+8007:     }
+8008:     UNREACHABLE;
+8009:   }
+8010:   s_n_llhttp__internal__n_error_49: {
+8011:     state->error = 0xb;
+8012:     state->reason = "Empty Content-Length";
+8013:     state->error_pos = (const char*) p;
+8113:         goto s_n_llhttp__internal__n_error_50;
+8114:       default:
+8115:         goto s_n_llhttp__internal__n_invoke_load_header_state_2;
+8116:     }
+8117:     UNREACHABLE;
+8118:   }
+8119:   s_n_llhttp__internal__n_error_46: {
+8120:     state->error = 0xa;
+8121:     state->reason = "Invalid header value char";
+8122:     state->error_pos = (const char*) p;
+8123:     state->_current = (void*) (intptr_t) s_error;
+8124:     return s_error;
+8125:     UNREACHABLE;
+8126:   }
+8127:   s_n_llhttp__internal__n_invoke_test_lenient_flags_14: {
+8128:     switch (llhttp__internal__c_test_lenient_flags_1(state, p, endp)) {
+8129:       case 1:
+8130:         goto s_n_llhttp__internal__n_header_value_discard_lws;
+8131:       default:
+8132:         goto s_n_llhttp__internal__n_error_46;
+8133:     }
+8134:     UNREACHABLE;
+8135:   }
+8136:   s_n_llhttp__internal__n_error_51: {
+8137:     state->error = 0x2;
+8138:     state->reason = "Expected LF after CR";
+8139:     state->error_pos = (const char*) p;
+8163:         goto s_n_llhttp__internal__n_invoke_update_header_state_1;
+8164:       default:
+8165:         goto s_n_llhttp__internal__n_span_start_llhttp__on_header_value_1;
+8166:     }
+8167:     UNREACHABLE;
+8168:   }
+8169:   s_n_llhttp__internal__n_error_53: {
+8170:     state->error = 0xa;
+8171:     state->reason = "Unexpected whitespace after header value";
+8172:     state->error_pos = (const char*) p;
+8173:     state->_current = (void*) (intptr_t) s_error;
+8174:     return s_error;
+8175:     UNREACHABLE;
+8176:   }
+8177:   s_n_llhttp__internal__n_invoke_test_lenient_flags_18: {
+8178:     switch (llhttp__internal__c_test_lenient_flags(state, p, endp)) {
+8179:       case 1:
+8180:         goto s_n_llhttp__internal__n_invoke_load_header_state_4;
+8181:       default:
+8182:         goto s_n_llhttp__internal__n_error_53;
+8183:     }
+8184:     UNREACHABLE;
+8185:   }
+8186:   s_n_llhttp__internal__n_invoke_update_header_state_2: {
+8187:     switch (llhttp__internal__c_update_header_state(state, p, endp)) {
+8188:       default:
+8189:         goto s_n_llhttp__internal__n_invoke_llhttp__on_header_value_complete;

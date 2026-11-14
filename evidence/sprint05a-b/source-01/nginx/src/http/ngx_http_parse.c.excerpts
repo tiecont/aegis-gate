@@ -1,0 +1,245 @@
+926:                         hash = 0;
+927:                         i = 0;
+928:                         r->invalid_header = 1;
+929:                     }
+930: 
+931:                     break;
+932:                 }
+933: 
+934:                 if (ch <= 0x20 || ch == 0x7f || ch == ':') {
+935:                     r->header_end = p;
+936:                     return NGX_HTTP_PARSE_INVALID_HEADER;
+937:                 }
+938: 
+939:                 hash = 0;
+940:                 i = 0;
+941:                 r->invalid_header = 1;
+942: 
+943:                 break;
+944: 
+945:             }
+946:             break;
+947: 
+948:         /* header name */
+949:         case sw_name:
+950:             c = lowcase[ch];
+951: 
+952:             if (c) {
+995:                 && r->upstream
+996:                 && p - r->header_name_start == 4
+997:                 && ngx_strncmp(r->header_name_start, "HTTP", 4) == 0)
+998:             {
+999:                 state = sw_ignore_line;
+1000:                 break;
+1001:             }
+1002: 
+1003:             if (ch <= 0x20 || ch == 0x7f) {
+1004:                 r->header_end = p;
+1005:                 return NGX_HTTP_PARSE_INVALID_HEADER;
+1006:             }
+1007: 
+1008:             r->invalid_header = 1;
+1009: 
+1010:             break;
+1011: 
+1012:         /* space* before header value */
+1013:         case sw_space_before_value:
+1014:             switch (ch) {
+1015:             case ' ':
+1016:                 break;
+1017:             case CR:
+1018:                 r->header_start = p;
+1019:                 r->header_end = p;
+1020:                 state = sw_almost_done;
+1021:                 break;
+1193:             case '#':
+1194:                 r->complex_uri = 1;
+1195:                 state = sw_uri;
+1196:                 break;
+1197:             case '+':
+1198:                 r->plus_in_uri = 1;
+1199:                 break;
+1200:             default:
+1201:                 if (ch <= 0x20 || ch == 0x7f) {
+1202:                     return NGX_ERROR;
+1203:                 }
+1204:                 state = sw_check_uri;
+1205:                 break;
+1206:             }
+1207:             break;
+1208: 
+1209:         /* check "/", "%" and "\" (Win32) in URI */
+1210:         case sw_check_uri:
+1211: 
+1212:             if (usual[ch >> 5] & (1U << (ch & 0x1f))) {
+1213:                 break;
+1214:             }
+1215: 
+1216:             switch (ch) {
+1217:             case '/':
+1218: #if (NGX_WIN32)
+1219:                 if (r->uri_ext == p) {
+1245:             case '#':
+1246:                 r->complex_uri = 1;
+1247:                 state = sw_uri;
+1248:                 break;
+1249:             case '+':
+1250:                 r->plus_in_uri = 1;
+1251:                 break;
+1252:             default:
+1253:                 if (ch <= 0x20 || ch == 0x7f) {
+1254:                     return NGX_ERROR;
+1255:                 }
+1256:                 break;
+1257:             }
+1258:             break;
+1259: 
+1260:         /* URI */
+1261:         case sw_uri:
+1262: 
+1263:             if (usual[ch >> 5] & (1U << (ch & 0x1f))) {
+1264:                 break;
+1265:             }
+1266: 
+1267:             switch (ch) {
+1268:             case '#':
+1269:                 r->complex_uri = 1;
+1270:                 break;
+1271:             default:
+1272:                 if (ch <= 0x20 || ch == 0x7f) {
+1273:                     return NGX_ERROR;
+1274:                 }
+1275:                 break;
+1276:             }
+1277:             break;
+1278:         }
+1279:     }
+1280: 
+1281:     return NGX_OK;
+1282: }
+1283: 
+1284: 
+1285: ngx_int_t
+1286: ngx_http_parse_complex_uri(ngx_http_request_t *r, ngx_uint_t merge_slashes)
+1287: {
+1288:     u_char  c, ch, decoded, *p, *u;
+1289:     enum {
+1290:         sw_usual = 0,
+2193: 
+2194:     } else {
+2195:         args->len = 0;
+2196:     }
+2197: }
+2198: 
+2199: 
+2200: ngx_int_t
+2201: ngx_http_parse_chunked(ngx_http_request_t *r, ngx_buf_t *b,
+2202:     ngx_http_chunked_t *ctx, ngx_uint_t keep_trailers)
+2203: {
+2204:     u_char     *pos, ch, c;
+2205:     ngx_int_t   rc;
+2206:     enum {
+2207:         sw_chunk_start = 0,
+2208:         sw_chunk_size,
+2209:         sw_chunk_extension,
+2210:         sw_chunk_extension_almost_done,
+2211:         sw_chunk_data,
+2212:         sw_after_data,
+2213:         sw_after_data_almost_done,
+2214:         sw_last_chunk_extension,
+2215:         sw_last_chunk_extension_almost_done,
+2216:         sw_trailer,
+2217:         sw_trailer_almost_done,
+2218:         sw_trailer_header,
+2219:         sw_trailer_header_almost_done
+2356:                 if (keep_trailers) {
+2357:                     goto done;
+2358:                 }
+2359:                 state = sw_trailer;
+2360:                 break;
+2361:             }
+2362:             goto invalid;
+2363: 
+2364:         case sw_trailer:
+2365:             switch (ch) {
+2366:             case CR:
+2367:                 state = sw_trailer_almost_done;
+2368:                 break;
+2369:             case LF:
+2370:                 goto invalid;
+2371:             default:
+2372:                 state = sw_trailer_header;
+2373:             }
+2374:             break;
+2375: 
+2376:         case sw_trailer_almost_done:
+2377:             if (ch == LF) {
+2378:                 goto done;
+2379:             }
+2380:             goto invalid;
+2381: 
+2382:         case sw_trailer_header:
+2383:             switch (ch) {
+2384:             case CR:
+2385:                 state = sw_trailer_header_almost_done;
+2386:                 break;
+2387:             case LF:
+2388:                 goto invalid;
+2389:             }
+2390:             break;
+2391: 
+2392:         case sw_trailer_header_almost_done:
+2393:             if (ch == LF) {
+2394:                 state = sw_trailer;
+2395:                 break;
+2396:             }
+2397:             goto invalid;
+2398: 
+2399:         }
+2400:     }
+2401: 
+2402: data:
+2403: 
+2404:     ctx->state = state;
+2405:     b->pos = pos;
+2406: 
+2407:     if (ctx->size > NGX_MAX_OFF_T_VALUE - 9) {
+2408:         goto invalid;
+2409:     }
+2410: 
+2434:         ctx->length = 6 /* LF "0" CRLF CRLF */;
+2435:         break;
+2436:     case sw_last_chunk_extension:
+2437:         ctx->length = 4 /* CRLF CRLF */;
+2438:         break;
+2439:     case sw_last_chunk_extension_almost_done:
+2440:         ctx->length = 3 /* LF CRLF */;
+2441:         break;
+2442:     case sw_trailer:
+2443:         ctx->length = 2 /* CRLF */;
+2444:         break;
+2445:     case sw_trailer_almost_done:
+2446:         ctx->length = 1 /* LF */;
+2447:         break;
+2448:     case sw_trailer_header:
+2449:         ctx->length = 4 /* CRLF CRLF */;
+2450:         break;
+2451:     case sw_trailer_header_almost_done:
+2452:         ctx->length = 3 /* LF CRLF */;
+2453:         break;
+2454: 
+2455:     }
+2456: 
+2457:     return rc;
+2458: 
+2459: done:
+2460: 
+2461:     ctx->state = 0;
+2462:     b->pos = pos + 1;
+2463: 
+2464:     return NGX_DONE;
+2465: 
+2466: invalid:
+2467: 
+2468:     return NGX_ERROR;
+2469: }
