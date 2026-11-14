@@ -119,6 +119,67 @@ Dd85d04b vs implementationeba8445 have identical relevant executable bytes.
 This is offline integrity verification; it starts no fixture and grants no
 semantic security PASS.
 
+## E: regression collector
+
+**ACCEPT narrow test-only collector and authentic retained evidence; REJECT an
+independent full-regression PASS from F's first replay.** Final E source
+`7755f7ae51d9a5e087c638371e41d8c2133e679c` changes no product or dependency
+code. Its sole existing fixture edit expands the isolated project-name regex
+from05A to05A/05B; no security assertion changes. E's original successful
+attempt02 raw commands, all source/tree bindings and manifest hashes verify.
+
+F independently strict-installs root/dashboard/spike dependencies, starts
+disposable PostgreSQL/Redis/NATS fixtures and passes credential/TLS negatives.
+The unmodified private-image integration then fails fresh PostgreSQL readiness
+before race/config/dashboard regression execution. Raw failure, successful
+volume/container/network removal and private-material removal are retained in
+`evidence/sprint05b-f/e-01`. This is a failed replay, not a waived image gate;
+F does not infer its cause from the generic readiness error.
+
+```sh
+flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint05b-f-review.mjs e 7755f7a evidence/sprint05b-f/e-01
+```
+
+Focused actual integration execution is queued separately. Root's full
+`make check`/`make security-scan` must still pass and cleanup must verify before
+integration delivery; neither the collector's addition nor this narrow review
+grants those gates.
+
+## Root Helpers And Integration
+
+**ACCEPT scoped native diagnostic/cleanup tools and safe readiness diagnostics;
+REJECT native resource eligibility and production acceptance.** Root source
+`fb4cc6a` retains exact-image extraction provenance and acknowledges native
+prlimit core0/nofile1024/cpu180 lacks Docker memory/PID/CPU cgroups and filesystem
+isolation. B's independent extraction produces the same binary SHA256. Root's
+launcher retains combined compiler, verified TLS, loopback listeners and
+validated manifest generation. Its resource helper hashes the live executable
+before reading `/proc` RSS; only additive observations import it. It changes no
+original75/23 assertion or interval. candidate04's17 completed observations are
+authentic diagnostics, not17 repaired security assertions.
+
+Corrected container cleanup unions separate prefix inventories and requires
+owned worktree mount paths before removal. The one-off root cleanup also
+requires its exact historical container and known mount fragment. C's six-round
+late-create inventory has an explicit finite observation limit. Native launchers
+remain non-hermetic test processes: no cgroup isolation or indefinite orphan
+cleanup guarantee is accepted. Failed cleanup receipts are superseded explicitly,
+not silently rewritten.
+
+Root `6173d1b` changes only failed private-PostgreSQL readiness diagnostics:
+original60 probes and250ms sleeps/assertion remain; stdlib JSON selects fixed
+State lifecycle fields plus an error-present boolean. It exports no Config.Env,
+raw error text, container logs or private fixture values. This is diagnostic
+evidence only and does not repair or waive a readiness failure.
+
+Integrated source `4127839` independently passes `audit-02`:72 manifests,
+1,200 artifact hashes and3,003 captured-source hashes verify with zero errors.
+Every reviewed A/B/C/D/E executable and root helper matches its exact source
+commit; all11 protected files match8758b1c. Product code, contracts, dependency
+manifests, infra and scanner/workflow policy are unchanged from baseline.
+Full gate/hosted/merge outcomes remain separate obligations; this acceptance
+permits only safe testing/evidence integration.
+
 ## D: late trailers and streaming
 
 **ACCEPT narrow counterexample/evidence; REJECT simultaneous strict zero-byte
