@@ -50,6 +50,9 @@ try {
   run('openssl', 'openssl', ['version']); run('docker', 'docker', ['version', '--format', '{{.Server.Version}}']);
   run('image', 'docker', ['image', 'inspect', JSON.parse(fs.readFileSync('spikes/envoy/image.lock.json')).image,
     '--format', '{{.Id}} {{json .RepoDigests}}']);
+  run('envoy-version', 'docker', ['run', '--rm', '--pull', 'never', '--network', 'none',
+    '--name', `aegis-sprint05b-b-preflight-${process.pid}`, '--entrypoint', '/usr/local/bin/envoy',
+    JSON.parse(fs.readFileSync('spikes/envoy/image.lock.json')).image, '--version']);
   run('immutable75', process.execPath, ['spikes/edge-comparison/extract-baseline.mjs', '--check']);
   const original = run('original75', process.execPath,
     [...(tap === 'tap' ? ['--import', './spikes/envoy/sprint05b-b-tap.mjs'] : []), 'spikes/edge-comparison/run.mjs'], [0, 1],
@@ -72,15 +75,17 @@ try {
 finally {
   assertLock();
   try {
-    const ids = execFileSync('docker', ['ps', '-aq'], { encoding: 'utf8' }).trim().split('\n').filter(Boolean);
+    const ids = execFileSync('docker', ['ps', '-aq', '--filter', 'name=^/aegis-envoy-', '--filter', 'name=^/aegis-sprint05a-a-'],
+      { encoding: 'utf8', timeout: 15000 }).trim().split('\n').filter(Boolean);
     const owned = [];
     for (const id of ids) {
-      const c = JSON.parse(execFileSync('docker', ['inspect', id]))[0];
-      if (/^\/aegis-(envoy-|sprint05a-a-)/.test(c.Name) &&
-        c.Mounts.some((m) => m.Source.startsWith(path.resolve('.local') + '/'))) owned.push(id);
+      const mounts = JSON.parse(execFileSync('docker', ['inspect', '--format', '{{json .Mounts}}', id], { timeout: 15000 }));
+      if (mounts.some((m) => m.Source.startsWith(path.resolve('.local') + '/'))) owned.push(id);
     }
     record.cleanup_stopped = owned;
     for (const id of owned) run(`cleanup-${id}`, 'docker', ['stop', '--timeout', '2', id]);
+    for (const id of owned) if (spawnSync('docker', ['inspect', id], { stdio: 'ignore', timeout: 15000 }).status === 0)
+      run(`remove-${id}`, 'docker', ['rm', '-f', id]);
     for (const id of owned) {
       for (let i = 0; i < 50 && spawnSync('docker', ['inspect', id], { stdio: 'ignore' }).status === 0; i++) await delay(100);
       assert.notEqual(spawnSync('docker', ['inspect', id], { stdio: 'ignore' }).status, 0, 'owned container retained');

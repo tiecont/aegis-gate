@@ -18,7 +18,7 @@ const paths = [
   ['source/common/http/http2/codec_impl.cc', /use_oghttp2_library_|sendSettingsHelper|SubmitSettings|OnSettings|Decoding incoming frames|Status ConnectionImpl::sendPendingFrames/],
   ['source/common/http/conn_pool_base.cc', /void MultiplexedActiveClientBase::onSettings/],
   ['source/common/runtime/runtime_features.cc', /http2_use_oghttp2/],
-  ['bazel/repository_locations.bzl', /nghttp2|com_google_quiche/],
+  ['MODULE.bazel', /bazel_dep\(name = "nghttp2"|bazel_dep\(name = "quiche"/],
   ['api/envoy/extensions/upstreams/http/v3/http_protocol_options.proto', /message HttpProtocolOptions|http2_protocol_options|explicit_http_config/],
 ];
 try {
