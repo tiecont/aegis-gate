@@ -65,6 +65,11 @@ try {
     const expected = git('show', `8758b1c:${file}`), actual = fs.readFileSync(`${clone}/${file}`);
     assert.deepEqual(actual, expected, file); return { file, sha256: sha(actual), bytes: actual.length };
   });
+  if (['b', 'c', 'root'].includes(mode)) {
+    const npm = path.join(path.dirname(node), 'npm');
+    assert.equal((await run('strict-spike-install', npm,
+      ['--prefix', 'spikes/pingora', 'ci', '--ignore-scripts', '--strict-peer-deps'])).exit_code, 0);
+  }
   const child = async (label, file, args, env = {}) => run(label, node, [file, ...args], clone, env, 900000);
   const generated = [];
   if (mode === 'a') {
