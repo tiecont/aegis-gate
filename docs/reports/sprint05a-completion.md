@@ -146,7 +146,8 @@ inspection/removal wait source above has a fresh17-control run at
 ACCEPTs exact B/C/E research/regressions, corrected D collector and preservation
 of the combined partial repairs; complete runtime eligibility is REJECTED.
 See `sprint05a-f-integration-review.md` and the final handoff at `c5cd051`.
-Root local gates, exact PR-head CI, merge SHA and main CI remain **PENDING**,
+Root full local gates now PASS as recorded below; exact PR-head CI, merge SHA
+and main CI remain **PENDING**,
 to be filled only from actual completed receipts. Earlier failed attempts and A's
 sanitized capture correction remain disclosed; no unreviewed unsafe ancestry
 is accepted. No upstream issue/PR draft was externally published.
@@ -198,6 +199,20 @@ Pingora's two unmaintained warnings remain visible, not ignored.
 Paths in this table are under `evidence/sprint05a-root/`. Final PR-head hosted
 jobs, merge SHA and main jobs must still be recorded from actual GitHub state;
 local gates alone do not grant merge or runtime acceptance.
+
+Final gate/source independent ACCEPT is `8ce5aef`, report
+`sprint05a-f-gate-review.md`. Its audit03 verifies67 manifests/1675 entries,
+1278 source hashes/1104 stream hashes, exact gates02, six empty inventories,
+formatting AST equality, absence of new binaries/private fixture material and
+an offline pinned secret scan. Four declared A withheld streams remain absent
+and ineligible. Both rejected04C commits are non-ancestors of the publishable
+source and all52 live advertised remote refs. All402 publishable ancestors are
+present in the independent clone; no shallow/alternate/hardlink boundary hides
+published history. This review accepts local gates and research scope only.
+
+Integration PR: https://github.com/tiecont/aegis-gate/pull/17. Its exact final
+head and resulting merge/main hosted results are recorded in the closeout
+addendum after execution; no self-referential commit hash is fabricated here.
 
 ## Gate matrix and next action
 

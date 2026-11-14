@@ -25,6 +25,8 @@ Full locked local check/security-scan/cleanup pass at `c117d96`, tree
 containing only publishable ancestry. `evidence/sprint05a-root/gates-02/`
 retains fresh scanner/SBOM receipts and cleanup. The failed gates01 history
 findings remain disclosed; unrelated rejected04C branches are not published.
+Independent final source/local-gate review `8ce5aef` ACCEPTs this scope;
+PR17 exact-head and merge hosted checks remain required for integration.
 
 See `docs/reports/sprint05a-completion.md` for exact source/evidence, independent
 review, local/hosted gate and merge receipts as they become available. Formal
