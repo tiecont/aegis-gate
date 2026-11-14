@@ -87,6 +87,7 @@ async function run(label, program, args) {
   return Buffer.concat(streams[0]).toString();
 }
 let started = false;
+let observer;
 const privateFiles = [
   "pki",
   "compose.env",
@@ -100,6 +101,18 @@ try {
   started = true;
   await run("fixtures-up", "make", ["dev-up"]);
   await run("fixture-tls-credentials", "python3", ["scripts/integration.py"]);
+  const observerProgram = path.resolve(".local/sprint05b-f-locks");
+  record.observer = {
+    file: observerProgram,
+    sha256: sha(fs.readFileSync(observerProgram)),
+    scope:
+      "Read-only pg_locks/allowlisted pg_stat_activity fields; no SQL text or credentials",
+  };
+  observer = spawn(
+    observerProgram,
+    [source, path.resolve(output, "lock-samples.jsonl")],
+    { stdio: ["ignore", "ignore", "ignore"] },
+  );
   const result = await run("go-race-all", "go", [
     "test",
     "-race",
@@ -132,6 +145,12 @@ try {
   record.error = error.stack;
 } finally {
   assertLock();
+  if (observer && observer.exitCode === null) {
+    const closed = new Promise((resolve) => observer.once("close", resolve));
+    observer.kill("SIGTERM");
+    await closed;
+    record.observer.exit_code = observer.exitCode;
+  }
   if (started)
     try {
       await run("cleanup", "docker", [
