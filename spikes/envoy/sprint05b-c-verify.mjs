@@ -28,12 +28,27 @@ for (const entry of fs.readdirSync('evidence/sprint05b-c')) {
     assert.match(result.fatal, /owned listener readiness/); assert.equal(result.tests.length, 0);
   } else {
     assert.equal(result.tests.length, 23);
-    const native = r.transport === 'native';
+    const native = ['native', 'root-native'].includes(r.transport);
     assert.equal(result.tests.filter((t) => t.status === 'pass').length, entry === 'attempt-01' || native ? 19 : 18);
     if (native) {
       assert.equal(r.native.binary.sha256, '1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc');
       assert.equal(sha(fs.readFileSync(r.native.binary.file)), r.native.binary.sha256);
       assert.equal(r.cleanup_complete, true);
+      if (r.transport === 'root-native') {
+        const rootLauncher = r.native.root_launcher;
+        assert.equal(sha(git('show', rootLauncher.source)), rootLauncher.sha256);
+        assert.equal(sha(git('show', `${r.source_commit}:${rootLauncher.file}`)), rootLauncher.sha256);
+        assert.equal(sha(git('show', '3e31b31:evidence/sprint05b-root/native-extract-01/receipt.json')), r.native.extraction_sha256);
+        assert.equal(r.recording_complete, true);
+        const actual = JSON.parse(fs.readFileSync(`${base}/bootstrap.json`));
+        for (const listener of actual.static_resources.listeners) for (const chain of listener.filter_chains) {
+          const hcm = chain.filters[0].typed_config;
+          assert.equal(hcm.http2_protocol_options.override_stream_error_on_invalid_http_message, true);
+          if (r.mode === 'flush-zero') assert.equal(hcm.delayed_close_timeout, '0s');
+          if (r.mode === 'flush-long') assert.equal(hcm.delayed_close_timeout, '1s');
+          if (r.mode === 'header-timeout') assert.equal(hcm.request_headers_timeout, '0.500s');
+        }
+      }
       for (const name of ['raw-H2-uppercase-header-name', 'raw-H2-connection-specific-header',
         'slow-reader-backpressure-and-response-cancellation', '32-partial-header-connections-termination-drain']) {
         assert.equal(result.tests.find((t) => t.name === name).status, 'pass');

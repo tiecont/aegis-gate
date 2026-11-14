@@ -264,6 +264,49 @@ all18 queries empty, with no removal or State.Error/Env read. Checksums pass,
 and their exact unchanged listener timeout remain preserved for root's host
 investigation.
 
+## Exact Root Launcher Completion
+
+After root confirmed candidate03 native setup (reported73/75 and19/23), C
+performed the requested final bounded attempts using a byte-identical copy of
+`f0e9792:spikes/envoy/sprint05b-native-launcher.mjs` as
+`spikes/envoy/sprint05b-c-root-launcher.mjs`. SHA256
+`f455aae493a68e1143911ca17e47bba224c3afb996bcb3477da7cd0973d968d5`
+matches the committed root blob before every run. The runtime resolver redirects
+only that launcher's combined compiler import to C's supported compiler. It
+does not transform the launcher, original test source or expectations. The
+extraction receipt is byte-equal to the committed3e31b31 provenance, hash
+`9961348d1c0349a092eb9cee143238a7c0e69fe253c257f1e574f3bf28b2d08c`.
+Source990042f records actual full23 suites with unchanged payloads, observation
+windows, TLS validation, original readiness deadline and original observer:
+
+| Attempt | Supported Setting | Full23 Result | Verdict |
+| --- | --- | --- | --- |
+| 15 | delayed_close_timeout=0s | 19/23, original four failures | No repair |
+| 16 | delayed_close_timeout=1s | 19/23, original four failures | No repair |
+| 17 | request_headers_timeout=500ms | 19/23, original four failures | No repair |
+
+Every original child exits1; each collector exits0 with recording_complete and
+cleanup_complete true. Minimum upstream windows, stream-local messaging errors
+and all repaired19 cases remain intact. The three actual bootstrap artifacts
+record their selected settings. Lock coverage includes all fixtures, separate
+container inventories, owned private-directory cleanup and final evidence
+hashing. No Docker run or new binary extraction occurred. The exact root
+launcher retains prlimit only and no cgroup memory/PID claim. Root's73/75 is
+context supplied by root, not a new C75 run. All C processes exited and `.local`
+is empty. This completes the requested bounded experiments; the four scoped
+stops and source-causal limitations above remain the final C verdict.
+
+Reproduce with the pinned main Node and global flock using a fresh attempt:
+
+```sh
+flock /tmp/aegisgate-sprint02-fixtures.lock \
+  /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node \
+  spikes/envoy/sprint05b-c-run.mjs evidence/sprint05b-c/attempt-NN flush-zero root-native
+```
+
+Other measured modes are flush-long and header-timeout. No additional
+architecture research or release authorization follows from these results.
+
 ## Agent Completion Report
 
 - Module/status:01/C, partial; four supplemental failures unresolved.
@@ -273,7 +316,8 @@ investigation.
 - Architecture/contract changes: none; no gate opened.
 - Positive/security tests: Docker baseline19/23; two Docker variants18/23;
   six setup failures0 cases; native baseline and three variants19/23 plus separate
-  relay19/23. Exact commands/raw exits retained in receipts.
+  relay19/23; exact-root-launcher attempts15-17 each19/23. Exact commands/raw
+  exits retained in receipts.
 - Offline verifier at clean source787ad0f exits0:155 evidence checksums and873
   captured-source hashes match their committed objects; owned script syntax,
   protected corpus equality and retained window/stream-error invariants pass.
