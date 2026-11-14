@@ -1,5 +1,11 @@
 # Sprint04-C F independent A/C/E review
 
+Subsequent disposition: E's acceptance below is SUPERSEDED pending correction
+of the public-document telemetry-token scanner finding and fresh sanitized
+proof. The historical review is retained without rewriting its observations.
+A/C acceptance remains effective. See `sprint04c-f-bd-review.md` and the failed
+safe scanner receipt `evidence/sprint04c-f/receipts-01/`.
+
 Verdict: **ACCEPT**, limited to the exact proposed decision, scoped alternative
 source/design and local regression evidence below. No runtime eligibility,
 contract activation, named-human appointment or production approval is granted.
