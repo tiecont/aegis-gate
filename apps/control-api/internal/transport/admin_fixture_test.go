@@ -9,6 +9,7 @@ import (
 	"crypto/x509"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net"
@@ -257,6 +258,15 @@ func newAdminLab(t *testing.T) *adminLab {
 func (l *adminLab) client(t *testing.T, subject string) *http.Client {
 	return l.clientStatus(t, subject, 200)
 }
+
+func fixtureHTTPError(err error) string {
+	var requestError *url.Error
+	if errors.As(err, &requestError) {
+		return fmt.Sprintf("HTTP %s failed: %v", requestError.Op, requestError.Err)
+	}
+	return fmt.Sprintf("HTTP request failed: %T", err)
+}
+
 func (l *adminLab) clientStatus(t *testing.T, subject string, want int) *http.Client {
 	t.Helper()
 	jar, err := cookiejar.New(nil)
@@ -273,7 +283,7 @@ func (l *adminLab) clientStatus(t *testing.T, subject string, want int) *http.Cl
 	l.subject.Store(subject)
 	resp, err := client.Get(l.server.URL + "/v1/login")
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(fixtureHTTPError(err))
 	}
 	resp.Body.Close()
 	if resp.StatusCode != 302 {
@@ -281,7 +291,7 @@ func (l *adminLab) clientStatus(t *testing.T, subject string, want int) *http.Cl
 	}
 	resp, err = client.Get(resp.Header.Get("Location"))
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(fixtureHTTPError(err))
 	}
 	resp.Body.Close()
 	if resp.StatusCode != 302 {
@@ -290,7 +300,7 @@ func (l *adminLab) clientStatus(t *testing.T, subject string, want int) *http.Cl
 	callback := resp.Header.Get("Location")
 	resp, err = client.Get(callback)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(fixtureHTTPError(err))
 	}
 	resp.Body.Close()
 	if resp.StatusCode != want {
@@ -299,7 +309,7 @@ func (l *adminLab) clientStatus(t *testing.T, subject string, want int) *http.Cl
 	calls := l.tokenCalls.Load()
 	resp, err = client.Get(callback)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(fixtureHTTPError(err))
 	}
 	resp.Body.Close()
 	if resp.StatusCode != 401 || calls != l.tokenCalls.Load() {
@@ -327,7 +337,7 @@ func (l *adminLab) request(t *testing.T, client *http.Client, method, path, body
 	}
 	resp, err := client.Do(request)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(fixtureHTTPError(err))
 	}
 	defer resp.Body.Close()
 	raw, err := io.ReadAll(io.LimitReader(resp.Body, 32769))
