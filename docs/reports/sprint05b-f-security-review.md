@@ -75,6 +75,50 @@ normal SETTINGS receive path queues an ACK. Hidden codec selection and
 window/keepalive settings establish no supported ACK suppression/barrier.
 The trace identifies JS relay order, not kernel timestamps/internal scheduling.
 
+## C: supplemental protocol scoped stops
+
+**ACCEPT narrow additive diagnostics and scoped stops; REJECT all four failed
+supplemental requirements.** Independently measured clean source
+`fe92fc16b8b84f6670a778070a4583b0225ced56`; final package `0170010` changes only
+the report and verify03 evidence. All C executable bytes are identical.
+
+```sh
+flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint05b-f-review.mjs c fe92fc1 evidence/sprint05b-f/c-01
+```
+
+Both the untapped original23 and separate verified TLS relay original23 return
+19/23, raw exits1, collection exits0. Userinfo receives peer RST_STREAM1,
+hex `00000403000000000100000001`, instead of required400/421. Relay connections6
+and9 verify SNI=edge-b.test/ALPN=h2 and show no earlier client RST. Client
+CANCEL8 appears only on connections11/12, in cancellation controls, with hex
+`00000403000000000100000008`. No client cancellation is credited as rejection.
+Raw HEADERS on stream0 and zero WINDOW_UPDATE have no received error frame
+before peer close; unchanged zero-origin counters do not repair that failure.
+
+The separate relay modifies diagnostic downstream transport and cannot replace
+untapped timing/resource evidence. Both fresh runs preserve valid protocol,
+uppercase/connection-header, backpressure, cancellation and drain results.
+Locked six-round cleanup and fresh-source checks complete. Original75/23,
+observers and deadlines are byte-identical to baseline.
+
+Final C receipts15/16/17 record exact-root-launcher flush0/flush1s/header500ms
+variants at19/23. Their original suite exits1, bootstrap setting bytes and
+source/tree/hash bindings check. The settings show no supported repair; F did
+not repeat every already failing variant. Pinned codec early-return/flush paths
+support a bounded explanation but do not prove an internally queued GOAWAY.
+Hidden/unimplemented validator or codec fields remain excluded.
+
+## Evidence Integrity
+
+Offline `scripts/sprint05b-f-audit.mjs evidence/sprint05b-f/audit-01` verifies
+60 committed manifests,1,087 artifact hashes and2,632 captured-source hashes
+across final A/B/C/D/E and root `fb4cc6a`, with zero errors. Each package's11
+protected parser/corpus/evaluator/observer/fixture files exactly match baseline
+`8758b1c`. Final A37f5439 vs measured95ded76, C0170010 vs measuredfe92fc1, and
+Dd85d04b vs implementationeba8445 have identical relevant executable bytes.
+This is offline integrity verification; it starts no fixture and grants no
+semantic security PASS.
+
 ## D: late trailers and streaming
 
 **ACCEPT narrow counterexample/evidence; REJECT simultaneous strict zero-byte
