@@ -7,9 +7,10 @@ import { setTimeout as delay } from 'node:timers/promises';
 import { assertLock } from './wire-fixtures.mjs';
 
 process.umask(0o077); assertLock();
-const [output, tap = 'tap'] = process.argv.slice(2);
+const [output, tap = 'tap', execution = 'container'] = process.argv.slice(2);
 assert.match(output ?? '', /^evidence\/sprint05b-b\/[a-z0-9-]+$/);
 assert.ok(['tap', 'plain'].includes(tap)); assert.ok(!fs.existsSync(output));
+assert.ok(['container', 'native'].includes(execution));
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 8 << 20 }).trim();
 assert.equal(git('status', '--porcelain', '--untracked-files=no'), '', 'commit source first');
 git('diff', '--exit-code', '8758b1c', 'HEAD', '--', 'spikes/edge-comparison', 'spikes/pingora/lab.mjs',
@@ -18,19 +19,23 @@ git('diff', '--exit-code', '8758b1c', 'HEAD', '--', 'spikes/edge-comparison', 's
 fs.mkdirSync(output, { recursive: true }); fs.mkdirSync('.local', { recursive: true });
 const initial = new Set(fs.readdirSync('.local'));
 const fixture = fs.mkdtempSync(path.resolve('.local/sprint05b-b-'));
+const nativeBinary = path.join(fixture, 'envoy');
+const nativeDigest = '1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc';
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const files = git('ls-files', 'spikes/envoy', 'spikes/edge-comparison', 'spikes/pingora/lab.mjs',
   'spikes/pingora/package.json', 'spikes/pingora/package-lock.json').split('\n');
 const environment = { AEGIS_05A_D_POLICY: 'stream-errors',
-  NODE_OPTIONS: `--import=${path.resolve('spikes/envoy/sprint05a-combined-select.mjs')}`,
+  NODE_OPTIONS: `--import=${path.resolve(`spikes/envoy/${execution === 'native' ? 'sprint05b-b-native' : 'sprint05a-combined'}-select.mjs`)}`,
   PINGORA_SPIKE_PROFILE: 'release', AEGIS_RUN_ROOT: fixture,
   AEGIS_CANDIDATE_NAME: 'envoy-1.40.2-sprint05b-b-unchanged-combined',
   AEGIS_CANDIDATE_COMMAND: process.execPath,
-  AEGIS_CANDIDATE_ARGS: JSON.stringify([path.resolve('spikes/envoy/sprint05a-a-launcher.mjs')]),
+  AEGIS_CANDIDATE_ARGS: JSON.stringify([path.resolve(`spikes/envoy/${execution === 'native' ? 'sprint05b-b-native' : 'sprint05a-a'}-launcher.mjs`)]),
   AEGIS_CANDIDATE_ARTIFACTS: JSON.stringify(files.filter((f) => f.startsWith('spikes/envoy/')).map((f) => path.resolve(f))) };
+if (execution === 'native') Object.assign(environment, { AEGIS_05B_B_BINARY: nativeBinary, AEGIS_05B_B_BINARY_SHA256: nativeDigest });
 const record = { source_commit: git('rev-parse', 'HEAD'), source_tree: git('rev-parse', 'HEAD^{tree}'),
   source_clean: true, argv: process.argv, cwd: process.cwd(), started_at: new Date().toISOString(),
-  node: process.version, node_binary_sha256: sha(fs.readFileSync(process.execPath)), environment, tap,
+  node: process.version, node_binary_sha256: sha(fs.readFileSync(process.execPath)), environment, tap, execution,
+  resource_eligibility: execution === 'container',
   sources: files.map((file) => ({ file, sha256: sha(fs.readFileSync(file)) })), commands: [] };
 const save = () => fs.writeFileSync(`${output}/receipt.json`, JSON.stringify(record, null, 2) + '\n');
 function run(label, program, args, expected = [0], extra = {}) {
@@ -50,7 +55,18 @@ try {
   run('openssl', 'openssl', ['version']); run('docker', 'docker', ['version', '--format', '{{.Server.Version}}']);
   run('image', 'docker', ['image', 'inspect', JSON.parse(fs.readFileSync('spikes/envoy/image.lock.json')).image,
     '--format', '{{.Id}} {{json .RepoDigests}}']);
-  run('envoy-version', 'docker', ['run', '--rm', '--pull', 'never', '--network', 'none',
+  if (execution === 'native') {
+    const name = `aegis-sprint05b-b-extract-${process.pid}`;
+    try {
+      run('extract-create', 'docker', ['create', '--name', name, '--network', 'none',
+        '--entrypoint', '/usr/local/bin/envoy', JSON.parse(fs.readFileSync('spikes/envoy/image.lock.json')).image, '--version']);
+      run('extract-copy', 'docker', ['cp', `${name}:/usr/local/bin/envoy`, nativeBinary]);
+      fs.chmodSync(nativeBinary, 0o700); assert.equal(sha(fs.readFileSync(nativeBinary)), nativeDigest);
+      record.native_binary = { sha256: nativeDigest, file: nativeBinary,
+        caveat: 'same image binary and combined config; host libraries, prlimit only; no Docker cgroups, ineligible resource proof' };
+      run('envoy-version', nativeBinary, ['--version']); run('native-libraries', 'ldd', [nativeBinary]);
+    } finally { run('extract-remove', 'docker', ['rm', '-f', name]); }
+  } else run('envoy-version', 'docker', ['run', '--rm', '--pull', 'never', '--network', 'none',
     '--name', `aegis-sprint05b-b-preflight-${process.pid}`, '--entrypoint', '/usr/local/bin/envoy',
     JSON.parse(fs.readFileSync('spikes/envoy/image.lock.json')).image, '--version']);
   run('immutable75', process.execPath, ['spikes/edge-comparison/extract-baseline.mjs', '--check']);
