@@ -103,3 +103,17 @@ or unrelated container configuration are retained.
   complete eligibility proof, maintenance and actual human decision.
 - Next action: independently reproduce D, combine accepted A/D settings and
   execute unchanged75/23 plus positive controls before any merged improvement.
+
+## Independent review and collector correction
+
+F independently reproduces selected19/23, but its fresh baseline is17/23:
+the200ms paused-reader assertion varies from historical16/23. The two header
+assertions are deterministic repairs in the reproduced comparison; lower
+window buffering is measured improvement, not a deterministic third new PASS.
+
+F rejects the original runner's broad Docker inspection before ownership
+selection. Source `c698a4af61195aad5a8a80d2b8d0d090f0f1d068` replaces it with
+mount-only inspection and bounded waiting for owned container removal. Fresh
+`attempt-03 --controls-only` executes17 observation-complete controls, exits0,
+and records complete cleanup/hashing under the fixture lock. The earlier
+receipts remain immutable; no underlying candidate or original75/23 changes.
