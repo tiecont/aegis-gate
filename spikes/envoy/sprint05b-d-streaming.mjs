@@ -106,8 +106,14 @@ try {
           fs.closeSync(fd); fd = undefined; const buffer = Buffer.alloc(16384), input = fs.openSync(stage, 'r');
           try { let n; while ((n = fs.readSync(input, buffer)) > 0) await send(Buffer.from(buffer.subarray(0, n))); } finally { fs.closeSync(input); }
         }
-        if (up) { if (invalid) up.destroy(); else await once(up, 'close'); }
+        if (up) {
+          if (invalid) {
+            up.destroy();
+            await until(() => aborted > before.aborted);
+          } else await once(up, 'close');
+        }
       }
+      await until(() => sockets.size === 0);
       await delay(30);
       const after = snapshot();
       const row = { mode, invalid, cancel, header_sha256: sha(header), body_chunk_sha256: sha(chunk),
