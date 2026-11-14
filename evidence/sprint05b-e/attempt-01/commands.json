@@ -1,0 +1,163 @@
+{
+  "source_commit": "9c5399c54ff89807d7237313d6bbf0fe1b8c23b1",
+  "source_tree": "49b33252a6408779d4b467c9fc7b747cf419f0a7",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05b-e/scripts/sprint05b-e-regressions.mjs",
+    "evidence/sprint05b-e/attempt-01"
+  ],
+  "cwd": "/tmp/aegisgate-05b-e",
+  "started_at": "2026-11-14T18:07:05.693Z",
+  "node": "v26.13.0",
+  "node_binary_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "environment": {
+    "PATH": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin:/home/tiecont/.local/bin:/home/tiecont/.codex/packages/app-server-daemon/releases/0.169.0-x86_64-unknown-linux-musl/codex-path:/home/tiecont/.codex/tmp/arg0-linux/codex-arg0Gu2xN6:/home/tiecont/.codex/tmp/arg0-linux/codex-arg0mkaBlZ:/home/tiecont/.codex/packages/standalone/releases/0.169.0-x86_64-unknown-linux-musl/codex-path:/home/tiecont/.local/bin:/home/tiecont/.local/share/nvm/v24.18.0/bin:/home/tiecont/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/tiecont/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/tiecont/.local/share/pnpm/bin",
+    "AEGIS_NODE_BIN": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "GOTOOLCHAIN": "go1.27.4",
+    "COMPOSE_PROJECT_NAME": "aegisgate-05b-e-attempt-01-d0a0386dc839"
+  },
+  "fixture_lock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "commands": [
+    {
+      "label": "version-git",
+      "command": "git",
+      "args": [
+        "--version"
+      ],
+      "extra": {},
+      "started_at": "2026-11-14T18:07:06.011Z",
+      "ended_at": "2026-11-14T18:07:06.031Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-e/attempt-01/version-git.stdout",
+          "bytes": 19,
+          "sha256": "0eff67955296e123526d7f9b9146fff8d8dc8d6dbf4f49ba5f838923d2b4af71"
+        },
+        {
+          "file": "evidence/sprint05b-e/attempt-01/version-git.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "version-go",
+      "command": "go",
+      "args": [
+        "version"
+      ],
+      "extra": {},
+      "started_at": "2026-11-14T18:07:06.039Z",
+      "ended_at": "2026-11-14T18:07:06.068Z",
+      "exit_code": 1,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-e/attempt-01/version-go.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05b-e/attempt-01/version-go.stderr",
+          "bytes": 84,
+          "sha256": "6a930d3fd82fb99038adaf213a89b7c4527fee746de0d8ea626e46983cbd8889"
+        }
+      ]
+    },
+    {
+      "label": "remaining-container",
+      "command": "docker",
+      "args": [
+        "container",
+        "ls",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-05b-e-attempt-01-d0a0386dc839",
+        "--format",
+        "{{.ID}}"
+      ],
+      "extra": {},
+      "started_at": "2026-11-14T18:07:06.078Z",
+      "ended_at": "2026-11-14T18:07:06.111Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-e/attempt-01/remaining-container.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05b-e/attempt-01/remaining-container.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "remaining-network",
+      "command": "docker",
+      "args": [
+        "network",
+        "ls",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-05b-e-attempt-01-d0a0386dc839",
+        "--format",
+        "{{.ID}}"
+      ],
+      "extra": {},
+      "started_at": "2026-11-14T18:07:06.125Z",
+      "ended_at": "2026-11-14T18:07:06.152Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-e/attempt-01/remaining-network.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05b-e/attempt-01/remaining-network.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "remaining-volume",
+      "command": "docker",
+      "args": [
+        "volume",
+        "ls",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-05b-e-attempt-01-d0a0386dc839",
+        "--format",
+        "{{.ID}}"
+      ],
+      "extra": {},
+      "started_at": "2026-11-14T18:07:06.159Z",
+      "ended_at": "2026-11-14T18:07:06.188Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-e/attempt-01/remaining-volume.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05b-e/attempt-01/remaining-volume.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "passed": false,
+  "error": "AssertionError [ERR_ASSERTION]: version-go\n\n1 !== 0\n\n    at run (file:///tmp/aegisgate-05b-e/scripts/sprint05b-e-regressions.mjs:88:10)\n    at file:///tmp/aegisgate-05b-e/scripts/sprint05b-e-regressions.mjs:110:5\n    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)\n    at async node:internal/modules/esm/loader:650:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:105:5)",
+  "private_matches": 0,
+  "private_material_removed": true,
+  "lock_held_through_hashing": true,
+  "ended_at": "2026-11-14T18:07:06.189Z"
+}
