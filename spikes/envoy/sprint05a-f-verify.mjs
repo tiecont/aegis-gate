@@ -9,10 +9,12 @@ import { supplementalNegatives } from '../edge-comparison/supplemental.mjs';
 
 process.umask(0o077); assertLock();
 const output = process.argv[2];
+const reportOnly = process.argv[3] === '--report-only';
+assert.ok(process.argv[3] === undefined || reportOnly);
 assert.match(output ?? '', /^evidence\/sprint05a-f\/checks-\d+$/);
 assert.ok(!fs.existsSync(output));
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
-assert.equal(git('status', '--porcelain'), '');
+assert.equal(git('status', '--porcelain', ...(reportOnly ? ['--untracked-files=no'] : [])), '');
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 const receipt = { source_commit: git('rev-parse', 'HEAD'), source_tree: git('rev-parse', 'HEAD^{tree}'),
   started_at: new Date().toISOString(), argv: process.argv, node: process.version,
@@ -37,6 +39,17 @@ function verifyManifest(dir) {
   receipt.manifests.push({ dir, entries: entries.length, sha256: sha(fs.readFileSync(`${dir}/SHA256SUMS`)) });
 }
 try {
+  if (reportOnly) {
+    fs.mkdirSync(output, { recursive: true });
+    const report = 'docs/reports/sprint05a-f-security-review.md';
+    receipt.report = { file: report, sha256: sha(fs.readFileSync(report)) };
+    const scanner = 'ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f';
+    for (const scope of [report, 'evidence/sprint05a-f']) run(`final-${path.basename(scope)}`, ['docker', 'run', '--rm', '--pull', 'never', '--network', 'none',
+      '--user', `${process.getuid()}:${process.getgid()}`, '-v', `${process.cwd()}:/repo:ro`, scanner, 'dir', `/repo/${scope}`,
+      '--config', '/repo/.github/gitleaks.toml', '--redact', '--no-banner']);
+    run('final-whitespace', ['git', 'diff', '--check', '541d1d9', '--', 'spikes/envoy/sprint05a-f-*', 'docs/reports/sprint05a-f*']);
+    receipt.completed = true;
+  } else {
   // This inherited integrity runner independently checks the sanitized original A handoff.
   run('a-handoff-integrity', [process.execPath, 'spikes/envoy/sprint05a-a-verify.mjs', 'evidence/sprint05a-a/checks-02']);
   fs.mkdirSync(output, { recursive: true });
@@ -103,6 +116,7 @@ try {
     scanner, 'git', '/repo', '--config', '/repo/.github/gitleaks.toml', '--redact', '--no-banner', `--log-opts=541d1d9..${receipt.source_commit}`]);
   run('whitespace', ['git', 'diff', '--check', '541d1d9', '--', 'spikes/envoy/sprint05a-f-*', 'docs/reports/sprint05a-f-plan.md']);
   receipt.completed = true;
+  }
 } catch (error) { receipt.error = error.stack; process.exitCode = 1; }
 finally {
   fs.mkdirSync(output, { recursive: true });
