@@ -28,17 +28,45 @@ for (const entry of fs.readdirSync('evidence/sprint05b-c')) {
     assert.match(result.fatal, /owned listener readiness/); assert.equal(result.tests.length, 0);
   } else {
     assert.equal(result.tests.length, 23);
-    assert.equal(result.tests.filter((t) => t.status === 'pass').length, entry === 'attempt-01' ? 19 : 18);
+    const native = r.transport === 'native';
+    assert.equal(result.tests.filter((t) => t.status === 'pass').length, entry === 'attempt-01' || native ? 19 : 18);
+    if (native) {
+      assert.equal(r.native.binary.sha256, '1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc');
+      assert.equal(sha(fs.readFileSync(r.native.binary.file)), r.native.binary.sha256);
+      assert.equal(r.cleanup_complete, true);
+      for (const name of ['raw-H2-uppercase-header-name', 'raw-H2-connection-specific-header',
+        'slow-reader-backpressure-and-response-cancellation', '32-partial-header-connections-termination-drain']) {
+        assert.equal(result.tests.find((t) => t.name === name).status, 'pass');
+      }
+    }
     for (const name of ['raw-H2-HEADERS-stream-zero', 'raw-H2-zero-WINDOW_UPDATE']) {
       const t = result.tests.find((t) => t.name === name); assert.equal(t.status, 'fail');
       assert.deepEqual(t.observation.received_frames, []); assert.equal(t.observation.peer_closed, true);
       assert.equal(t.origin.bytes, 0); assert.equal(t.origin.handlers, 0);
     }
   }
-  receipt.results.push({ attempt: entry, mode: r.mode, source_commit: r.source_commit,
+  receipt.results.push({ attempt: entry, mode: r.mode, transport: r.transport ?? 'docker', source_commit: r.source_commit,
     tests: result.tests.length, passed: result.tests.filter((t) => t.status === 'pass').length,
     failures: result.failures, setup_failure: Boolean(result.fatal), raw_exit: test.exit_code });
 }
+const relay = JSON.parse(fs.readFileSync('evidence/sprint05b-c/attempt-14/relay-frames.json'));
+assert.equal(relay.omitted, 0);
+const userinfo = [];
+for (const name of ['settled-reuse-identity-and-three-authority-negatives', 'individual-settled-userinfo-denial']) {
+  const index = relay.boundaries.findIndex((b) => b.message === `${name}: fail`); assert.ok(index > 0);
+  const start = BigInt(relay.boundaries[index - 1].time_ns), end = BigInt(relay.boundaries[index].time_ns);
+  const frames = relay.connections.flatMap((c) => c.frames.filter((f) => f.direction === 'envoy-to-client' &&
+    f.type === 3 && f.error_code === 1 && BigInt(f.time_ns) > start && BigInt(f.time_ns) < end)
+    .map((f) => ({ connection: c.id, upstream_authorized: c.upstream_authorized, ...f })));
+  assert.equal(frames.length, 1); assert.equal(frames[0].upstream_authorized, true);
+  const connection = relay.connections.find((c) => c.id === frames[0].connection);
+  assert.ok(!connection.frames.some((f) => f.direction === 'client-to-envoy' && f.type === 3 &&
+    BigInt(f.time_ns) <= BigInt(frames[0].time_ns)));
+  userinfo.push({ probe: name, peer_reset: frames[0], client_cancel_before_peer_reset: false });
+}
+assert.ok(relay.connections.some((c) => c.frames.some((f) => f.direction === 'client-to-envoy' && f.type === 3 && f.error_code === 8)));
+receipt.peer_attribution = { scope: relay.scope, userinfo, cancellation_control_code: 8,
+  acceptance_unchanged: 'userinfo peer reset is not the required 400/421 response' };
 receipt.assertions.push({ checksums, committed_source_hashes: sourceHashes });
 git('diff', '--exit-code', '8758b1c', 'HEAD', '--', 'spikes/edge-comparison', 'spikes/pingora/lab.mjs',
   'spikes/envoy/wire-probes.mjs', 'spikes/envoy/wire-observer.mjs');

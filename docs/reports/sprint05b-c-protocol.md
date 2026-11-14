@@ -1,6 +1,7 @@
 # Sprint05-B C Supplemental Protocol Disposition
 
-Status: partial, no executable protocol repair accepted. Module01 remains
+Status: partial, no executable protocol repair accepted. Native follow-up below
+completes the bounded setting measurements and peer attribution. Module01 remains
 NO-GO and Modules04-12 remain locked. Root integrates; nothing pushed or merged.
 
 ## Scope And Evidence
@@ -130,14 +131,91 @@ fixture. The report does not authorize deadline changes. Offline verification:
   spikes/envoy/sprint05b-c-verify.mjs evidence/sprint05b-c/verify-NN
 ```
 
+## Native Follow-Up And Ownership Provenance
+
+Root initially reported that another CLI worker owned C and instructed STOP.
+This writer stopped without reverting. Root then explicitly corrected that
+instruction, designated this writer sole C owner and stated duplicate CLI
+C2083269 was interrupted. On resumption, `git status --porcelain=v1
+--untracked-files=all` was empty at e3473c5; there was no duplicate untracked
+source to adopt. Existing commits/evidence were preserved. Earlier reference
+to session01a1db3c-7e26-7383-8684-bf216011dacf reflects root's superseded ownership
+message, not independent process attribution. Root's newest ownership direction
+governed subsequent work. No other writer changes were observed in this tree.
+
+Root's extraction receipt at
+`/home/tiecont/Projects/aegis-gate/evidence/sprint05b-root/native-extract-01/receipt.json`
+records sourcef0e9792, image identity, Docker create/cp, actual native version,
+dynamic libraries and removed extraction container. The extracted Envoy binary
+SHA256 is `1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc`.
+C verifies the extraction receipt, expected image and actual binary hash before
+each native run. Each receipt binds the extraction receipt SHA256/source,
+binary path/hash, current source/tree, runtime libraries and argv. The owned
+launcher matches root's reviewed mechanism: prlimit core0/nofile1024/cpu180,
+one Envoy worker, same pinned compiler and TLS validation, no cgroup isolation.
+It is test-only and cannot establish container memory/PID or production resource
+eligibility. No Docker containers are started by these native runs.
+
+Clean sourcebb9820f executes the unchanged suite directly; the resolver replaces
+only recovery-launcher's entry point. Attempt10 is untapped. The original
+payloads/deadlines/assertions and upstream observer remain unchanged throughout.
+
+| Native Attempt | Mode | Actual Result | Verdict |
+| --- | --- | --- | --- |
+| 10 | untapped combined05A | 19/23, same four failures | Baseline reproduced |
+| 11 | delayed_close_timeout=0s | 19/23, same four failures | No repair |
+| 12 | delayed_close_timeout=1s | 19/23, same four failures | No repair |
+| 13 | request_headers_timeout=500ms | 19/23, same four failures | No repair |
+| 14 | baseline plus verified downstream TLS relay | 19/23, same four failures | Additional attribution only |
+
+All five raw suite exits are1; collectors exit0. Native11-13 preserve repaired19,
+including uppercase/connection-specific header RST1, backpressure/cancellation,
+pooling/identity, stream/connection caps and termination drain. This resolves
+the earlier setup obstruction without discarding the Docker18/23 evidence or
+attributing its extra drain failure to a particular setting.
+
+Attempt14's additive relay forwards plaintext bytes unchanged between two
+verified TLS endpoints, retaining bounded frame metadata in both directions.
+It changes the downstream diagnostic transport and is not baseline timing or
+resource acceptance evidence. The upstream origin observer and suite assertions
+remain authoritative. Both userinfo failures have actual Envoy-to-client
+RST_STREAM1 bytes `00000403000000000100000001` (relay connections6 and9).
+The relay's upstream certificate is authorized, SNI=edge-b.test and ALPN=h2.
+No client RST precedes those peer frames; the native client subsequently sends
+GOAWAY0. Separately, response/upload cancellation controls emit client-to-Envoy
+RST_STREAM8 bytes `00000403000000000100000008` on connections11/12. This closes
+the earlier native raw attribution limitation for this separate diagnostic;
+peer RST1 is still not the original required400/421, so both userinfo assertions
+remain FAIL. No CANCEL is credited as a peer rejection.
+
+The same run's raw HEADERS0 and zero WINDOW_UPDATE sockets are direct: original
+received_frames=[] and peer_closed=true, with zero origin bytes/handlers. Thus
+all four exact scoped stops remain. No unsupported codec/UHV field was enabled.
+After14, all C launchers and native children exited, the worktree's `.local`
+was empty, and the global fixture lock was released. No further retries are
+needed for these three bounded hypotheses.
+
+Native reproduction uses a fresh attempt directory and an existing verified
+root extraction (same pinned main Node as above):
+
+```sh
+flock /tmp/aegisgate-sprint02-fixtures.lock \
+  /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node \
+  spikes/envoy/sprint05b-c-run.mjs evidence/sprint05b-c/attempt-NN untapped native
+```
+
+For the separate frame diagnostic use `baseline native relay`. That diagnostic
+must not replace the untapped baseline or justify any assertion exemption.
+
 ## Agent Completion Report
 
 - Module/status:01/C, partial; four supplemental failures unresolved.
 - Files/commits: owned sprint05b-c source/evidence and this report only; source
   checkpoints215dd35,5d377ef,f84ecc2,32bd18b,0cd8011,8b98df6.
 - Architecture/contract changes: none; no gate opened.
-- Positive/security tests: original23 baseline19/23; two completed variants18/23;
-  six setup failures0 cases. Exact commands/raw exits retained in receipts.
+- Positive/security tests: Docker baseline19/23; two Docker variants18/23;
+  six setup failures0 cases; native baseline and three variants19/23 plus separate
+  relay19/23. Exact commands/raw exits retained in receipts.
 - Offline verifier at clean source787ad0f exits0:155 evidence checksums and873
   captured-source hashes match their committed objects; owned script syntax,
   protected corpus equality and retained window/stream-error invariants pass.
@@ -145,9 +223,9 @@ fixture. The report does not authorize deadline changes. Offline verification:
   semantic_security_pass=false. A scoped private-key PEM marker search found
   no matches; this is not a replacement for independent security review.
 - Performance: no throughput, production memory, fairness or load claim.
-- Risks/blockers: four failures, original75 issues outside C, incomplete native
-  raw peer-frame attribution, Docker setup/shutdown and earlier collision.
+- Risks/blockers: four failures, original75 issues outside C, diagnostic relay
+  transport limitations, Docker setup/shutdown and earlier collision.
 - Human review: root/F must assess bounded evidence; no security/architecture
   approval requested or fabricated.
-- Next action: root supplies an exact pinned native fixture, then reproduces
-  original assertions and peer frames without changing deadlines or oracles.
+- Next action: root/F independently review native source/evidence and retain
+  all four failures; no supported repair among these bounded settings.
