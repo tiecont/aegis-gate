@@ -7,7 +7,8 @@ import { assertLock } from './wire-fixtures.mjs';
 import { cleanupOwned } from './sprint05b-c-cleanup.mjs';
 
 process.umask(0o077); assertLock();
-const [output, mode = 'baseline'] = process.argv.slice(2);
+const [output, mode = 'baseline', transport = 'docker', capture = 'events'] = process.argv.slice(2);
+assert.ok(['docker', 'native'].includes(transport));
 assert.match(output ?? '', /^evidence\/sprint05b-c\/attempt-\d+$/);
 assert.ok(!fs.existsSync(output));
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
@@ -19,11 +20,24 @@ const initial = new Set(fs.readdirSync('.local'));
 const fixture = fs.mkdtempSync(path.resolve('.local/sprint05b-c-'));
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 const sources = git('ls-files', 'spikes/envoy', 'spikes/edge-comparison', 'spikes/pingora/lab.mjs').split('\n');
+const nativeSelect = transport === 'native' ? 'spikes/envoy/sprint05b-c-native-select.mjs' :
+  ['baseline', 'untapped'].includes(mode) ? 'spikes/envoy/sprint05a-combined-select.mjs' : 'spikes/envoy/sprint05b-c-select.mjs';
 const env = { AEGIS_05A_D_POLICY: 'stream-errors', AEGIS_05B_C_MODE: mode,
-  NODE_OPTIONS: `--import=${path.resolve(['baseline', 'untapped'].includes(mode) ? 'spikes/envoy/sprint05a-combined-select.mjs' : 'spikes/envoy/sprint05b-c-select.mjs')}${mode === 'untapped' ? '' : ` --import=${path.resolve('spikes/envoy/sprint05b-c-tap.mjs')}`}`,
-  AEGIS_05B_C_CAPTURE: path.resolve(output, 'peer-frames.json') };
+  NODE_OPTIONS: `--import=${path.resolve(nativeSelect)}${mode === 'untapped' ? '' : ` --import=${path.resolve('spikes/envoy/sprint05b-c-tap.mjs')}`}${capture === 'relay' ? ` --import=${path.resolve('spikes/envoy/sprint05b-c-peer-relay.mjs')}` : ''}`,
+  AEGIS_05B_C_CAPTURE: path.resolve(output, 'peer-frames.json'), AEGIS_05B_C_RELAY_CAPTURE: path.resolve(output, 'relay-frames.json') };
+let nativePin;
+if (transport === 'native') {
+  const extraction = '/home/tiecont/Projects/aegis-gate/evidence/sprint05b-root/native-extract-01/receipt.json';
+  const bytes = fs.readFileSync(extraction), r = JSON.parse(bytes);
+  assert.equal(r.complete, true); assert.equal(r.cleanup.absent, true);
+  assert.equal(r.image, JSON.parse(fs.readFileSync('spikes/envoy/image.lock.json')).image);
+  assert.equal(sha(fs.readFileSync(r.binary.file)), r.binary.sha256);
+  Object.assign(env, { AEGIS_05B_NATIVE_BINARY: r.binary.file, AEGIS_05B_NATIVE_SHA256: r.binary.sha256 });
+  nativePin = { extraction, extraction_sha256: sha(bytes), extraction_source_commit: r.source_commit,
+    binary: r.binary, limitations: 'same image binary, host libraries, prlimit only; no container resource eligibility proof' };
+}
 const receipt = { source_commit: git('rev-parse', 'HEAD'), source_tree: git('rev-parse', 'HEAD^{tree}'),
-  source_clean: true, argv: process.argv, mode, started_at: new Date().toISOString(),
+  source_clean: true, argv: process.argv, mode, transport, capture, native: nativePin, started_at: new Date().toISOString(),
   node: process.version, node_binary_sha256: sha(fs.readFileSync(process.execPath)), environment: env,
   sources: sources.map((file) => ({ file, sha256: sha(fs.readFileSync(file)) })), commands: [] };
 const save = () => fs.writeFileSync(`${output}/receipt.json`, JSON.stringify(receipt, null, 2) + '\n');
@@ -43,7 +57,8 @@ try {
   run('openssl', 'openssl', ['version']); run('docker', 'docker', ['version', '--format', '{{.Server.Version}}']);
   const image = JSON.parse(fs.readFileSync('spikes/envoy/image.lock.json')).image;
   run('image', 'docker', ['image', 'inspect', image, '--format', '{{.Id}} {{json .RepoDigests}}']);
-  run('envoy-version', 'docker', ['run', '--rm', '--pull', 'never', '--name', versionName, '--network', 'none', '--entrypoint', '/usr/local/bin/envoy', image, '--version']);
+  if (transport === 'docker') run('envoy-version', 'docker', ['run', '--rm', '--pull', 'never', '--name', versionName, '--network', 'none', '--entrypoint', '/usr/local/bin/envoy', image, '--version']);
+  else { run('envoy-version', env.AEGIS_05B_NATIVE_BINARY, ['--version']); run('native-libraries', 'ldd', [env.AEGIS_05B_NATIVE_BINARY]); }
   run('original23', process.execPath, ['spikes/envoy/wire-probes.mjs', path.resolve(output, 'original23.json'), fixture], [0, 1]);
   const result = JSON.parse(fs.readFileSync(`${output}/original23.json`));
   assert.ok(!result.fatal); assert.equal(result.tests.length, 23);
