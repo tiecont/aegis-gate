@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { assertLock } from './wire-fixtures.mjs';
+import { cleanupOwned } from './sprint05b-c-cleanup.mjs';
 
 process.umask(0o077); assertLock();
 const [output, mode = 'baseline'] = process.argv.slice(2);
@@ -26,6 +27,7 @@ const receipt = { source_commit: git('rev-parse', 'HEAD'), source_tree: git('rev
   node: process.version, node_binary_sha256: sha(fs.readFileSync(process.execPath)), environment: env,
   sources: sources.map((file) => ({ file, sha256: sha(fs.readFileSync(file)) })), commands: [] };
 const save = () => fs.writeFileSync(`${output}/receipt.json`, JSON.stringify(receipt, null, 2) + '\n');
+const versionName = `aegis-sprint05b-c-version-${process.pid}`;
 function run(label, program, args, expected = [0]) {
   assertLock(); const started_at = new Date().toISOString();
   const r = spawnSync(program, args, { env: { ...process.env, ...env }, timeout: 180000, maxBuffer: 16 << 20 });
@@ -41,7 +43,7 @@ try {
   run('openssl', 'openssl', ['version']); run('docker', 'docker', ['version', '--format', '{{.Server.Version}}']);
   const image = JSON.parse(fs.readFileSync('spikes/envoy/image.lock.json')).image;
   run('image', 'docker', ['image', 'inspect', image, '--format', '{{.Id}} {{json .RepoDigests}}']);
-  run('envoy-version', 'docker', ['run', '--rm', '--network', 'none', '--entrypoint', '/usr/local/bin/envoy', image, '--version']);
+  run('envoy-version', 'docker', ['run', '--rm', '--pull', 'never', '--name', versionName, '--network', 'none', '--entrypoint', '/usr/local/bin/envoy', image, '--version']);
   run('original23', process.execPath, ['spikes/envoy/wire-probes.mjs', path.resolve(output, 'original23.json'), fixture], [0, 1]);
   const result = JSON.parse(fs.readFileSync(`${output}/original23.json`));
   assert.ok(!result.fatal); assert.equal(result.tests.length, 23);
@@ -50,14 +52,7 @@ try {
 } catch (error) { receipt.error = error.stack; process.exitCode = 1; }
 finally {
   assertLock();
-  const ids = execFileSync('docker', ['ps', '-aq', '--filter', 'name=^/aegis-envoy-'], { encoding: 'utf8' }).trim().split('\n').filter(Boolean);
-  receipt.cleanup_containers = [];
-  for (const id of ids) {
-    const mounts = JSON.parse(execFileSync('docker', ['inspect', '--format', '{{json .Mounts}}', id]));
-    if (!mounts.some((m) => m.Source.startsWith(fixture + '/') || m.Source === fixture)) continue;
-    run(`cleanup-${id}`, 'docker', ['stop', '--timeout', '2', id]); receipt.cleanup_containers.push(id);
-    assert.notEqual(spawnSync('docker', ['inspect', id], { stdio: 'ignore' }).status, 0);
-  }
+  receipt.cleanup = await cleanupOwned(run, versionName);
   receipt.resources = [];
   for (const entry of fs.readdirSync('.local')) {
     if (initial.has(entry) || !/^(sprint05b-c-|envoy-run-)/.test(entry)) continue;
