@@ -69,7 +69,7 @@ try {
   receipt.baseline_before = immutable();
   receipt.owner_files = [];
   for (const [owner, commit] of Object.entries(owners)) {
-    for (const file of git('ls-tree', '-r', '--name-only', commit, `spikes/envoy/sprint05a-${owner}-*`).split('\n').filter(Boolean)) {
+    for (const file of git('ls-tree', '-r', '--name-only', commit, 'spikes/envoy').split('\n').filter((f) => f.startsWith(`spikes/envoy/sprint05a-${owner}-`))) {
       const b = execFileSync('git', ['show', `${commit}:${file}`]);
       assert.deepEqual(fs.readFileSync(file), b, file);
       receipt.owner_files.push({ owner, commit, file, sha256: sha(b) });
@@ -121,7 +121,19 @@ try {
   assert.ok(controls.tests.every((t) => t.status === 'observation-complete'));
   receipt.controls = { total: 17, semantic_security_pass: false };
   await run('immutable-manifest', [process.execPath, 'spikes/edge-comparison/extract-baseline.mjs', '--check']);
-  await run('a-integrity', [process.execPath, 'spikes/envoy/sprint05a-a-verify.mjs', 'evidence/sprint05a-a/checks-02']);
+  await run('removed-inspection-object', ['git', 'cat-file', '-e', '7bad0dc7cf80ff73c4f6edc335d1354efbc338ba'], [1, 128]);
+  receipt.withheld = [];
+  for (const attempt of ['01', '02']) {
+    const data = JSON.parse(fs.readFileSync(`evidence/sprint05a-a/attempt-${attempt}/withheld.json`));
+    for (const entry of data.streams) {
+      assert.equal(fs.existsSync(entry.file), false);
+      assert.equal(git('log', '--all', '--format=%H', '--', entry.file), '', 'forbidden stream in reachable history');
+      receipt.withheld.push(entry);
+    }
+  }
+  const retired = JSON.parse(fs.readFileSync('evidence/sprint05a-a/attempt-02/commands.json')).source_commit;
+  await run('retired-source-not-ancestor', ['git', 'merge-base', '--is-ancestor', retired, 'HEAD'], [1, 128]);
+  receipt.retired_source = retired;
   receipt.collection_complete = true;
 } catch (error) { receipt.error = error.stack; process.exitCode = 1; }
 finally {
