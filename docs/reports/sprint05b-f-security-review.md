@@ -180,6 +180,37 @@ manifests, infra and scanner/workflow policy are unchanged from baseline.
 Full gate/hosted/merge outcomes remain separate obligations; this acceptance
 permits only safe testing/evidence integration.
 
+## New Gate Findings
+
+Full root `gates-01` at4127839 fails actual Go integration: transport OIDC
+rotation/outage schema setup receives SQL57014 statement timeout and55P03 lock
+timeout, and an admin OIDC callback times out. The security scanner continues
+independently. Full delivery acceptance is withheld; no timeout or assertion is
+weakened. Separate schema fixtures still share Store.Migrate's database-wide
+advisory lock4122026002; concurrent package migrations are a plausible cause,
+not yet a proven causal conclusion. Read-only lock sampling is queued with
+focused E to record actual waiters/blockers before proposing test isolation.
+
+The callback timeout exposed disposable code/state values through `url.Error`
+in a private, uncommitted root failure log. F reported this promptly and did
+not commit the values. Root test-only patch `de6265d` removes request URLs from
+fixture error messages while retaining timeout causes. Independent clean-source
+race test `TestFixtureHTTPErrorDoesNotExposeOIDCCallback` passes; F accepts this
+narrow disclosure repair. It changes no request/assertion/deadline/TLS behavior.
+
+Root `ff3f3fe` adds an explicitly sanitized derivative exporter for completed
+gate evidence: structured URL query/userinfo redaction, original byte sizes and
+SHA256, original receipt hash, derived receipt marking and new output hashes.
+Source review accepts it for the known callback log scope. It is not a generic
+secret scrubber, and the future exported artifact still requires validation.
+Original failed exits cannot become PASS through export.
+
+F `checks-01` at2af4bd6 passes five script syntax checks, repository formatting,
+whitespace,255 retained F hashes and the disclosure sentinel race unit. System
+gofmt failed the host's AMD64v4 requirement; pinned Go1.27.4 gofmt/build succeed.
+The earlier600s shared-lock wait expired before starting any fixture and was
+requeued; it is not an executed regression failure or a passed test.
+
 ## D: late trailers and streaming
 
 **ACCEPT narrow counterexample/evidence; REJECT simultaneous strict zero-byte
