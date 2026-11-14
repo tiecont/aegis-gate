@@ -82,14 +82,18 @@ try {
     let status; stream.on('response', (h) => { status = h[':status']; }); stream.resume(); stream.end();
     await bounded(once(stream, 'end')); return status;
   };
-  const client = await connect();
+  let client = await connect();
   await check('cold-host-denial-zero-origin', async () => {
     assert.equal(await request(client, { host: 'edge-a.test' }), 421);
     assert.deepEqual(snapshot(), { bytes: 0, handlers: 0, accepts: 0, chunks: 0 }); return snapshot();
   });
+  client.destroy();
+  client = await connect();
   await check('valid-pool-prime-and-initial-settings-ack', async () => {
-    assert.equal(await request(client), 200); await bounded(initialAck);
-    assert.equal(accepts, 1); assert.equal(handlers, 1); return snapshot();
+    const statuses = [await request(client), await request(client),
+      ...await Promise.all(Array.from({ length: 4 }, () => request(client)))];
+    assert.ok(statuses.every((status) => status === 200)); await bounded(initialAck);
+    assert.equal(accepts, 1); assert.equal(handlers, 6); return snapshot();
   });
   await check('idle-peer-settings-alone-exact-nine-byte-ack', async () => {
     const before = snapshot();
@@ -100,7 +104,7 @@ try {
     return { before, after, hex, downstream_requests_during_interval: 0 };
   });
   await check('same-pool-remains-usable', async () => {
-    assert.equal(await request(client), 200); assert.equal(accepts, 1); assert.equal(handlers, 2); return snapshot();
+    assert.equal(await request(client), 200); assert.equal(accepts, 1); assert.equal(handlers, 7); return snapshot();
   });
   record.complete = true;
 } catch (error) { record.error = error.stack; }
