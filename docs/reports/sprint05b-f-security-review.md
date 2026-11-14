@@ -352,3 +352,26 @@ hashes are in `evidence/sprint05b-f/d-01/SHA256SUMS`.
 This finite, serialized test does not establish production disk capacity,
 partial-write recovery, sustained RSS bounds, concurrent spool admission,
 streaming feasibility, or replacement of the immutable75/23 suites.
+
+## Agent Completion Report
+
+Final checkpoint verification: `checks-02` at28fefd1 passes nine JavaScript
+syntax checks, Prettier, whitespace, pinned gofmt (empty diff), Python AST,
+400 retained F artifact hashes and the clean de6265d disclosure race unit.
+Scoped `secrets-01` scans464 F source/report/evidence files with the repository's
+unchanged pinned Gitleaks8.30.1 image/policy, exit0 and empty JSON findings.
+Inputs are staged at `/scan` so ignored `.local` fixture exclusions cannot hide
+F artifacts; scanner container and temporary stage are verified absent. This
+is a scoped F secret scan, not root's final full security-scan gate.
+
+- Module: Sprint05B independent F review; Module01 feasibility and Modules00/02/03 regression evidence.
+- Status: partial delivery checkpoint; independent component review and focused reproduction complete, final root local/hosted gates pending.
+- Commits / files changed: F-only tooling under `scripts/sprint05b-f-*`, retained evidence under `evidence/sprint05b-f`, and this report. Checkpoint implementation/evidence commit28fefd1; later checksum/scan/report commits are additive.
+- Architecture/ADR decisions: no production runtime or parser replacement accepted. Narrow additive diagnostics, safe disclosure repair, TCP fixture readiness and package scheduling accepted at exact reviewed pins. Module01 remains NO-GO.
+- Contracts changed: none. Protected original75/23, their observers/evaluators and measurement intervals remain unchanged.
+- Positive tests executed (exact commands + outcome): A/B/C/D/E and focused03/04/05/06 commands appear above with exact source pins and retained argv. Focused05 passes all11 Go packages,89 top-level tests/151 subtests/zero skips, strict installs, contracts and five dashboard checks. Focused06 original private-image/stale-volume/UID/restart tests pass. Offline audit04 and raw-to-sanitized export validation pass. All successful lifecycle receipts include cleanup/private removal.
+- Security negative tests executed (exact commands + outcome): original75/23 remain73/75 and19/23; all six failures are rejected in the verdict table. A's strict folded-header/trailer/cancellation/limit probes and D's streaming counterexample are independently reproduced. Focused05 `go test -p 1 -race -v ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/... -count=1` includes actual tenancy, authorization, TLS, OIDC, publication and recovery negatives without skips. Credential/TLS negatives and image password negatives pass in05/06. Disclosure sentinel race test passes inchecks01; finalchecks/owned-secret scan receipts are separate verification artifacts.
+- Performance data: finite loopback feasibility observations only; no production benchmark, native cgroup eligibility or SLO claim. Natural lock sampling and controlled cross-schema probe are scoped diagnostic evidence.
+- Known risks and release blockers: six mandatory ingress failures remain. Previous incomplete/failed F attempts and root gate01 check2 remain retained. Controlled migration coupling does not establish the cause of the earlier natural5s HTTP timeouts. Final integrated make check/security-scan and hosted acceptance are still required. F01-04 wrapper byte attribution is limited as disclosed above;05/06 retain executable source snapshots.
+- Human review needed: existing architecture/security/release approval gates remain; this report permits test/evidence integration only. No production GO, push, merge or deployment performed by F.
+- Next unblocked module(s): final integrated verification and review. Modules04-12 remain locked.
