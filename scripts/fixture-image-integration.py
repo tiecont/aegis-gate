@@ -20,12 +20,23 @@ assert isinstance(network,str) and network,'Compose lab network missing'
 def docker(*args,check=True):
     return subprocess.run(['docker',*args],check=check,capture_output=True,text=True)
 def ready():
+    started=time.monotonic()
     for _ in range(60):
         # The official entrypoint starts a socket-only temporary init server.
         # Probe TCP so readiness cannot race its shutdown and final startup.
         result=docker('exec',name,'pg_isready','-h',name,'-U','aegisgate_local','-d','aegisgate_local',check=False)
         if result.returncode==0:return
         time.sleep(.25)
+    # Retain lifecycle state without Docker Config.Env or private fixture values.
+    state=docker('inspect','--format','{{json .State}}',name,check=False)
+    diagnostics={'scope':'private-postgres-readiness','elapsed_seconds':round(time.monotonic()-started,3),
+                 'inspect_exit':state.returncode,'last_probe_exit':result.returncode}
+    if state.returncode==0:
+        observed=json.loads(state.stdout)
+        diagnostics['state']={key:observed.get(key) for key in
+                              ['Status','Running','Paused','Restarting','OOMKilled','Dead','ExitCode','StartedAt','FinishedAt']}
+        diagnostics['state']['error_present']=bool(observed.get('Error'))
+    print(json.dumps(diagnostics,sort_keys=True),flush=True)
     raise RuntimeError('Private fresh Postgres fixture failed readiness; no credentials logged')
 def sql(statement,valid=True):
     password='$(cat /run/secrets/postgres-password)' if valid else 'unsafe-wrong-fixture'
