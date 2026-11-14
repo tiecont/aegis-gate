@@ -1,0 +1,476 @@
+{
+  "started_at": "2026-11-14T13:46:14.973Z",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05a-b/spikes/envoy/sprint05a-b-run.mjs",
+    "llhttp",
+    "evidence/sprint05a-b/llhttp-01"
+  ],
+  "cwd": "/tmp/aegisgate-05a-b",
+  "source_commit": "865d98ced7211ccab4ab718b06b10232fd8e9c6c",
+  "source_tree": "3a7432c52e89c3417e7ba935dc8bb9b2856045e0",
+  "tracked_clean": true,
+  "node": "v26.13.0",
+  "node_executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "sources": [
+    {
+      "file": "evidence/sprint05a-b/PLAN.md",
+      "sha256": "d49d0b877fa7f9c67eb834c650f500104b873b1f98332637cd3a59e7b908d504"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-b-llhttp.c",
+      "sha256": "3cf10a21cd803343cf2df7ecb33e098281ca976ff64bbafb439513a5547b73c8"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-b-receipts.mjs",
+      "sha256": "cc78016a38a38d2f64dacf5809fb1bd28473b69132012f53d2f441af5ee39a3a"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-b-run.mjs",
+      "sha256": "da25efb1f638daf050cd2e36f1f1ea9784c39612d4d2c9ab5ef45165d506b0ce"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-b-source.mjs",
+      "sha256": "00a89f1443c9a5ee472ebe283ab072f4ab59ab48b685a9f27bb24046b20bb232"
+    },
+    {
+      "file": "spikes/envoy/wire-fixtures.mjs",
+      "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278"
+    }
+  ],
+  "commands": [
+    {
+      "name": "openssl-version",
+      "argv": [
+        "openssl",
+        "version"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T13:46:15.243Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/llhttp-01/openssl-version.stdout",
+        "bytes": 63,
+        "sha256": "bdd7122ae3788e889ce96da25f99fe5023a80a88ab0e6db9f93cf3174187301c"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/llhttp-01/openssl-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "pki-1",
+      "argv": [
+        "openssl",
+        "req",
+        "-x509",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "ca.key",
+        "-out",
+        "ca.pem",
+        "-days",
+        "1",
+        "-subj",
+        "/CN=disposable Sprint05A B CA",
+        "-addext",
+        "basicConstraints=critical,CA:TRUE"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b/.local/sprint05a-b-llhttp-JWC4jl",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T13:46:15.286Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/llhttp-01/pki-1.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/llhttp-01/pki-1.stderr",
+        "bytes": 627,
+        "sha256": "ae7e851b392edd2d89bffb0169b03bceb8eadb905ccd5964473d6ba1d1e8154f"
+      }
+    },
+    {
+      "name": "pki-2",
+      "argv": [
+        "openssl",
+        "req",
+        "-new",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "edge.key",
+        "-out",
+        "edge.csr",
+        "-subj",
+        "/CN=edge-a.test",
+        "-addext",
+        "subjectAltName=DNS:edge-a.test"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b/.local/sprint05a-b-llhttp-JWC4jl",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T13:46:15.393Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/llhttp-01/pki-2.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/llhttp-01/pki-2.stderr",
+        "bytes": 1968,
+        "sha256": "373a2a464d14e2006eaab852a114619acbd9369a33e4585e57163a2a68512e78"
+      }
+    },
+    {
+      "name": "pki-3",
+      "argv": [
+        "openssl",
+        "x509",
+        "-req",
+        "-in",
+        "edge.csr",
+        "-CA",
+        "ca.pem",
+        "-CAkey",
+        "ca.key",
+        "-CAcreateserial",
+        "-out",
+        "edge.pem",
+        "-days",
+        "1",
+        "-copy_extensions",
+        "copy"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b/.local/sprint05a-b-llhttp-JWC4jl",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T13:46:15.413Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/llhttp-01/pki-3.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/llhttp-01/pki-3.stderr",
+        "bytes": 61,
+        "sha256": "92ddb144b26ef1980f9c002e35f8b53f8fb784728611951a286bc7b0a9a9ddfe"
+      }
+    },
+    {
+      "name": "pki-4",
+      "argv": [
+        "openssl",
+        "req",
+        "-new",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "origin.key",
+        "-out",
+        "origin.csr",
+        "-subj",
+        "/CN=lab-origin.test",
+        "-addext",
+        "subjectAltName=DNS:lab-origin.test"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b/.local/sprint05a-b-llhttp-JWC4jl",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T13:46:15.474Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/llhttp-01/pki-4.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/llhttp-01/pki-4.stderr",
+        "bytes": 1169,
+        "sha256": "7a1aaea94a0d9249e5bb21859330123c46b1ad652a749c3c217a869c758dfcee"
+      }
+    },
+    {
+      "name": "pki-5",
+      "argv": [
+        "openssl",
+        "x509",
+        "-req",
+        "-in",
+        "origin.csr",
+        "-CA",
+        "ca.pem",
+        "-CAkey",
+        "ca.key",
+        "-CAcreateserial",
+        "-out",
+        "origin.pem",
+        "-days",
+        "1",
+        "-copy_extensions",
+        "copy"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b/.local/sprint05a-b-llhttp-JWC4jl",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T13:46:15.497Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/llhttp-01/pki-5.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/llhttp-01/pki-5.stderr",
+        "bytes": 65,
+        "sha256": "09fd425719106e552b8dbf27cf942780b126e2b916e05099dab19b2a3ebc9c1d"
+      }
+    },
+    {
+      "name": "cc-version",
+      "argv": [
+        "cc",
+        "--version"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T13:46:15.554Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/llhttp-01/cc-version.stdout",
+        "bytes": 227,
+        "sha256": "52fa390d1b33ef5e0b20f39de6624190ade494b52dd543bd8121f350ec88e0e5"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/llhttp-01/cc-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "build-llhttp",
+      "argv": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/tmp/aegisgate-05a-b/.local/sprint05a-b-llhttp-JWC4jl/upstream",
+        "spikes/envoy/sprint05a-b-llhttp.c",
+        "/tmp/aegisgate-05a-b/.local/sprint05a-b-llhttp-JWC4jl/upstream/api.c",
+        "/tmp/aegisgate-05a-b/.local/sprint05a-b-llhttp-JWC4jl/upstream/http.c",
+        "/tmp/aegisgate-05a-b/.local/sprint05a-b-llhttp-JWC4jl/upstream/llhttp.c",
+        "-o",
+        "/tmp/aegisgate-05a-b/.local/sprint05a-b-llhttp-JWC4jl/llhttp-driver"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b",
+      "exit_code": 1,
+      "signal": null,
+      "ended_at": "2026-11-14T13:46:18.654Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/llhttp-01/build-llhttp.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/llhttp-01/build-llhttp.stderr",
+        "bytes": 45539,
+        "sha256": "d3e1d33f0428602ccd1391e1a2c0128d4766972a9a1966d29b8699ca557ca302"
+      }
+    }
+  ],
+  "runtime": "llhttp",
+  "scope": "Targeted released strict-parser PoC only; not original75/23 or production eligibility",
+  "bounds": {
+    "wall_ms": 90000,
+    "message_bytes": 32768,
+    "downstream_idle_ms": 2500,
+    "request_observation_ms": 3000,
+    "container_memory": "256m",
+    "container_cpus": 1,
+    "container_pids": 64
+  },
+  "pins": {
+    "downloads": [
+      {
+        "name": "envoy/release",
+        "url": "https://api.github.com/repos/envoyproxy/envoy/releases/tags/v1.40.2",
+        "cache": ".local/sprint05a-b-sources/envoy_release",
+        "bytes": 15041,
+        "sha256": "05b9f8b45939c71a9403e199b08c96b0f3748fc0161d4c1a0b5b704ea4f2961e"
+      },
+      {
+        "name": "envoy/commit",
+        "url": "https://api.github.com/repos/envoyproxy/envoy/commits/v1.40.2",
+        "cache": ".local/sprint05a-b-sources/envoy_commit",
+        "bytes": 56630,
+        "sha256": "05818df59fde85067a5a7b0575e2c7cfc7fba25fc88167ddb7ff6ee1d7b23a3d"
+      },
+      {
+        "name": "llhttp/release",
+        "url": "https://api.github.com/repos/nodejs/llhttp/releases/tags/release/v9.4.4",
+        "cache": ".local/sprint05a-b-sources/llhttp_release",
+        "bytes": 3445,
+        "sha256": "56c69a312f58d256b40e5e5e67ca402a56919c11083a8b64bdba5c1f035f5250"
+      },
+      {
+        "name": "llhttp/commit",
+        "url": "https://api.github.com/repos/nodejs/llhttp/commits/release/v9.4.4",
+        "cache": ".local/sprint05a-b-sources/llhttp_commit",
+        "bytes": 6024,
+        "sha256": "0a7c4dda17d70e41a614120dd9eb79177fa6eaffd19189eb1103a364c4bb9002"
+      },
+      {
+        "name": "envoy/source/common/http/http1/balsa_parser.cc",
+        "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http1/balsa_parser.cc",
+        "cache": ".local/sprint05a-b-sources/envoy_source_common_http_http1_balsa_parser.cc",
+        "bytes": 16888,
+        "sha256": "9dbd0c51df40c34e9893fc8269f14c834fc53eb5f7a832ec5d13055520552951"
+      },
+      {
+        "name": "envoy/source/common/http/http1/balsa_parser.h",
+        "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http1/balsa_parser.h",
+        "cache": ".local/sprint05a-b-sources/envoy_source_common_http_http1_balsa_parser.h",
+        "bytes": 3945,
+        "sha256": "1afe7bf610c0a6dd06623fd8d8b80c4874b6fd3fadeaaec826ae871abc3e4bb8"
+      },
+      {
+        "name": "envoy/api/envoy/config/core/v3/protocol.proto",
+        "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/api/envoy/config/core/v3/protocol.proto",
+        "cache": ".local/sprint05a-b-sources/envoy_api_envoy_config_core_v3_protocol.proto",
+        "bytes": 51174,
+        "sha256": "cd3e8569d0ffdd9963f85ab20e4247c3cef97742430a74edf35cb7a62b964ba2"
+      },
+      {
+        "name": "envoy/api/envoy/extensions/http/header_validators/envoy_default/v3/header_validator.proto",
+        "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/api/envoy/extensions/http/header_validators/envoy_default/v3/header_validator.proto",
+        "cache": ".local/sprint05a-b-sources/envoy_api_envoy_extensions_http_header_validators_envoy_default_v3_header_validator.proto",
+        "bytes": 11928,
+        "sha256": "6d28be682f9fc8861eb8344901acb820f24ea864a79f5b4a1a5a6557ca557280"
+      },
+      {
+        "name": "envoy/source/common/runtime/runtime_features.cc",
+        "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/runtime/runtime_features.cc",
+        "cache": ".local/sprint05a-b-sources/envoy_source_common_runtime_runtime_features.cc",
+        "bytes": 28658,
+        "sha256": "02188275d7be1cda84c4b1b50d6b36063ff1e0c74048c38fef500dc883f8b644"
+      },
+      {
+        "name": "llhttp/include/llhttp.h",
+        "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/include/llhttp.h",
+        "cache": ".local/sprint05a-b-sources/llhttp_include_llhttp.h",
+        "bytes": 31469,
+        "sha256": "52a7011f979b31f761403c1a333bf7fc26dc70f5745d8488eed1609c92097100"
+      },
+      {
+        "name": "llhttp/src/api.c",
+        "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/api.c",
+        "cache": ".local/sprint05a-b-sources/llhttp_src_api.c",
+        "bytes": 13384,
+        "sha256": "0f8590206fe2f264db2825401b5fb856b979ee1363dc88b06f36dc9577afb941"
+      },
+      {
+        "name": "llhttp/src/http.c",
+        "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/http.c",
+        "cache": ".local/sprint05a-b-sources/llhttp_src_http.c",
+        "bytes": 5209,
+        "sha256": "a1f2b23168f8e9b5bfa464c89027d3ca259fc649ae3d7e72bfff997d1aeb5d72"
+      },
+      {
+        "name": "llhttp/src/llhttp.c",
+        "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/llhttp.c",
+        "cache": ".local/sprint05a-b-sources/llhttp_src_llhttp.c",
+        "bytes": 319064,
+        "sha256": "f3ef756529b7444630717fa5540d4a1c9a1256874bda823c49c5a99c37f89429"
+      },
+      {
+        "name": "llhttp/LICENSE-MIT",
+        "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/LICENSE-MIT",
+        "cache": ".local/sprint05a-b-sources/llhttp_LICENSE-MIT",
+        "bytes": 1105,
+        "sha256": "ebca854e0134cd256d673627c20499f42577eb74bacf08b9f25b626a73c91277"
+      },
+      {
+        "name": "llhttp/README.md",
+        "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/README.md",
+        "cache": ".local/sprint05a-b-sources/llhttp_README.md",
+        "bytes": 21282,
+        "sha256": "0d52c46bd4df4bb4dfa9af808a170ef34c03d6bbcd07ace5fd03869804f7c88c"
+      },
+      {
+        "name": "nginx/changes",
+        "url": "https://nginx.org/en/CHANGES-1.30",
+        "cache": ".local/sprint05a-b-sources/nginx_changes",
+        "bytes": 349436,
+        "sha256": "07d5e370e05f4942e9bc61de802d6a401dcfca6ec2283067a5ad566aae60df36"
+      },
+      {
+        "name": "nginx/commit",
+        "url": "https://api.github.com/repos/nginx/nginx/commits/release-1.30.6",
+        "cache": ".local/sprint05a-b-sources/nginx_commit",
+        "bytes": 14763,
+        "sha256": "7717530f52966f04004786dd806a92af4b83b727d974b96b7451337670c5a0c7"
+      },
+      {
+        "name": "nginx/src/http/ngx_http_parse.c",
+        "url": "https://raw.githubusercontent.com/nginx/nginx/fb0e979c6dd63c018958b41eeb844947c5c21264/src/http/ngx_http_parse.c",
+        "cache": ".local/sprint05a-b-sources/nginx_src_http_ngx_http_parse.c",
+        "bytes": 61745,
+        "sha256": "529e32a859fa49f6e8444ed8161543abf40f74b5b2f0b5b6a0ea29218992d167"
+      },
+      {
+        "name": "nginx/src/http/ngx_http_request_body.c",
+        "url": "https://raw.githubusercontent.com/nginx/nginx/fb0e979c6dd63c018958b41eeb844947c5c21264/src/http/ngx_http_request_body.c",
+        "cache": ".local/sprint05a-b-sources/nginx_src_http_ngx_http_request_body.c",
+        "bytes": 35400,
+        "sha256": "14dfda333c6adc3d4bc12e505867b247e0f3d7c29ed2c5982a64aa11c9d58aca"
+      },
+      {
+        "name": "nginx/src/http/modules/ngx_http_proxy_module.c",
+        "url": "https://raw.githubusercontent.com/nginx/nginx/fb0e979c6dd63c018958b41eeb844947c5c21264/src/http/modules/ngx_http_proxy_module.c",
+        "cache": ".local/sprint05a-b-sources/nginx_src_http_modules_ngx_http_proxy_module.c",
+        "bytes": 151788,
+        "sha256": "3bd280886adfbd22e3096472c9fca5fd10b72986f86bb6cd88e3d951f90a55ab"
+      },
+      {
+        "name": "nginx/src/core/nginx.h",
+        "url": "https://raw.githubusercontent.com/nginx/nginx/fb0e979c6dd63c018958b41eeb844947c5c21264/src/core/nginx.h",
+        "cache": ".local/sprint05a-b-sources/nginx_src_core_nginx.h",
+        "bytes": 476,
+        "sha256": "a318282c696b14b3780f946753c6359574aec9fe350c118f6a210c2186a60751"
+      },
+      {
+        "name": "nginx/LICENSE",
+        "url": "https://raw.githubusercontent.com/nginx/nginx/fb0e979c6dd63c018958b41eeb844947c5c21264/LICENSE",
+        "cache": ".local/sprint05a-b-sources/nginx_LICENSE",
+        "bytes": 1319,
+        "sha256": "08845fe39e06b51dad7685c28140ab49577a86e947523e16b536a46caf89ad5c"
+      }
+    ],
+    "nginx_revision": "fb0e979c6dd63c018958b41eeb844947c5c21264"
+  },
+  "observer_control": {
+    "exact_match": true,
+    "bytes": 76,
+    "decrypted_hex": "474554202f6f627365727665722d636f6e74726f6c20485454502f312e310d0a486f73743a206c61622d6f726967696e2e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a"
+  },
+  "error": "AssertionError [ERR_ASSERTION]: build-llhttp\n\n1 !== 0\n\n    at cmd (file:///tmp/aegisgate-05a-b/spikes/envoy/sprint05a-b-run.mjs:25:56)\n    at file:///tmp/aegisgate-05a-b/spikes/envoy/sprint05a-b-run.mjs:109:5\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+  "cleanup": {
+    "lock_held_through_hashing": true,
+    "container_absent": true,
+    "fixture_removed": true,
+    "wall_ms": 3432
+  },
+  "ended_at": "2026-11-14T13:46:18.666Z"
+}
