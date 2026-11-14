@@ -14,3 +14,9 @@ commit as its collection head; its implementation source is unchanged from
 Neither attempt is the final eligible handoff proof. The collector is corrected
 to enumerate only candidate names and request only mount fields, then collect
 a fresh exact-source attempt. No public publication or remote push occurred.
+
+Only this agent's abandoned commit objects and sensitive inspection blob were
+removed from the shared local object store after reachability checks. Existing
+referenced objects and other worktrees' histories were preserved. The verifier
+checks that the inspection blob is unavailable. Attempts01/02 retain explicit
+withheld-stream records; their SHA256 inventories cover only retained files.
