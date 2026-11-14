@@ -1,0 +1,265 @@
+{
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05b-c/spikes/envoy/sprint05b-c-verify.mjs",
+    "evidence/sprint05b-c/verify-02"
+  ],
+  "source_commit": "29ed2f1aba006af5017906683e48543c09b2cedb",
+  "started_at": "2026-11-14T18:40:51.610Z",
+  "assertions": [
+    {
+      "checksums": 246,
+      "committed_source_hashes": 1383
+    },
+    "protected corpus, payloads, deadlines, oracle and observer unchanged",
+    "all supported variants retain stream errors and minimum upstream H2 windows"
+  ],
+  "results": [
+    {
+      "attempt": "attempt-01",
+      "mode": "baseline",
+      "transport": "docker",
+      "source_commit": "215dd359d13bc316ce04a128b0f6de8898b30522",
+      "tests": 23,
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ],
+      "setup_failure": false,
+      "raw_exit": 1
+    },
+    {
+      "attempt": "attempt-02",
+      "mode": "untapped",
+      "transport": "docker",
+      "source_commit": "f84ecc22c796fb2fadc53ec578ad670e4716a5df",
+      "tests": 0,
+      "passed": 0,
+      "failures": [],
+      "setup_failure": true,
+      "raw_exit": 1
+    },
+    {
+      "attempt": "attempt-03",
+      "mode": "untapped",
+      "transport": "docker",
+      "source_commit": "f84ecc22c796fb2fadc53ec578ad670e4716a5df",
+      "tests": 0,
+      "passed": 0,
+      "failures": [],
+      "setup_failure": true,
+      "raw_exit": 1
+    },
+    {
+      "attempt": "attempt-04",
+      "mode": "flush-zero",
+      "transport": "docker",
+      "source_commit": "f84ecc22c796fb2fadc53ec578ad670e4716a5df",
+      "tests": 0,
+      "passed": 0,
+      "failures": [],
+      "setup_failure": true,
+      "raw_exit": 1
+    },
+    {
+      "attempt": "attempt-05",
+      "mode": "flush-long",
+      "transport": "docker",
+      "source_commit": "32bd18bbdb45852b3d40bd30f16260494c8260e3",
+      "tests": 0,
+      "passed": 0,
+      "failures": [],
+      "setup_failure": true,
+      "raw_exit": 1
+    },
+    {
+      "attempt": "attempt-06",
+      "mode": "header-timeout",
+      "transport": "docker",
+      "source_commit": "32bd18bbdb45852b3d40bd30f16260494c8260e3",
+      "tests": 23,
+      "passed": 18,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE",
+        "32-partial-header-connections-termination-drain"
+      ],
+      "setup_failure": false,
+      "raw_exit": 1
+    },
+    {
+      "attempt": "attempt-07",
+      "mode": "untapped",
+      "transport": "docker",
+      "source_commit": "0cd801188a26511a5ccf5946bd38d86e1465c82b",
+      "tests": 0,
+      "passed": 0,
+      "failures": [],
+      "setup_failure": true,
+      "raw_exit": 1
+    },
+    {
+      "attempt": "attempt-08",
+      "mode": "flush-zero",
+      "transport": "docker",
+      "source_commit": "0cd801188a26511a5ccf5946bd38d86e1465c82b",
+      "tests": 0,
+      "passed": 0,
+      "failures": [],
+      "setup_failure": true,
+      "raw_exit": 1
+    },
+    {
+      "attempt": "attempt-09",
+      "mode": "flush-long",
+      "transport": "docker",
+      "source_commit": "0cd801188a26511a5ccf5946bd38d86e1465c82b",
+      "tests": 23,
+      "passed": 18,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE",
+        "32-partial-header-connections-termination-drain"
+      ],
+      "setup_failure": false,
+      "raw_exit": 1
+    },
+    {
+      "attempt": "attempt-10",
+      "mode": "untapped",
+      "transport": "native",
+      "source_commit": "bb9820f3a39ef346545cd0912430e706fa10c866",
+      "tests": 23,
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ],
+      "setup_failure": false,
+      "raw_exit": 1
+    },
+    {
+      "attempt": "attempt-11",
+      "mode": "flush-zero",
+      "transport": "native",
+      "source_commit": "bb9820f3a39ef346545cd0912430e706fa10c866",
+      "tests": 23,
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ],
+      "setup_failure": false,
+      "raw_exit": 1
+    },
+    {
+      "attempt": "attempt-12",
+      "mode": "flush-long",
+      "transport": "native",
+      "source_commit": "bb9820f3a39ef346545cd0912430e706fa10c866",
+      "tests": 23,
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ],
+      "setup_failure": false,
+      "raw_exit": 1
+    },
+    {
+      "attempt": "attempt-13",
+      "mode": "header-timeout",
+      "transport": "native",
+      "source_commit": "bb9820f3a39ef346545cd0912430e706fa10c866",
+      "tests": 23,
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ],
+      "setup_failure": false,
+      "raw_exit": 1
+    },
+    {
+      "attempt": "attempt-14",
+      "mode": "baseline",
+      "transport": "native",
+      "source_commit": "bb9820f3a39ef346545cd0912430e706fa10c866",
+      "tests": 23,
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ],
+      "setup_failure": false,
+      "raw_exit": 1
+    }
+  ],
+  "semantic_security_pass": false,
+  "peer_attribution": {
+    "scope": "additional verified TLS relay diagnostic; not baseline timing evidence",
+    "userinfo": [
+      {
+        "probe": "settled-reuse-identity-and-three-authority-negatives",
+        "peer_reset": {
+          "connection": 6,
+          "upstream_authorized": true,
+          "time_ns": "24522549106710",
+          "direction": "envoy-to-client",
+          "kind": "frame",
+          "type": 3,
+          "name": "RST_STREAM",
+          "flags": 0,
+          "stream": 1,
+          "length": 4,
+          "bytes": 13,
+          "sha256": "902f528c71b3d55985510ee73256814dee0bdf71ce6320ad21bd0f6531f20185",
+          "error_code": 1,
+          "hex": "00000403000000000100000001"
+        },
+        "client_cancel_before_peer_reset": false
+      },
+      {
+        "probe": "individual-settled-userinfo-denial",
+        "peer_reset": {
+          "connection": 9,
+          "upstream_authorized": true,
+          "time_ns": "24523040494685",
+          "direction": "envoy-to-client",
+          "kind": "frame",
+          "type": 3,
+          "name": "RST_STREAM",
+          "flags": 0,
+          "stream": 1,
+          "length": 4,
+          "bytes": 13,
+          "sha256": "902f528c71b3d55985510ee73256814dee0bdf71ce6320ad21bd0f6531f20185",
+          "error_code": 1,
+          "hex": "00000403000000000100000001"
+        },
+        "client_cancel_before_peer_reset": false
+      }
+    ],
+    "cancellation_control_code": 8,
+    "acceptance_unchanged": "userinfo peer reset is not the required 400/421 response"
+  },
+  "ended_at": "2026-11-14T18:41:08.524Z",
+  "verification_complete": true
+}
