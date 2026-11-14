@@ -19,7 +19,7 @@ BLOCKED. B/C/E and final combined integration review remain pending.
 | Fresh A runtime source | `9ec2765305aae1e5aa94501ca18b41542f22bf55` / `ffefbb2177e94d464e898c78b69642a9eb7bd661` |
 | Fresh D runtime source | `8c6e233f1b39ea370497ca5560c0e774c026c6c7` / `646304bfbe079d2530b31859bcac6b823a976749` |
 | Integrity verifier source | `86e861238defd02c62be64bf01bd1362e75a1c0a` / `3717fa0a237f301052d6c4f1e8bf7f47d56b860d` |
-| Final report receipt source | `8d546a7`; committed verifier before report scan |
+| Final report receipt source | `1ba8b5be198afb6c7ec943cbaab74ff11bb7c8c1`; verifier committed earlier as `8d546a7` |
 
 All nine A/D source files match their exact component heads byte-for-byte.
 Before/after checks verify all4003 baseline blobs, inventory SHA256
@@ -158,7 +158,8 @@ Every command below uses the supplied Node and a single outer
 | `spikes/envoy/sprint05a-f-review.mjs evidence/sprint05a-f/ad-02 evidence/sprint05a-a/attempt-04` |1 after complete A proof: D baseline17 differed from collector's assumed16 |
 | `spikes/envoy/sprint05a-f-review.mjs evidence/sprint05a-f/ad-03 evidence/sprint05a-a/attempt-04 --d-only` |0; reuses immutable A receipt, freshly runs all D modes/controls |
 | `spikes/envoy/sprint05a-f-verify.mjs evidence/sprint05a-f/checks-01` |0; exact receipts,original inputs,counters,frames,root diff,secret/history checks |
-| `spikes/envoy/sprint05a-f-verify.mjs evidence/sprint05a-f/checks-02 --report-only` | Final report/evidence scan receipt retained separately |
+| `spikes/envoy/sprint05a-f-verify.mjs evidence/sprint05a-f/checks-02 --report-only` |0; final report/evidence scan receipt retained separately |
+| `spikes/envoy/sprint05a-f-verify.mjs evidence/sprint05a-f/checks-03 --report-only` | Corrected provenance text scanned and hashed separately |
 
 All fixture lifecycles cover setup,test,capture,hashing and cleanup under the
 lock. Candidate inventories are empty and new fixture directories removed;
