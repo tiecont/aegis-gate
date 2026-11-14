@@ -15,8 +15,8 @@ def run(label,argv,cwd=root):
 try:
  baseline=tree(root,'a325b9e')
  for owner,cwd,revision,allowed in [
- ('A',pathlib.Path('/tmp/aegisgate-04c-a'),'dbc83509217b17f50df8680a5a54e3bd3622a406',r'^(docs/(reports/sprint04c-(a-architecture|human-approval-checklist)|ADR-012-sprint04c-decision-addendum-proposed)\.md|evidence/sprint04c-a/)'),
- ('C',pathlib.Path('/tmp/aegisgate-04c-c'),'7b20cf3a61c26caa170f8e3f7ec28f256653e5b9',r'^(docs/reports/sprint04c-c-alternatives\.md|evidence/sprint04c-c/)'),
+ ('A',pathlib.Path('/tmp/aegisgate-04c-a'),'02bad67b51a8171493ad3ff1eee245e3f07d6e2f',r'^(docs/(reports/sprint04c-(a-architecture|human-approval-checklist)|ADR-012-sprint04c-decision-addendum-proposed)\.md|evidence/sprint04c-a/)'),
+ ('C',pathlib.Path('/tmp/aegisgate-04c-c'),'49f2d554d30fd9002f6d15e7ee39999a6e866d5c',r'^(docs/reports/sprint04c-c-alternatives\.md|evidence/sprint04c-c/)'),
  ('E',pathlib.Path('/tmp/aegisgate-04c-e'),'551591395880ce87863b4e861c05d266c719b91f',r'^(docs/reports/sprint04c-e-regressions\.md|evidence/sprint04c-e/)')]:
   assert git(cwd,'rev-parse','HEAD')==revision;assert not git(cwd,'status','--porcelain','--untracked-files=no')
   current=tree(cwd,revision);assert all(current.get(f)==blob for f,blob in baseline.items())
