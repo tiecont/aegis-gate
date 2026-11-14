@@ -67,6 +67,7 @@ try {
     B: '12abd255b754b553480544edbf9452b7f65d9a4d',
     C: '49f2d554d30fd9002f6d15e7ee39999a6e866d5c',
     D: 'd9a2004167a178a3a1d4549cc97378fe4b02c360',
+    E: '212677805416a3e38d44724bfaf1101c8e11a0d5',
   };
   receipt.accepted_component_objects = [];
   for (const [owner, commit] of Object.entries(owners)) {
@@ -93,6 +94,14 @@ try {
         excluded++;
         continue;
       }
+      if (entry === 'evidence/sprint04c-e/attempt-01/stdout.log') {
+        const metadata = git('show', `${source}:evidence/sprint04c-e/attempt-01/REDACTION.md`).toString();
+        assert.ok(metadata.includes(expected));
+        assert.equal(expected, '8992edbdc9711c445bcf8cd811d3288feb08d299479f7544bdfe37eb2df9b3a1');
+        assert.ok(!tracked.includes(entry));
+        excluded++;
+        continue;
+      }
       assert.ok(tracked.includes(entry), `${file}: absent ${entry}`);
       assert.equal(sha(git('show', `${source}:${entry}`)), expected, entry);
       verified++;
@@ -111,7 +120,7 @@ try {
     for (const marker of ['NO-GO', 'LOCKED', 'BLOCKED', 'PENDING']) assert.ok(content.includes(marker), `${file}: ${marker}`);
   }
   receipt.result = 'PASS within preliminary source-audit scope';
-  receipt.remaining = ['corrected E acceptance and source integration', 'latest helper independent acceptance', 'final complete locked local gates and cleanup', 'exact PR-head and merge hosted jobs', 'final source/receipt audit'];
+  receipt.remaining = ['latest helper independent acceptance', 'final complete locked local gates and cleanup', 'exact PR-head and merge hosted jobs', 'final source/receipt audit'];
 } catch (error) {
   receipt.result = 'FAIL';
   receipt.error = error.stack;
