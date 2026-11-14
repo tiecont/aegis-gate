@@ -143,6 +143,7 @@ checks every downloaded hash. Runtime runner refuses dirty tracked source.
 | llhttp03 | `5e685457f5c0c4e4071be4224fbef30e38dd6f16` |0;22 wire +24 direct controls;source tree `6dfe4b5b358c7998a053606c1659be3aa3211dfe` |
 | verify01 | `76b6e03` (full ID in receipt) |1;raw retained upstream/tool whitespace;all preceding parser and baseline-object assertions passed |
 | verify02 | `fa062873d96531dfbebca3c51089de0d48d51587` |0;hashes/source bindings/narrow assertions,4003 baseline objects,manifest,authored whitespace,owned secret scan |
+| verify03 | `133d3eae70fa6dfe6b27ee0b4ca0ce08b8d44dcf` |0;same checks after report commit `76ec22a`;report included in owned secret scan |
 
 No failed attempt was edited or removed. Raw-output whitespace is retained
 verbatim; authored source/plan/report whitespace is checked separately. The
