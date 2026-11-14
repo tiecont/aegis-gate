@@ -79,7 +79,9 @@ try {
   await run('strict-dependencies', [process.execPath,
     '/home/tiecont/Projects/aegis-gate/.local/toolchains/node/lib/node_modules/npm/bin/npm-cli.js',
     'ci', '--prefix', 'spikes/pingora', '--ignore-scripts', '--engine-strict', '--no-audit', '--no-fund']);
-  if (!fs.existsSync('node_modules')) fs.symlinkSync('spikes/pingora/node_modules', 'node_modules', 'dir');
+  fs.mkdirSync('node_modules', { recursive: true });
+  for (const name of ['ws', '@grpc']) if (!fs.existsSync(`node_modules/${name}`))
+    fs.symlinkSync(`../spikes/pingora/node_modules/${name}`, `node_modules/${name}`, 'dir');
   // A's runner requires a completely clean tree, so flush reviewer receipts afterwards.
   await run('a-runner', [process.execPath, 'spikes/envoy/sprint05a-a-run.mjs', aOutput]);
   fs.mkdirSync(output, { recursive: true });
