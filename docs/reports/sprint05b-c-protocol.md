@@ -207,6 +207,30 @@ flock /tmp/aegisgate-sprint02-fixtures.lock \
 For the separate frame diagnostic use `baseline native relay`. That diagnostic
 must not replace the untapped baseline or justify any assertion exemption.
 
+## Host-Health Hold And Inventory Correction
+
+Root subsequently reported the same slow Docker/never-started Created behavior
+in root/B, and directed a host-health hold. No further C configuration,
+readiness or native experiments were started. All prior failed starts remain
+unaltered, including the original listener timeout. No host cause has been
+established by C.
+
+The earlier ad hoc inventory combined multiple name prefixes in one Docker
+query. Per root's correction, its empty result is withdrawn as sufficient
+coverage of the intended union. Source4147dd7 enumerates each prefix in a
+separate query and unions IDs. Under the global fixture lock, cleanup02 executes
+six rounds across aegis-envoy-, aegis-sprint05a-a- and aegis-sprint05b-c-, preserving
+all18 query argv/stdout/stderr/exits and hashes. Every query returned empty;
+there was no candidate whose Mounts/State.Error could be read or whose removal
+was warranted. No Env or full container configuration was inspected.
+
+The collector now checks mount-only ownership under this worktree's `.local`
+before reading owned State.Error, and the standalone `--created-only` mode
+removes only owned ps-state=created candidates with docker rm --force. It does
+not remove root/B or other worktrees' containers. Historical cleanup01 removal
+records and their missing State.Error limitation are preserved. Syntax and
+cleanup02's checksums pass; no fixture start was needed for this correction.
+
 ## Agent Completion Report
 
 - Module/status:01/C, partial; four supplemental failures unresolved.
