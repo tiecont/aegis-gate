@@ -1,0 +1,100 @@
+{
+  "source_commit": "1d88984a39fbd5399ce9e1cccb640fe5c801c5b4",
+  "source_tree": "0df58fcde4667bbe17bc786740b4d8b60e693328",
+  "reviewed_commit": "c117d96a0216de301c2a8033e79edee21a936f4a",
+  "reviewed_tree": "e47d07a6fcdd88c4d827e725bcd8abd263f648d9",
+  "mode": "scan",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05a-pr17-review/scripts/sprint05a-gate-audit.mjs",
+    "scan",
+    "evidence/sprint05a-gate-review/scan-02"
+  ],
+  "cwd": "/tmp/aegisgate-05a-pr17-review",
+  "node": "v26.13.0",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "started_at": "2026-11-14T16:57:21.581Z",
+  "checks": [
+    {
+      "name": "independent-worktree-secret-scan",
+      "passed": true,
+      "result": {
+        "scanner": "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "container_absent": true,
+        "scope": "review worktree files; retained bad history evaluated separately"
+      }
+    }
+  ],
+  "commands": [
+    {
+      "label": "gitleaks",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--name",
+        "aegisgate-05a-gate-audit-1693075",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05a-pr17-review:/repo:ro",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-14T16:57:21.666Z",
+      "ended_at": "2026-11-14T16:57:41.257Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-gate-review/scan-02/gitleaks.stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-gate-review/scan-02/gitleaks.stderr.log",
+          "bytes": 133,
+          "sha256": "a194ab17f5ba41d161dfad5d61c865e4553ea89e4f49298388338192fe567655"
+        }
+      ]
+    },
+    {
+      "label": "scanner-cleanup",
+      "argv": [
+        "docker",
+        "ps",
+        "-aq",
+        "--filter",
+        "name=^/aegisgate-05a-gate-audit-1693075$"
+      ],
+      "started_at": "2026-11-14T16:57:41.263Z",
+      "ended_at": "2026-11-14T16:57:41.334Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-gate-review/scan-02/scanner-cleanup.stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-gate-review/scan-02/scanner-cleanup.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "ended_at": "2026-11-14T16:57:41.341Z",
+  "lock_held_through_scanner_inventory_hashing": true,
+  "passed": true
+}
