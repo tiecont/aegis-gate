@@ -1,0 +1,249 @@
+{
+  "source_commit": "3b60ed6fa1ccfa5c1419c039a2cb382ac64938f5",
+  "source_tree": "3e541dc1b04b83a63b5f1d3f513bd49bbbd81d4f",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05b-d/spikes/envoy/sprint05b-d-streaming.mjs",
+    "/tmp/aegisgate-05b-a",
+    "evidence/sprint05b-d/attempt-01"
+  ],
+  "started_at": "2026-11-14T18:28:28.944Z",
+  "node": "v26.13.0",
+  "node_binary_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "scope": "Independent test-only admission ordering counterexample; no original75/23 replacement or complete runtime claim",
+  "limits": {
+    "feed_bytes": 16384,
+    "staged_wire_bytes": 2097152,
+    "body_bytes": 1048576,
+    "wall_ms": 30000
+  },
+  "tests": [],
+  "parser_source": {
+    "commit": "2d5c68c000c089775af177a55aebbee5b6283761",
+    "files": [
+      {
+        "file": "spikes/envoy/sprint05b-a-build.mjs",
+        "sha256": "ae82962b5d938d87ea72cf2197aa1327f2463219c1336ed14c88368ff446275f"
+      },
+      {
+        "file": "spikes/envoy/sprint05b-llhttp-addon.c",
+        "sha256": "a2cc3ca770c84e8d11c04181341dd97f5449a602040e243561b5d70439288efa"
+      }
+    ]
+  },
+  "upstream": [
+    {
+      "name": "include/llhttp.h",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/include/llhttp.h",
+      "sha256": "52a7011f979b31f761403c1a333bf7fc26dc70f5745d8488eed1609c92097100",
+      "bytes": 31469
+    },
+    {
+      "name": "src/api.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/api.c",
+      "sha256": "0f8590206fe2f264db2825401b5fb856b979ee1363dc88b06f36dc9577afb941",
+      "bytes": 13384
+    },
+    {
+      "name": "src/http.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/http.c",
+      "sha256": "a1f2b23168f8e9b5bfa464c89027d3ca259fc649ae3d7e72bfff997d1aeb5d72",
+      "bytes": 5209
+    },
+    {
+      "name": "src/llhttp.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/llhttp.c",
+      "sha256": "f3ef756529b7444630717fa5540d4a1c9a1256874bda823c49c5a99c37f89429",
+      "bytes": 319064
+    },
+    {
+      "name": "LICENSE-MIT",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/LICENSE-MIT",
+      "sha256": "ebca854e0134cd256d673627c20499f42577eb74bacf08b9f25b626a73c91277",
+      "bytes": 1105
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "curl",
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--location",
+        "--proto",
+        "=https",
+        "--proto-redir",
+        "=https",
+        "--tlsv1.2",
+        "--connect-timeout",
+        "10",
+        "--max-time",
+        "30",
+        "--max-filesize",
+        "1048576",
+        "--output",
+        "/tmp/aegisgate-05b-a/.local/sprint05b-a-sources/llhttp.h.download",
+        "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/include/llhttp.h"
+      ],
+      "cwd": "/tmp/aegisgate-05b-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "curl",
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--location",
+        "--proto",
+        "=https",
+        "--proto-redir",
+        "=https",
+        "--tlsv1.2",
+        "--connect-timeout",
+        "10",
+        "--max-time",
+        "30",
+        "--max-filesize",
+        "1048576",
+        "--output",
+        "/tmp/aegisgate-05b-a/.local/sprint05b-a-sources/api.c.download",
+        "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/api.c"
+      ],
+      "cwd": "/tmp/aegisgate-05b-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "curl",
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--location",
+        "--proto",
+        "=https",
+        "--proto-redir",
+        "=https",
+        "--tlsv1.2",
+        "--connect-timeout",
+        "10",
+        "--max-time",
+        "30",
+        "--max-filesize",
+        "1048576",
+        "--output",
+        "/tmp/aegisgate-05b-a/.local/sprint05b-a-sources/http.c.download",
+        "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/http.c"
+      ],
+      "cwd": "/tmp/aegisgate-05b-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "curl",
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--location",
+        "--proto",
+        "=https",
+        "--proto-redir",
+        "=https",
+        "--tlsv1.2",
+        "--connect-timeout",
+        "10",
+        "--max-time",
+        "30",
+        "--max-filesize",
+        "1048576",
+        "--output",
+        "/tmp/aegisgate-05b-a/.local/sprint05b-a-sources/llhttp.c.download",
+        "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/llhttp.c"
+      ],
+      "cwd": "/tmp/aegisgate-05b-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "curl",
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--location",
+        "--proto",
+        "=https",
+        "--proto-redir",
+        "=https",
+        "--tlsv1.2",
+        "--connect-timeout",
+        "10",
+        "--max-time",
+        "30",
+        "--max-filesize",
+        "1048576",
+        "--output",
+        "/tmp/aegisgate-05b-a/.local/sprint05b-a-sources/LICENSE-MIT.download",
+        "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/LICENSE-MIT"
+      ],
+      "cwd": "/tmp/aegisgate-05b-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "cc",
+        "--version"
+      ],
+      "cwd": "/tmp/aegisgate-05b-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "cc (GCC) 16.2.1 20260810\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsyntax-only",
+        "-I/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node",
+        "-I/tmp/aegisgate-05b-d-Jjib78/upstream",
+        "spikes/envoy/sprint05b-llhttp-addon.c"
+      ],
+      "cwd": "/tmp/aegisgate-05b-a",
+      "exit": 1,
+      "signal": null,
+      "stdout": "",
+      "stderr": "spikes/envoy/sprint05b-llhttp-addon.c: In function ‘napi_register_module_v1’:\nspikes/envoy/sprint05b-llhttp-addon.c:272:50: error: ‘LLHTTP_VERSION_STRING’ undeclared (first use in this function); did you mean ‘LLHTTP_VERSION_MINOR’?\n  272 |   set(env, exports, \"llhttpVersion\", string(env, LLHTTP_VERSION_STRING));\n      |                                                  ^~~~~~~~~~~~~~~~~~~~~\n      |                                                  LLHTTP_VERSION_MINOR\nspikes/envoy/sprint05b-llhttp-addon.c:272:50: note: each undeclared identifier is reported only once for each function it appears in\n"
+    }
+  ],
+  "compiler": "cc (GCC) 16.2.1 20260810",
+  "nodeApiHeader": {
+    "file": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node/node_api.h",
+    "sha256": "2d4560831e525b47b060ec8a0864ab73993df9e20215ce9f0fe7b24cd31af32a"
+  },
+  "error": "AssertionError [ERR_ASSERTION]: cc: spikes/envoy/sprint05b-llhttp-addon.c: In function ‘napi_register_module_v1’:\nspikes/envoy/sprint05b-llhttp-addon.c:272:50: error: ‘LLHTTP_VERSION_STRING’ undeclared (first use in this function); did you mean ‘LLHTTP_VERSION_MINOR’?\n  272 |   set(env, exports, \"llhttpVersion\", string(env, LLHTTP_VERSION_STRING));\n      |                                                  ^~~~~~~~~~~~~~~~~~~~~\n      |                                                  LLHTTP_VERSION_MINOR\nspikes/envoy/sprint05b-llhttp-addon.c:272:50: note: each undeclared identifier is reported only once for each function it appears in\n\n\n1 !== 0\n\n    at command (file:///tmp/aegisgate-05b-a/spikes/envoy/sprint05b-a-build.mjs:14:10)\n    at build (file:///tmp/aegisgate-05b-a/spikes/envoy/sprint05b-a-build.mjs:48:3)\n    at file:///tmp/aegisgate-05b-d/spikes/envoy/sprint05b-d-streaming.mjs:44:41",
+  "cleanup": {
+    "fixture_removed": true,
+    "active_parsers": null,
+    "lock_held": true
+  },
+  "ended_at": "2026-11-14T18:28:32.995Z"
+}
