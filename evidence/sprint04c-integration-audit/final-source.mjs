@@ -113,10 +113,12 @@ function resolveStream(receiptFile, entry) {
 }
 function auditReceipt(file) {
   const r = json(file);
-  assert.equal(value('rev-parse', `${r.source_commit}^{tree}`), r.source_tree, file);
+  const revision = r.source_commit ?? r.reviewer_commit;
+  const revisionTree = r.source_tree ?? r.reviewer_tree;
+  assert.equal(value('rev-parse', `${revision}^{tree}`), revisionTree, file);
   let sources = 0, streams = 0;
   for (const s of [...(r.sources ?? []), ...(r.immutable ?? [])]) {
-    assert.equal(sha(git('show', `${r.source_commit}:${s.file}`)), s.sha256, `${file}: ${s.file}`);
+    assert.equal(sha(git('show', `${revision}:${s.file}`)), s.sha256, `${file}: ${s.file}`);
     sources++;
   }
   for (const c of r.commands) {
@@ -130,7 +132,7 @@ function auditReceipt(file) {
     }
   }
   if (r.node_sha256) assert.equal(r.node_sha256, receipt.node_sha256, `${file}: Node binary`);
-  return { file, source_commit: r.source_commit, source_tree: r.source_tree, sources, commands: r.commands.length, streams };
+  return { file, source_commit: revision, source_tree: revisionTree, sources, commands: r.commands.length, streams };
 }
 let stage;
 try {
