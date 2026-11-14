@@ -6,13 +6,14 @@ import { execFileSync, spawn } from "node:child_process";
 import { assertLock } from "../spikes/envoy/wire-fixtures.mjs";
 
 const [output] = process.argv.slice(2);
-assert.ok(output?.startsWith("evidence/sprint04c-root/gates-"));
+const sprint = /^evidence\/sprint(04c|05a)-root\/gates-/.exec(output ?? "")?.[1];
+assert.ok(sprint, "supported isolated sprint output required");
 assert.ok(!fs.existsSync(output), "fresh evidence required");
 assertLock();
 const git = (...args) => execFileSync("git", args, { encoding: "utf8" }).trim();
 assert.equal(git("status", "--porcelain", "--untracked-files=no"), "");
 fs.mkdirSync(output, { recursive: true });
-process.env.COMPOSE_PROJECT_NAME = "aegisgate-04c-root";
+process.env.COMPOSE_PROJECT_NAME = `aegisgate-${sprint}-root`;
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const receipt = {
   source_commit: git("rev-parse", "HEAD"),
@@ -110,7 +111,7 @@ try {
         "ps",
         "-aq",
         "--filter",
-        "label=com.docker.compose.project=aegisgate-04c-root",
+        `label=com.docker.compose.project=${process.env.COMPOSE_PROJECT_NAME}`,
       ],
       { encoding: "utf8" },
     ).trim();
@@ -206,7 +207,7 @@ try {
           "ls",
           "-q",
           "--filter",
-          "label=com.docker.compose.project=aegisgate-04c-root",
+          `label=com.docker.compose.project=${process.env.COMPOSE_PROJECT_NAME}`,
         ],
         { encoding: "utf8" },
       )
