@@ -4,6 +4,12 @@ This register tracks residual implementation and release risks. It does not acce
 
 ## Sprint05-A measured disposition
 
+Integration delivery is closed by PR17 merge581a609. Exact final-head/main
+hosted43617194188/43618663914 both pass both required jobs; independent final
+head review3c9e666 and local-gate review8ce5aef ACCEPT the scoped work.
+`reports/sprint05a-closeout-addendum.md` records the final receipt. No runtime
+or production risk is accepted by that integration.
+
 R01/R04 remain blocking. The isolated supported Envoy TE mapper repairs four
 original assertions on unchanged75, giving73/75. It maps all locally generated
 501 responses to400; a genuine origin501 is preserved. Broader local-status

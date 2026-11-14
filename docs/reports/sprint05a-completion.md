@@ -1,5 +1,11 @@
 # Sprint05-A implementation and measured results
 
+Final integration closeout: PR17 merged at
+`581a609df8c3c3a0ce62d75f4f58fa6db8f76816`; exact final-head43617194188 and
+merge43618663914 both PASS the two hosted jobs. The
+[closeout addendum](sprint05a-closeout-addendum.md) supersedes checkpoint pending
+delivery fields below while retaining all mandatory failures and gate locks.
+
 Status: engineering improvements independently accepted in their scoped research
 and test boundaries; full root gates PASS. Exact-head/main hosted closeout
 PENDING until recorded below or in a subsequent receipt addendum. Module01

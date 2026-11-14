@@ -1,5 +1,19 @@
 # Implementation status
 
+## Sprint05-A complete / Module01 NO-GO
+
+PR17 merged as `581a609df8c3c3a0ce62d75f4f58fa6db8f76816`, with exact
+head12b870e and merge sharing treea4fe8e5d1286d7862e5817bf8d9fed2a464c5c07.
+Hosted43617194188 (final head) and43618663914 (merge) both PASS foundation-quality
+and supply-chain-security. Exact source/local gates and final PR-head review
+are independently ACCEPTed. The additive
+`docs/reports/sprint05a-closeout-addendum.md` supersedes checkpoint pending fields.
+
+Separate Envoy candidate73/75 and19/23 preserve real partial fixes; obs-fold,
+nine-byte H2 and four supplemental failures remain. llhttp's strict folding PoC
+does not qualify a complete runtime.00/02/03 retain PASS local;01 NO-GO;
+04-12 LOCKED; production BLOCKED. ADR012 and human owner/approval remain PENDING.
+
 ## Sprint05-A measured ingress improvements
 
 The isolated combined Envoy1.40.2 candidate now measures **73/75**, versus
