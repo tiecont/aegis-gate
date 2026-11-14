@@ -66,10 +66,16 @@ async function run(label, argv, expected = [0], env = {}) {
   return out.toString();
 }
 async function owned() {
-  const out = await run(`containers-${record.commands.length}`, ['docker', 'ps', '-aq']);
-  const ids = out.trim().split('\n').filter(Boolean); if (!ids.length) return [];
-  const rows = JSON.parse(await run(`inspect-${record.commands.length}`, ['docker', 'inspect', ...ids]));
-  return rows.filter((c) => c.Mounts.some((m) => m.Source.startsWith(`${root}/.local/`))).map((c) => c.Name.slice(1));
+  const out = await run(`containers-${record.commands.length}`, ['docker', 'ps', '-a',
+    '--filter', 'name=^/aegis-envoy-', '--filter', 'name=^/aegis-sprint05a-a-', '--format', '{{.ID}} {{.Names}}']);
+  const found = [];
+  for (const line of out.trim().split('\n').filter(Boolean)) {
+    const [id, name] = line.split(' ');
+    const mounts = JSON.parse(await run(`mounts-${record.commands.length}`,
+      ['docker', 'inspect', '--format', '{{json .Mounts}}', id]));
+    if (mounts.some((m) => m.Source.startsWith(`${root}/.local/`))) found.push(name);
+  }
+  return found;
 }
 try {
   await run('git-version', ['git', '--version']); await run('openssl-version', ['openssl', 'version']);
