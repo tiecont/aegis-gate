@@ -6,6 +6,7 @@ import { spawnSync, execFileSync } from 'node:child_process';
 import { assertLock } from './wire-fixtures.mjs';
 import { strategies } from './sprint05a-c-config.mjs';
 import { evaluate } from '../edge-comparison/evaluate.mjs';
+import { setTimeout as delay } from 'node:timers/promises';
 process.umask(0o077);
 assertLock();
 const root = process.cwd();
@@ -58,7 +59,12 @@ finally {
   const owned = ids.length ? JSON.parse(execFileSync('docker', ['inspect', ...ids], { encoding: 'utf8' })).filter((c) => c.Mounts.some((m) => m.Source.startsWith(`${root}/.local/sprint05a-c-`))) : [];
   record.cleanup = { lock_held: true, stopped: [] };
   for (const c of owned) record.cleanup.stopped.push({ name: c.Name, exit_code: command(`stop-${c.Id.slice(0, 8)}`, 'docker', ['stop', '--timeout', '2', c.Id]).status });
-  record.cleanup.remaining = execFileSync('docker', ['ps', '-aq', '--filter', 'name=aegis-envoy-sprint05a-c-'], { encoding: 'utf8' }).trim();
+  for (let attempt = 0; attempt < 50; attempt++) {
+    record.cleanup.remaining = execFileSync('docker', ['ps', '-aq', '--filter', 'name=aegis-envoy-sprint05a-c-'], { encoding: 'utf8' }).trim();
+    if (!record.cleanup.remaining) break;
+    await delay(100);
+  }
+  save();
   assert.equal(record.cleanup.remaining, '');
   fs.rmSync(fixture, { recursive: true, force: true });
   for (const dir of fs.readdirSync('.local')) if (!generatedBefore.has(dir) && dir.startsWith('sprint05a-c-envoy-')) fs.rmSync(path.join('.local', dir), { recursive: true });

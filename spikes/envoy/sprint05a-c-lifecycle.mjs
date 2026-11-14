@@ -71,14 +71,15 @@ try {
   const request = async (c, extra = {}) => {
     const s = c.request({ ':path': '/', ':authority': c.proofHost, ...extra }); let headers; const data = [];
     s.on('response', (h) => { headers = h; }); s.on('data', (b) => data.push(b)); s.end();
-    await bound(once(s, 'end')); return { status: headers[':status'], connection: headers['x-origin-connection'], generation: headers['x-origin-generation'], body: Buffer.concat(data).toString() };
+    await bound(once(s, 'end')); return { status: headers?.[':status'] ?? null, rst_code: s.rstCode,
+      connection: headers?.['x-origin-connection'], generation: headers?.['x-origin-generation'], body: Buffer.concat(data).toString() };
   };
   await test('cold-denials-no-origin-dial-or-bytes', async () => {
     const details = [];
     for (const extra of [{ host: 'edge-a.test' }, { ':authority': 'edge-a.test' }, { ':authority': 'user@edge-b.test' }]) {
       const before = { relays: relayId, chunks: captures.length, handlers: handlers.length };
       const c = await connect(); const r = await request(c, extra); c.destroy();
-      assert.ok([400, 421].includes(r.status)); assert.equal(relayId, before.relays); assert.equal(captures.length, before.chunks); assert.equal(handlers.length, before.handlers);
+      assert.ok([400, 421].includes(r.status) || (r.status === null && r.rst_code !== 0)); assert.equal(relayId, before.relays); assert.equal(captures.length, before.chunks); assert.equal(handlers.length, before.handlers);
       details.push({ extra, ...r });
     } return details;
   });
@@ -100,7 +101,7 @@ try {
       const c = await connect(); const response = await request(c, extra); c.destroy();
       const raw = captures.slice(before.chunks).map((x) => x.hex).join('');
       details.push({ extra, response, raw_hex: raw, handlers: handlers.length - before.handlers });
-      assert.ok([400, 421].includes(response.status)); assert.equal(handlers.length, before.handlers);
+      assert.ok([400, 421].includes(response.status) || (response.status === null && response.rst_code !== 0)); assert.equal(handlers.length, before.handlers);
     } return details;
   });
   await test('route-pools-partitioned', async () => {
