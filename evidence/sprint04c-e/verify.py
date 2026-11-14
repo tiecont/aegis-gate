@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 
 root = Path.cwd()
 output = Path(sys.argv[1])
+audit_only = '--audit-only' in sys.argv[2:]
 assert not output.exists(), 'Fresh verification output required'
 lock = Path('/tmp/aegisgate-sprint02-fixtures.lock')
 ancestors = set()
@@ -60,8 +61,10 @@ for label in ['cleanup-container', 'cleanup-network', 'cleanup-volume']:
     assert raw(label).strip() == ''
 assert not git('diff', '--name-only', 'a325b9e', 'HEAD', '--', '.', ':!evidence/sprint04c-e', ':!docs/reports/sprint04c-e-regressions.md')
 private_names = ['postgres-password', 'redis-password', 'nats-token']
-secrets = [(root / '.local' / f).read_bytes().strip() for f in private_names]
-secrets.append((root / '.local/pki/valid.jwt').read_bytes().strip())
+private_paths = [root / '.local' / f for f in private_names] + [root / '.local/pki/valid.jwt']
+if not audit_only:
+    assert all(p.is_file() for p in private_paths), 'Full cleanup verification requires original private fixture values'
+secrets = [p.read_bytes().strip() for p in private_paths if p.is_file()]
 owned = [p for p in (root / 'evidence/sprint04c-e').rglob('*') if p.is_file() and '__pycache__' not in str(p)]
 for p in owned:
     b = p.read_bytes()
@@ -70,15 +73,17 @@ for p in owned:
 for kind in ['container', 'network', 'volume']:
     assert not subprocess.check_output(['docker', kind, 'ls', '--filter', 'label=com.docker.compose.project=aegisgate-04c-e', '--format', '{{.ID}}'], text=True).strip()
 # These paths were generated only by this isolated recorder, never shared state.
-for name in private_names + ['compose.env', 'redis.conf', 'nats.conf']:
-    (root / '.local' / name).unlink()
-shutil.rmtree(root / '.local/pki')
+if not audit_only:
+    for name in private_names + ['compose.env', 'redis.conf', 'nats.conf']:
+        (root / '.local' / name).unlink()
+    shutil.rmtree(root / '.local/pki')
 result = dict(source_commit=git('rev-parse', 'HEAD'), source_tree=git('rev-parse', 'HEAD^{tree}'),
               argv=sys.argv, python=sys.version, python_binary=sys.executable,
               python_binary_sha256=sha(Path(sys.executable).read_bytes()), cwd=str(root),
               verified_manifest_entries=verified, verified_commands=len(r['commands']), go=go,
-              exact_source_unchanged=True, credential_matches=0, private_key_matches=0,
-              cleanup_inventory_empty=True, owned_generated_private_material_removed=True,
+              exact_source_unchanged=True, credential_matches=0 if len(secrets) == 4 else None,
+              private_key_matches=0, audit_only=audit_only,
+              cleanup_inventory_empty=True, owned_generated_private_material_removed=True if not audit_only else None,
               fixture_lock_held=True, exit_code=0, ended_at=datetime.now(timezone.utc).isoformat())
 output.write_text(json.dumps(result, indent=2) + '\n')
 print(json.dumps(result))
