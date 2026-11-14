@@ -1,0 +1,1511 @@
+{
+  "started_at": "2026-11-14T14:08:56.427Z",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05a-b/spikes/envoy/sprint05a-b-run.mjs",
+    "nginx",
+    "evidence/sprint05a-b/nginx-02"
+  ],
+  "cwd": "/tmp/aegisgate-05a-b",
+  "source_commit": "a64cd6aa94e4a9429f8eb6d172940c7b71a94f45",
+  "source_tree": "ed2f1fbecd1d5b4670919984ee648472bffefc5b",
+  "tracked_clean": true,
+  "node": "v26.13.0",
+  "node_executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "sources": [
+    {
+      "file": "evidence/sprint05a-b/PLAN.md",
+      "sha256": "d49d0b877fa7f9c67eb834c650f500104b873b1f98332637cd3a59e7b908d504"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-b-llhttp.c",
+      "sha256": "d5388783ea73293d6224333e9ac5b0ccc28a4e3d7d58a5391ec16978fdb7a5b9"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-b-receipts.mjs",
+      "sha256": "cc78016a38a38d2f64dacf5809fb1bd28473b69132012f53d2f441af5ee39a3a"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-b-run.mjs",
+      "sha256": "ddf47b9d0ff8a5eba7560aefe558c8f483173ebf6670752660818d44d3ffbc1d"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-b-source.mjs",
+      "sha256": "00a89f1443c9a5ee472ebe283ab072f4ab59ab48b685a9f27bb24046b20bb232"
+    },
+    {
+      "file": "spikes/envoy/wire-fixtures.mjs",
+      "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278"
+    }
+  ],
+  "commands": [
+    {
+      "name": "openssl-version",
+      "argv": [
+        "openssl",
+        "version"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T14:08:56.704Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/nginx-02/openssl-version.stdout",
+        "bytes": 63,
+        "sha256": "bdd7122ae3788e889ce96da25f99fe5023a80a88ab0e6db9f93cf3174187301c"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/nginx-02/openssl-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "docker-version",
+      "argv": [
+        "docker",
+        "version",
+        "--format",
+        "{{json .}}"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T14:08:56.751Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/nginx-02/docker-version.stdout",
+        "bytes": 1121,
+        "sha256": "128cbd88426fbce4931172bc507a305ed1aefaae33450326d5a6efa20d0de6eb"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/nginx-02/docker-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "image-inspect",
+      "argv": [
+        "docker",
+        "image",
+        "inspect",
+        "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311",
+        "--format",
+        "{{.Id}} {{json .RepoDigests}} {{.Os}}/{{.Architecture}}"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T14:08:56.842Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/nginx-02/image-inspect.stdout",
+        "bytes": 166,
+        "sha256": "de152d042ef66c7c24b9d696a5ff49e21026e7516e9e62cca2961a1f37201048"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/nginx-02/image-inspect.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "runtime-version",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--entrypoint",
+        "nginx",
+        "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311",
+        "-V"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T14:08:57.693Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/nginx-02/runtime-version.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/nginx-02/runtime-version.stderr",
+        "bytes": 1558,
+        "sha256": "e26c32aeaee8893de04f5f3bb50ded0efcfd9bab2244a7941584893cb811dc47"
+      }
+    },
+    {
+      "name": "pki-4",
+      "argv": [
+        "openssl",
+        "req",
+        "-x509",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "ca.key",
+        "-out",
+        "ca.pem",
+        "-days",
+        "1",
+        "-subj",
+        "/CN=disposable Sprint05A B CA",
+        "-addext",
+        "basicConstraints=critical,CA:TRUE"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b/.local/sprint05a-b-nginx-tYnbNu",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T14:08:57.738Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/nginx-02/pki-4.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/nginx-02/pki-4.stderr",
+        "bytes": 855,
+        "sha256": "2b3e4ae79cc5f1740e7e88f05dc55d1a2061c92f4e3fc83dda8ebcadeff73677"
+      }
+    },
+    {
+      "name": "pki-5",
+      "argv": [
+        "openssl",
+        "req",
+        "-new",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "edge.key",
+        "-out",
+        "edge.csr",
+        "-subj",
+        "/CN=edge-a.test",
+        "-addext",
+        "subjectAltName=DNS:edge-a.test"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b/.local/sprint05a-b-nginx-tYnbNu",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T14:08:57.785Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/nginx-02/pki-5.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/nginx-02/pki-5.stderr",
+        "bytes": 791,
+        "sha256": "aa9255fa92ada835a761e97159a820b9aa354606cb62d9b6f708aadb1784969f"
+      }
+    },
+    {
+      "name": "pki-6",
+      "argv": [
+        "openssl",
+        "x509",
+        "-req",
+        "-in",
+        "edge.csr",
+        "-CA",
+        "ca.pem",
+        "-CAkey",
+        "ca.key",
+        "-CAcreateserial",
+        "-out",
+        "edge.pem",
+        "-days",
+        "1",
+        "-copy_extensions",
+        "copy"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b/.local/sprint05a-b-nginx-tYnbNu",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T14:08:57.805Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/nginx-02/pki-6.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/nginx-02/pki-6.stderr",
+        "bytes": 61,
+        "sha256": "92ddb144b26ef1980f9c002e35f8b53f8fb784728611951a286bc7b0a9a9ddfe"
+      }
+    },
+    {
+      "name": "pki-7",
+      "argv": [
+        "openssl",
+        "req",
+        "-new",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "origin.key",
+        "-out",
+        "origin.csr",
+        "-subj",
+        "/CN=lab-origin.test",
+        "-addext",
+        "subjectAltName=DNS:lab-origin.test"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b/.local/sprint05a-b-nginx-tYnbNu",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T14:08:57.843Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/nginx-02/pki-7.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/nginx-02/pki-7.stderr",
+        "bytes": 613,
+        "sha256": "a375cecaf4493a4ab91a9b52485e65862a2d9b48fafb0fc89c947609067af169"
+      }
+    },
+    {
+      "name": "pki-8",
+      "argv": [
+        "openssl",
+        "x509",
+        "-req",
+        "-in",
+        "origin.csr",
+        "-CA",
+        "ca.pem",
+        "-CAkey",
+        "ca.key",
+        "-CAcreateserial",
+        "-out",
+        "origin.pem",
+        "-days",
+        "1",
+        "-copy_extensions",
+        "copy"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b/.local/sprint05a-b-nginx-tYnbNu",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T14:08:57.861Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/nginx-02/pki-8.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/nginx-02/pki-8.stderr",
+        "bytes": 65,
+        "sha256": "09fd425719106e552b8dbf27cf942780b126e2b916e05099dab19b2a3ebc9c1d"
+      }
+    },
+    {
+      "name": "container-create",
+      "argv": [
+        "docker",
+        "create",
+        "--rm",
+        "--pull",
+        "never",
+        "--name",
+        "aegis-sprint05a-b-nginx-709518",
+        "--network",
+        "host",
+        "--read-only",
+        "--user",
+        "1000:1000",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "64",
+        "--memory",
+        "256m",
+        "--cpus",
+        "1",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,size=4m",
+        "-v",
+        "/tmp/aegisgate-05a-b/.local/sprint05a-b-nginx-tYnbNu:/tmp/aegisgate-05a-b/.local/sprint05a-b-nginx-tYnbNu:ro",
+        "--entrypoint",
+        "nginx",
+        "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311",
+        "-c",
+        "/tmp/aegisgate-05a-b/.local/sprint05a-b-nginx-tYnbNu/bootstrap.conf",
+        "-g",
+        "daemon off;"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T14:08:58.119Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/nginx-02/container-create.stdout",
+        "bytes": 65,
+        "sha256": "4467dadec00019f34fc0aa2ee400091113c4fd6a0779e17eb41149e8074e1b83"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/nginx-02/container-create.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "container-stop",
+      "argv": [
+        "docker",
+        "stop",
+        "--timeout",
+        "1",
+        "aegis-sprint05a-b-nginx-709518"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T14:08:59.850Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/nginx-02/container-stop.stdout",
+        "bytes": 31,
+        "sha256": "1f16a10efebdc8e69145f1fa9838f9d3375f912e35c146d164c059dbddd7c842"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/nginx-02/container-stop.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "cleanup-inspect",
+      "argv": [
+        "docker",
+        "ps",
+        "-aq",
+        "--filter",
+        "name=^aegis-sprint05a-b-nginx-709518$"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T14:08:59.953Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/nginx-02/cleanup-inspect.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/nginx-02/cleanup-inspect.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "runtime": "nginx",
+  "variant": "default",
+  "scope": "Targeted released strict-parser PoC only; not original75/23 or production eligibility",
+  "bounds": {
+    "wall_ms": 90000,
+    "message_bytes": 32768,
+    "downstream_idle_ms": 2500,
+    "request_observation_ms": 3000,
+    "container_memory": "256m",
+    "container_cpus": 1,
+    "container_pids": 64
+  },
+  "pins": {
+    "downloads": [
+      {
+        "name": "envoy/release",
+        "url": "https://api.github.com/repos/envoyproxy/envoy/releases/tags/v1.40.2",
+        "cache": ".local/sprint05a-b-sources/envoy_release",
+        "bytes": 15041,
+        "sha256": "05b9f8b45939c71a9403e199b08c96b0f3748fc0161d4c1a0b5b704ea4f2961e"
+      },
+      {
+        "name": "envoy/commit",
+        "url": "https://api.github.com/repos/envoyproxy/envoy/commits/v1.40.2",
+        "cache": ".local/sprint05a-b-sources/envoy_commit",
+        "bytes": 56630,
+        "sha256": "05818df59fde85067a5a7b0575e2c7cfc7fba25fc88167ddb7ff6ee1d7b23a3d"
+      },
+      {
+        "name": "llhttp/release",
+        "url": "https://api.github.com/repos/nodejs/llhttp/releases/tags/release/v9.4.4",
+        "cache": ".local/sprint05a-b-sources/llhttp_release",
+        "bytes": 3445,
+        "sha256": "56c69a312f58d256b40e5e5e67ca402a56919c11083a8b64bdba5c1f035f5250"
+      },
+      {
+        "name": "llhttp/commit",
+        "url": "https://api.github.com/repos/nodejs/llhttp/commits/release/v9.4.4",
+        "cache": ".local/sprint05a-b-sources/llhttp_commit",
+        "bytes": 6024,
+        "sha256": "0a7c4dda17d70e41a614120dd9eb79177fa6eaffd19189eb1103a364c4bb9002"
+      },
+      {
+        "name": "envoy/source/common/http/http1/balsa_parser.cc",
+        "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http1/balsa_parser.cc",
+        "cache": ".local/sprint05a-b-sources/envoy_source_common_http_http1_balsa_parser.cc",
+        "bytes": 16888,
+        "sha256": "9dbd0c51df40c34e9893fc8269f14c834fc53eb5f7a832ec5d13055520552951"
+      },
+      {
+        "name": "envoy/source/common/http/http1/balsa_parser.h",
+        "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http1/balsa_parser.h",
+        "cache": ".local/sprint05a-b-sources/envoy_source_common_http_http1_balsa_parser.h",
+        "bytes": 3945,
+        "sha256": "1afe7bf610c0a6dd06623fd8d8b80c4874b6fd3fadeaaec826ae871abc3e4bb8"
+      },
+      {
+        "name": "envoy/api/envoy/config/core/v3/protocol.proto",
+        "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/api/envoy/config/core/v3/protocol.proto",
+        "cache": ".local/sprint05a-b-sources/envoy_api_envoy_config_core_v3_protocol.proto",
+        "bytes": 51174,
+        "sha256": "cd3e8569d0ffdd9963f85ab20e4247c3cef97742430a74edf35cb7a62b964ba2"
+      },
+      {
+        "name": "envoy/api/envoy/extensions/http/header_validators/envoy_default/v3/header_validator.proto",
+        "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/api/envoy/extensions/http/header_validators/envoy_default/v3/header_validator.proto",
+        "cache": ".local/sprint05a-b-sources/envoy_api_envoy_extensions_http_header_validators_envoy_default_v3_header_validator.proto",
+        "bytes": 11928,
+        "sha256": "6d28be682f9fc8861eb8344901acb820f24ea864a79f5b4a1a5a6557ca557280"
+      },
+      {
+        "name": "envoy/source/common/runtime/runtime_features.cc",
+        "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/runtime/runtime_features.cc",
+        "cache": ".local/sprint05a-b-sources/envoy_source_common_runtime_runtime_features.cc",
+        "bytes": 28658,
+        "sha256": "02188275d7be1cda84c4b1b50d6b36063ff1e0c74048c38fef500dc883f8b644"
+      },
+      {
+        "name": "llhttp/include/llhttp.h",
+        "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/include/llhttp.h",
+        "cache": ".local/sprint05a-b-sources/llhttp_include_llhttp.h",
+        "bytes": 31469,
+        "sha256": "52a7011f979b31f761403c1a333bf7fc26dc70f5745d8488eed1609c92097100"
+      },
+      {
+        "name": "llhttp/src/api.c",
+        "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/api.c",
+        "cache": ".local/sprint05a-b-sources/llhttp_src_api.c",
+        "bytes": 13384,
+        "sha256": "0f8590206fe2f264db2825401b5fb856b979ee1363dc88b06f36dc9577afb941"
+      },
+      {
+        "name": "llhttp/src/http.c",
+        "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/http.c",
+        "cache": ".local/sprint05a-b-sources/llhttp_src_http.c",
+        "bytes": 5209,
+        "sha256": "a1f2b23168f8e9b5bfa464c89027d3ca259fc649ae3d7e72bfff997d1aeb5d72"
+      },
+      {
+        "name": "llhttp/src/llhttp.c",
+        "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/llhttp.c",
+        "cache": ".local/sprint05a-b-sources/llhttp_src_llhttp.c",
+        "bytes": 319064,
+        "sha256": "f3ef756529b7444630717fa5540d4a1c9a1256874bda823c49c5a99c37f89429"
+      },
+      {
+        "name": "llhttp/LICENSE-MIT",
+        "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/LICENSE-MIT",
+        "cache": ".local/sprint05a-b-sources/llhttp_LICENSE-MIT",
+        "bytes": 1105,
+        "sha256": "ebca854e0134cd256d673627c20499f42577eb74bacf08b9f25b626a73c91277"
+      },
+      {
+        "name": "llhttp/README.md",
+        "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/README.md",
+        "cache": ".local/sprint05a-b-sources/llhttp_README.md",
+        "bytes": 21282,
+        "sha256": "0d52c46bd4df4bb4dfa9af808a170ef34c03d6bbcd07ace5fd03869804f7c88c"
+      },
+      {
+        "name": "nginx/changes",
+        "url": "https://nginx.org/en/CHANGES-1.30",
+        "cache": ".local/sprint05a-b-sources/nginx_changes",
+        "bytes": 349436,
+        "sha256": "07d5e370e05f4942e9bc61de802d6a401dcfca6ec2283067a5ad566aae60df36"
+      },
+      {
+        "name": "nginx/commit",
+        "url": "https://api.github.com/repos/nginx/nginx/commits/release-1.30.6",
+        "cache": ".local/sprint05a-b-sources/nginx_commit",
+        "bytes": 14763,
+        "sha256": "7717530f52966f04004786dd806a92af4b83b727d974b96b7451337670c5a0c7"
+      },
+      {
+        "name": "nginx/src/http/ngx_http_parse.c",
+        "url": "https://raw.githubusercontent.com/nginx/nginx/fb0e979c6dd63c018958b41eeb844947c5c21264/src/http/ngx_http_parse.c",
+        "cache": ".local/sprint05a-b-sources/nginx_src_http_ngx_http_parse.c",
+        "bytes": 61745,
+        "sha256": "529e32a859fa49f6e8444ed8161543abf40f74b5b2f0b5b6a0ea29218992d167"
+      },
+      {
+        "name": "nginx/src/http/ngx_http_request_body.c",
+        "url": "https://raw.githubusercontent.com/nginx/nginx/fb0e979c6dd63c018958b41eeb844947c5c21264/src/http/ngx_http_request_body.c",
+        "cache": ".local/sprint05a-b-sources/nginx_src_http_ngx_http_request_body.c",
+        "bytes": 35400,
+        "sha256": "14dfda333c6adc3d4bc12e505867b247e0f3d7c29ed2c5982a64aa11c9d58aca"
+      },
+      {
+        "name": "nginx/src/http/modules/ngx_http_proxy_module.c",
+        "url": "https://raw.githubusercontent.com/nginx/nginx/fb0e979c6dd63c018958b41eeb844947c5c21264/src/http/modules/ngx_http_proxy_module.c",
+        "cache": ".local/sprint05a-b-sources/nginx_src_http_modules_ngx_http_proxy_module.c",
+        "bytes": 151788,
+        "sha256": "3bd280886adfbd22e3096472c9fca5fd10b72986f86bb6cd88e3d951f90a55ab"
+      },
+      {
+        "name": "nginx/src/core/nginx.h",
+        "url": "https://raw.githubusercontent.com/nginx/nginx/fb0e979c6dd63c018958b41eeb844947c5c21264/src/core/nginx.h",
+        "cache": ".local/sprint05a-b-sources/nginx_src_core_nginx.h",
+        "bytes": 476,
+        "sha256": "a318282c696b14b3780f946753c6359574aec9fe350c118f6a210c2186a60751"
+      },
+      {
+        "name": "nginx/LICENSE",
+        "url": "https://raw.githubusercontent.com/nginx/nginx/fb0e979c6dd63c018958b41eeb844947c5c21264/LICENSE",
+        "cache": ".local/sprint05a-b-sources/nginx_LICENSE",
+        "bytes": 1319,
+        "sha256": "08845fe39e06b51dad7685c28140ab49577a86e947523e16b536a46caf89ad5c"
+      }
+    ],
+    "nginx_revision": "fb0e979c6dd63c018958b41eeb844947c5c21264"
+  },
+  "observer_control": {
+    "exact_match": true,
+    "bytes": 76,
+    "decrypted_hex": "474554202f6f627365727665722d636f6e74726f6c20485454502f312e310d0a486f73743a206c61622d6f726967696e2e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a"
+  },
+  "runtime_command": {
+    "argv": [
+      "docker",
+      "start",
+      "--attach",
+      "aegis-sprint05a-b-nginx-709518"
+    ],
+    "started_at": "2026-11-14T14:08:58.125Z",
+    "exit_code": 0,
+    "signal": null
+  },
+  "probes": [
+    {
+      "name": "valid-header",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a582d466f6c6465643a206669727374207365636f6e640d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "started_at": "2026-11-14T14:08:58.347Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "response_hex": "485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353820474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 100,
+        "hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a436f6e74656e742d4c656e6774683a20300d0a582d466f6c6465643a206669727374207365636f6e640d0a0d0a",
+        "new_connections": 1,
+        "handlers": [
+          {
+            "url": "/",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close",
+              "Content-Length",
+              "0",
+              "X-Folded",
+              "first second"
+            ],
+            "body_bytes": 0,
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:58.397Z",
+      "strict_rejection": false
+    },
+    {
+      "name": "valid-trailer",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a547261696c65723a20582d466f6c6465640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a310d0a610d0a300d0a582d466f6c6465643a206669727374207365636f6e640d0a0d0a",
+      "started_at": "2026-11-14T14:08:58.402Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "response_hex": "485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353820474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 96,
+        "hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a436f6e74656e742d4c656e6774683a20310d0a547261696c65723a20582d466f6c6465640d0a0d0a61",
+        "new_connections": 1,
+        "handlers": [
+          {
+            "url": "/",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close",
+              "Content-Length",
+              "1",
+              "Trailer",
+              "X-Folded"
+            ],
+            "body_bytes": 1,
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:58.450Z",
+      "strict_rejection": false
+    },
+    {
+      "name": "folded-header-sp",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a582d466f6c6465643a2066697273740d0a207365636f6e640d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "started_at": "2026-11-14T14:08:58.456Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "response_hex": "485454502f312e31203430302042616420526571756573740d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353820474d540d0a436f6e74656e742d547970653a20746578742f68746d6c0d0a436f6e74656e742d4c656e6774683a203135370d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a3c68746d6c3e0d0a3c686561643e3c7469746c653e3430302042616420526571756573743c2f7469746c653e3c2f686561643e0d0a3c626f64793e0d0a3c63656e7465723e3c68313e3430302042616420526571756573743c2f68313e3c2f63656e7465723e0d0a3c68723e3c63656e7465723e6e67696e782f312e33302e363c2f63656e7465723e0d0a3c2f626f64793e0d0a3c2f68746d6c3e0d0a",
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:58.494Z",
+      "strict_rejection": true
+    },
+    {
+      "name": "folded-header-sp-reused",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a582d466f6c6465643a2066697273740d0a207365636f6e640d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "started_at": "2026-11-14T14:08:58.503Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "warmup": {
+        "origin_bytes": 62,
+        "handlers": [
+          {
+            "url": "/warmup",
+            "method": "GET",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close"
+            ],
+            "body_bytes": 0,
+            "trailers": []
+          }
+        ]
+      },
+      "response_hex": "485454502f312e31203430302042616420526571756573740d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353820474d540d0a436f6e74656e742d547970653a20746578742f68746d6c0d0a436f6e74656e742d4c656e6774683a203135370d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a3c68746d6c3e0d0a3c686561643e3c7469746c653e3430302042616420526571756573743c2f7469746c653e3c2f686561643e0d0a3c626f64793e0d0a3c63656e7465723e3c68313e3430302042616420526571756573743c2f68313e3c2f63656e7465723e0d0a3c68723e3c63656e7465723e6e67696e782f312e33302e363c2f63656e7465723e0d0a3c2f626f64793e0d0a3c2f68746d6c3e0d0a",
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:58.557Z",
+      "strict_rejection": true
+    },
+    {
+      "name": "folded-header-htab",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a582d466f6c6465643a2066697273740d0a097365636f6e640d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "started_at": "2026-11-14T14:08:58.564Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "response_hex": "485454502f312e31203430302042616420526571756573740d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353820474d540d0a436f6e74656e742d547970653a20746578742f68746d6c0d0a436f6e74656e742d4c656e6774683a203135370d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a3c68746d6c3e0d0a3c686561643e3c7469746c653e3430302042616420526571756573743c2f7469746c653e3c2f686561643e0d0a3c626f64793e0d0a3c63656e7465723e3c68313e3430302042616420526571756573743c2f68313e3c2f63656e7465723e0d0a3c68723e3c63656e7465723e6e67696e782f312e33302e363c2f63656e7465723e0d0a3c2f626f64793e0d0a3c2f68746d6c3e0d0a",
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:58.602Z",
+      "strict_rejection": true
+    },
+    {
+      "name": "folded-header-htab-reused",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a582d466f6c6465643a2066697273740d0a097365636f6e640d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "started_at": "2026-11-14T14:08:58.611Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "warmup": {
+        "origin_bytes": 62,
+        "handlers": [
+          {
+            "url": "/warmup",
+            "method": "GET",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close"
+            ],
+            "body_bytes": 0,
+            "trailers": []
+          }
+        ]
+      },
+      "response_hex": "485454502f312e31203430302042616420526571756573740d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353820474d540d0a436f6e74656e742d547970653a20746578742f68746d6c0d0a436f6e74656e742d4c656e6774683a203135370d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a3c68746d6c3e0d0a3c686561643e3c7469746c653e3430302042616420526571756573743c2f7469746c653e3c2f686561643e0d0a3c626f64793e0d0a3c63656e7465723e3c68313e3430302042616420526571756573743c2f68313e3c2f63656e7465723e0d0a3c68723e3c63656e7465723e6e67696e782f312e33302e363c2f63656e7465723e0d0a3c2f626f64793e0d0a3c2f68746d6c3e0d0a",
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:58.664Z",
+      "strict_rejection": true
+    },
+    {
+      "name": "folded-trailer-sp",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a547261696c65723a20582d466f6c6465640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a310d0a610d0a300d0a582d466f6c6465643a2066697273740d0a207365636f6e640d0a0d0a",
+      "started_at": "2026-11-14T14:08:58.669Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "response_hex": "485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353820474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 96,
+        "hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a436f6e74656e742d4c656e6774683a20310d0a547261696c65723a20582d466f6c6465640d0a0d0a61",
+        "new_connections": 1,
+        "handlers": [
+          {
+            "url": "/",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close",
+              "Content-Length",
+              "1",
+              "Trailer",
+              "X-Folded"
+            ],
+            "body_bytes": 1,
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:58.718Z",
+      "strict_rejection": false
+    },
+    {
+      "name": "folded-trailer-sp-reused",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a547261696c65723a20582d466f6c6465640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a310d0a610d0a300d0a582d466f6c6465643a2066697273740d0a207365636f6e640d0a0d0a",
+      "started_at": "2026-11-14T14:08:58.724Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "warmup": {
+        "origin_bytes": 62,
+        "handlers": [
+          {
+            "url": "/warmup",
+            "method": "GET",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close"
+            ],
+            "body_bytes": 0,
+            "trailers": []
+          }
+        ]
+      },
+      "response_hex": "485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353820474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 96,
+        "hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a436f6e74656e742d4c656e6774683a20310d0a547261696c65723a20582d466f6c6465640d0a0d0a61",
+        "new_connections": 1,
+        "handlers": [
+          {
+            "url": "/",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close",
+              "Content-Length",
+              "1",
+              "Trailer",
+              "X-Folded"
+            ],
+            "body_bytes": 1,
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:58.786Z",
+      "strict_rejection": false
+    },
+    {
+      "name": "folded-trailer-htab",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a547261696c65723a20582d466f6c6465640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a310d0a610d0a300d0a582d466f6c6465643a2066697273740d0a097365636f6e640d0a0d0a",
+      "started_at": "2026-11-14T14:08:58.792Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "response_hex": "485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353820474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 96,
+        "hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a436f6e74656e742d4c656e6774683a20310d0a547261696c65723a20582d466f6c6465640d0a0d0a61",
+        "new_connections": 1,
+        "handlers": [
+          {
+            "url": "/",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close",
+              "Content-Length",
+              "1",
+              "Trailer",
+              "X-Folded"
+            ],
+            "body_bytes": 1,
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:58.841Z",
+      "strict_rejection": false
+    },
+    {
+      "name": "folded-trailer-htab-reused",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a547261696c65723a20582d466f6c6465640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a310d0a610d0a300d0a582d466f6c6465643a2066697273740d0a097365636f6e640d0a0d0a",
+      "started_at": "2026-11-14T14:08:58.845Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "warmup": {
+        "origin_bytes": 62,
+        "handlers": [
+          {
+            "url": "/warmup",
+            "method": "GET",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close"
+            ],
+            "body_bytes": 0,
+            "trailers": []
+          }
+        ]
+      },
+      "response_hex": "485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353820474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 96,
+        "hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a436f6e74656e742d4c656e6774683a20310d0a547261696c65723a20582d466f6c6465640d0a0d0a61",
+        "new_connections": 1,
+        "handlers": [
+          {
+            "url": "/",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close",
+              "Content-Length",
+              "1",
+              "Trailer",
+              "X-Folded"
+            ],
+            "body_bytes": 1,
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:58.899Z",
+      "strict_rejection": false
+    },
+    {
+      "name": "delayed-folded-trailer",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a547261696c65723a20582d466f6c6465640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a310d0a610d0a300d0a582d466f6c6465643a2066697273740d0a207365636f6e640d0a0d0a",
+      "started_at": "2026-11-14T14:08:58.905Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "before_final_fragment": {
+        "origin_bytes": 0,
+        "new_connections": 0,
+        "handlers": []
+      },
+      "response_hex": "485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353920474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 96,
+        "hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a436f6e74656e742d4c656e6774683a20310d0a547261696c65723a20582d466f6c6465640d0a0d0a61",
+        "new_connections": 1,
+        "handlers": [
+          {
+            "url": "/",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close",
+              "Content-Length",
+              "1",
+              "Trailer",
+              "X-Folded"
+            ],
+            "body_bytes": 1,
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:59.052Z",
+      "strict_rejection": false
+    },
+    {
+      "name": "fragmented-folded-header",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a582d466f6c6465643a2066697273740d0a207365636f6e640d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "started_at": "2026-11-14T14:08:59.061Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "before_final_fragment": {
+        "origin_bytes": 0,
+        "new_connections": 0,
+        "handlers": []
+      },
+      "response_hex": "485454502f312e31203430302042616420526571756573740d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353920474d540d0a436f6e74656e742d547970653a20746578742f68746d6c0d0a436f6e74656e742d4c656e6774683a203135370d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a3c68746d6c3e0d0a3c686561643e3c7469746c653e3430302042616420526571756573743c2f7469746c653e3c2f686561643e0d0a3c626f64793e0d0a3c63656e7465723e3c68313e3430302042616420526571756573743c2f68313e3c2f63656e7465723e0d0a3c68723e3c63656e7465723e6e67696e782f312e33302e363c2f63656e7465723e0d0a3c2f626f64793e0d0a3c2f68746d6c3e0d0a",
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:59.198Z",
+      "strict_rejection": true
+    },
+    {
+      "name": "encoded-/bad%20target",
+      "request_hex": "504f5354202f62616425323074617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "started_at": "2026-11-14T14:08:59.205Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "response_hex": "485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353920474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 88,
+        "hex": "504f5354202f62616425323074617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a436f6e74656e742d4c656e6774683a20300d0a0d0a",
+        "new_connections": 1,
+        "handlers": [
+          {
+            "url": "/bad%20target",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close",
+              "Content-Length",
+              "0"
+            ],
+            "body_bytes": 0,
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:59.253Z",
+      "strict_rejection": false
+    },
+    {
+      "name": "encoded-/bad%09target",
+      "request_hex": "504f5354202f62616425303974617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "started_at": "2026-11-14T14:08:59.258Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "response_hex": "485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353920474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 88,
+        "hex": "504f5354202f62616425303974617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a436f6e74656e742d4c656e6774683a20300d0a0d0a",
+        "new_connections": 1,
+        "handlers": [
+          {
+            "url": "/bad%09target",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close",
+              "Content-Length",
+              "0"
+            ],
+            "body_bytes": 0,
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:59.304Z",
+      "strict_rejection": false
+    },
+    {
+      "name": "encoded-/bad%01target",
+      "request_hex": "504f5354202f62616425303174617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "started_at": "2026-11-14T14:08:59.309Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "response_hex": "485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353920474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 88,
+        "hex": "504f5354202f62616425303174617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a436f6e74656e742d4c656e6774683a20300d0a0d0a",
+        "new_connections": 1,
+        "handlers": [
+          {
+            "url": "/bad%01target",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close",
+              "Content-Length",
+              "0"
+            ],
+            "body_bytes": 0,
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:59.359Z",
+      "strict_rejection": false
+    },
+    {
+      "name": "encoded-/bad%00target",
+      "request_hex": "504f5354202f62616425303074617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "started_at": "2026-11-14T14:08:59.365Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "response_hex": "485454502f312e31203430302042616420526571756573740d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353920474d540d0a436f6e74656e742d547970653a20746578742f68746d6c0d0a436f6e74656e742d4c656e6774683a203135370d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a3c68746d6c3e0d0a3c686561643e3c7469746c653e3430302042616420526571756573743c2f7469746c653e3c2f686561643e0d0a3c626f64793e0d0a3c63656e7465723e3c68313e3430302042616420526571756573743c2f68313e3c2f63656e7465723e0d0a3c68723e3c63656e7465723e6e67696e782f312e33302e363c2f63656e7465723e0d0a3c2f626f64793e0d0a3c2f68746d6c3e0d0a",
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:59.402Z",
+      "strict_rejection": true
+    },
+    {
+      "name": "encoded-/encoded%2Fsegment?value=%2520",
+      "request_hex": "504f5354202f656e636f6465642532467365676d656e743f76616c75653d253235323020485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "started_at": "2026-11-14T14:08:59.407Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "response_hex": "485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353920474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 105,
+        "hex": "504f5354202f656e636f6465642532467365676d656e743f76616c75653d253235323020485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a436f6e74656e742d4c656e6774683a20300d0a0d0a",
+        "new_connections": 1,
+        "handlers": [
+          {
+            "url": "/encoded%2Fsegment?value=%2520",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close",
+              "Content-Length",
+              "0"
+            ],
+            "body_bytes": 0,
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:59.457Z",
+      "strict_rejection": false
+    },
+    {
+      "name": "encoded-/caf%C3%A9?x=a%20b",
+      "request_hex": "504f5354202f6361662543332541393f783d612532306220485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "started_at": "2026-11-14T14:08:59.462Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "response_hex": "485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353920474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 93,
+        "hex": "504f5354202f6361662543332541393f783d612532306220485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a436f6e74656e742d4c656e6774683a20300d0a0d0a",
+        "new_connections": 1,
+        "handlers": [
+          {
+            "url": "/caf%C3%A9?x=a%20b",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close",
+              "Content-Length",
+              "0"
+            ],
+            "body_bytes": 0,
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:59.506Z",
+      "strict_rejection": false
+    },
+    {
+      "name": "valid-pipeline",
+      "request_hex": "474554202f66697273742532467365676d656e7420485454502f312e310d0a486f73743a20656467652d612e746573740d0a0d0a504f5354202f7365636f6e643f783d253235323020485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "started_at": "2026-11-14T14:08:59.513Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "response_hex": "485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353920474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a4f4b485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353920474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200,
+        200
+      ],
+      "origin": {
+        "bytes": 161,
+        "hex": "474554202f66697273742532467365676d656e7420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a504f5354202f7365636f6e643f783d253235323020485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a436f6e74656e742d4c656e6774683a20300d0a0d0a",
+        "new_connections": 2,
+        "handlers": [
+          {
+            "url": "/first%2Fsegment",
+            "method": "GET",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close"
+            ],
+            "body_bytes": 0,
+            "trailers": []
+          },
+          {
+            "url": "/second?x=%2520",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close",
+              "Content-Length",
+              "0"
+            ],
+            "body_bytes": 0,
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:59.574Z",
+      "strict_rejection": false
+    },
+    {
+      "name": "valid-then-folded-pipeline",
+      "request_hex": "474554202f66697273742532467365676d656e7420485454502f312e310d0a486f73743a20656467652d612e746573740d0a0d0a504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a582d466f6c6465643a2066697273740d0a207365636f6e640d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "started_at": "2026-11-14T14:08:59.581Z",
+      "identity": {
+        "authorized": true,
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "servername": "edge-a.test"
+      },
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "response_hex": "485454502f312e3120323030204f4b0d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353920474d540d0a436f6e74656e742d4c656e6774683a20320d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a4f4b485454502f312e31203430302042616420526571756573740d0a5365727665723a206e67696e782f312e33302e360d0a446174653a205361742c203134204e6f7620323032362031343a30383a353920474d540d0a436f6e74656e742d547970653a20746578742f68746d6c0d0a436f6e74656e742d4c656e6774683a203135370d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a3c68746d6c3e0d0a3c686561643e3c7469746c653e3430302042616420526571756573743c2f7469746c653e3c2f686561643e0d0a3c626f64793e0d0a3c63656e7465723e3c68313e3430302042616420526571756573743c2f68313e3c2f63656e7465723e0d0a3c68723e3c63656e7465723e6e67696e782f312e33302e363c2f63656e7465723e0d0a3c2f626f64793e0d0a3c2f68746d6c3e0d0a",
+      "status": [
+        200,
+        400
+      ],
+      "origin": {
+        "bytes": 71,
+        "hex": "474554202f66697273742532467365676d656e7420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+        "new_connections": 1,
+        "handlers": [
+          {
+            "url": "/first%2Fsegment",
+            "method": "GET",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Connection",
+              "close"
+            ],
+            "body_bytes": 0,
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "ended_at": "2026-11-14T14:08:59.637Z",
+      "strict_rejection": false
+    }
+  ],
+  "parses": [],
+  "admissions": [],
+  "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- '/bad%00target'\n\n    at file:///tmp/aegisgate-05a-b/spikes/envoy/sprint05a-b-run.mjs:315:57",
+  "cleanup": {
+    "lock_held_through_hashing": true,
+    "container_absent": true,
+    "fixture_removed": true,
+    "wall_ms": 3277
+  },
+  "ended_at": "2026-11-14T14:08:59.954Z"
+}
