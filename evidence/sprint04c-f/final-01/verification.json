@@ -1,0 +1,316 @@
+{
+  "source_commit": "25c5069c2305724d22380f025810ebc3ee253bd0",
+  "source_tree": "f4121b38e5b07d58a02a8c170320c1c04f52901c",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-04c-f/evidence/sprint04c-f/review-final.mjs",
+    "evidence/sprint04c-f/final-01"
+  ],
+  "node": "v26.13.0",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "started_at": "2026-11-14T09:31:52.173Z",
+  "commands": [
+    {
+      "label": "E-collector-syntax",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--check",
+        "evidence/sprint04c-e/record.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-e-safe",
+      "started_at": "2026-11-14T09:31:52.282Z",
+      "ended_at": "2026-11-14T09:31:52.313Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "E-collector-syntax.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "E-collector-syntax.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "immutable75-E",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "cwd": "/tmp/aegisgate-04c-e-safe",
+      "started_at": "2026-11-14T09:31:52.322Z",
+      "ended_at": "2026-11-14T09:31:52.412Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "immutable75-E.stdout",
+          "bytes": 74,
+          "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+        },
+        {
+          "file": "immutable75-E.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "E-post-cleanup-audit",
+      "argv": [
+        "python3",
+        "evidence/sprint04c-e/verify.py",
+        "/tmp/aegisgate-04c-f/evidence/sprint04c-f/final-01/E-audit.json",
+        "--audit-only"
+      ],
+      "cwd": "/tmp/aegisgate-04c-e-safe",
+      "started_at": "2026-11-14T09:31:52.419Z",
+      "ended_at": "2026-11-14T09:31:52.617Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "E-post-cleanup-audit.stdout",
+          "bytes": 896,
+          "sha256": "0de1d8ec0b6fc60a7e3add8612adcf62cbeb6170203ff7c75acd6c3c0d1570ec"
+        },
+        {
+          "file": "E-post-cleanup-audit.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "go-version",
+      "argv": [
+        "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+        "version"
+      ],
+      "cwd": "/tmp/aegisgate-04c-f",
+      "started_at": "2026-11-14T09:31:52.623Z",
+      "ended_at": "2026-11-14T09:31:52.635Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "go-version.stdout",
+          "bytes": 32,
+          "sha256": "a29205bd83967c2f70e6768fae009600038d6056499fa289de9d5f9b79beaef4"
+        },
+        {
+          "file": "go-version.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "independent-recovery-negative",
+      "argv": [
+        "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+        "test",
+        "-race",
+        "-v",
+        "./internal/configconsumer",
+        "./internal/configpublish",
+        "-run",
+        "Recovery|Negative",
+        "-count=1"
+      ],
+      "cwd": "/tmp/aegisgate-04c-f",
+      "started_at": "2026-11-14T09:31:52.637Z",
+      "ended_at": "2026-11-14T09:31:56.071Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "independent-recovery-negative.stdout",
+          "bytes": 5327,
+          "sha256": "530914ea178c98f3b62e8fd14e1a1b8b0f76154a2dbdcb03a93892bb880157da"
+        },
+        {
+          "file": "independent-recovery-negative.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "helper-test-syntax",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--check",
+        "evidence/sprint04c-helper/cleanup-test.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-helper-test",
+      "started_at": "2026-11-14T09:31:56.082Z",
+      "ended_at": "2026-11-14T09:31:56.112Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "helper-test-syntax.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "helper-test-syntax.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "helper-owner-test",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--experimental-vm-modules",
+        "evidence/sprint04c-helper/cleanup-test.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-helper-test",
+      "started_at": "2026-11-14T09:31:56.128Z",
+      "ended_at": "2026-11-14T09:31:56.189Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "helper-owner-test.stdout",
+          "bytes": 849,
+          "sha256": "135e5c7bc43e62a405249538f71cfc6d2bdc2fd0f8082a68830eac3527810097"
+        },
+        {
+          "file": "helper-owner-test.stderr",
+          "bytes": 174,
+          "sha256": "6ff625a05ee87a5364619b206a8f408d34c07deeaee733d6e044a32248f7193a"
+        }
+      ]
+    },
+    {
+      "label": "helper-independent-syntax",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--check",
+        "/tmp/aegisgate-04c-f/evidence/sprint04c-f/final-01/independent-helper-harness.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-helper-test",
+      "started_at": "2026-11-14T09:31:56.200Z",
+      "ended_at": "2026-11-14T09:31:56.231Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "helper-independent-syntax.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "helper-independent-syntax.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "helper-inventory-error",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--experimental-vm-modules",
+        "/tmp/aegisgate-04c-f/evidence/sprint04c-f/final-01/independent-helper-harness.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-helper-test",
+      "started_at": "2026-11-14T09:31:56.245Z",
+      "ended_at": "2026-11-14T09:31:56.314Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "helper-inventory-error.stdout",
+          "bytes": 983,
+          "sha256": "8ce01ad867f842233aa5a30604ced486a56b6a37e92f20e56744b7104b86c3f0"
+        },
+        {
+          "file": "helper-inventory-error.stderr",
+          "bytes": 174,
+          "sha256": "a3f5017bcfb38a83f3247739fb83093d3ff89a7cc092107cc00f7c0a954a501b"
+        }
+      ]
+    },
+    {
+      "label": "E-independent-secrets",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "-v",
+        "/tmp/aegisgate-04c-f/.local/f-final-scan:/input:ro",
+        "-v",
+        "/tmp/aegisgate-04c-f/.github/gitleaks.toml:/config:ro",
+        "-v",
+        "/tmp/aegisgate-04c-f/evidence/sprint04c-f/final-01:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/input",
+        "--config",
+        "/config",
+        "--redact",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/reports/secrets.json",
+        "--no-banner"
+      ],
+      "cwd": "/tmp/aegisgate-04c-f",
+      "started_at": "2026-11-14T09:31:56.333Z",
+      "ended_at": "2026-11-14T09:31:57.704Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "E-independent-secrets.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "E-independent-secrets.stderr",
+          "bytes": 131,
+          "sha256": "faf9a366afed47b6beb459fdc66c25936cfb5b52d891185185ccebe54950d255"
+        }
+      ]
+    }
+  ],
+  "e_revision": "212677805416a3e38d44724bfaf1101c8e11a0d5",
+  "e_tree": "1bbd377963750776329dff48be3442bf130abbe6",
+  "e_manifests": [
+    {
+      "file": "evidence/sprint04c-e/attempt-01/SHA256SUMS",
+      "entries": 11,
+      "missing": [
+        "evidence/sprint04c-e/attempt-01/stdout.log"
+      ]
+    },
+    {
+      "file": "evidence/sprint04c-e/attempt-02/SHA256SUMS",
+      "entries": 12,
+      "missing": []
+    },
+    {
+      "file": "evidence/sprint04c-e/scan-02/SHA256SUMS",
+      "entries": 4,
+      "missing": []
+    }
+  ],
+  "helper_revision": "cb9c30904e3430793d9847d9b9bf3eec3a8d052f",
+  "helper_source_sha256": "8900209131660583d5294dc12e947b1360dbc796f329e5b9ee00279af51b915d",
+  "verdict": "ACCEPT corrected E evidence; REJECT gate helper because inventory failure skips private-file cleanup",
+  "exit_code": 0,
+  "lock_held_through_cleanup": true,
+  "ended_at": "2026-11-14T09:31:57.718Z"
+}
