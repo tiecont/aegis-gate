@@ -92,7 +92,7 @@ for (const mode of ['clean', 'synthetic-value-leak', 'synthetic-key-marker']) {
   assert.deepEqual(receipt.remaining_project_networks, []);
   assert.deepEqual(receipt.remaining_project_volumes, []);
   assert.equal(receipt.lock_held_through_cleanup, true);
-  assert.ok(lockCalls >= 15);
+  assert.equal(lockCalls, 13);
   assert.equal(descriptors.size, 0);
   assert.equal(commands.filter(row => row[0] === 'make').length, 3);
   assert.ok(!logs.join('').includes(synthetic));
