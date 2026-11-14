@@ -53,6 +53,14 @@ equality; generated private values/private-key markers match0 in owned evidence.
 Owned cached passwords, configs, JWT and PKI are removed under the verification
 lock. Rendered Compose, private keys and image archives are never committed.
 
+The pinned offline Gitleaks scan of all33 sanitized owned source/evidence files
+exits0 with an empty findings array in `scan-02`. It holds the shared lock,
+uses the unchanged repository scanner configuration and removes its temporary
+input tree. The subsequent read-only audit verifies all fresh stream hashes
+after private cleanup; credential_matches=null correctly records that removed
+values are not reconstructed. Root's complete history/worktree/image scan and
+F's independent judgment remain separate gates.
+
 Tools are official Go1.27.4, Rust1.99.1, Node26.13.0/npm11.20.0,
 Docker29.9.3/Compose5.7.1, govulncheck1.9.0/cargo-audit0.23.0. Exact versions,
 scanner/Node hashes and command results are retained in attempt02.
