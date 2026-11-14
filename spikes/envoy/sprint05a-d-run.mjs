@@ -85,15 +85,19 @@ finally {
   assertLock();
   try {
     const ids = execFileSync('docker', ['ps', '-aq', '--filter', 'name=aegis-envoy-'], { encoding: 'utf8' }).trim().split('\n').filter(Boolean);
-    const owned = ids.length ? JSON.parse(execFileSync('docker', ['inspect', ...ids], { maxBuffer: 8 << 20 }))
-      .filter((c) => c.Mounts.some((m) => m.Source.startsWith(path.resolve('.local') + '/'))) : [];
-    receipt.cleanup_containers = owned.map((c) => c.Name);
-    for (const c of owned) command(`stop-${c.Id.slice(0, 12)}`, 'docker', ['stop', '--timeout', '2', c.Id]);
-    const active = owned.filter((c) => {
-      const status = spawnSync('docker', ['inspect', c.Id], { encoding: 'utf8' });
-      return status.status === 0 && JSON.parse(status.stdout)[0].State.Running;
+    const owned = ids.filter((id) => {
+      const mounts = JSON.parse(execFileSync('docker', ['inspect', '--format', '{{json .Mounts}}', id]));
+      return mounts.some((m) => m.Source.startsWith(path.resolve('.local') + '/'));
     });
-    assert.equal(active.length, 0);
+    receipt.cleanup_containers = owned;
+    for (const id of owned) command(`stop-${id.slice(0, 12)}`, 'docker', ['stop', '--timeout', '2', id]);
+    for (const id of owned) {
+      const deadline = Date.now() + 5000;
+      while (spawnSync('docker', ['inspect', '--format', '{{.Id}}', id], { stdio: 'ignore' }).status === 0) {
+        assert.ok(Date.now() < deadline, 'owned container retained after stop');
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 50);
+      }
+    }
     for (const entry of fs.readdirSync('.local')) {
       if (!initial.has(entry) && entry.startsWith('envoy-run-')) fs.rmSync(`.local/${entry}`, { recursive: true });
     }
