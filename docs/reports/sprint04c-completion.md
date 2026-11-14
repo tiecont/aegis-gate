@@ -19,8 +19,8 @@ reports, failed attempts and manifests remain immutable.
 | B | research/sprint04c-envoy-upstream |12abd255b754b553480544edbf9452b7f65d9a4d, fresh released/API source and focused upstream package |
 | C / root | design/sprint04c-ingress-alternatives |49f2d55, maintained boundary screening, ownership/threat diagram and conditional acceptance |
 | D | test/sprint04c-h2-security-proof |d9a2004167a178a3a1d4549cc97378fe4b02c360, additive maintained H2/HPACK capture diagnostics/adversarial tests |
-| E | hardening/sprint04c-regressions-sanitized |corrected source dc30375; fresh attempt02 replaces ineligible original evidence |
-| F | review/sprint04c-security |independent exact-source verdict recorded below after execution |
+| E | hardening/sprint04c-regressions-sanitized |212677805416a3e38d44724bfaf1101c8e11a0d5; corrected source dc30375 and fresh attempt02 |
+| F | review/sprint04c-security |cede69eb3e11c42cc66c21b5e7b5d7c55ea037a1; A/B/C/D and corrected E accepted; earlier helper rejected |
 | Root | sprint/04c-integration |isolated contract, full gate helper, accepted integration and hosted closeout |
 
 Final PR and merge SHA are recorded only after observed execution. A later
@@ -144,7 +144,7 @@ observer, security PASS or production parser. Details: `sprint04c-d-protocol.md`
 
 ## Accepted module regressions and dependencies
 
-E sourcea8a93d1 executes actual PostgreSQL/NATS/Redis/mTLS, tenant/RBAC/isolation,
+E corrected sourcedc30375 executes actual PostgreSQL/NATS/Redis/mTLS, tenant/RBAC/isolation,
 snapshotv1 publication, encrypted LKG/anti-replay/provisioning floor, drain,
 canary/rollback/prune/archive and recovery controls. All11 Go packages,88
 top-level tests and151 subtests pass with no skips. Dashboard's five checks,
@@ -159,7 +159,7 @@ No scanner ignore, peer force or finding suppression. External generation floor
 remains provisioning interface, drain does not cancel engine I/O, archive
 custody/production monotonic storage/secret service remain outside local proof.
 
-E retains48 compact command receipts,96 exact stream slices and source/tool/
+E attempt02 retains49 compact command receipts,98 exact stream slices and source/tool/
 manifest hashes; all verify. Shared fixture lock covers setup/tests/scans/
 evidence/teardown. Isolated Compose/stale resources are absent; owned private
 material is removed after in-memory credential exclusion. Raw rendered Compose
@@ -189,10 +189,21 @@ clean output, deliberate synthetic fixture leakage and private-key markers;
 both negative cases exit1 yet perform cleanup/inventories and disclose no values.
 This synthetic test is not a full gate or fixture runtime receipt.
 
+F subsequently rejects cb9c309: an unguarded Docker inventory can still throw
+before deletion. Its independent reproduction and exact E acceptance are in
+`sprint04c-f-final-review.md`, committed at cede69e. Repair578d78f guards Docker
+cleanup, inventories and scanner evidence copying independently, then attempts
+each owned private-path removal separately. Failure is retained in the final
+receipt; an unavailable inventory cannot be represented as empty. Independent
+fault-path review of this replacement is pending. Both earlier failures remain
+historical evidence and are not represented as passing helpers.
+
 ## Independent review and full gates
 
-F exact-source component decisions and fresh adversarial/recovery/source
-verification: PENDING execution; no acceptance is inferred from owner reports.
+F exact-source A/B/C/D and corrected E decisions: ACCEPT as scoped documentation,
+research, diagnostic tests and local regression evidence. The final E acceptance
+supersedes earlier E pending/rejected checkpoint fields only for corrected
+2126778. Root helper replacement and final integration review remain PENDING.
 Root full locked make check/security-scan/cleanup: PENDING integration.
 Exact final PR-head and merge foundation-quality/supply-chain-security:
 PENDING after local and independent acceptance. Existing baseline successes
