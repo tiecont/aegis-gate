@@ -1,6 +1,6 @@
 # Sprint 04-C completion and decision handoff
 
-Status: component work complete; evidence repair and final integration gates in progress.
+Status: component work and full local gates complete; final review/hosted closeout in progress.
 Module01 **NO-GO**;04-12 **LOCKED**; production **BLOCKED**. This report is
 updated only from actual receipts. No eligible strict-ingress runtime exists.
 
@@ -210,7 +210,18 @@ lock-loss limits remain documented. Source audit at1ca490a ACCEPTs integration
 dd5b484:3,115 protected baseline objects,299 owner files,519 manifest entries
 and two explicit ineligible redactions. Final local/hosted binding remains
 PENDING; these scoped verdicts do not accept an unexecuted full gate.
-Root full locked make check/security-scan/cleanup: PENDING integration.
+Root full locked make check/security-scan/cleanup: PASS at exact clean source
+`dd5b48441982bf76a53982a16c53b948e59b175e`, tree
+`616cd569b30c022eff47b4e7bbfdbdbe6e48362d`. The single fixture-lock lifecycle
+runs2026-11-14T09:41:43.541Z through09:47:06.270Z. Check, security-scan,
+dev-down and volume teardown all exit0; containers/networks/volumes are empty,
+eight owned private paths absent,56 retained files checked with zero credential
+or private-key matches. Exact commands/tools/raw outputs and56-entry manifest
+are in `evidence/sprint04c-root/gates-01/`, committed separately as f42b1ab.
+Worktree and clean reachable-history secret scans pass without suppression;
+dependency, filesystem, pinned image identity/vulnerability and SBOM operations
+pass. Later review/document/receipt-only additions do not change tested product,
+configuration, dependency, workflow, corpus or evaluator objects.
 Exact final PR-head and merge foundation-quality/supply-chain-security:
 PENDING after local and independent acceptance. Existing baseline successes
 are not substituted for final integration CI.

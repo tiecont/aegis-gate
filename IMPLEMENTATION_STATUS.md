@@ -18,8 +18,10 @@ Released Envoy/Pingora/Hyper source screening finds no strict-provenance change;
 no complete candidate rebuild is justified. Separate HAProxy3.4.7 boundary
 screening is source/design only and establishes no released strict solution.
 Additive H2/HPACK diagnostics and fresh00/02/03 regressions are independently
-reviewed before integration; local/hosted integration evidence is recorded only
-after execution. Current gates:00/02/03 PASS local;01 NO-GO;04-12 LOCKED;
+reviewed before integration. Full locked make check/security-scan/cleanup pass
+at dd5b484, tree616cd569b30c022eff47b4e7bbfdbdbe6e48362d; exact receipts in
+`evidence/sprint04c-root/gates-01/`. Final hosted closeout is pending.
+Current gates:00/02/03 PASS local;01 NO-GO;04-12 LOCKED;
 production BLOCKED. No upstream content is published.
 
 ## Sprint04-B Complete / Module01 NO-GO
