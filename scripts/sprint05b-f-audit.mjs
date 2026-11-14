@@ -17,6 +17,7 @@ const packages = [
   ['a', '37f5439', 'evidence/sprint05b-a'], ['b', 'f7ce126', 'evidence/sprint05b-b'],
   ['c', '0170010', 'evidence/sprint05b-c'], ['d', 'd85d04b', 'evidence/sprint05b-d'],
   ['e', '7755f7a', 'evidence/sprint05b-e'], ['root', 'fb4cc6a', 'evidence/sprint05b-root']];
+if (process.argv[3]) packages.push(['integrated', process.argv[3], 'evidence/sprint05b-root']);
 const protectedFiles = ['spikes/pingora/lab.mjs', 'spikes/edge-comparison/manifest.json',
   'spikes/edge-comparison/contract.mjs', 'spikes/edge-comparison/supplemental.mjs',
   'spikes/edge-comparison/evaluate.mjs', 'spikes/edge-comparison/run.mjs',
@@ -61,6 +62,28 @@ for (const [final, measured, paths] of [
   ['37f5439', '95ded76', ['spikes/envoy']], ['0170010', 'fe92fc1', ['spikes/envoy']],
   ['d85d04b', 'eba8445', ['spikes/envoy/sprint05b-d-streaming.mjs']]])
   check(`code-equivalence:${final}:${measured}`, () => assert.equal(git('diff', '--name-only', final, measured, '--', ...paths).toString().trim(), ''));
+if (process.argv[3]) {
+  const integrated = git('rev-parse', `${process.argv[3]}^{commit}`).toString().trim();
+  record.integrated = { commit: integrated, tree: git('rev-parse', `${integrated}^{tree}`).toString().trim(), files: [] };
+  const groups = [
+    ['37f5439', ['spikes/envoy/sprint05b-a-', 'spikes/envoy/sprint05b-admission.mjs', 'spikes/envoy/sprint05b-llhttp-addon.c']],
+    ['f7ce126', ['spikes/envoy/sprint05b-b-']], ['0170010', ['spikes/envoy/sprint05b-c-']],
+    ['d85d04b', ['spikes/envoy/sprint05b-d-streaming.mjs']], ['7755f7a', ['scripts/sprint05b-e-regressions.mjs', 'scripts/sprint05a-e-fixtures.py']],
+    ['fb4cc6a', ['spikes/envoy/sprint05b-native-', 'spikes/envoy/sprint04c-protocol.mjs',
+      'spikes/envoy/sprint05a-combined-', 'scripts/sprint05b-extract-envoy.mjs', 'scripts/sprint05b-cleanup.mjs']],
+    ['6173d1b', ['scripts/fixture-image-integration.py']]];
+  for (const [reviewed, prefixes] of groups) {
+    const files = git('ls-tree', '-r', '--name-only', reviewed).toString().trim().split('\n')
+      .filter((file) => prefixes.some((prefix) => file.startsWith(prefix)));
+    for (const file of files) check(`integrated:${file}`, () => {
+      const expected = git('show', `${reviewed}:${file}`), actual = git('show', `${integrated}:${file}`);
+      assert.deepEqual(actual, expected); record.integrated.files.push({ file, reviewed, sha256: sha(actual) });
+    });
+  }
+  check('unchanged-product-code', () => assert.equal(git('diff', '--name-only', '8758b1c', integrated, '--',
+    'apps', 'internal', 'packages', 'contracts', 'infra', 'go.mod', 'go.sum', 'Cargo.lock', 'Cargo.toml',
+    'package.json', 'package-lock.json', '.github').toString().trim(), ''));
+}
 record.complete = record.errors.length === 0;
 record.ended_at = new Date().toISOString();
 fs.writeFileSync(`${output}/receipt.json`, JSON.stringify(record, null, 2) + '\n');
