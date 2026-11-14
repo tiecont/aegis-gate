@@ -231,6 +231,39 @@ not remove root/B or other worktrees' containers. Historical cleanup01 removal
 records and their missing State.Error limitation are preserved. Syntax and
 cleanup02's checksums pass; no fixture start was needed for this correction.
 
+## Bounded Source-Causal Stop
+
+C re-read the exact pinned source and stops at the following evidence boundary.
+The codec's onInvalidFrame function distinguishes stream-local HTTP messaging
+errors from fatal protocol/flow-control errors. Fatal cases return
+ERR_CALLBACK_FAILURE. Dispatch can then return before sendPendingFrames;
+HCM's error handler closes with FlushWriteAndDelay, relying on a GOAWAY that
+its comment says has already been sent. This is a concrete source path
+consistent with the two raw missing-error observations. It is not proof that
+these exact inputs took a specific adapter branch or that a GOAWAY was queued.
+No internal callback trace was captured, and no such trace is invented.
+
+Native measurements supply the narrower executable conclusion: changing the
+supported close delay to0s or1s does not produce the required peer frame, and
+the500ms header timeout does not fix either raw case or userinfo. All retain
+the repaired19. Userinfo is demonstrably rejected by a peer RST1 in the relay
+diagnostic, rather than a client CANCEL8; the exact internal validator that
+selected that reset was not traced. Therefore neither authority status repair
+nor fatal-frame flush repair is claimed. Unsupported hidden UHV/codec knobs,
+permissive validation, parser/codec patches and altered oracle/deadlines remain
+outside the accepted scope. This is a bounded supported-setting stop, not an
+exhaustive claim that no Envoy repair can exist.
+
+Root's later suggestion to consider a bounded docker create/cp fallback is
+already satisfied by its existing extraction and C's native10-14 evidence;
+C did not repeat extraction or Docker --version during the host-health hold.
+Native prlimit/TLS/resource limitations above remain in force. Locked cleanup03
+at source2a0f19b repeats the corrected separate-prefix inventory for six rounds,
+all18 queries empty, with no removal or State.Error/Env read. Checksums pass,
+`.local` is empty, and no C fixture starts are queued. Earlier failed starts
+and their exact unchanged listener timeout remain preserved for root's host
+investigation.
+
 ## Agent Completion Report
 
 - Module/status:01/C, partial; four supplemental failures unresolved.
