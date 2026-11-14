@@ -154,6 +154,13 @@ try {
       files_checked: retained.length,
       matches: 0,
     };
+  } catch (error) {
+    receipt.private_material_error = error.message;
+    passed = false;
+  }
+  // Cleanup must run even when evidence validation fails.
+  try {
+    assertLock();
     const paths = [
       ".local/pki",
       ".local/postgres-password",
