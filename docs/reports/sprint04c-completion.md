@@ -1,6 +1,10 @@
 # Sprint 04-C completion and decision handoff
 
 Status: component work, independent reviews and full local gates complete; hosted closeout in progress.
+Final disposition: PR15 merged as `f7d3134d59f1d1213580b8ee120d6187ae83a78b`;
+exact final-head and merge hosted jobs PASS. The additive
+[closeout receipt](sprint04c-closeout-addendum.md) supersedes historical pending
+fields below without rewriting their checkpoint evidence.
 Module01 **NO-GO**;04-12 **LOCKED**; production **BLOCKED**. This report is
 updated only from actual receipts. No eligible strict-ingress runtime exists.
 

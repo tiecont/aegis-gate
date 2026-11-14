@@ -1,6 +1,13 @@
 # Implementation status
 
-## Sprint04-C execution / Module01 NO-GO
+## Sprint04-C complete / Module01 NO-GO
+
+PR15 merged as `f7d3134d59f1d1213580b8ee120d6187ae83a78b`. Exact final-head
+hosted43583949148 and exact merge hosted43592857907 pass foundation-quality
+and supply-chain-security. The additive `docs/reports/sprint04c-closeout-addendum.md`
+supersedes checkpoint pending fields below. Prepared documentation/research/test
+proof and decision handoff are complete; named human owners/approvals remain
+PENDING. Module01 NO-GO and all downstream/release locks remain binding.
 
 Baseline main `a325b9ecc086e09467f61b49f17da241bf8e43ea` is refreshed and its
 foundation-quality/supply-chain-security jobs pass in43478235586. Isolated
