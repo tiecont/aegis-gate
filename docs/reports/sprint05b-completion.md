@@ -16,9 +16,9 @@ argv, tool versions, exits and output SHA256 are in the referenced receipts.
 
 | Owner | Branch | Executable source / report evidence |
 | --- | --- | --- |
-| A | `feat/sprint05b-llhttp-admission` | `95ded76`; root-executed `sprint05b-a/run-06` |
+| A | `feat/sprint05b-llhttp-admission` | code `95ded76`, final `37f5439`; root-executed `sprint05b-a/run-06` |
 | B | `fix/sprint05b-h2-origin-lifecycle` | final `f7ce126`; ACK causal/original-case traces |
-| C | `fix/sprint05b-h2-rejection` | final `4ac3412`; native original23 and peer-frame relay |
+| C | `fix/sprint05b-h2-rejection` | final `0170010`; native original23 and peer-frame relay |
 | D (root) | `test/sprint05b-streaming-safety` | source `eba8445`, report/evidence `d85d04b` |
 | E (root) | `test/sprint05b-regressions` | source `a59e9f9`, final `7755f7a` |
 | F (independent) | `review/sprint05b-security` | clean-source reproduction/review in progress |
@@ -87,7 +87,7 @@ the source-causal stop is bounded to inspected released behavior.
 ## Parser, Trailers And Resource Proof
 
 A run06 at `95ded76` exits 0: 714 split boundaries plus one-byte/native limits,
-33 wire probes, exact historical folded header/TE bytes, SP/HTAB folded trailers,
+34 wire probes, exact historical folded header/TE bytes, SP/HTAB folded trailers,
 fresh/reused connections, valid encoded targets and ordered pipelines. Rejected
 folded inputs have zero origin connections/bytes/handlers/parser/transport errors.
 Finite staging supports cancellation, 413/408 and queue rejection, but waits
