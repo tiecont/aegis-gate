@@ -2,7 +2,7 @@
 
 This register tracks residual implementation and release risks. It does not accept risks on behalf of a human reviewer. The current module states and actual executed evidence are recorded in `IMPLEMENTATION_STATUS.md`; T01–T20 mappings are maintained in `docs/SECURITY_COVERAGE.md`.
 
-## Sprint04-C disposition (review and integration in progress)
+## Sprint04-C disposition (accepted scope; hosted closeout in progress)
 
 R01/R04 remain blocking: no maintained released strict-provenance repair or
 eligible runtime is established. Root recommends original aggregate zero bytes;
@@ -22,6 +22,11 @@ External generation floor, engine drain, archive custody and production secret
 service remain unimplemented production obligations. F source-specific review
 and root full local/hosted receipts are separately recorded in Sprint04-C
 completion. No risk is closed merely by documentation or green CI.
+
+Independent component/source and gate-binding reviews ACCEPT the scoped work;
+full local check/scan/cleanup pass at dd5b484. PR15 exact final-head/merge hosted
+receipts remain required. Earlier scanner/helper/audit failures stay retained
+and ineligible; publishable history excludes rejected evidence/source ancestry.
 
 ## Sprint04-B Disposition
 

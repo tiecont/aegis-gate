@@ -1,6 +1,6 @@
 # Sprint 04-C completion and decision handoff
 
-Status: component work and full local gates complete; final review/hosted closeout in progress.
+Status: component work, independent reviews and full local gates complete; hosted closeout in progress.
 Module01 **NO-GO**;04-12 **LOCKED**; production **BLOCKED**. This report is
 updated only from actual receipts. No eligible strict-ingress runtime exists.
 
@@ -232,6 +232,22 @@ configuration, dependency, workflow, corpus or evaluator objects.
 Exact final PR-head and merge foundation-quality/supply-chain-security:
 PENDING after local and independent acceptance. Existing baseline successes
 are not substituted for final integration CI.
+
+F gate/source binding ACCEPT at `ca10abd` verifies target4855552 against tested
+dd5b484, all56 manifest entries/eight command streams,26 scanner stages,
+helper acceptance and57 retained gate files. Its independent target-history
+scan is empty; locked read-only inspection confirms all eight private paths
+absent and no project resources. Product/executable objects remain identical;
+IMPLEMENTATION_STATUS.md is the explicit documentation exception. Current Go
+from the reviewer's PATH is unavailable on its CPU; earlier exact E Go1.27.4
+receipt is verified separately, without pretending a current version query
+attests the historical root binary. Stopped audits remain failures.
+See `sprint04c-f-gate-binding-review.md` for the scoped limits.
+
+PR15 is open. Intermediate head31e755f hosted43583087835 passes both required
+jobs; exact final head and merge receipts will supersede the remaining pending
+fields through an additive closeout report. The initial/retrigger runs are
+retained CANCELLED due to overlapping/update triggers, not described as PASS.
 
 ## Blockers, accountable handoff and next executable trigger
 

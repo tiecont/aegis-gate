@@ -20,7 +20,9 @@ screening is source/design only and establishes no released strict solution.
 Additive H2/HPACK diagnostics and fresh00/02/03 regressions are independently
 reviewed before integration. Full locked make check/security-scan/cleanup pass
 at dd5b484, tree616cd569b30c022eff47b4e7bbfdbdbe6e48362d; exact receipts in
-`evidence/sprint04c-root/gates-01/`. Final hosted closeout is pending.
+`evidence/sprint04c-root/gates-01/`. Independent scoped gate/source acceptance:
+ca10abd. PR15 intermediate head31e755f hosted43583087835 passes both required
+jobs; exact final-head/main hosted closeout is pending.
 Current gates:00/02/03 PASS local;01 NO-GO;04-12 LOCKED;
 production BLOCKED. No upstream content is published.
 
