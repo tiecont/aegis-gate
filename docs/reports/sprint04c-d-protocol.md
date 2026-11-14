@@ -157,6 +157,13 @@ Principal attempt01 SHA256:
 - Receipt:`e6b7cc1896f7f245352c5b63c3ebeffc7f2a2ce75e6eed3affe1a16f0a223250`.
 - Observer test stdout:`5acd379a6e00b5ade8786a163b508af661b947aaac21f5784a4b6f2227ab7b2f`.
 
+Verification01 stops before child commands because its equality check did not
+allow the intentionally appended adversarial Go tests after attempt01. That
+failed verifier receipt remains retained. Corrected verification checks the
+original test Git object/hash and requires the final test source to preserve
+its entire prefix, then executes the extended tests from a clean final source.
+No captured observation or original expectation is altered.
+
 Verifier receipts bind final source, immutable historical objects, all attempt
 manifest/stream hashes, scoped syntax/whitespace, maintained module verification,
 adversarial tests and offline pinned secret scans. F independent reproduction,
