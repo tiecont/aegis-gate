@@ -184,8 +184,12 @@ try {
   assert.equal(labels.get('go-full-race-integration').environment.AEGIS_TENANCY_INTEGRATION, '1');
   assert.match(rawE('typescript7-strict-resolution', 'stderr'), /ERESOLVE/);
   assert.match(rawE('typescript7-strict-resolution', 'stderr'), />=4\.8\.4 <6\.1\.0/);
-  assert.match(rawE('dependency-scans', 'stderr') + rawE('dependency-scans'), /RUSTSEC-2024-0388/);
-  assert.match(rawE('dependency-scans', 'stderr') + rawE('dependency-scans'), /RUSTSEC-2024-0449/);
+  const audit = json(eRead, `${eDir}/dependencies/pingora-spike-vulnerabilities.log`);
+  assert.deepEqual(audit.settings.ignore, []); assert.equal(audit.vulnerabilities.found, false);
+  assert.deepEqual(audit.warnings.unmaintained.map((p) => p.advisory.id).sort(), ['RUSTSEC-2024-0388', 'RUSTSEC-2024-0449']);
+  for (const file of ['scripts/sprint05a-e-regressions.mjs', 'scripts/sprint05a-e-fixtures.py', 'scripts/sprint05a-e-verify.py']) {
+    assert.deepEqual(fs.readFileSync(file), blob(e.source_commit, file));
+  }
   for (const c of e.commands.filter((c) => c.label.startsWith('cleanup-') && !c.label.includes('image'))) assert.equal(rawE(c.label).trim(), '');
   const refs = json(eRead, `${eDir}/baseline-references.json`).files;
   assert.equal(refs.length, 57);
