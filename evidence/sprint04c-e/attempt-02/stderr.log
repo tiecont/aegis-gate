@@ -1,0 +1,251 @@
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @aegisgate/dashboard@0.1.0
+npm warn Found: typescript@6.0.3
+npm warn node_modules/typescript
+npm warn   peer typescript@">=4.8.4 <6.1.0" from @typescript-eslint/eslint-plugin@8.72.2
+npm warn   node_modules/@typescript-eslint/eslint-plugin
+npm warn     @typescript-eslint/eslint-plugin@"8.72.2" from typescript-eslint@8.72.2
+npm warn     node_modules/typescript-eslint
+npm warn   9 more (@typescript-eslint/parser, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer typescript@">=4.8.4 <6.1.0" from typescript-eslint@8.72.2
+npm warn node_modules/typescript-eslint
+npm warn   dev typescript-eslint@"8.72.2" from the root project
+npm error code ERESOLVE
+npm error ERESOLVE could not resolve
+npm error
+npm error While resolving: typescript-eslint@8.72.2
+npm error Found: typescript@7.0.2
+npm error node_modules/typescript
+npm error   dev typescript@"7.0.2" from the root project
+npm error   peer typescript@">=4.8.4" from ts-api-utils@2.5.0
+npm error   node_modules/ts-api-utils
+npm error     ts-api-utils@"^2.5.0" from @typescript-eslint/eslint-plugin@8.72.2
+npm error     node_modules/@typescript-eslint/eslint-plugin
+npm error       @typescript-eslint/eslint-plugin@"8.72.2" from typescript-eslint@8.72.2
+npm error       node_modules/typescript-eslint
+npm error         dev typescript-eslint@"8.72.2" from the root project
+npm error     ts-api-utils@"^2.5.0" from @typescript-eslint/type-utils@8.72.2
+npm error     node_modules/@typescript-eslint/type-utils
+npm error       @typescript-eslint/type-utils@"8.72.2" from @typescript-eslint/eslint-plugin@8.72.2
+npm error       node_modules/@typescript-eslint/eslint-plugin
+npm error         @typescript-eslint/eslint-plugin@"8.72.2" from typescript-eslint@8.72.2
+npm error         node_modules/typescript-eslint
+npm error     1 more (@typescript-eslint/typescript-estree)
+npm error
+npm error Could not resolve dependency:
+npm error @typescript-eslint/eslint-plugin@"8.72.2" from typescript-eslint@8.72.2
+npm error node_modules/typescript-eslint
+npm error   dev typescript-eslint@"8.72.2" from the root project
+npm error
+npm error Conflicting peer dependency: typescript@6.0.3
+npm error node_modules/typescript
+npm error   peer typescript@">=4.8.4 <6.1.0" from @typescript-eslint/eslint-plugin@8.72.2
+npm error   node_modules/@typescript-eslint/eslint-plugin
+npm error     @typescript-eslint/eslint-plugin@"8.72.2" from typescript-eslint@8.72.2
+npm error     node_modules/typescript-eslint
+npm error       dev typescript-eslint@"8.72.2" from the root project
+npm error
+npm error Fix the upstream dependency conflict, or retry this command with --no-strict-peer-deps, --force, or --legacy-peer-deps to accept an incorrect (and potentially broken) dependency resolution.
+npm error
+npm error
+npm error For a full report see:
+npm error /home/tiecont/.npm/_logs/2026-11-14T09_25_01_998Z-eresolve-report.txt
+npm error A complete log of this run can be found in: /home/tiecont/.npm/_logs/2026-11-14T09_25_01_998Z-debug-0.log
+2026/11/14 16:25:04 unsafe local fixtures generated; material not logged
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.postgres
+#1 transferring dockerfile: 644B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395
+#2 DONE 1.5s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 102B done
+#3 DONE 0.0s
+
+#4 [1/4] FROM docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395
+#4 resolve docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 165B done
+#5 DONE 0.0s
+
+#6 [2/4] RUN apk add --no-cache krb5-libs=1.22.3-r0 libxslt=1.1.43-r4 su-exec=0.3-r0     && rm /usr/local/bin/gosu
+#6 CACHED
+
+#7 [3/4] COPY su-exec-wrapper.sh /usr/local/bin/gosu
+#7 CACHED
+
+#8 [4/4] RUN chmod 0755 /usr/local/bin/gosu     && /usr/local/bin/gosu postgres id -u | grep -qx 70
+#8 CACHED
+
+#9 exporting to image
+#9 exporting layers done
+#9 exporting manifest sha256:a0b1b4366e56ca38f5fa6084e53cbb7773e2b01fb0ff84391e5184bec8fba47a done
+#9 exporting config sha256:2a85fb76e2bb30167e8339b3e08d4148781d2882506c34053d3af2a5e6ba4205 done
+#9 naming to moby-dangling@sha256:a0b1b4366e56ca38f5fa6084e53cbb7773e2b01fb0ff84391e5184bec8fba47a done
+#9 unpacking to moby-dangling@sha256:a0b1b4366e56ca38f5fa6084e53cbb7773e2b01fb0ff84391e5184bec8fba47a 0.0s done
+#9 DONE 0.0s
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.origin
+#1 transferring dockerfile: 658B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894
+#2 DONE 1.5s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 102B done
+#3 DONE 0.0s
+
+#4 [1/2] FROM docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894
+#4 resolve docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894 0.0s done
+#4 DONE 0.0s
+
+#5 [2/2] RUN rm -rf /usr/local/lib/python3.14/site-packages/*       /usr/local/lib/python3.14/ensurepip /root/.cache     && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.14     && python -I -c "import http.server, ssl; assert ssl.OPENSSL_VERSION"
+#5 CACHED
+
+#6 exporting to image
+#6 exporting layers done
+#6 exporting manifest sha256:96ecc820bddcd34ba08bfa9ababc57588e6a1ddce19ed5ef20e14a7261cb538e done
+#6 exporting config sha256:72a695d361743fd7888cf7bf26158ded55712bed32e79fc3a6916c921d11b398 done
+#6 naming to moby-dangling@sha256:96ecc820bddcd34ba08bfa9ababc57588e6a1ddce19ed5ef20e14a7261cb538e done
+#6 unpacking to moby-dangling@sha256:96ecc820bddcd34ba08bfa9ababc57588e6a1ddce19ed5ef20e14a7261cb538e
+#6 unpacking to moby-dangling@sha256:96ecc820bddcd34ba08bfa9ababc57588e6a1ddce19ed5ef20e14a7261cb538e 0.0s done
+#6 DONE 0.0s
+ Network aegisgate-04c-e_lab Creating 
+ Volume aegisgate-04c-e_postgres-data Creating 
+ Volume aegisgate-04c-e_nats-data Creating 
+ Volume aegisgate-04c-e_nats-data Created 
+ Volume aegisgate-04c-e_postgres-data Created 
+ Network aegisgate-04c-e_lab Created 
+ Container aegisgate-04c-e-redis-1 Creating 
+ Container aegisgate-04c-e-nats-1 Creating 
+ Container aegisgate-04c-e-postgres-1 Creating 
+ Container aegisgate-04c-e-demo-origin-1 Creating 
+ Container aegisgate-04c-e-demo-origin-1 Created 
+ Container aegisgate-04c-e-nats-1 Created 
+ Container aegisgate-04c-e-postgres-1 Created 
+ Container aegisgate-04c-e-redis-1 Created 
+ Container aegisgate-04c-e-redis-1 Starting 
+ Container aegisgate-04c-e-nats-1 Starting 
+ Container aegisgate-04c-e-postgres-1 Starting 
+ Container aegisgate-04c-e-demo-origin-1 Starting 
+ Container aegisgate-04c-e-redis-1 Started 
+ Container aegisgate-04c-e-nats-1 Started 
+ Container aegisgate-04c-e-postgres-1 Started 
+ Container aegisgate-04c-e-demo-origin-1 Started 
+ Container aegisgate-04c-e-demo-origin-1 Waiting 
+ Container aegisgate-04c-e-postgres-1 Waiting 
+ Container aegisgate-04c-e-redis-1 Waiting 
+ Container aegisgate-04c-e-nats-1 Waiting 
+ Container aegisgate-04c-e-demo-origin-1 Healthy 
+ Container aegisgate-04c-e-redis-1 Healthy 
+ Container aegisgate-04c-e-nats-1 Healthy 
+ Container aegisgate-04c-e-postgres-1 Healthy 
+   Compiling proc-macro2 v1.0.107
+   Compiling serde_core v1.0.229
+   Compiling unicode-ident v1.0.27
+   Compiling quote v1.0.47
+   Compiling zmij v1.0.23
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.154
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.19
+   Compiling policy-engine v0.1.0 (/tmp/aegisgate-04c-e-safe/apps/edge/policy-engine)
+   Compiling edge-server v0.1.0 (/tmp/aegisgate-04c-e-safe/apps/edge/edge-server)
+   Compiling syn v3.0.10
+   Compiling uuid v1.29.2
+   Compiling serde_derive v1.0.229
+   Compiling edge-types v0.1.0 (/tmp/aegisgate-04c-e-safe/apps/edge/edge-types)
+   Compiling config-agent v0.1.0 (/tmp/aegisgate-04c-e-safe/apps/edge/config-agent)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.24s
+     Running unittests src/main.rs (apps/edge/target/debug/deps/config_agent-9b9476539948c025)
+     Running tests/error_contract.rs (apps/edge/target/debug/deps/error_contract-9a2ebe0b37bbadf3)
+     Running unittests src/main.rs (apps/edge/target/debug/deps/edge_server-8fedd0e3d252c8c9)
+     Running tests/bootstrap.rs (apps/edge/target/debug/deps/bootstrap-ff19012fff994869)
+     Running unittests src/lib.rs (apps/edge/target/debug/deps/edge_types-9fe729b93620f3b0)
+     Running unittests src/lib.rs (apps/edge/target/debug/deps/policy_engine-0c57bc4d36d0b17d)
+   Doc-tests edge_types
+   Doc-tests policy_engine
+test_generate_idempotently_with_private_modes (__main__.SecretTests.test_generate_idempotently_with_private_modes) ... ok
+test_negative_symlink_directory_and_config_rejected (__main__.SecretTests.test_negative_symlink_directory_and_config_rejected) ... ok
+test_negative_unsafe_existing_password_and_config_rejected (__main__.SecretTests.test_negative_unsafe_existing_password_and_config_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.547s
+
+OK
+test_ambiguous_or_absent_platform (__main__.IdentityTests.test_ambiguous_or_absent_platform) ... ok
+test_archive_index_can_be_the_requested_identity (__main__.IdentityTests.test_archive_index_can_be_the_requested_identity) ... ok
+test_classic_layer_count_order_and_missing_refs (__main__.IdentityTests.test_classic_layer_count_order_and_missing_refs) ... ok
+test_classic_layers_and_substitution (__main__.IdentityTests.test_classic_layers_and_substitution) ... ok
+test_classic_runtime_config_regression (__main__.IdentityTests.test_classic_runtime_config_regression) ... ok
+test_classic_substitution_and_platform_mismatch (__main__.IdentityTests.test_classic_substitution_and_platform_mismatch) ... ok
+test_config_blob_runtime_config_regression (__main__.IdentityTests.test_config_blob_runtime_config_regression) ... ok
+test_config_identity_does_not_bypass_manifest_validation (__main__.IdentityTests.test_config_identity_does_not_bypass_manifest_validation) ... ok
+test_conflicting_classic_and_oci_scan_entry_points (__main__.IdentityTests.test_conflicting_classic_and_oci_scan_entry_points) ... ok
+test_descriptor_platform_cannot_override_config (__main__.IdentityTests.test_descriptor_platform_cannot_override_config) ... ok
+test_docker_save_config_identity_with_oci_entry_point (__main__.IdentityTests.test_docker_save_config_identity_with_oci_entry_point) ... ok
+test_docker_save_wrapper_platform_cannot_conflict (__main__.IdentityTests.test_docker_save_wrapper_platform_cannot_conflict) ... ok
+test_docker_schema2_manifest_and_list (__main__.IdentityTests.test_docker_schema2_manifest_and_list) ... ok
+test_duplicate_archive_member_and_symlink (__main__.IdentityTests.test_duplicate_archive_member_and_symlink) ... ok
+test_duplicate_json_fields (__main__.IdentityTests.test_duplicate_json_fields) ... ok
+test_excessive_nesting (__main__.IdentityTests.test_excessive_nesting) ... ok
+test_explicit_null_or_conflicting_media_types_rejected (__main__.IdentityTests.test_explicit_null_or_conflicting_media_types_rejected) ... ok
+test_legacy_metadata_ambiguity_paths_and_missing (__main__.IdentityTests.test_legacy_metadata_ambiguity_paths_and_missing) ... ok
+test_malformed_descriptors_fail_closed (__main__.IdentityTests.test_malformed_descriptors_fail_closed) ... ok
+test_malformed_documents_fail_closed (__main__.IdentityTests.test_malformed_documents_fail_closed) ... ok
+test_manifest_descriptor_type_and_size_mismatch (__main__.IdentityTests.test_manifest_descriptor_type_and_size_mismatch) ... ok
+test_missing_blob_does_not_fall_back_to_legacy (__main__.IdentityTests.test_missing_blob_does_not_fall_back_to_legacy) ... ok
+test_multi_platform_selection (__main__.IdentityTests.test_multi_platform_selection) ... ok
+test_oci_archive_entry_point_binding (__main__.IdentityTests.test_oci_archive_entry_point_binding) ... ok
+test_oci_each_hash_is_verified (__main__.IdentityTests.test_oci_each_hash_is_verified) ... ok
+test_oci_layer_content_binding_plain_and_gzip (__main__.IdentityTests.test_oci_layer_content_binding_plain_and_gzip) ... ok
+test_oci_layer_descriptor_size_digest_count_and_order (__main__.IdentityTests.test_oci_layer_descriptor_size_digest_count_and_order) ... ok
+test_oci_manifest_and_index (__main__.IdentityTests.test_oci_manifest_and_index) ... ok
+test_oci_rehashed_substituted_layer_cannot_keep_config (__main__.IdentityTests.test_oci_rehashed_substituted_layer_cannot_keep_config) ... ok
+test_optional_oci_document_media_types (__main__.IdentityTests.test_optional_oci_document_media_types) ... ok
+test_scan_binding (__main__.IdentityTests.test_scan_binding) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.090s
+
+OK
+test_full_clone_and_linked_worktree_have_history (__main__.GitHistoryPreflightTests.test_full_clone_and_linked_worktree_have_history) ... ok
+test_history_log_parser_is_exact_and_fail_closed (__main__.GitHistoryPreflightTests.test_history_log_parser_is_exact_and_fail_closed) ... ok
+test_inaccessible_common_directory_fails_closed (__main__.GitHistoryPreflightTests.test_inaccessible_common_directory_fails_closed) ... ok
+test_real_container_clone_worktree_and_missing_git (__main__.GitHistoryPreflightTests.test_real_container_clone_worktree_and_missing_git) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 3.334s
+
+OK
+ Container aegisgate-04c-e-nats-1 Stopping 
+ Container aegisgate-04c-e-demo-origin-1 Stopping 
+ Container aegisgate-04c-e-redis-1 Stopping 
+ Container aegisgate-04c-e-postgres-1 Stopping 
+ Container aegisgate-04c-e-nats-1 Stopped 
+ Container aegisgate-04c-e-nats-1 Removing 
+ Container aegisgate-04c-e-redis-1 Stopped 
+ Container aegisgate-04c-e-redis-1 Removing 
+ Container aegisgate-04c-e-nats-1 Removed 
+ Container aegisgate-04c-e-redis-1 Removed 
+ Container aegisgate-04c-e-postgres-1 Stopped 
+ Container aegisgate-04c-e-postgres-1 Removing 
+ Container aegisgate-04c-e-postgres-1 Removed 
+ Container aegisgate-04c-e-demo-origin-1 Stopped 
+ Container aegisgate-04c-e-demo-origin-1 Removing 
+ Container aegisgate-04c-e-demo-origin-1 Removed 
+ Volume aegisgate-04c-e_postgres-data Removing 
+ Volume aegisgate-04c-e_nats-data Removing 
+ Network aegisgate-04c-e_lab Removing 
+ Volume aegisgate-04c-e_postgres-data Removed 
+ Volume aegisgate-04c-e_nats-data Removed 
+ Network aegisgate-04c-e_lab Removed 
