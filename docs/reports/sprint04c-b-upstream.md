@@ -178,8 +178,7 @@ supplemental failures remain open.75/75 alone would not grant GO.
 - Architecture/ADR decisions: none; human owner/decision PENDING.
 - Contracts changed: none; original75/23 and aggregate zero-byte remain binding.
 - Tests: official refresh and focused H1/second H2 collectors exit0 as scoped
-  above; first H2 completion measurement retained ineligible. Verifier receipts
-  bind source/streams/manifests, unchanged protected inputs and authored syntax.
+  above; first H2 completion measurement retained ineligible. Verifier `checks-01` at sourcec15776f exits0: source/stream hashes and four attempt manifests verify; immutable/protected-baseline, five syntax checks and authored whitespace all0.
 - Performance: bounded correctness only; no capacity/fairness/SLO claim.
 - Blockers: strict provenance API, full runtime/resource proof and formal human
   decision; no production/Module04 implementation authorized.
