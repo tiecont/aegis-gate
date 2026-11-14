@@ -1,0 +1,2119 @@
+{
+  "sourceCommit": "95ded76883c7b550285df01139a642a7def24941",
+  "sourceTree": "b4e910624270e81a03297fab9cabdca630287adb",
+  "trackedClean": true,
+  "startedAt": "2026-11-14T18:47:11.454Z",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/spikes/envoy/sprint05b-a-run.mjs",
+    "evidence/sprint05b-a/run-901"
+  ],
+  "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7",
+  "node": {
+    "version": "v26.13.0",
+    "executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+  },
+  "sources": [
+    {
+      "file": "evidence/sprint05a-b/source-01/sources.json",
+      "sha256": "75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d"
+    },
+    {
+      "file": "evidence/sprint05b-a/PLAN.md",
+      "sha256": "81ee9ce6d4c7ba2ac37e04c7aa2c0ba621396cafe558e555dd0e18e394963005"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-a-admission.mjs",
+      "sha256": "face8c8c4e3764bfe6017e65033402428712b453bfe6da47060d276fb54a7210"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-a-build.mjs",
+      "sha256": "9769180e6cd5c9f4c51fbb6eb581f9df1942348b685c621f91a1cedca73613b2"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-a-proof.mjs",
+      "sha256": "fdfb6d2f3cea62e65fa1b3f0254bca75f235918435869d4917f87bc9e905912e"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-a-run.mjs",
+      "sha256": "2c64aeb8facddcea5f6def79a944a92363e73ccbc0221f40d1130addbe4989ef"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-a-verify.mjs",
+      "sha256": "5674cf5976b62e946dcad7a0266573e7ef6e1703dd007c96a813f67045eeee7c"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-admission.mjs",
+      "sha256": "a660efd8f7dc167e974f5f4d54c22a04c8d94d83147ac8d985cfaf79e7be813b"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-llhttp-addon.c",
+      "sha256": "56cda536d196abb7075fe148dedb8bb791ef71c20dde59f0cbcc7a4d953c05c9"
+    },
+    {
+      "file": "spikes/envoy/wire-fixtures.mjs",
+      "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278"
+    }
+  ],
+  "limits": {
+    "connections": 4,
+    "stagingBytesPerConnection": 32768,
+    "stagingBytesGlobal": 131072,
+    "queuedMessages": 4,
+    "pauseAtMessages": 2,
+    "requestDeadlineMs": 1200,
+    "idleMs": 700,
+    "originDeadlineMs": 1000,
+    "socketHighWaterMark": 16384
+  },
+  "fixtureLock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "8758b1c84b4186449cd79fabae461ca53ee05100",
+        "--",
+        "spikes/edge-comparison"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "uname",
+        "-a"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7",
+      "exit": 0,
+      "signal": null,
+      "stdout": "Linux ties-cachyos 7.3.3-1-cachyos #1 SMP PREEMPT_DYNAMIC Sat, 07 Nov 2026 13:54:44 +0000 x86_64 GNU/Linux\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "openssl",
+        "version"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7",
+      "exit": 0,
+      "signal": null,
+      "stdout": "OpenSSL 4.1.0 23 Oct 2026 (Library: OpenSSL 4.1.0 23 Oct 2026)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "curl",
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--location",
+        "--proto",
+        "=https",
+        "--proto-redir",
+        "=https",
+        "--tlsv1.2",
+        "--connect-timeout",
+        "10",
+        "--max-time",
+        "30",
+        "--max-filesize",
+        "1048576",
+        "--output",
+        "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-sources/llhttp.h.download",
+        "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/include/llhttp.h"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "curl",
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--location",
+        "--proto",
+        "=https",
+        "--proto-redir",
+        "=https",
+        "--tlsv1.2",
+        "--connect-timeout",
+        "10",
+        "--max-time",
+        "30",
+        "--max-filesize",
+        "1048576",
+        "--output",
+        "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-sources/api.c.download",
+        "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/api.c"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "curl",
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--location",
+        "--proto",
+        "=https",
+        "--proto-redir",
+        "=https",
+        "--tlsv1.2",
+        "--connect-timeout",
+        "10",
+        "--max-time",
+        "30",
+        "--max-filesize",
+        "1048576",
+        "--output",
+        "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-sources/http.c.download",
+        "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/http.c"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "curl",
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--location",
+        "--proto",
+        "=https",
+        "--proto-redir",
+        "=https",
+        "--tlsv1.2",
+        "--connect-timeout",
+        "10",
+        "--max-time",
+        "30",
+        "--max-filesize",
+        "1048576",
+        "--output",
+        "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-sources/llhttp.c.download",
+        "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/llhttp.c"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "curl",
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--location",
+        "--proto",
+        "=https",
+        "--proto-redir",
+        "=https",
+        "--tlsv1.2",
+        "--connect-timeout",
+        "10",
+        "--max-time",
+        "30",
+        "--max-filesize",
+        "1048576",
+        "--output",
+        "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-sources/LICENSE-MIT.download",
+        "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/LICENSE-MIT"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "cc",
+        "--version"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7",
+      "exit": 0,
+      "signal": null,
+      "stdout": "cc (GCC) 16.2.1 20260810\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsyntax-only",
+        "-I/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node",
+        "-I/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/upstream",
+        "spikes/envoy/sprint05b-llhttp-addon.c"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-shared",
+        "-fPIC",
+        "-Wall",
+        "-Werror",
+        "-I/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node",
+        "-I/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/upstream",
+        "spikes/envoy/sprint05b-llhttp-addon.c",
+        "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/upstream/api.c",
+        "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/upstream/http.c",
+        "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/upstream/llhttp.c",
+        "-o",
+        "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/llhttp.node"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "openssl",
+        "req",
+        "-x509",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "ca.key",
+        "-out",
+        "ca.pem",
+        "-days",
+        "1",
+        "-subj",
+        "/CN=disposable Sprint05B A CA",
+        "-addext",
+        "basicConstraints=critical,CA:TRUE"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "..+.+......+.....+.+.....+++++++++++++++++++++++++++++++++++++++*.....+.+...+...+...+......+.....+++++++++++++++++++++++++++++++++++++++*.........+............+......+....................+....+...........+......+.+..+.+...........+.+...............+..+......+.+...++++++\n.....+......+...+.....+.+........+++++++++++++++++++++++++++++++++++++++*...+.......+.....+.+++++++++++++++++++++++++++++++++++++++*.......+...+...+..+...+...+.........+.+............+...+.....+.........+......+.+......+.....+...+....+...+..............+.........+.......+............+...+........+.+.....+...+.......+.....+.+.....+.............+..+.............+..+.......+......+.....+.........+......+.......+........+......+.+..+...+...+.+...+...............+...+...............+..+...............+.+..............+.+.....................+.....++++++\n-----\n"
+    },
+    {
+      "argv": [
+        "openssl",
+        "req",
+        "-new",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "edge-a.key",
+        "-out",
+        "edge-a.csr",
+        "-subj",
+        "/CN=edge-a.test",
+        "-addext",
+        "subjectAltName=DNS:edge-a.test"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ".......+....+......+......+............+...+..+......+.........+.+.....+++++++++++++++++++++++++++++++++++++++*....+..+....+...........+..........+...+.....+....+...+..+.+..+...................+........+...+.......+++++++++++++++++++++++++++++++++++++++*.....................+.....+....+...+......+......+........+...+...+.+...+....................+.+...........+...+......+......+.+.................+...+....+...+........++++++\n...+..+......+..........+..+.........+++++++++++++++++++++++++++++++++++++++*.....+...+.......+...+.................+...+.........+.........+.+...+...+..+......+.+......+........+.+......+++++++++++++++++++++++++++++++++++++++*..+...............+......+.........+.+..+......+...............+....+......+..+....+...........+...+.+......+..+...+....+...+..+.+..+.+.................+...+.+...+...+..+..........++++++\n-----\n"
+    },
+    {
+      "argv": [
+        "openssl",
+        "x509",
+        "-req",
+        "-in",
+        "edge-a.csr",
+        "-CA",
+        "ca.pem",
+        "-CAkey",
+        "ca.key",
+        "-CAcreateserial",
+        "-out",
+        "edge-a.pem",
+        "-days",
+        "1",
+        "-copy_extensions",
+        "copy"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "Certificate request self-signature ok\nsubject=CN=edge-a.test\n"
+    },
+    {
+      "argv": [
+        "openssl",
+        "req",
+        "-new",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "origin.key",
+        "-out",
+        "origin.csr",
+        "-subj",
+        "/CN=lab-origin.test",
+        "-addext",
+        "subjectAltName=DNS:lab-origin.test"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "...+++++++++++++++++++++++++++++++++++++++*.......+...........+......+.+..+......+....+..+++++++++++++++++++++++++++++++++++++++*..+....+...........+.+..+................+..+.......+...+............+..+...+......+...................+...+..+.............+.....+...+......+...+.+..+.........+..........+...+...........+....+.....+.............+...+..+...............+....+..............+.........+.+..+.......+..+...+.+..+...+.+........+.......+......+........+.......+..+.......+...+...........+......................+...+...............+.....+..........+.........+...........+.+.....+......+...+.+......+..+...+....+...+...........+....+...+..............+....+........................+..+.+..............................+.....+....+.....+....+..+.......+...+...+......+...+..+....+.................+.........+...+.......+...........+...+.+.....+.+..+..........+..+.+.....+.......+.....+.+...................................+................+.....+...+.......+...+..+......+.......+..+....+..+.......+...+.....+...................+........+.+.....+.+......+...++++++\n.....+...+..+......+...+.......+...+...........+....+.....+....+......+..+...+.+...+..+....+...........+....+...........+.+..+......+......+.+............+...+............+..+......+.......+...+.....+...+.......+........+.......+...+++++++++++++++++++++++++++++++++++++++*...+.+............+..+...+.+......+...+......+.........+...+.....+....+..............+++++++++++++++++++++++++++++++++++++++*.....+...............+...+....+......+.........+........+.+.....+......+....+..+.........+.+.........+...+...+...............+..+.+..+....+...+......+..+.............+.....+....+..+..........+.....+......+............+.......+..............+....+.....+..........+..+...+.+..+...+....+...+...............+........+............+....+..............+.+.........+.........+............+.....+...+.............+...............+...+...........+...+..........+...+..+......+.+...+..+......+...+.......+.....+............+.+.....+.......+.....+....+.....+...+.+...............+......+...+..+...+............+.+............+..+......+....+.....+....+.....+....+...........+.......+..+......+.+....................+.+........+.+.....+......+............+...............+......+.......+..+.+..+.........+.+..+.+......+........+.+......+.....+.........+.+...+......+...........+.+.....+....+...+......+..+.......+...+..+.......+......+........+.........+......+......................+...+..+.........+...+.......+.....+...+.......+........+.+..+....+...+...+..+.+.....+......+.+........+....+.....+......+....+...+........+....+......+..+.......+........+...+...............+....+..+.+.........+......+...+..+....+...+...+..+......+......+..................+.+.........+.....+......+....+...+..++++++\n-----\n"
+    },
+    {
+      "argv": [
+        "openssl",
+        "x509",
+        "-req",
+        "-in",
+        "origin.csr",
+        "-CA",
+        "ca.pem",
+        "-CAkey",
+        "ca.key",
+        "-CAcreateserial",
+        "-out",
+        "origin.pem",
+        "-days",
+        "1",
+        "-copy_extensions",
+        "copy"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "Certificate request self-signature ok\nsubject=CN=lab-origin.test\n"
+    }
+  ],
+  "nativeChecks": [
+    {
+      "name": "valid",
+      "inputSha256": "7c78a15ccfb734d86f71df3b18f12ab5fa07ef137fe3c8a6aaba8c84a83f8836",
+      "bytes": 97,
+      "splitChecks": 96,
+      "oneByte": {
+        "calls": 97,
+        "total": 97,
+        "complete": 1,
+        "error": "HPE_PAUSED"
+      }
+    },
+    {
+      "name": "original-obs-fold",
+      "inputSha256": "2fd5c8bf85674e67a1e8d75c11b53d58904ca3b56d8cb3be3d264d53f16eba9f",
+      "bytes": 82,
+      "splitChecks": 81,
+      "oneByte": {
+        "calls": 53,
+        "total": 52,
+        "complete": 0,
+        "error": "HPE_INVALID_HEADER_TOKEN"
+      }
+    },
+    {
+      "name": "original-TE-fold",
+      "inputSha256": "e9d3ff8fc8dff3411cc84fb3d60f46dfbcda5218ae8b1ff082e08512fbe3967a",
+      "bytes": 111,
+      "splitChecks": 110,
+      "oneByte": {
+        "calls": 73,
+        "total": 73,
+        "complete": 0,
+        "error": "HPE_INVALID_TRANSFER_ENCODING"
+      }
+    },
+    {
+      "name": "valid-trailer",
+      "inputSha256": "9e1e242b66bd9a7d9def69791d434d08f4a1a7145c1e87eca0de728414343883",
+      "bytes": 142,
+      "splitChecks": 141,
+      "oneByte": {
+        "calls": 142,
+        "total": 142,
+        "complete": 1,
+        "error": "HPE_PAUSED"
+      }
+    },
+    {
+      "name": "folded-trailer-sp",
+      "inputSha256": "7812b723de883ccfd63448a2613d7b8255dd752fb15fcdde450df83319b0020b",
+      "bytes": 144,
+      "splitChecks": 143,
+      "oneByte": {
+        "calls": 134,
+        "total": 133,
+        "complete": 0,
+        "error": "HPE_INVALID_HEADER_TOKEN"
+      }
+    },
+    {
+      "name": "folded-trailer-tab",
+      "inputSha256": "7363d91ec408507222bbdfb9361192efc1c080a00f367f5fc0dde1ea8f73fffd",
+      "bytes": 144,
+      "splitChecks": 143,
+      "oneByte": {
+        "calls": 134,
+        "total": 133,
+        "complete": 0,
+        "error": "HPE_INVALID_HEADER_TOKEN"
+      }
+    },
+    {
+      "name": "target-limit",
+      "inputSha256": "e3c8d94caf27cb7661fac01f963a9eb066d4a83b69f316d78c4674640eda5ecf",
+      "bytes": 2105,
+      "last": {
+        "error": "HPE_USER",
+        "reason": "test-only parser byte limit",
+        "consumed": 2054,
+        "totalConsumed": 2054,
+        "feedCalls": 1,
+        "messages": 0,
+        "bodyBytes": 0,
+        "metadataBytes": 0,
+        "targetBytes": 0,
+        "complete": false,
+        "keepAlive": false
+      }
+    },
+    {
+      "name": "metadata-limit",
+      "inputSha256": "162fd8e84d83c7c3b8b952a47b9f025cc854355550de3eec340ad89aac7a8636",
+      "bytes": 16452,
+      "last": {
+        "error": "HPE_USER",
+        "reason": "test-only parser byte limit",
+        "consumed": 46,
+        "totalConsumed": 16430,
+        "feedCalls": 2,
+        "messages": 0,
+        "bodyBytes": 0,
+        "metadataBytes": 16361,
+        "targetBytes": 1,
+        "complete": false,
+        "keepAlive": false
+      }
+    },
+    {
+      "name": "body-limit",
+      "inputSha256": "f9272e7f08c8e785fe77e65e75768d7a83683ead32f0e98727c1be37d5331787",
+      "bytes": 8388691,
+      "last": {
+        "error": "HPE_USER",
+        "reason": "test-only parser byte limit",
+        "consumed": 83,
+        "totalConsumed": 8388691,
+        "feedCalls": 513,
+        "messages": 0,
+        "bodyBytes": 8388526,
+        "metadataBytes": 51,
+        "targetBytes": 1,
+        "complete": false,
+        "keepAlive": false
+      }
+    },
+    {
+      "name": "messages-limit",
+      "inputSha256": "697db0e99213ccb9942660aa1f4dc74b21abf81d63c55ccd6abcbf0ae21d8a9c",
+      "bytes": 58425,
+      "last": {
+        "error": "HPE_CB_MESSAGE_BEGIN",
+        "reason": "`on_message_begin` callback error",
+        "consumed": 0,
+        "totalConsumed": 58368,
+        "feedCalls": 1025,
+        "messages": 1024,
+        "bodyBytes": 0,
+        "metadataBytes": 0,
+        "targetBytes": 0,
+        "complete": false,
+        "keepAlive": true
+      }
+    },
+    {
+      "name": "wire-lifetime-limit",
+      "last": {
+        "error": "HPE_USER",
+        "reason": "test-only parser lifetime limit",
+        "consumed": 0,
+        "totalConsumed": 16776066,
+        "feedCalls": 1399,
+        "messages": 0,
+        "bodyBytes": 2796000,
+        "metadataBytes": 39,
+        "targetBytes": 1,
+        "complete": false,
+        "keepAlive": false
+      }
+    }
+  ],
+  "probes": [
+    {
+      "name": "valid-original-bytes",
+      "requestBytes": 97,
+      "requestSha256": "7c78a15ccfb734d86f71df3b18f12ab5fa07ef137fe3c8a6aaba8c84a83f8836",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 97,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/one%2Ftwo?x=%2520",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "4",
+              "Connection",
+              "close"
+            ],
+            "bodyBytes": 4,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "7c78a15ccfb734d86f71df3b18f12ab5fa07ef137fe3c8a6aaba8c84a83f8836",
+        "hex": "504f5354202f6f6e6525324674776f3f783d253235323020485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20340d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a74657374"
+      }
+    },
+    {
+      "name": "valid-trailer",
+      "requestBytes": 142,
+      "requestSha256": "9e1e242b66bd9a7d9def69791d434d08f4a1a7145c1e87eca0de728414343883",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 142,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Transfer-Encoding",
+              "chunked",
+              "Trailer",
+              "X-Folded",
+              "Connection",
+              "close"
+            ],
+            "bodyBytes": 4,
+            "ended": true,
+            "aborted": false,
+            "trailers": [
+              "X-Folded",
+              "first second"
+            ]
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "9e1e242b66bd9a7d9def69791d434d08f4a1a7145c1e87eca0de728414343883",
+        "hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a547261696c65723a20582d466f6c6465640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a340d0a746573740d0a300d0a582d466f6c6465643a206669727374207365636f6e640d0a0d0a"
+      }
+    },
+    {
+      "name": "original-malformed-HTTP-obsolete-folded-header",
+      "requestBytes": 82,
+      "requestSha256": "2fd5c8bf85674e67a1e8d75c11b53d58904ca3b56d8cb3be3d264d53f16eba9f",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      },
+      "originalInputHex": "474554202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a582d466f6c6465643a2066697273740d0a207365636f6e640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a"
+    },
+    {
+      "name": "original-strict-ingress-TE-obsolete-fold",
+      "requestBytes": 111,
+      "requestSha256": "e9d3ff8fc8dff3411cc84fb3d60f46dfbcda5218ae8b1ff082e08512fbe3967a",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      },
+      "originalInputHex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20340d0a5472616e736665722d456e636f64696e673a0d0a206368756e6b65640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a300d0a0d0a"
+    },
+    {
+      "name": "malformed-HTTP-conflicting-content-length",
+      "requestBytes": 96,
+      "requestSha256": "07057b15e6526b0f05e1c480bf1befff3d350eb9142d45f8128fe1450b3848ae",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "malformed-HTTP-CL-TE",
+      "requestBytes": 109,
+      "requestSha256": "efc39b604e50a21b1e1f6b36f1a6dd9735639960a4c3f413b5eb9e1106e38440",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "malformed-HTTP-TE-CL",
+      "requestBytes": 109,
+      "requestSha256": "892715b046105b0d34ab9c6e1f2f476f7c7ade3159d1b03d6c860d9936dfa0fa",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "malformed-HTTP-invalid-transfer-encoding",
+      "requestBytes": 82,
+      "requestSha256": "c9b39ca183e97c6c2f21ef486005d0fc92b07b55543db8361e4d227ac2986edb",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "strict-ingress-CL-TE-pipelined",
+      "requestBytes": 158,
+      "requestSha256": "b73660189a1fce9a6b9c1d5256c39b6a60ec4ac92b9851dcbf07da158a23642d",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "strict-ingress-TE-CL-pipelined",
+      "requestBytes": 158,
+      "requestSha256": "e457f3e3b00594926529df4bc046e5fc1946a5fd976e816105fc3aebf974a7ba",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "strict-ingress-CL-comma-conflict",
+      "requestBytes": 80,
+      "requestSha256": "8c81e5bc14aa8795471d10cee89211bd2a912d6385eadd80e6711a4fe78c12e1",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "strict-ingress-TE-repeated-chunked",
+      "requestBytes": 99,
+      "requestSha256": "896ca844f7a408f8e12304cf302b0c3ea31b94930b5923aa7f32d10f1e871d42",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "strict-ingress-TE-not-final-chunked",
+      "requestBytes": 96,
+      "requestSha256": "88c42d855422b7bb57f8691174d90be612a3e3073d59c1cfdd16af8de8d0df0a",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "original-obs-fold-reused",
+      "requestBytes": 82,
+      "requestSha256": "2fd5c8bf85674e67a1e8d75c11b53d58904ca3b56d8cb3be3d264d53f16eba9f",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "warmup": {
+        "bytes": 63,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/warmup",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      },
+      "originalInputHex": "474554202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a582d466f6c6465643a2066697273740d0a207365636f6e640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a"
+    },
+    {
+      "name": "fragmented-original-obs-fold",
+      "requestBytes": 82,
+      "requestSha256": "2fd5c8bf85674e67a1e8d75c11b53d58904ca3b56d8cb3be3d264d53f16eba9f",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "beforeFinalFragment": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      },
+      "originalInputHex": "474554202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a582d466f6c6465643a2066697273740d0a207365636f6e640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a"
+    },
+    {
+      "name": "late-folded-trailer-sp",
+      "requestBytes": 144,
+      "requestSha256": "7812b723de883ccfd63448a2613d7b8255dd752fb15fcdde450df83319b0020b",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "beforeFinalFragment": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "late-folded-trailer-reused-sp",
+      "requestBytes": 144,
+      "requestSha256": "7812b723de883ccfd63448a2613d7b8255dd752fb15fcdde450df83319b0020b",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "warmup": {
+        "bytes": 63,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/warmup",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0
+      },
+      "beforeFinalFragment": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "late-folded-trailer-tab",
+      "requestBytes": 144,
+      "requestSha256": "7363d91ec408507222bbdfb9361192efc1c080a00f367f5fc0dde1ea8f73fffd",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "beforeFinalFragment": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "late-folded-trailer-reused-tab",
+      "requestBytes": 144,
+      "requestSha256": "7363d91ec408507222bbdfb9361192efc1c080a00f367f5fc0dde1ea8f73fffd",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "warmup": {
+        "bytes": 63,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/warmup",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0
+      },
+      "beforeFinalFragment": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        400
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "late-valid-trailer-staged",
+      "requestBytes": 142,
+      "requestSha256": "9e1e242b66bd9a7d9def69791d434d08f4a1a7145c1e87eca0de728414343883",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "beforeFinalFragment": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 142,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Transfer-Encoding",
+              "chunked",
+              "Trailer",
+              "X-Folded",
+              "Connection",
+              "close"
+            ],
+            "bodyBytes": 4,
+            "ended": true,
+            "aborted": false,
+            "trailers": [
+              "X-Folded",
+              "first second"
+            ]
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "9e1e242b66bd9a7d9def69791d434d08f4a1a7145c1e87eca0de728414343883",
+        "hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a547261696c65723a20582d466f6c6465640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a340d0a746573740d0a300d0a582d466f6c6465643a206669727374207365636f6e640d0a0d0a"
+      }
+    },
+    {
+      "name": "encoded-/bad%20target",
+      "requestBytes": 88,
+      "requestSha256": "2db97fc9df30d6fcd7c8b50226db64100b7bef23f3f470b4d85e98e7ee938d6e",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 88,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/bad%20target",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0",
+              "Connection",
+              "close"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "2db97fc9df30d6fcd7c8b50226db64100b7bef23f3f470b4d85e98e7ee938d6e",
+        "hex": "504f5354202f62616425323074617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a"
+      }
+    },
+    {
+      "name": "encoded-/bad%09target",
+      "requestBytes": 88,
+      "requestSha256": "8f343fbeb05bffe2937819a0db63e613447c74d6ed6f22f4920ae71fc4127ede",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 88,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/bad%09target",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0",
+              "Connection",
+              "close"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "8f343fbeb05bffe2937819a0db63e613447c74d6ed6f22f4920ae71fc4127ede",
+        "hex": "504f5354202f62616425303974617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a"
+      }
+    },
+    {
+      "name": "encoded-/bad%01target",
+      "requestBytes": 88,
+      "requestSha256": "062b7223fefac0f41b3a7aae56507f87a19e6b73a9671cd26314daf2142119df",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 88,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/bad%01target",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0",
+              "Connection",
+              "close"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "062b7223fefac0f41b3a7aae56507f87a19e6b73a9671cd26314daf2142119df",
+        "hex": "504f5354202f62616425303174617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a"
+      }
+    },
+    {
+      "name": "encoded-/bad%00target",
+      "requestBytes": 88,
+      "requestSha256": "968965e731ce55e23226be44139e4e8682e3b19191ed8cbf6c76252f78d39854",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 88,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/bad%00target",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0",
+              "Connection",
+              "close"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "968965e731ce55e23226be44139e4e8682e3b19191ed8cbf6c76252f78d39854",
+        "hex": "504f5354202f62616425303074617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a"
+      }
+    },
+    {
+      "name": "encoded-/encoded%2Fsegment?value=%2520",
+      "requestBytes": 105,
+      "requestSha256": "f7f2784c007c4c2fd002598ab0c8735e3fdc137d29fc6c03b195f2a6d0c4f38a",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 105,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/encoded%2Fsegment?value=%2520",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0",
+              "Connection",
+              "close"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "f7f2784c007c4c2fd002598ab0c8735e3fdc137d29fc6c03b195f2a6d0c4f38a",
+        "hex": "504f5354202f656e636f6465642532467365676d656e743f76616c75653d253235323020485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a"
+      }
+    },
+    {
+      "name": "encoded-/caf%C3%A9?x=a%20b",
+      "requestBytes": 93,
+      "requestSha256": "4304701e2f53606c347e2b065f44aa1d10df1a9322eca2d0aa6c296e8425d2b1",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 93,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/caf%C3%A9?x=a%20b",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0",
+              "Connection",
+              "close"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "4304701e2f53606c347e2b065f44aa1d10df1a9322eca2d0aa6c296e8425d2b1",
+        "hex": "504f5354202f6361662543332541393f783d612532306220485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a"
+      }
+    },
+    {
+      "name": "valid-pipeline",
+      "requestBytes": 159,
+      "requestSha256": "1c2dddcd4ad85fe9e0652b84a1de23ceb6281f7f07a663b259eb7d7d7385f605",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        200,
+        200
+      ],
+      "origin": {
+        "bytes": 159,
+        "connections": 2,
+        "handlers": [
+          {
+            "url": "/first",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          },
+          {
+            "url": "/one%2Ftwo?x=%2520",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "4",
+              "Connection",
+              "close"
+            ],
+            "bodyBytes": 4,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "1c2dddcd4ad85fe9e0652b84a1de23ceb6281f7f07a663b259eb7d7d7385f605",
+        "hex": "504f5354202f666972737420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a0d0a504f5354202f6f6e6525324674776f3f783d253235323020485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20340d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a74657374"
+      }
+    },
+    {
+      "name": "valid-then-original-fold",
+      "requestBytes": 144,
+      "requestSha256": "ab9b843203900bb60a6ade66cf9f3e23fb5dc3df74cc00c50e8db8587c2e0223",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        200,
+        400
+      ],
+      "origin": {
+        "bytes": 62,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/first",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "911bf9d187c7af53c430a068f3853cc4ea72efef0d953f090afc7b17d8683410",
+        "hex": "504f5354202f666972737420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a0d0a"
+      }
+    },
+    {
+      "name": "content-length-stream-staged",
+      "requestBytes": 97,
+      "requestSha256": "7c78a15ccfb734d86f71df3b18f12ab5fa07ef137fe3c8a6aaba8c84a83f8836",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "beforeFinalFragment": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        200
+      ],
+      "origin": {
+        "bytes": 97,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/one%2Ftwo?x=%2520",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "4",
+              "Connection",
+              "close"
+            ],
+            "bodyBytes": 4,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "7c78a15ccfb734d86f71df3b18f12ab5fa07ef137fe3c8a6aaba8c84a83f8836",
+        "hex": "504f5354202f6f6e6525324674776f3f783d253235323020485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20340d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a74657374"
+      }
+    },
+    {
+      "name": "client-cancel-before-complete",
+      "requestBytes": 92,
+      "requestSha256": "33fed8ea321334fbffd50be2a6d59700e094442f639254bd88a7a3681d3ffccb",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "beforeFinalFragment": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0
+      },
+      "peerEnd": false,
+      "timedOut": false,
+      "status": [],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "oversized-body",
+      "requestBytes": 40080,
+      "requestSha256": "5d1dd0671f45acb2159d4b5b55b93214ebb9073522c147aa3b160e9a044766b0",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        413
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "oversized-header",
+      "requestBytes": 33087,
+      "requestSha256": "d1e6797e5a4d7fe0dfea8c5c58cd07a3f9d164c471b64d4b63cfd8355ebb73a3",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        413
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "slow-client-idle",
+      "requestBytes": 92,
+      "requestSha256": "33fed8ea321334fbffd50be2a6d59700e094442f639254bd88a7a3681d3ffccb",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        408
+      ],
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "hex": ""
+      }
+    },
+    {
+      "name": "queue-overflow",
+      "requestBytes": 496,
+      "requestSha256": "e08b8b9a83b7cadacb185f871c8361ac21a720db3d9d38d134e343e2963af212",
+      "identity": {
+        "authorized": true,
+        "protocol": "TLSv1.3",
+        "alpn": "http/1.1"
+      },
+      "peerEnd": true,
+      "timedOut": false,
+      "status": [
+        200,
+        200,
+        200,
+        200,
+        429
+      ],
+      "origin": {
+        "bytes": 248,
+        "connections": 4,
+        "handlers": [
+          {
+            "url": "/first",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          },
+          {
+            "url": "/first",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          },
+          {
+            "url": "/first",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          },
+          {
+            "url": "/first",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "0"
+            ],
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0,
+        "sha256": "aec3125f22df360a0fc18713d9cb0d722de4c633f4426a9da793888c8006ea8b",
+        "hex": "504f5354202f666972737420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a0d0a504f5354202f666972737420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a0d0a504f5354202f666972737420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a0d0a504f5354202f666972737420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20300d0a0d0a"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "name": "cc",
+      "file": "/usr/bin/gcc",
+      "sha256": "b0b49531b313e70aee0254fb5e69b050a781506184e16ebee6ebe68eee94a145"
+    },
+    {
+      "name": "openssl",
+      "file": "/usr/bin/openssl",
+      "sha256": "3c852df717ce7321bc9f38ceeb5c41244324e4d6a43a6b48ad0e5f274c3b52e0"
+    },
+    {
+      "name": "curl",
+      "file": "/usr/bin/curl",
+      "sha256": "e94f761d3f3d78060fdd1654e4b0f0475c519ec984764d0cc1d5bcef6a4a1732"
+    }
+  ],
+  "upstream": [
+    {
+      "name": "include/llhttp.h",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/include/llhttp.h",
+      "sha256": "52a7011f979b31f761403c1a333bf7fc26dc70f5745d8488eed1609c92097100",
+      "bytes": 31469
+    },
+    {
+      "name": "src/api.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/api.c",
+      "sha256": "0f8590206fe2f264db2825401b5fb856b979ee1363dc88b06f36dc9577afb941",
+      "bytes": 13384
+    },
+    {
+      "name": "src/http.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/http.c",
+      "sha256": "a1f2b23168f8e9b5bfa464c89027d3ca259fc649ae3d7e72bfff997d1aeb5d72",
+      "bytes": 5209
+    },
+    {
+      "name": "src/llhttp.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/llhttp.c",
+      "sha256": "f3ef756529b7444630717fa5540d4a1c9a1256874bda823c49c5a99c37f89429",
+      "bytes": 319064
+    },
+    {
+      "name": "LICENSE-MIT",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/LICENSE-MIT",
+      "sha256": "ebca854e0134cd256d673627c20499f42577eb74bacf08b9f25b626a73c91277",
+      "bytes": 1105
+    }
+  ],
+  "compiler": "cc (GCC) 16.2.1 20260810",
+  "nodeApiHeader": {
+    "file": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node/node_api.h",
+    "sha256": "2d4560831e525b47b060ec8a0864ab73993df9e20215ce9f0fe7b24cd31af32a"
+  },
+  "buildArgv": [
+    "cc",
+    "-std=c11",
+    "-O2",
+    "-shared",
+    "-fPIC",
+    "-Wall",
+    "-Werror",
+    "-I/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node",
+    "-I/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/upstream",
+    "spikes/envoy/sprint05b-llhttp-addon.c",
+    "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/upstream/api.c",
+    "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/upstream/http.c",
+    "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/upstream/llhttp.c",
+    "-o",
+    "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/a-95ded76883c7/.local/sprint05b-a-yn3v1s/llhttp.node"
+  ],
+  "addonSha256": "26a7edc50a90582f1225000a6e452ffdde4f37ff8dea3141c24233a2d4545a24",
+  "native": {
+    "version": "9.4.4",
+    "stateBytes": 344,
+    "maxFeedBytes": 32768
+  },
+  "nativeIsolationAndEOF": true,
+  "nativeBounds": {
+    "maxWireBytes": 16777216,
+    "maxBodyBytes": 8388608,
+    "maxMetadataBytes": 16384,
+    "maxTargetBytes": 2048,
+    "maxMessages": 1024
+  },
+  "nativeLongBody": {
+    "calls": 65,
+    "total": 1048658,
+    "complete": 1,
+    "error": "HPE_PAUSED"
+  },
+  "observerControl": {
+    "exact": true,
+    "bytes": 76,
+    "sha256": "abd29bfde62d3a6d9492857da6faeae6e2fb7685c2d3a974bfe6ec34d7b14199"
+  },
+  "absoluteDeadline": {
+    "observedMs": 1204.2643150000004,
+    "configuredMs": 1200,
+    "zeroOrigin": true
+  },
+  "streamingCounterexample": {
+    "prefixBytes": 113,
+    "originAt100ms": {
+      "bytes": 0,
+      "connections": 0,
+      "handlers": [],
+      "parserErrors": 0,
+      "transportErrors": 0
+    },
+    "status": 408,
+    "result": "full-message admission prevents upload streaming and origin progress before final trailers"
+  },
+  "upstreamCancellation": {
+    "cancelled": true,
+    "observedMs": 11.55875500000002,
+    "originResponseClosures": 1
+  },
+  "slowResponse": {
+    "pausesDuringStall": 41,
+    "peakWritableBytes": 49152,
+    "cancelled": true
+  },
+  "metrics": {
+    "connections": 42,
+    "peakConnections": 4,
+    "allocatedStaging": 0,
+    "peakAllocatedStaging": 131072,
+    "peakStagedBytes": 32768,
+    "peakQueuedMessages": 4,
+    "admissions": 22,
+    "parserFeedCalls": 63,
+    "parserConsumed": 69297,
+    "originConnections": 22,
+    "upstreamCancelled": 2,
+    "pauses": 2,
+    "responsePauses": 62,
+    "peakClientWritable": 49152,
+    "rejections": {
+      "Unexpected whitespace after header value": 8,
+      "Transfer-Encoding can't be present with Content-Length": 3,
+      "Duplicate Content-Length": 1,
+      "Content-Length can't be present with Transfer-Encoding": 2,
+      "Request has invalid `Transfer-Encoding`": 1,
+      "Invalid character in Content-Length": 1,
+      "Invalid `Transfer-Encoding` header value": 2,
+      "truncated": 1,
+      "staging-bytes": 1,
+      "test-only parser byte limit": 1,
+      "idle": 2,
+      "request-deadline": 1,
+      "queued-messages": 1,
+      "connections": 1
+    },
+    "cancellations": 42
+  },
+  "originTLSMismatch": {
+    "status": 502,
+    "requestBytes": 0,
+    "verificationEnabled": true
+  },
+  "staging": [
+    {
+      "mode": "memory",
+      "exactCap": 32768,
+      "capPlusOneRejected": true
+    },
+    {
+      "mode": "disk",
+      "exactCap": 131072,
+      "capPlusOneRejected": true
+    },
+    {
+      "name": "disk-96KiB-valid-body",
+      "inputBytes": 98384,
+      "inputSha256": "eeb825ab6035c3f5bbf26ddb69c12077dfd5e1d153776da1b17cebc209075063",
+      "cancelled": false,
+      "peakStagedBytes": 98384,
+      "feeds": 7,
+      "origin": {
+        "bytes": 98384,
+        "connections": 1,
+        "handlers": [
+          {
+            "url": "/",
+            "method": "POST",
+            "headers": [
+              "Host",
+              "edge-a.test",
+              "Content-Length",
+              "98304",
+              "Connection",
+              "close"
+            ],
+            "bodyBytes": 98304,
+            "ended": true,
+            "aborted": false,
+            "trailers": []
+          }
+        ],
+        "parserErrors": 0,
+        "transportErrors": 0
+      }
+    },
+    {
+      "name": "disk-cancel-before-admission",
+      "inputBytes": 64081,
+      "inputSha256": "42c418526365cabdb479e0a873fffe813a73e3bef05ec38b3fdf491f6c8dc13a",
+      "cancelled": true,
+      "peakStagedBytes": 60000,
+      "feeds": 4,
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0
+      }
+    },
+    {
+      "name": "disk-folded-trailer",
+      "inputBytes": 144,
+      "inputSha256": "7812b723de883ccfd63448a2613d7b8255dd752fb15fcdde450df83319b0020b",
+      "cancelled": false,
+      "error": "HPE_INVALID_HEADER_TOKEN: Unexpected whitespace after header value",
+      "peakStagedBytes": 0,
+      "feeds": 1,
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0
+      }
+    },
+    {
+      "name": "disk-over-128KiB",
+      "inputBytes": 140081,
+      "inputSha256": "4492202534c888c4baad296e422dffd9ce660c2e7836e74060fa2a8e3bc30fea",
+      "cancelled": false,
+      "error": "staging limit",
+      "peakStagedBytes": 125536,
+      "feeds": 9,
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "parserErrors": 0,
+        "transportErrors": 0
+      }
+    }
+  ],
+  "prefixStreamingCounterexample": {
+    "prefixBytes": 113,
+    "beforeTrailer": {
+      "bytes": 113,
+      "connections": 1,
+      "handlers": [
+        {
+          "url": "/",
+          "method": "POST",
+          "headers": [
+            "Host",
+            "edge-a.test",
+            "Transfer-Encoding",
+            "chunked",
+            "Trailer",
+            "X-Folded",
+            "Connection",
+            "close"
+          ],
+          "bodyBytes": 4,
+          "ended": false,
+          "aborted": true
+        }
+      ],
+      "parserErrors": 0,
+      "transportErrors": 0
+    },
+    "parserError": "HPE_INVALID_HEADER_TOKEN",
+    "strictZeroByteContract": false,
+    "explanation": "The origin has received the valid prefix before malformed trailers are available."
+  },
+  "verifiedObserverOrigins": {
+    "count": 25,
+    "all": true
+  },
+  "completed": true,
+  "cleanup": {
+    "fixtureAbsent": true,
+    "remainingSockets": 0,
+    "listeners": 0,
+    "allocatedStaging": 0,
+    "liveNativeParsers": 0,
+    "lockHeldThroughCleanup": true,
+    "elapsedMs": 12894
+  },
+  "endedAt": "2026-11-14T18:47:24.784Z"
+}
