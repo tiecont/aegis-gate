@@ -195,7 +195,8 @@ before deletion. Its independent reproduction and exact E acceptance are in
 cleanup, inventories and scanner evidence copying independently, then attempts
 each owned private-path removal separately. Failure is retained in the final
 receipt; an unavailable inventory cannot be represented as empty. Independent
-fault-path review of this replacement is pending. Both earlier failures remain
+fault-path review of this replacement ACCEPTs all33 scoped synthetic cases
+at c8fd9b9 (`sprint04c-f-cleanup-review.md`). Both earlier failures remain
 historical evidence and are not represented as passing helpers.
 
 ## Independent review and full gates
@@ -203,7 +204,12 @@ historical evidence and are not represented as passing helpers.
 F exact-source A/B/C/D and corrected E decisions: ACCEPT as scoped documentation,
 research, diagnostic tests and local regression evidence. The final E acceptance
 supersedes earlier E pending/rejected checkpoint fields only for corrected
-2126778. Root helper replacement and final integration review remain PENDING.
+2126778. Root helper578d78f is independently ACCEPTed for cleanup continuation
+under a held lock; mocked synchronous spawn descriptor residue and simulated
+lock-loss limits remain documented. Source audit at1ca490a ACCEPTs integration
+dd5b484:3,115 protected baseline objects,299 owner files,519 manifest entries
+and two explicit ineligible redactions. Final local/hosted binding remains
+PENDING; these scoped verdicts do not accept an unexecuted full gate.
 Root full locked make check/security-scan/cleanup: PENDING integration.
 Exact final PR-head and merge foundation-quality/supply-chain-security:
 PENDING after local and independent acceptance. Existing baseline successes
