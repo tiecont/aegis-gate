@@ -1,0 +1,68 @@
+5: #include "envoy/event/dispatcher.h"
+6: #include "envoy/server/overload/overload_manager.h"
+7: #include "envoy/upstream/upstream.h"
+8: 
+9: #include "source/common/http/http2/codec_impl.h"
+10: #include "source/common/runtime/runtime_features.h"
+11: 
+12: namespace Envoy {
+13: namespace Http {
+14: 
+15: namespace Http2 {
+16: 
+17: uint32_t ActiveClient::calculateInitialStreamsLimit(
+18:     Http::HttpServerPropertiesCacheSharedPtr http_server_properties_cache,
+19:     std::optional<HttpServerPropertiesCache::Origin>& origin,
+20:     Upstream::HostDescriptionConstSharedPtr host) {
+21:   uint32_t initial_streams =
+22:       host->cluster().httpProtocolOptions().http2Options().max_concurrent_streams().value();
+23:   if (http_server_properties_cache && origin.has_value()) {
+24:     uint32_t cached_concurrency =
+25:         http_server_properties_cache->getConcurrentStreams(origin.value());
+26:     if (cached_concurrency != 0 && cached_concurrency < initial_streams) {
+27:       // Only use the cached concurrency if lowers the streams below the
+28:       // configured max_concurrent_streams as Envoy should never send more
+29:       // than max_concurrent_streams at once.
+30:       initial_streams = cached_concurrency;
+31:     }
+32:   }
+33:   uint32_t max_requests = MultiplexedActiveClientBase::maxStreamsPerConnection(
+34:       host->cluster().maxRequestsPerConnection());
+35:   if (max_requests < initial_streams) {
+36:     initial_streams = max_requests;
+37:   }
+38:   return initial_streams;
+39: }
+40: 
+41: ActiveClient::ActiveClient(HttpConnPoolImplBase& parent,
+42:                            OptRef<Upstream::Host::CreateConnectionData> data)
+43:     : MultiplexedActiveClientBase(
+44:           parent, calculateInitialStreamsLimit(parent.cache(), parent.origin(), parent.host()),
+45:           parent.host()
+46:               ->cluster()
+47:               .httpProtocolOptions()
+48:               .http2Options()
+49:               .max_concurrent_streams()
+50:               .value(),
+51:           parent.host()->cluster().trafficStats()->upstream_cx_http2_total_, data) {}
+52: 
+53: ConnectionPool::InstancePtr
+54: allocateConnPool(Event::Dispatcher& dispatcher, Random::RandomGenerator& random_generator,
+55:                  Upstream::HostConstSharedPtr host, Upstream::ResourcePriority priority,
+56:                  const Network::ConnectionSocket::OptionsSharedPtr& options,
+57:                  const Network::TransportSocketOptionsConstSharedPtr& transport_socket_options,
+58:                  Upstream::ClusterConnectivityState& state,
+59:                  Server::OverloadManager& overload_manager,
+60:                  std::optional<HttpServerPropertiesCache::Origin> origin,
+61:                  Http::HttpServerPropertiesCacheSharedPtr cache) {
+62:   return std::make_unique<FixedHttpConnPoolImpl>(
+63:       host, priority, dispatcher, options, transport_socket_options, random_generator, state,
+64:       [](HttpConnPoolImplBase* pool) -> ::Envoy::ConnectionPool::ActiveClientPtr {
+65:         // Create the connection up front so a failure (e.g. network namespace binding failure)
+66:         // surfaces as a graceful connection failure rather than a crash when initializing the
+67:         // client with a null connection.
+68:         Upstream::Host::CreateConnectionData data =
+69:             static_cast<Envoy::ConnectionPool::ConnPoolImplBase*>(pool)->host()->createConnection(
+70:                 pool->dispatcher(), pool->socketOptions(), pool->transportSocketOptions());
+71:         if (data.connection_ == nullptr) {
+72:           return nullptr;

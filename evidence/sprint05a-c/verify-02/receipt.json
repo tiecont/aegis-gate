@@ -1,0 +1,441 @@
+{
+  "started_at": "2026-11-14T14:15:30.854Z",
+  "source_commit": "b3f2f73d2c119fb59e6258e34a8cc5608c0f9638",
+  "source_tree": "931ac74123753db693733c5607e7dff451ac7e32",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05a-c/spikes/envoy/sprint05a-c-verify.mjs",
+    "evidence/sprint05a-c/verify-02"
+  ],
+  "node": "v26.13.0",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "commands": [
+    {
+      "label": "syntax-sprint05a-c-config.mjs",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--check",
+        "spikes/envoy/sprint05a-c-config.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null
+    },
+    {
+      "label": "syntax-sprint05a-c-launcher.mjs",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--check",
+        "spikes/envoy/sprint05a-c-launcher.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null
+    },
+    {
+      "label": "syntax-sprint05a-c-lifecycle.mjs",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--check",
+        "spikes/envoy/sprint05a-c-lifecycle.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null
+    },
+    {
+      "label": "syntax-sprint05a-c-run.mjs",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--check",
+        "spikes/envoy/sprint05a-c-run.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null
+    },
+    {
+      "label": "syntax-sprint05a-c-source.mjs",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--check",
+        "spikes/envoy/sprint05a-c-source.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null
+    },
+    {
+      "label": "syntax-sprint05a-c-tap.mjs",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--check",
+        "spikes/envoy/sprint05a-c-tap.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null
+    },
+    {
+      "label": "syntax-sprint05a-c-verify.mjs",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--check",
+        "spikes/envoy/sprint05a-c-verify.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null
+    },
+    {
+      "label": "baseline",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "exit_code": 0,
+      "signal": null
+    },
+    {
+      "label": "observer-contract-evaluator-tests",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--test",
+        "spikes/edge-comparison/tls-observer.test.mjs",
+        "spikes/edge-comparison/contract.test.mjs",
+        "spikes/edge-comparison/evaluate.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null
+    }
+  ],
+  "original_runs": [
+    {
+      "directory": "recovery-01",
+      "source_commit": "e17c5fab6c52687e7f85997f88615ce8d1545fb2",
+      "source_tree": "6bcc6a4107ad6f482d0fd21238b14da0b7c23481",
+      "receipt_sha256": "e96b28ebbe43dc8e12e50a76b7fadc81f63c8607f951a288ead1e0103f162e61",
+      "evidence_manifest_sha256": "e4e6d92b60096640a1c956f96abdcfca18a39a3b00dfe63bf9df022063f9e156",
+      "passed": 69,
+      "failed": [
+        "malformed-HTTP-invalid-transfer-encoding",
+        "malformed-HTTP-obsolete-folded-header",
+        "strict-ingress-TE-repeated-chunked",
+        "strict-ingress-TE-not-final-chunked",
+        "supplemental-repeated-transfer-encoding-fields",
+        "HTTP2-authority-Host-and-SNI-confusion-rejected"
+      ],
+      "negative": {
+        "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+        "status": "fail",
+        "milliseconds": 12.26,
+        "error": "confused authority forwarded bytes to origin\n\n3045 !== 3036\n",
+        "origin": {
+          "handler_invocations": 0,
+          "decrypted_bytes": 9,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "requests": [],
+          "omitted_request_samples": 0
+        }
+      },
+      "raw_origin_hex": "000000040100000000",
+      "raw_origin_sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+      "positive_controls": [
+        "HTTP2-downstream-and-upstream-ALPN",
+        "HTTP1-and-HTTP2-body-streaming",
+        "WebSocket-upgrade-bidirectional-close",
+        "certificate-rotation-keeps-active-stream-and-snapshot",
+        "invalid-and-replayed-snapshot-retains-last-good",
+        "invalid-certificate-config-retains-last-good",
+        "verified-origin-TLS-rejects-wrong",
+        "verified-origin-TLS-rejects-expired",
+        "verified-origin-TLS-rejects-untrusted",
+        "trust-store-swap-cannot-reuse-old-origin-TLS-session",
+        "origin-connection-pooling",
+        "same-origin-pools-are-partitioned-between-routes",
+        "gRPC-bidirectional-streaming-and-trailers",
+        "gRPC-client-cancellation-reaches-origin"
+      ]
+    },
+    {
+      "directory": "windows-01",
+      "source_commit": "e17c5fab6c52687e7f85997f88615ce8d1545fb2",
+      "source_tree": "6bcc6a4107ad6f482d0fd21238b14da0b7c23481",
+      "receipt_sha256": "cde9ff5bc567304afabac741356770013484b047665b9f3ef85cd9c7423711e3",
+      "evidence_manifest_sha256": "da3f08f448bcf0f40c1a0a7167ca7d530aa841f13643d09ec4006a99a9c206ce",
+      "passed": 69,
+      "failed": [
+        "malformed-HTTP-invalid-transfer-encoding",
+        "malformed-HTTP-obsolete-folded-header",
+        "strict-ingress-TE-repeated-chunked",
+        "strict-ingress-TE-not-final-chunked",
+        "supplemental-repeated-transfer-encoding-fields",
+        "HTTP2-authority-Host-and-SNI-confusion-rejected"
+      ],
+      "negative": {
+        "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+        "status": "fail",
+        "milliseconds": 12.4,
+        "error": "confused authority forwarded bytes to origin\n\n3033 !== 3024\n",
+        "origin": {
+          "handler_invocations": 0,
+          "decrypted_bytes": 9,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "requests": [],
+          "omitted_request_samples": 0
+        }
+      },
+      "raw_origin_hex": "000000040100000000",
+      "raw_origin_sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+      "positive_controls": [
+        "HTTP2-downstream-and-upstream-ALPN",
+        "HTTP1-and-HTTP2-body-streaming",
+        "WebSocket-upgrade-bidirectional-close",
+        "certificate-rotation-keeps-active-stream-and-snapshot",
+        "invalid-and-replayed-snapshot-retains-last-good",
+        "invalid-certificate-config-retains-last-good",
+        "verified-origin-TLS-rejects-wrong",
+        "verified-origin-TLS-rejects-expired",
+        "verified-origin-TLS-rejects-untrusted",
+        "trust-store-swap-cannot-reuse-old-origin-TLS-session",
+        "origin-connection-pooling",
+        "same-origin-pools-are-partitioned-between-routes",
+        "gRPC-bidirectional-streaming-and-trailers",
+        "gRPC-client-cancellation-reaches-origin"
+      ]
+    },
+    {
+      "directory": "identity-01",
+      "source_commit": "48f42f8d99b8ff999b655c102c62c928e694624e",
+      "source_tree": "b666e5a7c52066904d9aaa742118a36739128d63",
+      "receipt_sha256": "ab2b9e98099cdb29215e20e839707d0c7fbab5de6c2c7ec124ad0336ef91f78d",
+      "evidence_manifest_sha256": "cf88d5749aa48b4f6277710e534f005bb3307c653c1c0a40cc922d4f9ec1ced7",
+      "passed": 69,
+      "failed": [
+        "malformed-HTTP-invalid-transfer-encoding",
+        "malformed-HTTP-obsolete-folded-header",
+        "strict-ingress-TE-repeated-chunked",
+        "strict-ingress-TE-not-final-chunked",
+        "supplemental-repeated-transfer-encoding-fields",
+        "HTTP2-authority-Host-and-SNI-confusion-rejected"
+      ],
+      "negative": {
+        "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+        "status": "fail",
+        "milliseconds": 11.2,
+        "error": "confused authority forwarded bytes to origin\n\n3033 !== 3024\n",
+        "origin": {
+          "handler_invocations": 0,
+          "decrypted_bytes": 9,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "requests": [],
+          "omitted_request_samples": 0
+        }
+      },
+      "raw_origin_hex": "000000040100000000",
+      "raw_origin_sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+      "positive_controls": [
+        "HTTP2-downstream-and-upstream-ALPN",
+        "HTTP1-and-HTTP2-body-streaming",
+        "WebSocket-upgrade-bidirectional-close",
+        "certificate-rotation-keeps-active-stream-and-snapshot",
+        "invalid-and-replayed-snapshot-retains-last-good",
+        "invalid-certificate-config-retains-last-good",
+        "verified-origin-TLS-rejects-wrong",
+        "verified-origin-TLS-rejects-expired",
+        "verified-origin-TLS-rejects-untrusted",
+        "trust-store-swap-cannot-reuse-old-origin-TLS-session",
+        "origin-connection-pooling",
+        "same-origin-pools-are-partitioned-between-routes",
+        "gRPC-bidirectional-streaming-and-trailers",
+        "gRPC-client-cancellation-reaches-origin"
+      ]
+    },
+    {
+      "directory": "partition-01",
+      "source_commit": "823da03101e69814d0312484a57fffca0a830fa6",
+      "source_tree": "c5ac375f039bdb932b6aaa35f81d2f8fa45723cb",
+      "receipt_sha256": "dc52a6e538a6da1ae802fd4c8dad3de1b1125cfbb08c69e6012260a490c14742",
+      "evidence_manifest_sha256": "fc1c3283d5328572bf07b05321f4757b639c560f78bf330f42c5f697ee006010",
+      "passed": 69,
+      "failed": [
+        "malformed-HTTP-invalid-transfer-encoding",
+        "malformed-HTTP-obsolete-folded-header",
+        "strict-ingress-TE-repeated-chunked",
+        "strict-ingress-TE-not-final-chunked",
+        "supplemental-repeated-transfer-encoding-fields",
+        "HTTP2-authority-Host-and-SNI-confusion-rejected"
+      ],
+      "negative": {
+        "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+        "status": "fail",
+        "milliseconds": 8.21,
+        "error": "confused authority forwarded bytes to origin\n\n3033 !== 3024\n",
+        "origin": {
+          "handler_invocations": 0,
+          "decrypted_bytes": 9,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "requests": [],
+          "omitted_request_samples": 0
+        }
+      },
+      "raw_origin_hex": "000000040100000000",
+      "raw_origin_sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+      "positive_controls": [
+        "HTTP2-downstream-and-upstream-ALPN",
+        "HTTP1-and-HTTP2-body-streaming",
+        "WebSocket-upgrade-bidirectional-close",
+        "certificate-rotation-keeps-active-stream-and-snapshot",
+        "invalid-and-replayed-snapshot-retains-last-good",
+        "invalid-certificate-config-retains-last-good",
+        "verified-origin-TLS-rejects-wrong",
+        "verified-origin-TLS-rejects-expired",
+        "verified-origin-TLS-rejects-untrusted",
+        "trust-store-swap-cannot-reuse-old-origin-TLS-session",
+        "origin-connection-pooling",
+        "same-origin-pools-are-partitioned-between-routes",
+        "gRPC-bidirectional-streaming-and-trailers",
+        "gRPC-client-cancellation-reaches-origin"
+      ]
+    },
+    {
+      "directory": "bounded-02",
+      "source_commit": "12500ceca2b689f6352fb246597e5b04ee928759",
+      "source_tree": "2c882f90ba427a45de9b6d7bc16970e68bfd8e1c",
+      "receipt_sha256": "906266c179dcc0a39d8c79fffec8d938417ce2095a284886303b28bc9048ae84",
+      "evidence_manifest_sha256": "c405c56b2b365751a19259a102a95c731882b1c1f31c2d24fff3ba5411a4988e",
+      "passed": 69,
+      "failed": [
+        "malformed-HTTP-invalid-transfer-encoding",
+        "malformed-HTTP-obsolete-folded-header",
+        "strict-ingress-TE-repeated-chunked",
+        "strict-ingress-TE-not-final-chunked",
+        "supplemental-repeated-transfer-encoding-fields",
+        "HTTP2-authority-Host-and-SNI-confusion-rejected"
+      ],
+      "negative": {
+        "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+        "status": "fail",
+        "milliseconds": 13.47,
+        "error": "confused authority forwarded bytes to origin\n\n3033 !== 3024\n",
+        "origin": {
+          "handler_invocations": 0,
+          "decrypted_bytes": 9,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "requests": [],
+          "omitted_request_samples": 0
+        }
+      },
+      "raw_origin_hex": "000000040100000000",
+      "raw_origin_sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+      "positive_controls": [
+        "HTTP2-downstream-and-upstream-ALPN",
+        "HTTP1-and-HTTP2-body-streaming",
+        "WebSocket-upgrade-bidirectional-close",
+        "certificate-rotation-keeps-active-stream-and-snapshot",
+        "invalid-and-replayed-snapshot-retains-last-good",
+        "invalid-certificate-config-retains-last-good",
+        "verified-origin-TLS-rejects-wrong",
+        "verified-origin-TLS-rejects-expired",
+        "verified-origin-TLS-rejects-untrusted",
+        "trust-store-swap-cannot-reuse-old-origin-TLS-session",
+        "origin-connection-pooling",
+        "same-origin-pools-are-partitioned-between-routes",
+        "gRPC-bidirectional-streaming-and-trailers",
+        "gRPC-client-cancellation-reaches-origin"
+      ]
+    },
+    {
+      "directory": "windows-plain-01",
+      "source_commit": "12500ceca2b689f6352fb246597e5b04ee928759",
+      "source_tree": "2c882f90ba427a45de9b6d7bc16970e68bfd8e1c",
+      "receipt_sha256": "9c8bbb3e11a55ada8d323ca23fe25eb1a807857b3a74fc043639aba48e273844",
+      "evidence_manifest_sha256": "a1335764f497cf8f1194d9c48493e0e4b492950a3e6bcbad30d60427bfc077fe",
+      "passed": 69,
+      "failed": [
+        "malformed-HTTP-invalid-transfer-encoding",
+        "malformed-HTTP-obsolete-folded-header",
+        "strict-ingress-TE-repeated-chunked",
+        "strict-ingress-TE-not-final-chunked",
+        "supplemental-repeated-transfer-encoding-fields",
+        "HTTP2-authority-Host-and-SNI-confusion-rejected"
+      ],
+      "negative": {
+        "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+        "status": "fail",
+        "milliseconds": 16.9,
+        "error": "confused authority forwarded bytes to origin\n\n3033 !== 3024\n",
+        "origin": {
+          "handler_invocations": 0,
+          "decrypted_bytes": 9,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "requests": [],
+          "omitted_request_samples": 0
+        }
+      },
+      "raw_origin_hex": null,
+      "raw_origin_sha256": null,
+      "positive_controls": [
+        "HTTP2-downstream-and-upstream-ALPN",
+        "HTTP1-and-HTTP2-body-streaming",
+        "WebSocket-upgrade-bidirectional-close",
+        "certificate-rotation-keeps-active-stream-and-snapshot",
+        "invalid-and-replayed-snapshot-retains-last-good",
+        "invalid-certificate-config-retains-last-good",
+        "verified-origin-TLS-rejects-wrong",
+        "verified-origin-TLS-rejects-expired",
+        "verified-origin-TLS-rejects-untrusted",
+        "trust-store-swap-cannot-reuse-old-origin-TLS-session",
+        "origin-connection-pooling",
+        "same-origin-pools-are-partitioned-between-routes",
+        "gRPC-bidirectional-streaming-and-trailers",
+        "gRPC-client-cancellation-reaches-origin"
+      ]
+    }
+  ],
+  "lifecycle": [
+    {
+      "directory": "lifecycle-windows-03",
+      "source_commit": "b3f2f73d2c119fb59e6258e34a8cc5608c0f9638",
+      "passed": 7,
+      "sequential_requests": 6,
+      "concurrent_streams": 8,
+      "sequential_origin_connections": 1,
+      "concurrent_origin_connections": 1,
+      "receipt_sha256": "a890dee4a517f18e9f3cb21b6ef2162810d807ef941313b8178be4c558cc27ad",
+      "evidence_manifest_sha256": "7caa77b300868ee48810c004245a440764492d69c333743305e29b7ab2658c48",
+      "limitations": "Additional userinfo probe can end with native RST8 and no response; this does not satisfy or replace original 400/421 assertion. Warm diagnostics run after valid reuse and do not reproduce original timing."
+    },
+    {
+      "directory": "lifecycle-partition-02",
+      "source_commit": "b3f2f73d2c119fb59e6258e34a8cc5608c0f9638",
+      "passed": 7,
+      "sequential_requests": 6,
+      "concurrent_streams": 8,
+      "sequential_origin_connections": 1,
+      "concurrent_origin_connections": 1,
+      "receipt_sha256": "8a4a04e40924af9792f1df1f37693b8004a13ea78900492dd922867f3dc3785d",
+      "evidence_manifest_sha256": "f1df0728712c0e3fb7c6aa61773971aefbc44ebf7dde01e5687604f344b8563c",
+      "limitations": "Additional userinfo probe can end with native RST8 and no response; this does not satisfy or replace original 400/421 assertion. Warm diagnostics run after valid reuse and do not reproduce original timing."
+    },
+    {
+      "directory": "lifecycle-bounded-02",
+      "source_commit": "b3f2f73d2c119fb59e6258e34a8cc5608c0f9638",
+      "passed": 7,
+      "sequential_requests": 6,
+      "concurrent_streams": 8,
+      "sequential_origin_connections": 1,
+      "concurrent_origin_connections": 1,
+      "receipt_sha256": "c7c0a306158c6851de1b6e9358c535c678258a31d499c45a162a754634d86fff",
+      "evidence_manifest_sha256": "a254b80a63ac9dd91094620e83093b7ac3cc83774ae6af5ea17f21f9f8ab6685",
+      "limitations": "Additional userinfo probe can end with native RST8 and no response; this does not satisfy or replace original 400/421 assertion. Warm diagnostics run after valid reuse and do not reproduce original timing."
+    }
+  ],
+  "security_verdict": "NO-GO: original H2 aggregate-zero-byte assertion still fails; no repair claimed",
+  "cleanup": {
+    "containers_absent": true,
+    "fixture_directories_absent": true,
+    "lock_held": true
+  },
+  "ended_at": "2026-11-14T14:15:33.788Z"
+}

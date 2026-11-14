@@ -1,0 +1,42 @@
+{
+  "at": "2026-11-14T14:21:47.440Z",
+  "checks": [
+    {
+      "label": "raw-whitespace",
+      "program": "git",
+      "args": [
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 2,
+      "signal": null
+    },
+    {
+      "label": "authored-whitespace",
+      "program": "git",
+      "args": [
+        "diff",
+        "8e77a4f",
+        "--check",
+        "--",
+        "spikes/envoy/sprint05a-c-*",
+        "docs/reports/sprint05a-c-h2.md"
+      ],
+      "exit_code": 0,
+      "signal": null
+    },
+    {
+      "label": "secret-patterns",
+      "program": "rg",
+      "args": [
+        "-n",
+        "BEGIN .*PRIVATE KEY|Bearer [A-Za-z0-9]|sk-proj-|ghp_",
+        "evidence/sprint05a-c"
+      ],
+      "exit_code": 1,
+      "signal": null
+    }
+  ],
+  "notes": "Raw evidence whitespace is retained; authored whitespace passes. rg exit1 means no matching credential patterns; this is not a full security scan."
+}
