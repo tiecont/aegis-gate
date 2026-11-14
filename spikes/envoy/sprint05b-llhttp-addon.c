@@ -201,7 +201,16 @@ static napi_value finish(napi_env env, napi_callback_info info) {
     napi_throw_error(env, NULL, "parser closed or terminal");
     return NULL;
   }
-  if (state->paused) llhttp_resume(&state->parser);
+  if (state->paused) {
+    llhttp_resume(&state->parser);
+    state->paused = false;
+    /* Run llhttp's post-completion transition before asking it about EOF. */
+    llhttp_errno_t resumed = llhttp_execute(&state->parser, "", 0);
+    if (resumed != HPE_OK) {
+      state->terminal = true;
+      return result(env, state, resumed, 0);
+    }
+  }
   state->complete = false;
   llhttp_errno_t error = llhttp_finish(&state->parser);
   state->terminal = true;

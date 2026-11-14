@@ -90,10 +90,12 @@ try {
     record.nativeChecks.push({ name, inputSha256: hash(bytes), bytes: bytes.length, splitChecks, oneByte });
   }
   const first = addon.createParser(), second = addon.createParser();
-  assert.equal(first.feed(Buffer.from('POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\n\r\nte')).complete, false);
-  assert.equal(second.feed(Buffer.from(good)).complete, true);
-  assert.equal(first.feed(Buffer.from('st')).complete, true);
-  assert.equal(first.finish().error, 'HPE_OK'); first.close(); second.close();
+  try {
+    assert.equal(first.feed(Buffer.from('POST / HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 4\r\n\r\nte')).complete, false);
+    assert.equal(second.feed(Buffer.from(good)).complete, true);
+    assert.equal(first.feed(Buffer.from('st')).complete, true);
+    assert.equal(first.finish().error, 'HPE_OK');
+  } finally { first.close(); second.close(); }
   const truncated = addon.createParser(); truncated.feed(Buffer.from(good.slice(0, -1)));
   assert.equal(truncated.finish().error, 'HPE_INVALID_EOF_STATE'); truncated.close();
   const oversized = addon.createParser(); assert.throws(() => oversized.feed(Buffer.alloc(32769)), RangeError); oversized.close();
