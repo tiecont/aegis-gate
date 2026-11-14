@@ -107,7 +107,15 @@ finally {
   }
   observer?.closeAllConnections();
   for (const server of [observer, native]) if (server?.listening) await bound(new Promise((resolve) => server.close(resolve)));
-  if (log !== undefined) fs.closeSync(log);
+  if (log !== undefined) {
+    fs.closeSync(log);
+    const first = fs.readFileSync(`${process.argv[2]}/proxy.log`, 'utf8').split('\n').find((line) => line.startsWith('{'));
+    if (first) {
+      const generated = path.dirname(JSON.parse(first).resources);
+      assert.ok(generated.startsWith(path.resolve('.local/envoy-run-')), 'owned launcher directory');
+      fs.rmSync(generated, { recursive: true }); proof.record.launcher_directory_removed = !fs.existsSync(generated);
+    }
+  }
   fs.rmSync(fixture, { recursive: true, force: true });
   proof.record.cleanup = { lock_held_through_cleanup: true, fixture_removed: !fs.existsSync(fixture), wall_ms: Date.now() - started };
   proof.finish();
