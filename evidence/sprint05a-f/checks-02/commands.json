@@ -1,0 +1,130 @@
+{
+  "source_commit": "1ba8b5be198afb6c7ec943cbaab74ff11bb7c8c1",
+  "source_tree": "edfce0f3a2721de4cbb0f8d900330f707f18452b",
+  "started_at": "2026-11-14T14:51:59.552Z",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05a-f/spikes/envoy/sprint05a-f-verify.mjs",
+    "evidence/sprint05a-f/checks-02",
+    "--report-only"
+  ],
+  "node": "v26.13.0",
+  "node_binary_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "commands": [
+    {
+      "label": "final-sprint05a-f-security-review.md",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05a-f:/repo:ro",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/docs/reports/sprint05a-f-security-review.md",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-14T14:51:59.968Z",
+      "ended_at": "2026-11-14T14:52:00.901Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/checks-02/final-sprint05a-f-security-review.md.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/checks-02/final-sprint05a-f-security-review.md.stderr",
+          "bytes": 131,
+          "sha256": "7e672be70111bfd8595e523dbabdd61d8254b4150888775e35125a539698199c"
+        }
+      ]
+    },
+    {
+      "label": "final-sprint05a-f",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05a-f:/repo:ro",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/evidence/sprint05a-f",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-14T14:52:00.918Z",
+      "ended_at": "2026-11-14T14:52:02.349Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/checks-02/final-sprint05a-f.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/checks-02/final-sprint05a-f.stderr",
+          "bytes": 131,
+          "sha256": "a66193c3d35f0d8bc333414a0cabda1b19411ae59fe4b2681c7bedb9d7d44726"
+        }
+      ]
+    },
+    {
+      "label": "final-whitespace",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "541d1d9",
+        "--",
+        "spikes/envoy/sprint05a-f-*",
+        "docs/reports/sprint05a-f*"
+      ],
+      "started_at": "2026-11-14T14:52:02.354Z",
+      "ended_at": "2026-11-14T14:52:02.368Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/checks-02/final-whitespace.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/checks-02/final-whitespace.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "manifests": [],
+  "source_bindings": [],
+  "report": {
+    "file": "docs/reports/sprint05a-f-security-review.md",
+    "sha256": "e3ee40e701f86bff27d564d06cb983bcbed1837e16443f1122c5d92b24887eac"
+  },
+  "completed": true,
+  "ended_at": "2026-11-14T14:52:02.371Z",
+  "lock_held_through_capture": true
+}
