@@ -19,7 +19,7 @@ const fixture = fs.mkdtempSync(path.resolve('.local/sprint05b-c-'));
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 const sources = git('ls-files', 'spikes/envoy', 'spikes/edge-comparison', 'spikes/pingora/lab.mjs').split('\n');
 const env = { AEGIS_05A_D_POLICY: 'stream-errors', AEGIS_05B_C_MODE: mode,
-  NODE_OPTIONS: `--import=${path.resolve(mode === 'baseline' ? 'spikes/envoy/sprint05a-combined-select.mjs' : 'spikes/envoy/sprint05b-c-select.mjs')} --import=${path.resolve('spikes/envoy/sprint05b-c-tap.mjs')}`,
+  NODE_OPTIONS: `--import=${path.resolve(['baseline', 'untapped'].includes(mode) ? 'spikes/envoy/sprint05a-combined-select.mjs' : 'spikes/envoy/sprint05b-c-select.mjs')}${mode === 'untapped' ? '' : ` --import=${path.resolve('spikes/envoy/sprint05b-c-tap.mjs')}`}`,
   AEGIS_05B_C_CAPTURE: path.resolve(output, 'peer-frames.json') };
 const receipt = { source_commit: git('rev-parse', 'HEAD'), source_tree: git('rev-parse', 'HEAD^{tree}'),
   source_clean: true, argv: process.argv, mode, started_at: new Date().toISOString(),
