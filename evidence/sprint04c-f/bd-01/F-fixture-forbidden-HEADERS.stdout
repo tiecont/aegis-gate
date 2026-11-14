@@ -1,0 +1,35 @@
+{
+  "connection": "F-synthetic-1",
+  "captured_bytes": 35,
+  "captured_sha256": "f94120455ecab9810a1c18c58a00606a796078ebe05092e9991f15d7fdf3f0db",
+  "events": [
+    {
+      "offset": 24,
+      "type": "HEADERS",
+      "stream": 1,
+      "payload_bytes": 2,
+      "raw_sha256": "25ce1f6832f5bd77d3725403797d8898eb1a89d937f0ae26c60331e6b7121a4b",
+      "raw_hex": "0000020104000000018284",
+      "decoded_fields": [
+        {
+          "Name": ":method",
+          "Value": "GET",
+          "Sensitive": false
+        },
+        {
+          "Name": ":path",
+          "Value": "/",
+          "Sensitive": false
+        }
+      ],
+      "hpack_block_hex": "8284"
+    }
+  ],
+  "violations": [
+    "rejected request emitted HEADERS on stream 1"
+  ],
+  "incomplete": [],
+  "capture_complete": true,
+  "semantic_security_pass": false,
+  "hpack_mutation_visibility": "stateful maintained decoder; exact dynamic-table mutations unavailable through public API"
+}
