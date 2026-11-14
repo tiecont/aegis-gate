@@ -351,5 +351,7 @@ TCP readiness and serialized shared-database package scheduling. Clean-source
 module regressions, dashboard/contracts and image/stale-volume probes pass.
 The failed full gate and independent startup/HTTP failures remain retained;
 controlled cross-schema lock coupling does not establish the cause of the
-natural HTTP timeouts. Full final local/hosted integration remains required.
+natural HTTP timeouts. Corrected source `7725063` passes both full locked local
+gates and cleanup (gates02); exact final PR19-head and merge hosted jobs remain
+required. This does not repair any of the six mandatory ingress failures.
 

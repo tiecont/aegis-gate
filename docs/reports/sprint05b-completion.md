@@ -1,7 +1,7 @@
 # Sprint 05-B Completion Evidence
 
-Status: component implementation and independent review complete; final full
-integration gates, hosted CI and merge closeout pending at this checkpoint.
+Status: component implementation, independent review and full local gates complete;
+exact final PR-head hosted CI and merge closeout pending at this checkpoint.
 This report does not grant Module 01 GO. Subsequent closeout receipts must name
 the actual reviewed source, PR head, merge SHA and hosted run; no commit can
 contain its own final commit hash.
@@ -55,7 +55,7 @@ Test HTTP failures omit private callback URLs. Original 75/23 sources remain imm
 ## Original Results And Failure Disposition
 
 The combined Envoy 1.40.2 configuration is unchanged. Fresh root
-`evidence/sprint05b-root/candidate-04/` at `34cf5b0` records:
+`evidence/sprint05b-root/candidate-05/` at `ff3f3fe` records:
 
 | Mandatory suite | Previous | Current | New repaired assertions |
 | --- | ---: | ---: | ---: |
@@ -67,7 +67,7 @@ The exact binary is extracted from
 Native execution preserves the config and original observation windows, but
 lacks Docker memory/PID cgroups/read-only-rootfs isolation. Thus these are
 protocol diagnostics, not new complete resource/runtime eligibility evidence.
-All 17 additive controls finish observation in candidate04; observation completion
+All 17 additive controls finish observation in candidate05; observation completion
 does not assert a security PASS for their retained historical failures.
 
 | Failure ID | Current measured disposition |
@@ -199,12 +199,32 @@ instead of assuming combined Docker name filters form a union.
 
 ## Gate Matrix And Next Action
 
+Full locked integration gates PASS at source
+`7725063dd65e07d26b7579f428a29424e1f8f4f8`, tree
+`dcc33021cbac83a1f106b95d9ddd18ca5dfb1386`. Gate collector
+`scripts/sprint04c-gates.mjs evidence/sprint05b-root/gates-02` executes
+`make check`, `make security-scan`, `make dev-down` and owned Compose volume
+removal within one shared-lock lifetime. Every command exits 0; lifecycle ends
+2026-11-14T19:40:39.859Z. The Node/Go/Rust tools remain pinned; argv, binary
+hashes, timestamps, raw command streams, scanner/SBOM/image identity results
+and SHA256 are retained in `evidence/sprint05b-root/gates-02/` (`dfe69c7`).
+The export uses the same explicit derivative format as gate01, with zero
+redactions this time and all original stream hashes preserved. It checks 57
+files for fixture values with zero matches; owned project resources and generated
+private fixtures are removed. Passing gate02 supersedes gate01's failed quality
+outcome for the corrected source, without deleting the earlier failure evidence.
+
+Draft PR [19](https://github.com/tiecont/aegis-gate/pull/19) initially names
+`7725063`; hosted run `43633078400` is an intermediate-head check. Final PR-head
+and merge-commit hosted receipts must be recorded separately after the evidence
+and review addenda are integrated. No pending hosted job is credited as PASS.
+
 | Gate | State |
 | --- | --- |
-| Module 00 | PASS local, independent focused regression PASS; full integration gate pending |
+| Module 00 | PASS local, independent focused regression and full integration PASS |
 | Module 01 | NO-GO |
-| Module 02 | PASS local, independent focused regression PASS; full integration gate pending |
-| Module 03 | PASS local, independent focused regression PASS; full integration gate pending |
+| Module 02 | PASS local, independent focused regression and full integration PASS |
+| Module 03 | PASS local, independent focused regression and full integration PASS |
 | Modules 04-12 | LOCKED |
 | Production | BLOCKED |
 | ADR-012 / named architecture and security owners / approval | PROPOSED / PENDING / PENDING |

@@ -4,7 +4,7 @@
 
 Baseline main `8758b1c84b4186449cd79fabae461ca53ee05100`, hosted
 `43620722442` passes both required jobs. Fresh exact-image native diagnostics
-at source `34cf5b0` retain **73/75** original cases and **19/23** supplemental
+at source `ff3f3fe` retain **73/75** original cases and **19/23** supplemental
 probes. Additive 17-control observations complete, including native RSS sampling;
 this native fixture lacks container cgroup memory/PID isolation and is not a
 complete runtime/resource eligibility proof. Original evaluators remain unchanged.
@@ -26,8 +26,11 @@ contracts/dashboard and private-image/stale-volume controls also pass. Independe
 F checkpoint `1d8769b` accepts scoped test tooling and fixture corrections,
 rejecting complete ingress eligibility and all six remaining failures. TCP
 readiness and package scheduling preserve existing assertions/timeouts. The first
-full check failed and remains retained; final full local gates, hosted CI and
-merge receipts are pending. No production or dependency replacement is introduced. See
+full check failed and remains retained. Corrected source `7725063`, tree
+`dcc33021cbac83a1f106b95d9ddd18ca5dfb1386`, passes full locked check/security-scan
+and cleanup/volume removal, all exit0 (`evidence/sprint05b-root/gates-02/`).
+Exact final-head hosted CI and merge receipts remain pending for PR19.
+No production or dependency replacement is introduced. See
 `docs/sprints/05b-execution.md` and `docs/reports/sprint05b-completion.md`.
 Module 01 remains NO-GO; 04-12 LOCKED; production BLOCKED. ADR-012 and actual
 human architecture/security owners/approval remain PENDING.

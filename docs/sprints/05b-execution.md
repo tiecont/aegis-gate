@@ -68,5 +68,6 @@ lock waits peak at 495.991ms and do not explain the earlier HTTP5s failures.
 The controlled separate-schema probe proves database-global migration coupling
 at the unchanged2s timeout; package scheduling removes that avoidable overlap.
 TCP readiness excludes the socket-only init server. All successful lifecycles
-verify private-material/resource removal under lock. Root final full gates,
-exact PR head/main CI and merge closeout remain pending.
+verify private-material/resource removal under lock. Root full gates at `7725063`
+pass check/security-scan/cleanup/volume removal, all exit0, retained in gates02.
+PR19 final exact-head/main CI and merge closeout remain pending.
