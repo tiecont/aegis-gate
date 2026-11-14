@@ -1,0 +1,370 @@
+{
+  "source_commit": "80addb665c00922ec7eb98834b43efe73930c1be",
+  "source_tree": "82e7c079cf14fecead03eb4f0fa5a86b5ed93b33",
+  "source_clean": true,
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-04c-d/spikes/envoy/sprint04c-run.mjs",
+    "evidence/sprint04c-d/attempt-01"
+  ],
+  "cwd": "/tmp/aegisgate-04c-d",
+  "started_at": "2026-11-14T08:58:45.322Z",
+  "node": "v26.13.0",
+  "node_binary": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "commands": [
+    {
+      "label": "go-version",
+      "program": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "args": [
+        "version"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T08:58:45.565Z",
+      "ended_at": "2026-11-14T08:58:45.573Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/attempt-01/go-version.stdout",
+          "sha256": "a29205bd83967c2f70e6768fae009600038d6056499fa289de9d5f9b79beaef4"
+        },
+        {
+          "file": "evidence/sprint04c-d/attempt-01/go-version.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "decoder-module",
+      "program": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "args": [
+        "list",
+        "-m",
+        "-json",
+        "golang.org/x/net"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T08:58:45.574Z",
+      "ended_at": "2026-11-14T08:58:45.582Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/attempt-01/decoder-module.stdout",
+          "sha256": "d62de70bf21626a13e26eb04c802ab17f4a3d74a0900410d8a79ccf31f2f9faa"
+        },
+        {
+          "file": "evidence/sprint04c-d/attempt-01/decoder-module.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "openssl",
+      "program": "openssl",
+      "args": [
+        "version"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T08:58:45.583Z",
+      "ended_at": "2026-11-14T08:58:45.589Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/attempt-01/openssl.stdout",
+          "sha256": "bdd7122ae3788e889ce96da25f99fe5023a80a88ab0e6db9f93cf3174187301c"
+        },
+        {
+          "file": "evidence/sprint04c-d/attempt-01/openssl.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "envoy-image",
+      "program": "docker",
+      "args": [
+        "image",
+        "inspect",
+        "envoyproxy/envoy@sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded",
+        "--format",
+        "{{.Id}} {{.Os}}/{{.Architecture}}"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T08:58:45.590Z",
+      "ended_at": "2026-11-14T08:58:45.657Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/attempt-01/envoy-image.stdout",
+          "sha256": "27a467ca17e2fc31a8f523832c7c31b6c62b3d69e77dc72a3cc0bd4d72bb0920"
+        },
+        {
+          "file": "evidence/sprint04c-d/attempt-01/envoy-image.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "immutable-manifest",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T08:58:45.666Z",
+      "ended_at": "2026-11-14T08:58:45.727Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/attempt-01/immutable-manifest.stdout",
+          "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+        },
+        {
+          "file": "evidence/sprint04c-d/attempt-01/immutable-manifest.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "observer-tests",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--test",
+        "spikes/envoy/sprint04c-observer.test.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T08:58:45.739Z",
+      "ended_at": "2026-11-14T08:58:49.786Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/attempt-01/observer-tests.stdout",
+          "sha256": "5acd379a6e00b5ade8786a163b508af661b947aaac21f5784a4b6f2227ab7b2f"
+        },
+        {
+          "file": "evidence/sprint04c-d/attempt-01/observer-tests.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "decoder-build",
+      "program": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "args": [
+        "build",
+        "-o",
+        ".local/bin/sprint04c-attribution",
+        "./spikes/envoy/sprint04c-attribution"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T08:58:49.793Z",
+      "ended_at": "2026-11-14T08:58:51.548Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/attempt-01/decoder-build.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-d/attempt-01/decoder-build.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "protocol",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/envoy/sprint04c-protocol.mjs",
+        "/tmp/aegisgate-04c-d/evidence/sprint04c-d/attempt-01/protocol.json",
+        "/tmp/aegisgate-04c-d/.local/sprint04c-d-qjKpJ9/protocol"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T08:58:51.565Z",
+      "ended_at": "2026-11-14T08:59:17.900Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/attempt-01/protocol.stdout",
+          "sha256": "49c6daa22d277d7551149c021e9c7d062309510860d24b5b94ae392bdad81609"
+        },
+        {
+          "file": "evidence/sprint04c-d/attempt-01/protocol.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "decode-00",
+      "program": ".local/bin/sprint04c-attribution",
+      "args": [],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T08:59:17.914Z",
+      "ended_at": "2026-11-14T08:59:17.924Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdin_bytes": 33888,
+      "stdin_sha256": "be3560c14db5db5e03c4811804335cb6f0629e118e807eec3388289a3989e8c6",
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/attempt-01/decode-00.stdout",
+          "sha256": "5bb2b7139e66142026cc5ab245b5f180e3b4e62d658ad68bb352f0dc38fea383"
+        },
+        {
+          "file": "evidence/sprint04c-d/attempt-01/decode-00.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "decode-01",
+      "program": ".local/bin/sprint04c-attribution",
+      "args": [],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T08:59:17.926Z",
+      "ended_at": "2026-11-14T08:59:17.940Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdin_bytes": 262423,
+      "stdin_sha256": "c8c21a3ca36c6b237e3055c5ebbe24c839c2c8ea2279ac50987624dee6d5426d",
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/attempt-01/decode-01.stdout",
+          "sha256": "99e365a3086aa706153254bbb16103257b038adb30503dcfa465e98a249165a9"
+        },
+        {
+          "file": "evidence/sprint04c-d/attempt-01/decode-01.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "decode-02",
+      "program": ".local/bin/sprint04c-attribution",
+      "args": [],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T08:59:17.942Z",
+      "ended_at": "2026-11-14T08:59:17.950Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdin_bytes": 1321,
+      "stdin_sha256": "dc7479fa4bf9eab9473d4e19c784cf9d13d92f85b2328aa30ab3c661ee874e0c",
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/attempt-01/decode-02.stdout",
+          "sha256": "a495bf738630d070fa873e14dc9aff7b9b7ec3fa95b2b19c4fabcc4b75645151"
+        },
+        {
+          "file": "evidence/sprint04c-d/attempt-01/decode-02.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "decode-03",
+      "program": ".local/bin/sprint04c-attribution",
+      "args": [],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T08:59:17.953Z",
+      "ended_at": "2026-11-14T08:59:17.966Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdin_bytes": 890,
+      "stdin_sha256": "aed6f977d585fce5141e950d966c8c3f8ac5775dff8399df91da6a905fb5e5ab",
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/attempt-01/decode-03.stdout",
+          "sha256": "c00d514f74fafcb95d5477c9609264a8e4d000662500682ced66bf5e9273a746"
+        },
+        {
+          "file": "evidence/sprint04c-d/attempt-01/decode-03.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "fixture_lock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "semantic_security_pass": false,
+  "immutable": [
+    {
+      "file": "go.mod",
+      "sha256": "853983da256fcd10524f76dfa6d310312a29c2efbf5d28cca0d931b3753d3293"
+    },
+    {
+      "file": "go.sum",
+      "sha256": "63e406f62626f3f779af795b760639d8538a6def6faea30dc595cbb8bef63c7f"
+    },
+    {
+      "file": "spikes/pingora/lab.mjs",
+      "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d"
+    },
+    {
+      "file": "spikes/envoy/wire-probes.mjs",
+      "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/edge-comparison/contract.mjs",
+      "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f"
+    },
+    {
+      "file": "spikes/edge-comparison/supplemental.mjs",
+      "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf"
+    },
+    {
+      "file": "spikes/edge-comparison/evaluate.mjs",
+      "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.mjs",
+      "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065"
+    }
+  ],
+  "sources": [
+    {
+      "file": "spikes/envoy/sprint04c-attribution/main.go",
+      "sha256": "c42020f2b987cf9e3b18cb0ed0476735d46905664ed3fe6b99960868b76e8741"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-attribution/main_test.go",
+      "sha256": "bb57070f5e9b4cef77e2257133a01730e5cebc54b04675e793fa3763b0db90de"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-observer.mjs",
+      "sha256": "215012524eaaab2133ee0c711d1b29e1bf7ddd0338d996290a73624ca827514b"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-observer.test.mjs",
+      "sha256": "7cd1bbce7d5a0b6c08ee82789670d59c9968ba5bad84a2c1ccf5804f7ac0e831"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-protocol.mjs",
+      "sha256": "ce75ff5a3e91cc4c650607ffb8db1bd21f8fed0583b95baf937cd99293753738"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-run.mjs",
+      "sha256": "ee0aec3526cae4136f59323fd26570b48d35b9728c4d6c9775c5b7759838d6d1"
+    }
+  ],
+  "fixture_root": "/tmp/aegisgate-04c-d/.local/sprint04c-d-qjKpJ9",
+  "decoder_binary_sha256": "20dae5023a7a9cdde8736d7fecaf354d79a77b0f4df2362a29e5e7045dfdb2a9",
+  "observations_complete": true,
+  "cleanup": {
+    "stopped": [],
+    "lock_held_through_cleanup": true,
+    "remaining_owned_containers": []
+  },
+  "ended_at": "2026-11-14T08:59:18.074Z"
+}
