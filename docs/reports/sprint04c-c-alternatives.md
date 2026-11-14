@@ -85,10 +85,11 @@ to own AegisGate integration. Origin remains outside the front's trust boundary.
 T01 gains a spoofable identity-transfer path unless backhaul sender and original
 SNI/client identity are authenticated. T07 gains two parsers and H1/H2 translation,
 so independently valid normalized output can conceal malformed original input.
-T08 gains another header/HPACK/window/buffer budget, downgrade path and timeout
-race. T11 gains dual config generation/expiry/rollback coordination. T16/T17
-gain two sets of idle pools, drain states, half-closes and cancellation races.
-TLS custody and logs gain an extra plaintext location and another patch cadence.
+T08 gains another header/HPACK/window/buffer budget, downgrade path, timeout
+race, idle pools, drain states, half-closes and cancellation races. T05/T17 gain
+dual config generation/expiry/rollback coordination. T06 gains authenticated
+identity-transfer obligations; T11/T13 gain another TLS custody/plaintext/log
+location and another patch cadence. T16 origin rewriting remains mandatory.
 
 Required negatives include direct backend bypass, forged PROXY/TLV/Forwarded
 identity, mismatched SNI/Host/:authority, cross-tenant pool reuse, front/back
