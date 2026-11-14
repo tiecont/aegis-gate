@@ -7,7 +7,8 @@ import { assertLock } from './wire-fixtures.mjs';
 
 process.umask(0o077);
 assertLock();
-const [output] = process.argv.slice(2);
+const [output, option] = process.argv.slice(2);
+assert.ok(option === undefined || option === '--controls-only');
 assert.match(output ?? '', /^evidence\/sprint05a-d\/attempt-\d+$/);
 assert.ok(!fs.existsSync(output));
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
@@ -49,7 +50,7 @@ try {
       '--format', '{{.Id}} {{json .RepoDigests}}']],
     ['immutable75', process.execPath, ['spikes/edge-comparison/extract-baseline.mjs', '--check']],
   ]) assert.equal(command(label, program, args).status, 0);
-  for (const mode of ['baseline', 'windows', 'stream-errors', 'flush-errors']) {
+  for (const mode of option ? [] : ['baseline', 'windows', 'stream-errors', 'flush-errors']) {
     const environment = mode === 'baseline' ? { NODE_OPTIONS: '' } : {
       AEGIS_05A_D_POLICY: mode,
       NODE_OPTIONS: `--import=${path.resolve('spikes/envoy/sprint05a-d-select.mjs')}`,
@@ -65,6 +66,19 @@ try {
     // The suite's nonzero security result is preserved, not a collector error.
     if (![0, 1].includes(child.status)) complete = false;
     save();
+  }
+  if (option === '--controls-only') {
+    const child = command('bounded-controls', process.execPath, ['spikes/envoy/sprint04c-protocol.mjs',
+      path.resolve(output, 'controls.json'), path.join(fixtures, 'controls')], {
+      AEGIS_05A_D_POLICY: 'stream-errors',
+      NODE_OPTIONS: `--import=${path.resolve('spikes/envoy/sprint05a-d-select.mjs')}`,
+    });
+    assert.equal(child.status, 0, 'bounded control collection must complete');
+    const controls = JSON.parse(fs.readFileSync(`${output}/controls.json`));
+    assert.equal(controls.tests.length, 17);
+    assert.ok(controls.tests.every((t) => t.status === 'observation-complete'));
+    receipt.controls = controls.tests.map(({ name, status }) => ({ name, status }));
+    receipt.semantic_security_pass = false;
   }
 } catch (error) { receipt.error = error.stack; complete = false; }
 finally {
