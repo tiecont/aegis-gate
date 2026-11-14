@@ -1,0 +1,552 @@
+{
+  "scope": "Independent F helper repair review; synthetic VM only; no Docker/scanner/shared fixture execution",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-04c-cleanup-review/evidence/sprint04c-f/review-cleanup.mjs",
+    "evidence/sprint04c-f/cleanup-01"
+  ],
+  "cwd": "/tmp/aegisgate-04c-cleanup-review",
+  "started_at": "2026-11-14T09:40:44.410Z",
+  "source_commit": "9f7eef62903fdbaf82b8fecc6fd4becf6d7fb061",
+  "source_tree": "04694a2141e01c3fe63654c7ac6e528f4f918c6e",
+  "tracked_clean_at_start": true,
+  "helper_commit": "578d78f3465d5a4cbb9587a0e03be975b33cd1c9",
+  "helper_tree": "77e863b3e912e496b5b7d02fe0644fe18bd84407",
+  "helper_blob": "4a5400dfab224f6797a63a25fa2fc0421e2c79b0",
+  "helper_sha256": "052922dd93c87ee9f5aae99d27cd6b283562549cbc65d0a8e628809c57da59bd",
+  "sources": [
+    {
+      "file": "evidence/sprint04c-helper/cleanup-test.mjs",
+      "sha256": "64bbda00677aa2222ebde806e4347629c463da948e0533ad6c4921d7d6f2caf2"
+    },
+    {
+      "file": "evidence/sprint04c-f/review-cleanup.mjs",
+      "sha256": "d829650ca7e56dc230da4e705308979962c20f1408f03d0249b7c9a3886c7db1"
+    },
+    {
+      "file": "spikes/envoy/wire-fixtures.mjs",
+      "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278"
+    }
+  ],
+  "node": "v26.13.0",
+  "node_versions": {
+    "node": "26.13.0",
+    "acorn": "8.19.0",
+    "ada": "4.0.0",
+    "amaro": "1.1.11",
+    "ares": "1.34.9",
+    "brotli": "1.2.0",
+    "cldr": "48.0",
+    "icu": "78.3",
+    "libffi": "3.8.0",
+    "lief": "1.0.0",
+    "llhttp": "9.4.3",
+    "merve": "1.2.2",
+    "modules": "147",
+    "napi": "10",
+    "nbytes": "0.1.4",
+    "ncrypto": "0.0.1",
+    "nghttp2": "1.70.0",
+    "nghttp3": "",
+    "ngtcp2": "",
+    "openssl": "3.5.9",
+    "simdjson": "5.0.3",
+    "simdutf": "7.7.0",
+    "sqlite": "3.54.0",
+    "tz": "2026e",
+    "undici": "8.12.2",
+    "unicode": "17.0",
+    "uv": "1.52.1",
+    "uvwasi": "0.0.23",
+    "v8": "14.6.202.34-node.40",
+    "zlib": "1.3.2.1-motley-456ae73",
+    "zstd": "1.5.7"
+  },
+  "node_binary": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "lock_scope": "VM assertLock mock only; no shared fixtures/scanners accessed; real lifecycle flock not exercised",
+  "commands": [
+    {
+      "label": "node-version",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--version"
+      ],
+      "cwd": "/tmp/aegisgate-04c-cleanup-review",
+      "started_at": "2026-11-14T09:40:44.750Z",
+      "ended_at": "2026-11-14T09:40:44.760Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/node-version.stdout",
+          "bytes": 9,
+          "sha256": "d4b8a831ea4925f1c54be7746ec0b846cb04bbc35295b64ccdb2101bfcf5d70c"
+        },
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/node-version.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "git-version",
+      "argv": [
+        "git",
+        "--version"
+      ],
+      "cwd": "/tmp/aegisgate-04c-cleanup-review",
+      "started_at": "2026-11-14T09:40:44.760Z",
+      "ended_at": "2026-11-14T09:40:44.768Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/git-version.stdout",
+          "bytes": 19,
+          "sha256": "0eff67955296e123526d7f9b9146fff8d8dc8d6dbf4f49ba5f838923d2b4af71"
+        },
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/git-version.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "helper-syntax",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--check",
+        "scripts/sprint04c-gates.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-cleanup-review",
+      "started_at": "2026-11-14T09:40:44.768Z",
+      "ended_at": "2026-11-14T09:40:44.816Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/helper-syntax.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/helper-syntax.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "harness-syntax",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--check",
+        "evidence/sprint04c-helper/cleanup-test.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-cleanup-review",
+      "started_at": "2026-11-14T09:40:44.816Z",
+      "ended_at": "2026-11-14T09:40:44.858Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/harness-syntax.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/harness-syntax.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "collector-syntax",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--check",
+        "evidence/sprint04c-f/review-cleanup.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-cleanup-review",
+      "started_at": "2026-11-14T09:40:44.858Z",
+      "ended_at": "2026-11-14T09:40:44.888Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/collector-syntax.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/collector-syntax.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "synthetic-faults",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--experimental-vm-modules",
+        "evidence/sprint04c-helper/cleanup-test.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-cleanup-review",
+      "started_at": "2026-11-14T09:40:44.888Z",
+      "ended_at": "2026-11-14T09:40:45.073Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/synthetic-faults.stdout",
+          "bytes": 224464,
+          "sha256": "61bc23d4ba1b4b47347acad64f93e5cf354afa67da1d70170844dec2efc5981c"
+        },
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/synthetic-faults.stderr",
+          "bytes": 174,
+          "sha256": "323b37ae8a83152a10922ecb397015c5590543dc97da4389b6de025eb6b6785f"
+        }
+      ]
+    },
+    {
+      "label": "changes-from-helper",
+      "argv": [
+        "git",
+        "diff",
+        "--name-status",
+        "578d78f3465d5a4cbb9587a0e03be975b33cd1c9",
+        "HEAD"
+      ],
+      "cwd": "/tmp/aegisgate-04c-cleanup-review",
+      "started_at": "2026-11-14T09:40:45.074Z",
+      "ended_at": "2026-11-14T09:40:45.078Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/changes-from-helper.stdout",
+          "bytes": 87,
+          "sha256": "38bde4a28d21b5ad142b8f178423908c6fa883ffb3a379da021aa21fec7a1432"
+        },
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/changes-from-helper.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "whitespace",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "578d78f3465d5a4cbb9587a0e03be975b33cd1c9",
+        "HEAD"
+      ],
+      "cwd": "/tmp/aegisgate-04c-cleanup-review",
+      "started_at": "2026-11-14T09:40:45.082Z",
+      "ended_at": "2026-11-14T09:40:45.086Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/whitespace.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-f/cleanup-01/whitespace.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "case_summary": [
+    {
+      "mode": "clean",
+      "exit_code": 0,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": []
+    },
+    {
+      "mode": "synthetic-value-leak",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "private-evidence-validation"
+      ]
+    },
+    {
+      "mode": "synthetic-key-marker",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "private-evidence-validation"
+      ]
+    },
+    {
+      "mode": "dev-down-throw",
+      "exit_code": 1,
+      "lock_assertions": 24,
+      "descriptor_residue_on_synchronous_spawn_throw": 2,
+      "cleanup_error_labels": [
+        "dev-down"
+      ]
+    },
+    {
+      "mode": "dev-down-error-event",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": []
+    },
+    {
+      "mode": "dev-down-nonzero",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": []
+    },
+    {
+      "mode": "compose-down-throw",
+      "exit_code": 1,
+      "lock_assertions": 24,
+      "descriptor_residue_on_synchronous_spawn_throw": 2,
+      "cleanup_error_labels": [
+        "compose-down"
+      ]
+    },
+    {
+      "mode": "compose-down-error-event",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": []
+    },
+    {
+      "mode": "compose-down-nonzero",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": []
+    },
+    {
+      "mode": "container-inventory-throw",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "container-inventory"
+      ]
+    },
+    {
+      "mode": "container-inventory-nonempty",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": []
+    },
+    {
+      "mode": "network-inventory-throw",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "network-inventory"
+      ]
+    },
+    {
+      "mode": "network-inventory-nonempty",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": []
+    },
+    {
+      "mode": "volume-inventory-throw",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "volume-inventory"
+      ]
+    },
+    {
+      "mode": "volume-inventory-nonempty",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": []
+    },
+    {
+      "mode": "evidence-mkdir-throw",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "scanner-evidence-copy"
+      ]
+    },
+    {
+      "mode": "evidence-readdir-throw",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "scanner-evidence-copy"
+      ]
+    },
+    {
+      "mode": "evidence-copy-throw",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "scanner-evidence-copy"
+      ]
+    },
+    {
+      "mode": "validation-read-throw",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "private-evidence-validation"
+      ]
+    },
+    {
+      "mode": "remove-throw:.local/pki",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "remove:.local/pki"
+      ]
+    },
+    {
+      "mode": "remove-throw:.local/postgres-password",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "remove:.local/postgres-password"
+      ]
+    },
+    {
+      "mode": "remove-throw:.local/redis-password",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "remove:.local/redis-password"
+      ]
+    },
+    {
+      "mode": "remove-throw:.local/nats-token",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "remove:.local/nats-token"
+      ]
+    },
+    {
+      "mode": "remove-throw:.local/redis.conf",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "remove:.local/redis.conf"
+      ]
+    },
+    {
+      "mode": "remove-throw:.local/nats.conf",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "remove:.local/nats.conf"
+      ]
+    },
+    {
+      "mode": "remove-throw:.local/compose.env",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "remove:.local/compose.env"
+      ]
+    },
+    {
+      "mode": "remove-throw:.local/evidence/security/compose-config.json",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": [
+        "remove:.local/evidence/security/compose-config.json"
+      ]
+    },
+    {
+      "mode": "remove-silent-noop",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": []
+    },
+    {
+      "mode": "check-nonzero",
+      "exit_code": 1,
+      "lock_assertions": 25,
+      "descriptor_residue_on_synchronous_spawn_throw": 0,
+      "cleanup_error_labels": []
+    },
+    {
+      "mode": "check-throw",
+      "exit_code": 1,
+      "lock_assertions": 22,
+      "descriptor_residue_on_synchronous_spawn_throw": 2,
+      "cleanup_error_labels": []
+    },
+    {
+      "mode": "combined-failures",
+      "exit_code": 1,
+      "lock_assertions": 24,
+      "descriptor_residue_on_synchronous_spawn_throw": 2,
+      "cleanup_error_labels": [
+        "dev-down",
+        "container-inventory",
+        "scanner-evidence-copy",
+        "private-evidence-validation",
+        "remove:.local/pki",
+        "network-inventory",
+        "volume-inventory"
+      ]
+    },
+    {
+      "mode": "lock-missing-at-entry",
+      "expected_abort": true,
+      "lock_assertions": 1,
+      "cleanup_error_labels": []
+    },
+    {
+      "mode": "lock-lost-before-cleanup",
+      "expected_abort": true,
+      "lock_assertions": 20,
+      "cleanup_error_labels": []
+    }
+  ],
+  "verdict": "ACCEPT exact helper repair for scoped cleanup continuation/failure receipts under held lock; full gates and Module01 remain unaccepted",
+  "exit_code": 0,
+  "ended_at": "2026-11-14T09:40:45.086Z"
+}
