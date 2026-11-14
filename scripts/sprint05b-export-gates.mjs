@@ -125,16 +125,16 @@ if (process.argv[2] === "--selftest") {
   };
   for (const command of derived.commands)
     for (const stream of command.streams ?? []) {
-      const relative = path.relative(path.posix.basename(input), stream.file);
-      const safeRelative = stream.file.slice(
-        stream.file.indexOf(path.posix.basename(input) + "/") +
-          path.posix.basename(input).length +
-          1,
-      );
+      const prefix = `${path.posix.dirname(output)}/${path.basename(input)}/`;
       assert.ok(
-        !safeRelative.startsWith("../") &&
+        stream.file.startsWith(prefix),
+        "unexpected original stream path",
+      );
+      const safeRelative = stream.file.slice(prefix.length);
+      assert.ok(
+        !safeRelative.split("/").includes("..") &&
           fs.existsSync(path.join(output, safeRelative)),
-        relative,
+        "missing exported stream",
       );
       stream.original_sha256 = stream.sha256;
       stream.sha256 = hash(fs.readFileSync(path.join(output, safeRelative)));
