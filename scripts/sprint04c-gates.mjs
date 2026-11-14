@@ -6,7 +6,9 @@ import { execFileSync, spawn } from "node:child_process";
 import { assertLock } from "../spikes/envoy/wire-fixtures.mjs";
 
 const [output] = process.argv.slice(2);
-const sprint = /^evidence\/sprint(04c|05a)-root\/gates-/.exec(output ?? "")?.[1];
+const sprint = /^evidence\/sprint(04c|05a)-root\/gates-/.exec(
+  output ?? "",
+)?.[1];
 assert.ok(sprint, "supported isolated sprint output required");
 assert.ok(!fs.existsSync(output), "fresh evidence required");
 assertLock();
