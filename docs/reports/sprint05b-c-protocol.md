@@ -138,6 +138,12 @@ fixture. The report does not authorize deadline changes. Offline verification:
 - Architecture/contract changes: none; no gate opened.
 - Positive/security tests: original23 baseline19/23; two completed variants18/23;
   six setup failures0 cases. Exact commands/raw exits retained in receipts.
+- Offline verifier at clean source787ad0f exits0:155 evidence checksums and873
+  captured-source hashes match their committed objects; owned script syntax,
+  protected corpus equality and retained window/stream-error invariants pass.
+  Receipt `evidence/sprint05b-c/verify-01/receipt.json` explicitly keeps
+  semantic_security_pass=false. A scoped private-key PEM marker search found
+  no matches; this is not a replacement for independent security review.
 - Performance: no throughput, production memory, fairness or load claim.
 - Risks/blockers: four failures, original75 issues outside C, incomplete native
   raw peer-frame attribution, Docker setup/shutdown and earlier collision.
