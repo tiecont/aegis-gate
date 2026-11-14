@@ -179,3 +179,36 @@ func TestDecoderBoundsAndInvalidHPACK(t *testing.T) {
 	})
 	need(t, c, "frame event bound", false)
 }
+
+func TestDecompressionAndContinuationBounds(t *testing.T) {
+	for _, kind := range []string{"string", "fields", "wrong-stream", "table-size"} {
+		t.Run(kind, func(t *testing.T) {
+			var b bytes.Buffer
+			e := hpack.NewEncoder(&b)
+			switch kind {
+			case "string":
+				_ = e.WriteField(hpack.HeaderField{Name: "x-synthetic", Value: strings.Repeat("a", 8193)})
+			case "fields":
+				for range 129 {
+					_ = e.WriteField(hpack.HeaderField{Name: "x-synthetic", Value: "constant"})
+				}
+			case "table-size":
+				e.SetMaxDynamicTableSizeLimit(8192)
+				e.SetMaxDynamicTableSize(8192)
+				_ = e.WriteField(hpack.HeaderField{Name: "x-synthetic", Value: "constant"})
+			}
+			c := fixture(t, func(f *http2.Framer) {
+				if kind == "wrong-stream" {
+					_ = f.WriteHeaders(http2.HeadersFrameParam{StreamID: 1, BlockFragment: []byte{0x40}})
+					_ = f.WriteContinuation(3, true, []byte{0})
+				} else {
+					_ = f.WriteHeaders(http2.HeadersFrameParam{StreamID: 1, BlockFragment: b.Bytes(), EndHeaders: true})
+				}
+			})
+			r := analyze(c)
+			if r.Complete {
+				t.Fatalf("bound accepted: %#v", r)
+			}
+		})
+	}
+}
