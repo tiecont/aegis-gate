@@ -153,7 +153,7 @@ try {
     if (runtime === 'envoy') {
       const hcm = { stat_prefix: 'sprint05a_b', codec_type: 'HTTP1', request_headers_timeout: '2s',
         stream_idle_timeout: '2s', max_request_headers_kb: 16,
-        http_protocol_options: { enable_trailers: true, use_balsa_parser: true, allow_chunked_length: false,
+        http_protocol_options: { enable_trailers: true, allow_chunked_length: false,
           override_stream_error_on_invalid_http_message: false },
         normalize_path: false, merge_slashes: false, path_with_escaped_slashes_action: 'KEEP_UNCHANGED',
         route_config: { name: 'proof', virtual_hosts: [{ name: 'edge', domains: ['edge-a.test'],
@@ -167,8 +167,7 @@ try {
             path_with_escaped_slashes_action: 'KEEP_UNCHANGED' },
           headers_with_underscores_action: 'REJECT_REQUEST' }) };
       config = JSON.stringify({ layered_runtime: { layers: [{ name: 'strict', static_layer: {
-        'envoy.reloadable_features.strict_chunk_parsing': true,
-        'envoy.reloadable_features.http1_use_balsa_parser': true } }] },
+        'envoy.reloadable_features.strict_chunk_parsing': true } }] },
       static_resources: { listeners: [{ name: 'sprint05a-b-loopback', address: address(port), filter_chains: [{
         transport_socket: { name: 'envoy.transport_sockets.tls', typed_config: type('extensions.transport_sockets.tls.v3.DownstreamTlsContext', {
           require_sni: true, common_tls_context: { alpn_protocols: ['http/1.1'], tls_certificates: [{
