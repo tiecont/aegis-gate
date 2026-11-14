@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 import { once } from 'node:events';
 import { spawn } from 'node:child_process';
 import { setTimeout as delay } from 'node:timers/promises';
-import { frame } from './wire-observer.mjs';
+import { frame, decoder } from './wire-observer.mjs';
 import { observedOrigin, traceFrames, identity } from './sprint04b-observer.mjs';
 import { assertLock, pki, listen, freePort } from './wire-fixtures.mjs';
 import { receipt, hash } from './sprint04c-repro-receipts.mjs';
@@ -66,13 +66,18 @@ try {
     ['authority-mismatch', 'edge-a.test'], ['authority-userinfo', 'user@edge-b.test'], ['valid-reuse-control', 'edge-b.test']]) {
     const before = snapshot(); const rawStart = Buffer.concat(raw).length;
     const s = await connect(); const ident = identity(s); const trace = traceFrames(); const received = []; const lifecycle = [];
-    let localCleanup = false, timedOut = false;
-    s.on('data', (b) => { received.push(Buffer.from(b)); trace.consume(b); });
+    let localCleanup = false, timedOut = false, responseEnded = false;
+    const complete = decoder({ emit: (e) => {
+      if (e.kind !== 'frame') return;
+      if (e.type === 4 && e.flags === 0) s.write(frame(4, 1, 0));
+      if (e.stream === 1 && (e.flags & 1) && [0, 1].includes(e.type)) responseEnded = true;
+    } });
+    s.on('data', (b) => { received.push(Buffer.from(b)); trace.consume(b); complete(b); });
     for (const event of ['end', 'close', 'error']) s.on(event, (e) => lifecycle.push({ event, code: e?.code, local_cleanup: localCleanup, at: new Date().toISOString() }));
     const sent = Buffer.concat([Buffer.from('PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n'), frame(4, 0, 0), frame(1, 5, 1, block(authority, host))]);
     s.write(sent);
     const deadline = Date.now() + 3500;
-    while (!s.destroyed && !trace.result.events.some((e) => e.kind === 'frame' && e.stream === 1 && (e.flags & 1) && [0, 1].includes(e.type))) {
+    while (!s.destroyed && !responseEnded) {
       if (Date.now() >= deadline) { timedOut = true; break; } await delay(2);
     }
     // Keep this diagnostic interval fixed and retain all bytes. Original gate timing is untouched.
@@ -80,7 +85,7 @@ try {
     const counts = Object.fromEntries(['bytes', 'headers', 'data_bytes', 'handlers', 'native_connections', 'parser_errors', 'transport_errors']
       .map((k) => [k, after[k] - before[k]]));
     proof.record.probes.push({ name, authority, host: host ?? null, tls: ident, sent_hex: sent.toString('hex'), sent_sha256: hash(sent),
-      received_hex: Buffer.concat(received).toString('hex'), frame_observation: trace.result, lifecycle, timed_out: timedOut,
+      received_hex: Buffer.concat(received).toString('hex'), frame_observation: trace.result, lifecycle, timed_out: timedOut, response_end_stream_observed: responseEnded,
       origin: { ...counts, raw_hex: bytes.toString('hex'), raw_sha256: hash(bytes), handlers: handlers.slice(before.handlers) },
       aggregate_zero_byte_observed: counts.bytes === 0, observer_complete_security_attribution: false });
     proof.save(); localCleanup = true; s.destroy();
@@ -89,6 +94,7 @@ try {
   proof.record.origin_wire = observer.snapshot();
   assert.ok(proof.record.probes[0].origin.bytes > 0 && proof.record.probes[0].origin.handlers.length === 1, 'positive origin byte/handler control');
   assert.equal(proof.record.probes.at(-1).origin.handlers.length, 1, 'valid H2 control');
+  assert.ok([proof.record.probes[0], proof.record.probes.at(-1)].every((p) => !p.timed_out && p.response_end_stream_observed), 'valid H2 responses must complete');
   assert.equal(proof.record.capture_incomplete ?? false, false);
   proof.record.completed_observations = true;
   proof.record.security_acceptance = 'NO-GO unchanged; this diagnostic does not replace the original75 or prove HPACK/request attribution';
