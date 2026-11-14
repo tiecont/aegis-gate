@@ -68,6 +68,16 @@ async function run(label, command, args) {
   return result.exit_code === 0;
 }
 let passed = true;
+async function cleanupStep(label, action) {
+  try {
+    assertLock();
+    await action();
+  } catch (error) {
+    receipt.cleanup_errors ??= [];
+    receipt.cleanup_errors.push({ label, error: error.message });
+    passed = false;
+  }
+}
 try {
   passed = (await run("check", "make", ["check"])) && passed;
   passed = (await run("security-scan", "make", ["security-scan"])) && passed;
@@ -75,49 +85,61 @@ try {
   receipt.error = error.stack;
   passed = false;
 } finally {
-  passed = (await run("cleanup", "make", ["dev-down"])) && passed;
-  passed =
-    (await run("cleanup-volumes", "docker", [
-      "compose",
-      "--env-file",
-      ".local/compose.env",
-      "--env-file",
-      ".local/fixture-images.env",
-      "-f",
-      "infra/compose/compose.yaml",
-      "down",
-      "--volumes",
-      "--remove-orphans",
-    ])) && passed;
-  const remaining = execFileSync(
-    "docker",
-    [
-      "ps",
-      "-aq",
-      "--filter",
-      "label=com.docker.compose.project=aegisgate-04c-root",
-    ],
-    { encoding: "utf8" },
-  ).trim();
-  receipt.remaining_project_containers = remaining.split("\n").filter(Boolean);
-  passed = !remaining && passed;
+  await cleanupStep("dev-down", async () => {
+    passed = (await run("cleanup", "make", ["dev-down"])) && passed;
+  });
+  await cleanupStep("compose-down", async () => {
+    passed =
+      (await run("cleanup-volumes", "docker", [
+        "compose",
+        "--env-file",
+        ".local/compose.env",
+        "--env-file",
+        ".local/fixture-images.env",
+        "-f",
+        "infra/compose/compose.yaml",
+        "down",
+        "--volumes",
+        "--remove-orphans",
+      ])) && passed;
+  });
+  await cleanupStep("container-inventory", () => {
+    const remaining = execFileSync(
+      "docker",
+      [
+        "ps",
+        "-aq",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-04c-root",
+      ],
+      { encoding: "utf8" },
+    ).trim();
+    receipt.remaining_project_containers = remaining
+      .split("\n")
+      .filter(Boolean);
+    passed = !remaining && passed;
+  });
   // Rendered Compose contains credentials; retain only safe scanner outputs.
-  const security = ".local/evidence/security";
-  if (fs.existsSync(security)) {
-    fs.mkdirSync(path.join(output, "security"));
-    for (const entry of fs.readdirSync(security)) {
-      if (/\.(json|log|tsv)$/.test(entry) && entry !== "compose-config.json") {
-        fs.copyFileSync(
-          path.join(security, entry),
-          path.join(output, "security", entry),
-        );
+  await cleanupStep("scanner-evidence-copy", () => {
+    const security = ".local/evidence/security";
+    if (fs.existsSync(security)) {
+      fs.mkdirSync(path.join(output, "security"));
+      for (const entry of fs.readdirSync(security)) {
+        if (
+          /\.(json|log|tsv)$/.test(entry) &&
+          entry !== "compose-config.json"
+        ) {
+          fs.copyFileSync(
+            path.join(security, entry),
+            path.join(output, "security", entry),
+          );
+        }
       }
     }
-  }
+  });
   // Only this isolated worktree's generated private fixtures are removed.
   // Compare in memory before removal; never retain secret values or their hashes.
-  try {
-    assertLock();
+  await cleanupStep("private-evidence-validation", () => {
     const secretFiles = [
       ".local/postgres-password",
       ".local/redis-password",
@@ -154,29 +176,29 @@ try {
       files_checked: retained.length,
       matches: 0,
     };
-  } catch (error) {
-    receipt.private_material_error = error.message;
-    passed = false;
-  }
+  });
   // Cleanup must run even when evidence validation fails.
-  try {
-    assertLock();
-    const paths = [
-      ".local/pki",
-      ".local/postgres-password",
-      ".local/redis-password",
-      ".local/nats-token",
-      ".local/redis.conf",
-      ".local/nats.conf",
-      ".local/compose.env",
-      ".local/evidence/security/compose-config.json",
-    ];
-    for (const file of paths) fs.rmSync(file, { recursive: true, force: true });
-    receipt.private_fixture_cleanup = paths.map((file) => ({
-      file,
-      exists: fs.existsSync(file),
-    }));
-    for (const kind of ["network", "volume"]) {
+  const paths = [
+    ".local/pki",
+    ".local/postgres-password",
+    ".local/redis-password",
+    ".local/nats-token",
+    ".local/redis.conf",
+    ".local/nats.conf",
+    ".local/compose.env",
+    ".local/evidence/security/compose-config.json",
+  ];
+  receipt.private_fixture_cleanup = [];
+  for (const file of paths) {
+    await cleanupStep(`remove:${file}`, () => {
+      fs.rmSync(file, { recursive: true, force: true });
+      const exists = fs.existsSync(file);
+      receipt.private_fixture_cleanup.push({ file, exists });
+      passed = !exists && passed;
+    });
+  }
+  for (const kind of ["network", "volume"]) {
+    await cleanupStep(`${kind}-inventory`, () => {
       const ids = execFileSync(
         "docker",
         [
@@ -193,11 +215,7 @@ try {
         .filter(Boolean);
       receipt[`remaining_project_${kind}s`] = ids;
       passed = !ids.length && passed;
-    }
-    assertLock();
-  } catch (error) {
-    receipt.private_cleanup_error = error.message;
-    passed = false;
+    });
   }
   assertLock();
   receipt.ended_at = new Date().toISOString();
