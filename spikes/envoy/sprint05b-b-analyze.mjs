@@ -13,7 +13,10 @@ const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
 const load = (file) => JSON.parse(fs.readFileSync(path.join(input, file)));
 const raw = load('wire.json'), original = load('original75.json'), receipt = load('receipt.json');
-assert.equal(raw.omitted, 0); assert.equal(receipt.recording_complete, true);
+assert.equal(raw.omitted, 0);
+// Full original75/23 capture is independent of the optional Docker-only resource helper.
+for (const label of ['original75', 'evaluate75', 'original23'])
+  assert.equal(receipt.commands.find((c) => c.label === label)?.exit_code, 1);
 assert.equal(receipt.cleanup_complete, true); assert.equal(original.tests.length, 75);
 const name = 'HTTP2-authority-Host-and-SNI-confusion-rejected';
 const test = original.tests.find((t) => t.name === name); assert.equal(test.status, 'fail');
@@ -55,6 +58,8 @@ const report = { source_commit: git('rev-parse', 'HEAD'), source_tree: git('rev-
   argv: process.argv, node: process.version, input_source_commit: receipt.source_commit,
   input_source_tree: receipt.source_tree, inputs: ['wire.json', 'original75.json', 'receipt.json']
     .map((file) => ({ file: `${input}/${file}`, sha256: sha(fs.readFileSync(`${input}/${file}`)) })),
+  overall_collector_complete: receipt.recording_complete, overall_collector_error: receipt.error,
+  resource_eligibility: receipt.resource_eligibility,
   unchanged_gate: test, boundary_before: prior, boundary_after: target, endpoint,
   interval, peer_settings: peerSettings, corresponding_ack: allAcks[0],
   event_order: frames.filter((f) => f.connection === id && f.observed_sequence <= interval[0].sequence)
