@@ -1,0 +1,31 @@
+{
+  "scope": "Synthetic in-memory fault injection only; no real gates, Docker, fixtures or security acceptance",
+  "pinned_source": "cb9c30904e3430793d9847d9b9bf3eec3a8d052f",
+  "source_sha256": "8900209131660583d5294dc12e947b1360dbc796f329e5b9ee00279af51b915d",
+  "results": [
+    {
+      "mode": "clean",
+      "exit_code": 0,
+      "passed": true,
+      "cleanup_paths": 8,
+      "lock_assertions": 13,
+      "no_values_in_logs_or_receipt": true
+    },
+    {
+      "mode": "synthetic-value-leak",
+      "exit_code": 1,
+      "passed": false,
+      "cleanup_paths": 8,
+      "lock_assertions": 13,
+      "no_values_in_logs_or_receipt": true
+    },
+    {
+      "mode": "synthetic-key-marker",
+      "exit_code": 1,
+      "passed": false,
+      "cleanup_paths": 8,
+      "lock_assertions": 13,
+      "no_values_in_logs_or_receipt": true
+    }
+  ]
+}
