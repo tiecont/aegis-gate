@@ -218,6 +218,8 @@ try {
     try { fs.lstatSync(path.join(clone, file)); } catch (e) { if (e.code === 'ENOENT') exists = false; else throw e; }
     assert.equal(exists, false, file); return { file, exists };
   });
+  for (const file of gateFiles) assert.equal(sha(fs.readFileSync(path.join(clone, file))), sha(read(file)), `live retained evidence: ${file}`);
+  receipt.live_retained_gate_files_equal = gateFiles.length;
   receipt.live_resources = {};
   for (const [kind, args] of [['containers', ['ps', '-aq']], ['networks', ['network', 'ls', '-q']], ['volumes', ['volume', 'ls', '-q']]]) {
     const ids = run(`live-${kind}`, 'docker', [...args, '--filter', 'label=com.docker.compose.project=aegisgate-04c-root']).trim().split('\n').filter(Boolean);
@@ -234,11 +236,13 @@ try {
     '-e', 'GIT_DIR=/git-common', '-e', 'GIT_WORK_TREE=/repo', '-v', `${staging}:/repo:ro`, '-v', `${common}:/git-common:ro`, '-v', `${path.resolve(output)}:/reports`, image];
   run('target-history-secrets', 'docker', [...dockerArgs, 'git', '/repo', '--config', '/repo/.github/gitleaks.toml', '--redact', '--report-format', 'json', '--report-path', '/reports/target-history-secrets.json', '--no-banner', `--log-opts=${target}`]);
   run('target-history-parser', 'python3', ['scripts/history_scan_evidence.py', `${output}/target-history-secrets.stderr`]);
+  const historyLog = fs.readFileSync(`${output}/target-history-secrets.stderr`, 'utf8');
+  assert.equal(Number(historyLog.match(/(\d+) commits scanned\./)[1]), receipt.history.target_nonmerges);
   assert.deepEqual(JSON.parse(fs.readFileSync(`${output}/target-history-secrets.json`)), []);
   run('reviewer-snapshot-secrets', 'docker', [...dockerArgs, 'dir', '/repo', '--config', '/repo/.github/gitleaks.toml', '--redact', '--report-format', 'json', '--report-path', '/reports/reviewer-snapshot-secrets.json', '--no-banner']);
   assert.deepEqual(JSON.parse(fs.readFileSync(`${output}/reviewer-snapshot-secrets.json`)), []);
   receipt.history.independent_target_scan = { revision: target, network: 'none', explicit_revision_not_all_refs: true, findings: 0 };
-  run('scoped-whitespace', 'git', ['diff', '--check', target, reviewer]);
+  run('authored-whitespace', 'git', ['diff', '--check', target, reviewer, '--', 'evidence/sprint04c-f/review-gate-binding.mjs', 'evidence/sprint04c-f/gate-binding-plan.md', 'docs/reports/sprint04c-f-gate-binding-review.md']);
   receipt.passed = true;
 } catch (error) {
   receipt.error = error.stack; process.exitCode = 1;
