@@ -259,6 +259,34 @@ try {
           retained_local_refs: oldLocalRefs,
         };
       });
+      const advertised = run("remote-advertised-refs", [
+        "git",
+        "ls-remote",
+        "origin",
+      ])
+        .split("\n")
+        .map((line) => {
+          const [commit, ref] = line.split("\t");
+          assert.match(commit, /^[0-9a-f]{40}$/);
+          assert.ok(ref);
+          assert.equal(
+            spawnSync("git", ["cat-file", "-e", `${commit}^{commit}`]).status,
+            0,
+            ref,
+          );
+          for (const rejected of bad)
+            assert.equal(
+              spawnSync("git", [
+                "merge-base",
+                "--is-ancestor",
+                rejected,
+                commit,
+              ]).status,
+              1,
+              ref,
+            );
+          return { commit, ref, rejected_ancestors: [] };
+        });
       // --no-hardlinks is verified on actual common loose/pack files, without reading their contents.
       const common = txt(
         "rev-parse",
@@ -296,7 +324,9 @@ try {
         clone_refs: cg("for-each-ref", "--format=%(refname)").split("\n"),
         common_object_files_not_hardlinked: compared,
         rejected_commits: results,
-        remote_scope: "locally available refs/remotes; no live fetch",
+        advertised_remote_refs: advertised,
+        remote_scope:
+          "all live advertised origin refs plus locally available refs/remotes; read-only ls-remote, no fetch",
       };
     });
     await check("formatting-and-receipt-helper", async () => {
@@ -396,6 +426,7 @@ try {
       const used = new Set(),
         cache = new Map(),
         sources = [],
+        summaries = [],
         trees = new Map(),
         unavailableTrees = [];
       let streamCount = 0;
@@ -438,6 +469,19 @@ try {
           }
         }
         for (const p of r.sources ?? r.source_hashes ?? []) {
+          if (!p.file) {
+            assert.match(p.commit ?? "", /^[0-9a-f]{40}$/);
+            assert.ok(Number.isInteger(p.files) && p.files > 0);
+            const tree = txt("rev-parse", `${p.commit}^{tree}`);
+            if (p.tree) assert.equal(tree, p.tree, f);
+            summaries.push({
+              receipt: f,
+              commit: p.commit,
+              tree,
+              files: p.files,
+            });
+            continue;
+          }
           const spec = `${source}:${p.file}`;
           if (!cache.has(spec)) cache.set(spec, sha(git("show", spec)));
           assert.equal(cache.get(spec), p.sha256, `${f}: ${p.file}`);
@@ -483,6 +527,7 @@ try {
       return {
         source_hashes: sources.length,
         unique_source_blobs: cache.size,
+        source_summaries: summaries,
         source_trees: trees.size,
         unavailable_source_trees: unavailableTrees,
         verified_streams: streamCount,
