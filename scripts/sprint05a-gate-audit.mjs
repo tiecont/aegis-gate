@@ -320,6 +320,7 @@ try {
                     "raw",
                     "comments",
                     "tokens",
+                    "__contentEnd",
                   ].includes(k),
               )
               .map(([k, x]) => [k, clean(x)]),
@@ -395,7 +396,8 @@ try {
       const used = new Set(),
         cache = new Map(),
         sources = [],
-        trees = new Map();
+        trees = new Map(),
+        unavailableTrees = [];
       let streamCount = 0;
       for (const f of files.filter(
         (p) =>
@@ -403,21 +405,59 @@ try {
           /\/(commands|receipt)\.json$/.test(p),
       )) {
         const r = json(f);
+        let source = r.source_commit;
+        // A's retired unsafe capture commit is deliberately unrecoverable.
+        // Only its recorded implementation hashes can be checked against1626bf4.
+        if (f === "evidence/sprint05a-a/attempt-02/commands.json") {
+          assert.equal(source, "02b0a6582997aeb8ed7992ae4c6f9af34d6a0d11");
+          assert.notEqual(
+            spawnSync("git", ["cat-file", "-e", source]).status,
+            0,
+          );
+          unavailableTrees.push({
+            file: f,
+            source_commit: source,
+            source_tree: r.source_tree,
+            eligible: false,
+          });
+          source = "1626bf4249554dfc6a6721aa3a3702630a1ca50b";
+        }
         if (r.source_commit && r.source_tree) {
-          if (!trees.has(r.source_commit))
-            trees.set(
-              r.source_commit,
-              txt("rev-parse", `${r.source_commit}^{tree}`),
+          if (source !== r.source_commit) {
+            assert.match(
+              read("evidence/sprint05a-a/CAPTURE-CORRECTION.md").toString(),
+              /1626bf4249554dfc6a6721aa3a3702630a1ca50b/,
             );
-          assert.equal(trees.get(r.source_commit), r.source_tree, f);
+          } else {
+            if (!trees.has(r.source_commit))
+              trees.set(
+                r.source_commit,
+                txt("rev-parse", `${r.source_commit}^{tree}`),
+              );
+            assert.equal(trees.get(r.source_commit), r.source_tree, f);
+          }
         }
         for (const p of r.sources ?? r.source_hashes ?? []) {
-          const spec = `${r.source_commit}:${p.file}`;
+          const spec = `${source}:${p.file}`;
           if (!cache.has(spec)) cache.set(spec, sha(git("show", spec)));
           assert.equal(cache.get(spec), p.sha256, `${f}: ${p.file}`);
           sources.push(spec);
         }
         for (const c of r.commands ?? [r]) {
+          if (c.streams && !Array.isArray(c.streams)) {
+            for (const [name, p] of Object.entries(c.streams)) {
+              assert.ok(["stdout", "stderr"].includes(name));
+              assert.ok(
+                Number.isInteger(p.offset) && Number.isInteger(p.length),
+              );
+              const bytes = read(
+                path.join(path.dirname(f), `${name}.log`),
+              ).subarray(p.offset, p.offset + p.length);
+              assert.equal(bytes.length, p.length, f);
+              assert.equal(sha(bytes), p.sha256, `${f}: ${c.label}/${name}`);
+              streamCount++;
+            }
+          }
           const streams = Array.isArray(c.streams)
             ? c.streams
             : [c.stdout, c.stderr].filter((p) => p?.file);
@@ -444,6 +484,7 @@ try {
         source_hashes: sources.length,
         unique_source_blobs: cache.size,
         source_trees: trees.size,
+        unavailable_source_trees: unavailableTrees,
         verified_streams: streamCount,
         withheld: [...withheld.values()],
         withheld_eligible: false,
