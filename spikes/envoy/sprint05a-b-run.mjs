@@ -294,6 +294,8 @@ http {
   const header = folded(' ', false); const headerSplit = header.indexOf('\r\n second') + 2;
   await probe('fragmented-folded-header', header, { parts: [header.slice(0, headerSplit), header.slice(headerSplit)] });
   const manifest = JSON.parse(fs.readFileSync('spikes/edge-comparison/manifest.json'));
+  if (runtime === 'llhttp') for (const entry of manifest.negatives.filter((p) => /obsolete.fold/.test(p.name)))
+    await probe(`original-${entry.name}`, entry.request);
   for (const target of manifest.encoded_targets) await probe(`encoded-${target}`, request('Content-Length: 0\r\n', '', target));
   const first = 'GET /first%2Fsegment HTTP/1.1\r\nHost: edge-a.test\r\n\r\n';
   await probe('valid-pipeline', first + request('Content-Length: 0\r\n', '', '/second?x=%2520'));

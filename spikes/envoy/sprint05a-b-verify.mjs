@@ -9,7 +9,7 @@ const proof = receipt(process.argv[2]);
 const base = '541d1d915ce6a3b679dc3fed3ea0a98f908ce001';
 try {
   proof.record.checked = [];
-  for (const attempt of ['source-01', 'envoy-01', 'envoy-02', 'llhttp-01', 'llhttp-02', 'nginx-01', 'nginx-02', 'validator-01']) {
+  for (const attempt of ['source-01', 'envoy-01', 'envoy-02', 'llhttp-01', 'llhttp-02', 'llhttp-03', 'nginx-01', 'nginx-02', 'validator-01']) {
     const dir = `evidence/sprint05a-b/${attempt}`;
     const r = JSON.parse(fs.readFileSync(`${dir}/receipt.json`));
     assert.equal(r.tracked_clean, true);
@@ -58,6 +58,15 @@ try {
   const mixed = ll.probes.find((p) => p.name === 'valid-then-folded-pipeline');
   assert.deepEqual(mixed.status, [200, 400]);
   assert.equal(Buffer.from(mixed.origin.hex, 'hex').toString(), 'GET /first%2Fsegment HTTP/1.1\r\nHost: edge-a.test\r\n\r\n');
+  const fresh = read('llhttp-03'); assert.ok(!fresh.error);
+  assert.equal(fresh.probes.length, 22);
+  assert.ok(fresh.fold_rejections.every((p) => p.pass));
+  const originals = JSON.parse(fs.readFileSync('spikes/edge-comparison/manifest.json')).negatives.filter((p) => /obsolete.fold/.test(p.name));
+  for (const original of originals) {
+    const p = fresh.probes.find((p) => p.name === `original-${original.name}`);
+    assert.equal(p.request_hex, Buffer.from(original.request).toString('hex'));
+    assert.equal(p.strict_rejection, true);
+  }
   const ng = read('nginx-02'); assert.match(ng.error, /bad%00target/);
   for (const p of ng.probes.filter((p) => p.name.startsWith('folded-trailer'))) {
     assert.equal(p.status[0], 200); assert.equal(p.origin.bytes, 96);
@@ -70,9 +79,19 @@ try {
   proof.record.protected_baseline_objects = before.length;
   for (const [name, argv] of [
     ['immutable-manifest', [process.execPath, 'spikes/edge-comparison/extract-baseline.mjs', '--check']],
-    ['whitespace', ['git', 'diff', '--check', base, 'HEAD']],
+    ['authored-whitespace', ['git', 'diff', '--check', base, 'HEAD', '--', 'spikes/envoy/sprint05a-b*',
+      'evidence/sprint05a-b/PLAN.md', 'docs/reports/sprint05a-b-strict-parser.md']],
     ['baseline-worktree', ['git', 'diff', '--exit-code', '--', ...before.map((line) => line.split('\t')[1])]],
   ]) assert.equal(proof.command(name, argv).status, 0);
+  const owned = git('ls-files', 'spikes/envoy/sprint05a-b*', 'docs/reports/sprint05a-b-strict-parser.md').split('\n').filter(Boolean);
+  const mounts = owned.flatMap((f) => ['-v', `${process.cwd()}/${f}:/scan/${pathBase(f)}:ro`]);
+  const scanner = 'ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f';
+  assert.equal(proof.command('owned-secret-scan', ['docker', 'run', '--rm', '--network', 'none', '--pull', 'never',
+    '-v', `${process.cwd()}/evidence/sprint05a-b:/scan/evidence:ro`,
+    '-v', `${process.cwd()}/.github/gitleaks.toml:/gitleaks.toml:ro`, ...mounts,
+    scanner, 'dir', '/scan', '--config', '/gitleaks.toml', '--redact', '--no-banner']).status, 0);
   proof.record.scope = 'Receipt verification and exact narrow PoC assertions; no full candidate acceptance';
 } catch (e) { proof.record.error = e.stack; }
 finally { proof.finish(); }
+
+function pathBase(f) { return f.split('/').at(-1); }
