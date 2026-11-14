@@ -26,7 +26,7 @@ refreshed during the audit and remains
   data is neither reconstructed nor counted as complete-manifest PASS.
 - Rejected E5515913 is not an ancestor of the audited source. The clean
   replacement ancestry does not distribute its flagged evidence blob.
-- Original75 extraction check, authored-source whitespace check and all13
+- Original75 extraction check, authored-source whitespace check and all11
   current Sprint04-C observer/reproducer/root-helper Node syntax checks pass.
   The status, completion report and proposed ADR retain NO-GO, LOCKED, BLOCKED
   and PENDING approval markers.
