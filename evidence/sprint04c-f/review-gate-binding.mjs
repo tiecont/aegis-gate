@@ -44,14 +44,21 @@ fs.mkdirSync(output, { recursive: true });
 function run(label, program, args, options = {}) {
   assertLock();
   const started_at = new Date().toISOString();
-  const p = spawnSync(program, args, { timeout: 60000, maxBuffer: 16 << 20, ...options });
+  const { observationOnly = false, ...spawnOptions } = options;
+  const p = spawnSync(program, args, { timeout: 60000, maxBuffer: 16 << 20, ...spawnOptions });
   const streams = ['stdout', 'stderr'].map(name => {
     const file = `${output}/${label}.${name}`, bytes = p[name] ?? Buffer.alloc(0);
     fs.writeFileSync(file, bytes);
     return { file, bytes: bytes.length, sha256: sha(bytes) };
   });
   receipt.commands.push({ label, program, args, cwd: options.cwd ?? process.cwd(), started_at,
-    ended_at: new Date().toISOString(), exit_code: p.status, signal: p.signal, streams });
+    ended_at: new Date().toISOString(), exit_code: p.status, signal: p.signal, observation_only: observationOnly, streams });
+  if (observationOnly && (p.status !== 0 || p.signal !== null)) {
+    receipt.unavailable_current_tool_observations ??= [];
+    receipt.unavailable_current_tool_observations.push(label);
+    assertLock();
+    return p.stdout?.toString() ?? '';
+  }
   assert.equal(p.status, 0, label);
   assert.equal(p.signal, null, label);
   assertLock();
@@ -180,17 +187,30 @@ try {
     assert.equal(hash.digest('hex'), lock.source_sha256);
   }
   receipt.image_inventory = inventory;
+  const toolReceiptFile = 'evidence/sprint04c-e/attempt-02/commands.json';
+  const toolReceipt = json(toolReceiptFile);
+  assert.equal(value('rev-parse', `${toolReceipt.source_commit}^{tree}`), toolReceipt.source_tree);
+  receipt.prior_component_tool_versions = [];
+  for (const label of ['go-version', 'rust-version', 'node-version', 'npm-version', 'docker-version', 'govulncheck-version', 'cargo-audit-version']) {
+    const command = toolReceipt.commands.find(c => c.label === label);
+    assert.ok(command, label); assert.equal(command.exit_code, 0);
+    const stream = command.streams.stdout;
+    const bytes = read(`evidence/sprint04c-e/attempt-02/${stream.file}`).subarray(stream.offset, stream.offset + stream.length);
+    assert.equal(bytes.length, stream.length); assert.equal(sha(bytes), stream.sha256);
+    receipt.prior_component_tool_versions.push({ label, version: bytes.toString().trim(), receipt: toolReceiptFile,
+      source_commit: toolReceipt.source_commit, source_tree: toolReceipt.source_tree, stream_sha256: stream.sha256 });
+  }
   receipt.tool_provenance_limit = 'Original receipt records Node version/hash; Go/Rust and scanner versions are constrained by unchanged scripts; current versions below are observations, not reconstructed historical executions. Image archives/rendered Compose were intentionally not retained.';
   run('node-version', process.execPath, ['--version']);
   run('git-version', 'git', ['--version']);
-  run('go-version-current', 'go', ['version'], { env: { ...process.env, GOTOOLCHAIN: 'go1.27.4', GOPROXY: 'off' } });
-  run('rust-version-current', 'rustc', ['+1.99.1', '--version']);
-  run('cargo-version-current', 'cargo', ['+1.99.1', '--version']);
+  run('go-version-current', 'go', ['version'], { observationOnly: true, env: { ...process.env, GOTOOLCHAIN: 'go1.27.4', GOPROXY: 'off' } });
+  run('rust-version-current', 'rustc', ['+1.99.1', '--version'], { observationOnly: true });
+  run('cargo-version-current', 'cargo', ['+1.99.1', '--version'], { observationOnly: true });
   run('npm-version-current', path.join(path.dirname(process.execPath), 'npm'), ['--version'], { env: { ...process.env, PATH: `${path.dirname(process.execPath)}:${process.env.PATH}` } });
   run('docker-version-current', 'docker', ['version', '--format', '{{.Client.Version}} {{.Server.Version}}']);
   run('compose-version-current', 'docker', ['compose', 'version', '--short']);
-  run('govulncheck-version-current', `${clone}/.local/bin/govulncheck`, ['-version']);
-  run('cargo-audit-version-current', `${clone}/.local/tools/bin/cargo-audit`, ['--version']);
+  run('govulncheck-version-current', `${clone}/.local/bin/govulncheck`, ['-version'], { observationOnly: true });
+  run('cargo-audit-version-current', `${clone}/.local/tools/bin/cargo-audit`, ['--version'], { observationOnly: true });
   receipt.live_clone_head_before = run('clone-head-before', 'git', ['-C', clone, 'rev-parse', 'HEAD']).trim();
   run('clone-status', 'git', ['--no-optional-locks', '-C', clone, 'status', '--porcelain']);
   receipt.live_private_paths = privatePaths.map(file => {
