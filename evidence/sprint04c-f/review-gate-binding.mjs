@@ -191,7 +191,7 @@ try {
   const toolReceipt = json(toolReceiptFile);
   assert.equal(value('rev-parse', `${toolReceipt.source_commit}^{tree}`), toolReceipt.source_tree);
   receipt.prior_component_tool_versions = [];
-  for (const label of ['go-version', 'rust-version', 'node-version', 'npm-version', 'docker-version', 'govulncheck-version', 'cargo-audit-version']) {
+  for (const label of ['go-version', 'rust-version', 'npm-version', 'docker-version', 'compose-version', 'govulncheck-version', 'cargo-audit-version']) {
     const command = toolReceipt.commands.find(c => c.label === label);
     assert.ok(command, label); assert.equal(command.exit_code, 0);
     const stream = command.streams.stdout;
