@@ -5,7 +5,7 @@ import os from 'node:os';
 import http2 from 'node:http2';
 import assert from 'node:assert/strict';
 import { once } from 'node:events';
-import { spawn, execFileSync } from 'node:child_process';
+import { spawn, spawnSync, execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { setTimeout as delay } from 'node:timers/promises';
 import { assertLock, pki, listen, freePort } from './wire-fixtures.mjs';
