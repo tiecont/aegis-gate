@@ -1,7 +1,7 @@
 # Sprint05-A implementation and measured results
 
-Status: engineering improvements measured; final integration review, full root
-gates and exact-head/main hosted closeout PENDING until recorded below or in a
+Status: engineering improvements independently accepted in their scoped research
+and test boundaries; full root gates and exact-head/main hosted closeout PENDING until recorded below or in a
 subsequent receipt addendum. Module01 remains **NO-GO**. No production runtime
 or human architecture/security approval is implied.
 
@@ -141,9 +141,12 @@ Initial F scoped ACCEPT confirms four TE repairs, two H2-header repairs and
 bounded-window/cancellation observations. Overall protocol acceptance is
 REJECTED. Original D cleanup collector is rejected for reuse; corrected mount-only
 inspection/removal wait source above has a fresh17-control run at
-`evidence/sprint05a-d/attempt-03/`. Final component/integration security review,
-root local gates, exact PR-head CI, merge SHA and main CI: **PENDING**, to be
-filled only from actual completed receipts. Earlier failed attempts and A's
+`evidence/sprint05a-d/attempt-03/`. Final independent review at `862f1ad`
+ACCEPTs exact B/C/E research/regressions, corrected D collector and preservation
+of the combined partial repairs; complete runtime eligibility is REJECTED.
+See `sprint05a-f-integration-review.md` and the final handoff at `c5cd051`.
+Root local gates, exact PR-head CI, merge SHA and main CI remain **PENDING**,
+to be filled only from actual completed receipts. Earlier failed attempts and A's
 sanitized capture correction remain disclosed; no unreviewed unsafe ancestry
 is accepted. No upstream issue/PR draft was externally published.
 
@@ -152,6 +155,25 @@ through setup, execution, evidence hashing and cleanup. Unique projects and
 actual network discovery prevent shared fixture edits; only owned disposable
 resources/private material are removed. Raw manifests bind exact source/tree,
 tool binaries/versions, command arguments, timestamps, exit codes and SHA256.
+
+Root gates01 at `4c47218` fails: three helper scripts need Prettier formatting;
+no Compose fixture is created, so image/cleanup prerequisites also fail. The
+history scan correctly reports two previously rejected Sprint04-C commits:
+`551591395880ce87863b4e861c05d266c719b91f` (fixture JWT in rejected E output)
+and `cd8f4a760239086616809db8b55a651d3cc28d8e` (synthetic private-key marker
+in rejected audit source). Both are reachable only through retained old local
+branches, never through the Sprint05-A publishable ancestry or a remote ref.
+They are not new candidate leaks or accepted exceptions. Findings, failed exits
+and raw redacted outputs remain in `evidence/sprint05a-root/gates-01/`.
+
+Formatting-only repair `2993cc0` is applied. The final full gate rerun uses an
+independent `git clone --no-hardlinks --single-branch --branch
+sprint/05a-integration` checkout at the exact root source. Its unchanged scanner
+still scans every available ref and fails on findings; the clone has only the
+complete publishable source history, without unrelated rejected local branches.
+This does not delete or suppress the earlier findings. Source/tree equality and
+non-ancestry of both rejected commits must be independently reviewed before
+merge; the final actual gate result is recorded separately.
 
 ## Gate matrix and next action
 
