@@ -136,10 +136,35 @@ Fresh full scanner and hosted results are separate final integration obligations
 
 ## Review, Gates And Preserved Failures
 
-F independent exact-source reproduction and per-failure verdicts are pending.
-Full local `make check`, `make security-scan`, cleanup and exact-head/merge hosted
-jobs are pending. A subsequent additive closeout must record actual source,
-PR/run links and merge SHA without rewriting historical runtime receipts.
+F independently accepts A's finite parser/admission proof, B's scoped H2 stop,
+C's peer-frame diagnostics, D's six-case counterexample and E's collector/evidence
+scope. F's full E replay fails private PostgreSQL image readiness; it does not
+establish independent full regression PASS. A focused replay with read-only lock
+observation is pending. F audit `da605eb` binds integrated `4127839` to reviewed
+component bytes and checks 72 manifests, 1,200 artifact hashes, 3,003 source hashes
+and all 11 protected source files. Later test-only changes require final review.
+
+Final integrated matrix at `ff3f3fe280056b50bfc79c30db9ef00f1f5288e6`
+(`evidence/sprint05b-root/candidate-05/`, commit `c309475`) retains 73/75 and 19/23,
+all 17 additive observations complete and cleanup complete. This supersedes the
+earlier root matrix as integrated protocol evidence, with the same native limits.
+
+Full locked local gates at `4127839f55acd1cbfa854bd162b8384033fe7755`, tree
+`906c4995a079f886f45f2d5fecdbb56d8d7ed638`, produce `make check` exit 2,
+`make security-scan` exit 0, teardown and volume cleanup exit 0. Quality fails in
+OIDC integration with SQLSTATE 57014/55P03 and a callback deadline. Original
+timeouts/assertions remain unchanged. This failed gate is retained and blocks
+merge until resolved and rerun. No full local PASS is claimed for this attempt.
+
+`evidence/sprint05b-root/gates-01/` is an explicitly sanitized published derivative:
+two callback query fields (disposable authorization code/state) are redacted using
+the URL parser. `export.json` retains each original byte count/SHA256 and original
+command-receipt SHA256; derived streams and SHA256SUMS are recalculated and marked.
+The original private output is not published or represented as byte-identical.
+New test-only `de6265d` removes request URLs from future fixture HTTP failures;
+its sentinel race test retains the timeout diagnosis without leaking callback data.
+Full gates on corrected final source and exact-head/merge hosted jobs remain pending.
+A subsequent closeout must record actual source, PR/run links and merge SHA.
 
 Preserved failed attempts include Docker startup failures (zero cases), the
 llhttp wrapper's nonexistent version macro/completion-EOF fix, managed-session
