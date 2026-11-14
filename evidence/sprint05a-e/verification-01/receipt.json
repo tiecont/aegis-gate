@@ -1,0 +1,73 @@
+{
+  "source_commit": "16f2ffb75ef8ebb4d4ba2e645c8734670287cb60",
+  "source_tree": "62c8159adecaa54f07ee98abcc1989c3639cdd93",
+  "runtime_source_commit": "e325d80f45147f3125ebb9ac9428420cdba348c1",
+  "runtime_source_tree": "ea1b2be6aacdc38e35fa763c5ec5c8ec53fcd1b4",
+  "argv": [
+    "/tmp/aegisgate-05a-e/scripts/sprint05a-e-verify.py",
+    "attempt-01",
+    "evidence/sprint05a-e/verification-01",
+    "--locked"
+  ],
+  "cwd": "/tmp/aegisgate-05a-e",
+  "python": "3.14.10 (main, Nov 13 2026, 15:10:24) [GCC 16.2.1 20260810]",
+  "python_binary": "/usr/bin/python3",
+  "python_binary_sha256": "a38210a53e07ac5eb912ee35c2d92ddb7eaa349301b60c188a5f496c7c87449d",
+  "started_at": "2026-11-14T14:58:02.802738+00:00",
+  "verified_manifest_entries": 14,
+  "verified_commands": 64,
+  "verified_stream_slices": 128,
+  "verified_baseline_references": 57,
+  "go": {
+    "packages": 11,
+    "top_level": 88,
+    "subtests": 151,
+    "skipped": 0
+  },
+  "fixture_lock_held": true,
+  "cleanup_inventory_empty": true,
+  "owned_private_material_removed": true,
+  "protected_objects_equal": true,
+  "input_files": 20,
+  "scanner_argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--name",
+    "aegisgate-05a-e-attempt-01-8a83326c1e18-verify-gitleaks",
+    "--network",
+    "none",
+    "-v",
+    "/tmp/aegisgate-05a-e/.local/sprint05a-e-verify-scan:/input:ro",
+    "-v",
+    "/tmp/aegisgate-05a-e/.github/gitleaks.toml:/config:ro",
+    "-v",
+    "/tmp/aegisgate-05a-e/evidence/sprint05a-e/verification-01:/reports",
+    "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+    "dir",
+    "/input",
+    "--config",
+    "/config",
+    "--redact",
+    "--report-format",
+    "json",
+    "--report-path",
+    "/reports/secrets.json",
+    "--no-banner"
+  ],
+  "streams": [
+    {
+      "file": "stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "stderr.log",
+      "bytes": 132,
+      "sha256": "41f0b92e847726c4a4795880b161634d5233acbbdffa50ed54567239da0cf792"
+    }
+  ],
+  "exit_code": 0,
+  "stage_removed": true,
+  "ended_at": "2026-11-14T14:58:05.372084+00:00"
+}
