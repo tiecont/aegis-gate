@@ -60,7 +60,9 @@ try {
   pass('spike-install', [npm, 'ci', '--ignore-scripts', '--strict-peer-deps'], { cwd: path.join(cwd, 'spikes/pingora') });
   for (const pkg of ['typescript', 'typescript-eslint', '@typescript-eslint/parser', '@typescript-eslint/eslint-plugin', '@typescript-eslint/typescript-estree'])
     pass(`metadata-${pkg}`, [npm, 'view', pkg, 'version', 'peerDependencies', 'engines', 'dist.integrity', '--json']);
-  pass('official-compatibility-doc', ['curl', '--fail', '--silent', '--show-error', '--location', 'https://typescript-eslint.io/users/dependency-versions/']);
+  const docRevision = pass('official-compatibility-revision', ['gh', 'api', 'repos/typescript-eslint/typescript-eslint/commits/main', '--jq', '.sha']).stdout.toString().trim();
+  assert.match(docRevision, /^[a-f0-9]{40}$/);
+  pass('official-compatibility-doc', ['curl', '--fail', '--silent', '--show-error', '--location', `https://raw.githubusercontent.com/typescript-eslint/typescript-eslint/${docRevision}/docs/users/Dependency_Versions.mdx`]);
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'aegisgate-04c-e-ts7-'));
   try {
     for (const f of ['package.json', 'package-lock.json']) fs.copyFileSync(path.join(cwd, 'apps/dashboard', f), path.join(temp, f));

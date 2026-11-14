@@ -26,7 +26,7 @@ assert any(len(f := line.split()) > 5 and f[1] == 'FLOCK' and f[3] == 'WRITE'
 sha = lambda b: hashlib.sha256(b).hexdigest()
 git = lambda *a: subprocess.check_output(['git', *a], text=True).strip()
 assert git('diff', '--name-only') == ''
-prefix = root / 'evidence/sprint04c-e/attempt-01'
+prefix = root / 'evidence/sprint04c-e/attempt-02'
 r = json.loads((prefix / 'commands.json').read_text())
 assert r['passed'] and r['tracked_clean'] and r['lock_held_through_cleanup']
 assert r['source_tree'] == git('rev-parse', r['source_commit'] + '^{tree}')
