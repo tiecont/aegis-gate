@@ -211,7 +211,8 @@ must not replace the untapped baseline or justify any assertion exemption.
 
 - Module/status:01/C, partial; four supplemental failures unresolved.
 - Files/commits: owned sprint05b-c source/evidence and this report only; source
-  checkpoints215dd35,5d377ef,f84ecc2,32bd18b,0cd8011,8b98df6.
+  checkpoints215dd35,5d377ef,f84ecc2,32bd18b,0cd8011,8b98df6,
+  bb9820f(native measurements),29ed2f1(native evidence and verifier).
 - Architecture/contract changes: none; no gate opened.
 - Positive/security tests: Docker baseline19/23; two Docker variants18/23;
   six setup failures0 cases; native baseline and three variants19/23 plus separate
@@ -222,6 +223,11 @@ must not replace the untapped baseline or justify any assertion exemption.
   Receipt `evidence/sprint05b-c/verify-01/receipt.json` explicitly keeps
   semantic_security_pass=false. A scoped private-key PEM marker search found
   no matches; this is not a replacement for independent security review.
+- Native follow-up verifier at clean source29ed2f1 exits0:246 evidence
+  checksums and1383 committed-source hashes match, all four native hypotheses
+  and separate relay retain19/23, and actual peerRST1/clientCANCEL8 attribution
+  checks pass. `evidence/sprint05b-c/verify-02/receipt.json` continues to record
+  semantic_security_pass=false. Module01 remains NO-GO.
 - Performance: no throughput, production memory, fairness or load claim.
 - Risks/blockers: four failures, original75 issues outside C, diagnostic relay
   transport limitations, Docker setup/shutdown and earlier collision.
