@@ -1,0 +1,883 @@
+{
+  "source_commit": "02b0a6582997aeb8ed7992ae4c6f9af34d6a0d11",
+  "source_tree": "1726579f06ebb7559c50fc747bc9294f176a1275",
+  "source_clean": true,
+  "started_at": "2026-11-14T13:38:36.348Z",
+  "cwd": "/tmp/aegisgate-05a-a",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05a-a/spikes/envoy/sprint05a-a-run.mjs",
+    "evidence/sprint05a-a/attempt-02"
+  ],
+  "node": {
+    "version": "v26.13.0",
+    "executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+  },
+  "protected_baseline": {
+    "commit": "541d1d915ce6a3b679dc3fed3ea0a98f908ce001",
+    "tree": "89eff9430f2bb7044683eaf9e62e6657a7295a86",
+    "tracked_objects": 4003,
+    "ls_tree_sha256": "0006bf530e2c928baf928089d4d709294cd09f3552a7d511bed1fa3a85ba9225",
+    "all_working_blobs_equal": true
+  },
+  "commands": [
+    {
+      "label": "git-version",
+      "argv": [
+        "git",
+        "--version"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:38:36.616Z",
+      "ended_at": "2026-11-14T13:38:36.630Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/git-version.stdout",
+        "bytes": 19,
+        "sha256": "0eff67955296e123526d7f9b9146fff8d8dc8d6dbf4f49ba5f838923d2b4af71"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/git-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "openssl-version",
+      "argv": [
+        "openssl",
+        "version"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:38:36.632Z",
+      "ended_at": "2026-11-14T13:38:36.642Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/openssl-version.stdout",
+        "bytes": 63,
+        "sha256": "bdd7122ae3788e889ce96da25f99fe5023a80a88ab0e6db9f93cf3174187301c"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/openssl-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "docker-version",
+      "argv": [
+        "docker",
+        "version",
+        "--format",
+        "{{json .}}"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:38:36.654Z",
+      "ended_at": "2026-11-14T13:38:36.717Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/docker-version.stdout",
+        "bytes": 1121,
+        "sha256": "128cbd88426fbce4931172bc507a305ed1aefaae33450326d5a6efa20d0de6eb"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/docker-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "image",
+      "argv": [
+        "docker",
+        "image",
+        "inspect",
+        "envoyproxy/envoy@sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded",
+        "--format",
+        "{{.Id}} {{.Os}}/{{.Architecture}} {{json .RepoDigests}}"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:38:36.723Z",
+      "ended_at": "2026-11-14T13:38:36.858Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/image.stdout",
+        "bytes": 177,
+        "sha256": "ee7cf8371ce228309c5958c2b2e849c5b01f374e71920e872ab114cfe057902d"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/image.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "envoy-version",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--entrypoint",
+        "/usr/local/bin/envoy",
+        "envoyproxy/envoy@sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded",
+        "--version"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:38:36.866Z",
+      "ended_at": "2026-11-14T13:38:37.575Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/envoy-version.stdout",
+        "bytes": 105,
+        "sha256": "0c39628263c2098f5bce73ca589fee40b713437d65363bd80901e9514d20867c"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/envoy-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "node-dependencies",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--input-type=module",
+        "-e",
+        "import fs from 'node:fs'; import {createRequire} from 'node:module'; const r=createRequire(import.meta.url); for(const p of ['ws','@grpc/grpc-js']) console.log(p,JSON.parse(fs.readFileSync(r.resolve(p+'/package.json'))).version);"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:38:37.584Z",
+      "ended_at": "2026-11-14T13:38:37.649Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/node-dependencies.stdout",
+        "bytes": 31,
+        "sha256": "2cb385c5de338f1dfdcf06f3b9dbb1c422158d0af674f66a751dd0a9ba57049f"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/node-dependencies.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "immutable-manifest",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:38:37.657Z",
+      "ended_at": "2026-11-14T13:38:37.755Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/immutable-manifest.stdout",
+        "bytes": 74,
+        "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/immutable-manifest.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "protected-tests",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--test",
+        "spikes/edge-comparison/contract.test.mjs",
+        "spikes/edge-comparison/evaluate.test.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:38:37.762Z",
+      "ended_at": "2026-11-14T13:38:37.989Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/protected-tests.stdout",
+        "bytes": 676,
+        "sha256": "ecc2dc8e356d37e770d70d2c597fe3b39e552d0a504cb85429e0979071bb4054"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/protected-tests.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "candidate-config-test",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--test",
+        "spikes/envoy/sprint05a-a-config.test.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:38:37.997Z",
+      "ended_at": "2026-11-14T13:38:38.232Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/candidate-config-test.stdout",
+        "bytes": 210,
+        "sha256": "c29085a879fe17f3b9d2a561957327579e77871869ab10a33522ff6b65e2e42c"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/candidate-config-test.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "focused",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/envoy/sprint05a-a-focused.mjs",
+        "/tmp/aegisgate-05a-a/evidence/sprint05a-a/attempt-02/focused.json",
+        "/tmp/aegisgate-05a-a/.local/sprint05a-a-proof-UwTxQO/focused"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:38:38.241Z",
+      "ended_at": "2026-11-14T13:39:15.523Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/focused.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/focused.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "full75",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/edge-comparison/run.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {
+        "PINGORA_SPIKE_PROFILE": "release",
+        "AEGIS_RUN_ROOT": "/tmp/aegisgate-05a-a/.local/sprint05a-a-proof-UwTxQO",
+        "AEGIS_CANDIDATE_NAME": "envoy-sprint05a-a-te",
+        "AEGIS_CANDIDATE_COMMAND": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "AEGIS_CANDIDATE_ARGS": "[\"/tmp/aegisgate-05a-a/spikes/envoy/sprint05a-a-launcher.mjs\"]",
+        "AEGIS_CANDIDATE_ARTIFACTS": "[\"/tmp/aegisgate-05a-a/spikes/envoy/config.mjs\",\"/tmp/aegisgate-05a-a/spikes/envoy/recovery-config.mjs\",\"/tmp/aegisgate-05a-a/spikes/envoy/sprint05a-a-config.mjs\",\"/tmp/aegisgate-05a-a/spikes/envoy/image.lock.json\"]"
+      },
+      "started_at": "2026-11-14T13:39:15.526Z",
+      "ended_at": "2026-11-14T13:40:23.696Z",
+      "exit_code": 1,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/full75.stdout",
+        "bytes": 3317,
+        "sha256": "d584f81863037c0f7253d13d83da1449bc9854ceb30ef3d081cf4fac92ca19cf"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/full75.stderr",
+        "bytes": 211,
+        "sha256": "393a2a9d395a27a2bce164f7a2ae5d1bb7da3776e4861424c902eb1430f33710"
+      }
+    },
+    {
+      "label": "evaluate",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/edge-comparison/evaluate.mjs",
+        "evidence/sprint05a-a/attempt-02/full75.json"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:40:23.707Z",
+      "ended_at": "2026-11-14T13:40:23.801Z",
+      "exit_code": 1,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/evaluate.stdout",
+        "bytes": 510,
+        "sha256": "c9813b15be0a4767a9effa472a24668c3e0afc39d960e0830712c03de7c9d42d"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/evaluate.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "containers-12",
+      "argv": [
+        "docker",
+        "ps",
+        "-aq"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:40:23.812Z",
+      "ended_at": "2026-11-14T13:40:24.054Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/containers-12.stdout",
+        "bytes": 559,
+        "sha256": "4e6319ff1137efa21bf5678fbe3b3dc92e3f641afb434be8394d273871db8e9a"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/containers-12.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "inspect-13",
+      "argv": [
+        "docker",
+        "inspect",
+        "66398dc417f0",
+        "4421774be6cf",
+        "f72cff151c10",
+        "3e6064309e36",
+        "6e258425d377",
+        "e87c75078645",
+        "b1de37e9e74a",
+        "a9770ef27de2",
+        "3dc183508153",
+        "7915e3c04142",
+        "064d6050f795",
+        "c6c762070eed",
+        "3331d673bdc8",
+        "d445276b868d",
+        "dcf6845dfbb9",
+        "d7e4ddc5dcdd",
+        "fbb9f5bce95b",
+        "73c41bb0da9e",
+        "68599a053a15",
+        "19be74b7c865",
+        "57f098606cda",
+        "9c5d9877e3d6",
+        "cb255293bc3d",
+        "5f470221c33b",
+        "ef270a3843a4",
+        "fcda7aaa34b9",
+        "311c87801e0f",
+        "901109e61dab",
+        "6194c1ccaab9",
+        "1863bf690999",
+        "404f5e082d56",
+        "b54092d0b339",
+        "0b78453d73c3",
+        "d9c1ef1cd117",
+        "79407b21fd89",
+        "d978e7ee4c84",
+        "15989d36dc0c",
+        "88c6a509c38e",
+        "0e3cdb6af141",
+        "1c578e48ff9a",
+        "47b2df23f6f5",
+        "5300b03ab46f",
+        "c493a6d95624"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:40:24.063Z",
+      "ended_at": "2026-11-14T13:40:24.147Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/inspect-13.stdout",
+        "bytes": 440460,
+        "sha256": "54ada28480009f89259b96c30708dd123c5deee1c4ef85238469f29575a8393a"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/inspect-13.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "containers-14",
+      "argv": [
+        "docker",
+        "ps",
+        "-aq"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:40:24.159Z",
+      "ended_at": "2026-11-14T13:40:24.370Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/containers-14.stdout",
+        "bytes": 559,
+        "sha256": "4e6319ff1137efa21bf5678fbe3b3dc92e3f641afb434be8394d273871db8e9a"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/containers-14.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "inspect-15",
+      "argv": [
+        "docker",
+        "inspect",
+        "66398dc417f0",
+        "4421774be6cf",
+        "f72cff151c10",
+        "3e6064309e36",
+        "6e258425d377",
+        "e87c75078645",
+        "b1de37e9e74a",
+        "a9770ef27de2",
+        "3dc183508153",
+        "7915e3c04142",
+        "064d6050f795",
+        "c6c762070eed",
+        "3331d673bdc8",
+        "d445276b868d",
+        "dcf6845dfbb9",
+        "d7e4ddc5dcdd",
+        "fbb9f5bce95b",
+        "73c41bb0da9e",
+        "68599a053a15",
+        "19be74b7c865",
+        "57f098606cda",
+        "9c5d9877e3d6",
+        "cb255293bc3d",
+        "5f470221c33b",
+        "ef270a3843a4",
+        "fcda7aaa34b9",
+        "311c87801e0f",
+        "901109e61dab",
+        "6194c1ccaab9",
+        "1863bf690999",
+        "404f5e082d56",
+        "b54092d0b339",
+        "0b78453d73c3",
+        "d9c1ef1cd117",
+        "79407b21fd89",
+        "d978e7ee4c84",
+        "15989d36dc0c",
+        "88c6a509c38e",
+        "0e3cdb6af141",
+        "1c578e48ff9a",
+        "47b2df23f6f5",
+        "5300b03ab46f",
+        "c493a6d95624"
+      ],
+      "cwd": "/tmp/aegisgate-05a-a",
+      "environment": {},
+      "started_at": "2026-11-14T13:40:24.379Z",
+      "ended_at": "2026-11-14T13:40:24.463Z",
+      "exit_code": 0,
+      "signal": null,
+      "timed_out": false,
+      "stdout": {
+        "file": "evidence/sprint05a-a/attempt-02/inspect-15.stdout",
+        "bytes": 440460,
+        "sha256": "6a1c9e3ef68ec50c045ec617de53bdf04a653f49db52e8b0ea5ba748bb7674b5"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-a/attempt-02/inspect-15.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "fixture_lock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "collection_complete": true,
+  "security_acceptance": "NO-GO; independent review and architecture/security decision pending",
+  "environment": {
+    "PINGORA_SPIKE_PROFILE": "release",
+    "AEGIS_RUN_ROOT": "/tmp/aegisgate-05a-a/.local/sprint05a-a-proof-UwTxQO",
+    "AEGIS_CANDIDATE_NAME": "envoy-sprint05a-a-te",
+    "AEGIS_CANDIDATE_COMMAND": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "AEGIS_CANDIDATE_ARGS": "[\"/tmp/aegisgate-05a-a/spikes/envoy/sprint05a-a-launcher.mjs\"]",
+    "AEGIS_CANDIDATE_ARTIFACTS": "[\"/tmp/aegisgate-05a-a/spikes/envoy/config.mjs\",\"/tmp/aegisgate-05a-a/spikes/envoy/recovery-config.mjs\",\"/tmp/aegisgate-05a-a/spikes/envoy/sprint05a-a-config.mjs\",\"/tmp/aegisgate-05a-a/spikes/envoy/image.lock.json\"]"
+  },
+  "sources": [
+    {
+      "file": "package-lock.json",
+      "sha256": "500c3aea9bb2b39648b40233c8be22ca6b97d3b84386df6e30ccca2202d609ef"
+    },
+    {
+      "file": "spikes/edge-comparison/README.md",
+      "sha256": "644f383a67436bdea26dd8668f33137701d421f45c76da2e343141b122cd99f3"
+    },
+    {
+      "file": "spikes/edge-comparison/contract.mjs",
+      "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f"
+    },
+    {
+      "file": "spikes/edge-comparison/contract.test.mjs",
+      "sha256": "b8ddf59505a5e342eea217ff49fd6a3d3ec64b0cdfe036000257d1191b6df223"
+    },
+    {
+      "file": "spikes/edge-comparison/evaluate.mjs",
+      "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf"
+    },
+    {
+      "file": "spikes/edge-comparison/evaluate.test.mjs",
+      "sha256": "6b6ee9e2116c94d3a1f737dc8f5c6e34468891bae2bbcc0af9c469c8c8cb544e"
+    },
+    {
+      "file": "spikes/edge-comparison/extract-baseline.mjs",
+      "sha256": "a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/edge-comparison/run.mjs",
+      "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493"
+    },
+    {
+      "file": "spikes/edge-comparison/supplemental.mjs",
+      "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.mjs",
+      "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.test.mjs",
+      "sha256": "9ddc71cf675cc89cb2bc2cba3770cf57f6b0eecde42885db0dccaa0718b1dbbd"
+    },
+    {
+      "file": "spikes/envoy/PLAN.md",
+      "sha256": "a3df75367c072812bc7a05dd1c46038becc87e803c95bf0af71bda8984dee7b6"
+    },
+    {
+      "file": "spikes/envoy/README.md",
+      "sha256": "6dfb2c5408b0cb1e956cf04750a730bdc5a5743431c0fffced947fa1224cadaf"
+    },
+    {
+      "file": "spikes/envoy/benchmark.mjs",
+      "sha256": "1625cbd3c85dd68d27dd479fa51f291f0a0b09376369827d9e32e860b6c831b0"
+    },
+    {
+      "file": "spikes/envoy/collect.mjs",
+      "sha256": "ecdaa37055d38adeb726fce2fb5828ace54401bc1775518a14a8161c6773e938"
+    },
+    {
+      "file": "spikes/envoy/config.mjs",
+      "sha256": "53fd7c0c624f8a4771ce75d6059981762694a89d61f24482803289b979cebeef"
+    },
+    {
+      "file": "spikes/envoy/config.test.mjs",
+      "sha256": "bc143535d181e428e7322862fdfbaa0e918fa314ad814bd355a4e8e51c584a3d"
+    },
+    {
+      "file": "spikes/envoy/example-manifest.json",
+      "sha256": "01ff8ad3357dafa78604113ae53d61c602b9023360e742c5d7b050e2f6a3f51a"
+    },
+    {
+      "file": "spikes/envoy/finalize-evidence.mjs",
+      "sha256": "6c2353c081a7a2419dd5ecac6fc677370449322361e7e05224193f5733580594"
+    },
+    {
+      "file": "spikes/envoy/image.lock.json",
+      "sha256": "a96054e7fe3b8994f708f54c221758ecd786b91655c641cb7648067d1f02889d"
+    },
+    {
+      "file": "spikes/envoy/launch",
+      "sha256": "0ee313b5b338486cd856415a6022ae10f6f12aeab2696f0d0399c512f723f0f1"
+    },
+    {
+      "file": "spikes/envoy/launcher.mjs",
+      "sha256": "26705e93f391d6fcd815ce48ef279142ab5d3463be681a8cfe11edfea6bb5da3"
+    },
+    {
+      "file": "spikes/envoy/recovery-config.mjs",
+      "sha256": "407268e48e6dffe15220f1b2d58f6eb7b0520dd2b1f69b5250e8f685a3f44b3c"
+    },
+    {
+      "file": "spikes/envoy/recovery-launcher.mjs",
+      "sha256": "00517051e9d631adbee9c58f58f1a343404360e24e66e5c3cbecd0c17c08be23"
+    },
+    {
+      "file": "spikes/envoy/recovery-raw-h2.mjs",
+      "sha256": "646e4a009c41269db90c97656c4b228db9ec65a170ae49f3c4b73540eb06e22a"
+    },
+    {
+      "file": "spikes/envoy/recovery-run.mjs",
+      "sha256": "ccaff2dd48099cccfb06b276f7f13717648d605dbabcad5238fa1eec74c2d42f"
+    },
+    {
+      "file": "spikes/envoy/research.mjs",
+      "sha256": "c6af39bac12b35b99dbe77e6aa3de37c3629cd8ecee1d61e64a875cd0c07909c"
+    },
+    {
+      "file": "spikes/envoy/scan-owned-secrets.sh",
+      "sha256": "29893d4bca45c2ac9497bd7c0f4574a95f6bbe22a0c68766d24543e764d5ea04"
+    },
+    {
+      "file": "spikes/envoy/scan.sh",
+      "sha256": "26eec5e058d9d56fc833254589eed4561efc78163dd7287ea167e2d7757ee85a"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-observer.mjs",
+      "sha256": "2b711290f5d7dcc8831a85a1d2299fefcab7d8a3ec3fb1256308c831287142a7"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-observer.test.mjs",
+      "sha256": "afcf2f3a3726afab9d128d78780a79cc9ff98c5bf9af3ac0e4d81a151c525082"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-protocol.mjs",
+      "sha256": "c00b465407778cab9bdd9df987fb48d9e9c4ec1625c51ad7ef90946e2732ccb4"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-receipts.mjs",
+      "sha256": "757e0cf106a7dee16fc8acaec1893b34bcdd7d363b90346490e81af5d17a272d"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-repro.mjs",
+      "sha256": "689be974b677daf833bfcdaee247a571a8740c7bb8a226e11cdedc260020fe3b"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-run.mjs",
+      "sha256": "b56b2b82d436b22895a16f545d6504e3add2ae800f16b1b7dd8893c82f588ed6"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-upstream-verify.mjs",
+      "sha256": "58f56e36a8780e4e53452c6434e9fe4a9eda28908968db5a4a6a99332afd1f8a"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-upstream.mjs",
+      "sha256": "c8143ded99d9dc887a85848febe2fa7c75d486281f481a2b8940f018c3863520"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-verify.mjs",
+      "sha256": "ead5e86838792f316759cd7d6a2aa74d6dcb53815772707ac309069021bd74ba"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-attribution/main.go",
+      "sha256": "c42020f2b987cf9e3b18cb0ed0476735d46905664ed3fe6b99960868b76e8741"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-attribution/main_test.go",
+      "sha256": "a6bf965416d0ed1f3ba06a78c03dbe54ba8f6a838e847f6e7c0cf14e7a83924b"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-observer.mjs",
+      "sha256": "215012524eaaab2133ee0c711d1b29e1bf7ddd0338d996290a73624ca827514b"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-observer.test.mjs",
+      "sha256": "7cd1bbce7d5a0b6c08ee82789670d59c9968ba5bad84a2c1ccf5804f7ac0e831"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-protocol.mjs",
+      "sha256": "ce75ff5a3e91cc4c650607ffb8db1bd21f8fed0583b95baf937cd99293753738"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-repro-h1.mjs",
+      "sha256": "be5e8b2fa85f885be30b28a976d31e4463584bc4755a3a9527be70b3f48e5e55"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-repro-h2.mjs",
+      "sha256": "ba7c7dbe272ea6f8763aac06986b71e0d19067efaecd34eb4b5bfdfbcc167a35"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-repro-receipts.mjs",
+      "sha256": "69b1cd45537ff3efcfbee4c595e012f9c8f9eecdc3b50a40636a8b74b863114a"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-run.mjs",
+      "sha256": "ee0aec3526cae4136f59323fd26570b48d35b9728c4d6c9775c5b7759838d6d1"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-upstream-verify.mjs",
+      "sha256": "2bf3eda9c341a149038a4462256dbfde583366c7ab0fe58f80fe3194cd1cc6cb"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-upstream.mjs",
+      "sha256": "abce7f263a936ca42f63db72bd5b36bc9b83d53c71d4e09b703b8ed5823ecafa"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-verify.mjs",
+      "sha256": "4a73ba77d3c22f47a7eec24a696d7d8e1ebc963056ae5c916903fb691cda23be"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-a-config.mjs",
+      "sha256": "a0d86c1e292a68d2c78faeb6b9e6ea3c67d5b5e55d74f3d5d0e1faa0bca312d2"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-a-config.test.mjs",
+      "sha256": "d5f05ae62d043e247454d8d5c021a9fd499302dbe55dd1252606a305c5e285ab"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-a-focused.mjs",
+      "sha256": "831fafbf3da9153cb44033fb67c287b26f1fac77145ec6fd0d1768f0de138529"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-a-launcher.mjs",
+      "sha256": "a367a0c33168ad6508f801ac6529918cddde462f785cca26ea25bf54987e5fbe"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-a-run.mjs",
+      "sha256": "0dee4a0c779cfe7abf52311943fef396f52df1440016699c3d75c810937a961b"
+    },
+    {
+      "file": "spikes/envoy/strict-boundary-check.mjs",
+      "sha256": "4017485afc16c1813c0d23745af9c8c72a9db40c7fe2a1c93f17af204e743abe"
+    },
+    {
+      "file": "spikes/envoy/strict-check.mjs",
+      "sha256": "4fb5ed53b3160fd0df4c774d7cc6bbeb97479e3563d31fe004ad520e19389bd7"
+    },
+    {
+      "file": "spikes/envoy/strict-finalize.mjs",
+      "sha256": "6e98c6bd885bd43e5b18e21849cc0d81e4d3c0c311e460c6941adc974334f9ce"
+    },
+    {
+      "file": "spikes/envoy/strict-research.mjs",
+      "sha256": "83c8488a46862ec789c5e6430e110f4e89151ef26fd8fc5d7ec9519e3cb423ad"
+    },
+    {
+      "file": "spikes/envoy/wire-closeout.mjs",
+      "sha256": "221d45747dfdc36d27fd79098dd8012501b00cd4b73065dbdc5a6141f460569a"
+    },
+    {
+      "file": "spikes/envoy/wire-fixtures.mjs",
+      "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278"
+    },
+    {
+      "file": "spikes/envoy/wire-observer.mjs",
+      "sha256": "bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3"
+    },
+    {
+      "file": "spikes/envoy/wire-observer.test.mjs",
+      "sha256": "1bdd293bc39956883f6a76d5924e8464e4d623d6b7217189140c372ae1b846b3"
+    },
+    {
+      "file": "spikes/envoy/wire-plan.md",
+      "sha256": "3b299daa2ca9ff77abb7496d23bcb0b143ef265ed5645b5b0a19a34425004b8a"
+    },
+    {
+      "file": "spikes/envoy/wire-probes.mjs",
+      "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a"
+    },
+    {
+      "file": "spikes/envoy/wire-run.mjs",
+      "sha256": "2cf5a83b900a9dfffdd5c7314ac69c3a8e61f987c912c4f8ac44d70a775bb95a"
+    },
+    {
+      "file": "spikes/envoy/wire-trace.mjs",
+      "sha256": "76b5dcf1a2bb80fcdbcbb76fc86828aed91ae8b1f94388ef187f2406b883f5bd"
+    },
+    {
+      "file": "spikes/pingora/lab.mjs",
+      "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d"
+    }
+  ],
+  "focused": {
+    "completed": true,
+    "probes": 51,
+    "baseline_original_failures": 16,
+    "candidate_original_passes": 16
+  },
+  "full75": {
+    "total": 75,
+    "passed": 73,
+    "failures": [
+      {
+        "name": "malformed-HTTP-obsolete-folded-header",
+        "status": "fail",
+        "milliseconds": 10.98,
+        "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+        "origin": {
+          "handler_invocations": 1,
+          "decrypted_bytes": 263,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "requests": [
+            {
+              "method": "GET",
+              "target": "/",
+              "protocol": "1.1",
+              "tls": "TLSv1.2",
+              "sni": false,
+              "alpn": "http/1.1"
+            }
+          ],
+          "omitted_request_samples": 0
+        }
+      },
+      {
+        "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+        "status": "fail",
+        "milliseconds": 11.09,
+        "error": "confused authority forwarded bytes to origin\n\n3045 !== 3036\n",
+        "origin": {
+          "handler_invocations": 0,
+          "decrypted_bytes": 9,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "requests": [],
+          "omitted_request_samples": 0
+        }
+      }
+    ],
+    "result": "fail"
+  },
+  "cleanup": {
+    "lock_held": true,
+    "stopped": [],
+    "remaining_owned_containers": [],
+    "fixture_removed": true,
+    "new_owned_directories": []
+  },
+  "protected_baseline_after": {
+    "commit": "541d1d915ce6a3b679dc3fed3ea0a98f908ce001",
+    "tree": "89eff9430f2bb7044683eaf9e62e6657a7295a86",
+    "tracked_objects": 4003,
+    "ls_tree_sha256": "0006bf530e2c928baf928089d4d709294cd09f3552a7d511bed1fa3a85ba9225",
+    "all_working_blobs_equal": true
+  },
+  "ended_at": "2026-11-14T13:40:24.621Z"
+}
