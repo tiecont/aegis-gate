@@ -41,7 +41,7 @@ try {
   }) };
   const { build } = await import(pathToFileURL(path.join(aSource, aFiles[0])).href);
   const cwd = process.cwd();
-  try { process.chdir(aSource); addon = build(fixture, record); } finally { process.chdir(cwd); }
+  try { process.chdir(aSource); addon = await build(fixture, record); } finally { process.chdir(cwd); }
   assert.equal(addon.llhttpVersion, '9.4.4');
   watchdog = setTimeout(() => { for (const s of sockets) s.destroy(); }, 30000);
   const material = pki(fixture);
