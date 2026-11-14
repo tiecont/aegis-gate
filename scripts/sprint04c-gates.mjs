@@ -114,6 +114,84 @@ try {
       }
     }
   }
+  // Only this isolated worktree's generated private fixtures are removed.
+  // Compare in memory before removal; never retain secret values or their hashes.
+  try {
+    assertLock();
+    const secretFiles = [
+      ".local/postgres-password",
+      ".local/redis-password",
+      ".local/nats-token",
+      ".local/pki/valid.jwt",
+    ];
+    const secrets = secretFiles
+      .filter((file) => fs.existsSync(file))
+      .map((file) => fs.readFileSync(file).toString().trim())
+      .filter(Boolean);
+    const retained = [];
+    const collect = (directory) => {
+      for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+        const file = path.join(directory, entry.name);
+        if (entry.isDirectory()) collect(file);
+        else retained.push(file);
+      }
+    };
+    collect(output);
+    for (const file of retained) {
+      const bytes = fs.readFileSync(file);
+      assert.ok(
+        !secrets.some((secret) => bytes.includes(Buffer.from(secret))),
+        "generated private fixture value present in retained gate evidence",
+      );
+      assert.ok(
+        !/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/.test(
+          bytes.toString(),
+        ),
+        "private key present in retained gate evidence",
+      );
+    }
+    receipt.private_material_check = {
+      files_checked: retained.length,
+      matches: 0,
+    };
+    const paths = [
+      ".local/pki",
+      ".local/postgres-password",
+      ".local/redis-password",
+      ".local/nats-token",
+      ".local/redis.conf",
+      ".local/nats.conf",
+      ".local/compose.env",
+      ".local/evidence/security/compose-config.json",
+    ];
+    for (const file of paths) fs.rmSync(file, { recursive: true, force: true });
+    receipt.private_fixture_cleanup = paths.map((file) => ({
+      file,
+      exists: fs.existsSync(file),
+    }));
+    for (const kind of ["network", "volume"]) {
+      const ids = execFileSync(
+        "docker",
+        [
+          kind,
+          "ls",
+          "-q",
+          "--filter",
+          "label=com.docker.compose.project=aegisgate-04c-root",
+        ],
+        { encoding: "utf8" },
+      )
+        .trim()
+        .split("\n")
+        .filter(Boolean);
+      receipt[`remaining_project_${kind}s`] = ids;
+      passed = !ids.length && passed;
+    }
+    assertLock();
+  } catch (error) {
+    receipt.private_cleanup_error = error.message;
+    passed = false;
+  }
   assertLock();
   receipt.ended_at = new Date().toISOString();
   receipt.passed = passed;
