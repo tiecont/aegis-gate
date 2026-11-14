@@ -1,0 +1,473 @@
+{
+  "source_commit": "12500ceca2b689f6352fb246597e5b04ee928759",
+  "started_at": "2026-11-14T14:00:03.553Z",
+  "node": "v26.13.0",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05a-c/spikes/envoy/sprint05a-c-lifecycle.mjs",
+    "evidence/sprint05a-c/lifecycle-bounded-01"
+  ],
+  "tests": [
+    {
+      "name": "cold-denials-no-origin-dial-or-bytes",
+      "status": "pass",
+      "detail": [
+        {
+          "extra": {
+            "host": "edge-a.test"
+          },
+          "status": 421,
+          "rst_code": 0,
+          "body": ""
+        },
+        {
+          "extra": {
+            ":authority": "edge-a.test"
+          },
+          "status": 421,
+          "rst_code": 0,
+          "body": ""
+        },
+        {
+          "extra": {
+            ":authority": "user@edge-b.test"
+          },
+          "status": null,
+          "rst_code": 8,
+          "body": ""
+        }
+      ],
+      "raw_chunks": []
+    },
+    {
+      "name": "valid-cold-warm-sequential-reuse",
+      "status": "pass",
+      "detail": [
+        {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        }
+      ],
+      "raw_chunks": [
+        {
+          "connection": 1,
+          "hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00001e04000000000000020000000000010000000000080000000000030000004000040000ffff0000a40105000000012084018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a8dc90839248d61be302cd15a6d61b5209671c189c21196e369ff0088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f"
+        },
+        {
+          "connection": 1,
+          "hex": "000000040100000000"
+        },
+        {
+          "connection": 1,
+          "hex": "0000a301050000000384018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a1baeb8ebac916906db6b34d3b2ad1b6f096281a94ad0241bed490088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f"
+        },
+        {
+          "connection": 1,
+          "hex": "0000a301050000000584018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a925746ebed85670a48d66a30096186502c168728c52b8fbf203f0088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f"
+        },
+        {
+          "connection": 1,
+          "hex": "0000a301050000000784018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a665703236422cc942359a7a49568cad95668b2362184acb72b5f0088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f"
+        },
+        {
+          "connection": 1,
+          "hex": "0000a301050000000984018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a9012bc10844b3e191f59a1492acf4a3916100acbe36657e569af0088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f"
+        },
+        {
+          "connection": 1,
+          "hex": "0000a301050000000b84018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a91d8c8e3ed34b38500566a56a55a379c2accb24085c940291d930088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f"
+        }
+      ]
+    },
+    {
+      "name": "concurrent-streams-share-valid-pool",
+      "status": "pass",
+      "detail": [
+        {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        }
+      ],
+      "raw_chunks": [
+        {
+          "connection": 1,
+          "hex": "0000a801050000000d048461141fc7018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a03e09491baf2c5081b59a6c71ac395d6d671b6432ba0236f0dcf0088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f0000a901050000000f048461141fc7018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279b91d69d71c72559f6e49166a47a559e0c6fac379a7238c621b524bf0088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f0000a8010500000011048461141fc7018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a04850b31bacac39250acd3412ad1bacb4b48fb8e36fbd2ca291b0088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f0000a8010500000013048461141fc7018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a69f91904ad0161b8cb6b341038b3c10c8b3840019215e24836bf0088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f0000a8010500000015048461141fc7018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a75a69a1bcf48b0c4cc6b34e81d586e01e59f6e370b232eb846990088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f0000a8010500000017048461141fc7018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a6a3642d95c9561b2d3ab34e95f5a391f7968dc8dc149238128410088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f0000a9010500000019048461141fc7018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279b642fb2d3b236b38265d59a96491679b7635a5181a6e52c6c8a367f0088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f0000a801050000001b048461141fc7018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a6638e47dd2b2b3607da59a75f2acfc650ac48c8571f148475c6b0088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f"
+        }
+      ]
+    },
+    {
+      "name": "warm-denials-retain-all-origin-bytes",
+      "status": "pass",
+      "detail": [
+        {
+          "extra": {
+            "host": "edge-a.test"
+          },
+          "response": {
+            "status": 421,
+            "rst_code": 0,
+            "body": ""
+          },
+          "raw_hex": "",
+          "handlers": 0
+        },
+        {
+          "extra": {
+            ":authority": "edge-a.test"
+          },
+          "response": {
+            "status": 421,
+            "rst_code": 0,
+            "body": ""
+          },
+          "raw_hex": "",
+          "handlers": 0
+        },
+        {
+          "extra": {
+            ":authority": "user@edge-b.test"
+          },
+          "response": {
+            "status": null,
+            "rst_code": 8,
+            "body": ""
+          },
+          "raw_hex": "",
+          "handlers": 0
+        }
+      ],
+      "raw_chunks": []
+    },
+    {
+      "name": "route-pools-partitioned",
+      "status": "pass",
+      "detail": {
+        "a": {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "2",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        "b": {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        }
+      },
+      "raw_chunks": [
+        {
+          "connection": 2,
+          "hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00001e04000000000000020000000000010000000000080000000000030000004000040000ffff0000a40105000000012084018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a8e575903ed46b38595f59a95b7967db79b59979a7085788420050088f2b5038d6b0f6a4b882c931561ae92a13f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931561ae92a13f"
+        },
+        {
+          "connection": 2,
+          "hex": "000000040100000000"
+        },
+        {
+          "connection": 1,
+          "hex": "0000a301050000001d84018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a75a2b848e56567c2065669c91f586f102b36265d6412043236df0088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f"
+        }
+      ]
+    },
+    {
+      "name": "generation-swap-retains-inflight-and-retires-pool",
+      "status": "pass",
+      "detail": {
+        "old": {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        "next": {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "3",
+          "generation": "2",
+          "body": "h2-origin"
+        }
+      },
+      "raw_chunks": [
+        {
+          "connection": 1,
+          "hex": "0000a801050000001f048461141fc7018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a91f7992888d2cc902d2cd08a45a30006b36c8852c6dc60944dff0088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0131008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f"
+        },
+        {
+          "connection": 3,
+          "hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00001e04000000000000020000000000010000000000080000000000030000004000040000ffff0000a40105000000012084018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a0b7211c7dd2ac195c0acd086e2c394a459d79f0b4195a646cb3f0088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0132008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f"
+        }
+      ]
+    },
+    {
+      "name": "trust-retirement-cannot-reuse-old-pool",
+      "status": "pass",
+      "detail": {
+        "old": {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "3",
+          "generation": "2",
+          "body": "h2-origin"
+        },
+        "rejected": {
+          "status": 503,
+          "rst_code": 0,
+          "body": "upstream connect error or disconnect/reset before headers. reset reason: remote connection failure"
+        },
+        "restored": {
+          "status": 200,
+          "rst_code": 0,
+          "connection": "4",
+          "generation": "4",
+          "body": "h2-origin"
+        }
+      },
+      "raw_chunks": [
+        {
+          "connection": 3,
+          "hex": "000000040100000000"
+        },
+        {
+          "connection": 3,
+          "hex": "0000a301050000000384018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d279a13a48d92844b002dc6b345684b3d195e59d6647e5089e28de97f0088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0132008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f"
+        },
+        {
+          "connection": 4,
+          "hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00001e04000000000000020000000000010000000000080000000000030000004000040000ffff0000a30105000000012084018ba071ac7b0d31aa5d25427f8287008df2b4a7b3c0ec90b22d5d8749ff849d29ad1f0092f2b16aee7f4b17ca4b6543a161c92585423f87089d5c0b8170ff0089f2b585ed6950958d27990360291f684b05c69a59a8c6359e181e588ebe408ca414aeb30088f2b5038d6b0f6a4b882c931568d749509f008cf2b5038d698b516c1a4c7abf0134008ff2b16aee7f4b1ec34c6a8742d39d09882c931568d749509f"
+        }
+      ]
+    }
+  ],
+  "policy": "bounded",
+  "scope": "bounded loopback lifecycle; original gate remains separate",
+  "launcher_pid": 662600,
+  "origin": {
+    "connections": 4,
+    "relays": 4,
+    "handlers": [
+      {
+        "connection": 1,
+        "stream": 1,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 1,
+        "stream": 3,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 1,
+        "stream": 5,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 1,
+        "stream": 7,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 1,
+        "stream": 9,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 1,
+        "stream": 11,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 1,
+        "stream": 13,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 1,
+        "stream": 15,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 1,
+        "stream": 17,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 1,
+        "stream": 19,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 1,
+        "stream": 21,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 1,
+        "stream": 23,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 1,
+        "stream": 25,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 1,
+        "stream": 27,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 2,
+        "stream": 1,
+        "generation": "1",
+        "route": "edge-a.test"
+      },
+      {
+        "connection": 1,
+        "stream": 29,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 1,
+        "stream": 31,
+        "generation": "1",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 3,
+        "stream": 1,
+        "generation": "2",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 3,
+        "stream": 3,
+        "generation": "2",
+        "route": "edge-b.test"
+      },
+      {
+        "connection": 4,
+        "stream": 1,
+        "generation": "4",
+        "route": "edge-b.test"
+      }
+    ],
+    "parser_errors": 0,
+    "transport_errors": 1
+  },
+  "cleanup": {
+    "stop_exit": 0,
+    "container_absent": true,
+    "lock_held": true,
+    "fixture_removed": true
+  },
+  "ended_at": "2026-11-14T14:00:09.420Z"
+}

@@ -1,0 +1,107 @@
+141: 
+142: void ConnPoolImplBase::destructAllConnections() {
+143:   for (auto* list : {&ready_clients_, &busy_clients_, &connecting_clients_, &early_data_clients_}) {
+144:     while (!list->empty()) {
+145:       list->front()->close();
+146:     }
+147:   }
+148: 
+149:   // Make sure all clients are destroyed before we are destroyed.
+150:   dispatcher_.clearDeferredDeleteList();
+151: }
+152: 
+153: bool ConnPoolImplBase::shouldConnect(size_t pending_streams, size_t active_streams,
+154:                                      uint64_t connecting_and_connected_capacity,
+155:                                      float preconnect_ratio, bool anticipate_incoming_stream) {
+156:   // This is set to true any time global preconnect is being calculated.
+157:   // ClusterManagerImpl::maybePreconnect is called directly before a stream is created, so the
+158:   // stream must be anticipated.
+159:   //
+160:   // Also without this, we would never pre-establish a connection as the first
+161:   // connection in a pool because pending/active streams could both be 0.
+162:   int anticipated_streams = anticipate_incoming_stream ? 1 : 0;
+163: 
+164:   // The number of streams we want to be provisioned for is the number of
+165:   // pending, active, and anticipated streams times the preconnect ratio.
+166:   // The number of streams we are (theoretically) provisioned for is the
+167:   // connecting stream capacity plus the number of active streams.
+168:   //
+169:   // If preconnect ratio is not set, it defaults to 1, and this simplifies to the
+170:   // legacy value of pending streams > connecting_stream_capacity_
+171:   return (pending_streams + active_streams + anticipated_streams) * preconnect_ratio >
+181:     return pendingStreamCount() > connecting_stream_capacity_;
+182:   }
+183: 
+184:   bool result = false;
+185:   if (global_preconnect_ratio != 0) {
+186:     // If global preconnecting is on, and this connection is within the global
+187:     // preconnect limit, preconnect.
+188:     // For global preconnect, we anticipate an incoming stream to this pool, since it is
+189:     // prefetching for the next upcoming stream, which will likely be assigned to this pool.
+190:     // We may eventually want to track preconnect_attempts to allow more preconnecting for
+191:     // heavily weighted upstreams or sticky picks.
+192:     result =
+193:         shouldConnect(pendingStreamCount(), num_active_streams_,
+194:                       connecting_and_connected_stream_capacity_, global_preconnect_ratio, true);
+195:     ENVOY_LOG(trace,
+196:               "predictive shouldCreateNewConnection returns {} for pending {} active {} "
+197:               "connecting_and_connected_capacity {} connecting_capacity {} ratio {}",
+198:               result, pendingStreamCount(), num_active_streams_,
+199:               connecting_and_connected_stream_capacity_, connecting_stream_capacity_,
+200:               global_preconnect_ratio);
+201:   } else {
+202:     // Ensure this local pool has adequate connections for the given load.
+203:     //
+204:     // Local preconnect does not need to anticipate a stream. It is called as
+205:     // new streams are established or torn down and simply attempts to maintain
+206:     // the correct ratio of streams and anticipated capacity.
+207:     result = shouldConnect(pendingStreamCount(), num_active_streams_,
+208:                            connecting_and_connected_stream_capacity_, perUpstreamPreconnectRatio());
+209:     ENVOY_LOG(trace,
+210:               "per-upstream shouldCreateNewConnection returns {} for pending {} active {} "
+211:               "connecting_and_connected_capacity {} connecting_capacity {} ratio {}",
+212:               result, pendingStreamCount(), num_active_streams_,
+213:               connecting_and_connected_stream_capacity_, connecting_stream_capacity_,
+214:               perUpstreamPreconnectRatio());
+215:   }
+216: 
+217:   // Ineligible hosts get connections only for on-demand requests, not anticipatory ones.
+218:   if (!host_->cluster().shouldPreconnect(*host_)) {
+219:     const bool on_demand = pendingStreamCount() > connecting_stream_capacity_;
+220:     if (result && !on_demand) {
+221:       host_->cluster().trafficStats()->upstream_cx_preconnect_skipped_.inc();
+222:     }
+223:     return on_demand;
+224:   }
+225: 
+561: 
+562: void ConnPoolImplBase::drainClients(std::list<ActiveClientPtr>& clients) {
+563:   while (!clients.empty()) {
+564:     ASSERT(clients.front()->numActiveStreams() > 0u, dumpState());
+565:     ENVOY_LOG_EVENT(
+566:         debug, "draining_non_idle_client", "draining {} client {} for cluster {}",
+567:         (clients.front()->state() == ActiveClient::State::Ready ? "ready" : "early data"),
+568:         clients.front()->id(), host_->cluster().name());
+569:     transitionActiveClientState(*clients.front(), ActiveClient::State::Draining);
+570:   }
+571: }
+572: 
+573: void ConnPoolImplBase::drainConnectionsImpl(DrainBehavior drain_behavior) {
+574:   if (drain_behavior == Envoy::ConnectionPool::DrainBehavior::DrainAndDelete) {
+575:     is_draining_for_deletion_ = true;
+576:     checkForIdleAndCloseIdleConnsIfDraining();
+577:     return;
+578:   }
+579:   closeIdleConnectionsForDrainingPool();
+580:   // closeIdleConnectionsForDrainingPool() closes all connections in ready_clients_ with no active
+581:   // streams and if no pending streams, all connections in early_data_clients_ with no active
+582:   // streams as well, so all remaining entries in ready_clients_ are serving streams. Move them and
+583:   // all entries in busy_clients_ to draining.
+584:   if (!hasPendingStreams()) {
+585:     // The remaining early data clients are non-idle.
+586:     drainClients(early_data_clients_);
+587:   }
+588: 
+589:   drainClients(ready_clients_);
+590: 
+591:   // Changing busy_clients_ to Draining does not move them between lists,

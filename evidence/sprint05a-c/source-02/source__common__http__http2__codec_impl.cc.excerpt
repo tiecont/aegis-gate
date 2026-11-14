@@ -1,0 +1,107 @@
+105: 
+106:   absl::flat_hash_map<absl::string_view, const LowerCaseString*> map_;
+107: };
+108: 
+109: const StaticHeaderNameLookup& getStaticHeaderNameLookup() {
+110:   CONSTRUCT_ON_FIRST_USE(StaticHeaderNameLookup);
+111: }
+112: 
+113: } // namespace
+114: 
+115: // for nghttp2 compatibility.
+116: const int ERR_CALLBACK_FAILURE = -902;
+117: const int INITIAL_CONNECTION_WINDOW_SIZE = ((1 << 16) - 1);
+118: const int ERR_TEMPORAL_CALLBACK_FAILURE = -521;
+119: const int ERR_REFUSED_STREAM = -533;
+120: const int ERR_HTTP_HEADER = -531;
+121: const int ERR_HTTP_MESSAGING = -532;
+122: const int ERR_PROTO = -505;
+123: const int ERR_STREAM_CLOSED = -510;
+124: const int ERR_FLOW_CONTROL = -524;
+125: 
+126: // Changes or additions to details should be reflected in
+127: // docs/root/configuration/http/http_conn_man/response_code_details.rst
+128: class Http2ResponseCodeDetailValues {
+129: public:
+130:   // Invalid HTTP header field was received and stream is going to be
+131:   // closed.
+132:   const absl::string_view ng_http2_err_http_header_ = "http2.invalid.header.field";
+133:   // Violation in HTTP messaging rule.
+134:   const absl::string_view ng_http2_err_http_messaging_ = "http2.violation.of.messaging.rule";
+135:   // none of the above
+1805:   }
+1806:   return status;
+1807: }
+1808: 
+1809: bool ConnectionImpl::sendPendingFramesAndHandleError() {
+1810:   if (!sendPendingFrames().ok()) {
+1811:     scheduleProtocolConstraintViolationCallback();
+1812:     return true;
+1813:   }
+1814:   return false;
+1815: }
+1816: 
+1817: void ConnectionImpl::sendSettingsHelper(
+1818:     const envoy::config::core::v3::Http2ProtocolOptions& http2_options, bool disable_push) {
+1819:   absl::InlinedVector<http2::adapter::Http2Setting, 10> settings;
+1820:   auto insertParameter = [&settings](const http2::adapter::Http2Setting& entry) mutable -> bool {
+1821:     // Consider using a set as an intermediate data structure, rather than this ad-hoc
+1822:     // deduplication.
+1823:     const auto it = std::find_if(
+1824:         settings.cbegin(), settings.cend(),
+1825:         [&entry](const http2::adapter::Http2Setting& existing) { return entry.id == existing.id; });
+1826:     if (it != settings.end()) {
+1827:       return false;
+1828:     }
+1829:     settings.push_back(entry);
+1830:     return true;
+1831:   };
+1832: 
+1833:   // Universally disable receiving push promise frames as we don't currently
+1834:   // support them.
+1835:   // NOTE: This is a special case with respect to custom parameter overrides in
+1846:     ASSERT(result);
+1847:     ENVOY_CONN_LOG(debug, "adding custom settings parameter with id {:#x} to {}", connection_,
+1848:                    it.identifier().value(), it.value().value());
+1849:   }
+1850: 
+1851:   // Insert named parameters.
+1852:   settings.insert(
+1853:       settings.end(),
+1854:       {{http2::adapter::HEADER_TABLE_SIZE, http2_options.hpack_table_size().value()},
+1855:        {http2::adapter::ENABLE_CONNECT_PROTOCOL, http2_options.allow_connect()},
+1856:        {http2::adapter::MAX_CONCURRENT_STREAMS, http2_options.max_concurrent_streams().value()},
+1857:        {http2::adapter::INITIAL_WINDOW_SIZE, http2_options.initial_stream_window_size().value()}});
+1858:   adapter_->SubmitSettings(settings);
+1859: }
+1860: 
+1861: void ConnectionImpl::sendSettings(
+1862:     const envoy::config::core::v3::Http2ProtocolOptions& http2_options, bool disable_push) {
+1863:   sendSettingsHelper(http2_options, disable_push);
+1864: 
+1865:   const uint32_t initial_connection_window_size =
+1866:       http2_options.initial_connection_window_size().value();
+1867:   // Increase connection window size up to our default size.
+1868:   if (initial_connection_window_size != INITIAL_CONNECTION_WINDOW_SIZE) {
+1869:     ENVOY_CONN_LOG(debug, "updating connection-level initial window size to {}", connection_,
+1870:                    initial_connection_window_size);
+1871:     adapter_->SubmitWindowUpdate(0,
+1872:                                  initial_connection_window_size - INITIAL_CONNECTION_WINDOW_SIZE);
+1873:   }
+1874: }
+1875: 
+1876: int ConnectionImpl::setAndCheckCodecCallbackStatus(Status&& status) {
+1877:   // Keep the error status that caused the original failure. Subsequent
+1878:   // error statuses are silently discarded.
+1879:   codec_callback_status_.Update(std::move(status));
+1880:   if (codec_callback_status_.ok() && connection_.state() != Network::Connection::State::Open) {
+1881:     if (!active_streams_.empty() || !raised_goaway_) {
+1882:       codec_callback_status_ = codecProtocolError("Connection was closed while dispatching frames");
+1883:     } else {
+1884:       codec_callback_status_ = goAwayGracefulCloseError();
+1885:     }
+1886:   }
+1887: 
+1888:   return codec_callback_status_.ok() ? 0 : ERR_CALLBACK_FAILURE;
+1889: }
+1890: 

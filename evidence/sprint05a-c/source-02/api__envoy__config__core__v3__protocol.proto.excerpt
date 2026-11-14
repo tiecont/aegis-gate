@@ -1,0 +1,180 @@
+100:   // <https://tools.ietf.org/html/draft-ietf-quic-transport-34#section-4.1>`_ size. Valid values range from
+101:   // ``1`` to ``16777216`` (``2^24``, maximum supported by QUICHE) and defaults to ``16777216`` (``16 * 1024 * 1024``).
+102:   //
+103:   // .. note::
+104:   //
+105:   //   ``16384`` (``2^14``) is the minimum window size supported in Google QUIC. If configured smaller than it, we will use
+106:   //   ``16384`` instead. QUICHE IETF QUIC implementation supports ``1`` byte window. We only support increasing the default
+107:   //   window size now, so it's also the minimum.
+108:   //
+109:   // This field also acts as a soft limit on the number of bytes Envoy will buffer per-stream in the
+110:   // QUIC stream send and receive buffers. Once the buffer reaches this pointer, watermark callbacks will fire to
+111:   // stop the flow of data to the stream buffers.
+112:   google.protobuf.UInt32Value initial_stream_window_size = 2
+113:       [(validate.rules).uint32 = {lte: 16777216 gte: 1}];
+114: 
+115:   // Similar to ``initial_stream_window_size``, but for connection-level
+116:   // flow-control. Valid values range from ``1`` to ``25165824`` (``24MB``, maximum supported by QUICHE) and defaults
+117:   // to ``25165824`` (``24 * 1024 * 1024``).
+118:   //
+119:   // .. note::
+120:   //
+121:   //   ``16384`` (``2^14``) is the minimum window size supported in Google QUIC. We only support increasing the default
+122:   //   window size now, so it's also the minimum.
+123:   //
+124:   google.protobuf.UInt32Value initial_connection_window_size = 3
+125:       [(validate.rules).uint32 = {lte: 25165824 gte: 1}];
+126: 
+127:   // The number of timeouts that can occur before port migration is triggered for QUIC clients.
+128:   // This defaults to ``4``. If set to ``0``, port migration will not occur on path degrading.
+129:   // Timeout here refers to QUIC internal path degrading timeout mechanism, such as ``PTO``.
+130:   // This has no effect on server sessions.
+131:   google.protobuf.UInt32Value num_timeouts_to_trigger_port_migration = 4
+132:       [(validate.rules).uint32 = {lte: 5 gte: 0}];
+133: 
+134:   // Probes the peer at the configured interval to solicit traffic, i.e. ``ACK`` or ``PATH_RESPONSE``, from the peer to push back connection idle timeout.
+135:   // If absent, use the default keepalive behavior of which a client connection sends ``PING``s every ``15s``, and a server connection doesn't do anything.
+136:   QuicKeepAliveSettings connection_keepalive = 5;
+137: 
+138:   // A comma-separated list of strings representing QUIC connection options defined in
+139:   // `QUICHE <https://github.com/google/quiche/blob/main/quiche/quic/core/crypto/crypto_protocol.h>`_ and to be sent by upstream connections.
+140:   string connection_options = 6;
+141: 
+142:   // A comma-separated list of strings representing QUIC client connection options defined in
+397:   //   Upstream responses are not affected by this setting.
+398:   //
+399:   // .. note::
+400:   //
+401:   //   This only affects client headers. It does not affect headers added by Envoy filters and does not have any
+402:   //   impact if added to cluster config.
+403:   HeadersWithUnderscoresAction headers_with_underscores_action = 5;
+404: 
+405:   // Optional maximum requests for both upstream and downstream connections.
+406:   // If not specified, there is no limit.
+407:   // Setting this parameter to ``1`` will effectively disable keep alive.
+408:   // For HTTP/2 and HTTP/3, due to concurrent stream processing, the limit is approximate.
+409:   google.protobuf.UInt32Value max_requests_per_connection = 6;
+410: }
+411: 
+412: // [#next-free-field: 12]
+413: message Http1ProtocolOptions {
+414:   option (udpa.annotations.versioning).previous_message_type =
+415:       "envoy.api.v2.core.Http1ProtocolOptions";
+416: 
+417:   // [#next-free-field: 9]
+418:   message HeaderKeyFormat {
+419:     option (udpa.annotations.versioning).previous_message_type =
+420:         "envoy.api.v2.core.Http1ProtocolOptions.HeaderKeyFormat";
+421: 
+422:     message ProperCaseWords {
+423:       option (udpa.annotations.versioning).previous_message_type =
+424:           "envoy.api.v2.core.Http1ProtocolOptions.HeaderKeyFormat.ProperCaseWords";
+425:     }
+426: 
+427:     oneof header_format {
+584:       (validate.rules).uint32 = {lte: 65535 gte: 0},
+585:       (validate.rules).message = {required: true}
+586:     ];
+587: 
+588:     // The 32 bit parameter value.
+589:     google.protobuf.UInt32Value value = 2 [(validate.rules).message = {required: true}];
+590:   }
+591: 
+592:   // `Maximum table size <https://httpwg.org/specs/rfc7541.html#rfc.section.4.2>`_
+593:   // (in octets) that the encoder is permitted to use for the dynamic HPACK table. Valid values
+594:   // range from ``0`` to ``4294967295`` (``2^32 - 1``) and defaults to ``4096``. ``0`` effectively disables header
+595:   // compression.
+596:   google.protobuf.UInt32Value hpack_table_size = 1;
+597: 
+598:   // `Maximum concurrent streams <https://httpwg.org/specs/rfc7540.html#rfc.section.5.1.2>`_
+599:   // allowed for peer on one HTTP/2 connection. Valid values range from ``1`` to ``2147483647`` (``2^31 - 1``)
+600:   // and defaults to ``1024`` for safety and should be sufficient for most use cases.
+601:   //
+602:   // For upstream connections, this also limits how many streams Envoy will initiate concurrently
+603:   // on a single connection. If the limit is reached, Envoy may queue requests or establish
+604:   // additional connections (as allowed per circuit breaker limits).
+605:   //
+606:   // This acts as an upper bound: Envoy will lower the max concurrent streams allowed on a given
+607:   // connection based on upstream settings. Config dumps will reflect the configured upper bound,
+608:   // not the per-connection negotiated limits.
+609:   google.protobuf.UInt32Value max_concurrent_streams = 2
+610:       [(validate.rules).uint32 = {lte: 2147483647 gte: 1}];
+611: 
+612:   // `Initial stream-level flow-control window
+613:   // <https://httpwg.org/specs/rfc7540.html#rfc.section.6.9.2>`_ size. Valid values range from ``65535``
+614:   // (``2^16 - 1``, HTTP/2 default) to ``2147483647`` (``2^31 - 1``, HTTP/2 maximum) and defaults to
+615:   // ``16MiB`` (``16 * 1024 * 1024``).
+616:   //
+617:   // .. note::
+618:   //
+619:   //   ``65535`` is the initial window size from HTTP/2 spec. We only support increasing the default window size now,
+620:   //   so it's also the minimum.
+621:   //
+622:   // This field also acts as a soft limit on the number of bytes Envoy will buffer per-stream in the
+623:   // HTTP/2 codec buffers. Once the buffer reaches this pointer, watermark callbacks will fire to
+624:   // stop the flow of data to the codec buffers.
+625:   google.protobuf.UInt32Value initial_stream_window_size = 3
+626:       [(validate.rules).uint32 = {lte: 2147483647 gte: 65535}];
+627: 
+628:   // Similar to ``initial_stream_window_size``, but for connection-level flow-control
+629:   // window. The default is ``24MiB`` (``24 * 1024 * 1024``).
+630:   google.protobuf.UInt32Value initial_connection_window_size = 4
+631:       [(validate.rules).uint32 = {lte: 2147483647 gte: 65535}];
+632: 
+633:   // Allows proxying Websocket and other upgrades over H2 connect.
+634:   bool allow_connect = 5;
+635: 
+636:   // [#not-implemented-hide:] Hiding until Envoy has full metadata support.
+637:   // Still under implementation. DO NOT USE.
+638:   //
+639:   // Allows sending and receiving HTTP/2 METADATA frames. See [metadata
+640:   // docs](https://github.com/envoyproxy/envoy/blob/main/source/docs/h2_metadata.md) for more
+641:   // information.
+642:   bool allow_metadata = 6;
+643: 
+644:   // Limit the number of pending outbound downstream frames of all types (frames that are waiting to
+645:   // be written into the socket). Exceeding this limit triggers flood mitigation and connection is
+646:   // terminated. The ``http2.outbound_flood`` stat tracks the number of terminated connections due
+647:   // to flood mitigation. The default limit is ``10000``.
+648:   google.protobuf.UInt32Value max_outbound_frames = 7 [(validate.rules).uint32 = {gte: 1}];
+726:   // 2. SETTINGS_ENABLE_CONNECT_PROTOCOL (0x8) is only configurable through the named field
+727:   // 'allow_connect'.
+728:   //
+729:   // .. note::
+730:   //
+731:   //   Custom parameters specified through this field can not also be set in the
+732:   //   corresponding named parameters:
+733:   //
+734:   // .. code-block:: text
+735:   //
+736:   //   ID    Field Name
+737:   //   ----------------
+738:   //   0x1   hpack_table_size
+739:   //   0x3   max_concurrent_streams
+740:   //   0x4   initial_stream_window_size
+741:   //
+742:   // Collisions will trigger config validation failure on load/update. Likewise, inconsistencies
+743:   // between custom parameters with the same identifier will trigger a failure.
+744:   //
+745:   // See `IANA HTTP/2 Settings
+746:   // <https://www.iana.org/assignments/http2-parameters/http2-parameters.xhtml#settings>`_ for
+747:   // standardized identifiers.
+748:   repeated SettingsParameter custom_settings_parameters = 13;
+749: 
+750:   // Send HTTP/2 PING frames to verify that the connection is still healthy. If the remote peer
+751:   // does not respond within the configured timeout, the connection will be aborted.
+752:   KeepaliveSettings connection_keepalive = 15;
+753: 
+754:   // [#not-implemented-hide:] Hiding so that the field can be removed after oghttp2 is rolled out.
+755:   // If set, force use of a particular HTTP/2 codec: oghttp2 if true, nghttp2 if false.
+756:   // If unset, HTTP/2 codec is selected based on envoy.reloadable_features.http2_use_oghttp2.
+757:   google.protobuf.BoolValue use_oghttp2_codec = 16
+758:       [(xds.annotations.v3.field_status).work_in_progress = true];
+759: 
+760:   // Configure the maximum amount of metadata than can be handled per stream. Defaults to ``1 MB``.
+761:   google.protobuf.UInt64Value max_metadata_size = 17;
+762: 
+763:   // Controls whether to encode headers using huffman encoding.
+764:   // This can be useful in cases where the cpu spent encoding the headers isn't
+765:   // worth the network bandwidth saved e.g. for localhost.
+766:   // If unset, uses the data plane's default value.
