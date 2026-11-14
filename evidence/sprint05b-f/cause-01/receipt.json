@@ -1,0 +1,62 @@
+{
+  "reviewer_commit": "50758c956f95f86917bcc5527293051733a82888",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05b-f/scripts/sprint05b-f-cause.mjs",
+    "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/b-f7ce126ad3bf",
+    "evidence/sprint05b-f/cause-01"
+  ],
+  "started_at": "2026-11-14T18:52:41.367Z",
+  "source_commit": "f7ce126ad3bf56762e18fe8c009566728530d339",
+  "source_tree": "cac700a5a7c93c476778d077a85b434b17798195",
+  "binary_sha256": "1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc",
+  "scope": "Independent causal diagnostic; no original oracle or timing replacement",
+  "tests": [
+    {
+      "name": "cold-host-denial-zero-origin",
+      "detail": {
+        "bytes": 0,
+        "handlers": 0,
+        "accepts": 0,
+        "chunks": 0
+      }
+    }
+  ],
+  "semantic_security_pass": false,
+  "sources": [
+    {
+      "file": "spikes/envoy/sprint05b-b-native-launcher.mjs",
+      "sha256": "3f73805fb682edcc353d48563d8d0e2cd1906a1f97c529086dee67133342b58e"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-combined-config.mjs",
+      "sha256": "3cb1b622f67cc7f85c5d62eb1b8c345c2dc77ff7c8a4dc2d2f3a4aee76566fd7"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.mjs",
+      "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065"
+    }
+  ],
+  "launch": {
+    "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "args": [
+      "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/b-f7ce126ad3bf/spikes/envoy/sprint05b-b-native-launcher.mjs",
+      "/tmp/aegisgate-05b-f/.local/sprint05b-f-cause-k2FXBO/manifest.json",
+      "45319"
+    ],
+    "environment": {
+      "AEGIS_05A_D_POLICY": "stream-errors",
+      "AEGIS_05B_B_BINARY": "/home/tiecont/Projects/aegis-gate/.local/sprint05b-native/envoy",
+      "AEGIS_05B_B_BINARY_SHA256": "1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc"
+    },
+    "pid": 2388326
+  },
+  "error": "Error [ERR_HTTP2_GOAWAY_SESSION]: New streams cannot be created after receiving a GOAWAY\n    at ClientHttp2Session.request (node:internal/http2/core:1843:22)\n    at request (file:///tmp/aegisgate-05b-f/scripts/sprint05b-f-cause.mjs:81:27)\n    at file:///tmp/aegisgate-05b-f/scripts/sprint05b-f-cause.mjs:91:24\n    at check (file:///tmp/aegisgate-05b-f/scripts/sprint05b-f-cause.mjs:44:24)\n    at file:///tmp/aegisgate-05b-f/scripts/sprint05b-f-cause.mjs:90:9\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+  "cleanup": {
+    "fixture_removed": true,
+    "launcher_exit": 0,
+    "origin_sockets": 0,
+    "lock_held": true
+  },
+  "ended_at": "2026-11-14T18:52:42.722Z"
+}

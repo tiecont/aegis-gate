@@ -1,0 +1,252 @@
+{
+  "source_commit": "f7ce126ad3bf56762e18fe8c009566728530d339",
+  "source_tree": "cac700a5a7c93c476778d077a85b434b17798195",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/b-f7ce126ad3bf/spikes/envoy/sprint05b-b-analyze.mjs",
+    "evidence/sprint05b-b/f-native-tap",
+    "evidence/sprint05b-b/analysis-f"
+  ],
+  "node": "v26.13.0",
+  "input_source_commit": "f7ce126ad3bf56762e18fe8c009566728530d339",
+  "input_source_tree": "cac700a5a7c93c476778d077a85b434b17798195",
+  "inputs": [
+    {
+      "file": "evidence/sprint05b-b/f-native-tap/wire.json",
+      "sha256": "da25b77834095bbda109f9aae216e00ecca38e9f4e7cabeb131bff842b196aa8"
+    },
+    {
+      "file": "evidence/sprint05b-b/f-native-tap/original75.json",
+      "sha256": "9a5bbba7539c8f693108734865583ef2299adec0b523887fecc7b421d8e6e50d"
+    },
+    {
+      "file": "evidence/sprint05b-b/f-native-tap/receipt.json",
+      "sha256": "5f4e0fa34430e5192f28355f126b75539c4923612f2e5a6849de9ef96778c315"
+    }
+  ],
+  "overall_collector_complete": false,
+  "overall_collector_error": "AssertionError [ERR_ASSERTION]: controls: unexpected result\n    at run (file:///tmp/aegisgate-05b-f/.local/sprint05b-f-sources/b-f7ce126ad3bf/spikes/envoy/sprint05b-b-run.mjs:51:10)\n    at file:///tmp/aegisgate-05b-f/.local/sprint05b-f-sources/b-f7ce126ad3bf/spikes/envoy/sprint05b-b-run.mjs:87:3\n    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)\n    at async node:internal/modules/esm/loader:650:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:105:5)",
+  "resource_eligibility": false,
+  "unchanged_gate": {
+    "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+    "status": "fail",
+    "milliseconds": 16.88,
+    "error": "confused authority forwarded bytes to origin\n\n3031 !== 3022\n",
+    "origin": {
+      "handler_invocations": 0,
+      "decrypted_bytes": 9,
+      "parser_errors": 0,
+      "transport_errors": 0,
+      "requests": [],
+      "omitted_request_samples": 0
+    }
+  },
+  "boundary_before": {
+    "sequence": 58,
+    "time_ns": "25260504692691",
+    "kind": "test-end",
+    "message": "PASS HTTP2-downstream-and-upstream-ALPN",
+    "offsets": [
+      {
+        "id": 1,
+        "envoy_to_origin": 234,
+        "origin_to_envoy": 82
+      }
+    ]
+  },
+  "boundary_after": {
+    "sequence": 60,
+    "time_ns": "25260522167644",
+    "kind": "test-end",
+    "message": "FAIL HTTP2-authority-Host-and-SNI-confusion-rejected: confused authority forwarded bytes to origin\n\n3031 !== 3022\n",
+    "offsets": [
+      {
+        "id": 1,
+        "envoy_to_origin": 243,
+        "origin_to_envoy": 82
+      }
+    ]
+  },
+  "endpoint": {
+    "id": 1,
+    "sni": "lab-origin.test",
+    "alpn": "h2",
+    "local": {
+      "address": "127.0.0.1",
+      "port": 41461
+    },
+    "remote": {
+      "address": "127.0.0.1",
+      "port": 59772
+    },
+    "envoy_to_origin": 246342,
+    "origin_to_envoy": 246261
+  },
+  "interval": [
+    {
+      "sequence": 59,
+      "time_ns": "25260512091831",
+      "kind": "bytes",
+      "connection": 1,
+      "direction": "envoy_to_origin",
+      "offset": 234,
+      "hex": "000000040100000000"
+    }
+  ],
+  "peer_settings": [
+    {
+      "connection": 1,
+      "direction": "origin_to_envoy",
+      "offset": 0,
+      "observed_sequence": 57,
+      "observed_ns": "25260500081272",
+      "kind": "frame",
+      "type": 4,
+      "name": "SETTINGS",
+      "flags": 0,
+      "stream": 0,
+      "length": 0,
+      "bytes": 9,
+      "sha256": "5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053",
+      "hex": "000000040000000000"
+    }
+  ],
+  "corresponding_ack": {
+    "connection": 1,
+    "direction": "envoy_to_origin",
+    "offset": 234,
+    "observed_sequence": 59,
+    "observed_ns": "25260512091831",
+    "kind": "frame",
+    "type": 4,
+    "name": "SETTINGS",
+    "flags": 1,
+    "stream": 0,
+    "length": 0,
+    "bytes": 9,
+    "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+    "hex": "000000040100000000"
+  },
+  "event_order": [
+    {
+      "connection": 1,
+      "direction": "envoy_to_origin",
+      "offset": 0,
+      "observed_sequence": 56,
+      "observed_ns": "25260492748411",
+      "kind": "preface",
+      "bytes": 24
+    },
+    {
+      "connection": 1,
+      "direction": "envoy_to_origin",
+      "offset": 24,
+      "observed_sequence": 56,
+      "observed_ns": "25260492748411",
+      "kind": "frame",
+      "type": 4,
+      "name": "SETTINGS",
+      "flags": 0,
+      "stream": 0,
+      "length": 30,
+      "bytes": 39,
+      "sha256": "af8ffcfa6ac22de3f60c9039c2c098db1fb1053e99a319ce5341b1aba2f9f5a4"
+    },
+    {
+      "connection": 1,
+      "direction": "envoy_to_origin",
+      "offset": 63,
+      "observed_sequence": 56,
+      "observed_ns": "25260492748411",
+      "kind": "frame",
+      "type": 1,
+      "name": "HEADERS",
+      "flags": 5,
+      "stream": 1,
+      "length": 162,
+      "bytes": 171,
+      "sha256": "351a9ec7abeb05ff2fba5d61e1cc2e6f55e864643966be533d9dcfc61aea66c9"
+    },
+    {
+      "connection": 1,
+      "direction": "origin_to_envoy",
+      "offset": 0,
+      "observed_sequence": 57,
+      "observed_ns": "25260500081272",
+      "kind": "frame",
+      "type": 4,
+      "name": "SETTINGS",
+      "flags": 0,
+      "stream": 0,
+      "length": 0,
+      "bytes": 9,
+      "sha256": "5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053",
+      "hex": "000000040000000000"
+    },
+    {
+      "connection": 1,
+      "direction": "origin_to_envoy",
+      "offset": 9,
+      "observed_sequence": 57,
+      "observed_ns": "25260500081272",
+      "kind": "frame",
+      "type": 4,
+      "name": "SETTINGS",
+      "flags": 1,
+      "stream": 0,
+      "length": 0,
+      "bytes": 9,
+      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+      "hex": "000000040100000000"
+    },
+    {
+      "connection": 1,
+      "direction": "origin_to_envoy",
+      "offset": 18,
+      "observed_sequence": 57,
+      "observed_ns": "25260500081272",
+      "kind": "frame",
+      "type": 1,
+      "name": "HEADERS",
+      "flags": 4,
+      "stream": 1,
+      "length": 37,
+      "bytes": 46,
+      "sha256": "7bbbd2fa3f7a725a95e3fd75268377c28f7c5a3cbe0d63bf1e70f6e92405c87a"
+    },
+    {
+      "connection": 1,
+      "direction": "origin_to_envoy",
+      "offset": 64,
+      "observed_sequence": 57,
+      "observed_ns": "25260500081272",
+      "kind": "frame",
+      "type": 0,
+      "name": "DATA",
+      "flags": 1,
+      "stream": 1,
+      "length": 9,
+      "bytes": 18,
+      "sha256": "b9c71c52b8ce1e833469ccf3b3acd95189edbe1a550ce63818f0d4627d3b9e42"
+    },
+    {
+      "connection": 1,
+      "direction": "envoy_to_origin",
+      "offset": 234,
+      "observed_sequence": 59,
+      "observed_ns": "25260512091831",
+      "kind": "frame",
+      "type": 4,
+      "name": "SETTINGS",
+      "flags": 1,
+      "stream": 0,
+      "length": 0,
+      "bytes": 9,
+      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+      "hex": "000000040100000000"
+    }
+  ],
+  "conclusion": "Envoy sent the sole ACK of the sole observed origin SETTINGS on the already established H2 origin connection during the unchanged failing interval. No HEADERS/DATA were sent in that interval. This is still an all-byte gate failure.",
+  "limit": "Times identify JS relay observation order, not Envoy internal scheduling or kernel wire-send timestamps.",
+  "exit_code": 0
+}
