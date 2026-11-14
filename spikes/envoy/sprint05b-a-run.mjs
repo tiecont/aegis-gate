@@ -4,7 +4,8 @@ import assert from 'node:assert/strict';
 import tls from 'node:tls';
 import https from 'node:https';
 import net from 'node:net';
-import { execFileSync } from 'node:child_process';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import { once } from 'node:events';
 import { setTimeout as delay } from 'node:timers/promises';
 import { assertLock, listen, until } from './wire-fixtures.mjs';
@@ -14,18 +15,19 @@ import { Admission, Stage, bounds } from './sprint05b-admission.mjs';
 
 process.umask(0o077);
 assertLock();
-const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
-assert.equal(git('branch', '--show-current'), 'feat/sprint05b-llhttp-admission');
+const exec = promisify(execFile);
+const git = async (...args) => (await exec('git', args, { encoding: 'utf8', timeout: 10000 })).stdout.trim();
+assert.equal(await git('branch', '--show-current'), 'feat/sprint05b-llhttp-admission');
 assert.equal(fs.realpathSync(process.execPath), fs.realpathSync('.local/toolchains/node/bin/node'));
-assert.equal(git('status', '--porcelain', '--untracked-files=no'), '', 'commit exact sources before evidence');
+assert.equal(await git('status', '--porcelain', '--untracked-files=no'), '', 'commit exact sources before evidence');
 const output = process.argv[2];
 assert.match(output ?? '', /^evidence\/sprint05b-a\/[a-z]+-\d+$/);
 fs.mkdirSync(output, { recursive: false });
-const sources = git('ls-files', 'spikes/envoy/sprint05b*', 'spikes/envoy/wire-fixtures.mjs',
+const sources = (await git('ls-files', 'spikes/envoy/sprint05b*', 'spikes/envoy/wire-fixtures.mjs',
   'spikes/edge-comparison/manifest.json', 'evidence/sprint05a-b/source-01/sources.json',
-  'evidence/sprint05b-a/PLAN.md').split('\n').filter(Boolean);
+  'evidence/sprint05b-a/PLAN.md')).split('\n').filter(Boolean);
 assert.ok(sources.includes('spikes/envoy/sprint05b-llhttp-addon.c'));
-const record = { sourceCommit: git('rev-parse', 'HEAD'), sourceTree: git('rev-parse', 'HEAD^{tree}'),
+const record = { sourceCommit: await git('rev-parse', 'HEAD'), sourceTree: await git('rev-parse', 'HEAD^{tree}'),
   trackedClean: true, startedAt: new Date().toISOString(), argv: process.argv, cwd: process.cwd(),
   node: { version: process.version, executable: process.execPath, sha256: hash(fs.readFileSync(process.execPath)) },
   sources: sources.map((file) => ({ file, sha256: hash(fs.readFileSync(file)) })), limits,
@@ -36,15 +38,15 @@ let fixture, front, addon;
 const started = Date.now();
 const watchdog = setTimeout(() => { record.error ??= '90s watchdog'; for (const s of sockets) s.destroy(); }, 90000);
 try {
-  command(record, ['git', 'diff', '--exit-code', '8758b1c84b4186449cd79fabae461ca53ee05100', '--', 'spikes/edge-comparison']);
-  command(record, ['uname', '-a']); command(record, ['openssl', 'version']);
+  await command(record, ['git', 'diff', '--exit-code', '8758b1c84b4186449cd79fabae461ca53ee05100', '--', 'spikes/edge-comparison']);
+  await command(record, ['uname', '-a']); await command(record, ['openssl', 'version']);
   record.tools = ['cc', 'openssl', 'curl'].map((name) => {
     const file = fs.realpathSync(`/usr/bin/${name}`);
     return { name, file, sha256: hash(fs.readFileSync(file)) };
   });
   fs.mkdirSync('.local', { recursive: true });
   fixture = fs.mkdtempSync(path.resolve('.local/sprint05b-a-'));
-  addon = build(fixture, record);
+  addon = await build(fixture, record);
   const manifest = JSON.parse(fs.readFileSync('spikes/edge-comparison/manifest.json'));
   const originals = manifest.negatives.filter((p) => /obsolete.fold/.test(p.name));
   const original = originals.find((p) => p.name === 'malformed-HTTP-obsolete-folded-header');
@@ -134,12 +136,12 @@ try {
   }
   const pkiDir = path.join(fixture, 'pki'); fs.mkdirSync(pkiDir);
   const openssl = (...argv) => command(record, ['openssl', ...argv], { cwd: pkiDir });
-  openssl('req', '-x509', '-newkey', 'rsa:2048', '-nodes', '-keyout', 'ca.key', '-out', 'ca.pem',
+  await openssl('req', '-x509', '-newkey', 'rsa:2048', '-nodes', '-keyout', 'ca.key', '-out', 'ca.pem',
     '-days', '1', '-subj', '/CN=disposable Sprint05B A CA', '-addext', 'basicConstraints=critical,CA:TRUE');
   for (const [name, host] of [['edge-a', 'edge-a.test'], ['origin', 'lab-origin.test']]) {
-    openssl('req', '-new', '-newkey', 'rsa:2048', '-nodes', '-keyout', `${name}.key`, '-out', `${name}.csr`,
+    await openssl('req', '-new', '-newkey', 'rsa:2048', '-nodes', '-keyout', `${name}.key`, '-out', `${name}.csr`,
       '-subj', `/CN=${host}`, '-addext', `subjectAltName=DNS:${host}`);
-    openssl('x509', '-req', '-in', `${name}.csr`, '-CA', 'ca.pem', '-CAkey', 'ca.key', '-CAcreateserial',
+    await openssl('x509', '-req', '-in', `${name}.csr`, '-CA', 'ca.pem', '-CAkey', 'ca.key', '-CAcreateserial',
       '-out', `${name}.pem`, '-days', '1', '-copy_extensions', 'copy');
   }
   fs.unlinkSync(`${pkiDir}/ca.key`);
@@ -235,7 +237,7 @@ try {
   await probe('valid-trailer', trailer());
   await probe(`original-${original.name}`, original.request, { expected: [400] });
   await probe(`original-${originals[1].name}`, originals[1].request, { expected: [400] });
-  for (const entry of manifest.negatives.filter((p) => /CL-|TE-|content-length|transfer-encoding/i.test(p.name) && !/obsolete.fold/.test(p.name)))
+  for (const entry of manifest.negatives.filter((p) => /(?:^|-)(?:CL|TE)-|content-length|transfer-encoding/.test(p.name) && !/obsolete.fold/.test(p.name)))
     await probe(entry.name, entry.request, { expected: [400] });
   await probe('original-obs-fold-reused', original.request, { warmup: true, expected: [400] });
   const headerSplit = original.request.indexOf(' second');
@@ -402,7 +404,7 @@ try {
     liveNativeParsers: addon?.liveParsers(), lockHeldThroughCleanup: true, elapsedMs: Date.now() - started };
   assertLock();
   for (const source of record.sources) assert.equal(hash(fs.readFileSync(source.file)), source.sha256);
-  assert.equal(git('rev-parse', 'HEAD'), record.sourceCommit);
+  assert.equal(await git('rev-parse', 'HEAD'), record.sourceCommit);
   record.endedAt = new Date().toISOString();
   const serialized = JSON.stringify(record, null, 2) + '\n';
   fs.writeFileSync(`${output}/receipt.json`, serialized, { flag: 'wx' });

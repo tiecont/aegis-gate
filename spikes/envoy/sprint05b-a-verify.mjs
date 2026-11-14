@@ -1,10 +1,12 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import { createHash } from 'node:crypto';
 
 const out = process.argv[2]; assert.match(out, /^evidence\/sprint05b-a\/run-\d+$/);
 const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
+const exec = promisify(execFile);
 for (const line of fs.readFileSync(`${out}/SHA256SUMS`, 'utf8').trim().split('\n')) {
   const [expected, file] = line.split('  '); assert.equal(hash(fs.readFileSync(file)), expected, file);
 }
@@ -12,13 +14,13 @@ const r = JSON.parse(fs.readFileSync(`${out}/receipt.json`));
 const command = JSON.parse(fs.readFileSync(`${out}/command.json`));
 assert.equal(command.exit, 0); assert.equal(command.signal, null);
 assert.equal(r.sourceCommit, command.source_commit);
-assert.equal(execFileSync('git', ['rev-parse', `${r.sourceCommit}^{tree}`], { encoding: 'utf8' }).trim(), r.sourceTree);
+assert.equal((await exec('git', ['rev-parse', `${r.sourceCommit}^{tree}`], { encoding: 'utf8' })).stdout.trim(), r.sourceTree);
 for (const s of r.sources) {
-  assert.equal(hash(execFileSync('git', ['show', `${r.sourceCommit}:${s.file}`])), s.sha256, s.file);
+  assert.equal(hash((await exec('git', ['show', `${r.sourceCommit}:${s.file}`], { encoding: 'buffer' })).stdout), s.sha256, s.file);
   assert.equal(hash(fs.readFileSync(s.file)), s.sha256, 'current source differs from measured source');
 }
 assert.equal(r.completed, true); assert.equal(r.error, undefined);
-for (const c of r.commands) { assert.equal(c.exit, 0, c.argv.join(' ')); assert.equal(c.signal, null); }
+for (const c of r.commands) { assert.equal(c.exit, 0, c.argv.join(' ')); assert.equal(c.signal, null); assert.equal(c.error, undefined); }
 assert.equal(r.cleanup.fixtureAbsent, true); assert.equal(r.cleanup.remainingSockets, 0);
 assert.equal(r.cleanup.listeners, 0); assert.equal(r.cleanup.liveNativeParsers, 0);
 assert.equal(r.cleanup.allocatedStaging, 0); assert.equal(r.cleanup.lockHeldThroughCleanup, true);
