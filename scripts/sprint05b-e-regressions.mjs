@@ -30,7 +30,7 @@ for (const file of privateFiles)
 fs.mkdirSync(output, { recursive: true });
 const env = {
   ...process.env,
-  PATH: `${path.dirname(process.execPath)}:${process.env.PATH}`,
+  PATH: `${path.dirname(process.execPath)}:/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin:${process.env.PATH}`,
   AEGIS_NODE_BIN: process.execPath,
   GOTOOLCHAIN: "go1.27.4",
   COMPOSE_PROJECT_NAME: `aegisgate-05b-e-attempt-01-${randomBytes(6).toString("hex")}`,
