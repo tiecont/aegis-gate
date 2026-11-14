@@ -7,7 +7,7 @@ import { assertLock } from './wire-fixtures.mjs';
 
 process.umask(0o077); assertLock();
 const [output] = process.argv.slice(2);
-assert.match(output ?? '', /^evidence\/sprint05a-(?:root|f)\/candidate-\d+$/);
+assert.match(output ?? '', /^evidence\/sprint05[ab]-(?:root|f)\/candidate-\d+$/);
 assert.ok(!fs.existsSync(output));
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 8 << 20 }).trim();
 assert.equal(git('status', '--porcelain', '--untracked-files=no'), '');
