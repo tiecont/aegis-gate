@@ -1,0 +1,111 @@
+{
+  "source_commit": "acec5e67c46cd703145ee8ed13ee731b8db57a0d",
+  "source_tree": "44971876851f1c9bfe2a94b4a7915daf30941240",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05a-f/spikes/envoy/sprint05a-f-extended-verify.mjs",
+    "evidence/sprint05a-f/extendedchecks-01"
+  ],
+  "started_at": "2026-11-14T15:05:45.251Z",
+  "commands": [
+    {
+      "label": "clean-b",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/aegisgate-05a-f-exact-b",
+        "diff",
+        "--exit-code",
+        "133d3eae70fa6dfe6b27ee0b4ca0ce08b8d44dcf"
+      ],
+      "started_at": "2026-11-14T15:05:45.324Z",
+      "ended_at": "2026-11-14T15:05:45.333Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-01/clean-b.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-01/clean-b.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "clean-c",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/aegisgate-05a-f-exact-c",
+        "diff",
+        "--exit-code",
+        "d4fc4b1460d846142c05beb854697efe89a10352"
+      ],
+      "started_at": "2026-11-14T15:05:45.377Z",
+      "ended_at": "2026-11-14T15:05:45.385Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-01/clean-c.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-01/clean-c.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "clean-combined",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/aegisgate-05a-f-exact-combined",
+        "diff",
+        "--exit-code",
+        "8d293c8ad7ab5c2deaac868462913243852adde7"
+      ],
+      "started_at": "2026-11-14T15:05:45.424Z",
+      "ended_at": "2026-11-14T15:05:45.431Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-01/clean-combined.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-01/clean-combined.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "commit": "133d3eae70fa6dfe6b27ee0b4ca0ce08b8d44dcf",
+      "files": 9,
+      "scope": "B llhttp"
+    }
+  ],
+  "manifests": [
+    {
+      "file": "evidence/sprint05a-f/extended-01/SHA256SUMS",
+      "sha256": "e5452e5d7b2221f45250ce77c9dffdeac34249ae6d8b546a9fe72742e912a940",
+      "entries": 194
+    }
+  ],
+  "security_pass": false,
+  "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok([32, 9].includes(bytes[p.result.consumed]))\n\n    at file:///tmp/aegisgate-05a-f/spikes/envoy/sprint05a-f-extended-verify.mjs:58:12\n    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)\n    at async node:internal/modules/esm/loader:650:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:105:5)",
+  "ended_at": "2026-11-14T15:05:45.496Z",
+  "lock_held_through_hashing": true
+}

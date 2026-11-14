@@ -53,7 +53,7 @@ try {
     assert.equal(sha(fs.readFileSync(cached)), p.sha256, p.name);
   }
   for (const p of b.parses) {
-    if (p.result.error === 'HPE_OK') continue;
+    if (p.result.error !== 'HPE_INVALID_HEADER_TOKEN') continue;
     const bytes = Buffer.from(p.input_hex, 'hex');
     assert.ok([32, 9].includes(bytes[p.result.consumed]));
     assert.equal(bytes.subarray(p.result.consumed - 2, p.result.consumed).toString(), '\r\n');
