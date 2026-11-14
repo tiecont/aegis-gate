@@ -2,6 +2,7 @@ import datetime,hashlib,json,pathlib,shutil,subprocess,sys
 root=pathlib.Path.cwd();out=root/sys.argv[1];assert not out.exists();out.mkdir(parents=True)
 sha=lambda b:hashlib.sha256(b).hexdigest();git=lambda cwd,*a:subprocess.check_output(['git',*a],cwd=cwd,text=True).strip()
 assert not git(root,'status','--porcelain','--untracked-files=no')
+stage=None
 r={'source_commit':git(root,'rev-parse','HEAD'),'source_tree':git(root,'rev-parse','HEAD^{tree}'),'argv':sys.argv,'python':sys.version,'started_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'receipts':[],'commands':[]}
 try:
  for owner,attempts in [('b',['upstream-01','reproh-01','reprot-01','reprot-02','checks-01']),('d',['attempt-01','verification-02'])]:
@@ -16,9 +17,9 @@ try:
      assert sha((cwd/s['file']).read_bytes())==s['sha256'];streams+=1
    r['receipts'].append({'owner':owner,'attempt':attempt,'source_commit':j['source_commit'],'source_tree':j['source_tree'],'verified_sources':sources,'verified_commands':len(j['commands']),'verified_streams':streams})
  # Copy only the validated owned additions into a bounded scanner input tree.
- stage=root/'.local/f-owned';assert not stage.exists();stage.mkdir(parents=True)
+ stage=root/('.local/f-owned-'+out.name);assert not stage.exists();stage.mkdir(parents=True)
  total=0;count=0
- for owner in ['a','b','c','d','e']:
+ for owner in (sys.argv[2].split(',') if len(sys.argv)>2 else ['a','b','c','d','e']):
   cwd=pathlib.Path('/tmp/aegisgate-04c-'+owner)
   for file in git(cwd,'diff','--name-only','a325b9e','HEAD').splitlines():
    raw=(cwd/file).read_bytes();dest=stage/owner/file;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(raw);total+=len(raw);count+=1
@@ -33,6 +34,7 @@ try:
  shutil.rmtree(stage);r['scanner_stage_removed']=True;r['exit_code']=0
 except Exception as e:r['error']=repr(e);r['exit_code']=1
 finally:
+ if stage is not None and stage.exists():shutil.rmtree(stage)
  r['ended_at']=datetime.datetime.now(datetime.timezone.utc).isoformat();(out/'verification.json').write_text(json.dumps(r,indent=2)+'\n')
  (out/'SHA256SUMS').write_text(''.join(sha(f.read_bytes())+'  '+str(f.relative_to(root))+'\n' for f in sorted(out.iterdir()) if f.name!='SHA256SUMS'))
  print(json.dumps({'exit_code':r['exit_code'],'error':r.get('error'),'receipts':len(r['receipts'])}));sys.exit(r['exit_code'])
