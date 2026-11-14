@@ -1,0 +1,745 @@
+{
+  "source_commit": "2fa9b13afa2e81bfbd679a67c11a3f4377951e1a",
+  "source_tree": "fcafdbd5f199e59bab1dbedda238b4e026c4cbca",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05a-f/spikes/envoy/sprint05a-f-extended-verify.mjs",
+    "evidence/sprint05a-f/extendedchecks-02"
+  ],
+  "started_at": "2026-11-14T15:13:10.620Z",
+  "commands": [
+    {
+      "label": "clean-b",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/aegisgate-05a-f-exact-b",
+        "diff",
+        "--exit-code",
+        "133d3eae70fa6dfe6b27ee0b4ca0ce08b8d44dcf"
+      ],
+      "started_at": "2026-11-14T15:13:10.665Z",
+      "ended_at": "2026-11-14T15:13:10.672Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/clean-b.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/clean-b.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "clean-c",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/aegisgate-05a-f-exact-c",
+        "diff",
+        "--exit-code",
+        "d4fc4b1460d846142c05beb854697efe89a10352"
+      ],
+      "started_at": "2026-11-14T15:13:10.710Z",
+      "ended_at": "2026-11-14T15:13:10.716Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/clean-c.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/clean-c.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "clean-combined",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/aegisgate-05a-f-exact-combined",
+        "diff",
+        "--exit-code",
+        "8d293c8ad7ab5c2deaac868462913243852adde7"
+      ],
+      "started_at": "2026-11-14T15:13:10.751Z",
+      "ended_at": "2026-11-14T15:13:10.758Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/clean-combined.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/clean-combined.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "secrets-tree-b",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05a-f-exact-b:/repo:ro",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-14T15:13:11.258Z",
+      "ended_at": "2026-11-14T15:13:18.748Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-tree-b.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-tree-b.stderr",
+          "bytes": 133,
+          "sha256": "1769f9bf2af658aaab5ea8d225e932ccb9f4ae6e1c02865ed3aeaccbb029977b"
+        }
+      ]
+    },
+    {
+      "label": "secrets-history-b",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05a-f-exact-b:/repo:ro",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate/.git:/git-common:ro",
+        "-e",
+        "GIT_DIR=/git-common",
+        "-e",
+        "GIT_WORK_TREE=/repo",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "git",
+        "/repo",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner",
+        "--log-opts=541d1d9..133d3eae70fa6dfe6b27ee0b4ca0ce08b8d44dcf"
+      ],
+      "started_at": "2026-11-14T15:13:18.757Z",
+      "ended_at": "2026-11-14T15:13:20.609Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-history-b.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-history-b.stderr",
+          "bytes": 188,
+          "sha256": "a4d91a3d9e1f424119af36aa22b9628ebda4a15bae1aacaa369bc472bdc914ef"
+        }
+      ]
+    },
+    {
+      "label": "secrets-tree-c",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05a-f-exact-c:/repo:ro",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-14T15:13:20.618Z",
+      "ended_at": "2026-11-14T15:13:29.277Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-tree-c.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-tree-c.stderr",
+          "bytes": 133,
+          "sha256": "fccd169395df1a2ff951189cbc3d08ee1b10e83ae8feb832a819d62912f00915"
+        }
+      ]
+    },
+    {
+      "label": "secrets-history-c",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05a-f-exact-c:/repo:ro",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate/.git:/git-common:ro",
+        "-e",
+        "GIT_DIR=/git-common",
+        "-e",
+        "GIT_WORK_TREE=/repo",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "git",
+        "/repo",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner",
+        "--log-opts=541d1d9..d4fc4b1460d846142c05beb854697efe89a10352"
+      ],
+      "started_at": "2026-11-14T15:13:29.289Z",
+      "ended_at": "2026-11-14T15:13:34.820Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-history-c.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-history-c.stderr",
+          "bytes": 188,
+          "sha256": "5e8cfd37818d20f4c0e7af4559230f0052fec85b7ceb345ac9c34676b33ac203"
+        }
+      ]
+    },
+    {
+      "label": "secrets-tree-combined",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05a-f-exact-combined:/repo:ro",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-14T15:13:34.828Z",
+      "ended_at": "2026-11-14T15:13:42.957Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-tree-combined.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-tree-combined.stderr",
+          "bytes": 133,
+          "sha256": "f9ca79adacc022715793aed3eac3865cf3ddebfee10e10c44f2cd0d2263485b4"
+        }
+      ]
+    },
+    {
+      "label": "secrets-history-combined",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05a-f-exact-combined:/repo:ro",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate/.git:/git-common:ro",
+        "-e",
+        "GIT_DIR=/git-common",
+        "-e",
+        "GIT_WORK_TREE=/repo",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "git",
+        "/repo",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner",
+        "--log-opts=541d1d9..8d293c8ad7ab5c2deaac868462913243852adde7"
+      ],
+      "started_at": "2026-11-14T15:13:42.964Z",
+      "ended_at": "2026-11-14T15:13:44.762Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-history-combined.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-history-combined.stderr",
+          "bytes": 188,
+          "sha256": "d47189dd53bd9dd718c64d4cf931bdabf709e57d88f2b994894dc6a2a6624e11"
+        }
+      ]
+    },
+    {
+      "label": "secrets-tree-b-final",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05a-b:/repo:ro",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-14T15:13:44.768Z",
+      "ended_at": "2026-11-14T15:13:53.280Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-tree-b-final.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-tree-b-final.stderr",
+          "bytes": 133,
+          "sha256": "1a691274a1653c76e119b8793854e13cdd5f6fac39402105a5b62fd5df04301b"
+        }
+      ]
+    },
+    {
+      "label": "secrets-history-b-final",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05a-b:/repo:ro",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate/.git:/git-common:ro",
+        "-e",
+        "GIT_DIR=/git-common",
+        "-e",
+        "GIT_WORK_TREE=/repo",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "git",
+        "/repo",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner",
+        "--log-opts=541d1d9..2f7fe949c55778d7b2293f4c936fb9cbf555031b"
+      ],
+      "started_at": "2026-11-14T15:13:53.291Z",
+      "ended_at": "2026-11-14T15:13:55.322Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-history-b-final.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-history-b-final.stderr",
+          "bytes": 188,
+          "sha256": "7743f5698ebd43bc4b48add57863ec61f48dbc956409dfadeac9cfa5a92b3cce"
+        }
+      ]
+    },
+    {
+      "label": "secrets-tree-f",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05a-f:/repo:ro",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-14T15:13:55.332Z",
+      "ended_at": "2026-11-14T15:14:04.687Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-tree-f.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-tree-f.stderr",
+          "bytes": 133,
+          "sha256": "9cd901be5ec0a2989a513bc0fd1e31ab2fed6e043db2bf6008db86fb49161ca6"
+        }
+      ]
+    },
+    {
+      "label": "secrets-history-f",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05a-f:/repo:ro",
+        "-v",
+        "/home/tiecont/Projects/aegis-gate/.git:/git-common:ro",
+        "-e",
+        "GIT_DIR=/git-common",
+        "-e",
+        "GIT_WORK_TREE=/repo",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "git",
+        "/repo",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--no-banner",
+        "--log-opts=541d1d9..2fa9b13afa2e81bfbd679a67c11a3f4377951e1a"
+      ],
+      "started_at": "2026-11-14T15:14:04.695Z",
+      "ended_at": "2026-11-14T15:14:09.757Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-history-f.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/secrets-history-f.stderr",
+          "bytes": 188,
+          "sha256": "6196675d6776a3e2ee12c2f562255019b96351fdf18dadb2f5286c6fa6c78b5c"
+        }
+      ]
+    },
+    {
+      "label": "baseline",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "started_at": "2026-11-14T15:14:09.763Z",
+      "ended_at": "2026-11-14T15:14:09.873Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/baseline.stdout",
+          "bytes": 74,
+          "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/baseline.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "immutable-tests",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "--test",
+        "spikes/edge-comparison/contract.test.mjs",
+        "spikes/edge-comparison/evaluate.test.mjs",
+        "spikes/edge-comparison/tls-observer.test.mjs"
+      ],
+      "started_at": "2026-11-14T15:14:09.886Z",
+      "ended_at": "2026-11-14T15:14:10.229Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/immutable-tests.stdout",
+          "bytes": 782,
+          "sha256": "98bf8c343548d274f88322a00c7c8b2d4f0370e7ad72fbbaf4e61c89bb325d17"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/immutable-tests.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "cleanup-inventory",
+      "argv": [
+        "docker",
+        "ps",
+        "-a",
+        "--filter",
+        "name=^/aegis-envoy-",
+        "--filter",
+        "name=^/aegis-sprint05a-",
+        "--format",
+        "{{.ID}} {{.Names}}"
+      ],
+      "started_at": "2026-11-14T15:14:10.242Z",
+      "ended_at": "2026-11-14T15:14:10.270Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/cleanup-inventory.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/cleanup-inventory.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "authored-whitespace",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "541d1d9",
+        "--",
+        "spikes/envoy/sprint05a-f-*",
+        "docs/reports/sprint05a-f*"
+      ],
+      "started_at": "2026-11-14T15:14:10.277Z",
+      "ended_at": "2026-11-14T15:14:10.286Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/authored-whitespace.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05a-f/extendedchecks-02/authored-whitespace.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "commit": "133d3eae70fa6dfe6b27ee0b4ca0ce08b8d44dcf",
+      "files": 9,
+      "scope": "B llhttp"
+    },
+    {
+      "commit": "d4fc4b1460d846142c05beb854697efe89a10352",
+      "files": 22,
+      "scope": "C original75"
+    },
+    {
+      "commit": "8d293c8ad7ab5c2deaac868462913243852adde7",
+      "files": 75,
+      "scope": "combined"
+    }
+  ],
+  "manifests": [
+    {
+      "file": "evidence/sprint05a-f/extended-01/SHA256SUMS",
+      "sha256": "e5452e5d7b2221f45250ce77c9dffdeac34249ae6d8b546a9fe72742e912a940",
+      "entries": 194
+    }
+  ],
+  "security_pass": false,
+  "h2": {
+    "before": {
+      "message": "PASS HTTP2-downstream-and-upstream-ALPN",
+      "time_ns": "11029306562767",
+      "offsets": [
+        {
+          "id": 1,
+          "bytes": 236
+        }
+      ]
+    },
+    "after": {
+      "message": "FAIL HTTP2-authority-Host-and-SNI-confusion-rejected: confused authority forwarded bytes to origin\n\n3033 !== 3024\n",
+      "time_ns": "11029323891682",
+      "offsets": [
+        {
+          "id": 1,
+          "bytes": 245
+        }
+      ]
+    },
+    "chunks": [
+      {
+        "connection": 1,
+        "time_ns": "11029312658736",
+        "hex": "000000040100000000"
+      }
+    ],
+    "ack_sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+    "repaired": false
+  },
+  "header_repairs": [
+    {
+      "name": "raw-H2-uppercase-header-name",
+      "started_at": "2026-11-14T14:54:56.387Z",
+      "error_frames": [
+        {
+          "kind": "frame",
+          "type": 3,
+          "name": "RST_STREAM",
+          "flags": 0,
+          "stream": 1,
+          "length": 4,
+          "bytes": 13,
+          "sha256": "902f528c71b3d55985510ee73256814dee0bdf71ce6320ad21bd0f6531f20185",
+          "error_code": 1,
+          "hex": "00000403000000000100000001",
+          "code": 1
+        }
+      ],
+      "sent_sha256_note": "exact bytes generated by committed source",
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "raw-H2-connection-specific-header",
+      "started_at": "2026-11-14T14:54:56.433Z",
+      "error_frames": [
+        {
+          "kind": "frame",
+          "type": 3,
+          "name": "RST_STREAM",
+          "flags": 0,
+          "stream": 1,
+          "length": 4,
+          "bytes": 13,
+          "sha256": "902f528c71b3d55985510ee73256814dee0bdf71ce6320ad21bd0f6531f20185",
+          "error_code": 1,
+          "hex": "00000403000000000100000001",
+          "code": 1
+        }
+      ],
+      "sent_sha256_note": "exact bytes generated by committed source",
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    }
+  ],
+  "completed": true,
+  "ended_at": "2026-11-14T15:14:10.287Z",
+  "lock_held_through_hashing": true
+}

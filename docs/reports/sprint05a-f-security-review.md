@@ -1,11 +1,12 @@
-# Sprint05A F Initial A/D Security Review
+# Sprint05A F Independent Security Review
 
 Initial independent verdict: **ACCEPT A's four specific TE repairs and D's
 two malformed-header repairs plus bounded window/cancellation behavior** in
 test-only candidates. **REJECT overall protocol acceptance**: A remains73/75,
 D remains19/23. This does not accept root integration, production code, a
 runtime architecture, or a release. Module01 NO-GO;04-12 LOCKED; production
-BLOCKED. B/C/E and final combined integration review remain pending.
+BLOCKED. The completed B/C/combined follow-up below supersedes the initial
+pending B/C/combined scope. E and final root integration gates remain separate.
 
 ## Exact Sources
 
@@ -182,7 +183,7 @@ environment,tool identity,timestamps,exit codes,raw failures and stream hashes;
 each group has SHA256SUMS. A lifecycle UTC14:29:05.579-14:31:07.774; D
 UTC14:33:48.287-14:35:14.128; integrity14:39:05.557-14:39:34.202 on2026-11-14.
 
-## Agent Completion Report
+## Initial A/D Agent Completion Report
 
 - Module/status:01/Sprint05A F initial A/D review complete; final review pending.
 - Commits/files: committed F harness/verifier before their proof; additive F
@@ -198,3 +199,175 @@ UTC14:33:48.287-14:35:14.128; integrity14:39:05.557-14:39:34.202 on2026-11-14.
 - Next unblocked action: root may assess accepted isolated candidate changes,
   repair D cleanup capture and run combined unchanged75/23 plus controls; final
   integration verdict follows exact final sources and required gate evidence.
+
+## Final B/C/Combined Independent Follow-Up
+
+**ACCEPT** A's four TE assertions, D's two malformed-header assertions and
+bounded window/cancellation observations, and B's narrow released-llhttp
+pre-normalization capability. **REJECT** C as an H2 repair and **REJECT** full
+protocol acceptance for the combined candidate. **Module01 remains NO-GO**;
+Modules04-12 LOCKED; production BLOCKED. This is a scoped engineering review,
+not affirmative human architecture/security approval or final integration
+signoff. Root's later local/hosted gate results are outside this verdict.
+
+F independently created fresh detached worktrees and executed exact committed
+sources, without importing component changes into this review branch:
+
+| Candidate | Exact commit | Exact tree | Independently measured result |
+| --- | --- | --- | --- |
+| B | `133d3eae70fa6dfe6b27ee0b4ca0ce08b8d44dcf` | `d3a126941eba127152ff485b722a3c1242370913` | 22 wire observations;10/10 fold rejections;24 direct controls |
+| C | `d4fc4b1460d846142c05beb854697efe89a10352` | `33c0bdece42397a91083deffacee447fcf81b7da` | bounded variant69/75;H2 still9 bytes;7/7 lifecycle controls |
+| Combined A/D | `8d293c8ad7ab5c2deaac868462913243852adde7` | `03b61ba9303c4dfc7538b2b8feb8f4658d0ad53c` | original73/75;original19/23;17 bounded observations |
+
+The combined full commit/tree values are bound by
+`extended-01/receipt.json` and `combined/commands.json`; the latter is the
+exact component runner receipt, not a source reconstruction. F runtime harness
+was committed first at `1ba8b5be198afb6c7ec943cbaab74ff11bb7c8c1`, tree
+`edfce0f3a2721de4cbb0f8d900330f707f18452b`. All4003 protected baseline
+mode/type/blob entries match in each exact checkout before and after proof.
+Working trees remain clean, original75/23/evaluator remain unchanged, and
+`extract-baseline.mjs --check` passes in all three checkouts and F.
+
+### B: Narrow ACCEPT, Full Runtime REJECT
+
+F rebuilt the unchanged C test driver against llhttp9.4.4, upstream commit
+`816485216511b86459b2e6478190e14c38c14891`. Official source cache bytes were
+reused only after independently matching every recorded SHA256; restore also
+validates them. No generated parser code, private fork or raw framing scanner
+was added. Fresh compiler output and driver binary hash are in the receipt.
+
+Ten SP/HTAB folded-header/trailer cases, including reused downstream sockets,
+fragmented header and delayed trailer, all return400 with actual peer end,
+no timeout/client FIN, and zero origin bytes/new connections/handlers/parser
+errors/transport errors. Both exact original manifest inputs pass byte-equality
+and rejection checks. Delayed trailer has zero activity before its final
+fragment. Six encoded targets, unfolded header/trailer and ordered pipeline
+controls pass. Mixed valid/folded pipeline retains all52 valid origin bytes,
+one valid handler, then400; F explicitly verifies those exact52 bytes.
+
+The16 direct folding controls reject with `HPE_INVALID_HEADER_TOKEN`, at the
+first SP/HTAB after CRLF with zero completed messages, across feed sizes1/2/7/
+65536 and strict/relaxed-value modes. Callback spans stop before that byte.
+Eight valid trailer controls complete. The exact folded-TE manifest input
+instead reports `HPE_INVALID_TRANSFER_ENCODING`; F preserves that distinct
+upstream diagnostic and does not claim every malformed input uses one error.
+
+ACCEPT is limited to this bounded test admission adapter. It buffers through
+message completion/trailers before forwarding unchanged bytes; streaming a
+prefix before trailer validation would not establish zero-byte rejection.
+32KiB pending-buffer/subprocess limits, repeated parsing, and absent full
+protocol/tenant/TLS-negative/resource/config integration prevent any complete
+maintained ingress, production parser, performance or full75/full23 claim.
+F did not rerun B's Envoy/Nginx experiments and grants no new verdict on them.
+
+### C: Stop Conclusion ACCEPT, H2 Repair REJECT
+
+The exact bounded candidate repeats69/75 and the six original failures. The
+H2 authority/Host/SNI negative records0 handlers/errors but9 origin bytes.
+Passive capture between the unchanged preceding/failing test boundaries has
+one chunk on existing connection1: `000000040100000000`, a SETTINGS ACK,
+SHA256 `a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6`.
+Capture is complete; F verifies the raw chunk and timing boundaries. Those
+bytes are retained without subtraction, timing adjustment or exemption.
+
+The seven separate bounded lifecycle controls pass: cold denials/no dial,
+valid sequential reuse, concurrent reuse, warm denials with retained bytes,
+route-pool partition, generation retirement with in-flight preservation, and
+trust retirement/recovery. These controls do not override the failed original
+gate. C's supported host check/window/pool settings preserve verification;
+F accepts the documented stop conclusion, not a repaired H2 identity gate.
+
+### Combined: Scoped Repairs ACCEPT, Overall REJECT
+
+F runs the unmodified combined wrapper from exact8d293c8. The resolver selects
+only launcher config imports; the composition transfers A's supported local
+reply mapping onto D's supported stream-error/window policy. Test source is
+unchanged. Baseline TLS identity checks remain inherited intact. Full75
+repeats73/75: obsolete folding still dispatches1 handler/263 bytes; confused
+H2 authority still has0 handlers/9 bytes. All four A TE assertions remain PASS.
+
+Full23 repeats19/23. The two accepted malformed-header cases retain exact
+peer RST_STREAM/PROTOCOL_ERROR `00000403000000000100000001` with all five
+origin counters0. Remaining failures are the two original userinfo/deadline
+assertions and HEADERS-stream0/zero-WINDOW_UPDATE missing error-frame
+assertions. No deterministic16=>19 baseline transition is claimed. Seventeen
+bounded controls complete with `semantic_security_pass=false`; this is not an
+additional17 mandatory security PASS result or a memory/fairness guarantee.
+The combined collector exits0 for complete capture; original75,evaluator and
+original23 child commands each retain exit1 for actual mandatory failures.
+
+### Source, Secret And Cleanup Verification
+
+`sprint05a-f-extended-verify.mjs` independently binds all B/C/combined receipt
+source hashes to exact Git objects, verifies all194 retained files against
+the outer SHA256 manifest, confirms pins, raw parser callback offsets, mixed
+pipeline bytes, ACK capture, malformed-header frames and protected baseline
+objects. It reruns the unchanged contract/evaluator/observer suite:7 tests
+PASS. Ten pinned, offline, redacted Gitleaks scans pass: filesystem plus
+541d1d9-to-exact-head histories for B,C,combined,F and B's subsequent
+`2f7fe94` report/verification-only head. No source differs between B133d3ea
+and that later B head. This is secret/provenance evidence, not exhaustive
+dependency advisory approval; maintained-release/pinning evidence does not
+replace root dependency/SBOM/security gates.
+
+All fixture work holds the global flock through setup,capture,cleanup,hashing.
+Fresh private PKI is deleted; every candidate container is absent; all three
+exact checkout `.local` directories contain no fixture residue (B retains
+only hash-verified public upstream source cache). Docker cleanup inventory is
+empty. No public test/listener,publication,push,merge or sub-agent was used.
+The F runner did not execute D's broad-inspection collector. C's existing
+collector reads scoped C Docker objects internally during cleanup but emits
+only stop metadata; F's own verification uses name-only inventory.
+
+One failed verifier attempt is preserved at `extendedchecks-01`: its generic
+offset assertion incorrectly applied folding-token semantics to the distinct
+folded-TE error. Corrected checker source committed as `2fa9b13` scopes that
+offset check to `HPE_INVALID_HEADER_TOKEN`; `extendedchecks-02` exits0. No
+candidate,original assertion,raw output or prior receipt was edited.
+
+### Exact Reproduction And Receipts
+
+Using the supplied Node binary already identified above, execute each command
+under one outer `flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock`:
+
+| Entrypoint and arguments | Actual result |
+| --- | --- |
+| `spikes/envoy/sprint05a-f-extended.mjs evidence/sprint05a-f/extended-01` |0;fresh exact B,C,combined worktrees;captures above |
+| `spikes/envoy/sprint05a-f-extended-verify.mjs evidence/sprint05a-f/extendedchecks-01` |1;retained overbroad verifier assertion |
+| `spikes/envoy/sprint05a-f-extended-verify.mjs evidence/sprint05a-f/extendedchecks-02` |0;hash/source/parser/frame/baseline/scans/cleanup checks |
+
+Reproduction requires fresh output and detached-worktree names; do not
+overwrite retained evidence. Safe argv/environment,UTC timestamps,versions,
+exit codes,source/tree and stream hashes are retained for every child command.
+The new runtime lifecycle was2026-11-14 UTC14:52:02 through14:55:24; authoritative
+exact endpoints are in `extended-01/receipt.json`.
+
+| Artifact under `evidence/sprint05a-f/extended-01/` | SHA256 |
+| --- | --- |
+| `receipt.json` | `60f8041ddf2a3aa85e18a7df31563efd0b6bf1bbf4860ff722cced23b1eb74a7` |
+| `SHA256SUMS` | `e5452e5d7b2221f45250ce77c9dffdeac34249ae6d8b546a9fe72742e912a940` |
+| `b-llhttp/receipt.json` | `906f416141aac931745f62e6184f083d149c123e497706e427183ab49e730501` |
+| `c-original75/results.json` | `24f259d96cb91d2f9a15e364eec6556606f1676eda6e331409303e0cee8272dc` |
+| `c-original75/raw-h2.json` | `2a4758baa61af0a635f40531ce5f85c3cccef4e4697b5bdabd613b510c2c20ff` |
+| `c-lifecycle/receipt.json` | `45e6b9b00ddc90719b2271c2ea8b3e086253cfecef292c3cff8470f81acbfa71` |
+| `combined/commands.json` | `820deb3a3af4e9294983eb2974287b2ffa85cb927243c22e4df2c52bab2cc1f4` |
+
+## Agent Completion Report
+
+- Module/status:01/Sprint05A F requested independent A/D/B/C/combined review
+  complete in scoped local research; overall protocol/release NO-GO.
+- Commits/files:F-owned harness/verifier,additive receipts and this report;
+  component sources executed from clean exact detached checkouts.
+- Architecture/contracts:no changes;original75/23 and4003 baseline objects
+  preserved;no human approval or production acceptance implied.
+- Positive/security tests:A73/75+51 focused;D19/23 selected;B22 wire+24 direct;
+  C69/75+7 lifecycle;combined73/75,19/23+17 observations;7 unchanged tests;
+  ten exact-source/history secret scans,source/hash/cleanup verification pass.
+- Performance:bounded samples only;no sustained resource,SLO or capacity claim.
+- Risks/blockers:folding and H2 zero-byte failures,userinfo deadlines,missing
+  required H2 error frames;llhttp integration breadth;D collector;root local/
+  hosted dependency and final integration gates;affirmative human decision.
+- Human review needed:architecture/security approval remains PENDING.
+- Next runnable action:root assess these exact scoped ACCEPTs and retained
+  failures,finish its combined/local/hosted gates and independent final source
+  review. Module04 remains locked regardless of isolated research progress.
