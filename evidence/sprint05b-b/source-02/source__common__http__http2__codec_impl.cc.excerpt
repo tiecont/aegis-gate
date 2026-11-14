@@ -1,0 +1,238 @@
+981:       reject_frames_after_end_stream_(Runtime::runtimeFeatureEnabled(
+982:           "envoy.reloadable_features.http2_reject_frames_after_end_stream")),
+983:       protocol_constraints_(stats, http2_options,
+984:                             Runtime::runtimeFeatureEnabled(
+985:                                 "envoy.reloadable_features.http2_flood_protection_active_streams")),
+986:       dispatching_(false), raised_goaway_(false), random_(random_generator),
+987:       last_received_data_time_(connection_.dispatcher().timeSource().monotonicTime()) {
+988:   if (http2_options.has_use_oghttp2_codec()) {
+989:     use_oghttp2_library_ = http2_options.use_oghttp2_codec().value();
+990:   } else {
+991:     use_oghttp2_library_ =
+992:         Runtime::runtimeFeatureEnabled("envoy.reloadable_features.http2_use_oghttp2");
+993:   }
+994:   if (http2_options.has_connection_keepalive()) {
+995:     keepalive_interval_ = std::chrono::milliseconds(
+996:         PROTOBUF_GET_MS_OR_DEFAULT(http2_options.connection_keepalive(), interval, 0));
+997:     keepalive_timeout_ = std::chrono::milliseconds(
+998:         PROTOBUF_GET_MS_REQUIRED(http2_options.connection_keepalive(), timeout));
+999:     keepalive_interval_jitter_percent_ = PROTOBUF_GET_WRAPPED_OR_DEFAULT(
+1000:         http2_options.connection_keepalive(), interval_jitter, 15.0);
+1001: 
+1002:     if (keepalive_interval_.count() > 0) {
+1003:       keepalive_send_timer_ = connection.dispatcher().createTimer([this]() { sendKeepalive(); });
+1004:     }
+1005:     keepalive_timeout_timer_ =
+1006:         connection.dispatcher().createTimer([this]() { onKeepaliveResponseTimeout(); });
+1007: 
+1008:     // This call schedules the initial interval, with jitter.
+1009:     onKeepaliveResponse();
+1010:   }
+1011: }
+1012: 
+1013: ConnectionImpl::~ConnectionImpl() {
+1014:   for (const auto& stream : active_streams_) {
+1015:     stream->destroy();
+1127:     current_slice_ = nullptr;
+1128:     dispatching_ = false;
+1129:     current_stream_id_.reset();
+1130:   }
+1131: 
+1132:   ENVOY_CONN_LOG(trace, "dispatched {} bytes", connection_, data.length());
+1133:   data.drain(data.length());
+1134: 
+1135:   // Decoding incoming frames can generate outbound frames so flush pending.
+1136:   return sendPendingFrames();
+1137: }
+1138: 
+1139: const ConnectionImpl::StreamImpl* ConnectionImpl::getStream(int32_t stream_id) const {
+1140:   // Delegate to the non-const version.
+1141:   return const_cast<ConnectionImpl*>(this)->getStream(stream_id);
+1142: }
+1143: 
+1144: ConnectionImpl::StreamImpl* ConnectionImpl::getStream(int32_t stream_id) {
+1145:   StreamImpl* stream = getStreamUnchecked(stream_id);
+1146:   SLOW_ASSERT(stream != nullptr || !slowContainsStreamId(stream_id));
+1147:   return stream;
+1148: }
+1149: 
+1150: const ConnectionImpl::StreamImpl* ConnectionImpl::getStreamUnchecked(int32_t stream_id) const {
+1151:   // Delegate to the non-const version.
+1152:   return const_cast<ConnectionImpl*>(this)->getStreamUnchecked(stream_id);
+1153: }
+1154: 
+1155: ConnectionImpl::StreamImpl* ConnectionImpl::getStreamUnchecked(int32_t stream_id) {
+1156:   return static_cast<StreamImpl*>(adapter_->GetStreamUserData(stream_id));
+1157: }
+1158: 
+1159: int ConnectionImpl::onData(int32_t stream_id, const uint8_t* data, size_t len) {
+1755:     stats_.header_overflow_.inc();
+1756:     // This will cause the library to reset/close the stream.
+1757:     return ERR_TEMPORAL_CALLBACK_FAILURE;
+1758:   }
+1759: 
+1760:   return 0;
+1761: }
+1762: 
+1763: Status ConnectionImpl::sendPendingFrames() {
+1764:   if (dispatching_ || connection_.state() == Network::Connection::State::Closed) {
+1765:     return okStatus();
+1766:   }
+1767: 
+1768:   const int rc = adapter_->Send();
+1769:   if (rc != 0) {
+1770:     ASSERT(rc == ERR_CALLBACK_FAILURE);
+1771:     return codecProtocolError(codecStrError(rc));
+1772:   }
+1773: 
+1774:   // See ConnectionImpl::StreamImpl::resetStream() for why we do this. This is an uncommon event,
+1775:   // so iterating through every stream to find the ones that have a deferred reset is not a big
+1776:   // deal. Furthermore, queueing a reset frame does not actually invoke the close stream callback.
+1777:   // This is only done when the reset frame is sent. Thus, it's safe to work directly with the
+1778:   // stream map.
+1779:   // NOTE: The way we handle deferred reset is essentially best effort. If we intend to do a
+1780:   //       deferred reset, we try to finish the stream, including writing any pending data frames.
+1781:   //       If we cannot do this (potentially due to not enough window), we just reset the stream.
+1782:   //       In general this behavior occurs only when we are trying to send immediate error messages
+1783:   //       to short circuit requests. In the best effort case, we complete the stream before
+1784:   //       resetting. In other cases, we just do the reset now which will blow away pending data
+1785:   //       frames and release any memory associated with the stream.
+1786:   if (!pending_deferred_reset_streams_.empty()) {
+1787:     while (!pending_deferred_reset_streams_.empty()) {
+1809: bool ConnectionImpl::sendPendingFramesAndHandleError() {
+1810:   if (!sendPendingFrames().ok()) {
+1811:     scheduleProtocolConstraintViolationCallback();
+1812:     return true;
+1813:   }
+1814:   return false;
+1815: }
+1816: 
+1817: void ConnectionImpl::sendSettingsHelper(
+1818:     const envoy::config::core::v3::Http2ProtocolOptions& http2_options, bool disable_push) {
+1819:   absl::InlinedVector<http2::adapter::Http2Setting, 10> settings;
+1820:   auto insertParameter = [&settings](const http2::adapter::Http2Setting& entry) mutable -> bool {
+1821:     // Consider using a set as an intermediate data structure, rather than this ad-hoc
+1822:     // deduplication.
+1823:     const auto it = std::find_if(
+1824:         settings.cbegin(), settings.cend(),
+1825:         [&entry](const http2::adapter::Http2Setting& existing) { return entry.id == existing.id; });
+1826:     if (it != settings.end()) {
+1827:       return false;
+1828:     }
+1829:     settings.push_back(entry);
+1830:     return true;
+1831:   };
+1832: 
+1833:   // Universally disable receiving push promise frames as we don't currently
+1834:   // support them.
+1835:   // NOTE: This is a special case with respect to custom parameter overrides in
+1836:   // that server push is not supported and therefore not end user configurable.
+1837:   if (disable_push) {
+1838:     settings.push_back({static_cast<int32_t>(http2::adapter::ENABLE_PUSH), disable_push ? 0U : 1U});
+1839:   }
+1840: 
+1841:   for (const auto& it : http2_options.custom_settings_parameters()) {
+1850: 
+1851:   // Insert named parameters.
+1852:   settings.insert(
+1853:       settings.end(),
+1854:       {{http2::adapter::HEADER_TABLE_SIZE, http2_options.hpack_table_size().value()},
+1855:        {http2::adapter::ENABLE_CONNECT_PROTOCOL, http2_options.allow_connect()},
+1856:        {http2::adapter::MAX_CONCURRENT_STREAMS, http2_options.max_concurrent_streams().value()},
+1857:        {http2::adapter::INITIAL_WINDOW_SIZE, http2_options.initial_stream_window_size().value()}});
+1858:   adapter_->SubmitSettings(settings);
+1859: }
+1860: 
+1861: void ConnectionImpl::sendSettings(
+1862:     const envoy::config::core::v3::Http2ProtocolOptions& http2_options, bool disable_push) {
+1863:   sendSettingsHelper(http2_options, disable_push);
+1864: 
+1865:   const uint32_t initial_connection_window_size =
+1866:       http2_options.initial_connection_window_size().value();
+1867:   // Increase connection window size up to our default size.
+1868:   if (initial_connection_window_size != INITIAL_CONNECTION_WINDOW_SIZE) {
+1869:     ENVOY_CONN_LOG(debug, "updating connection-level initial window size to {}", connection_,
+1870:                    initial_connection_window_size);
+1871:     adapter_->SubmitWindowUpdate(0,
+1872:                                  initial_connection_window_size - INITIAL_CONNECTION_WINDOW_SIZE);
+1873:   }
+1874: }
+1875: 
+1876: int ConnectionImpl::setAndCheckCodecCallbackStatus(Status&& status) {
+1877:   // Keep the error status that caused the original failure. Subsequent
+1878:   // error statuses are silently discarded.
+1879:   codec_callback_status_.Update(std::move(status));
+1880:   if (codec_callback_status_.ok() && connection_.state() != Network::Connection::State::Open) {
+1881:     if (!active_streams_.empty() || !raised_goaway_) {
+1882:       codec_callback_status_ = codecProtocolError("Connection was closed while dispatching frames");
+1883:     } else {
+1884:       codec_callback_status_ = goAwayGracefulCloseError();
+1885:     }
+1886:   }
+1887: 
+2420:     Random::RandomGenerator& random_generator,
+2421:     const envoy::config::core::v3::Http2ProtocolOptions& http2_options,
+2422:     const uint32_t max_response_headers_kb, const uint32_t max_response_headers_count,
+2423:     Http2SessionFactory& http2_session_factory)
+2424:     : ConnectionImpl(connection, stats, random_generator, http2_options, max_response_headers_kb,
+2425:                      max_response_headers_count),
+2426:       callbacks_(callbacks) {
+2427:   ClientHttp2Options client_http2_options(http2_options, max_response_headers_kb);
+2428:   if (!use_oghttp2_library_) {
+2429: #ifdef ENVOY_NGHTTP2
+2430:     adapter_ = http2_session_factory.create(base(), client_http2_options.options());
+2431:     stats_.nghttp2_upstream_connections_.inc();
+2432: #endif
+2433:   }
+2434:   if (!adapter_) {
+2435:     adapter_ = http2_session_factory.create(base(), client_http2_options.ogOptions());
+2436:     stats_.oghttp2_upstream_connections_.inc();
+2437:   }
+2438:   http2_session_factory.init(base(), http2_options);
+2439:   allow_metadata_ = http2_options.allow_metadata();
+2440:   max_metadata_size_ =
+2441:       PROTOBUF_GET_WRAPPED_OR_DEFAULT(http2_options, max_metadata_size, 1024 * 1024);
+2442:   idle_session_requires_ping_interval_ = std::chrono::milliseconds(PROTOBUF_GET_MS_OR_DEFAULT(
+2443:       http2_options.connection_keepalive(), connection_idle_interval, 0));
+2444: }
+2445: 
+2446: RequestEncoder& ClientConnectionImpl::newStream(ResponseDecoder& decoder) {
+2447:   // If the connection has been idle long enough to trigger a ping, send one
+2448:   // ahead of creating the stream.
+2449:   if (idle_session_requires_ping_interval_.count() != 0 &&
+2450:       (connection_.dispatcher().timeSource().monotonicTime() - lastReceivedDataTime() >
+2451:        idle_session_requires_ping_interval_)) {
+2452:     sendKeepalive();
+2533:       trace, should_send_go_away_and_close_on_dispatch_ == nullptr,
+2534:       "LoadShedPoint envoy.load_shed_points.http2_server_go_away_and_close_on_dispatch is not "
+2535:       "found. Is it configured?");
+2536:   Http2Options h2_options(http2_options, max_request_headers_kb);
+2537: 
+2538:   auto direct_visitor = std::make_unique<Http2Visitor>(this);
+2539: 
+2540: #ifdef ENVOY_NGHTTP2
+2541:   if (use_oghttp2_library_) {
+2542: #endif
+2543:     visitor_ = std::move(direct_visitor);
+2544:     adapter_ = http2::adapter::OgHttp2Adapter::Create(*visitor_, h2_options.ogOptions());
+2545:     stats_.oghttp2_downstream_connections_.inc();
+2546: #ifdef ENVOY_NGHTTP2
+2547:   } else {
+2548:     auto adapter =
+2549:         http2::adapter::NgHttp2Adapter::CreateServerAdapter(*direct_visitor, h2_options.options());
+2550:     auto stream_close_listener = [p = adapter.get()](http2::adapter::Http2StreamId stream_id) {
+2551:       p->RemoveStream(stream_id);
+2552:     };
+2553:     direct_visitor->setStreamCloseListener(std::move(stream_close_listener));
+2554:     visitor_ = std::move(direct_visitor);
+2555:     adapter_ = std::move(adapter);
+2556:     stats_.nghttp2_downstream_connections_.inc();
+2557:   }
+2558: #endif
+2559:   sendSettings(http2_options, false);
+2560:   allow_metadata_ = http2_options.allow_metadata();
+2561:   max_metadata_size_ =
+2562:       PROTOBUF_GET_WRAPPED_OR_DEFAULT(http2_options, max_metadata_size, 1024 * 1024);
+2563: }
+2564: 
+2565: Status ServerConnectionImpl::onBeginHeaders(int32_t stream_id) {

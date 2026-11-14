@@ -1,0 +1,69 @@
+4237:   }
+4238: 
+4239:   return 0;
+4240: }
+4241: 
+4242: int nghttp2_session_on_settings_received(nghttp2_session *session,
+4243:                                          nghttp2_frame *frame, int noack) {
+4244:   int rv;
+4245:   size_t i;
+4246:   nghttp2_mem *mem;
+4247:   nghttp2_inflight_settings *settings;
+4248: 
+4249:   mem = &session->mem;
+4250: 
+4251:   if (frame->hd.stream_id != 0) {
+4252:     return session_handle_invalid_connection(session, frame, NGHTTP2_ERR_PROTO,
+4253:                                              "SETTINGS: stream_id != 0");
+4254:   }
+4255:   if (frame->hd.flags & NGHTTP2_FLAG_ACK) {
+4256:     if (frame->settings.niv != 0) {
+4257:       return session_handle_invalid_connection(
+4258:         session, frame, NGHTTP2_ERR_FRAME_SIZE_ERROR,
+4259:         "SETTINGS: ACK and payload != 0");
+4415: 
+4416:   if (session->remote_settings.no_rfc7540_priorities == UINT32_MAX) {
+4417:     session->remote_settings.no_rfc7540_priorities = 0;
+4418:   }
+4419: 
+4420:   if (!noack && !session_is_closing(session)) {
+4421:     rv = nghttp2_session_add_settings(session, NGHTTP2_FLAG_ACK, NULL, 0);
+4422: 
+4423:     if (rv != 0) {
+4424:       if (nghttp2_is_fatal(rv)) {
+4425:         return rv;
+4426:       }
+4427: 
+4428:       return session_handle_invalid_connection(session, frame,
+4429:                                                NGHTTP2_ERR_INTERNAL, NULL);
+4430:     }
+4431:   }
+4432: 
+4433:   return session_call_on_frame_received(session, frame);
+4434: }
+4435: 
+4436: static int session_process_settings_frame(nghttp2_session *session) {
+4437:   nghttp2_inbound_frame *iframe = &session->iframe;
+4465: 
+4466:   iframe->iv = NULL;
+4467:   iframe->niv = 0;
+4468:   iframe->max_niv = 0;
+4469: 
+4470:   return nghttp2_session_on_settings_received(session, frame, 0 /* ACK */);
+4471: }
+4472: 
+4473: int nghttp2_session_on_push_promise_received(nghttp2_session *session,
+4474:                                              nghttp2_frame *frame) {
+4475:   int rv;
+4476:   nghttp2_stream *stream;
+4477:   nghttp2_stream *promised_stream;
+4478: 
+4479:   if (frame->hd.stream_id == 0) {
+4480:     return session_inflate_handle_invalid_connection(
+4481:       session, frame, NGHTTP2_ERR_PROTO, "PUSH_PROMISE: stream_id == 0");
+4482:   }
+4483:   if (session->server || session->local_settings.enable_push == 0) {
+4484:     return session_inflate_handle_invalid_connection(
+4485:       session, frame, NGHTTP2_ERR_PROTO, "PUSH_PROMISE: push disabled");
+4486:   }
+4487: 

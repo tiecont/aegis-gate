@@ -1,0 +1,112 @@
+{
+  "source_commit": "540b101eff1aa31aa1e9a4e32008bafb15420b9e",
+  "source_tree": "8bea37973768717dd42e79138a05e884a4001dba",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05b-b/spikes/envoy/sprint05b-b-cleanup.mjs",
+    "evidence/sprint05b-b/cleanup-01"
+  ],
+  "node": "v26.13.0",
+  "started_at": "2026-11-14T18:18:58.764Z",
+  "commands": [
+    {
+      "program": "docker",
+      "args": [
+        "ps",
+        "-aq",
+        "--filter",
+        "name=^/aegis-envoy-",
+        "--filter",
+        "name=^/aegis-sprint05a-a-"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "11152fe6eaeb\n7d80b04f1ec2\n9b0b42ad9f3b\n8659b865cb0b\n",
+      "stderr": ""
+    },
+    {
+      "program": "docker",
+      "args": [
+        "inspect",
+        "--format",
+        "{{json .Mounts}}",
+        "11152fe6eaeb"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "[{\"Type\":\"bind\",\"Source\":\"/tmp/aegisgate-05b-c/.local/envoy-run-Ganajb\",\"Destination\":\"/tmp/aegisgate-05b-c/.local/envoy-run-Ganajb\",\"Mode\":\"\",\"RW\":false,\"Propagation\":\"rprivate\"},{\"Type\":\"bind\",\"Source\":\"/tmp/aegisgate-05b-c/.local/sprint05b-c-l0LQNc\",\"Destination\":\"/tmp/aegisgate-05b-c/.local/sprint05b-c-l0LQNc\",\"Mode\":\"\",\"RW\":false,\"Propagation\":\"rprivate\"}]\n",
+      "stderr": ""
+    },
+    {
+      "program": "docker",
+      "args": [
+        "inspect",
+        "--format",
+        "{{json .Mounts}}",
+        "7d80b04f1ec2"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "[{\"Type\":\"bind\",\"Source\":\"/tmp/aegisgate-05b-c/.local/envoy-run-jwPtRZ\",\"Destination\":\"/tmp/aegisgate-05b-c/.local/envoy-run-jwPtRZ\",\"Mode\":\"\",\"RW\":false,\"Propagation\":\"rprivate\"},{\"Type\":\"bind\",\"Source\":\"/tmp/aegisgate-05b-c/.local/sprint05b-c-gHs2J0\",\"Destination\":\"/tmp/aegisgate-05b-c/.local/sprint05b-c-gHs2J0\",\"Mode\":\"\",\"RW\":false,\"Propagation\":\"rprivate\"}]\n",
+      "stderr": ""
+    },
+    {
+      "program": "docker",
+      "args": [
+        "inspect",
+        "--format",
+        "{{json .Mounts}}",
+        "9b0b42ad9f3b"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "[{\"Type\":\"bind\",\"Source\":\"/tmp/aegisgate-05b-b/.local/sprint05a-a-envoy-E6zrx9\",\"Destination\":\"/tmp/aegisgate-05b-b/.local/sprint05a-a-envoy-E6zrx9\",\"Mode\":\"\",\"RW\":false,\"Propagation\":\"rprivate\"},{\"Type\":\"bind\",\"Source\":\"/tmp/aegisgate-05b-b/.local/sprint05b-b-pbqRMu/edge-proof-run-HybYl2\",\"Destination\":\"/tmp/aegisgate-05b-b/.local/sprint05b-b-pbqRMu/edge-proof-run-HybYl2\",\"Mode\":\"\",\"RW\":false,\"Propagation\":\"rprivate\"}]\n",
+      "stderr": ""
+    },
+    {
+      "program": "docker",
+      "args": [
+        "rm",
+        "-f",
+        "9b0b42ad9f3b"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "9b0b42ad9f3b\n",
+      "stderr": ""
+    },
+    {
+      "program": "docker",
+      "args": [
+        "inspect",
+        "--format",
+        "{{.Id}}",
+        "9b0b42ad9f3b"
+      ],
+      "exit_code": 1,
+      "signal": null,
+      "stdout": "\n",
+      "stderr": "error: no such object: 9b0b42ad9f3b\n"
+    },
+    {
+      "program": "docker",
+      "args": [
+        "inspect",
+        "--format",
+        "{{json .Mounts}}",
+        "8659b865cb0b"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "[{\"Type\":\"bind\",\"Source\":\"/tmp/aegisgate-05b-c/.local/envoy-run-scSdDD\",\"Destination\":\"/tmp/aegisgate-05b-c/.local/envoy-run-scSdDD\",\"Mode\":\"\",\"RW\":false,\"Propagation\":\"rprivate\"},{\"Type\":\"bind\",\"Source\":\"/tmp/aegisgate-05b-c/.local/sprint05b-c-lDrTmV\",\"Destination\":\"/tmp/aegisgate-05b-c/.local/sprint05b-c-lDrTmV\",\"Mode\":\"\",\"RW\":false,\"Propagation\":\"rprivate\"}]\n",
+      "stderr": ""
+    }
+  ],
+  "removed": [
+    "sprint05a-a-envoy-E6zrx9",
+    "sprint05b-b-pbqRMu"
+  ],
+  "exit_code": 0,
+  "lock_held_through_hash_cleanup": true,
+  "ended_at": "2026-11-14T18:19:01.352Z"
+}

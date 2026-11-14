@@ -1,0 +1,124 @@
+{
+  "source_commit": "d961720db2e6e09d9efb1f57257f7cf9a3604f3d",
+  "source_tree": "92d641cff5386497d66bfc695a78ab2489ed4376",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05b-b/spikes/envoy/sprint05b-b-cause.mjs",
+    "evidence/sprint05b-b/cause-01"
+  ],
+  "node": "v26.13.0",
+  "node_binary_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "started_at": "2026-11-14T18:25:21.661Z",
+  "tests": [
+    {
+      "name": "cold-host-denial-no-origin-accept-bytes-handler",
+      "status": "pass",
+      "detail": {
+        "status": 421,
+        "body": ""
+      }
+    },
+    {
+      "name": "valid-sequential-and-concurrent-h2-pool-reuse",
+      "status": "pass",
+      "detail": {
+        "responses": [
+          {
+            "status": 200,
+            "connection": "1",
+            "body": "h2-origin"
+          },
+          {
+            "status": 200,
+            "connection": "1",
+            "body": "h2-origin"
+          },
+          {
+            "status": 200,
+            "connection": "1",
+            "body": "h2-origin"
+          },
+          {
+            "status": 200,
+            "connection": "1",
+            "body": "h2-origin"
+          },
+          {
+            "status": 200,
+            "connection": "1",
+            "body": "h2-origin"
+          },
+          {
+            "status": 200,
+            "connection": "1",
+            "body": "h2-origin"
+          }
+        ],
+        "accepts": 1,
+        "handlers": 6,
+        "initial_settings_ack_received": true
+      }
+    },
+    {
+      "name": "idle-origin-settings-alone-cause-exact-nine-byte-ack",
+      "status": "pass",
+      "detail": {
+        "started_ns": "23769717904664",
+        "ended_ns": "23769756685798",
+        "raw_hex": "000000040100000000",
+        "origin_bytes": 9,
+        "handlers": 0,
+        "accepts": 0,
+        "downstream_requests_during_interval": 0,
+        "peer_setting": {
+          "maxConcurrentStreams": 31
+        }
+      }
+    },
+    {
+      "name": "same-h2-pool-usable-after-peer-settings-ack",
+      "status": "pass",
+      "detail": {
+        "status": 200,
+        "connection": "1",
+        "body": "h2-origin"
+      }
+    }
+  ],
+  "commands": [
+    {
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/envoy/sprint05a-a-launcher.mjs",
+        "/tmp/aegisgate-05b-b/.local/sprint05b-b-cause-Q3bEK4/manifest.json",
+        "41689"
+      ],
+      "environment": {
+        "AEGIS_05A_D_POLICY": "stream-errors",
+        "NODE_OPTIONS": "--import=/tmp/aegisgate-05b-b/spikes/envoy/sprint05a-combined-select.mjs"
+      }
+    },
+    {
+      "program": "docker",
+      "args": [
+        "rm",
+        "-f",
+        "aegis-sprint05a-a-2225054"
+      ],
+      "exit_code": 0,
+      "stdout": "aegis-sprint05a-a-2225054\n",
+      "stderr": ""
+    }
+  ],
+  "scope": "additional causal fixture only; no oracle exemptions",
+  "environment": {
+    "AEGIS_05A_D_POLICY": "stream-errors",
+    "NODE_OPTIONS": "--import=/tmp/aegisgate-05b-b/spikes/envoy/sprint05a-combined-select.mjs"
+  },
+  "launcher_exit": 0,
+  "container_absent": true,
+  "fixture_removed": true,
+  "lock_held_through_cleanup": true,
+  "exit_code": 0,
+  "ended_at": "2026-11-14T18:25:27.126Z"
+}
