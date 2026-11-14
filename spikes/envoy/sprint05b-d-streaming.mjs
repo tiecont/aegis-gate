@@ -104,7 +104,7 @@ try {
         assert.equal(accepted, !invalid);
         if (mode === 'stage' && accepted) {
           fs.closeSync(fd); fd = undefined; const buffer = Buffer.alloc(16384), input = fs.openSync(stage, 'r');
-          try { let n; while ((n = fs.readSync(input, buffer)) > 0) await send(buffer.subarray(0, n)); } finally { fs.closeSync(input); }
+          try { let n; while ((n = fs.readSync(input, buffer)) > 0) await send(Buffer.from(buffer.subarray(0, n))); } finally { fs.closeSync(input); }
         }
         if (up) { if (invalid) up.destroy(); else await once(up, 'close'); }
       }
