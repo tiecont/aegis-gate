@@ -17,7 +17,7 @@ try:
  assert sha(archive)==checksum.decode().split()[0]
  with tarfile.open(fileobj=io.BytesIO(archive),mode="r:gz") as t:
   r["members"]=[]
-  for name in ["src/h1.c","include/haproxy/h1-t.h","VERSION"]:
+  for name in ["src/h1.c","VERSION"]:
    b=t.extractfile("haproxy-3.4.7/"+name).read(); dest=name.replace("/","_"); (out/dest).write_bytes(b)
    r["members"].append({"member":name,"file":dest,"bytes":len(b),"sha256":sha(b)})
   config=t.extractfile("haproxy-3.4.7/doc/configuration.txt").read().decode()
