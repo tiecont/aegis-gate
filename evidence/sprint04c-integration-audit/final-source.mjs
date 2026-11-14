@@ -109,6 +109,11 @@ function manifest(file, inventory = files, get = read) {
     restriction: reason ?? 'integrity only; does not grant runtime or final-gate acceptance' };
 }
 function resolveStream(receiptFile, entry) {
+  assert.equal(typeof entry, 'string', `missing stream location: ${receiptFile}`);
+  if (path.isAbsolute(entry)) {
+    assert.ok(entry.startsWith('/tmp/aegisgate-04c-b/evidence/sprint04b-b/'), 'unexpected external stream reference');
+    return entry.slice('/tmp/aegisgate-04c-b/'.length);
+  }
   return entry.startsWith('evidence/') ? entry : `${path.posix.dirname(receiptFile)}/${entry}`;
 }
 function auditReceipt(file) {
@@ -125,8 +130,9 @@ function auditReceipt(file) {
     assert.equal(c.exit_code, 0, `${file}: ${c.label ?? c.name}`);
     assert.ok(c.signal == null);
     for (const s of c.streams ?? [c.stdout, c.stderr]) {
-      const bytes = read(resolveStream(file, s.file));
-      assert.equal(sha(bytes), s.sha256, `${file}: ${s.file}`);
+      const location = s.file ?? s.retained_reference;
+      const bytes = read(resolveStream(file, location));
+      assert.equal(sha(bytes), s.sha256, `${file}: ${location}`);
       if (s.bytes !== undefined) assert.equal(bytes.length, s.bytes);
       streams++;
     }
@@ -225,16 +231,24 @@ try {
   assert.deepEqual(original75.tests.map(t => t.name), json('evidence/sprint04a-b/attempt02/diagnostic75-results.json').tests.map(t => t.name));
   receipt.original_gates = { original75: summary, original23: { tests: 23, passed: 16, failures: supplemental.failures }, nine_byte_failure_retained: true };
   assert.equal(json('evidence/sprint04c-d/attempt-01/attribution-summary.json').semantic_security_pass, false);
-  const duplicates = new Map(), binary = [], large = [];
+  const duplicates = new Map(), binary = [], large = [], syntheticMarkers = [];
   for (const file of delta) {
     const bytes = read(file), hash = sha(bytes);
     if (bytes.includes(0) || bytes.subarray(0, 4).equals(Buffer.from([0x7f, 0x45, 0x4c, 0x46])) || /\.(?:tar|gz|zip|wasm|exe|so|a)$/.test(file)) binary.push(file);
     if (bytes.length >= 1024 && file.startsWith('evidence/')) duplicates.set(hash, [...(duplicates.get(hash) ?? []), file]);
     if (bytes.length > 1 << 20) large.push({ file, bytes: bytes.length, sha256: hash });
-    assert.doesNotMatch(bytes.toString(), /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/, `private-key marker: ${file}`);
+    const text = bytes.toString();
+    if (/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/.test(text)) {
+      assert.ok(['evidence/sprint04c-f/final-01/independent-helper-harness.mjs', 'evidence/sprint04c-helper/cleanup-test.mjs'].includes(file), `unexpected private-key marker: ${file}`);
+      const marker = ['-----BEGIN', 'PRIVATE KEY-----'].join(' ');
+      assert.equal(text.split(marker).length - 1, 1);
+      assert.ok(text.includes(`Buffer.from(mode === 'synthetic-value-leak' ? synthetic : '${marker}')`));
+      assert.doesNotMatch(text, /-----END (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/);
+      syntheticMarkers.push({ file, sha256: hash, kind: 'literal synthetic BEGIN marker in immutable test harness; no key block' });
+    }
   }
   assert.deepEqual(binary, []);
-  receipt.artifacts = { binary_files: binary, files_over_1MiB: large, duplicate_payloads_over_1KiB: [...duplicates].filter(([, paths]) => paths.length > 1).map(([sha256, paths]) => ({ sha256, paths })), note: 'identical payloads are storage duplicates, never independent executions' };
+  receipt.artifacts = { binary_files: binary, files_over_1MiB: large, synthetic_key_markers: syntheticMarkers, duplicate_payloads_over_1KiB: [...duplicates].filter(([, paths]) => paths.length > 1).map(([sha256, paths]) => ({ sha256, paths })), note: 'identical payloads are storage duplicates, never independent executions' };
   for (const file of ['IMPLEMENTATION_STATUS.md', 'docs/reports/sprint04c-completion.md', 'docs/ADR-012-sprint04c-decision-addendum-proposed.md']) {
     for (const marker of ['NO-GO', 'LOCKED', 'BLOCKED', 'PENDING']) assert.ok(read(file).includes(marker), `${file}: ${marker}`);
   }

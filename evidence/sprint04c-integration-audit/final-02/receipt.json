@@ -1,0 +1,580 @@
+{
+  "verifier_commit": "98d89750d7976765708f486905599d0aca9501bd",
+  "verifier_tree": "b45511348c8682538fddffd809ca6355417d11aa",
+  "verifier_sha256": "61ce16e967cd00f146f53cf3260f7a952cafe75a3bd18405cc1e68d1777af2ce",
+  "source_commit": "dd5b48441982bf76a53982a16c53b948e59b175e",
+  "source_tree": "616cd569b30c022eff47b4e7bbfdbdbe6e48362d",
+  "baseline": "a325b9ecc086e09467f61b49f17da241bf8e43ea",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-04c-integration-audit/evidence/sprint04c-integration-audit/final-source.mjs",
+    "evidence/sprint04c-integration-audit/final-02"
+  ],
+  "cwd": "/tmp/aegisgate-04c-integration-audit",
+  "started_at": "2026-11-14T09:48:02.285Z",
+  "node": "v26.13.0",
+  "node_binary": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "git": "git version 2.56.1",
+  "fixture_lock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "scope": "independent final integration SOURCE audit; no helper fault tests or full gates",
+  "final_integration_accepted": false,
+  "commands": [
+    {
+      "label": "baseline-ancestor",
+      "program": "git",
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "a325b9ecc086e09467f61b49f17da241bf8e43ea",
+        "dd5b48441982bf76a53982a16c53b948e59b175e"
+      ],
+      "cwd": "/tmp/aegisgate-04c-integration-audit",
+      "started_at": "2026-11-14T09:48:02.630Z",
+      "ended_at": "2026-11-14T09:48:02.653Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-integration-audit/final-02/baseline-ancestor.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-integration-audit/final-02/baseline-ancestor.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "rejected-E-not-ancestor",
+      "program": "git",
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "551591395880ce87863b4e861c05d266c719b91f",
+        "dd5b48441982bf76a53982a16c53b948e59b175e"
+      ],
+      "cwd": "/tmp/aegisgate-04c-integration-audit",
+      "started_at": "2026-11-14T09:48:02.665Z",
+      "ended_at": "2026-11-14T09:48:02.670Z",
+      "exit_code": 1,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-integration-audit/final-02/rejected-E-not-ancestor.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-integration-audit/final-02/rejected-E-not-ancestor.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "integration-ancestor",
+      "program": "git",
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "dd5b48441982bf76a53982a16c53b948e59b175e",
+        "98d89750d7976765708f486905599d0aca9501bd"
+      ],
+      "cwd": "/tmp/aegisgate-04c-integration-audit",
+      "started_at": "2026-11-14T09:48:02.672Z",
+      "ended_at": "2026-11-14T09:48:02.677Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-integration-audit/final-02/integration-ancestor.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-integration-audit/final-02/integration-ancestor.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "rejected_E_ancestor_absent": true,
+  "protected_baseline_objects": 3115,
+  "allowed_shared_documents": [
+    "IMPLEMENTATION_STATUS.md",
+    "docs/RISK_REGISTER.md",
+    "docs/ADR-012-strict-ingress-decision-proposed.md"
+  ],
+  "exact_working_objects": 3576,
+  "owners": [
+    {
+      "owner": "A",
+      "revision": "02bad67b51a8171493ad3ff1eee245e3f07d6e2f",
+      "tree": "0a1b72690975aea8f9df1dbdbc664af6383fd43d",
+      "exact_objects": 20
+    },
+    {
+      "owner": "B",
+      "revision": "12abd255b754b553480544edbf9452b7f65d9a4d",
+      "tree": "17fd33848ad3bb17b739876e50f6e518eeaf8fb5",
+      "exact_objects": 137
+    },
+    {
+      "owner": "C",
+      "revision": "49f2d554d30fd9002f6d15e7ee39999a6e866d5c",
+      "tree": "016e56d6b8bd58f67ad9a5748b98ed6629bfbbc3",
+      "exact_objects": 33
+    },
+    {
+      "owner": "D",
+      "revision": "d9a2004167a178a3a1d4549cc97378fe4b02c360",
+      "tree": "54af308eee061fc164011f719aae8f2b034b6460",
+      "exact_objects": 70
+    },
+    {
+      "owner": "E",
+      "revision": "212677805416a3e38d44724bfaf1101c8e11a0d5",
+      "tree": "1bbd377963750776329dff48be3442bf130abbe6",
+      "exact_objects": 39
+    }
+  ],
+  "prior_independent_review": {
+    "revision": "cede69eb3e11c42cc66c21b5e7b5d7c55ea037a1",
+    "exact_objects": 141
+  },
+  "delta_files": 461,
+  "manifests": [
+    {
+      "file": "evidence/sprint04c-a/verification-01/SHA256SUMS",
+      "verified": 7,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-a/verification-02/SHA256SUMS",
+      "verified": 7,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-b/SHA256SUMS",
+      "verified": 136,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-b/checks-01/SHA256SUMS",
+      "verified": 17,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-b/reproh-01/SHA256SUMS",
+      "verified": 27,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-b/reprot-01/SHA256SUMS",
+      "verified": 12,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": false,
+      "restriction": "missed valid response completion"
+    },
+    {
+      "file": "evidence/sprint04c-b/reprot-02/SHA256SUMS",
+      "verified": 12,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-b/upstream-01/SHA256SUMS",
+      "verified": 55,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-c/source-01/SHA256SUMS",
+      "verified": 3,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": false,
+      "restriction": "optional archive member collection failed"
+    },
+    {
+      "file": "evidence/sprint04c-c/source-02/SHA256SUMS",
+      "verified": 9,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-c/verification-01/SHA256SUMS",
+      "verified": 7,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-c/verification-02/SHA256SUMS",
+      "verified": 7,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/SHA256SUMS",
+      "verified": 29,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-d/verification-01/SHA256SUMS",
+      "verified": 1,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": false,
+      "restriction": "historical source equality assertion failed"
+    },
+    {
+      "file": "evidence/sprint04c-d/verification-02/SHA256SUMS",
+      "verified": 28,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-e/attempt-01/SHA256SUMS",
+      "verified": 11,
+      "missing": [
+        "evidence/sprint04c-e/attempt-01/stdout.log"
+      ],
+      "hash_complete": false,
+      "eligible_for_original_scoped_use": false,
+      "restriction": "omitted flagged document stdout; superseded"
+    },
+    {
+      "file": "evidence/sprint04c-e/attempt-02/SHA256SUMS",
+      "verified": 12,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-e/scan-02/SHA256SUMS",
+      "verified": 4,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-f/ace-01/SHA256SUMS",
+      "verified": 1,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": false,
+      "restriction": "stale owner-head assertion failed"
+    },
+    {
+      "file": "evidence/sprint04c-f/ace-02/SHA256SUMS",
+      "verified": 20,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": false,
+      "restriction": "historical E acceptance superseded; A/C scope retained"
+    },
+    {
+      "file": "evidence/sprint04c-f/bd-01/SHA256SUMS",
+      "verified": 74,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-f/final-01/SHA256SUMS",
+      "verified": 24,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-f/receipts-01/SHA256SUMS",
+      "verified": 3,
+      "missing": [
+        "evidence/sprint04c-f/receipts-01/secrets.json"
+      ],
+      "hash_complete": false,
+      "eligible_for_original_scoped_use": false,
+      "restriction": "failed scan with deliberately omitted raw report"
+    },
+    {
+      "file": "evidence/sprint04c-f/receipts-bd-02/SHA256SUMS",
+      "verified": 4,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-helper/proof-01/SHA256SUMS",
+      "verified": 3,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": false,
+      "restriction": "historical synthetic test does not accept replacement helper"
+    },
+    {
+      "file": "evidence/sprint04c-root/baseline-jobs/SHA256SUMS",
+      "verified": 3,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    },
+    {
+      "file": "evidence/sprint04c-root/baseline-main/SHA256SUMS",
+      "verified": 3,
+      "missing": [],
+      "hash_complete": true,
+      "eligible_for_original_scoped_use": true,
+      "restriction": "integrity only; does not grant runtime or final-gate acceptance"
+    }
+  ],
+  "verifier_negative_controls": [
+    "restored omitted evidence rejected",
+    "hash mismatch rejected",
+    "unexpected missing evidence rejected"
+  ],
+  "receipts": [
+    {
+      "file": "evidence/sprint04c-a/verification-01/receipt.json",
+      "source_commit": "df61133db3a87f67d03ebc406a9584fdf1c1defb",
+      "source_tree": "05db2ccc9caf1069fb7786171f7cfa757ca0c6af",
+      "sources": 0,
+      "commands": 3,
+      "streams": 6
+    },
+    {
+      "file": "evidence/sprint04c-a/verification-02/receipt.json",
+      "source_commit": "b5a2d044322670d8db6873c410ceef5df7be7398",
+      "source_tree": "f45620ce83a2393e91611602462bb93a506c0958",
+      "sources": 0,
+      "commands": 3,
+      "streams": 6
+    },
+    {
+      "file": "evidence/sprint04c-b/upstream-01/commands.json",
+      "source_commit": "9885a8611593c2db654258b048482b1bc168b476",
+      "source_tree": "03e649b622ea5b2ea72b87e8807213890e78e80e",
+      "sources": 54,
+      "commands": 39,
+      "streams": 78
+    },
+    {
+      "file": "evidence/sprint04c-b/reproh-01/commands.json",
+      "source_commit": "4983886399e0fbb6a01d16313f37b305ea8de050",
+      "source_tree": "76af4fbda921f0be2a20ffc1f3107e1d831edfc9",
+      "sources": 56,
+      "commands": 12,
+      "streams": 24
+    },
+    {
+      "file": "evidence/sprint04c-b/reprot-01/commands.json",
+      "source_commit": "4983886399e0fbb6a01d16313f37b305ea8de050",
+      "source_tree": "76af4fbda921f0be2a20ffc1f3107e1d831edfc9",
+      "sources": 56,
+      "commands": 5,
+      "streams": 10
+    },
+    {
+      "file": "evidence/sprint04c-b/reprot-02/commands.json",
+      "source_commit": "deb34bd17344856b426924238d85013069f07429",
+      "source_tree": "0ac141b1ae0622e26eed5e04176d8210cb44ba07",
+      "sources": 56,
+      "commands": 5,
+      "streams": 10
+    },
+    {
+      "file": "evidence/sprint04c-b/checks-01/commands.json",
+      "source_commit": "c15776f90e9f001de37215a4114ce3d3bab0decd",
+      "source_tree": "a078224efb5614a872f3f42b108b7a6eab8bca73",
+      "sources": 58,
+      "commands": 8,
+      "streams": 16
+    },
+    {
+      "file": "evidence/sprint04c-c/source-02/receipt.json",
+      "source_commit": "6f9634e74311a11f96f124cfeb8ea2344e081b3b",
+      "source_tree": "e377851f5e95e703442f8b589f598a170961c04f",
+      "sources": 0,
+      "commands": 2,
+      "streams": 4
+    },
+    {
+      "file": "evidence/sprint04c-c/verification-01/receipt.json",
+      "source_commit": "1e10dff52286f9dd8bfbda6485a8b30f3465c0b3",
+      "source_tree": "6e1e149619ced55d0eeb490f808cc4a69a2ac9a7",
+      "sources": 0,
+      "commands": 3,
+      "streams": 6
+    },
+    {
+      "file": "evidence/sprint04c-c/verification-02/receipt.json",
+      "source_commit": "e6db50890c95a54c747fc3093b4264531e132f05",
+      "source_tree": "396ae0c339563aa7499258d1c6c19f0dd5c1ba91",
+      "sources": 0,
+      "commands": 3,
+      "streams": 6
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/commands.json",
+      "source_commit": "80addb665c00922ec7eb98834b43efe73930c1be",
+      "source_tree": "82e7c079cf14fecead03eb4f0fa5a86b5ed93b33",
+      "sources": 15,
+      "commands": 12,
+      "streams": 24
+    },
+    {
+      "file": "evidence/sprint04c-d/verification-02/commands.json",
+      "source_commit": "79882486f71d70e2d6e24c32c8fc0fdbd373991f",
+      "source_tree": "cbf7086fe67f0b4462f0a7d04960b40d20f32a51",
+      "sources": 0,
+      "commands": 12,
+      "streams": 24
+    },
+    {
+      "file": "evidence/sprint04c-f/ace-02/verification.json",
+      "source_commit": "e95f756292426375fc3c1ab0ab58e48a10adcd49",
+      "source_tree": "bef22982c3d2cc2bc68cdd0b084f2c82c220136f",
+      "sources": 0,
+      "commands": 9,
+      "streams": 18
+    },
+    {
+      "file": "evidence/sprint04c-f/bd-01/verification.json",
+      "source_commit": "7f8594ac89cd39a39b2391888a027762270b32a2",
+      "source_tree": "3aceb4417456aed0ab6a461674dc47d4a23ca328",
+      "sources": 0,
+      "commands": 46,
+      "streams": 92
+    },
+    {
+      "file": "evidence/sprint04c-f/receipts-bd-02/verification.json",
+      "source_commit": "ace8f601c689dcb76b076cbc0cf1d5f3551b31da",
+      "source_tree": "125d493971f8ee825c90b29448d4982671f4a21a",
+      "sources": 0,
+      "commands": 1,
+      "streams": 2
+    },
+    {
+      "file": "evidence/sprint04c-f/final-01/verification.json",
+      "source_commit": "25c5069c2305724d22380f025810ebc3ee253bd0",
+      "source_tree": "f4121b38e5b07d58a02a8c170320c1c04f52901c",
+      "sources": 0,
+      "commands": 10,
+      "streams": 20
+    }
+  ],
+  "corrected_E": {
+    "commands": 49,
+    "stream_slices": 98,
+    "complete_contiguous_stream_bytes": {
+      "stdout": 46339,
+      "stderr": 14798
+    },
+    "go": {
+      "packages": 11,
+      "top_level": 88,
+      "subtests": 151
+    },
+    "credential_matches": null,
+    "scope": "historical receipts; deleted credentials not reconstructed"
+  },
+  "original_gates": {
+    "original75": {
+      "candidate": "envoy-1.40.2-retain-original-h2-host",
+      "mandatory_tests": 75,
+      "passed": 69,
+      "failed": [
+        "malformed-HTTP-invalid-transfer-encoding",
+        "malformed-HTTP-obsolete-folded-header",
+        "strict-ingress-TE-repeated-chunked",
+        "strict-ingress-TE-not-final-chunked",
+        "supplemental-repeated-transfer-encoding-fields",
+        "HTTP2-authority-Host-and-SNI-confusion-rejected"
+      ],
+      "unsafe_or_unproven_rejections": [
+        {
+          "name": "invalid-transfer-encoding",
+          "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 1"
+        },
+        {
+          "name": "obsolete-folded-header",
+          "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+        },
+        {
+          "name": "TE-repeated-chunked",
+          "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 1"
+        },
+        {
+          "name": "TE-not-final-chunked",
+          "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 1"
+        },
+        {
+          "name": "repeated-transfer-encoding-fields",
+          "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Fri, 13 Nov 2026 1"
+        }
+      ],
+      "protocol_proof_pass": false,
+      "architecture_approval": "requires independent dependency/security review and human architecture decision"
+    },
+    "original23": {
+      "tests": 23,
+      "passed": 16,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE",
+        "raw-H2-uppercase-header-name",
+        "raw-H2-connection-specific-header",
+        "slow-reader-backpressure-and-response-cancellation"
+      ]
+    },
+    "nine_byte_failure_retained": true
+  },
+  "result": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: private-key marker: evidence/sprint04c-f/final-01/independent-helper-harness.mjs\n    at file:///tmp/aegisgate-04c-integration-audit/evidence/sprint04c-integration-audit/final-source.mjs:240:12\n    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)\n    at async node:internal/modules/esm/loader:650:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:105:5)",
+  "exit_code": 1,
+  "lock_held_through_cleanup": true,
+  "ended_at": "2026-11-14T09:48:20.417Z"
+}

@@ -210,6 +210,13 @@ lock-loss limits remain documented. Source audit at1ca490a ACCEPTs integration
 dd5b484:3,115 protected baseline objects,299 owner files,519 manifest entries
 and two explicit ineligible redactions. Final local/hosted binding remains
 PENDING; these scoped verdicts do not accept an unexecuted full gate.
+Extended independent source audit `final-04` also ACCEPTs dd5b484:16 receipt
+groups,173 commands,346 raw streams and295 source hashes verify; corrected E
+has49 commands/98 contiguous slices. Historical evaluator still rejects69/75
+and the nine-byte failure. The scoped offline secret scan is empty. Three
+stopped audit attempts retain failure status. Exact corrected verifier/output
+content is imported without its scanner-rejected intermediate branch ancestry;
+see `sprint04c-f-integration-source-verdict.md` for the scope and provenance.
 Root full locked make check/security-scan/cleanup: PASS at exact clean source
 `dd5b48441982bf76a53982a16c53b948e59b175e`, tree
 `616cd569b30c022eff47b4e7bbfdbdbe6e48362d`. The single fixture-lock lifecycle
