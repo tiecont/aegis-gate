@@ -306,6 +306,11 @@ flock /tmp/aegisgate-sprint02-fixtures.lock \
 
 Other measured modes are flush-long and header-timeout. No additional
 architecture research or release authorization follows from these results.
+Offline verify03 at clean sourcefe92fc1 exits0, checking483 evidence checksums
+and1692 committed-source hashes, exact root launcher/provenance equality,
+actual selected bootstrap settings, immutable corpus, retained windows/stream
+errors and prior peerRST1/clientCANCEL8 attribution. Its semantic_security_pass
+remains false. Independent review is pending; C schedules no further attempts.
 
 ## Agent Completion Report
 
