@@ -43,6 +43,7 @@ tls.connect = function(...args) {
     return write.call(this, bytes, ...rest);
   };
   socket.on('secureConnect', () => { record.port = socket.remotePort; record.sni = socket.servername; record.alpn = socket.alpnProtocol; });
+  socket.on('error', (e) => { record.error = { code: e.code, message: e.message }; });
   socket.on('data', incoming);
   socket.on('close', () => { record.closed = true; record.close_ns = process.hrtime.bigint().toString(); });
   return socket;
