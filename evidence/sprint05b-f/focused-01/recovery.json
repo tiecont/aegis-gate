@@ -1,0 +1,110 @@
+{
+  "scope": "Fresh-lock recovery of interrupted focused-01; original lock continuity and completion are not claimed",
+  "project": "aegisgate-05b-e-attempt-91-48a4808c973b",
+  "started_at": "2026-11-14T19:17:56.005Z",
+  "commands": [
+    {
+      "label": "cleanup",
+      "args": [
+        "compose",
+        "--env-file",
+        ".local/compose.env",
+        "--env-file",
+        ".local/fixture-images.env",
+        "-f",
+        "infra/compose/compose.yaml",
+        "down",
+        "--volumes",
+        "--remove-orphans"
+      ],
+      "exit_code": 0,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/focused-01/recovery-cleanup.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "file": "evidence/sprint05b-f/focused-01/recovery-cleanup.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "label": "remaining-container",
+      "args": [
+        "container",
+        "ls",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-05b-e-attempt-91-48a4808c973b",
+        "--format",
+        "{{.ID}}"
+      ],
+      "exit_code": 0,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/focused-01/recovery-remaining-container.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "file": "evidence/sprint05b-f/focused-01/recovery-remaining-container.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "label": "remaining-network",
+      "args": [
+        "network",
+        "ls",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-05b-e-attempt-91-48a4808c973b",
+        "--format",
+        "{{.ID}}"
+      ],
+      "exit_code": 0,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/focused-01/recovery-remaining-network.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "file": "evidence/sprint05b-f/focused-01/recovery-remaining-network.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "label": "remaining-volume",
+      "args": [
+        "volume",
+        "ls",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-05b-e-attempt-91-48a4808c973b",
+        "--format",
+        "{{.ID}}"
+      ],
+      "exit_code": 0,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/focused-01/recovery-remaining-volume.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "file": "evidence/sprint05b-f/focused-01/recovery-remaining-volume.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    }
+  ],
+  "private_material_removed": true,
+  "ended_at": "2026-11-14T19:17:59.192Z",
+  "recovery_complete": true
+}

@@ -71,6 +71,19 @@ try {
     "scripts/sprint05b-f-locks.go",
     "docs/reports/sprint05b-f-security-review.md",
   ]);
+  run(
+    "go-format",
+    "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/gofmt",
+    [
+      "-d",
+      "scripts/sprint05b-f-locks.go",
+      "scripts/sprint05b-f-migration-cause.go",
+    ],
+  );
+  run("python-syntax", "python3", [
+    "-c",
+    "import ast; from pathlib import Path; ast.parse(Path('scripts/sprint05b-f-readiness.py').read_text()); print('PASS Python AST syntax')",
+  ]);
   for (const name of fs.readdirSync("evidence/sprint05b-f")) {
     const manifest = `evidence/sprint05b-f/${name}/SHA256SUMS`;
     if (!fs.existsSync(manifest)) continue;

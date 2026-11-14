@@ -8,6 +8,9 @@ import { assertLock } from "../spikes/envoy/wire-fixtures.mjs";
 assertLock();
 process.umask(0o077);
 const [source, output] = process.argv.slice(2);
+const causeOnly = process.argv[4] === "--migration-cause-only";
+const serial = process.argv[4] === "--serial";
+const fixtureOnly = process.argv[4] === "--fixtures-only";
 assert.ok(path.isAbsolute(source));
 assert.match(output ?? "", /^evidence\/sprint05b-f\/focused-\d+$/);
 assert.ok(!fs.existsSync(output));
@@ -15,7 +18,7 @@ fs.mkdirSync(output, { recursive: true });
 const git = (...args) => execFileSync("git", args, { encoding: "utf8" }).trim();
 assert.equal(
   git("-C", source, "rev-parse", "HEAD"),
-  git("rev-parse", "7755f7a^{commit}"),
+  git("rev-parse", `${serial || fixtureOnly ? "8f60c2a" : "7755f7a"}^{commit}`),
 );
 assert.equal(
   git("-C", source, "status", "--porcelain", "--untracked-files=no"),
@@ -40,6 +43,7 @@ const record = {
   started_at: new Date().toISOString(),
   commands: [],
   complete: false,
+  serial_package_scheduling: serial,
   scope:
     "Focused regression reproduction; e-01 private Postgres image-readiness failure remains unresolved",
 };
@@ -48,6 +52,19 @@ const save = () =>
     `${output}/receipt.json`,
     JSON.stringify(record, null, 2) + "\n",
   );
+record.collector_sources = [];
+for (const file of [
+  "scripts/sprint05b-f-focused.mjs",
+  "scripts/sprint05b-f-locks.go",
+  "scripts/sprint05b-f-readiness.py",
+  ...(causeOnly ? ["scripts/sprint05b-f-migration-cause.go"] : []),
+]) {
+  const bytes = fs.readFileSync(file);
+  const retained = `${output}/${path.basename(file)}`;
+  fs.writeFileSync(retained, bytes);
+  record.collector_sources.push({ file, retained, sha256: sha(bytes) });
+}
+save();
 async function run(label, program, args) {
   assertLock();
   const started_at = new Date().toISOString(),
@@ -130,8 +147,22 @@ const privateFiles = [
   "nats.conf",
 ];
 try {
+  if (serial) {
+    const npm = path.join(path.dirname(node), "npm");
+    await run("root-npm-ci", npm, ["ci", "--no-audit", "--no-fund"]);
+    await run("dashboard-npm-ci", npm, [
+      "--prefix",
+      "apps/dashboard",
+      "ci",
+      "--no-audit",
+      "--no-fund",
+    ]);
+  }
   started = true;
   await run("fixtures-up", "make", ["dev-up"]);
+  await run("fixtures-ready", "python3", [
+    path.resolve("scripts/sprint05b-f-readiness.py"),
+  ]);
   await run("fixture-tls-credentials", "python3", ["scripts/integration.py"]);
   const observerProgram = path.resolve(".local/sprint05b-f-locks");
   record.observer = {
@@ -145,34 +176,75 @@ try {
     [source, path.resolve(output, "lock-samples.jsonl")],
     { stdio: ["ignore", "ignore", "ignore"] },
   );
-  const result = await run("go-race-all", "go", [
-    "test",
-    "-race",
-    "-v",
-    "./apps/control-api/...",
-    "./apps/config-publisher/...",
-    "./internal/...",
-    "./packages/test-fixtures/...",
-    "-count=1",
-  ]);
-  assert.ok(!/--- (FAIL|SKIP):/.test(result));
-  record.go = {
-    packages: (result.match(/^ok\s/gm) ?? []).length,
-    top_level: (result.match(/^--- PASS:/gm) ?? []).length,
-    subtests: (result.match(/^\s+--- PASS:/gm) ?? []).length,
-    skips: 0,
-  };
-  const npm = path.join(path.dirname(node), "npm");
-  await run("contracts", npm, ["run", "contracts:check"]);
-  await run("contract-integration", node, ["scripts/contract-integration.mjs"]);
-  for (const target of ["lint", "typecheck", "test", "build", "integration"])
-    await run(`dashboard-${target}`, npm, [
-      "--prefix",
-      "apps/dashboard",
+  if (causeOnly) {
+    const overlay = path.resolve(output, "migration-overlay.json");
+    const helper = path.resolve("scripts/sprint05b-f-migration-cause.go");
+    record.migration_helper = {
+      file: helper,
+      sha256: sha(fs.readFileSync(helper)),
+    };
+    fs.writeFileSync(
+      overlay,
+      JSON.stringify({
+        Replace: {
+          [path.join(source, "apps/control-api/cmd/control-api/main.go")]:
+            helper,
+        },
+      }),
+    );
+    await run("migration-cause", "go", [
       "run",
-      target,
+      "-overlay",
+      overlay,
+      "./apps/control-api/cmd/control-api",
     ]);
-  record.complete = true;
+    record.complete = true;
+  } else if (fixtureOnly) {
+    record.fixture_failures = [];
+    for (const [label, file] of [
+      ["fixture-image-integration", "scripts/fixture-image-integration.py"],
+      ["fixture-stale-volume", "scripts/sprint05a-e-fixtures.py"],
+    ]) {
+      try {
+        await run(label, "python3", [file]);
+      } catch {
+        record.fixture_failures.push(label);
+      }
+    }
+    record.complete = record.fixture_failures.length === 0;
+  } else {
+    const result = await run("go-race-all", "go", [
+      "test",
+      ...(serial ? ["-p", "1"] : []),
+      "-race",
+      "-v",
+      "./apps/control-api/...",
+      "./apps/config-publisher/...",
+      "./internal/...",
+      "./packages/test-fixtures/...",
+      "-count=1",
+    ]);
+    assert.ok(!/--- (FAIL|SKIP):/.test(result));
+    record.go = {
+      packages: (result.match(/^ok\s/gm) ?? []).length,
+      top_level: (result.match(/^--- PASS:/gm) ?? []).length,
+      subtests: (result.match(/^\s+--- PASS:/gm) ?? []).length,
+      skips: 0,
+    };
+    const npm = path.join(path.dirname(node), "npm");
+    await run("contracts", npm, ["run", "contracts:check"]);
+    await run("contract-integration", node, [
+      "scripts/contract-integration.mjs",
+    ]);
+    for (const target of ["lint", "typecheck", "test", "build", "integration"])
+      await run(`dashboard-${target}`, npm, [
+        "--prefix",
+        "apps/dashboard",
+        "run",
+        target,
+      ]);
+    record.complete = true;
+  }
 } catch (error) {
   record.error = error.stack;
 } finally {

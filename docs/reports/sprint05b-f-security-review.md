@@ -1,6 +1,6 @@
 # Sprint05B F independent security review
 
-Review in progress. Module01 remains NO-GO, Modules04-12 remain locked and
+Independent review checkpoint. Module01 remains NO-GO, Modules04-12 remain locked and
 production remains blocked. ACCEPT below applies only to specified additive
 test tooling and evidence, never to a complete runtime or release.
 
@@ -140,7 +140,7 @@ F does not infer its cause from the generic readiness error.
 flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint05b-f-review.mjs e 7755f7a evidence/sprint05b-f/e-01
 ```
 
-Focused actual integration execution is queued separately. Root's full
+Focused actual integration execution and controlled probes are recorded below. Root's full
 `make check`/`make security-scan` must still pass and cleanup must verify before
 integration delivery; neither the collector's addition nor this narrow review
 grants those gates.
@@ -202,7 +202,13 @@ Root `ff3f3fe` adds an explicitly sanitized derivative exporter for completed
 gate evidence: structured URL query/userinfo redaction, original byte sizes and
 SHA256, original receipt hash, derived receipt marking and new output hashes.
 Source review accepts it for the known callback log scope. It is not a generic
-secret scrubber, and the future exported artifact still requires validation.
+secret scrubber. Independent `export-01` validates the completed5151150 export
+against the private raw directory without retaining private values: all58
+original file sizes/digests match,56 exported file bodies match the declared
+transformation, both callback values are absent, and exactly two query fields
+are redacted. The derived command receipt equals the original except declared
+export metadata and stream digest fields. Actual outcomes remain check2,
+security-scan0, cleanup0 and cleanup-volumes0.
 Original failed exits cannot become PASS through export.
 
 F `checks-01` at2af4bd6 passes five script syntax checks, repository formatting,
@@ -210,6 +216,111 @@ whitespace,255 retained F hashes and the disclosure sentinel race unit. System
 gofmt failed the host's AMD64v4 requirement; pinned Go1.27.4 gofmt/build succeed.
 The earlier600s shared-lock wait expired before starting any fixture and was
 requeued; it is not an executed regression failure or a passed test.
+
+Integrated `ac81faa` passes `audit-03`:74 manifests,1,283 artifact hashes and
+3,127 captured-source hashes, zero errors. Original11 protected files remain
+unchanged. The product-tree exception is exactly the two de6265d test files,
+whose bytes match the separately reviewed commit; runtime, contracts,
+dependencies, infrastructure and scanner policy remain unchanged at this pin.
+Final combined candidate05 sourceff3f3fe (evidencec309475) retains73/75 and
+19/23, all six failures and original child exits1. Its17/17 completed diagnostic
+observations, collector exit0 and cleanup are not security-gate PASS results.
+
+## Focused Regression Diagnosis
+
+`focused-01` was interrupted after fixtures-up0, before any Go test or lock
+observer. The enclosing flock process disappeared; the finally lock assertion
+prevented cleanup. The original receipt remains incomplete. F reacquired the
+shared lock, removed only project `aegisgate-05b-e-attempt-91-48a4808c973b`,
+verified no owned containers/networks/volumes and removed private files.
+`recovery.json` explicitly does not claim uninterrupted lock continuity or
+original execution completion. The wrapper cannot guarantee cleanup after its
+lock holder is externally killed; fresh-lock recovery is required in that case.
+
+`focused-02` starts fresh fixtures but fails the first PostgreSQL psql call in
+unchanged integration.py before any Go test. Inner output was suppressed by
+that script; the retained traceback establishes exit2 but not a detailed cause.
+Cleanup and private-file removal pass. No credentials or container log dump
+were used to infer a cause.
+
+`focused-03` adds F-only bounded readiness before unchanged TLS/credential
+checks and parallel `go test -race -v ... -count=1`. Actual persistence passes
+48.670s; transport fails55.795s on a project origin-pool HTTP timeout and OIDC
+login timeout, each with the unchanged5s HTTP client limit. Read-only samples
+record20 migration-lock wait observations, maximum query age495.991ms. This
+does not prove the earlier2s migration lock or5s HTTP failures share a cause.
+All Go logs, including failures, and complete cleanup are retained.
+
+`focused-04` uses an explicit Go overlay replacing only the command entrypoint
+with F tooling, importing the clean source's actual persistence.Open/Migrate.
+One connection in schemaA deliberately holds key4122026002; actual Migrate in
+schemaB fails55P03 after2,002ms under unchanged Store.Open deadlines. Nineteen
+read-only samples105..1949ms identify waiter161 blocked by holder160. Releasing
+the holder makes unchanged Migrate succeed. This proves cross-schema coupling,
+not attribution of earlier natural failures. The overlay is scoped diagnostic
+tooling, never production source. Cleanup/private removal pass.
+
+Focused01-04 pin clean product source7755f7a, but the F wrapper was edited
+between attempts and does not have a complete pre-execution source snapshot.
+The final F commit and retained receipts explain those changes; exact wrapper
+byte attribution is not claimed for those attempts. Focused05 starts retaining
+the collector, observer and readiness source bytes before execution.
+
+Root8f60c2a changes only Compose PostgreSQL health from Unix socket pg_isready
+to `-h 127.0.0.1`, keeping credential/authentication assertions and health
+interval/timeout/retry settings unchanged. This correctly distinguishes the
+entrypoint's socket-only temporary initialization server from its final TCP
+listener. F accepts this fixture-only source change; the prior suppressed
+psql failure alone does not prove the precise initialization race.
+
+Exact focused commands (pinned Node path shown above):
+
+```sh
+flock /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint05b-f-focused.mjs /tmp/aegisgate-05b-f/.local/sprint05b-f-sources/e-7755f7ae51d9 evidence/sprint05b-f/focused-03
+flock /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint05b-f-focused.mjs /tmp/aegisgate-05b-f/.local/sprint05b-f-sources/e-7755f7ae51d9 evidence/sprint05b-f/focused-04 --migration-cause-only
+flock /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint05b-f-focused.mjs /tmp/aegisgate-05b-f/.local/sprint05b-f-sources/root-8f60c2a evidence/sprint05b-f/focused-05 --serial
+flock /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint05b-f-focused.mjs /tmp/aegisgate-05b-f/.local/sprint05b-f-sources/root-8f60c2a evidence/sprint05b-f/focused-06 --fixtures-only
+```
+
+Focused05 on clean8f60c2a completes PASS:11 packages,89 top-level tests,
+151 subtests, zero skips; persistence25.978s and transport34.357s. It changes
+package scheduling to `-p 1`, preserving race detection, within-package
+concurrency, assertions and timeouts. Strict root/dashboard npm installs,
+TLS/credential negatives, contracts and all five dashboard checks pass.
+Cleanup reports no owned containers/networks/volumes, zero private output
+matches and all private files removed. This comparison supports isolated local
+package scheduling, not diagnosis of one specific natural failure or a general
+resource/SLO guarantee.
+
+Focused06 is a separate fresh locked lifecycle, without editing the loaded05
+collector. The original private image test passes unchanged60x250ms readiness,
+fresh initialization, persisted restart and password negatives. The stale-volume
+probe passes exact image/loopback identity, non-root UID, persisted data,
+changed-password rejection and complete probe removal. All fixture cleanup and
+private removal pass. Socket/TCP/authenticated SQL all return0 immediately
+after Compose up in05/06; these successful samples do not capture the earlier
+transient readiness race or retrospectively turn e-01/focused02 into PASS.
+
+**ACCEPT8f60c2a fixture TCP readiness and5b10996 package scheduling only.**
+The latter adds `-p 1` only to Makefile integration and E's race collector,
+keeping every selected test/assertion/deadline intact. Controlled coupling and
+the successful serial comparison support this test scheduling boundary.
+`audit-04` verifies5b10996 with74 manifests,1,283 artifact hashes and3,127
+captured-source hashes, zero errors. Exact reviewed file bindings include the
+Compose change, both disclosure test files, Makefile and updated E collector.
+Runtime/contracts/dependencies/scanner/workflow policy and original75/23 remain
+unchanged. Root's full gates on the final integrated source remain required.
+
+## Original Failure Verdicts
+
+| Requirement | Verdict | Independent evidence |
+| --- | --- | --- |
+| H1 obsolete folded header | REJECT native runtime | Original reaches263 bytes/one handler; A's separate bounded admission rejects zero-origin |
+| H2 authority/Host/SNI all-byte gate | REJECT | Exact9-byte SETTINGS ACK, zero handlers; causal origin SETTINGS control reproduces ACK |
+| Settled reuse identity/three authority negatives | REJECT | Original supplemental remains failed; actual peer RST1 is not required400/421 |
+| Individual settled userinfo denial | REJECT | Actual peer RST1; client CANCEL8 belongs only to cancellation controls |
+| Raw H2 HEADERS stream0 | REJECT | Close without required received protocol error frame |
+| Raw H2 zero WINDOW_UPDATE | REJECT | Close without required received protocol error frame |
 
 ## D: late trailers and streaming
 

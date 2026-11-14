@@ -166,13 +166,7 @@ if (process.argv[3]) {
     ["f7ce126", ["spikes/envoy/sprint05b-b-"]],
     ["0170010", ["spikes/envoy/sprint05b-c-"]],
     ["d85d04b", ["spikes/envoy/sprint05b-d-streaming.mjs"]],
-    [
-      "7755f7a",
-      [
-        "scripts/sprint05b-e-regressions.mjs",
-        "scripts/sprint05a-e-fixtures.py",
-      ],
-    ],
+    ["7755f7a", ["scripts/sprint05a-e-fixtures.py"]],
     [
       "fb4cc6a",
       [
@@ -184,6 +178,16 @@ if (process.argv[3]) {
       ],
     ],
     ["6173d1b", ["scripts/fixture-image-integration.py"]],
+    [
+      "de6265d",
+      [
+        "apps/control-api/internal/transport/admin_fixture_test.go",
+        "apps/control-api/internal/transport/fixture_error_test.go",
+      ],
+    ],
+    ["ff3f3fe", ["scripts/sprint05b-export-gates.mjs"]],
+    ["8f60c2a", ["infra/compose/compose.yaml"]],
+    ["5b10996", ["Makefile", "scripts/sprint05b-e-regressions.mjs"]],
   ];
   for (const [reviewed, prefixes] of groups) {
     const files = git("ls-tree", "-r", "--name-only", reviewed)
@@ -199,8 +203,8 @@ if (process.argv[3]) {
         record.integrated.files.push({ file, reviewed, sha256: sha(actual) });
       });
   }
-  check("unchanged-product-code", () =>
-    assert.equal(
+  check("unchanged-product-code-except-reviewed-fixture-changes", () =>
+    assert.deepEqual(
       git(
         "diff",
         "--name-only",
@@ -221,8 +225,15 @@ if (process.argv[3]) {
         ".github",
       )
         .toString()
-        .trim(),
-      "",
+        .trim()
+        .split("\n")
+        .filter(Boolean)
+        .sort(),
+      [
+        "apps/control-api/internal/transport/admin_fixture_test.go",
+        "apps/control-api/internal/transport/fixture_error_test.go",
+        "infra/compose/compose.yaml",
+      ],
     ),
   );
 }
