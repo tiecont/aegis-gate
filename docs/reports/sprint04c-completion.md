@@ -1,6 +1,6 @@
 # Sprint 04-C completion and decision handoff
 
-Status: component work complete; independent review/integration gates in progress.
+Status: component work complete; evidence repair and final integration gates in progress.
 Module01 **NO-GO**;04-12 **LOCKED**; production **BLOCKED**. This report is
 updated only from actual receipts. No eligible strict-ingress runtime exists.
 
@@ -19,7 +19,7 @@ reports, failed attempts and manifests remain immutable.
 | B | research/sprint04c-envoy-upstream |12abd255b754b553480544edbf9452b7f65d9a4d, fresh released/API source and focused upstream package |
 | C / root | design/sprint04c-ingress-alternatives |49f2d55, maintained boundary screening, ownership/threat diagram and conditional acceptance |
 | D | test/sprint04c-h2-security-proof |d9a2004167a178a3a1d4549cc97378fe4b02c360, additive maintained H2/HPACK capture diagnostics/adversarial tests |
-| E | hardening/sprint04c-regressions |551591395880ce87863b4e861c05d266c719b91f, real00/02/03 fixture/regression/dependency proof |
+| E | hardening/sprint04c-regressions-sanitized |corrected source dc30375; fresh attempt02 replaces ineligible original evidence |
 | F | review/sprint04c-security |independent exact-source verdict recorded below after execution |
 | Root | sprint/04c-integration |isolated contract, full gate helper, accepted integration and hosted closeout |
 
@@ -164,6 +164,30 @@ manifest hashes; all verify. Shared fixture lock covers setup/tests/scans/
 evidence/teardown. Isolated Compose/stale resources are absent; owned private
 material is removed after in-memory credential exclusion. Raw rendered Compose
 and private keys are never committed. No Module10 implementation.
+
+### Independent scanner finding and repair
+
+F's subsequent full component secret scan found a JWT-shaped public Netlify RUM
+value in the fetched typescript-eslint website HTML. No value is reproduced,
+replayed or scanner-suppressed. The first E acceptance is superseded; attempt01
+is ineligible. Safe command/source metadata, original stream digest and explicit
+REDACTION remain; the whole stdout stream and raw finding report are omitted.
+Their original manifests are deliberately incomplete and are not claimed PASS.
+
+Corrected E source resolves official GitHub Markdown at an immutable revision,
+then reruns the entire local regression/dependency lifecycle as fresh attempt02.
+The publishable integration ancestry excludes original unpublished E5515913
+and its root descendants. Exact source hashes and safe failed-attempt metadata
+preserve the explanation without distributing the flagged blob. Root uses a
+fresh transfer-only clone of this clean reachable ancestry for history scanning;
+no baseline history, scanner policy or acceptance expectation is rewritten.
+
+F also found that root's added private-output assertion could skip deletion on
+failure. Fix cb9c309 executes owned cleanup in a separate guarded block while
+preserving failed status. An isolated in-memory fault test44fc689 exercises
+clean output, deliberate synthetic fixture leakage and private-key markers;
+both negative cases exit1 yet perform cleanup/inventories and disclose no values.
+This synthetic test is not a full gate or fixture runtime receipt.
 
 ## Independent review and full gates
 
