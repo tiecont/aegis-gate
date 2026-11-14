@@ -1,0 +1,91 @@
+{
+  "source_commit": "1e10dff52286f9dd8bfbda6485a8b30f3465c0b3",
+  "source_tree": "6e1e149619ced55d0eeb490f808cc4a69a2ac9a7",
+  "argv": [
+    "evidence/sprint04c-c/verify.py",
+    "evidence/sprint04c-c/verification-01"
+  ],
+  "python": "3.14.10 (main, Nov 13 2026, 15:10:24) [GCC 16.2.1 20260810]",
+  "started_at": "2026-11-14T09:00:33.091386+00:00",
+  "commands": [
+    {
+      "label": "immutable75",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "exit_code": 0,
+      "streams": [
+        {
+          "file": "immutable75.stdout",
+          "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+        },
+        {
+          "file": "immutable75.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "whitespace",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "a325b9e",
+        "HEAD",
+        "--",
+        "docs",
+        "evidence/sprint04c-c/collect.py",
+        "evidence/sprint04c-c/verify.py"
+      ],
+      "exit_code": 0,
+      "streams": [
+        {
+          "file": "whitespace.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "whitespace.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "protected",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "a325b9e",
+        "HEAD",
+        "--",
+        "spikes/edge-comparison",
+        "spikes/envoy/lab.mjs",
+        "spikes/pingora/lab.mjs",
+        "docs/THREAT_MODEL.md",
+        "docs/QUALITY_GATES.md"
+      ],
+      "exit_code": 0,
+      "streams": [
+        {
+          "file": "protected.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "protected.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "file": "docs/reports/sprint04c-c-alternatives.md",
+      "sha256": "a75c7e475a6bd4bf322b50b46ac4f775c3c8b3dc74b04f5e10b86b33bd017b47"
+    }
+  ],
+  "exit_code": 0,
+  "ended_at": "2026-11-14T09:00:33.166503+00:00"
+}

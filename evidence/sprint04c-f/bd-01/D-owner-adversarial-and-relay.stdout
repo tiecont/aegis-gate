@@ -1,0 +1,71 @@
+=== RUN   TestValidFragmentedStatefulHPACK
+--- PASS: TestValidFragmentedStatefulHPACK (0.00s)
+=== RUN   TestStatefulDynamicReference
+--- PASS: TestStatefulDynamicReference (0.00s)
+=== RUN   TestDeliberateLeaks
+=== RUN   TestDeliberateLeaks/HEADERS
+=== RUN   TestDeliberateLeaks/DATA
+=== RUN   TestDeliberateLeaks/RST_STREAM
+--- PASS: TestDeliberateLeaks (0.00s)
+    --- PASS: TestDeliberateLeaks/HEADERS (0.00s)
+    --- PASS: TestDeliberateLeaks/DATA (0.00s)
+    --- PASS: TestDeliberateLeaks/RST_STREAM (0.00s)
+=== RUN   TestPartialForbiddenHeadersFailClosed
+--- PASS: TestPartialForbiddenHeadersFailClosed (0.00s)
+=== RUN   TestIncompleteContinuation
+--- PASS: TestIncompleteContinuation (0.00s)
+=== RUN   TestInterleavedContinuation
+--- PASS: TestInterleavedContinuation (0.00s)
+=== RUN   TestNewDialWithoutHandler
+--- PASS: TestNewDialWithoutHandler (0.00s)
+=== RUN   TestCaptureOmissionAndIdentityFailClosed
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/drop
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/truncated
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/open
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/identity
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/registry
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/unmapped
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/forged
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/duplicate
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/transport
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/parser
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/new
+--- PASS: TestCaptureOmissionAndIdentityFailClosed (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/drop (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/truncated (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/open (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/identity (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/registry (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/unmapped (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/forged (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/duplicate (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/transport (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/parser (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/new (0.00s)
+=== RUN   TestDecoderBoundsAndInvalidHPACK
+--- PASS: TestDecoderBoundsAndInvalidHPACK (0.01s)
+=== RUN   TestDecompressionAndContinuationBounds
+=== RUN   TestDecompressionAndContinuationBounds/string
+=== RUN   TestDecompressionAndContinuationBounds/fields
+=== RUN   TestDecompressionAndContinuationBounds/wrong-stream
+=== RUN   TestDecompressionAndContinuationBounds/table-size
+--- PASS: TestDecompressionAndContinuationBounds (0.00s)
+    --- PASS: TestDecompressionAndContinuationBounds/string (0.00s)
+    --- PASS: TestDecompressionAndContinuationBounds/fields (0.00s)
+    --- PASS: TestDecompressionAndContinuationBounds/wrong-stream (0.00s)
+    --- PASS: TestDecompressionAndContinuationBounds/table-size (0.00s)
+PASS
+ok  	aegisgate.dev/aegisgate/spikes/envoy/sprint04c-attribution	1.027s
+
+✔ Sprint04-C maintained H2/HPACK attribution rejects deliberate leaks and incomplete evidence (1589.386222ms)
+✔ bounded capture accounts for drops and closed lifecycle (1.1459ms)
+{"direct_and_relay":[{"target":"/encoded%2Ftarget?x=%2520","sni":"lab-origin.test"},{"target":"/encoded%2Ftarget?x=%2520","sni":"lab-origin.test"}],"capture_totals":[{"direction":"candidate-to-origin","bytes":98,"sha256":"3001dd80986fba405acb7f7d77f78fdff1dc2a3aef64ad4c870437cb3df7e5a1"},{"direction":"origin-to-candidate","bytes":73,"sha256":"340042369d94d3939d20128f35139d8a3734e82f57431ca60436c29b3fb308cd"}]}
+✔ new raw relay preserves verified TLS, exact synthetic payload and encoded target (513.050938ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2185.725374

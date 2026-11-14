@@ -1,0 +1,2154 @@
+{
+  "started_at": "2026-11-14T08:58:22.524Z",
+  "cwd": "/tmp/aegisgate-04c-b",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-04c-b/spikes/envoy/sprint04c-repro-h1.mjs",
+    "evidence/sprint04c-b/reproh-01"
+  ],
+  "source_commit": "4983886399e0fbb6a01d16313f37b305ea8de050",
+  "source_tree": "76af4fbda921f0be2a20ffc1f3107e1d831edfc9",
+  "tracked_clean": true,
+  "node": "v26.13.0",
+  "node_executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "sources": [
+    {
+      "file": "evidence/sprint04c-b/PLAN.md",
+      "sha256": "db8ec0e8db0bdb2b8409b0b0df216bcd21b474e8f73036d6d016e583c195ee19"
+    },
+    {
+      "file": "evidence/sprint04c-b/upstream-requests.md",
+      "sha256": "b10b76423ab07ce71a8d7a18952b95c208b17268e1f0a25693afc8a7df443a2f"
+    },
+    {
+      "file": "spikes/edge-comparison/README.md",
+      "sha256": "644f383a67436bdea26dd8668f33137701d421f45c76da2e343141b122cd99f3"
+    },
+    {
+      "file": "spikes/edge-comparison/contract.mjs",
+      "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f"
+    },
+    {
+      "file": "spikes/edge-comparison/contract.test.mjs",
+      "sha256": "b8ddf59505a5e342eea217ff49fd6a3d3ec64b0cdfe036000257d1191b6df223"
+    },
+    {
+      "file": "spikes/edge-comparison/evaluate.mjs",
+      "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf"
+    },
+    {
+      "file": "spikes/edge-comparison/evaluate.test.mjs",
+      "sha256": "6b6ee9e2116c94d3a1f737dc8f5c6e34468891bae2bbcc0af9c469c8c8cb544e"
+    },
+    {
+      "file": "spikes/edge-comparison/extract-baseline.mjs",
+      "sha256": "a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/edge-comparison/run.mjs",
+      "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493"
+    },
+    {
+      "file": "spikes/edge-comparison/supplemental.mjs",
+      "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.mjs",
+      "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065"
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.test.mjs",
+      "sha256": "9ddc71cf675cc89cb2bc2cba3770cf57f6b0eecde42885db0dccaa0718b1dbbd"
+    },
+    {
+      "file": "spikes/envoy/PLAN.md",
+      "sha256": "a3df75367c072812bc7a05dd1c46038becc87e803c95bf0af71bda8984dee7b6"
+    },
+    {
+      "file": "spikes/envoy/README.md",
+      "sha256": "6dfb2c5408b0cb1e956cf04750a730bdc5a5743431c0fffced947fa1224cadaf"
+    },
+    {
+      "file": "spikes/envoy/benchmark.mjs",
+      "sha256": "1625cbd3c85dd68d27dd479fa51f291f0a0b09376369827d9e32e860b6c831b0"
+    },
+    {
+      "file": "spikes/envoy/collect.mjs",
+      "sha256": "ecdaa37055d38adeb726fce2fb5828ace54401bc1775518a14a8161c6773e938"
+    },
+    {
+      "file": "spikes/envoy/config.mjs",
+      "sha256": "53fd7c0c624f8a4771ce75d6059981762694a89d61f24482803289b979cebeef"
+    },
+    {
+      "file": "spikes/envoy/config.test.mjs",
+      "sha256": "bc143535d181e428e7322862fdfbaa0e918fa314ad814bd355a4e8e51c584a3d"
+    },
+    {
+      "file": "spikes/envoy/example-manifest.json",
+      "sha256": "01ff8ad3357dafa78604113ae53d61c602b9023360e742c5d7b050e2f6a3f51a"
+    },
+    {
+      "file": "spikes/envoy/finalize-evidence.mjs",
+      "sha256": "6c2353c081a7a2419dd5ecac6fc677370449322361e7e05224193f5733580594"
+    },
+    {
+      "file": "spikes/envoy/image.lock.json",
+      "sha256": "a96054e7fe3b8994f708f54c221758ecd786b91655c641cb7648067d1f02889d"
+    },
+    {
+      "file": "spikes/envoy/launch",
+      "sha256": "0ee313b5b338486cd856415a6022ae10f6f12aeab2696f0d0399c512f723f0f1"
+    },
+    {
+      "file": "spikes/envoy/launcher.mjs",
+      "sha256": "26705e93f391d6fcd815ce48ef279142ab5d3463be681a8cfe11edfea6bb5da3"
+    },
+    {
+      "file": "spikes/envoy/recovery-config.mjs",
+      "sha256": "407268e48e6dffe15220f1b2d58f6eb7b0520dd2b1f69b5250e8f685a3f44b3c"
+    },
+    {
+      "file": "spikes/envoy/recovery-launcher.mjs",
+      "sha256": "00517051e9d631adbee9c58f58f1a343404360e24e66e5c3cbecd0c17c08be23"
+    },
+    {
+      "file": "spikes/envoy/recovery-raw-h2.mjs",
+      "sha256": "646e4a009c41269db90c97656c4b228db9ec65a170ae49f3c4b73540eb06e22a"
+    },
+    {
+      "file": "spikes/envoy/recovery-run.mjs",
+      "sha256": "ccaff2dd48099cccfb06b276f7f13717648d605dbabcad5238fa1eec74c2d42f"
+    },
+    {
+      "file": "spikes/envoy/research.mjs",
+      "sha256": "c6af39bac12b35b99dbe77e6aa3de37c3629cd8ecee1d61e64a875cd0c07909c"
+    },
+    {
+      "file": "spikes/envoy/scan-owned-secrets.sh",
+      "sha256": "29893d4bca45c2ac9497bd7c0f4574a95f6bbe22a0c68766d24543e764d5ea04"
+    },
+    {
+      "file": "spikes/envoy/scan.sh",
+      "sha256": "26eec5e058d9d56fc833254589eed4561efc78163dd7287ea167e2d7757ee85a"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-observer.mjs",
+      "sha256": "2b711290f5d7dcc8831a85a1d2299fefcab7d8a3ec3fb1256308c831287142a7"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-observer.test.mjs",
+      "sha256": "afcf2f3a3726afab9d128d78780a79cc9ff98c5bf9af3ac0e4d81a151c525082"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-protocol.mjs",
+      "sha256": "c00b465407778cab9bdd9df987fb48d9e9c4ec1625c51ad7ef90946e2732ccb4"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-receipts.mjs",
+      "sha256": "757e0cf106a7dee16fc8acaec1893b34bcdd7d363b90346490e81af5d17a272d"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-repro.mjs",
+      "sha256": "689be974b677daf833bfcdaee247a571a8740c7bb8a226e11cdedc260020fe3b"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-run.mjs",
+      "sha256": "b56b2b82d436b22895a16f545d6504e3add2ae800f16b1b7dd8893c82f588ed6"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-upstream-verify.mjs",
+      "sha256": "58f56e36a8780e4e53452c6434e9fe4a9eda28908968db5a4a6a99332afd1f8a"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-upstream.mjs",
+      "sha256": "c8143ded99d9dc887a85848febe2fa7c75d486281f481a2b8940f018c3863520"
+    },
+    {
+      "file": "spikes/envoy/sprint04b-verify.mjs",
+      "sha256": "ead5e86838792f316759cd7d6a2aa74d6dcb53815772707ac309069021bd74ba"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-repro-h1.mjs",
+      "sha256": "be5e8b2fa85f885be30b28a976d31e4463584bc4755a3a9527be70b3f48e5e55"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-repro-h2.mjs",
+      "sha256": "bd5ac577bb9b00c3669a4576c45dfe610d27025588cc95fd032da70f9fccb98b"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-repro-receipts.mjs",
+      "sha256": "69b1cd45537ff3efcfbee4c595e012f9c8f9eecdc3b50a40636a8b74b863114a"
+    },
+    {
+      "file": "spikes/envoy/sprint04c-upstream.mjs",
+      "sha256": "abce7f263a936ca42f63db72bd5b36bc9b83d53c71d4e09b703b8ed5823ecafa"
+    },
+    {
+      "file": "spikes/envoy/strict-boundary-check.mjs",
+      "sha256": "4017485afc16c1813c0d23745af9c8c72a9db40c7fe2a1c93f17af204e743abe"
+    },
+    {
+      "file": "spikes/envoy/strict-check.mjs",
+      "sha256": "4fb5ed53b3160fd0df4c774d7cc6bbeb97479e3563d31fe004ad520e19389bd7"
+    },
+    {
+      "file": "spikes/envoy/strict-finalize.mjs",
+      "sha256": "6e98c6bd885bd43e5b18e21849cc0d81e4d3c0c311e460c6941adc974334f9ce"
+    },
+    {
+      "file": "spikes/envoy/strict-research.mjs",
+      "sha256": "83c8488a46862ec789c5e6430e110f4e89151ef26fd8fc5d7ec9519e3cb423ad"
+    },
+    {
+      "file": "spikes/envoy/wire-closeout.mjs",
+      "sha256": "221d45747dfdc36d27fd79098dd8012501b00cd4b73065dbdc5a6141f460569a"
+    },
+    {
+      "file": "spikes/envoy/wire-fixtures.mjs",
+      "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278"
+    },
+    {
+      "file": "spikes/envoy/wire-observer.mjs",
+      "sha256": "bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3"
+    },
+    {
+      "file": "spikes/envoy/wire-observer.test.mjs",
+      "sha256": "1bdd293bc39956883f6a76d5924e8464e4d623d6b7217189140c372ae1b846b3"
+    },
+    {
+      "file": "spikes/envoy/wire-plan.md",
+      "sha256": "3b299daa2ca9ff77abb7496d23bcb0b143ef265ed5645b5b0a19a34425004b8a"
+    },
+    {
+      "file": "spikes/envoy/wire-probes.mjs",
+      "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a"
+    },
+    {
+      "file": "spikes/envoy/wire-run.mjs",
+      "sha256": "2cf5a83b900a9dfffdd5c7314ac69c3a8e61f987c912c4f8ac44d70a775bb95a"
+    },
+    {
+      "file": "spikes/envoy/wire-trace.mjs",
+      "sha256": "76b5dcf1a2bb80fcdbcbb76fc86828aed91ae8b1f94388ef187f2406b883f5bd"
+    }
+  ],
+  "commands": [
+    {
+      "name": "openssl-version",
+      "argv": [
+        "openssl",
+        "version"
+      ],
+      "cwd": "/tmp/aegisgate-04c-b",
+      "started_at": "2026-11-14T08:58:22.746Z",
+      "ended_at": "2026-11-14T08:58:22.755Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04c-b/reproh-01/openssl-version.stdout",
+        "bytes": 63,
+        "sha256": "bdd7122ae3788e889ce96da25f99fe5023a80a88ab0e6db9f93cf3174187301c"
+      },
+      "stderr": {
+        "file": "evidence/sprint04c-b/reproh-01/openssl-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "docker-version",
+      "argv": [
+        "docker",
+        "version",
+        "--format",
+        "{{json .}}"
+      ],
+      "cwd": "/tmp/aegisgate-04c-b",
+      "started_at": "2026-11-14T08:58:22.756Z",
+      "ended_at": "2026-11-14T08:58:22.786Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04c-b/reproh-01/docker-version.stdout",
+        "bytes": 1121,
+        "sha256": "128cbd88426fbce4931172bc507a305ed1aefaae33450326d5a6efa20d0de6eb"
+      },
+      "stderr": {
+        "file": "evidence/sprint04c-b/reproh-01/docker-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "image-inspect",
+      "argv": [
+        "docker",
+        "image",
+        "inspect",
+        "envoyproxy/envoy@sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded",
+        "--format",
+        "{{.Id}} {{.Os}}/{{.Architecture}} {{json .RepoDigests}}"
+      ],
+      "cwd": "/tmp/aegisgate-04c-b",
+      "started_at": "2026-11-14T08:58:22.786Z",
+      "ended_at": "2026-11-14T08:58:22.845Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04c-b/reproh-01/image-inspect.stdout",
+        "bytes": 177,
+        "sha256": "ee7cf8371ce228309c5958c2b2e849c5b01f374e71920e872ab114cfe057902d"
+      },
+      "stderr": {
+        "file": "evidence/sprint04c-b/reproh-01/image-inspect.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "envoy-version",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--pull",
+        "never",
+        "--network",
+        "none",
+        "--entrypoint",
+        "/usr/local/bin/envoy",
+        "envoyproxy/envoy@sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded",
+        "--version"
+      ],
+      "cwd": "/tmp/aegisgate-04c-b",
+      "started_at": "2026-11-14T08:58:22.846Z",
+      "ended_at": "2026-11-14T08:58:23.795Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04c-b/reproh-01/envoy-version.stdout",
+        "bytes": 105,
+        "sha256": "0c39628263c2098f5bce73ca589fee40b713437d65363bd80901e9514d20867c"
+      },
+      "stderr": {
+        "file": "evidence/sprint04c-b/reproh-01/envoy-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "openssl-4",
+      "argv": [
+        "openssl",
+        "req",
+        "-x509",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "ca.key",
+        "-out",
+        "ca.pem",
+        "-days",
+        "1",
+        "-subj",
+        "/CN=disposable Sprint04-C repro CA",
+        "-addext",
+        "basicConstraints=critical,CA:TRUE"
+      ],
+      "cwd": "/tmp/aegisgate-04c-b/.local/sprint04c-b-ip2YpS",
+      "started_at": "2026-11-14T08:58:23.795Z",
+      "ended_at": "2026-11-14T08:58:23.887Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04c-b/reproh-01/openssl-4.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint04c-b/reproh-01/openssl-4.stderr",
+        "bytes": 2068,
+        "sha256": "024f7aa348de53bac78faef454bb293e2b70b62a88828114f8bf9a3775194901"
+      }
+    },
+    {
+      "name": "openssl-5",
+      "argv": [
+        "openssl",
+        "req",
+        "-new",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "edge.key",
+        "-out",
+        "edge.csr",
+        "-subj",
+        "/CN=edge-a.test",
+        "-addext",
+        "subjectAltName=DNS:edge-a.test"
+      ],
+      "cwd": "/tmp/aegisgate-04c-b/.local/sprint04c-b-ip2YpS",
+      "started_at": "2026-11-14T08:58:23.888Z",
+      "ended_at": "2026-11-14T08:58:23.967Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04c-b/reproh-01/openssl-5.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint04c-b/reproh-01/openssl-5.stderr",
+        "bytes": 1680,
+        "sha256": "f53063e609912d5b9fab87967c658070b6d88e795484517e432ccb67b4ebeb81"
+      }
+    },
+    {
+      "name": "openssl-6",
+      "argv": [
+        "openssl",
+        "x509",
+        "-req",
+        "-in",
+        "edge.csr",
+        "-CA",
+        "ca.pem",
+        "-CAkey",
+        "ca.key",
+        "-CAcreateserial",
+        "-out",
+        "edge.pem",
+        "-days",
+        "1",
+        "-copy_extensions",
+        "copy"
+      ],
+      "cwd": "/tmp/aegisgate-04c-b/.local/sprint04c-b-ip2YpS",
+      "started_at": "2026-11-14T08:58:23.967Z",
+      "ended_at": "2026-11-14T08:58:23.986Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04c-b/reproh-01/openssl-6.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint04c-b/reproh-01/openssl-6.stderr",
+        "bytes": 61,
+        "sha256": "92ddb144b26ef1980f9c002e35f8b53f8fb784728611951a286bc7b0a9a9ddfe"
+      }
+    },
+    {
+      "name": "openssl-7",
+      "argv": [
+        "openssl",
+        "req",
+        "-new",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "origin.key",
+        "-out",
+        "origin.csr",
+        "-subj",
+        "/CN=lab-origin.test",
+        "-addext",
+        "subjectAltName=DNS:lab-origin.test"
+      ],
+      "cwd": "/tmp/aegisgate-04c-b/.local/sprint04c-b-ip2YpS",
+      "started_at": "2026-11-14T08:58:23.986Z",
+      "ended_at": "2026-11-14T08:58:24.062Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04c-b/reproh-01/openssl-7.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint04c-b/reproh-01/openssl-7.stderr",
+        "bytes": 1544,
+        "sha256": "554c8955bb57ed7440383882aa39c2bc9df64ef43502d04f60c1bbee05cde0cf"
+      }
+    },
+    {
+      "name": "openssl-8",
+      "argv": [
+        "openssl",
+        "x509",
+        "-req",
+        "-in",
+        "origin.csr",
+        "-CA",
+        "ca.pem",
+        "-CAkey",
+        "ca.key",
+        "-CAcreateserial",
+        "-out",
+        "origin.pem",
+        "-days",
+        "1",
+        "-copy_extensions",
+        "copy"
+      ],
+      "cwd": "/tmp/aegisgate-04c-b/.local/sprint04c-b-ip2YpS",
+      "started_at": "2026-11-14T08:58:24.063Z",
+      "ended_at": "2026-11-14T08:58:24.079Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04c-b/reproh-01/openssl-8.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint04c-b/reproh-01/openssl-8.stderr",
+        "bytes": 65,
+        "sha256": "09fd425719106e552b8dbf27cf942780b126e2b916e05099dab19b2a3ebc9c1d"
+      }
+    },
+    {
+      "name": "container-create",
+      "argv": [
+        "docker",
+        "create",
+        "--rm",
+        "--pull",
+        "never",
+        "--name",
+        "aegis-sprint04c-b-332898",
+        "--network",
+        "host",
+        "--read-only",
+        "--user",
+        "1000:1000",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "64",
+        "--memory",
+        "256m",
+        "--cpus",
+        "1",
+        "-v",
+        "/tmp/aegisgate-04c-b/.local/sprint04c-b-ip2YpS:/tmp/aegisgate-04c-b/.local/sprint04c-b-ip2YpS:ro",
+        "--entrypoint",
+        "/usr/local/bin/envoy",
+        "envoyproxy/envoy@sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded",
+        "-c",
+        "/tmp/aegisgate-04c-b/.local/sprint04c-b-ip2YpS/bootstrap.json",
+        "--concurrency",
+        "1",
+        "--log-level",
+        "warn",
+        "--disable-hot-restart"
+      ],
+      "cwd": "/tmp/aegisgate-04c-b",
+      "started_at": "2026-11-14T08:58:24.107Z",
+      "ended_at": "2026-11-14T08:58:24.289Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04c-b/reproh-01/container-create.stdout",
+        "bytes": 65,
+        "sha256": "827fb2d8c6af685f7455eaecdb4113636aa21adf59be9988e838a84a304db301"
+      },
+      "stderr": {
+        "file": "evidence/sprint04c-b/reproh-01/container-create.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "container-stop",
+      "argv": [
+        "docker",
+        "stop",
+        "--timeout",
+        "1",
+        "aegis-sprint04c-b-332898"
+      ],
+      "cwd": "/tmp/aegisgate-04c-b",
+      "started_at": "2026-11-14T08:58:41.733Z",
+      "ended_at": "2026-11-14T08:58:42.224Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04c-b/reproh-01/container-stop.stdout",
+        "bytes": 25,
+        "sha256": "2bdcd35c8503c618d638cf9711f022ef20886d5024fc5cbd9af54143b4081246"
+      },
+      "stderr": {
+        "file": "evidence/sprint04c-b/reproh-01/container-stop.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "cleanup-inspect",
+      "argv": [
+        "docker",
+        "ps",
+        "-aq",
+        "--filter",
+        "name=^aegis-sprint04c-b-332898$"
+      ],
+      "cwd": "/tmp/aegisgate-04c-b",
+      "started_at": "2026-11-14T08:58:42.275Z",
+      "ended_at": "2026-11-14T08:58:42.304Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout": {
+        "file": "evidence/sprint04c-b/reproh-01/cleanup-inspect.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "file": "evidence/sprint04c-b/reproh-01/cleanup-inspect.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "scope": "Standalone H1 parser/partial mapper reproduction; not a full candidate or immutable75 execution",
+  "bounds": {
+    "wall_ms": 90000,
+    "request_deadline_ms": 2500,
+    "response_bytes": 32768,
+    "docker_memory": "256m",
+    "docker_cpus": "1",
+    "docker_pids": 64,
+    "maximum_requests": 40
+  },
+  "image": {
+    "version": "1.40.2",
+    "image": "envoyproxy/envoy@sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded",
+    "discovery_tag": "envoyproxy/envoy:distroless-v1.40.2",
+    "release": "https://github.com/envoyproxy/envoy/releases/tag/v1.40.2",
+    "source_commit": "b2d89e0ae53916f28770771fbdd49c5c99c5c5a2",
+    "license": "Apache-2.0"
+  },
+  "fixture": "/tmp/aegisgate-04c-b/.local/sprint04c-b-ip2YpS",
+  "observer_control": {
+    "raw_hex": "474554202f6f627365727665722d636f6e74726f6c20485454502f312e310d0a486f73743a206c61622d6f726967696e2e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+    "observed_bytes": 76,
+    "sent_bytes": 76,
+    "exact_match": true
+  },
+  "container_command": {
+    "argv": [
+      "docker",
+      "start",
+      "--attach",
+      "aegis-sprint04c-b-332898"
+    ],
+    "cwd": "/tmp/aegisgate-04c-b",
+    "started_at": "2026-11-14T08:58:24.290Z",
+    "ended_at": "2026-11-14T08:58:42.275Z",
+    "exit_code": 0,
+    "signal": null
+  },
+  "probes": [
+    {
+      "name": "unfolded-header",
+      "started_at": "2026-11-14T08:58:24.514Z",
+      "ended_at": "2026-11-14T08:58:24.557Z",
+      "listener": "default",
+      "request_utf8": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nX-Folded: first second\r\nConnection: close\r\n\r\n",
+      "request_hex": "474554202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a582d466f6c6465643a206669727374207365636f6e640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:24 GMT\r\nx-envoy-upstream-service-time: 6\r\nserver: envoy\r\nconnection: close\r\n\r\nOK",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a323420474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20360d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 177,
+        "decrypted_hex": "474554202f20485454502f312e310d0a686f73743a20656467652d612e746573740d0a782d666f6c6465643a206669727374207365636f6e640d0a782d666f727761726465642d70726f746f3a2068747470730d0a782d726571756573742d69643a2062353166643739612d353062382d343063632d383236622d3439613562613731626437300d0a782d656e766f792d65787065637465642d72712d74696d656f75742d6d733a20323030300d0a0d0a",
+        "new_connections": 1,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:24.525Z",
+            "url": "/",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-folded",
+              "first second",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "b51fd79a-50b8-40cc-826b-49a5ba71bd70",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 200,
+      "matches_observation": true
+    },
+    {
+      "name": "folded-header",
+      "started_at": "2026-11-14T08:58:24.559Z",
+      "ended_at": "2026-11-14T08:58:24.597Z",
+      "listener": "default",
+      "request_utf8": "GET / HTTP/1.1\r\nHost: edge-a.test\r\nX-Folded: first\r\n second\r\nConnection: close\r\n\r\n",
+      "request_hex": "474554202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a582d466f6c6465643a2066697273740d0a207365636f6e640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:24 GMT\r\nx-envoy-upstream-service-time: 1\r\nserver: envoy\r\nconnection: close\r\n\r\nOK",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a323420474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20310d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 177,
+        "decrypted_hex": "474554202f20485454502f312e310d0a686f73743a20656467652d612e746573740d0a782d666f6c6465643a206669727374207365636f6e640d0a782d666f727761726465642d70726f746f3a2068747470730d0a782d726571756573742d69643a2030373534306332392d326638372d346362662d613561642d3833393038336331633963650d0a782d656e766f792d65787065637465642d72712d74696d656f75742d6d733a20323030300d0a0d0a",
+        "new_connections": 0,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:24.565Z",
+            "url": "/",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-folded",
+              "first second",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "07540c29-2f87-4cbf-a5ad-839083c1c9ce",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 200,
+      "matches_observation": true
+    },
+    {
+      "name": "unfolded-trailer",
+      "started_at": "2026-11-14T08:58:24.598Z",
+      "ended_at": "2026-11-14T08:58:24.639Z",
+      "listener": "default",
+      "request_utf8": "POST /trailers HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nTrailer: X-Folded\r\nConnection: close\r\n\r\n0\r\nX-Folded: first second\r\n\r\n",
+      "request_hex": "504f5354202f747261696c65727320485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a547261696c65723a20582d466f6c6465640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a300d0a582d466f6c6465643a206669727374207365636f6e640d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:24 GMT\r\nx-envoy-upstream-service-time: 1\r\nserver: envoy\r\nconnection: close\r\n\r\nOK",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a323420474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20310d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 214,
+        "decrypted_hex": "504f5354202f747261696c65727320485454502f312e310d0a686f73743a20656467652d612e746573740d0a747261696c65723a20582d466f6c6465640d0a782d666f727761726465642d70726f746f3a2068747470730d0a782d726571756573742d69643a2066633265356134642d313431612d346665302d616436312d6136363737323165303763320d0a782d656e766f792d65787065637465642d72712d74696d656f75742d6d733a20323030300d0a7472616e736665722d656e636f64696e673a206368756e6b65640d0a0d0a300d0a0d0a",
+        "new_connections": 0,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:24.606Z",
+            "url": "/trailers",
+            "method": "POST",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "trailer",
+              "X-Folded",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "fc2e5a4d-141a-4fe0-ad61-a667721e07c2",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000",
+              "transfer-encoding",
+              "chunked"
+            ],
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 200,
+      "matches_observation": true
+    },
+    {
+      "name": "folded-trailer",
+      "started_at": "2026-11-14T08:58:24.639Z",
+      "ended_at": "2026-11-14T08:58:24.681Z",
+      "listener": "default",
+      "request_utf8": "POST /trailers HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nTrailer: X-Folded\r\nConnection: close\r\n\r\n0\r\nX-Folded: first\r\n second\r\n\r\n",
+      "request_hex": "504f5354202f747261696c65727320485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a547261696c65723a20582d466f6c6465640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a300d0a582d466f6c6465643a2066697273740d0a207365636f6e640d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:24 GMT\r\nx-envoy-upstream-service-time: 1\r\nserver: envoy\r\nconnection: close\r\n\r\nOK",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a323420474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20310d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 214,
+        "decrypted_hex": "504f5354202f747261696c65727320485454502f312e310d0a686f73743a20656467652d612e746573740d0a747261696c65723a20582d466f6c6465640d0a782d666f727761726465642d70726f746f3a2068747470730d0a782d726571756573742d69643a2035363730666433622d326632372d343064392d393935662d3566633064623364646431630d0a782d656e766f792d65787065637465642d72712d74696d656f75742d6d733a20323030300d0a7472616e736665722d656e636f64696e673a206368756e6b65640d0a0d0a300d0a0d0a",
+        "new_connections": 0,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:24.649Z",
+            "url": "/trailers",
+            "method": "POST",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "trailer",
+              "X-Folded",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "5670fd3b-2f27-40d9-995f-5fc0db3ddd1c",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000",
+              "transfer-encoding",
+              "chunked"
+            ],
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 200,
+      "matches_observation": true
+    },
+    {
+      "name": "malformed-HTTP-invalid-transfer-encoding-0-fresh",
+      "started_at": "2026-11-14T08:58:24.682Z",
+      "ended_at": "2026-11-14T08:58:25.720Z",
+      "listener": "default",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: cow\r\nConnection: keep-alive\r\n\r\nx",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a20636f770d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a78",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:24 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e3120353031204e6f7420496d706c656d656e7465640d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a323420474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        501
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 501,
+      "matches_observation": true
+    },
+    {
+      "name": "malformed-HTTP-invalid-transfer-encoding-0-reused",
+      "started_at": "2026-11-14T08:58:25.720Z",
+      "ended_at": "2026-11-14T08:58:26.768Z",
+      "listener": "default",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: cow\r\nConnection: keep-alive\r\n\r\nx",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a20636f770d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a78",
+      "after_valid_request": true,
+      "warmup": {
+        "request_utf8": "GET /warmup HTTP/1.1\r\nHost: edge-a.test\r\n\r\n",
+        "origin_decrypted_bytes": 159,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:25.731Z",
+            "url": "/warmup",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "d247f171-72be-4129-ae1d-110076d1a9a7",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "new_connections": 0
+      },
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:25 GMT\r\nx-envoy-upstream-service-time: 2\r\nserver: envoy\r\n\r\nOKHTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:25 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a323520474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20320d0a7365727665723a20656e766f790d0a0d0a4f4b485454502f312e3120353031204e6f7420496d706c656d656e7465640d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a323520474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        200,
+        501
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 501,
+      "matches_observation": true
+    },
+    {
+      "name": "strict-ingress-TE-repeated-chunked-0-fresh",
+      "started_at": "2026-11-14T08:58:26.769Z",
+      "ended_at": "2026-11-14T08:58:27.811Z",
+      "listener": "default",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, chunked\r\nConnection: keep-alive\r\n\r\n0\r\n\r\n",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65642c206368756e6b65640d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a300d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:26 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e3120353031204e6f7420496d706c656d656e7465640d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a323620474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        501
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 501,
+      "matches_observation": true
+    },
+    {
+      "name": "strict-ingress-TE-repeated-chunked-0-reused",
+      "started_at": "2026-11-14T08:58:27.811Z",
+      "ended_at": "2026-11-14T08:58:28.857Z",
+      "listener": "default",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, chunked\r\nConnection: keep-alive\r\n\r\n0\r\n\r\n",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65642c206368756e6b65640d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a300d0a0d0a",
+      "after_valid_request": true,
+      "warmup": {
+        "request_utf8": "GET /warmup HTTP/1.1\r\nHost: edge-a.test\r\n\r\n",
+        "origin_decrypted_bytes": 159,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:27.820Z",
+            "url": "/warmup",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "bf6c0a37-d1f9-49a6-8b57-c95d6a22c854",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "new_connections": 0
+      },
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:27 GMT\r\nx-envoy-upstream-service-time: 1\r\nserver: envoy\r\n\r\nOKHTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:27 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a323720474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20310d0a7365727665723a20656e766f790d0a0d0a4f4b485454502f312e3120353031204e6f7420496d706c656d656e7465640d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a323720474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        200,
+        501
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 501,
+      "matches_observation": true
+    },
+    {
+      "name": "strict-ingress-TE-not-final-chunked-0-fresh",
+      "started_at": "2026-11-14T08:58:28.858Z",
+      "ended_at": "2026-11-14T08:58:29.898Z",
+      "listener": "default",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, gzip\r\nConnection: keep-alive\r\n\r\n0\r\n\r\n",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65642c20677a69700d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a300d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:28 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e3120353031204e6f7420496d706c656d656e7465640d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a323820474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        501
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 501,
+      "matches_observation": true
+    },
+    {
+      "name": "strict-ingress-TE-not-final-chunked-0-reused",
+      "started_at": "2026-11-14T08:58:29.898Z",
+      "ended_at": "2026-11-14T08:58:30.940Z",
+      "listener": "default",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, gzip\r\nConnection: keep-alive\r\n\r\n0\r\n\r\n",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65642c20677a69700d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a300d0a0d0a",
+      "after_valid_request": true,
+      "warmup": {
+        "request_utf8": "GET /warmup HTTP/1.1\r\nHost: edge-a.test\r\n\r\n",
+        "origin_decrypted_bytes": 159,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:29.905Z",
+            "url": "/warmup",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "a46c477b-2298-4b60-83ca-de743cf20ea3",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "new_connections": 0
+      },
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:29 GMT\r\nx-envoy-upstream-service-time: 2\r\nserver: envoy\r\n\r\nOKHTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:29 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a323920474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20320d0a7365727665723a20656e766f790d0a0d0a4f4b485454502f312e3120353031204e6f7420496d706c656d656e7465640d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a323920474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        200,
+        501
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 501,
+      "matches_observation": true
+    },
+    {
+      "name": "supplemental-repeated-transfer-encoding-fields-0-fresh",
+      "started_at": "2026-11-14T08:58:30.940Z",
+      "ended_at": "2026-11-14T08:58:31.978Z",
+      "listener": "default",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nTransfer-Encoding: chunked\r\nConnection: keep-alive\r\n\r\n0\r\n\r\n",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a300d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:30 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e3120353031204e6f7420496d706c656d656e7465640d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a333020474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        501
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 501,
+      "matches_observation": true
+    },
+    {
+      "name": "supplemental-repeated-transfer-encoding-fields-0-reused",
+      "started_at": "2026-11-14T08:58:31.979Z",
+      "ended_at": "2026-11-14T08:58:33.021Z",
+      "listener": "default",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nTransfer-Encoding: chunked\r\nConnection: keep-alive\r\n\r\n0\r\n\r\n",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a300d0a0d0a",
+      "after_valid_request": true,
+      "warmup": {
+        "request_utf8": "GET /warmup HTTP/1.1\r\nHost: edge-a.test\r\n\r\n",
+        "origin_decrypted_bytes": 159,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:31.986Z",
+            "url": "/warmup",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "7e675176-bc1a-4af1-86b7-485af978f7c9",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "new_connections": 0
+      },
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:31 GMT\r\nx-envoy-upstream-service-time: 1\r\nserver: envoy\r\n\r\nOKHTTP/1.1 501 Not Implemented\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:31 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a333120474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20310d0a7365727665723a20656e766f790d0a0d0a4f4b485454502f312e3120353031204e6f7420496d706c656d656e7465640d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a333120474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        200,
+        501
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 501,
+      "matches_observation": true
+    },
+    {
+      "name": "origin-501-control-0",
+      "started_at": "2026-11-14T08:58:33.021Z",
+      "ended_at": "2026-11-14T08:58:33.061Z",
+      "listener": "default",
+      "request_utf8": "GET /origin501 HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "request_hex": "474554202f6f726967696e35303120485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 501 Not Implemented\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:33 GMT\r\nx-envoy-upstream-service-time: 2\r\nserver: envoy\r\nconnection: close\r\n\r\nOK",
+      "response_hex": "485454502f312e3120353031204e6f7420496d706c656d656e7465640d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a333320474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20320d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        501
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 162,
+        "decrypted_hex": "474554202f6f726967696e35303120485454502f312e310d0a686f73743a20656467652d612e746573740d0a782d666f727761726465642d70726f746f3a2068747470730d0a782d726571756573742d69643a2033386431616439362d646634352d343738642d623064342d6563393362356463613335310d0a782d656e766f792d65787065637465642d72712d74696d656f75742d6d733a20323030300d0a0d0a",
+        "new_connections": 0,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:33.027Z",
+            "url": "/origin501",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "38d1ad96-df45-478d-b0d4-ec93b5dca351",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 501,
+      "matches_observation": true
+    },
+    {
+      "name": "malformed-HTTP-invalid-transfer-encoding-1-fresh",
+      "started_at": "2026-11-14T08:58:33.061Z",
+      "ended_at": "2026-11-14T08:58:34.099Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: cow\r\nConnection: keep-alive\r\n\r\nx",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a20636f770d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a78",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 400 Bad Request\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:32 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e31203430302042616420526571756573740d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a333220474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        400
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 400,
+      "matches_observation": true
+    },
+    {
+      "name": "malformed-HTTP-invalid-transfer-encoding-1-reused",
+      "started_at": "2026-11-14T08:58:34.102Z",
+      "ended_at": "2026-11-14T08:58:35.146Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: cow\r\nConnection: keep-alive\r\n\r\nx",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a20636f770d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a78",
+      "after_valid_request": true,
+      "warmup": {
+        "request_utf8": "GET /warmup HTTP/1.1\r\nHost: edge-a.test\r\n\r\n",
+        "origin_decrypted_bytes": 159,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:34.112Z",
+            "url": "/warmup",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "447b3bd6-64ef-4019-89c9-47cae25faef8",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "new_connections": 0
+      },
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:34 GMT\r\nx-envoy-upstream-service-time: 3\r\nserver: envoy\r\n\r\nOKHTTP/1.1 400 Bad Request\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:33 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a333420474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20330d0a7365727665723a20656e766f790d0a0d0a4f4b485454502f312e31203430302042616420526571756573740d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a333320474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        200,
+        400
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 400,
+      "matches_observation": true
+    },
+    {
+      "name": "strict-ingress-TE-repeated-chunked-1-fresh",
+      "started_at": "2026-11-14T08:58:35.147Z",
+      "ended_at": "2026-11-14T08:58:36.182Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, chunked\r\nConnection: keep-alive\r\n\r\n0\r\n\r\n",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65642c206368756e6b65640d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a300d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 400 Bad Request\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:34 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e31203430302042616420526571756573740d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a333420474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        400
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 400,
+      "matches_observation": true
+    },
+    {
+      "name": "strict-ingress-TE-repeated-chunked-1-reused",
+      "started_at": "2026-11-14T08:58:36.183Z",
+      "ended_at": "2026-11-14T08:58:37.227Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, chunked\r\nConnection: keep-alive\r\n\r\n0\r\n\r\n",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65642c206368756e6b65640d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a300d0a0d0a",
+      "after_valid_request": true,
+      "warmup": {
+        "request_utf8": "GET /warmup HTTP/1.1\r\nHost: edge-a.test\r\n\r\n",
+        "origin_decrypted_bytes": 159,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:36.191Z",
+            "url": "/warmup",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "998725b2-bdba-4b68-abc8-3bd7e8f172c4",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "new_connections": 0
+      },
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:36 GMT\r\nx-envoy-upstream-service-time: 1\r\nserver: envoy\r\n\r\nOKHTTP/1.1 400 Bad Request\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:35 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a333620474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20310d0a7365727665723a20656e766f790d0a0d0a4f4b485454502f312e31203430302042616420526571756573740d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a333520474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        200,
+        400
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 400,
+      "matches_observation": true
+    },
+    {
+      "name": "strict-ingress-TE-not-final-chunked-1-fresh",
+      "started_at": "2026-11-14T08:58:37.228Z",
+      "ended_at": "2026-11-14T08:58:38.266Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, gzip\r\nConnection: keep-alive\r\n\r\n0\r\n\r\n",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65642c20677a69700d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a300d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 400 Bad Request\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:36 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e31203430302042616420526571756573740d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a333620474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        400
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 400,
+      "matches_observation": true
+    },
+    {
+      "name": "strict-ingress-TE-not-final-chunked-1-reused",
+      "started_at": "2026-11-14T08:58:38.267Z",
+      "ended_at": "2026-11-14T08:58:39.312Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked, gzip\r\nConnection: keep-alive\r\n\r\n0\r\n\r\n",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65642c20677a69700d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a300d0a0d0a",
+      "after_valid_request": true,
+      "warmup": {
+        "request_utf8": "GET /warmup HTTP/1.1\r\nHost: edge-a.test\r\n\r\n",
+        "origin_decrypted_bytes": 159,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:38.277Z",
+            "url": "/warmup",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "7ab11412-0ed3-4d8f-9fa1-0666726f5330",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "new_connections": 0
+      },
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:38 GMT\r\nx-envoy-upstream-service-time: 3\r\nserver: envoy\r\n\r\nOKHTTP/1.1 400 Bad Request\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:37 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a333820474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20330d0a7365727665723a20656e766f790d0a0d0a4f4b485454502f312e31203430302042616420526571756573740d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a333720474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        200,
+        400
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 400,
+      "matches_observation": true
+    },
+    {
+      "name": "supplemental-repeated-transfer-encoding-fields-1-fresh",
+      "started_at": "2026-11-14T08:58:39.313Z",
+      "ended_at": "2026-11-14T08:58:40.354Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nTransfer-Encoding: chunked\r\nConnection: keep-alive\r\n\r\n0\r\n\r\n",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a300d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 400 Bad Request\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:38 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e31203430302042616420526571756573740d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a333820474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        400
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 400,
+      "matches_observation": true
+    },
+    {
+      "name": "supplemental-repeated-transfer-encoding-fields-1-reused",
+      "started_at": "2026-11-14T08:58:40.355Z",
+      "ended_at": "2026-11-14T08:58:41.397Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "POST / HTTP/1.1\r\nHost: edge-a.test\r\nTransfer-Encoding: chunked\r\nTransfer-Encoding: chunked\r\nConnection: keep-alive\r\n\r\n0\r\n\r\n",
+      "request_hex": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a5472616e736665722d456e636f64696e673a206368756e6b65640d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a0d0a300d0a0d0a",
+      "after_valid_request": true,
+      "warmup": {
+        "request_utf8": "GET /warmup HTTP/1.1\r\nHost: edge-a.test\r\n\r\n",
+        "origin_decrypted_bytes": 159,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:40.361Z",
+            "url": "/warmup",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "f9f06314-e4c1-49e4-9958-1c98f997cd30",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "new_connections": 0
+      },
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:40 GMT\r\nx-envoy-upstream-service-time: 0\r\nserver: envoy\r\n\r\nOKHTTP/1.1 400 Bad Request\r\ncontent-length: 15\r\ncontent-type: text/plain\r\ndate: Sat, 14 Nov 2026 08:58:39 GMT\r\nserver: envoy\r\nconnection: close\r\n\r\nNot Implemented",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a343020474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20300d0a7365727665723a20656e766f790d0a0d0a4f4b485454502f312e31203430302042616420526571756573740d0a636f6e74656e742d6c656e6774683a2031350d0a636f6e74656e742d747970653a20746578742f706c61696e0d0a646174653a205361742c203134204e6f7620323032362030383a35383a333920474d540d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4e6f7420496d706c656d656e746564",
+      "status": [
+        200,
+        400
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 0,
+        "decrypted_hex": "",
+        "new_connections": 0,
+        "handlers": [],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 400,
+      "matches_observation": true
+    },
+    {
+      "name": "origin-501-control-1",
+      "started_at": "2026-11-14T08:58:41.398Z",
+      "ended_at": "2026-11-14T08:58:41.439Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "GET /origin501 HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "request_hex": "474554202f6f726967696e35303120485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 501 Not Implemented\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:41 GMT\r\nx-envoy-upstream-service-time: 1\r\nserver: envoy\r\nconnection: close\r\n\r\nOK",
+      "response_hex": "485454502f312e3120353031204e6f7420496d706c656d656e7465640d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a343120474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20310d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        501
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 162,
+        "decrypted_hex": "474554202f6f726967696e35303120485454502f312e310d0a686f73743a20656467652d612e746573740d0a782d666f727761726465642d70726f746f3a2068747470730d0a782d726571756573742d69643a2030333635363963662d633637612d343832642d386537372d6633623436363736356464330d0a782d656e766f792d65787065637465642d72712d74696d656f75742d6d733a20323030300d0a0d0a",
+        "new_connections": 0,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:41.405Z",
+            "url": "/origin501",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "036569cf-c67a-482d-8e77-f3b466765dd3",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 501,
+      "matches_observation": true
+    },
+    {
+      "name": "encoded-/bad%20target",
+      "started_at": "2026-11-14T08:58:41.440Z",
+      "ended_at": "2026-11-14T08:58:41.480Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "GET /bad%20target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "request_hex": "474554202f62616425323074617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:41 GMT\r\nx-envoy-upstream-service-time: 2\r\nserver: envoy\r\nconnection: close\r\n\r\nOK",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a343120474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20320d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 165,
+        "decrypted_hex": "474554202f62616425323074617267657420485454502f312e310d0a686f73743a20656467652d612e746573740d0a782d666f727761726465642d70726f746f3a2068747470730d0a782d726571756573742d69643a2035663731653030362d336461652d343437312d626438362d6365343832366235633533320d0a782d656e766f792d65787065637465642d72712d74696d656f75742d6d733a20323030300d0a0d0a",
+        "new_connections": 0,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:41.448Z",
+            "url": "/bad%20target",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "5f71e006-3dae-4471-bd86-ce4826b5c532",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 200,
+      "matches_observation": true
+    },
+    {
+      "name": "encoded-/bad%09target",
+      "started_at": "2026-11-14T08:58:41.481Z",
+      "ended_at": "2026-11-14T08:58:41.519Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "GET /bad%09target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "request_hex": "474554202f62616425303974617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:41 GMT\r\nx-envoy-upstream-service-time: 0\r\nserver: envoy\r\nconnection: close\r\n\r\nOK",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a343120474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20300d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 165,
+        "decrypted_hex": "474554202f62616425303974617267657420485454502f312e310d0a686f73743a20656467652d612e746573740d0a782d666f727761726465642d70726f746f3a2068747470730d0a782d726571756573742d69643a2032396331313730612d623765362d343866302d383432382d3765626432656635643562360d0a782d656e766f792d65787065637465642d72712d74696d656f75742d6d733a20323030300d0a0d0a",
+        "new_connections": 0,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:41.487Z",
+            "url": "/bad%09target",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "29c1170a-b7e6-48f0-8428-7ebd2ef5d5b6",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 200,
+      "matches_observation": true
+    },
+    {
+      "name": "encoded-/bad%01target",
+      "started_at": "2026-11-14T08:58:41.519Z",
+      "ended_at": "2026-11-14T08:58:41.560Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "GET /bad%01target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "request_hex": "474554202f62616425303174617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:41 GMT\r\nx-envoy-upstream-service-time: 1\r\nserver: envoy\r\nconnection: close\r\n\r\nOK",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a343120474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20310d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 165,
+        "decrypted_hex": "474554202f62616425303174617267657420485454502f312e310d0a686f73743a20656467652d612e746573740d0a782d666f727761726465642d70726f746f3a2068747470730d0a782d726571756573742d69643a2033326330643566352d633436352d346362312d386161312d3437306337646630623932390d0a782d656e766f792d65787065637465642d72712d74696d656f75742d6d733a20323030300d0a0d0a",
+        "new_connections": 0,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:41.527Z",
+            "url": "/bad%01target",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "32c0d5f5-c465-4cb1-8aa1-470c7df0b929",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 200,
+      "matches_observation": true
+    },
+    {
+      "name": "encoded-/bad%00target",
+      "started_at": "2026-11-14T08:58:41.561Z",
+      "ended_at": "2026-11-14T08:58:41.600Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "GET /bad%00target HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "request_hex": "474554202f62616425303074617267657420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:41 GMT\r\nx-envoy-upstream-service-time: 0\r\nserver: envoy\r\nconnection: close\r\n\r\nOK",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a343120474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20300d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 165,
+        "decrypted_hex": "474554202f62616425303074617267657420485454502f312e310d0a686f73743a20656467652d612e746573740d0a782d666f727761726465642d70726f746f3a2068747470730d0a782d726571756573742d69643a2032363435616437652d653132662d343039642d393462642d3738373637393331356138640d0a782d656e766f792d65787065637465642d72712d74696d656f75742d6d733a20323030300d0a0d0a",
+        "new_connections": 0,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:41.568Z",
+            "url": "/bad%00target",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "2645ad7e-e12f-409d-94bd-787679315a8d",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 200,
+      "matches_observation": true
+    },
+    {
+      "name": "encoded-/encoded%2Fsegment?value=%2520",
+      "started_at": "2026-11-14T08:58:41.601Z",
+      "ended_at": "2026-11-14T08:58:41.640Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "GET /encoded%2Fsegment?value=%2520 HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "request_hex": "474554202f656e636f6465642532467365676d656e743f76616c75653d253235323020485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:41 GMT\r\nx-envoy-upstream-service-time: 1\r\nserver: envoy\r\nconnection: close\r\n\r\nOK",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a343120474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20310d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 182,
+        "decrypted_hex": "474554202f656e636f6465642532467365676d656e743f76616c75653d253235323020485454502f312e310d0a686f73743a20656467652d612e746573740d0a782d666f727761726465642d70726f746f3a2068747470730d0a782d726571756573742d69643a2033653132346538322d336263372d346234612d616130622d6239623165383034643165300d0a782d656e766f792d65787065637465642d72712d74696d656f75742d6d733a20323030300d0a0d0a",
+        "new_connections": 0,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:41.607Z",
+            "url": "/encoded%2Fsegment?value=%2520",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "3e124e82-3bc7-4b4a-aa0b-b9b1e804d1e0",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 200,
+      "matches_observation": true
+    },
+    {
+      "name": "encoded-/caf%C3%A9?x=a%20b",
+      "started_at": "2026-11-14T08:58:41.641Z",
+      "ended_at": "2026-11-14T08:58:41.679Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "GET /caf%C3%A9?x=a%20b HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "request_hex": "474554202f6361662543332541393f783d612532306220485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:41 GMT\r\nx-envoy-upstream-service-time: 1\r\nserver: envoy\r\nconnection: close\r\n\r\nOK",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a343120474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20310d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 170,
+        "decrypted_hex": "474554202f6361662543332541393f783d612532306220485454502f312e310d0a686f73743a20656467652d612e746573740d0a782d666f727761726465642d70726f746f3a2068747470730d0a782d726571756573742d69643a2032383533353136362d376663312d343139332d616432622d3732313939363034383138650d0a782d656e766f792d65787065637465642d72712d74696d656f75742d6d733a20323030300d0a0d0a",
+        "new_connections": 0,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:41.647Z",
+            "url": "/caf%C3%A9?x=a%20b",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "28535166-7fc1-4193-ad2b-72199604818e",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 200,
+      "matches_observation": true
+    },
+    {
+      "name": "ordered-pipeline",
+      "started_at": "2026-11-14T08:58:41.680Z",
+      "ended_at": "2026-11-14T08:58:41.722Z",
+      "listener": "local-reply-501-to-400",
+      "request_utf8": "GET /first%2Fsegment HTTP/1.1\r\nHost: edge-a.test\r\n\r\nGET /second?x=%2520 HTTP/1.1\r\nHost: edge-a.test\r\nConnection: close\r\n\r\n",
+      "request_hex": "474554202f66697273742532467365676d656e7420485454502f312e310d0a486f73743a20656467652d612e746573740d0a0d0a474554202f7365636f6e643f783d253235323020485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "after_valid_request": false,
+      "warmup": null,
+      "identity": {
+        "authorized": true,
+        "servername": "edge-a.test",
+        "alpn": "http/1.1",
+        "protocol": "TLSv1.3",
+        "peer_fingerprint256": "0C:3E:51:FB:4D:C0:88:87:F6:96:D2:B1:CE:DE:8F:1B:B0:59:66:38:56:08:28:24:41:6A:CF:9A:EB:AC:83:26"
+      },
+      "response_utf8": "HTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:41 GMT\r\nx-envoy-upstream-service-time: 1\r\nserver: envoy\r\n\r\nOKHTTP/1.1 200 OK\r\ncontent-length: 2\r\ndate: Sat, 14 Nov 2026 08:58:41 GMT\r\nx-envoy-upstream-service-time: 1\r\nserver: envoy\r\nconnection: close\r\n\r\nOK",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a343120474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20310d0a7365727665723a20656e766f790d0a0d0a4f4b485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a646174653a205361742c203134204e6f7620323032362030383a35383a343120474d540d0a782d656e766f792d757073747265616d2d736572766963652d74696d653a20310d0a7365727665723a20656e766f790d0a636f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "status": [
+        200,
+        200
+      ],
+      "client_sent_fin": false,
+      "peer_end": true,
+      "timed_out": false,
+      "error": null,
+      "origin": {
+        "decrypted_bytes": 335,
+        "decrypted_hex": "474554202f66697273742532467365676d656e7420485454502f312e310d0a686f73743a20656467652d612e746573740d0a782d666f727761726465642d70726f746f3a2068747470730d0a782d726571756573742d69643a2064356333336530352d653430312d346137632d616436632d3839623835343637323766310d0a782d656e766f792d65787065637465642d72712d74696d656f75742d6d733a20323030300d0a0d0a474554202f7365636f6e643f783d253235323020485454502f312e310d0a686f73743a20656467652d612e746573740d0a782d666f727761726465642d70726f746f3a2068747470730d0a782d726571756573742d69643a2033343265623763322d663238652d346434382d396439612d6232663835366233346531630d0a782d656e766f792d65787065637465642d72712d74696d656f75742d6d733a20323030300d0a0d0a",
+        "new_connections": 0,
+        "handlers": [
+          {
+            "at": "2026-11-14T08:58:41.689Z",
+            "url": "/first%2Fsegment",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "d5c33e05-e401-4a7c-ad6c-89b8546727f1",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          },
+          {
+            "at": "2026-11-14T08:58:41.691Z",
+            "url": "/second?x=%2520",
+            "method": "GET",
+            "headers": [
+              "host",
+              "edge-a.test",
+              "x-forwarded-proto",
+              "https",
+              "x-request-id",
+              "342eb7c2-f28e-4d48-9d9a-b2f856b34e1c",
+              "x-envoy-expected-rq-timeout-ms",
+              "2000"
+            ],
+            "trailers": []
+          }
+        ],
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "expected": 200,
+      "matches_observation": true
+    }
+  ],
+  "trailer_delivery_proven": false,
+  "completed_observations": true,
+  "security_acceptance": "NO-GO: observing normalization/partial hooks does not grant a security pass",
+  "cleanup": {
+    "lock_held_through_cleanup": true,
+    "container_absent": true,
+    "fixture_removed": true,
+    "wall_ms": 19561
+  },
+  "ended_at": "2026-11-14T08:58:42.308Z"
+}

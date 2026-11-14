@@ -2,6 +2,32 @@
 
 This register tracks residual implementation and release risks. It does not accept risks on behalf of a human reviewer. The current module states and actual executed evidence are recorded in `IMPLEMENTATION_STATUS.md`; T01–T20 mappings are maintained in `docs/SECURITY_COVERAGE.md`.
 
+## Sprint04-C disposition (accepted scope; hosted closeout in progress)
+
+R01/R04 remain blocking: no maintained released strict-provenance repair or
+eligible runtime is established. Root recommends original aggregate zero bytes;
+ADR012/addendum stay PROPOSED, actual human owners and decision PENDING.
+Original75/23 and9-byte H2 failure remain mandatory. No risk waiver.
+
+The new-boundary assessment screens HAProxy3.4.7 H1 source and documents
+folding normalization plus added T01/T06 identity, T07 parser differential,
+T08 resource/lifecycle, T05/T17 configuration and T11/T13 TLS/plaintext risks.
+It authorizes no double-proxy implementation. Complete mapping/HPACK mutation
+visibility and fail-closed capture remain prerequisites for any Option2 suite.
+
+E's actual00/02/03, isolated fixtures, snapshotv1/recovery/tenancy and dashboard
+regressions pass with no product/dependency change. TS7 still fails explicit
+released peer support; minimatch override and scanners remain unchanged.
+External generation floor, engine drain, archive custody and production secret
+service remain unimplemented production obligations. F source-specific review
+and root full local/hosted receipts are separately recorded in Sprint04-C
+completion. No risk is closed merely by documentation or green CI.
+
+Independent component/source and gate-binding reviews ACCEPT the scoped work;
+full local check/scan/cleanup pass at dd5b484. PR15 exact final-head/merge hosted
+receipts remain required. Earlier scanner/helper/audit failures stay retained
+and ineligible; publishable history excludes rejected evidence/source ancestry.
+
 ## Sprint04-B Disposition
 
 PR12 is merged at `cbb5f71db84b9489bf4a6260696bbba29ab4a561`; both required

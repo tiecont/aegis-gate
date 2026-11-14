@@ -1,0 +1,189 @@
+9950: 
+9951: 
+9952: option accept-invalid-http-request     (deprecated)
+9953: no option accept-invalid-http-request  (deprecated)
+9954:   Enable or disable relaxing of HTTP request parsing
+9955: 
+9956:   The "accept-invalid-http-request" keyword is deprecated, use "option
+9957:   accept-unsafe-violations-in-http-request" instead.
+9958: 
+9959: 
+9960: option accept-invalid-http-response     (deprecated)
+9961: no option accept-invalid-http-response  (deprecated)
+9962:   Enable or disable relaxing of HTTP response parsing
+9963: 
+9964:   The "accept-invalid-http-response" keyword is deprecated, use "option
+9965:   accept-unsafe-violations-in-http-response" instead.
+9966: 
+9967: 
+9968: option accept-unsafe-violations-in-http-request
+9969: no option accept-unsafe-violations-in-http-request
+9970:   Enable or disable relaxing of HTTP request parsing
+9971: 
+9972:   May be used in the following contexts: http
+9973: 
+9974:   May be used in sections :   defaults | frontend | listen | backend
+9975:                                  yes   |    yes   |   yes  |   no
+9976: 
+9977:   Arguments : none
+9978: 
+9979:   By default, HAProxy complies with the different HTTP RFCs in terms of message
+9980:   parsing. This means the message parsing is quite strict and causes an error
+9981:   to be returned to the client for malformed messages. This is the desired
+9982:   behavior as such malformed messages are essentially used to build attacks
+9983:   exploiting server weaknesses, and bypass security filtering. Sometimes, a
+9984:   buggy browser will not respect these RCFs for whatever reason (configuration,
+9985:   implementation...) and the issue will not be immediately fixed. In such case,
+9986:   it is possible to relax HAProxy's parser to accept some invalid requests by
+
+27044:   ACL derivatives :
+27045:     ssl_fc_sni_end : suffix match
+27046:     ssl_fc_sni_reg : regex match
+27047: 
+27048: ssl_fc_supported_versions_bin([<filter_option>]) : binary
+27049:   Returns the content of the supported_versions (43) TLS extension presented
+27050:   during the Client Hello. It provides a binary list of 2-bytes versions.
+27051:   TLSv1.3 (0x0304), TLSv1.2 (0x0303).
+27052: 
+27053:   This value can return only if the value "tune.ssl.capture-buffer-size" is set
+27054:   greater than 0. Setting <filter_option> allows to filter returned data.
+27055:   Accepted values:
+27056:   0 : return the full list of ciphers (default)
+27057:   1 : exclude GREASE (RFC8701) values from the output
+27058: 
+27059: ssl_fc_unique_id : binary
+27060:   When the incoming connection was made over an SSL/TLS transport layer,
+27061:   returns the TLS unique ID as defined in RFC5929 section 3. The unique id
+27062:   can be encoded to base64 using the converter: "ssl_fc_unique_id,base64".
+27063: 
+27064: ssl_fc_use_keysize : integer
+27065:   Returns the symmetric cipher key size used in bits when the incoming
+27066:   connection was made over an SSL/TLS transport layer.
+27067: 
+27068: ssl_s_chain_der : binary
+27069:   Returns the DER formatted chain certificate presented by the server when the
+27070:   outgoing connection was made over an SSL/TLS transport layer. When used for
+27071:   an ACL, the value(s) to match against can be passed in hexadecimal form. One
+27072:   can parse the result with any lib accepting ASN.1 DER data. It currently
+27073:   does not support resumed sessions.
+27074: 
+27075: ssl_s_der : binary
+27076:   Returns the DER formatted certificate presented by the server when the
+27077:   outgoing connection was made over an SSL/TLS transport layer. When used for
+27078:   an ACL, the value(s) to match against can be passed in hexadecimal form.
+27079: 
+27080: ssl_s_i_dn([<entry>[,<occ>[,<format>]]]) : string
+
+19867:   "send-proxy-v2" option of the "bind" keyword.
+19868: 
+19869: send-proxy-v2-ssl-cn
+19870:   May be used in the following contexts: tcp, http
+19871: 
+19872:   The "send-proxy-v2-ssl" parameter enforces use of the PROXY protocol version
+19873:   2 over any connection established to this server. The PROXY protocol informs
+19874:   the other end about the layer 3/4 addresses of the incoming connection, so
+19875:   that it can know the client's address or the public address it accessed to,
+19876:   whatever the upper layer protocol. In addition, the SSL information extension
+19877:   of the PROXY protocol, along along with the Common Name from the subject of
+19878:   the client certificate (if any), is added to the PROXY protocol header. This
+19879:   setting must not be used if the server isn't aware of this version of the
+19880:   protocol. See also the "no-send-proxy-v2-ssl-cn" option of this section and
+19881:   the "send-proxy-v2" option of the "bind" keyword.
+19882: 
+19883: shard <shard>
+19884:   May be used in the following contexts: peers
+19885: 
+19886:   This parameter in used only in the context of stick-tables synchronisation
+19887:   with peers protocol. The "shard" parameter identifies the peers which will
+19888:   receive all the stick-table updates for keys with this shard as distribution
+19889:   hash. The accepted values are 0 up to "shards" parameter value specified in
+19890:   the "peers" section. 0 value is the default value meaning that the peer will
+19891:   receive all the key updates. Greater values than "shards" will be ignored.
+19892:   This is also the case for any value provided to the local peer.
+19893: 
+19894:   Example :
+19895: 
+19896:   peers mypeers
+19897:        shards 3
+19898:        peer A 127.0.0.1:40001 # local peer without shard value (0 internally)
+19899:        peer B 127.0.0.1:40002 shard 1
+19900:        peer C 127.0.0.1:40003 shard 2
+19901:        peer D 127.0.0.1:40004 shard 3
+19902: 
+19903: sigalgs <sigalgs>
+
+9087:              ACL usage.
+9088: 
+9089: http-reuse { never | safe | aggressive | always }
+9090:   Declare how idle HTTP connections may be shared between requests
+9091: 
+9092:   May be used in the following contexts: http
+9093: 
+9094:   May be used in sections:   defaults | frontend | listen | backend
+9095:                                yes    |    no    |   yes  |   yes
+9096: 
+9097:   In order to avoid the cost of setting up new connections to backend servers
+9098:   for each HTTP request, HAProxy tries to keep such idle connections opened
+9099:   after being used. These connections are specific to a server and are stored
+9100:   in a list called a pool, and are grouped together by a set of common key
+9101:   properties. Subsequent HTTP requests will cause a lookup of a compatible
+9102:   connection sharing identical properties in the associated pool and result in
+9103:   this connection being reused instead of establishing a new one.
+9104: 
+9105:   A limit on the number of idle connections to keep on a server can be
+9106:   specified via the "pool-max-conn" server keyword. Unused connections are
+9107:   periodically purged according to the "pool-purge-delay" interval.
+9108: 
+9109:   The following connection properties are used to determine if an idle
+9110:   connection is eligible for reuse on a given request:
+9111:   - source and destination addresses
+9112:   - proxy protocol
+9113:   - TOS and mark socket options
+9114:   - connection name, determined either by the result of the evaluation of the
+9115:     "pool-conn-name" expression if present, otherwise by the "sni" expression,
+9116:     which defaults to "req.hdr(host),field(1,:)", i.e. uses the incoming
+9117:     request's "Host" header field without the colon nor the port number.
+9118: 
+9119:   In some occasions, connection lookup or reuse is not performed due to extra
+9120:   restrictions. This is determined by the reuse strategy specified via the
+9121:   keyword argument:
+9122: 
+9123:     - "never"  : idle connections are never shared between sessions. This mode
+
+18525:   With TCP/TLS, 0rtt is only supported with OpenSSL.
+18526: 
+18527: alpn <protocols>
+18528:   May be used in the following contexts: tcp, http
+18529: 
+18530:   This enables the TLS ALPN extension and advertises the specified protocol
+18531:   list as supported on top of ALPN. The protocol list consists in a comma-
+18532:   delimited list of protocol names, for instance: "http/1.1,http/1.0" (without
+18533:   quotes). This requires that the SSL library is built with support for TLS
+18534:   extensions enabled (check with haproxy -vv). The ALPN extension replaces the
+18535:   initial NPN extension. ALPN is required to connect to HTTP/2 servers. It is
+18536:   also required to be able to use HTTP/3 via a QUIC server, "h3" serves as a
+18537:   default value for QUIC servers without "alpn" setting.
+18538:   Versions of OpenSSL prior to 1.0.2 didn't support ALPN and only supposed the
+18539:   now obsolete NPN extension.
+18540:   If both HTTP/2 and HTTP/1.1 are expected to be supported, both versions can
+18541:   be advertised, in order of preference, like below :
+18542: 
+18543:        server 127.0.0.1:443 ssl crt pub.pem alpn h2,http/1.1
+18544: 
+18545:   See also "ws" to use an alternative ALPN for websocket streams.
+18546: 
+18547: backup
+18548:   May be used in the following contexts: tcp, http, log
+18549: 
+18550:   When "backup" is present on a server line, the server is only used in load
+18551:   balancing when all other non-backup servers are unavailable. Requests coming
+18552:   with a persistence cookie referencing the server will always be served
+18553:   though. By default, only the first operational backup server is used, unless
+18554:   the "allbackups" option is set in the backend. See also the "no-backup" and
+18555:   "allbackups" options.
+18556: 
+18557: ca-file <cafile>
+18558:   May be used in the following contexts: tcp, http, log, peers, ring
+18559: 
+18560:   This setting is only available when support for OpenSSL was built in. It
+18561:   designates a PEM file from which to load CA certificates used to verify

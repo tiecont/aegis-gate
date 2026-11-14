@@ -1,0 +1,562 @@
+{
+  "source_commit": "79882486f71d70e2d6e24c32c8fc0fdbd373991f",
+  "source_tree": "cbf7086fe67f0b4462f0a7d04960b40d20f32a51",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-04c-d/spikes/envoy/sprint04c-verify.mjs",
+    "evidence/sprint04c-d/verification-02"
+  ],
+  "cwd": "/tmp/aegisgate-04c-d",
+  "started_at": "2026-11-14T09:02:53.281Z",
+  "node": "v26.13.0",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "commands": [
+    {
+      "label": "go-module-integrity",
+      "program": "go",
+      "args": [
+        "mod",
+        "verify"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T09:02:53.921Z",
+      "ended_at": "2026-11-14T09:02:54.758Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/verification-02/go-module-integrity.stdout",
+          "sha256": "b4537ed75f533f993f371954de47e42a793b8e5b0587577de7e27fb3e50696bd"
+        },
+        {
+          "file": "evidence/sprint04c-d/verification-02/go-module-integrity.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "final-observer-tests",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--test",
+        "spikes/envoy/sprint04c-observer.test.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T09:02:54.769Z",
+      "ended_at": "2026-11-14T09:02:57.250Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/verification-02/final-observer-tests.stdout",
+          "sha256": "084d9de5b5128734704b63bd7362e16848c9c3d36d292bc320aba18e2c006f5b"
+        },
+        {
+          "file": "evidence/sprint04c-d/verification-02/final-observer-tests.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "source-whitespace",
+      "program": "git",
+      "args": [
+        "diff",
+        "--check",
+        "a325b9e",
+        "--",
+        "spikes/envoy/sprint04c-*",
+        "docs/reports/sprint04c-d-protocol.md",
+        "evidence/sprint04c-d/PLAN.md"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T09:02:57.258Z",
+      "ended_at": "2026-11-14T09:02:57.264Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/verification-02/source-whitespace.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-d/verification-02/source-whitespace.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "immutable-manifest",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T09:02:57.265Z",
+      "ended_at": "2026-11-14T09:02:57.320Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/verification-02/immutable-manifest.stdout",
+          "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+        },
+        {
+          "file": "evidence/sprint04c-d/verification-02/immutable-manifest.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "syntax-sprint04c-observer.mjs",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "spikes/envoy/sprint04c-observer.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T09:02:57.333Z",
+      "ended_at": "2026-11-14T09:02:57.358Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/verification-02/syntax-sprint04c-observer.mjs.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-d/verification-02/syntax-sprint04c-observer.mjs.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "syntax-sprint04c-observer.test.mjs",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "spikes/envoy/sprint04c-observer.test.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T09:02:57.359Z",
+      "ended_at": "2026-11-14T09:02:57.390Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/verification-02/syntax-sprint04c-observer.test.mjs.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-d/verification-02/syntax-sprint04c-observer.test.mjs.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "syntax-sprint04c-protocol.mjs",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "spikes/envoy/sprint04c-protocol.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T09:02:57.407Z",
+      "ended_at": "2026-11-14T09:02:57.441Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/verification-02/syntax-sprint04c-protocol.mjs.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-d/verification-02/syntax-sprint04c-protocol.mjs.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "syntax-sprint04c-run.mjs",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "spikes/envoy/sprint04c-run.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T09:02:57.453Z",
+      "ended_at": "2026-11-14T09:02:57.480Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/verification-02/syntax-sprint04c-run.mjs.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-d/verification-02/syntax-sprint04c-run.mjs.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "syntax-sprint04c-verify.mjs",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "spikes/envoy/sprint04c-verify.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T09:02:57.489Z",
+      "ended_at": "2026-11-14T09:02:57.519Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/verification-02/syntax-sprint04c-verify.mjs.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-d/verification-02/syntax-sprint04c-verify.mjs.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "secrets-source",
+      "program": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-04c-d:/repo:ro",
+        "-v",
+        "/tmp/aegisgate-04c-d/evidence/sprint04c-d/verification-02:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/spikes/envoy",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/reports/source-secrets.json",
+        "--no-banner"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T09:02:57.530Z",
+      "ended_at": "2026-11-14T09:02:58.562Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/verification-02/secrets-source.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-d/verification-02/secrets-source.stderr",
+          "sha256": "e6dfdd48f8a0248b60ecca5e2cc7d077695ed7941eb727b33a1e8787502c19bd"
+        }
+      ]
+    },
+    {
+      "label": "secrets-evidence",
+      "program": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-04c-d:/repo:ro",
+        "-v",
+        "/tmp/aegisgate-04c-d/evidence/sprint04c-d/verification-02:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/evidence/sprint04c-d/attempt-01",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/reports/evidence-secrets.json",
+        "--no-banner"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T09:02:58.569Z",
+      "ended_at": "2026-11-14T09:02:59.262Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/verification-02/secrets-evidence.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-d/verification-02/secrets-evidence.stderr",
+          "sha256": "cde7c7f047bca548efd9c9cedebb8b202009319ef303870e341d9e2ca49ef366"
+        }
+      ]
+    },
+    {
+      "label": "secrets-report",
+      "program": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-04c-d:/repo:ro",
+        "-v",
+        "/tmp/aegisgate-04c-d/evidence/sprint04c-d/verification-02:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/docs/reports/sprint04c-d-protocol.md",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/reports/report-secrets.json",
+        "--no-banner"
+      ],
+      "cwd": "/tmp/aegisgate-04c-d",
+      "started_at": "2026-11-14T09:02:59.273Z",
+      "ended_at": "2026-11-14T09:02:59.713Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint04c-d/verification-02/secrets-report.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint04c-d/verification-02/secrets-report.stderr",
+          "sha256": "9cc6bdec96507798c84e7f40ebbea3b2fb7238bc9daa32ade48972f798095c93"
+        }
+      ]
+    }
+  ],
+  "manifest": [
+    {
+      "file": "evidence/sprint04c-d/attempt-01/attribution-summary.json",
+      "sha256": "e015706c445c5189d100927f88b43d86280f9d17c3ae5a8dbdafeb03f19b9037"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/commands.json",
+      "sha256": "e6b7cc1896f7f245352c5b63c3ebeffc7f2a2ce75e6eed3affe1a16f0a223250"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/decode-00.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/decode-00.stdout",
+      "sha256": "5bb2b7139e66142026cc5ab245b5f180e3b4e62d658ad68bb352f0dc38fea383"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/decode-01.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/decode-01.stdout",
+      "sha256": "99e365a3086aa706153254bbb16103257b038adb30503dcfa465e98a249165a9"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/decode-02.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/decode-02.stdout",
+      "sha256": "a495bf738630d070fa873e14dc9aff7b9b7ec3fa95b2b19c4fabcc4b75645151"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/decode-03.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/decode-03.stdout",
+      "sha256": "c00d514f74fafcb95d5477c9609264a8e4d000662500682ced66bf5e9273a746"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/decoder-build.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/decoder-build.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/decoder-module.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/decoder-module.stdout",
+      "sha256": "d62de70bf21626a13e26eb04c802ab17f4a3d74a0900410d8a79ccf31f2f9faa"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/envoy-image.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/envoy-image.stdout",
+      "sha256": "27a467ca17e2fc31a8f523832c7c31b6c62b3d69e77dc72a3cc0bd4d72bb0920"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/go-version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/go-version.stdout",
+      "sha256": "a29205bd83967c2f70e6768fae009600038d6056499fa289de9d5f9b79beaef4"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/immutable-manifest.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/immutable-manifest.stdout",
+      "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/observer-tests.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/observer-tests.stdout",
+      "sha256": "5acd379a6e00b5ade8786a163b508af661b947aaac21f5784a4b6f2227ab7b2f"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/openssl.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/openssl.stdout",
+      "sha256": "bdd7122ae3788e889ce96da25f99fe5023a80a88ab0e6db9f93cf3174187301c"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/protocol.json",
+      "sha256": "a4ea8a57af243dee61cdc3b5eabbcbd135626facacdf689979084b9d2c056860"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/protocol.json.progress.json",
+      "sha256": "f48a95f39788994f30b0d6f5c9a178874ebf161f60124e032e85f63e752df27b"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/protocol.json.proxy.log",
+      "sha256": "18a028a4e9622f35853af3d57cd359e2c4bd41c683ebf2131c1e797fcb17c82d"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/protocol.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint04c-d/attempt-01/protocol.stdout",
+      "sha256": "49c6daa22d277d7551149c021e9c7d062309510860d24b5b94ae392bdad81609"
+    }
+  ],
+  "protected_count": 87,
+  "incomplete_attribution": [
+    {
+      "connection": "origin-1",
+      "direction": "candidate-to-origin",
+      "total_bytes": 16810,
+      "dropped_bytes": 0,
+      "decoded_frames": 11,
+      "capture_complete": false,
+      "violations": [],
+      "incomplete": [
+        "authenticated identity/generation association unavailable",
+        "new origin dial has no valid-request attribution",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 3",
+        "unattributed upstream stream 3",
+        "unattributed upstream stream 5",
+        "unattributed upstream stream 5",
+        "unattributed upstream stream 5",
+        "unattributed upstream stream 5"
+      ]
+    },
+    {
+      "connection": "origin-1",
+      "direction": "origin-to-candidate",
+      "total_bytes": 25179723,
+      "dropped_bytes": 25048651,
+      "decoded_frames": 11,
+      "capture_complete": false,
+      "violations": [],
+      "incomplete": [
+        "lost/truncated bytes or inconsistent total",
+        "authenticated identity/generation association unavailable",
+        "new origin dial has no valid-request attribution",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 1",
+        "frame decoding failed: unexpected EOF"
+      ]
+    },
+    {
+      "connection": "grpc-origin-1",
+      "direction": "candidate-to-origin",
+      "total_bytes": 525,
+      "dropped_bytes": 0,
+      "decoded_frames": 11,
+      "capture_complete": false,
+      "violations": [],
+      "incomplete": [
+        "authenticated identity/generation association unavailable",
+        "new origin dial has no valid-request attribution",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 3",
+        "unattributed upstream stream 3",
+        "unattributed upstream stream 3",
+        "unattributed upstream stream 3"
+      ]
+    },
+    {
+      "connection": "grpc-origin-1",
+      "direction": "origin-to-candidate",
+      "total_bytes": 309,
+      "dropped_bytes": 0,
+      "decoded_frames": 11,
+      "capture_complete": false,
+      "violations": [],
+      "incomplete": [
+        "authenticated identity/generation association unavailable",
+        "new origin dial has no valid-request attribution",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 1",
+        "unattributed upstream stream 3",
+        "unattributed upstream stream 3",
+        "unattributed upstream stream 3"
+      ]
+    }
+  ],
+  "verified": true,
+  "semantic_security_pass": false,
+  "lock_held_through_cleanup": true,
+  "ended_at": "2026-11-14T09:02:59.722Z"
+}

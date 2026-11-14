@@ -1,0 +1,125 @@
+{
+  "source_commit": "ace8f601c689dcb76b076cbc0cf1d5f3551b31da",
+  "source_tree": "125d493971f8ee825c90b29448d4982671f4a21a",
+  "argv": [
+    "evidence/sprint04c-f/review-receipts.py",
+    "evidence/sprint04c-f/receipts-bd-02",
+    "a,b,c,d"
+  ],
+  "python": "3.14.10 (main, Nov 13 2026, 15:10:24) [GCC 16.2.1 20260810]",
+  "started_at": "2026-11-14T09:12:14.309557+00:00",
+  "receipts": [
+    {
+      "owner": "b",
+      "attempt": "upstream-01",
+      "source_commit": "9885a8611593c2db654258b048482b1bc168b476",
+      "source_tree": "03e649b622ea5b2ea72b87e8807213890e78e80e",
+      "verified_sources": 54,
+      "verified_commands": 39,
+      "verified_streams": 78
+    },
+    {
+      "owner": "b",
+      "attempt": "reproh-01",
+      "source_commit": "4983886399e0fbb6a01d16313f37b305ea8de050",
+      "source_tree": "76af4fbda921f0be2a20ffc1f3107e1d831edfc9",
+      "verified_sources": 56,
+      "verified_commands": 12,
+      "verified_streams": 24
+    },
+    {
+      "owner": "b",
+      "attempt": "reprot-01",
+      "source_commit": "4983886399e0fbb6a01d16313f37b305ea8de050",
+      "source_tree": "76af4fbda921f0be2a20ffc1f3107e1d831edfc9",
+      "verified_sources": 56,
+      "verified_commands": 5,
+      "verified_streams": 10
+    },
+    {
+      "owner": "b",
+      "attempt": "reprot-02",
+      "source_commit": "deb34bd17344856b426924238d85013069f07429",
+      "source_tree": "0ac141b1ae0622e26eed5e04176d8210cb44ba07",
+      "verified_sources": 56,
+      "verified_commands": 5,
+      "verified_streams": 10
+    },
+    {
+      "owner": "b",
+      "attempt": "checks-01",
+      "source_commit": "c15776f90e9f001de37215a4114ce3d3bab0decd",
+      "source_tree": "a078224efb5614a872f3f42b108b7a6eab8bca73",
+      "verified_sources": 58,
+      "verified_commands": 8,
+      "verified_streams": 16
+    },
+    {
+      "owner": "d",
+      "attempt": "attempt-01",
+      "source_commit": "80addb665c00922ec7eb98834b43efe73930c1be",
+      "source_tree": "82e7c079cf14fecead03eb4f0fa5a86b5ed93b33",
+      "verified_sources": 15,
+      "verified_commands": 12,
+      "verified_streams": 24
+    },
+    {
+      "owner": "d",
+      "attempt": "verification-02",
+      "source_commit": "79882486f71d70e2d6e24c32c8fc0fdbd373991f",
+      "source_tree": "cbf7086fe67f0b4462f0a7d04960b40d20f32a51",
+      "verified_sources": 0,
+      "verified_commands": 12,
+      "verified_streams": 24
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "-v",
+        "/tmp/aegisgate-04c-f/.local/f-owned-receipts-bd-02:/input:ro",
+        "-v",
+        "/tmp/aegisgate-04c-f/.github/gitleaks.toml:/config:ro",
+        "-v",
+        "/tmp/aegisgate-04c-f/evidence/sprint04c-f/receipts-bd-02:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/input",
+        "--config",
+        "/config",
+        "--redact",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/reports/secrets.json",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-14T09:12:17.088131+00:00",
+      "ended_at": "2026-11-14T09:12:20.090007+00:00",
+      "exit_code": 0,
+      "streams": [
+        {
+          "file": "secrets.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "secrets.stderr",
+          "sha256": "46195732e135e03577cf5267cfcb2fc6f9c9317cd612366880205540969d9b6b"
+        }
+      ]
+    }
+  ],
+  "scan_input": {
+    "files": 260,
+    "bytes": 1640819,
+    "scope": "All changed A-E files, validated exact source before staging"
+  },
+  "scanner_stage_removed": true,
+  "exit_code": 0,
+  "ended_at": "2026-11-14T09:12:20.095180+00:00"
+}
