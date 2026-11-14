@@ -1,0 +1,108 @@
+258: 
+259:     { ngx_string("proxy_buffering"),
+260:       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_FLAG,
+261:       ngx_conf_set_flag_slot,
+262:       NGX_HTTP_LOC_CONF_OFFSET,
+263:       offsetof(ngx_http_proxy_loc_conf_t, upstream.buffering),
+264:       NULL },
+265: 
+266:     { ngx_string("proxy_request_buffering"),
+267:       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_FLAG,
+268:       ngx_conf_set_flag_slot,
+269:       NGX_HTTP_LOC_CONF_OFFSET,
+270:       offsetof(ngx_http_proxy_loc_conf_t, upstream.request_buffering),
+271:       NULL },
+272: 
+273:     { ngx_string("proxy_ignore_client_abort"),
+274:       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_FLAG,
+275:       ngx_conf_set_flag_slot,
+276:       NGX_HTTP_LOC_CONF_OFFSET,
+277:       offsetof(ngx_http_proxy_loc_conf_t, upstream.ignore_client_abort),
+278:       NULL },
+279: 
+280:     { ngx_string("proxy_bind"),
+281:       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE12,
+282:       ngx_http_upstream_bind_set_slot,
+283:       NGX_HTTP_LOC_CONF_OFFSET,
+284:       offsetof(ngx_http_proxy_loc_conf_t, upstream.local),
+363: 
+364:     { ngx_string("proxy_pass_request_body"),
+365:       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_FLAG,
+366:       ngx_conf_set_flag_slot,
+367:       NGX_HTTP_LOC_CONF_OFFSET,
+368:       offsetof(ngx_http_proxy_loc_conf_t, upstream.pass_request_body),
+369:       NULL },
+370: 
+371:     { ngx_string("proxy_pass_trailers"),
+372:       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_FLAG,
+373:       ngx_conf_set_flag_slot,
+374:       NGX_HTTP_LOC_CONF_OFFSET,
+375:       offsetof(ngx_http_proxy_loc_conf_t, upstream.pass_trailers),
+376:       NULL },
+377: 
+378:     { ngx_string("proxy_buffer_size"),
+379:       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1,
+380:       ngx_conf_set_size_slot,
+381:       NGX_HTTP_LOC_CONF_OFFSET,
+382:       offsetof(ngx_http_proxy_loc_conf_t, upstream.buffer_size),
+383:       NULL },
+384: 
+385:     { ngx_string("proxy_read_timeout"),
+386:       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1,
+387:       ngx_conf_set_msec_slot,
+388:       NGX_HTTP_LOC_CONF_OFFSET,
+389:       offsetof(ngx_http_proxy_loc_conf_t, upstream.read_timeout),
+2234:     }
+2235: 
+2236:     plcf = ngx_http_get_module_loc_conf(r, ngx_http_proxy_module);
+2237: 
+2238:     prev = &buf->shadow;
+2239: 
+2240:     for ( ;; ) {
+2241: 
+2242:         rc = ngx_http_parse_chunked(r, buf, &ctx->chunked,
+2243:                                     plcf->upstream.pass_trailers);
+2244: 
+2245:         if (rc == NGX_OK) {
+2246: 
+2247:             /* a chunk has been parsed successfully */
+2248: 
+2249:             cl = ngx_chain_get_free_buf(p->pool, &p->free);
+2250:             if (cl == NULL) {
+2251:                 return NGX_ERROR;
+2252:             }
+2253: 
+2254:             b = cl->buf;
+2255: 
+2256:             ngx_memzero(b, sizeof(ngx_buf_t));
+2257: 
+2258:             b->pos = buf->pos;
+2259:             b->start = buf->start;
+2260:             b->end = buf->end;
+2482:     }
+2483: 
+2484:     for (cl = u->out_bufs, ll = &u->out_bufs; cl; cl = cl->next) {
+2485:         ll = &cl->next;
+2486:     }
+2487: 
+2488:     for ( ;; ) {
+2489: 
+2490:         rc = ngx_http_parse_chunked(r, buf, &ctx->chunked,
+2491:                                     plcf->upstream.pass_trailers);
+2492: 
+2493:         if (rc == NGX_OK) {
+2494: 
+2495:             /* a chunk has been parsed successfully */
+2496: 
+2497:             cl = ngx_chain_get_free_buf(r->pool, &u->free_bufs);
+2498:             if (cl == NULL) {
+2499:                 return NGX_ERROR;
+2500:             }
+2501: 
+2502:             *ll = cl;
+2503:             ll = &cl->next;
+2504: 
+2505:             b = cl->buf;
+2506: 
+2507:             b->flush = 1;
+2508:             b->memory = 1;
