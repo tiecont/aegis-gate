@@ -20,6 +20,11 @@ a bounded test-only admission PoC with zero origin effects. This establishes a
 parser capability, not an accepted replacement runtime. Five supported Envoy
 H2 lifecycle strategies and an untapped control retain the nine-byte failure.
 Accepted-module00/02/03 regressions pass, with no product/dependency change.
+Full locked local check/security-scan/cleanup pass at `c117d96`, tree
+`e47d07a6fcdd88c4d827e725bcd8abd263f648d9`, in a separate exact-source clone
+containing only publishable ancestry. `evidence/sprint05a-root/gates-02/`
+retains fresh scanner/SBOM receipts and cleanup. The failed gates01 history
+findings remain disclosed; unrelated rejected04C branches are not published.
 
 See `docs/reports/sprint05a-completion.md` for exact source/evidence, independent
 review, local/hosted gate and merge receipts as they become available. Formal

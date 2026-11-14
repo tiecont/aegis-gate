@@ -1,8 +1,9 @@
 # Sprint05-A implementation and measured results
 
 Status: engineering improvements independently accepted in their scoped research
-and test boundaries; full root gates and exact-head/main hosted closeout PENDING until recorded below or in a
-subsequent receipt addendum. Module01 remains **NO-GO**. No production runtime
+and test boundaries; full root gates PASS. Exact-head/main hosted closeout
+PENDING until recorded below or in a subsequent receipt addendum. Module01
+remains **NO-GO**. No production runtime
 or human architecture/security approval is implied.
 
 ## Baseline and implementation
@@ -174,6 +175,29 @@ complete publishable source history, without unrelated rejected local branches.
 This does not delete or suppress the earlier findings. Source/tree equality and
 non-ancestry of both rejected commits must be independently reviewed before
 merge; the final actual gate result is recorded separately.
+
+Full gates02 PASS at exact source `c117d96a0216de301c2a8033e79edee21a936f4a`,
+tree `e47d07a6fcdd88c4d827e725bcd8abd263f648d9`, UTC2026-11-14
+16:20:08.406 through16:25:49.006. A single outer flock covers both required
+make commands and cleanup. Actual `make check`, `make security-scan`,
+`make dev-down` and Compose `down --volumes --remove-orphans` each exit0.
+All project container/network/volume inventories are empty; private fixture
+paths are absent and56 retained files have zero generated-private-value matches.
+Fresh Go/Rust/npm, worktree/history, filesystem, candidate/fixture-image scans
+and SBOM generation pass. History actually scans336 commits/58.76MB with0 leaks;
+Pingora's two unmaintained warnings remain visible, not ignored.
+
+| Final local artifact | SHA256 |
+| --- | --- |
+| `gates-02/commands.json` | `c84a12d94da71fa895da03c9df8df535c3798fee4946a09bb12313dd0b52e7b9` |
+| `gates-02/SHA256SUMS` | `b5bfab7f59bf39c5eab6fda6c73be545f2efa9d0d6968aab586e36f45faa9eec` |
+| `candidate-02/commands.json` | `572ad993fe7f38b58c62c0b66de81a333006b3c6ed5a332478e38f60838d273a` |
+| `candidate-02/original75.json` | `13a04311fa39f0e7c7d94c85051d6d375e9a281cf6a4aa0f4aafa8dbe337556a` |
+| `candidate-02/original23.json` | `62fa6ba4082b20185d4958bbd034bbddef40dc7b46e2a89291fda507d3c99cee` |
+
+Paths in this table are under `evidence/sprint05a-root/`. Final PR-head hosted
+jobs, merge SHA and main jobs must still be recorded from actual GitHub state;
+local gates alone do not grant merge or runtime acceptance.
 
 ## Gate matrix and next action
 
