@@ -106,6 +106,34 @@ acceptance policy and every one of4003 immutable-main working blobs remain
 byte/object-identical before and after proof. `extract-baseline.mjs --check`
 and protected contract/evaluator tests pass. No original test/baseline edits.
 
+## Verification Handoff
+
+`checks-01` completes at clean source
+`faecf2eab5ce447b6de50e7061410280b954fc7f`, tree
+`39b6b6a70bbaa2a81c9a202a6aa30496a5998f45`, UTC
+2026-11-14T14:10:06.078Z through14:10:22.691Z. All13 child commands exit0:
+manifest extraction, config equality, six syntax checks, authored whitespace,
+pinned offline gitleaks version and source/evidence/report scans. The verifier
+also checks101 retained inventory files, command-stream hashes (four explicit
+withheld exceptions), exact runtime-source Git/working hashes, full75 evaluator
+result, unchanged historical TE bytes and all focused peer/counter assertions.
+It confirms4003 baseline objects and cleanup, and the removed inspection blob
+is absent from the local object store. `git fsck --connectivity-only
+--no-reflogs` exits0; unrelated dangling objects are left untouched.
+
+```sh
+flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock \
+ /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node \
+ spikes/envoy/sprint05a-a-verify.mjs evidence/sprint05a-a/checks-02
+```
+
+This is the next available suffix; executed verification used `checks-01`.
+Verification receipt SHA256 is
+`c3ccece0122caf4ceb90d347082cddcba3a2fbe2966553e2b73ceef5de472efa`;
+its `SHA256SUMS` is
+`c297a19c96e07d06d7e8f6201b088e0ed4a7827a706a55fd451c3909a6a5413d`.
+These component checks grant no independent F verdict or root/hosted gate.
+
 ## Reproduction And Receipts
 
 From a clean checkout with the existing pinned lab Node dependencies installed,
