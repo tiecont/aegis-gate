@@ -1,5 +1,31 @@
 # Implementation status
 
+## Sprint05-A measured ingress improvements
+
+The isolated combined Envoy1.40.2 candidate now measures **73/75**, versus
+the historical69/75, with the original corpus/evaluator unchanged. Supported
+local501-to400 mapping repairs all four original TE rejection assertions;
+actual origin501 remains501. Folding still forwards263 origin bytes and the
+original H2 negative still records9 bytes. Module01 remains **NO-GO**.
+
+The unchanged supplemental suite measures **19/23** on the combined policy:
+stream-level H2 messaging rejection repairs two malformed-header assertions;
+minimum supported upstream windows reduce stalled-reader production to196608
+bytes. Historical16/23 and independent fresh baseline17/23 are both retained;
+the200ms buffering assertion varies and is not a deterministic three-case
+regression claim. Two userinfo deadlines and two missing error frames remain.
+
+Released llhttp9.4.4 rejects folded headers/trailers before normalization in
+a bounded test-only admission PoC with zero origin effects. This establishes a
+parser capability, not an accepted replacement runtime. Five supported Envoy
+H2 lifecycle strategies and an untapped control retain the nine-byte failure.
+Accepted-module00/02/03 regressions pass, with no product/dependency change.
+
+See `docs/reports/sprint05a-completion.md` for exact source/evidence, independent
+review, local/hosted gate and merge receipts as they become available. Formal
+architecture/security owner and approval remain PENDING; ADR012 PROPOSED;
+Modules04-12 LOCKED; production BLOCKED. Research adapters are not production.
+
 ## Sprint04-C complete / Module01 NO-GO
 
 PR15 merged as `f7d3134d59f1d1213580b8ee120d6187ae83a78b`. Exact final-head

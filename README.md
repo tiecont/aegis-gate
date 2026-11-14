@@ -18,6 +18,9 @@ recovery, and audited canary rollout/rollback. See the
 Module01 remains **NO-GO**: Pingora63/75, Envoy69/75 and Hyper70/75 fail mandatory
 strict-ingress cases. The focused maintained Envoy setting still scores69/75;
 [ADR-011](docs/ADR-011-pingora-evaluation.md) records the unresolved conditions.
+Sprint05-A's separate supported Envoy candidate improves to73/75 and19/23
+supplemental probes; obs-fold and the original H2 nine-byte failure remain.
+See the [measured implementation report](docs/reports/sprint05a-completion.md).
 Modules04-12 remain locked. No production edge engine or production release is
 authorized. Module02 management and Module03 publisher use explicit local modes;
 they are not enabled by the default foundation listener.
