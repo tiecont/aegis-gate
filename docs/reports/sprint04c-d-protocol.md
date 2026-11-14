@@ -164,6 +164,12 @@ original test Git object/hash and requires the final test source to preserve
 its entire prefix, then executes the extended tests from a clean final source.
 No captured observation or original expectation is altered.
 
+Corrected verification02 exits0 at clean source
+`7988248` (exact full source/tree in its receipt):29 attempt manifest entries,
+87 protected historical objects,12 commands, extended adversarial tests and
+three scoped pinned offline secret scans all verify. Full-module `go mod verify`
+exits0. No new runtime observation is inferred from these integrity checks.
+
 Verifier receipts bind final source, immutable historical objects, all attempt
 manifest/stream hashes, scoped syntax/whitespace, maintained module verification,
 adversarial tests and offline pinned secret scans. F independent reproduction,
