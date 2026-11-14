@@ -36,6 +36,7 @@ async function cleanup() {
 const watchdog = setTimeout(() => { proof.record.error = '90s watchdog'; void cleanup(); }, 90000);
 try {
   proof.record.runtime = runtime;
+  proof.record.variant = process.argv[4] ?? 'default';
   proof.record.scope = 'Targeted released strict-parser PoC only; not original75/23 or production eligibility';
   proof.record.bounds = { wall_ms: 90000, message_bytes: 32768, downstream_idle_ms: 2500,
     request_observation_ms: 3000, container_memory: '256m', container_cpus: 1, container_pids: 64 };
@@ -158,6 +159,13 @@ try {
         route_config: { name: 'proof', virtual_hosts: [{ name: 'edge', domains: ['edge-a.test'],
           routes: [{ match: { prefix: '/' }, route: { cluster: 'origin', timeout: '2s' } }] }] },
         http_filters: [{ name: 'envoy.filters.http.router', typed_config: type('extensions.filters.http.router.v3.Router') }] };
+      if (process.argv[4] === 'uhv') hcm.typed_header_validation_config = {
+        name: 'envoy.http.header_validators.envoy_default',
+        typed_config: type('extensions.http.header_validators.envoy_default.v3.HeaderValidatorConfig', {
+          http1_protocol_options: { allow_chunked_length: false },
+          uri_path_normalization_options: { skip_path_normalization: true, skip_merging_slashes: true,
+            path_with_escaped_slashes_action: 'KEEP_UNCHANGED' },
+          headers_with_underscores_action: 'REJECT_REQUEST' }) };
       config = JSON.stringify({ layered_runtime: { layers: [{ name: 'strict', static_layer: {
         'envoy.reloadable_features.strict_chunk_parsing': true,
         'envoy.reloadable_features.http1_use_balsa_parser': true } }] },
@@ -181,6 +189,9 @@ http {
   access_log off;
   client_body_temp_path /tmp/body;
   proxy_temp_path /tmp/proxy;
+  fastcgi_temp_path /tmp/fastcgi;
+  uwsgi_temp_path /tmp/uwsgi;
+  scgi_temp_path /tmp/scgi;
   client_max_body_size 32k;
   client_body_buffer_size 32k;
   client_header_timeout 2s;
