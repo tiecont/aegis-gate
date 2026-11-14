@@ -136,7 +136,7 @@ try {
   const go = run(
     "go-race-all",
     "go",
-    ["test", "-race", "-v", ...packages, "-count=1"],
+    ["test", "-p", "1", "-race", "-v", ...packages, "-count=1"],
     { AEGIS_TENANCY_INTEGRATION: "1" },
   ).stdout.toString();
   assert.ok(!/--- (FAIL|SKIP):/.test(go));
