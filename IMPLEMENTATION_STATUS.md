@@ -20,9 +20,14 @@ those effects but waits for complete requests. H2 causal tracing attributes the
 unchanged nine-byte failure to origin SETTINGS/Envoy ACK on a valid reused pool.
 Supported H2 rejection-setting variants retain all four supplemental failures.
 
-Module 00/02/03 real fixture regressions pass locally; no production or dependency
-replacement is introduced. Independent F review, final integrated local gates,
-hosted CI and merge receipts are pending at this checkpoint. See
+Module 00/02/03 real fixture regressions pass locally and in F's clean-source
+serialized replay: 11 packages, 89 top-level tests, 151 subtests, zero skips;
+contracts/dashboard and private-image/stale-volume controls also pass. Independent
+F checkpoint `1d8769b` accepts scoped test tooling and fixture corrections,
+rejecting complete ingress eligibility and all six remaining failures. TCP
+readiness and package scheduling preserve existing assertions/timeouts. The first
+full check failed and remains retained; final full local gates, hosted CI and
+merge receipts are pending. No production or dependency replacement is introduced. See
 `docs/sprints/05b-execution.md` and `docs/reports/sprint05b-completion.md`.
 Module 01 remains NO-GO; 04-12 LOCKED; production BLOCKED. ADR-012 and actual
 human architecture/security owners/approval remain PENDING.

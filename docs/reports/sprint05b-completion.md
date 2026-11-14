@@ -1,6 +1,6 @@
 # Sprint 05-B Completion Evidence
 
-Status: engineering measurements recorded; independent final review,
+Status: component implementation and independent review complete; final full
 integration gates, hosted CI and merge closeout pending at this checkpoint.
 This report does not grant Module 01 GO. Subsequent closeout receipts must name
 the actual reviewed source, PR head, merge SHA and hosted run; no commit can
@@ -21,8 +21,8 @@ argv, tool versions, exits and output SHA256 are in the referenced receipts.
 | C | `fix/sprint05b-h2-rejection` | final `0170010`; native original23 and peer-frame relay |
 | D (root) | `test/sprint05b-streaming-safety` | source `eba8445`, report/evidence `d85d04b` |
 | E (root) | `test/sprint05b-regressions` | source `a59e9f9`, final `7755f7a` |
-| F (independent) | `review/sprint05b-security` | clean-source reproduction/review in progress |
-| Root | `sprint/05b-integration` | source `34cf5b0`, matrix evidence `fb4cc6a` |
+| F (independent) | `review/sprint05b-security` | final checkpoint `1d8769b`; clean-source reproduction and scoped verdicts |
+| Root | `sprint/05b-integration` | matrix source `ff3f3fe`, evidence `c309475`; reviewed fixture fixes `8f60c2a`/`5b10996` |
 
 All isolated worktrees and ownership are recorded in `docs/sprints/05b-execution.md`.
 An initial duplicate-agent orchestration error was stopped before acceptance;
@@ -47,7 +47,10 @@ peer-sent RST_STREAM from client-generated cancellation. D independently
 builds the maintained parser and measures late-trailer admission versus streaming.
 E adds fresh real dependency/config/tenant regressions. Root adds exact-image
 binary extraction, a loopback native diagnostic launcher, corrected owned-fixture
-cleanup and native RSS sampling. Original 75/23 sources remain immutable.
+cleanup and native RSS sampling. Reviewed fixture corrections require PostgreSQL
+TCP readiness and schedule shared-database integration packages with `-p 1`.
+Within-package concurrency, race detection, assertions and deadlines are unchanged.
+Test HTTP failures omit private callback URLs. Original 75/23 sources remain immutable.
 
 ## Original Results And Failure Disposition
 
@@ -138,11 +141,30 @@ Fresh full scanner and hosted results are separate final integration obligations
 
 F independently accepts A's finite parser/admission proof, B's scoped H2 stop,
 C's peer-frame diagnostics, D's six-case counterexample and E's collector/evidence
-scope. F's full E replay fails private PostgreSQL image readiness; it does not
-establish independent full regression PASS. A focused replay with read-only lock
-observation is pending. F audit `da605eb` binds integrated `4127839` to reviewed
-component bytes and checks 72 manifests, 1,200 artifact hashes, 3,003 source hashes
-and all 11 protected source files. Later test-only changes require final review.
+scope. Its final checkpoint `1d8769b` rejects every remaining original failure and
+complete runtime eligibility. Review audit04 verifies 74 manifests, 1,283 artifact
+hashes, 3,127 source hashes and all 11 protected source files on `5b10996`.
+The first E readiness failure, interrupted focused01 with fresh-lock recovery,
+focused02 readiness failure and focused03 HTTP timeout failures remain retained.
+No failed attempt is credited as PASS.
+
+Independent focused05 from clean `8f60c2a`, tree
+`2a77d531afa273ee04df680177099af7dea04c98`, passes 11 Go packages, 89 top-level
+tests, 151 subtests and zero skips with `go test -p 1 -race -v ... -count=1`.
+Contract checks/integration and all five dashboard checks pass. Focused06 passes
+the original 60-by-250ms private-image readiness/restart/password probe and the
+stale-volume/UID/image-identity controls. Both lifecycles remove every owned
+container/network/volume and private material while holding the fixture lock.
+
+The natural focused03 lock capture observes migration waits up to 495.991ms;
+that does not establish the cause of its 5s HTTP timeouts. A separate controlled
+actual `Store.Migrate` probe proves cross-schema global-lock coupling: SQL55P03
+at 2,002ms, followed by successful migration after release. Serial package
+scheduling removes avoidable shared-fixture overlap without changing product
+locking or weakening tests. TCP readiness excludes the entrypoint's socket-only
+temporary init server, but no transient race was captured in successful05/06.
+F accepts both scoped fixture corrections. Scoped F secret scan passes 464
+files; checks02 verifies 400 retained hashes and formatting/syntax/disclosure tests.
 
 Final integrated matrix at `ff3f3fe280056b50bfc79c30db9ef00f1f5288e6`
 (`evidence/sprint05b-root/candidate-05/`, commit `c309475`) retains 73/75 and 19/23,
@@ -179,10 +201,10 @@ instead of assuming combined Docker name filters form a union.
 
 | Gate | State |
 | --- | --- |
-| Module 00 | PASS local, final integration regression pending |
+| Module 00 | PASS local, independent focused regression PASS; full integration gate pending |
 | Module 01 | NO-GO |
-| Module 02 | PASS local, final integration regression pending |
-| Module 03 | PASS local, final integration regression pending |
+| Module 02 | PASS local, independent focused regression PASS; full integration gate pending |
+| Module 03 | PASS local, independent focused regression PASS; full integration gate pending |
 | Modules 04-12 | LOCKED |
 | Production | BLOCKED |
 | ADR-012 / named architecture and security owners / approval | PROPOSED / PENDING / PENDING |

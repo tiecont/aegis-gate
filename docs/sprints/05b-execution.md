@@ -58,5 +58,15 @@ statement/lock and callback deadlines. This is unresolved, not an accepted
 regression PASS. A failed callback log exposed disposable code/state; published
 gate evidence is an explicitly sanitized derivative preserving original hashes.
 `de6265d` removes request URLs from HTTP fixture error messages, with a sentinel
-race test. No timeout or original 75/23 expectation changes. F is measuring
-database-global advisory contention before any fixture isolation correction.
+race test. No timeout or original 75/23 expectation changes.
+
+F final checkpoint `1d8769b` accepts scoped component tools and fixture changes
+`8f60c2a`/`5b10996`. Clean-source focused05 passes 11 Go packages, 89 top-level
+tests, 151 subtests and zero skips with serial package scheduling, plus contracts
+and dashboard; focused06 image/restart/stale-volume negatives also pass. Natural
+lock waits peak at 495.991ms and do not explain the earlier HTTP5s failures.
+The controlled separate-schema probe proves database-global migration coupling
+at the unchanged2s timeout; package scheduling removes that avoidable overlap.
+TCP readiness excludes the socket-only init server. All successful lifecycles
+verify private-material/resource removal under lock. Root final full gates,
+exact PR head/main CI and merge closeout remain pending.
