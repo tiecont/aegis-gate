@@ -1,0 +1,26 @@
+220:     bool SendDataFrame(Http2StreamId stream_id, absl::string_view frame_header,
+221:                        size_t payload_bytes) override;
+222:     void OnConnectionError(ConnectionError /*error*/) override {}
+223:     bool OnFrameHeader(Http2StreamId stream_id, size_t length, uint8_t type,
+224:                        uint8_t flags) override;
+225:     void OnSettingsStart() override { settings_.clear(); }
+226:     void OnSetting(Http2Setting setting) override { settings_.push_back(setting); }
+227:     void OnSettingsEnd() override { connection_->onSettings(settings_); }
+228:     void OnSettingsAck() override {}
+229:     bool OnBeginHeadersForStream(Http2StreamId stream_id) override;
+230:     OnHeaderResult OnHeaderForStream(Http2StreamId stream_id, absl::string_view name_view,
+231:                                      absl::string_view value_view) override;
+232:     bool OnEndHeadersForStream(Http2StreamId stream_id) override;
+233:     bool OnDataPaddingLength(Http2StreamId stream_id, size_t padding_length) override;
+234:     bool OnBeginDataForStream(Http2StreamId stream_id, size_t payload_length) override;
+235:     bool OnDataForStream(Http2StreamId stream_id, absl::string_view data) override;
+236:     bool OnEndStream(Http2StreamId stream_id) override;
+237:     void OnRstStream(Http2StreamId stream_id, Http2ErrorCode error_code) override;
+238:     bool OnCloseStream(Http2StreamId stream_id, Http2ErrorCode error_code) override;
+239:     void OnPriorityForStream(Http2StreamId /*stream_id*/, Http2StreamId /*parent_stream_id*/,
+240:                              int /*weight*/, bool /*exclusive*/) override {}
+241:     void OnPing(Http2PingId ping_id, bool is_ack) override;
+242:     void OnPushPromiseForStream(Http2StreamId /*stream_id*/,
+243:                                 Http2StreamId /*promised_stream_id*/) override {}
+244:     bool OnGoAway(Http2StreamId last_accepted_stream_id, Http2ErrorCode error_code,
+245:                   absl::string_view opaque_data) override;

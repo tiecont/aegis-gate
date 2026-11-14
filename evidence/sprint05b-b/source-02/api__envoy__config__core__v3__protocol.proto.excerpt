@@ -1,0 +1,166 @@
+104:   //
+105:   //   ``16384`` (``2^14``) is the minimum window size supported in Google QUIC. If configured smaller than it, we will use
+106:   //   ``16384`` instead. QUICHE IETF QUIC implementation supports ``1`` byte window. We only support increasing the default
+107:   //   window size now, so it's also the minimum.
+108:   //
+109:   // This field also acts as a soft limit on the number of bytes Envoy will buffer per-stream in the
+110:   // QUIC stream send and receive buffers. Once the buffer reaches this pointer, watermark callbacks will fire to
+111:   // stop the flow of data to the stream buffers.
+112:   google.protobuf.UInt32Value initial_stream_window_size = 2
+113:       [(validate.rules).uint32 = {lte: 16777216 gte: 1}];
+114: 
+115:   // Similar to ``initial_stream_window_size``, but for connection-level
+116:   // flow-control. Valid values range from ``1`` to ``25165824`` (``24MB``, maximum supported by QUICHE) and defaults
+117:   // to ``25165824`` (``24 * 1024 * 1024``).
+118:   //
+119:   // .. note::
+120:   //
+121:   //   ``16384`` (``2^14``) is the minimum window size supported in Google QUIC. We only support increasing the default
+122:   //   window size now, so it's also the minimum.
+123:   //
+124:   google.protobuf.UInt32Value initial_connection_window_size = 3
+125:       [(validate.rules).uint32 = {lte: 25165824 gte: 1}];
+126: 
+127:   // The number of timeouts that can occur before port migration is triggered for QUIC clients.
+128:   // This defaults to ``4``. If set to ``0``, port migration will not occur on path degrading.
+129:   // Timeout here refers to QUIC internal path degrading timeout mechanism, such as ``PTO``.
+130:   // This has no effect on server sessions.
+131:   google.protobuf.UInt32Value num_timeouts_to_trigger_port_migration = 4
+132:       [(validate.rules).uint32 = {lte: 5 gte: 0}];
+133: 
+134:   // Probes the peer at the configured interval to solicit traffic, i.e. ``ACK`` or ``PATH_RESPONSE``, from the peer to push back connection idle timeout.
+135:   // If absent, use the default keepalive behavior of which a client connection sends ``PING``s every ``15s``, and a server connection doesn't do anything.
+136:   QuicKeepAliveSettings connection_keepalive = 5;
+137: 
+138:   // A comma-separated list of strings representing QUIC connection options defined in
+139:   // `QUICHE <https://github.com/google/quiche/blob/main/quiche/quic/core/crypto/crypto_protocol.h>`_ and to be sent by upstream connections.
+140:   string connection_options = 6;
+141: 
+142:   // A comma-separated list of strings representing QUIC client connection options defined in
+143:   // `QUICHE <https://github.com/google/quiche/blob/main/quiche/quic/core/crypto/crypto_protocol.h>`_ and to be sent by upstream connections.
+144:   string client_connection_options = 7;
+145: 
+146:   // The duration that a QUIC connection stays idle before it closes itself. If this field is not present, QUICHE
+147:   // default ``600s`` will be applied.
+148:   // For internal corporate network, a long timeout is often fine.
+530:   //
+531:   // .. note::
+532:   //
+533:   //   ``h2c`` upgrades are always removed for backwards compatibility, regardless of the
+534:   //   value in this setting.
+535:   repeated type.matcher.v3.StringMatcher ignore_http_11_upgrade = 11;
+536: }
+537: 
+538: message KeepaliveSettings {
+539:   // Send HTTP/2 PING frames at this period, in order to test that the connection is still alive.
+540:   // If this is zero, interval PINGs will not be sent.
+541:   google.protobuf.Duration interval = 1 [(validate.rules).duration = {gte {nanos: 1000000}}];
+542: 
+543:   // How long to wait for a response to a keepalive PING. If a response is not received within this
+544:   // time period, the connection will be aborted.
+545:   //
+546:   // .. note::
+547:   //
+548:   //   In order to prevent the influence of Head-of-line (HOL) blocking the timeout period is extended when *any* frame is received on
+549:   //   the connection, under the assumption that if a frame is received the connection is healthy.
+550:   google.protobuf.Duration timeout = 2 [(validate.rules).duration = {
+551:     required: true
+552:     gte {nanos: 1000000}
+553:   }];
+554: 
+555:   // A random jitter amount as a percentage of interval that will be added to each interval.
+556:   // A value of zero means there will be no jitter.
+557:   // The default value is ``15%``.
+558:   type.v3.Percent interval_jitter = 3;
+559: 
+560:   // If the connection has been idle for this duration, send a HTTP/2 ping ahead
+561:   // of new stream creation, to quickly detect dead connections.
+562:   // If this is zero, this type of PING will not be sent.
+617:   // .. note::
+618:   //
+619:   //   ``65535`` is the initial window size from HTTP/2 spec. We only support increasing the default window size now,
+620:   //   so it's also the minimum.
+621:   //
+622:   // This field also acts as a soft limit on the number of bytes Envoy will buffer per-stream in the
+623:   // HTTP/2 codec buffers. Once the buffer reaches this pointer, watermark callbacks will fire to
+624:   // stop the flow of data to the codec buffers.
+625:   google.protobuf.UInt32Value initial_stream_window_size = 3
+626:       [(validate.rules).uint32 = {lte: 2147483647 gte: 65535}];
+627: 
+628:   // Similar to ``initial_stream_window_size``, but for connection-level flow-control
+629:   // window. The default is ``24MiB`` (``24 * 1024 * 1024``).
+630:   google.protobuf.UInt32Value initial_connection_window_size = 4
+631:       [(validate.rules).uint32 = {lte: 2147483647 gte: 65535}];
+632: 
+633:   // Allows proxying Websocket and other upgrades over H2 connect.
+634:   bool allow_connect = 5;
+635: 
+636:   // [#not-implemented-hide:] Hiding until Envoy has full metadata support.
+637:   // Still under implementation. DO NOT USE.
+638:   //
+639:   // Allows sending and receiving HTTP/2 METADATA frames. See [metadata
+640:   // docs](https://github.com/envoyproxy/envoy/blob/main/source/docs/h2_metadata.md) for more
+641:   // information.
+642:   bool allow_metadata = 6;
+643: 
+644:   // Limit the number of pending outbound downstream frames of all types (frames that are waiting to
+645:   // be written into the socket). Exceeding this limit triggers flood mitigation and connection is
+646:   // terminated. The ``http2.outbound_flood`` stat tracks the number of terminated connections due
+647:   // to flood mitigation. The default limit is ``10000``.
+648:   google.protobuf.UInt32Value max_outbound_frames = 7 [(validate.rules).uint32 = {gte: 1}];
+649: 
+650:   // Limit the number of pending outbound downstream frames of types ``PING``, ``SETTINGS`` and ``RST_STREAM``,
+651:   // preventing high memory utilization when receiving continuous stream of these frames. Exceeding
+652:   // this limit triggers flood mitigation and connection is terminated. The
+653:   // ``http2.outbound_control_flood`` stat tracks the number of terminated connections due to flood
+654:   // mitigation. The default limit is ``1000``.
+732:   //   corresponding named parameters:
+733:   //
+734:   // .. code-block:: text
+735:   //
+736:   //   ID    Field Name
+737:   //   ----------------
+738:   //   0x1   hpack_table_size
+739:   //   0x3   max_concurrent_streams
+740:   //   0x4   initial_stream_window_size
+741:   //
+742:   // Collisions will trigger config validation failure on load/update. Likewise, inconsistencies
+743:   // between custom parameters with the same identifier will trigger a failure.
+744:   //
+745:   // See `IANA HTTP/2 Settings
+746:   // <https://www.iana.org/assignments/http2-parameters/http2-parameters.xhtml#settings>`_ for
+747:   // standardized identifiers.
+748:   repeated SettingsParameter custom_settings_parameters = 13;
+749: 
+750:   // Send HTTP/2 PING frames to verify that the connection is still healthy. If the remote peer
+751:   // does not respond within the configured timeout, the connection will be aborted.
+752:   KeepaliveSettings connection_keepalive = 15;
+753: 
+754:   // [#not-implemented-hide:] Hiding so that the field can be removed after oghttp2 is rolled out.
+755:   // If set, force use of a particular HTTP/2 codec: oghttp2 if true, nghttp2 if false.
+756:   // If unset, HTTP/2 codec is selected based on envoy.reloadable_features.http2_use_oghttp2.
+757:   google.protobuf.BoolValue use_oghttp2_codec = 16
+758:       [(xds.annotations.v3.field_status).work_in_progress = true];
+759: 
+760:   // Configure the maximum amount of metadata than can be handled per stream. Defaults to ``1 MB``.
+761:   google.protobuf.UInt64Value max_metadata_size = 17;
+762: 
+763:   // Controls whether to encode headers using huffman encoding.
+764:   // This can be useful in cases where the cpu spent encoding the headers isn't
+765:   // worth the network bandwidth saved e.g. for localhost.
+766:   // If unset, uses the data plane's default value.
+767:   google.protobuf.BoolValue enable_huffman_encoding = 18;
+768: 
+769:   // Configures the maximum wire-encoded size in KB of an individual header field (name or value)
+770:   // that the ``nghttp2`` HPACK inflater will accept. This limit applies to the HPACK-compressed
+771:   // length on the wire, not the decoded length. If not specified, defaults to ``64`` KB
+772:   // which is the ``nghttp2`` default.
+773:   //
+774:   // This limit applies to headers received by the codec. When configured on the downstream
+775:   // HTTP Connection Manager, it limits individual request header fields. When configured on an
+776:   // upstream cluster, it limits individual response header fields.
+777:   //
+778:   // Due to Huffman encoding, the decoded header size that passes a given wire limit depends
+779:   // on the compression ratio of the content. For example, at the default ``64`` KB wire
+780:   // limit, highly compressible header values can be approximately ``100`` KB when decoded.
+781:   // Increasing this limit allows accepting larger individual headers at the cost of increased

@@ -1,0 +1,230 @@
+{
+  "source_commit": "0bff8ec8e71b14f5ee5fa9701cab74e04dbece00",
+  "source_tree": "d295c7974d757be1935279fe6fd8ad21f48e10e5",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05b-b/spikes/envoy/sprint05b-b-checks.mjs",
+    "evidence/sprint05b-b/checks-01"
+  ],
+  "node": "v26.13.0",
+  "started_at": "2026-11-14T18:38:19.648Z",
+  "commands": [
+    {
+      "label": "whitespace",
+      "program": "git",
+      "args": [
+        "diff",
+        "--check",
+        "8758b1c",
+        "--",
+        "docs/reports/sprint05b-b-h2-lifecycle.md",
+        "spikes/envoy/sprint05b-b-analyze.mjs",
+        "spikes/envoy/sprint05b-b-cause.mjs",
+        "spikes/envoy/sprint05b-b-checks.mjs",
+        "spikes/envoy/sprint05b-b-cleanup.mjs",
+        "spikes/envoy/sprint05b-b-native-launcher.mjs",
+        "spikes/envoy/sprint05b-b-native-select.mjs",
+        "spikes/envoy/sprint05b-b-run.mjs",
+        "spikes/envoy/sprint05b-b-settings-source.mjs",
+        "spikes/envoy/sprint05b-b-source.mjs",
+        "spikes/envoy/sprint05b-b-tap.mjs",
+        "spikes/envoy/sprint05b-b-verify.mjs"
+      ],
+      "started_at": "2026-11-14T18:38:19.656Z",
+      "ended_at": "2026-11-14T18:38:19.675Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "checks-syntax",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "spikes/envoy/sprint05b-b-checks.mjs"
+      ],
+      "started_at": "2026-11-14T18:38:19.675Z",
+      "ended_at": "2026-11-14T18:38:19.730Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "scanner-image",
+      "program": "docker",
+      "args": [
+        "image",
+        "inspect",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "--format",
+        "{{.Id}} {{json .RepoDigests}}"
+      ],
+      "started_at": "2026-11-14T18:38:19.731Z",
+      "ended_at": "2026-11-14T18:38:19.921Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "3aa13310a840e43692d08107b02fda025e3bdd52c6a380aaf6347c55e7691ef5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "secrets-source",
+      "program": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--name",
+        "aegis-sprint05b-b-scan-2297710-source",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05b-b:/repo:ro",
+        "-v",
+        "/tmp/aegisgate-05b-b/evidence/sprint05b-b/checks-01:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/spikes/envoy",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/reports/source-secrets.json",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-14T18:38:19.921Z",
+      "ended_at": "2026-11-14T18:38:22.954Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "415d04f57f1b4c2dca1973763e9ee9b8d83a377a4f8101d832cadf1352fbe79c"
+    },
+    {
+      "label": "secrets-evidence",
+      "program": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--name",
+        "aegis-sprint05b-b-scan-2297710-evidence",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05b-b:/repo:ro",
+        "-v",
+        "/tmp/aegisgate-05b-b/evidence/sprint05b-b/checks-01:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/evidence/sprint05b-b",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/reports/evidence-secrets.json",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-14T18:38:22.954Z",
+      "ended_at": "2026-11-14T18:38:25.679Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "5fb995d27fbea27613fa56fd3d8e142a250434280429e0934a4ff4427a11c16a"
+    },
+    {
+      "label": "secrets-report",
+      "program": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--name",
+        "aegis-sprint05b-b-scan-2297710-report",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/tmp/aegisgate-05b-b:/repo:ro",
+        "-v",
+        "/tmp/aegisgate-05b-b/evidence/sprint05b-b/checks-01:/reports",
+        "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+        "dir",
+        "/repo/docs/reports/sprint05b-b-h2-lifecycle.md",
+        "--config",
+        "/repo/.github/gitleaks.toml",
+        "--redact",
+        "--report-format",
+        "json",
+        "--report-path",
+        "/reports/report-secrets.json",
+        "--no-banner"
+      ],
+      "started_at": "2026-11-14T18:38:25.679Z",
+      "ended_at": "2026-11-14T18:38:26.385Z",
+      "exit_code": 0,
+      "signal": null,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "0d45a1da24a8cb3ac23e5d32df24ad71f5d2019ad5fc4a8f8c7ea93baf91de15"
+    }
+  ],
+  "sources": [
+    {
+      "file": "docs/reports/sprint05b-b-h2-lifecycle.md",
+      "sha256": "c1ee60067b09bbb2e59aa6ee028fb5390c2c110f46cb1e72698e76bdb56f845c"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-b-analyze.mjs",
+      "sha256": "b0bc7f4caa61d8f13e05518f8f29db8ece4ab83d612b03db527e5c60df829a63"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-b-cause.mjs",
+      "sha256": "ff17cf19818e9e0333d557b98c29c4f3fc3ceb5aab074381c724d7aaaf326a8f"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-b-checks.mjs",
+      "sha256": "c262b817edaa2bab86bee66051fa4c962bb483395008e0a25336305ce54a006d"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-b-cleanup.mjs",
+      "sha256": "8b0d4e15e3c1b1b0f9e3a636fea618015d73083f7ae509672d2b4c2ccffdac81"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-b-native-launcher.mjs",
+      "sha256": "3f73805fb682edcc353d48563d8d0e2cd1906a1f97c529086dee67133342b58e"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-b-native-select.mjs",
+      "sha256": "66a754352976a037e77cca3ef2583dc51a35db651a7a9fd98b6ce66875477fc7"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-b-run.mjs",
+      "sha256": "efd058f8812d2d00fa3db06af5197a0ee7c07eb2de02974078208e5444bb1fc1"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-b-settings-source.mjs",
+      "sha256": "84c359ba2b530f164288f4cfdaef5c78e4ea21e46b1e4c6b67948d082be44a66"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-b-source.mjs",
+      "sha256": "ad15cb4ee211349c37a1865df1060ecb3f485114f50ce2b342a6818dab9c5c68"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-b-tap.mjs",
+      "sha256": "b6f4aeb24df715e76803c0863bd19b51a7f401d65e8094f28c6781641c03646a"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-b-verify.mjs",
+      "sha256": "c9f3b32dc862f3f8db788aa0c0d6d5808020b29e8c159a61dfff5a95ba109c5b"
+    }
+  ],
+  "exit_code": 0,
+  "lock_held_through_hashes": true,
+  "ended_at": "2026-11-14T18:38:26.395Z"
+}
