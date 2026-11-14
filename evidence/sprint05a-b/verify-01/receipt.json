@@ -1,0 +1,170 @@
+{
+  "started_at": "2026-11-14T14:24:29.606Z",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05a-b/spikes/envoy/sprint05a-b-verify.mjs",
+    "evidence/sprint05a-b/verify-01"
+  ],
+  "cwd": "/tmp/aegisgate-05a-b",
+  "source_commit": "76b6e03a80a0adcafbfbc425b235fc19a8eb12ab",
+  "source_tree": "b8a40d86e712f2c8c457845e97c95495baedf6d8",
+  "tracked_clean": true,
+  "node": "v26.13.0",
+  "node_executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "sources": [
+    {
+      "file": "evidence/sprint05a-b/PLAN.md",
+      "sha256": "d49d0b877fa7f9c67eb834c650f500104b873b1f98332637cd3a59e7b908d504"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-b-llhttp.c",
+      "sha256": "d5388783ea73293d6224333e9ac5b0ccc28a4e3d7d58a5391ec16978fdb7a5b9"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-b-receipts.mjs",
+      "sha256": "cc78016a38a38d2f64dacf5809fb1bd28473b69132012f53d2f441af5ee39a3a"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-b-restore.mjs",
+      "sha256": "47c79c2a59cf27d7dc0221130d7f09a8cac9affc4181af9f02cb30ec10af0ad9"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-b-run.mjs",
+      "sha256": "cae6d48d3e1029a5757493917f8c8a611177e3872f5dadac0b8c064661523558"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-b-source.mjs",
+      "sha256": "00a89f1443c9a5ee472ebe283ab072f4ab59ab48b685a9f27bb24046b20bb232"
+    },
+    {
+      "file": "spikes/envoy/sprint05a-b-verify.mjs",
+      "sha256": "7528f7663c3372926a817befc751baa296d6315534f6179a0d4cf65cdd7c7932"
+    },
+    {
+      "file": "spikes/envoy/wire-fixtures.mjs",
+      "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278"
+    }
+  ],
+  "commands": [
+    {
+      "name": "immutable-manifest",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/edge-comparison/extract-baseline.mjs",
+        "--check"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-14T14:24:31.134Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/verify-01/immutable-manifest.stdout",
+        "bytes": 74,
+        "sha256": "919de204bf9584567cb2db4e228e0404f0abfdc8b18db15365ef19a56466121e"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/verify-01/immutable-manifest.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "whitespace",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "541d1d915ce6a3b679dc3fed3ea0a98f908ce001",
+        "HEAD"
+      ],
+      "cwd": "/tmp/aegisgate-05a-b",
+      "exit_code": 2,
+      "signal": null,
+      "ended_at": "2026-11-14T14:24:31.191Z",
+      "stdout": {
+        "file": "evidence/sprint05a-b/verify-01/whitespace.stdout",
+        "bytes": 12828,
+        "sha256": "720b45c2c513ebcc39771d2c598b14e30a86356c4dcf52196c88c179a5904502"
+      },
+      "stderr": {
+        "file": "evidence/sprint05a-b/verify-01/whitespace.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "checked": [
+    {
+      "attempt": "source-01",
+      "source": "1839087c3923feb37dc3068c506458e28192975b",
+      "tree": "73dd93b9bf81c550df191e2f771a157b11ddb288",
+      "error": null,
+      "completed": null,
+      "commands": 22
+    },
+    {
+      "attempt": "envoy-01",
+      "source": "b97da1668d68e783d2311000394a1205acd0ee51",
+      "tree": "33a6ea7375952de32f141e31eb69d36ce15ef1aa",
+      "error": null,
+      "completed": true,
+      "commands": 12
+    },
+    {
+      "attempt": "envoy-02",
+      "source": "8ddd6cf8d25407dd9b35ae8f9290db081c168585",
+      "tree": "9985e361634ece626900a2636ed831f580e06cd2",
+      "error": null,
+      "completed": true,
+      "commands": 12
+    },
+    {
+      "attempt": "llhttp-01",
+      "source": "865d98ced7211ccab4ab718b06b10232fd8e9c6c",
+      "tree": "3a7432c52e89c3417e7ba935dc8bb9b2856045e0",
+      "error": "AssertionError [ERR_ASSERTION]: build-llhttp\n\n1 !== 0\n\n    at cmd (file:///tmp/aegisgate-05a-b/spikes/envoy/sprint05a-b-run.mjs:25:56)\n    at file:///tmp/aegisgate-05a-b/spikes/envoy/sprint05a-b-run.mjs:109:5\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+      "completed": null,
+      "commands": 8
+    },
+    {
+      "attempt": "llhttp-02",
+      "source": "4513c9600196a26d7c75c955e0529e70ca5f356e",
+      "tree": "644033406193e4309b89722b90caabf27e1a1eab",
+      "error": null,
+      "completed": true,
+      "commands": 59
+    },
+    {
+      "attempt": "nginx-01",
+      "source": "816d742ea9d8944322a9559a55b445e8216e5665",
+      "tree": "f05e26acb5bdc34382f75ff26e0f6d1e44ede10a",
+      "error": "AssertionError [ERR_ASSERTION]: runtime ready\n    at file:///tmp/aegisgate-05a-b/spikes/envoy/sprint05a-b-run.mjs:231:22\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+      "completed": null,
+      "commands": 12
+    },
+    {
+      "attempt": "nginx-02",
+      "source": "a64cd6aa94e4a9429f8eb6d172940c7b71a94f45",
+      "tree": "ed2f1fbecd1d5b4670919984ee648472bffefc5b",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- '/bad%00target'\n\n    at file:///tmp/aegisgate-05a-b/spikes/envoy/sprint05a-b-run.mjs:315:57",
+      "completed": null,
+      "commands": 12
+    },
+    {
+      "attempt": "validator-01",
+      "source": "e984eb6d9b1bf3bd3dac8b58a6e58dfd3fd8b83c",
+      "tree": "c690aced6abde459c7e5f91de527372c80cc3058",
+      "error": "AssertionError [ERR_ASSERTION]: runtime ready\n    at file:///tmp/aegisgate-05a-b/spikes/envoy/sprint05a-b-run.mjs:242:22\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+      "completed": null,
+      "commands": 12
+    }
+  ],
+  "protected_baseline_objects": 4003,
+  "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n2 !== 0\n\n    at file:///tmp/aegisgate-05a-b/spikes/envoy/sprint05a-b-verify.mjs:75:13\n    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)\n    at async node:internal/modules/esm/loader:650:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:105:5)",
+  "ended_at": "2026-11-14T14:24:31.201Z"
+}
