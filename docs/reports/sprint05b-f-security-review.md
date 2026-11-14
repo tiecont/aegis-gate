@@ -33,6 +33,48 @@ assertions, not a sustained process-memory or resource-isolation guarantee.
 The serialized128KiB disk experiment also completes; it does not solve the
 late-trailer ordering conflict independently reproduced under D below.
 
+## B: original H2 and causal ACK
+
+**ACCEPT narrow test/evidence scoped stop; REJECT original H2 all-byte gate.**
+Clean cloned `f7ce126ad3bf56762e18fe8c009566728530d339` independently extracts
+the pinned image binary, verifies SHA256
+`1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc`, and runs
+the unchanged75/23. Results are73/75 and19/23, both raw exits1. Original H1
+folding reaches one origin handler/263 bytes. The original H2 interval contains
+exactly `000000040100000000`: SETTINGS ACK, stream0, flags1, zero payload;
+origin counters are9bytes/0handlers/0parser errors/0transport errors. The
+unmodified all-byte assertion remains FAIL. Offline B analyzer exits0 with
+complete capture/no omitted bytes, exact frame identity and endpoint ordering.
+
+The B collector exits1 as expected: its historical two Docker-only optional
+resource diagnostics cannot inspect a nonexistent native container. The
+completed original results, both helper failures and collection error remain
+in `evidence/sprint05b-f/b-01`; no native resource PASS is inferred.
+
+F's separate causal diagnostic launches the same B native binary/config and
+uses verified loopback TLS. Cold mismatch yields421/zero origin traffic; two
+sequential plus four concurrent valid requests share one origin connection.
+After initial SETTINGS acknowledgment, an origin SETTINGS update alone causes
+the identical9-byte ACK, with no downstream request, handler or new origin
+connection. The next valid request succeeds on that pool. All four controls
+pass; fixture, launcher and origin sockets are gone while locked.
+
+```sh
+flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint05b-f-review.mjs b f7ce126 evidence/sprint05b-f/b-01
+flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint05b-f-cause.mjs /tmp/aegisgate-05b-f/.local/sprint05b-f-sources/b-f7ce126ad3bf evidence/sprint05b-f/cause-02
+```
+
+F `cause-01` is retained as a failed diagnostic setup: the test attempted pool
+priming on the cold-denial session, which correctly received GOAWAY. Corrected
+source `662c788` uses a fresh session, as B's original causal collector does.
+This does not alter the original75/23 or their observation intervals.
+
+Pinned source corroboration is bounded: the released codec flushes generated
+frames, the pool allows requests before peer SETTINGS arrive, and nghttp2's
+normal SETTINGS receive path queues an ACK. Hidden codec selection and
+window/keepalive settings establish no supported ACK suppression/barrier.
+The trace identifies JS relay order, not kernel timestamps/internal scheduling.
+
 ## D: late trailers and streaming
 
 **ACCEPT narrow counterexample/evidence; REJECT simultaneous strict zero-byte
