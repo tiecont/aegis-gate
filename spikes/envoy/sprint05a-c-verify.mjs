@@ -43,11 +43,12 @@ try {
       passed: decision.passed, failed: decision.failed, negative, raw_origin_hex: raw ?? null,
       raw_origin_sha256: raw ? hash(Buffer.from(raw, 'hex')) : null, positive_controls: controls.map((t) => t.name) });
   }
-  for (const dir of ['lifecycle-windows-02', 'lifecycle-partition-01', 'lifecycle-bounded-01']) {
+  for (const dir of ['lifecycle-windows-03', 'lifecycle-partition-02', 'lifecycle-bounded-02']) {
     const receipt = read(`${base}/${dir}/receipt.json`);
     for (const item of read(`${base}/${dir}/SHA256.json`)) assert.equal(hash(fs.readFileSync(`${base}/${dir}/${item.file}`)), item.sha256);
     assert.ok(!receipt.error); assert.equal(receipt.tests.length, 7); assert.ok(receipt.tests.every((t) => t.status === 'pass'));
     assert.equal(receipt.cleanup.container_absent, true); assert.equal(receipt.cleanup.lock_held, true); assert.equal(receipt.cleanup.fixture_removed, true);
+    for (const probe of receipt.tests.find((t) => t.name === 'cold-denials-no-origin-dial-or-bytes').detail) assert.equal(probe.origin_tcp_accepts, 0);
     const sequential = receipt.tests.find((t) => t.name === 'valid-cold-warm-sequential-reuse');
     const concurrent = receipt.tests.find((t) => t.name === 'concurrent-streams-share-valid-pool');
     record.lifecycle.push({ directory: dir, source_commit: receipt.source_commit, passed: 7,

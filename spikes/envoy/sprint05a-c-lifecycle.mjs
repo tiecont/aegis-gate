@@ -49,7 +49,8 @@ try {
   const nativePort = await listen(origin);
   observer = createTlsObserver({ cert: material.read('origin.pem'), key: material.read('origin.key'), ca, port: nativePort,
     onBytes: () => {}, onTransportError: () => { transportErrors++; } });
-  let relayId = 0;
+  let relayId = 0; let tcpAccepts = 0;
+  observer.on('connection', () => { tcpAccepts++; });
   observer.on('secureConnection', (socket) => { const id = ++relayId; sockets.add(socket); socket.on('close', () => sockets.delete(socket));
     socket.on('data', (bytes) => captures.push({ connection: id, hex: bytes.toString('hex') })); });
   const originPort = await listen(observer); const edgePort = await freePort();
@@ -77,10 +78,10 @@ try {
   await test('cold-denials-no-origin-dial-or-bytes', async () => {
     const details = [];
     for (const extra of [{ host: 'edge-a.test' }, { ':authority': 'edge-a.test' }, { ':authority': 'user@edge-b.test' }]) {
-      const before = { relays: relayId, chunks: captures.length, handlers: handlers.length };
+      const before = { tcp: tcpAccepts, relays: relayId, chunks: captures.length, handlers: handlers.length };
       const c = await connect(); const r = await request(c, extra); c.destroy();
-      assert.ok([400, 421].includes(r.status) || (r.status === null && r.rst_code !== 0)); assert.equal(relayId, before.relays); assert.equal(captures.length, before.chunks); assert.equal(handlers.length, before.handlers);
-      details.push({ extra, ...r });
+      assert.ok([400, 421].includes(r.status) || (r.status === null && r.rst_code !== 0)); assert.equal(tcpAccepts, before.tcp); assert.equal(relayId, before.relays); assert.equal(captures.length, before.chunks); assert.equal(handlers.length, before.handlers);
+      details.push({ extra, ...r, origin_tcp_accepts: tcpAccepts - before.tcp, origin_tls_connections: relayId - before.relays });
     } return details;
   });
   let pooled;
@@ -97,10 +98,10 @@ try {
   await test('warm-denials-retain-all-origin-bytes', async () => {
     const details = [];
     for (const extra of [{ host: 'edge-a.test' }, { ':authority': 'edge-a.test' }, { ':authority': 'user@edge-b.test' }]) {
-      const before = { chunks: captures.length, handlers: handlers.length };
+      const before = { tcp: tcpAccepts, chunks: captures.length, handlers: handlers.length };
       const c = await connect(); const response = await request(c, extra); c.destroy();
       const raw = captures.slice(before.chunks).map((x) => x.hex).join('');
-      details.push({ extra, response, raw_hex: raw, handlers: handlers.length - before.handlers });
+      details.push({ extra, response, raw_hex: raw, handlers: handlers.length - before.handlers, origin_tcp_accepts: tcpAccepts - before.tcp });
       assert.ok([400, 421].includes(response.status) || (response.status === null && response.rst_code !== 0)); assert.equal(handlers.length, before.handlers);
     } return details;
   });
@@ -120,7 +121,7 @@ try {
     publish({ ca_file: material.file('ca.pem') }); await delay(350); const restored = await request(pooled);
     assert.equal(restored.status, 200); assert.notEqual(old.connection, restored.connection); return { old, rejected, restored };
   });
-  record.origin = { connections: connectionId, relays: relayId, handlers, parser_errors: parserErrors, transport_errors: transportErrors };
+  record.origin = { tcp_accepts: tcpAccepts, connections: connectionId, relays: relayId, handlers, parser_errors: parserErrors, transport_errors: transportErrors };
 } catch (e) { record.error = e.stack; }
 finally {
   assertLock(); for (const c of clients) c.destroy(); for (const s of sessions) s.destroy(); for (const s of sockets) s.destroy();
