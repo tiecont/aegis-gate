@@ -32,4 +32,55 @@ Sources are committed before evidence; TMPDIR is disk-backed under F .local.
 
 ## Current Verdicts
 
-Pending exact-source evidence. No ACCEPT or production eligibility is inferred.
+**D REJECT** exact executable source `406d560`, final report/evidence `ba54e45`:
+the new bounded consistency check still accepts four independently forged
+coverage/identity transcripts. RuntimeComplete/RuntimePass/Module01Pass remain
+false, so these are research consistency defects, not a demonstrated active
+gateway bypass.
+
+Clean reviewer source `7694b61` runs D's exact proof unchanged: exit0. Its
+original05C/05D tests and both historical F overlays pass. F independently
+compiles a fresh race-enabled binary using an overlay and runs all suites:
+exit1 solely for four new negative subtests. Capture
+`evidence/sprint06a-f/d-independent-01` preserves every raw stream, binary hash,
+source/tree/argv/exits, both11-pin inventories and cleanup. All tracked bytes
+match after execution; the disposable source/build stage is removed under lock.
+
+| F challenge                                                            | Actual bounded consistency | Expected |
+| ---------------------------------------------------------------------- | -------------------------- | -------- |
+| Extra untagged complete upstream HEADERS on stream99                   | true                       | false    |
+| Extra untagged complete downstream HEADERS on stream99                 | true                       | false    |
+| Both accepted probe/nonce identities inside one upstream HEADERS block | true                       | false    |
+| Both accepted probe identities inside one downstream HEADERS block     | true                       | false    |
+
+The field-to-stream maps count identities, while the wrapper checks repeated
+HEADERS stream IDs. Neither checks that every request block carries exactly one
+appropriate identity or that each identity occupies its own distinct stream.
+The alias cases retain unrelated completed responses to satisfy cardinality.
+This reproduces the class of false bijection that the new wrapper aims to close.
+Suggested repair belongs to D: require exact per-block correlation field counts,
+account for every decoded request block, and verify a bijection between unique
+request stream IDs, events and completed response stream IDs. Keep general
+protocol and authoritative runtime claims explicitly out of scope.
+
+F's16 cases include honest and coherent trusted-signer rewrite positives;
+omitted dispatch/request, old repeated-HEADERS alias, nonce swap, incomplete
+HPACK, forged final response, capture loss, orphan DATA, duplicate capture and
+MAC tamper reject correctly. Old assessRuntime still returns true for the
+historical alias/orphan-DATA cases, as expected; the06A wrapper rejects those.
+
+Both fresh actual ACK observations retain hex `000000040100000000` at offset79,
+zero origin request HEADERS,88 total client-to-origin bytes and24 reverse bytes.
+Downstream request counts are0 and1 respectively; the latter completes a real
+421 denial. Capture loss is false, readers join, aggregate verdict stays FAIL.
+These observations and the precise public API stop are supportable separately
+from the rejected bounded consistency claims. No original75/23 rerun occurs.
+
+Exact command (from the F worktree):
+
+```sh
+env TMPDIR=/home/tiecont/.cache/aegisgate-06a/f/.local/tmp GOAMD64=v1 GOTOOLCHAIN=local flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint06a-f-review.mjs 406d560 evidence/sprint06a-f/d-independent-01
+```
+
+C/A/B/E and final integration gates remain pending review; no ACCEPT or
+production eligibility is inferred.
