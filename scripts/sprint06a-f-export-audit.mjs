@@ -7,7 +7,8 @@ import { assertLock } from "../spikes/envoy/wire-fixtures.mjs";
 
 process.umask(0o077);
 assertLock();
-const [revision, prefix, rawDirectory, output] = process.argv.slice(2);
+const [revision, prefix, rawDirectory, output, reviewerRevision = "HEAD"] =
+  process.argv.slice(2);
 assert.match(prefix ?? "", /^evidence\/sprint06a-root\/gates-\d+$/);
 assert.match(output ?? "", /^evidence\/sprint06a-f\/export-audit-\d+$/);
 assert.ok(path.isAbsolute(rawDirectory ?? ""));
@@ -24,6 +25,7 @@ fs.mkdirSync(output, { recursive: true });
 const record = {
   reviewer: str("rev-parse", "HEAD"),
   reviewed: str("rev-parse", `${revision}^{commit}`),
+  reviewerBytesSource: str("rev-parse", `${reviewerRevision}^{commit}`),
   argv: process.argv,
   collectorSha256: sha(fs.readFileSync(import.meta.filename)),
   started: new Date().toISOString(),
@@ -50,7 +52,7 @@ try {
         file,
       )
     ) {
-      assert.deepEqual(bytes, git("show", `HEAD:${file}`), file);
+      assert.deepEqual(bytes, git("show", `${reviewerRevision}:${file}`), file);
       row.reviewerOwnedBytesMatch = true;
     } else {
       assert.ok(
