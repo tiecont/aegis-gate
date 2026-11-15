@@ -169,6 +169,16 @@ exit0 is evidence consistency, never runtime acceptance. Full make check,
 security-scan, hosted gates, architecture and independent F signoff are not
 claimed here.
 
+Executed `verify-01` at clean source34eb5d4/tree
+f79c7741a25a6ee3d48e6e83961d1f909f28e7dd exits0. It verifies54 retained
+artifact hashes,91 captured-source bindings and all7,273 baseline objects.
+Existing protected tests pass11/11 with zero skips. Every syntax/format check
+and the pinned gitleaks8.30.1 source/evidence/report scan exits0; each scan
+report is `[]`. Receipt SHA256 is
+`df70b57efe196fb01b491d9f98ad28e82990034dba0c1cedac1b0f3b63cd8f59`.
+The final report addendum is followed by another owned scan/verification receipt;
+no runtime or original-suite execution is repeated for this documentation change.
+
 ## Agent Completion Report
 
 - Module/status:01, Sprint05C B scoped executable stop complete; H2 repair blocked.
