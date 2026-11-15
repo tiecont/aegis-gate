@@ -1,0 +1,28 @@
+{
+  "status": "INVALID_DO_NOT_ACCEPT",
+  "sourceAtStart": "2bacc0230eeb8dbdfc0e646e575a8fedec41745f",
+  "sourceAfterConcurrentRootCheckout": "c4a2fc529688ef53ef213e07a6567aeab3fe4fcf",
+  "reason": "Root changed clone HEAD during active gates. Source inventory postcheck fails. This run cannot establish exact-source acceptance.",
+  "qualityExit": 0,
+  "securityScanExit": 2,
+  "independentSetupFailure": "History scanner container could not resolve clone Git object alternates outside its mounts; history preflight and history scan fail.",
+  "cleanupExit": 0,
+  "cleanupVolumesExit": 0,
+  "privateMatches": 0,
+  "remainingProjectContainers": [],
+  "remainingProjectNetworks": [],
+  "remainingProjectVolumes": [],
+  "preservedRawDirectory": "/home/tiecont/Projects/aegis-gate/.local/sprint06a-gates/.local/sprint06a-f-invalid-gates-01",
+  "rawArtifactPathsInReceipt": "Original evidence/sprint06a-root/gates-01-relative paths are retained verbatim; resolve their suffix beneath preservedRawDirectory.",
+  "repair": [
+    "Under fixture flock: git repack -a -d (exit0)",
+    "Preserve .git/objects/info/alternates as .local/sprint06a-git-alternates-preserved after repack",
+    "git fsck --full --no-dangling must exit0 before fresh rerun",
+    "Preserve invalid raw evidence under clone .local, verify exact c4a2fc5 HEAD and fully clean status",
+    "Run fresh gate-run-02 against frozen c4a2fc5 with unchanged scanner, policies and container mounts"
+  ],
+  "localGatesAccepted": false,
+  "runtimeComplete": false,
+  "runtimePass": false,
+  "productionPass": false
+}
