@@ -69,7 +69,7 @@ try {
   for (const file of fs.readdirSync('scripts').filter((file) => file.startsWith('sprint05c-f-'))) copy(`scripts/${file}`);
   copy('docs/reports/sprint05c-f-security-review.md'); copy('evidence/sprint05c-f');
   r.reviewed_sources = [];
-  for (const [letter, revision] of [['a', '1019a60'], ['b', '0444023'], ['c', '7255fa2'], ['d', 'ee67bdd'], ['e', 'dd1eaa4']]) {
+  for (const [letter, revision] of [['a', 'dc5d966'], ['b', '0444023'], ['c', '7255fa2'], ['d', 'ee67bdd'], ['e', 'dd1eaa4']]) {
     const commit = git('rev-parse', `${revision}^{commit}`);
     const files = git('diff', '--name-only', '078d83c', commit).split('\n').filter((file) => file && !file.startsWith('evidence/'));
     r.reviewed_sources.push({ letter, commit, tree: git('rev-parse', `${commit}^{tree}`), files });
