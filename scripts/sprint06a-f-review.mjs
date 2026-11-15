@@ -213,6 +213,72 @@ try {
       { timeout: 290000, allowedExits: [0, 1] },
     );
     record.exactProofExit = record.commands.at(-1).exit;
+    if (record.exactProofExit === 0) {
+      const base = `${clone}/evidence/sprint06a-a/run-901`;
+      const r = JSON.parse(fs.readFileSync(`${base}/receipt.json`));
+      const c = JSON.parse(fs.readFileSync(`${base}/collector.json`));
+      assert.equal(r.completeValidationPass, true);
+      assert.equal(c.finiteControlsPass, true);
+      assert.equal(r.streamingPass, false);
+      assert.equal(r.streamingPositive.pass, false);
+      assert.equal(r.runtimeGO, false);
+      assert.equal(r.productionEligible, false);
+      assert.equal(r.probes.length, 67);
+      for (const value of Object.values(r.cleanup)) assert.equal(value, 0);
+      assert.equal(r.privateFixtureRemoved, true);
+      assert.equal(c.removeContainer.exit, 0);
+      assert.equal(c.remainingContainers.stdout, "");
+      assert.equal(c.run.stdout, fs.readFileSync(`${base}/run.stdout`, "utf8"));
+      assert.equal(c.run.stderr, fs.readFileSync(`${base}/run.stderr`, "utf8"));
+      assert.equal(c.inspectAfter.State.OOMKilled, true);
+      assert.equal(c.inspectAfter.State.ExitCode, 0);
+      const p = new Map(r.probes.map((v) => [v.name, v]));
+      assert.equal(p.size, 67);
+      assert.equal(
+        p.get("actual-tmpfs-ENOSPC-before-origin").tmpfs.failure,
+        "ENOSPC",
+      );
+      assert.equal(p.get("actual-tmpfs-ENOSPC-before-origin").origin.bytes, 0);
+      assert.equal(p.get("actual-tmpfs-ENOSPC-before-origin").origin.dials, 0);
+      assert.equal(
+        p.get("observed-hard-RST-queued-request-no-dispatch")
+          .cancelledRequestDials,
+        0,
+      );
+      assert.equal(
+        p.get("actual-origin-slots-queue-FIN-observation").zeroDispatchClaim,
+        false,
+      );
+      const memory = p.get("kernel-memory-OOM-killed-child-ingress-survived"),
+        cpu = p.get("kernel-CPU-quota-enforced"),
+        pids = p.get("kernel-PID-cap-enforced");
+      assert.ok(memory.after.oom_kill > memory.before.oom_kill);
+      assert.ok(cpu.after.nr_throttled > cpu.before.nr_throttled);
+      assert.ok(pids.after.max > pids.before.max);
+      assert.deepEqual(r.cgroupFinal.controls, {
+        memoryMax: "402653184",
+        swapMax: "0",
+        cpuMax: "75000 100000",
+        pidsMax: "64",
+      });
+      assert.equal(c.inspectBefore.HostConfig.NetworkMode, "none");
+      assert.deepEqual(c.inspectBefore.HostConfig.PortBindings, {});
+      for (const line of fs
+        .readFileSync(`${base}/SHA256SUMS`, "utf8")
+        .trim()
+        .split("\n")) {
+        const [digest, file] = line.split("  ");
+        assert.equal(sha(fs.readFileSync(`${clone}/${file}`)), digest);
+      }
+      record.componentSummary = {
+        probes: 67,
+        finite: true,
+        streaming: false,
+        controls: r.cgroupFinal.controls,
+        rawReceiptSha256: sha(fs.readFileSync(`${base}/receipt.json`)),
+        collectorSha256: sha(fs.readFileSync(`${base}/collector.json`)),
+      };
+    }
     run(
       "a-independent-attacks",
       node,
