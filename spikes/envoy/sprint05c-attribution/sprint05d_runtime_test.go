@@ -42,14 +42,14 @@ type runtimeEvidence struct {
 	MAC      string
 }
 type runtimeAssessment struct {
-	MappingComplete   bool
-	RuntimeComplete   bool
-	RuntimePass       bool
-	Module01Pass      bool
-	UpstreamStreams   map[string]uint32
-	DownstreamStreams map[string]uint32
-	Incomplete        []string
-	Raw               runtimeEvidence
+	CorrelationConsistent bool
+	RuntimeComplete       bool
+	RuntimePass           bool
+	Module01Pass          bool
+	UpstreamStreams       map[string]uint32
+	DownstreamStreams     map[string]uint32
+	Incomplete            []string
+	Raw                   runtimeEvidence
 }
 
 func runtimeMAC(e runtimeEvidence, key []byte) string {
@@ -146,7 +146,7 @@ func assessRuntime(e runtimeEvidence, key []byte) runtimeAssessment {
 	if len(r.UpstreamStreams) != accepted || len(r.DownstreamStreams) != len(e.Requests) {
 		fail("unattributed stream or omitted request")
 	}
-	r.MappingComplete = len(r.Incomplete) == 0
+	r.CorrelationConsistent = len(r.Incomplete) == 0
 	// Supported callbacks do not expose authoritative origin handler stream IDs,
 	// pre-wire stream admission, exact HPACK table mutations or signed generation.
 	r.Incomplete = append(r.Incomplete, "post-capture correlation is not an authenticated pre-wire dispatch hook", "static generation fixture is not signed snapshot runtime coverage", "exact HPACK internal table mutations unavailable through public decoder API")
@@ -358,7 +358,7 @@ func TestSprint05DRuntimeDerivedMappings(t *testing.T) {
 	}
 	e.MAC = runtimeMAC(e, key)
 	assessment := assessRuntime(e, key)
-	if !assessment.MappingComplete || assessment.RuntimeComplete || assessment.RuntimePass || assessment.Module01Pass {
+	if !assessment.CorrelationConsistent || assessment.RuntimeComplete || assessment.RuntimePass || assessment.Module01Pass {
 		t.Fatalf("incorrect bounded/full-runtime conclusion: %+v", assessment)
 	}
 	b, _ := json.Marshal(assessment)
@@ -395,7 +395,7 @@ func TestSprint05DRuntimeDerivedMappings(t *testing.T) {
 				bad.Requests[0].Status = 421
 			}
 			got := assessRuntime(bad, key)
-			if got.MappingComplete || got.RuntimePass || got.Module01Pass {
+			if got.CorrelationConsistent || got.RuntimePass || got.Module01Pass {
 				t.Fatalf("incomplete/forged runtime accepted: %+v", got)
 			}
 		})
