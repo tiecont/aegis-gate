@@ -3,9 +3,12 @@
 The isolated loopback H1 proof passes 77 additive wire/resource controls and
 653 native split boundaries plus six byte-at-a-time native controls. This is
 not the protected original75 suite or complete ingress acceptance. The exact
-historical folded requests reject with 400 and zero origin activity. Chunked
-uploads remain finite disk-staged; early chunked streaming still conflicts
-with zero-byte rejection of a subsequently malformed trailer in this design.
+historical folded requests reject with 400 and zero origin activity. Independent
+F evidence also shows known-length streaming returns400 for premature EOF after
+89 origin bytes and one handler. The streaming path is not admission-safe under
+strict truncation-zero requirements. Chunked uploads remain finite disk-staged;
+early chunked streaming conflicts with zero-byte rejection of a subsequently
+malformed trailer in this design. Only bounded finite runtime behavior is proven.
 Module01 remains NO-GO, Modules04-12 LOCKED and production BLOCKED.
 
 ## Source And Reproduction
@@ -59,12 +62,13 @@ absolute targets are forwarded byte-for-byte, including percent encodings and
 dot segments. Target admission does not normalize the forwarded wire.
 `X-Tenant-ID` and `X-Forwarded-Host` cannot choose the identity.
 
-Known-length/no-body H1.1 requests use the stream-admissible path after complete
-header validation and body/wire reservation. Their payload bytes cannot introduce
-trailers or another framing interpretation inside the declared body. Truncation
-is still a transport failure: already streamed bytes cannot be recalled; the
-upstream is aborted. No blanket zero-byte guarantee for interrupted known-length
-requests is claimed. Chunked requests are staged through complete syntax and
+Known-length/no-body H1.1 requests use the experimental streaming path after
+complete header validation and body/wire reservation. Payload bytes inside the
+declared body cannot introduce trailers, but premature EOF can still invalidate
+that framing after admission. F independently demonstrates this exact failure
+below. Calling this path stream-admissible does not establish strict admission
+safety: it fails the truncation-zero requirement. Already streamed bytes cannot
+be recalled when the upstream is aborted. Chunked requests are staged through complete syntax and
 declared, allowed trailers; forbidden/undeclared trailers reject before any dial.
 Expect, upgrades and CONNECT are explicitly unsupported in this isolated runtime.
 
@@ -134,6 +138,18 @@ origin slots/waiters, active contexts and listeners, with private fixture absent
 
 ## Technical Stop
 
+Independent F's exact-source EOF counterexample is retained at
+`evidence/sprint05c-f/a-independent-03/a-stream-admission.json`; A read that
+artifact and references it without copying it or repeating the fixture run.
+F sends `Content-Length: 10` with body `abc`, waits until the actual origin
+handler receives all3 body bytes, then sends EOF. A returns400 after89 decrypted
+origin bytes and one handler; the origin request is incomplete and aborted.
+The paired valid `Content-Length: 3`/`abc`/EOF control returns200 with84 exact
+origin bytes and a completed handler. F records `security_pass:false` and clean
+fixture/socket/parser/listener teardown. This disproves the claim that future
+framing cannot invalidate known-length stream admission under strict
+truncation-zero requirements. Path A is not fully safe under that contract.
+
 The competing experiment streams a valid65,646-byte chunked prefix to a verified
 TLS origin, observes body progress, then feeds exact folded-trailer hex
 `300d0a582d456e643a2066697273740d0a207365636f6e640d0a0d0a`.
@@ -145,8 +161,10 @@ progress before completing chunked syntax receives408 with zero origin activity.
 
 Thus early progress and zero-origin-byte rejection of a subsequently invalid
 trailer do not coexist in this tested H1 chunked admission design. Finite disk
-staging is not indefinite end-to-end streaming. Known-length streaming does
-not remove this chunked/trailer conflict. This is a scoped executable stop,
+staging is not indefinite end-to-end streaming. Known-length streaming has the
+independent premature-EOF failure above as well as failing to remove the
+chunked/trailer conflict. The runtime is a bounded finite experiment, not a
+complete syntax-before-origin admission boundary. These are scoped executable stops,
 not a universal impossibility claim for other protocols or architectures.
 No contract change, original-oracle repair or runtime GO is claimed. No further
 design expansion is scheduled by A.
@@ -175,14 +193,18 @@ state beyond the harness settlement deadline. Source1019a60 adds an explicit
 TCP accept timer, clears it only at successful TLS admission, and destroys TLS
 error sockets. Final run12 executes77 controls through unknown-SNI denial,
 origin hostname verification and the streaming counterexample; complete cleanup
-and verifier exit0 establish the corrected local lifecycle. F re-review remains
-required; its earlier failure is retained, not declared independently repaired.
+and verifier exit0 establish the corrected local lifecycle. F reports an
+independent full-proof PASS at source1019a60, reproducing the bounded controls
+and corrected lifecycle. Its separate EOF attack above still has
+`security_pass:false`; passing the existing proof does not establish complete
+stream admission safety. The earlier failed independent attempt remains retained.
 
 ## Agent Completion Report
 
 - Module: Sprint05C A, Module01 bounded H1 feasibility only.
-- Status: scoped implementation/proof complete; mandatory chunked streaming
-  conflict remains a technical stop and complete runtime acceptance is blocked.
+- Status: bounded finite implementation/proof complete; known-length premature
+  EOF and chunked late-trailer conflicts are technical stops. Complete stream
+  admission and runtime acceptance remain blocked.
 - Commits/files: source1019a60 and owned `spikes/envoy/sprint05c-a-*`, A plan,
   receipts and this report only; evidence/report commits follow source.
 - Architecture/ADR decisions: none; no runtime selection or human approval.
@@ -190,11 +212,15 @@ required; its earlier failure is retained, not declared independently repaired.
 - Positive tests: exact locked command above exit0;77 additive controls,
   653 split boundaries and six native byte-at-a-time controls; verifier exit0.
 - Security negatives: historical folds, trailer/framing/identity/pipeline/TLS,
-  quotas, cancellation and deadlines measured as specified above.
+  quotas, cancellation and deadlines measured as specified above; F's independent
+  CL10/abc/EOF counterexample fails strict truncation-zero admission after89
+  origin bytes/one handler, with valid CL3/EOF control200/84bytes.
 - Performance: bounded observations only, no benchmark/soak/resource eligibility.
-- Known risks/blockers: finite staging/stream conflict, H2/WS/gRPC, origin pooling,
+- Known risks/blockers: known-length truncation-zero failure, finite staging/stream
+  conflict, H2/WS/gRPC, origin pooling,
   production SSRF/policy/auth/signed-config/TLS rotation/crash lifecycle,
   independent F review, root full scanners/quality/hosted gates and human approval.
-- Human review needed: F exact-source reproduction and architecture/security gates.
+- Human review needed: disposition of the independently reproduced admission
+  failures and architecture/security gates; F full-proof reproduction alone grants no GO.
 - Next unblocked work: independent review of this scoped result; no locked module
   or broader runtime work is authorized by its successful local proof.
