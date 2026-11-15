@@ -16,6 +16,11 @@ now permits only an existing empty0700 directory; no fixtures were active.
 negative x509 `-days`. Expired fixtures now use the established bounded CA
 start/end-date mechanism from the unchanged wire fixture helper.
 
+`run-04` at `479db12` retains33 completed controls and then an EXDEV fixture
+failure: the live hardlink target was on disk while its source was on tmpfs.
+The attack target now stays on the same tmpfs. All cleanup counters were zero;
+the stopped container was removed. No failed capture is overwritten.
+
 ## Declared Experiment
 
 | Field | Declaration before execution |

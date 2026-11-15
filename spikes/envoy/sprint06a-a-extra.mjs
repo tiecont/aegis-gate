@@ -102,7 +102,7 @@ export async function exercise(c) {
       key = stage.key,
       iv = stage.iv,
       file = stage.file;
-    const other = path.join(fixture, `attack-${kind}`);
+    const other = path.join(path.dirname(front.quota.root), `attack-${kind}`);
     if (kind === "truncate") fs.truncateSync(file, 1);
     if (kind === "hardlink") fs.linkSync(file, other);
     if (kind === "symlink-replace") {
@@ -449,7 +449,7 @@ export async function exercise(c) {
         process.execPath,
         "--max-old-space-size=16",
         "--eval",
-        "const blocks=[]; for(let i=0;i<90;i++) blocks.push(Buffer.alloc(8*1024*1024,1)); setTimeout(()=>{},5000)",
+        "require('node:fs').writeFileSync('/proc/self/oom_score_adj','1000'); const blocks=[]; for(let i=0;i<90;i++) blocks.push(Buffer.alloc(8*1024*1024,1)); setTimeout(()=>{},5000)",
       ],
       { timeout: 15000 },
     );
