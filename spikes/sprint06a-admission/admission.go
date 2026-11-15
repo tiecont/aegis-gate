@@ -6,7 +6,6 @@ package admission
 import (
 	"bytes"
 	"context"
-	"crypto/rand"
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/hex"
@@ -313,11 +312,4 @@ func Authenticate(l *Lease, authorization string, key any, now time.Time) error 
 		return ErrDenied
 	}
 	return nil
-}
-func leaseID() string {
-	b := make([]byte, 24)
-	if _, err := rand.Read(b); err != nil {
-		panic("fixture random unavailable")
-	}
-	return hex.EncodeToString(b)
 }

@@ -40,11 +40,11 @@ const record = { sourceCommit: git('rev-parse', 'HEAD'), sourceTree: git('rev-pa
     stop: 'experimental multi-hop fixture only; no production contract, SSRF or full gateway claim' },
   module01Pass: false, productionEligible: false, passed: false };
 const save = () => fs.writeFileSync(`${output}/receipt.json`, JSON.stringify(record,null,2)+'\n');
-async function run(label, executable, args, extra = {}, timeout = 180000) {
+async function run(label, executable, args, extra = {}, timeout = 180000, cwd = process.cwd()) {
   assertLock();
   const started = new Date().toISOString();
   const result = await new Promise((resolve) => {
-    const child = spawn(executable,args,{ env:{...env,...extra}, stdio:['ignore','pipe','pipe'] });
+    const child = spawn(executable,args,{ cwd, env:{...env,...extra}, stdio:['ignore','pipe','pipe'] });
     const chunks = { stdout:[], stderr:[] }; let error;
     child.stdout.on('data',(b)=>chunks.stdout.push(b)); child.stderr.on('data',(b)=>chunks.stderr.push(b));
     const timer = setTimeout(()=>{error='bounded command deadline';child.kill('SIGTERM');},timeout);
@@ -52,7 +52,7 @@ async function run(label, executable, args, extra = {}, timeout = 180000) {
     child.on('close',(exit,signal)=>{clearTimeout(timer);resolve({exit,signal,error,stdout:Buffer.concat(chunks.stdout),stderr:Buffer.concat(chunks.stderr)});});
   });
   const streams = ['stdout','stderr'].map((name)=>{const file=`${output}/${label}.${name}`;fs.writeFileSync(file,result[name]);return {file,bytes:result[name].length,sha256:sha(result[name])};});
-  record.commands.push({label,argv:[executable,...args],extra,started,ended:new Date().toISOString(),
+  record.commands.push({label,argv:[executable,...args],cwd,extra,started,ended:new Date().toISOString(),
     exit:result.exit,signal:result.signal,error:result.error,streams,
     executableSha256:sha(fs.readFileSync(fs.realpathSync(executable)))});save();
   console.log(`${label}: exit=${result.exit}`);
@@ -82,7 +82,7 @@ try {
   for (const packageName of ['configsnapshot','configconsumer','configpublish','configrollout']) {
     const testBinary=path.join(fixture,`${packageName}.test`);
     await run(`build-${packageName}`,go,['test','-c','-race','-o',testBinary,`./internal/${packageName}`]);
-    const raw=await run(`module03-${packageName}`,testBinary,['-test.v','-test.count=1','-test.timeout=120s'],{AEGIS_TENANCY_INTEGRATION:'1'});
+    const raw=await run(`module03-${packageName}`,testBinary,['-test.v','-test.count=1','-test.timeout=120s'],{AEGIS_TENANCY_INTEGRATION:'1',AEGIS_FIXTURE_ROOT:process.cwd()},180000,path.resolve(`internal/${packageName}`));
     assert.ok(!/--- (FAIL|SKIP):/.test(raw),`${packageName}: no skipped real integration`);
   }
   await run('go-vet-tagged',go,['vet','-tags=aegisgate_sprint06a_feasibility','./spikes/sprint06a-admission','./internal/configsnapshot']);
