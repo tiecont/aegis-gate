@@ -147,5 +147,32 @@ identical second Adapter.Apply is denied rather than accepted idempotently.
 This is not a B security defect; the test is corrected to challenge conflicting
 activation while allowing the existing duplicate-notification semantics.
 
-E and final integration gates remain pending review; no production eligibility
-is inferred.
+**B ACCEPT**, executable `260dc7f`, evidence `ce5e803`, final report `e18922a`,
+for the explicitly limited build-tagged signed/JWT/TLS multi-hop experiment.
+F `b-independent-03`, reviewer source `b563568`, independently rejects a
+conflicting authenticated sidecar at the same snapshot generation, retaining
+the original admitted tenant binding. Mismatched notice digest/deployment/
+generation also reject and preserve captured generation7. Both top-level tests
+and three subtests pass under the race detector. The preceding failed F test
+does not demonstrate sidecar policy rollback. Its duplicate-activation premise
+was invalid, as recorded above. Exact clean full replay and independent attacks
+both preserve all11 pins, all tracked bytes, and remove private clone fixtures.
+
+**C ACCEPT** final `0bce723` for the reviewed bounded release/API stop and local
+package. Final Go/x-net metadata provenance is being mechanically bound below;
+no missing runtime repair or unexecuted diagnostic is relabeled as a PASS.
+
+**E ACCEPT** proposed source `27cdf2c`, final report `6a8280e`, as an inactive
+decision package only. The ADR and research manifest preserve the original
+aggregate contract/75/23 authority, separate effective/proved/proposed claims,
+and leave ownership/reference/date PENDING. Streaming/WS/gRPC, production SSRF,
+key custody, unified signed pre-stage capture and authoritative H2 coverage stay
+unproved/disabled. Migration/rollback requires explicit authenticated versioning
+and newer generations, with no fallback to weaker auth or streaming. The
+operational/threat matrices expose finite latency/quota/custody/retry and
+multi-hop costs; no implicit security downgrade, contract activation, human
+signoff or gateway GO is present. E's summary of other tracks remains subject
+to the exact component verdicts in this report.
+
+A exact container replay and final integration gates remain pending; no
+production eligibility is inferred.
