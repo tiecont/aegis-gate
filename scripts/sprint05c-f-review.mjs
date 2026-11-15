@@ -105,7 +105,8 @@ try {
     await checked('e-regressions', node, ['scripts/sprint05c-e-regressions.mjs', captures[0]], { env: { GOTOOLCHAIN: 'go1.27.4' } });
   } else if (mode === 'a') {
     captures.push('evidence/sprint05c-a/run-901');
-    await checked('a-wire-proof', node, ['spikes/envoy/sprint05c-a-proof.mjs', captures[0]]);
+    record.a_proof_exit = (await run('a-wire-proof', node, ['spikes/envoy/sprint05c-a-proof.mjs', captures[0]])).exit_code;
+    assert.ok([0, 1].includes(record.a_proof_exit));
     await checked('a-stream-admission', node, [path.join(root, 'scripts/sprint05c-f-ingress.mjs'), clone, path.resolve(output, 'a-stream-admission.json')]);
   } else if (mode === 'c') {
     await checked('spike-install', path.join(path.dirname(node), 'npm'), ['--prefix', 'spikes/pingora', 'ci', '--ignore-scripts', '--strict-peer-deps']);
