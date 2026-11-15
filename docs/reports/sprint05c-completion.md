@@ -1,7 +1,7 @@
 # Sprint 05-C Measured Completion
 
-Status: component engineering, independent source review and full local gates
-complete; hosted delivery PENDING. Module01 remains
+Status: reviewed engineering delivery merged in PR21; exact-main hosted
+verification PENDING. Module01 remains
 NO-GO. Baseline main `078d83c0ab1cb1364d0245d4c4f62f0fe0439e97`, tree
 `28aa22cf761092e31c84dc3d07d0d7593784afd3`; exact run43672825174 passes both
 hosted jobs. Actual final head/merge receipts follow observed events, never a
@@ -162,6 +162,32 @@ source objects. All four gate commands exit0;26 scanner PASS labels and zero
 HIGH/CRITICAL findings are verified. Current cleanup is independently empty.
 F checkpoints9385e3b/b43127a and retained auditsb140dc6 accept this scope only;
 runtime/production remain rejected and final-head hosted delivery is separate.
+
+## Actual Integration Delivery
+
+PR21 merged at2026-11-15T06:56:26Z as
+`22f6986713711a49de622ce9b6fb097ad31c26ef`. Final reviewed head
+`5da55045efb827258238f15268b3877dbbb161b1` and merge share exact tree
+`8b04b9316a9e3c080aec8648e0741f124b4e6d11`; no source delta was introduced
+by merge. F independently accepts the final30-file delta (29 exact F-owned
+files plus eight truthful report lines), protected files and retained manifests.
+
+Exact final-head hosted run43686973829 passes foundation-quality132729382538
+and supply-chain-security132729382372. F independently reads both complete
+logs:foundation141223 bytes/SHA256
+`4ce34702bafc45ae00168fdd5db90f608566949ce3cb24e2527aae9201e4d39a`,
+supply71659 bytes/SHA256
+`a156467e970a788a5da443e7d7e69466bf3b87a3323f58e7172cfb12ea02723b`.
+All26 scanner PASS labels are present. The F final verdict accepts only scoped
+tooling/evidence integration and exact-head CI; no runtime/production acceptance.
+Raw metadata, full logs, failed CLI log-export attempts and merge receipt are
+retained under `evidence/sprint05c-root/pr21-final-*` and `pr21-merge`.
+The failed CLI attempts report terminal escape-sequence output protection;
+explicit raw-output downloads succeed separately, without changing bytes.
+
+Exact merge hosted run43687689500 is PENDING. This receipt-only closeout updates
+the historical pending delivery checkpoints; it changes no executable runtime,
+original assertion, security contract, dependency pin or gate disposition.
 
 Root gate attempts01-03 are retained with failed exits. Attempts01/02 used
 734a9d6 and failed formatting before fixture setup;02 accidentally reused the

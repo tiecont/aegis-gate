@@ -1,6 +1,11 @@
 # Implementation status
 
-## Sprint 05-C Integration Review / Module 01 NO-GO
+## Sprint 05-C Reviewed Integration / Module 01 NO-GO
+
+PR21 merged as `22f6986713711a49de622ce9b6fb097ad31c26ef`; final reviewed head
+`5da55045efb827258238f15268b3877dbbb161b1` shares tree
+`8b04b9316a9e3c080aec8648e0741f124b4e6d11` with the merge. Both final-head
+hosted jobs PASS in43686973829. Exact merge run43687689500 is pending.
 
 Maintained llhttp H1 runtime implements bounded private staging and streaming;
 77 additive controls pass, but known-length premature EOF sends89 origin bytes
@@ -13,7 +18,7 @@ Research observer corrects four independently found false-PASS defects; bounded
 adversarial controls pass, full proxy attribution UNRESOLVED. Actual00/02/03
 regressions pass. Independent F1c99633 accepts scoped tooling and technical
 stops, rejects complete runtime eligibility. Full locked local gates/cleanup PASS
-at cd32311; exact-head hosted delivery pending. See
+at cd32311; independent F accepts scoped integration and exact-head CI. See
 `docs/reports/sprint05c-completion.md`.01 NO-GO;04-12 LOCKED;production BLOCKED;
 ADR012 and human approvals PENDING.
 

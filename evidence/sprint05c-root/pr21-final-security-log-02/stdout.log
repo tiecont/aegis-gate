@@ -1,0 +1,884 @@
+﻿2026-11-15T06:46:44.2712245Z Current runner version: '2.338.2'
+2026-11-15T06:46:44.2742612Z ##[group]Runner Image Provisioner
+2026-11-15T06:46:44.2743786Z Hosted Compute Agent
+2026-11-15T06:46:44.2744510Z Version: 20261103.629
+2026-11-15T06:46:44.2745476Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+2026-11-15T06:46:44.2746421Z Build Date: 2026-11-03T17:26:59Z
+2026-11-15T06:46:44.2747289Z Worker ID: {120156b6-2297-47d9-afba-21402c6a17c7}
+2026-11-15T06:46:44.2748166Z Region: centralus
+2026-11-15T06:46:44.2748833Z Cloud: Azure
+2026-11-15T06:46:44.2749554Z ##[endgroup]
+2026-11-15T06:46:44.2751414Z ##[group]Operating System
+2026-11-15T06:46:44.2752164Z Ubuntu
+2026-11-15T06:46:44.2752925Z 24.04.5
+2026-11-15T06:46:44.2753785Z LTS
+2026-11-15T06:46:44.2754513Z ##[endgroup]
+2026-11-15T06:46:44.2755337Z ##[group]Runner Image
+2026-11-15T06:46:44.2756060Z Image: ubuntu-24.04
+2026-11-15T06:46:44.2756884Z Version: 20261111.370.1
+2026-11-15T06:46:44.2758482Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.370/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-15T06:46:44.2760704Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.370
+2026-11-15T06:46:44.2761909Z ##[endgroup]
+2026-11-15T06:46:44.2763541Z ##[group]GITHUB_TOKEN Permissions
+2026-11-15T06:46:44.2765882Z Contents: read
+2026-11-15T06:46:44.2766761Z Metadata: read
+2026-11-15T06:46:44.2767446Z ##[endgroup]
+2026-11-15T06:46:44.2770019Z Secret source: Actions
+2026-11-15T06:46:44.2771198Z Cache mode: write
+2026-11-15T06:46:44.2772215Z Prepare workflow directory
+2026-11-15T06:46:44.3097247Z Prepare all required actions
+2026-11-15T06:46:44.3137276Z Getting action download info
+2026-11-15T06:46:44.6023986Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-15T06:46:44.9681368Z Download action repository 'actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e' (SHA:b7ad1dad31e06c5925ef5d2fc7ad053ef454303e)
+2026-11-15T06:46:45.4531156Z Download action repository 'actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+2026-11-15T06:46:45.8900521Z Download action repository 'dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8' (SHA:683b588c487a69d01f6c6ddf40f036ff682cc2c8)
+2026-11-15T06:46:46.1123718Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-11-15T06:46:46.4546711Z Complete job name: supply-chain-security
+2026-11-15T06:46:46.5206410Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-15T06:46:46.5207043Z with:
+2026-11-15T06:46:46.5207270Z   fetch-depth: 0
+2026-11-15T06:46:46.5207509Z   repository: tiecont/aegis-gate
+2026-11-15T06:46:46.5209489Z   token: ***
+2026-11-15T06:46:46.5209722Z   ssh-strict: true
+2026-11-15T06:46:46.5209948Z   ssh-user: git
+2026-11-15T06:46:46.5210176Z   persist-credentials: true
+2026-11-15T06:46:46.5210432Z   clean: true
+2026-11-15T06:46:46.5210680Z   sparse-checkout-cone-mode: true
+2026-11-15T06:46:46.5210950Z   fetch-tags: false
+2026-11-15T06:46:46.5211179Z   show-progress: true
+2026-11-15T06:46:46.5211415Z   lfs: false
+2026-11-15T06:46:46.5211628Z   submodules: false
+2026-11-15T06:46:46.5211853Z   set-safe-directory: true
+2026-11-15T06:46:46.5212109Z   allow-unsafe-pr-checkout: false
+2026-11-15T06:46:46.5212499Z ##[endgroup]
+2026-11-15T06:46:47.3439260Z Syncing repository: tiecont/aegis-gate
+2026-11-15T06:46:47.3440941Z ##[group]Getting Git version info
+2026-11-15T06:46:47.3441598Z Working directory is '/home/runner/work/aegis-gate/aegis-gate'
+2026-11-15T06:46:47.3442512Z [command]/usr/bin/git version
+2026-11-15T06:46:47.3474335Z git version 2.56.1
+2026-11-15T06:46:47.3491314Z ##[endgroup]
+2026-11-15T06:46:47.3500553Z Temporarily overriding HOME='/home/runner/work/_temp/459cd9a1-6fb9-4016-8b51-4e785801a30a' before making global git config changes
+2026-11-15T06:46:47.3501644Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-15T06:46:47.3507133Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/aegis-gate/aegis-gate
+2026-11-15T06:46:47.5030571Z Deleting the contents of '/home/runner/work/aegis-gate/aegis-gate'
+2026-11-15T06:46:47.5033590Z ##[group]Determining repository object format
+2026-11-15T06:46:47.5035181Z ##[endgroup]
+2026-11-15T06:46:47.5035766Z ##[group]Initializing the repository
+2026-11-15T06:46:47.5039234Z [command]/usr/bin/git init /home/runner/work/aegis-gate/aegis-gate
+2026-11-15T06:46:47.5125896Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-15T06:46:47.5126645Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-15T06:46:47.5127251Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-15T06:46:47.5127632Z hint: call:
+2026-11-15T06:46:47.5127858Z hint:
+2026-11-15T06:46:47.5128197Z hint: 	git config --global init.defaultBranch <name>
+2026-11-15T06:46:47.5128631Z hint:
+2026-11-15T06:46:47.5128920Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-15T06:46:47.5129352Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-15T06:46:47.5129890Z hint:
+2026-11-15T06:46:47.5130193Z hint: 	git branch -m <name>
+2026-11-15T06:46:47.5130539Z hint:
+2026-11-15T06:46:47.5131006Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-15T06:46:47.5131810Z Initialized empty Git repository in /home/runner/work/aegis-gate/aegis-gate/.git/
+2026-11-15T06:46:47.5139634Z [command]/usr/bin/git remote add origin https://github.com/tiecont/aegis-gate
+2026-11-15T06:46:47.5190317Z ##[endgroup]
+2026-11-15T06:46:47.5193930Z ##[group]Disabling automatic garbage collection
+2026-11-15T06:46:47.5194495Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-15T06:46:47.5232101Z ##[endgroup]
+2026-11-15T06:46:47.5232710Z ##[group]Setting up auth
+2026-11-15T06:46:47.5233116Z Removing SSH command configuration
+2026-11-15T06:46:47.5237317Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-15T06:46:47.5276799Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-15T06:46:47.5565099Z Removing HTTP extra header
+2026-11-15T06:46:47.5569096Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-15T06:46:47.5605465Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-15T06:46:47.5811759Z Removing includeIf entries pointing to credentials config files
+2026-11-15T06:46:47.5815557Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-15T06:46:47.5853856Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-15T06:46:47.6059763Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-a0f55a0c-05a9-4289-8347-e8ff0b88bf21.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-15T06:46:47.6100244Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git.path /home/runner/work/_temp/git-credentials-a0f55a0c-05a9-4289-8347-e8ff0b88bf21.config
+2026-11-15T06:46:47.6136583Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-a0f55a0c-05a9-4289-8347-e8ff0b88bf21.config
+2026-11-15T06:46:47.6174207Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-a0f55a0c-05a9-4289-8347-e8ff0b88bf21.config
+2026-11-15T06:46:47.6210810Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-a0f55a0c-05a9-4289-8347-e8ff0b88bf21.config
+2026-11-15T06:46:47.6246407Z ##[endgroup]
+2026-11-15T06:46:47.6246990Z ##[group]Fetching the repository
+2026-11-15T06:46:47.6251752Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +6d6beb5584ef2444044b59cb5dc683eca1beb251:refs/remotes/pull/21/merge
+2026-11-15T06:46:48.9627732Z From https://github.com/tiecont/aegis-gate
+2026-11-15T06:46:48.9628644Z  * [new branch]      dependabot/github_actions/actions/setup-go-7.0.0 -> origin/dependabot/github_actions/actions/setup-go-7.0.0
+2026-11-15T06:46:48.9629461Z  * [new branch]      dependabot/github_actions/actions/upload-artifact-7.0.2 -> origin/dependabot/github_actions/actions/upload-artifact-7.0.2
+2026-11-15T06:46:48.9630207Z  * [new branch]      dependabot/go_modules/github.com/go-jose/go-jose/v4-4.1.9 -> origin/dependabot/go_modules/github.com/go-jose/go-jose/v4-4.1.9
+2026-11-15T06:46:48.9630966Z  * [new branch]      docs/sprint04b-closeout-receipt          -> origin/docs/sprint04b-closeout-receipt
+2026-11-15T06:46:48.9631484Z  * [new branch]      docs/sprint04c-closeout                  -> origin/docs/sprint04c-closeout
+2026-11-15T06:46:48.9632134Z  * [new branch]      docs/sprint05a-closeout                  -> origin/docs/sprint05a-closeout
+2026-11-15T06:46:48.9632624Z  * [new branch]      docs/sprint05b-closeout                  -> origin/docs/sprint05b-closeout
+2026-11-15T06:46:48.9633345Z  * [new branch]      feat/module02-acceptance                 -> origin/feat/module02-acceptance
+2026-11-15T06:46:48.9634782Z  * [new branch]      feat/module03-config-consumer            -> origin/feat/module03-config-consumer
+2026-11-15T06:46:48.9635563Z  * [new branch]      feat/module03-management                 -> origin/feat/module03-management
+2026-11-15T06:46:48.9636282Z  * [new branch]      feat/module03-publisher                  -> origin/feat/module03-publisher
+2026-11-15T06:46:48.9636961Z  * [new branch]      feat/module03-rollout                    -> origin/feat/module03-rollout
+2026-11-15T06:46:48.9637424Z  * [new branch]      feat/module03-snapshot-trust             -> origin/feat/module03-snapshot-trust
+2026-11-15T06:46:48.9637905Z  * [new branch]      fix/ci-image-identity                    -> origin/fix/ci-image-identity
+2026-11-15T06:46:48.9638927Z  * [new branch]      fix/dashboard-dependency-resolution      -> origin/fix/dashboard-dependency-resolution
+2026-11-15T06:46:48.9639700Z  * [new branch]      fix/module01-envoy-codec-boundary        -> origin/fix/module01-envoy-codec-boundary
+2026-11-15T06:46:48.9640493Z  * [new branch]      fix/module01-envoy-strict-ingress        -> origin/fix/module01-envoy-strict-ingress
+2026-11-15T06:46:48.9641037Z  * [new branch]      hardening/module03-local-recovery        -> origin/hardening/module03-local-recovery
+2026-11-15T06:46:48.9641466Z  * [new branch]      main                                     -> origin/main
+2026-11-15T06:46:48.9641973Z  * [new branch]      research/module01-maintained-parser-resolution -> origin/research/module01-maintained-parser-resolution
+2026-11-15T06:46:48.9642578Z  * [new branch]      research/module01-upstream-capability    -> origin/research/module01-upstream-capability
+2026-11-15T06:46:48.9643113Z  * [new branch]      research/module01-upstream-resolution    -> origin/research/module01-upstream-resolution
+2026-11-15T06:46:48.9643829Z  * [new branch]      research/pingora-blocker-fix             -> origin/research/pingora-blocker-fix
+2026-11-15T06:46:48.9644321Z  * [new branch]      research/pingora-strict-ingress          -> origin/research/pingora-strict-ingress
+2026-11-15T06:46:48.9644842Z  * [new branch]      review/sprint03a-architecture            -> origin/review/sprint03a-architecture
+2026-11-15T06:46:48.9645314Z  * [new branch]      review/sprint03b-security                -> origin/review/sprint03b-security
+2026-11-15T06:46:48.9645909Z  * [new branch]      review/sprint04a-security                -> origin/review/sprint04a-security
+2026-11-15T06:46:48.9646378Z  * [new branch]      spike/envoy-feasibility                  -> origin/spike/envoy-feasibility
+2026-11-15T06:46:48.9646995Z  * [new branch]      spike/hyper-tokio-feasibility            -> origin/spike/hyper-tokio-feasibility
+2026-11-15T06:46:48.9647512Z  * [new branch]      sprint/02-integration                    -> origin/sprint/02-integration
+2026-11-15T06:46:48.9647945Z  * [new branch]      sprint/03b-integration                   -> origin/sprint/03b-integration
+2026-11-15T06:46:48.9648360Z  * [new branch]      sprint/04a-integration                   -> origin/sprint/04a-integration
+2026-11-15T06:46:48.9648767Z  * [new branch]      sprint/04b-integration                   -> origin/sprint/04b-integration
+2026-11-15T06:46:48.9649190Z  * [new branch]      sprint/04c-integration                   -> origin/sprint/04c-integration
+2026-11-15T06:46:48.9649620Z  * [new branch]      sprint/05a-integration                   -> origin/sprint/05a-integration
+2026-11-15T06:46:48.9650032Z  * [new branch]      sprint/05b-integration                   -> origin/sprint/05b-integration
+2026-11-15T06:46:48.9650471Z  * [new branch]      sprint/05c-integration                   -> origin/sprint/05c-integration
+2026-11-15T06:46:48.9650958Z  * [new branch]      test/edge-architecture-comparison        -> origin/test/edge-architecture-comparison
+2026-11-15T06:46:48.9651475Z  * [new branch]      test/module01-origin-boundary            -> origin/test/module01-origin-boundary
+2026-11-15T06:46:48.9651947Z  * [new branch]      test/module01-wire-boundary              -> origin/test/module01-wire-boundary
+2026-11-15T06:46:48.9652380Z  * [new ref]         6d6beb5584ef2444044b59cb5dc683eca1beb251 -> pull/21/merge
+2026-11-15T06:46:48.9653532Z ##[endgroup]
+2026-11-15T06:46:48.9653997Z ##[group]Determining the checkout info
+2026-11-15T06:46:48.9654507Z ##[endgroup]
+2026-11-15T06:46:48.9654708Z [command]/usr/bin/git sparse-checkout disable
+2026-11-15T06:46:48.9708482Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-15T06:46:48.9748585Z ##[group]Checking out the ref
+2026-11-15T06:46:48.9751831Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/21/merge
+2026-11-15T06:46:49.3437961Z Note: switching to 'refs/remotes/pull/21/merge'.
+2026-11-15T06:46:49.3438299Z 
+2026-11-15T06:46:49.3438585Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-15T06:46:49.3439523Z changes and commit them, and you can discard any commits you make in this
+2026-11-15T06:46:49.3440089Z state without impacting any branches by switching back to a branch.
+2026-11-15T06:46:49.3440427Z 
+2026-11-15T06:46:49.3440643Z If you want to create a new branch to retain commits you create, you may
+2026-11-15T06:46:49.3441158Z do so (now or later) by using -c with the switch command. Example:
+2026-11-15T06:46:49.3441465Z 
+2026-11-15T06:46:49.3441595Z   git switch -c <new-branch-name>
+2026-11-15T06:46:49.3441816Z 
+2026-11-15T06:46:49.3441940Z Or undo this operation with:
+2026-11-15T06:46:49.3442128Z 
+2026-11-15T06:46:49.3442235Z   git switch -
+2026-11-15T06:46:49.3442375Z 
+2026-11-15T06:46:49.3442638Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-15T06:46:49.3443016Z 
+2026-11-15T06:46:49.3443621Z HEAD is now at 6d6beb5 Merge 5da55045efb827258238f15268b3877dbbb161b1 into 078d83c0ab1cb1364d0245d4c4f62f0fe0439e97
+2026-11-15T06:46:49.3480278Z ##[endgroup]
+2026-11-15T06:46:49.3531698Z [command]/usr/bin/git log -1 --format=%H
+2026-11-15T06:46:49.3564847Z 6d6beb5584ef2444044b59cb5dc683eca1beb251
+2026-11-15T06:46:49.3784506Z ##[group]Run actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e
+2026-11-15T06:46:49.3784828Z with:
+2026-11-15T06:46:49.3785006Z   go-version-file: go.mod
+2026-11-15T06:46:49.3785205Z   cache: true
+2026-11-15T06:46:49.3785384Z   check-latest: false
+2026-11-15T06:46:49.3787192Z   token: ***
+2026-11-15T06:46:49.3787363Z ##[endgroup]
+2026-11-15T06:46:49.4750023Z Setup go version spec 1.27.4
+2026-11-15T06:46:49.4756341Z Attempting to download 1.27.4...
+2026-11-15T06:46:50.2104697Z matching 1.27.4...
+2026-11-15T06:46:50.2113342Z Acquiring 1.27.4 from https://github.com/actions/go-versions/releases/download/1.27.4-42945153609/go-1.27.4-linux-x64.tar.gz
+2026-11-15T06:46:50.7258324Z Extracting Go...
+2026-11-15T06:46:50.7415308Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/ccb8e297-d151-4242-af96-b2368d101c04 -f /home/runner/work/_temp/7f050db7-c3d8-4850-9a9a-6bda22833464
+2026-11-15T06:46:52.2637449Z Successfully extracted go to /home/runner/work/_temp/ccb8e297-d151-4242-af96-b2368d101c04
+2026-11-15T06:46:52.2637872Z Adding to the cache ...
+2026-11-15T06:46:56.8750854Z Successfully cached go to /opt/hostedtoolcache/go/1.27.4/x64
+2026-11-15T06:46:56.8752425Z Added go to the path
+2026-11-15T06:46:56.8754183Z Successfully set up Go version 1.27.4
+2026-11-15T06:46:56.8954366Z [command]/opt/hostedtoolcache/go/1.27.4/x64/bin/go env GOMODCACHE
+2026-11-15T06:46:56.8995741Z [command]/opt/hostedtoolcache/go/1.27.4/x64/bin/go env GOCACHE
+2026-11-15T06:46:56.9037919Z /home/runner/go/pkg/mod
+2026-11-15T06:46:56.9057420Z /home/runner/.cache/go-build
+2026-11-15T06:46:57.0446714Z Cache hit for: setup-go-Linux-x64-ubuntu24-go-1.27.4-36375a5e7de5636dfac8581ad6d43d41c121db9c07f2dda457b8cc56ef596372
+2026-11-15T06:46:58.2266731Z Received 134217728 of 239403722 (56.1%), 125.6 MBs/sec
+2026-11-15T06:46:58.7428896Z Received 239403722 of 239403722 (100.0%), 148.5 MBs/sec
+2026-11-15T06:46:58.7429370Z Cache Size: ~228 MB (239403722 B)
+2026-11-15T06:46:58.7524812Z [command]/usr/bin/tar -xf /home/runner/work/_temp/daae513b-99d4-4cab-8c4b-b19b7dbf6275/cache.tzst -P -C /home/runner/work/aegis-gate/aegis-gate --use-compress-program unzstd
+2026-11-15T06:47:00.3952736Z Cache restored successfully
+2026-11-15T06:47:00.4051809Z Cache restored from key: setup-go-Linux-x64-ubuntu24-go-1.27.4-36375a5e7de5636dfac8581ad6d43d41c121db9c07f2dda457b8cc56ef596372
+2026-11-15T06:47:00.4071279Z go version go1.27.4 linux/amd64
+2026-11-15T06:47:00.4071451Z 
+2026-11-15T06:47:00.4071705Z ##[group]go env
+2026-11-15T06:47:00.4202324Z AR='ar'
+2026-11-15T06:47:00.4202549Z CC='gcc'
+2026-11-15T06:47:00.4202798Z CGO_CFLAGS='-O2 -g'
+2026-11-15T06:47:00.4203022Z CGO_CPPFLAGS=''
+2026-11-15T06:47:00.4203356Z CGO_CXXFLAGS='-O2 -g'
+2026-11-15T06:47:00.4203584Z CGO_ENABLED='1'
+2026-11-15T06:47:00.4203846Z CGO_FFLAGS='-O2 -g'
+2026-11-15T06:47:00.4204168Z CGO_LDFLAGS='-O2 -g'
+2026-11-15T06:47:00.4204462Z CXX='g++'
+2026-11-15T06:47:00.4204693Z GCCGO='gccgo'
+2026-11-15T06:47:00.4204945Z GO111MODULE=''
+2026-11-15T06:47:00.4205211Z GOAMD64='v1'
+2026-11-15T06:47:00.4205455Z GOARCH='amd64'
+2026-11-15T06:47:00.4205698Z GOAUTH='netrc'
+2026-11-15T06:47:00.4205889Z GOBIN='/home/runner/go/bin'
+2026-11-15T06:47:00.4206116Z GOCACHE='/home/runner/.cache/go-build'
+2026-11-15T06:47:00.4206347Z GOCACHEPROG=''
+2026-11-15T06:47:00.4206516Z GODEBUG=''
+2026-11-15T06:47:00.4206692Z GOENV='/home/runner/.config/go/env'
+2026-11-15T06:47:00.4206917Z GOEXE=''
+2026-11-15T06:47:00.4207080Z GOEXPERIMENT=''
+2026-11-15T06:47:00.4207255Z GOFIPS140='off'
+2026-11-15T06:47:00.4207418Z GOFLAGS=''
+2026-11-15T06:47:00.4207982Z GOGCCFLAGS='-fPIC -m64 -pthread -Wl,--no-gc-sections -fmessage-length=0 -ffile-prefix-map=/tmp/go-build1698539655=/tmp/go-build -gno-record-gcc-switches'
+2026-11-15T06:47:00.4208493Z GOHOSTARCH='amd64'
+2026-11-15T06:47:00.4208673Z GOHOSTOS='linux'
+2026-11-15T06:47:00.4208844Z GOINSECURE=''
+2026-11-15T06:47:00.4209076Z GOMOD='/home/runner/work/aegis-gate/aegis-gate/go.mod'
+2026-11-15T06:47:00.4209566Z GOMODCACHE='/home/runner/go/pkg/mod'
+2026-11-15T06:47:00.4209786Z GONOPROXY=''
+2026-11-15T06:47:00.4209963Z GONOSUMDB=''
+2026-11-15T06:47:00.4210133Z GOOS='linux'
+2026-11-15T06:47:00.4210298Z GOPACKAGESDRIVER=''
+2026-11-15T06:47:00.4210486Z GOPATH='/home/runner/go'
+2026-11-15T06:47:00.4210672Z GOPRIVATE=''
+2026-11-15T06:47:00.4210888Z GOPROXY='https://proxy.golang.org,direct'
+2026-11-15T06:47:00.4211297Z GOROOT='/opt/hostedtoolcache/go/1.27.4/x64'
+2026-11-15T06:47:00.4211537Z GOSUMDB='sum.golang.org'
+2026-11-15T06:47:00.4211731Z GOTELEMETRY='local'
+2026-11-15T06:47:00.4211951Z GOTELEMETRYDIR='/home/runner/.config/go/telemetry'
+2026-11-15T06:47:00.4212198Z GOTMPDIR=''
+2026-11-15T06:47:00.4212360Z GOTOOLCHAIN='local'
+2026-11-15T06:47:00.4212616Z GOTOOLDIR='/opt/hostedtoolcache/go/1.27.4/x64/pkg/tool/linux_amd64'
+2026-11-15T06:47:00.4212891Z GOVCS=''
+2026-11-15T06:47:00.4213064Z GOVERSION='go1.27.4'
+2026-11-15T06:47:00.4213405Z GOWORK=''
+2026-11-15T06:47:00.4213582Z PKG_CONFIG='pkg-config'
+2026-11-15T06:47:00.4213707Z 
+2026-11-15T06:47:00.4213959Z ##[endgroup]
+2026-11-15T06:47:00.4429903Z ##[group]Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+2026-11-15T06:47:00.4430234Z with:
+2026-11-15T06:47:00.4430416Z   node-version-file: .node-version
+2026-11-15T06:47:00.4430633Z   cache: npm
+2026-11-15T06:47:00.4430927Z   cache-dependency-path: package-lock.json
+apps/dashboard/package-lock.json
+
+2026-11-15T06:47:00.4431277Z   check-latest: false
+2026-11-15T06:47:00.4433097Z   token: ***
+2026-11-15T06:47:00.4433436Z   package-manager-cache: true
+2026-11-15T06:47:00.4433652Z env:
+2026-11-15T06:47:00.4433820Z   GOTOOLCHAIN: local
+2026-11-15T06:47:00.4434009Z ##[endgroup]
+2026-11-15T06:47:00.5469770Z Node version file is not JSON file
+2026-11-15T06:47:00.5473489Z Node version file is not TOML file
+2026-11-15T06:47:00.5473969Z Resolved .node-version as 26.13.0
+2026-11-15T06:47:00.5485957Z Attempting to download 26.13.0...
+2026-11-15T06:47:01.2060016Z Acquiring 26.13.0 - x64 from https://github.com/actions/node-versions/releases/download/26.13.0-41378513395/node-26.13.0-linux-x64.tar.gz
+2026-11-15T06:47:01.9006503Z Extracting ...
+2026-11-15T06:47:01.9116504Z [command]/usr/bin/tar xz --strip 1 --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/95f7472c-07c2-4e1c-b524-e6a11ede2abf -f /home/runner/work/_temp/feb1b741-8f22-4914-a989-a0ea554d498b
+2026-11-15T06:47:03.0664291Z Adding to the cache ...
+2026-11-15T06:47:05.3959856Z ##[group]Environment details
+2026-11-15T06:47:05.6159083Z node: v26.13.0
+2026-11-15T06:47:05.6159409Z npm: 11.20.0
+2026-11-15T06:47:05.6159662Z yarn: 1.22.22
+2026-11-15T06:47:05.6160123Z ##[endgroup]
+2026-11-15T06:47:05.6172456Z [command]/opt/hostedtoolcache/node/26.13.0/x64/bin/npm config get cache
+2026-11-15T06:47:05.6968740Z /home/runner/.npm
+2026-11-15T06:47:05.8352602Z Cache hit for: node-cache-Linux-x64-npm-f8ac0b1f041bf4fdcb61a100da39e882b6326762ac4751d09e537ed4333230a9
+2026-11-15T06:47:06.9199730Z Received 108351876 of 108351876 (100.0%), 115.1 MBs/sec
+2026-11-15T06:47:06.9200217Z Cache Size: ~103 MB (108351876 B)
+2026-11-15T06:47:06.9252544Z [command]/usr/bin/tar -xf /home/runner/work/_temp/f6ddd0fe-4c62-4a31-8211-5c1facb3ce52/cache.tzst -P -C /home/runner/work/aegis-gate/aegis-gate --use-compress-program unzstd
+2026-11-15T06:47:07.1013560Z Cache restored successfully
+2026-11-15T06:47:07.1064557Z Cache restored from key: node-cache-Linux-x64-npm-f8ac0b1f041bf4fdcb61a100da39e882b6326762ac4751d09e537ed4333230a9
+2026-11-15T06:47:07.1398574Z ##[group]Run dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8
+2026-11-15T06:47:07.1398919Z with:
+2026-11-15T06:47:07.1399105Z   toolchain: 1.99.1
+2026-11-15T06:47:07.1399308Z env:
+2026-11-15T06:47:07.1399478Z   GOTOOLCHAIN: local
+2026-11-15T06:47:07.1399673Z ##[endgroup]
+2026-11-15T06:47:07.1453722Z ##[start-action display=Parse toolchain version;id=__dtolnay_rust-toolchain.parse]
+2026-11-15T06:47:07.1497588Z ##[group]Run if [[ -z $toolchain ]]; then
+2026-11-15T06:47:07.1497933Z [36;1mif [[ -z $toolchain ]]; then[0m
+2026-11-15T06:47:07.1498383Z [36;1m  # GitHub does not enforce `required: true` inputs itself. https://github.com/actions/runner/issues/1070[0m
+2026-11-15T06:47:07.1498865Z [36;1m  echo "'toolchain' is a required input" >&2[0m
+2026-11-15T06:47:07.1499120Z [36;1m  exit 1[0m
+2026-11-15T06:47:07.1499410Z [36;1melif [[ $toolchain =~ ^stable' '[0-9]+' '(year|month|week|day)s?' 'ago$ ]]; then[0m
+2026-11-15T06:47:07.1499997Z [36;1m  if [[ Linux == macOS ]]; then[0m
+2026-11-15T06:47:07.1500430Z [36;1m    echo "toolchain=1.$((($(date -v-$(sed 's/stable \([0-9]*\) \(.\).*/\1\2/' <<< $toolchain) +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT[0m
+2026-11-15T06:47:07.1500835Z [36;1m  else[0m
+2026-11-15T06:47:07.1501171Z [36;1m    echo "toolchain=1.$((($(date --date "${toolchain#stable }" +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT[0m
+2026-11-15T06:47:07.1501546Z [36;1m  fi[0m
+2026-11-15T06:47:07.1501810Z [36;1melif [[ $toolchain =~ ^stable' 'minus' '[0-9]+' 'releases?$ ]]; then[0m
+2026-11-15T06:47:07.1502246Z [36;1m  echo "toolchain=1.$((($(date +%s)/60/60/24-16569)/7/6-${toolchain//[^0-9]/}))" >> $GITHUB_OUTPUT[0m
+2026-11-15T06:47:07.1502656Z [36;1melif [[ $toolchain =~ ^1\.[0-9]+$ ]]; then[0m
+2026-11-15T06:47:07.1503138Z [36;1m  echo "toolchain=1.$((i=${toolchain#1.}, c=($(date +%s)/60/60/24-16569)/7/6, i+9*i*(10*i<=c)+90*i*(100*i<=c)))" >> $GITHUB_OUTPUT[0m
+2026-11-15T06:47:07.1503658Z [36;1melse[0m
+2026-11-15T06:47:07.1503858Z [36;1m  delimiter=EOF[0m
+2026-11-15T06:47:07.1504125Z [36;1m  while [[ $toolchain == *$delimiter* ]]; do delimiter+=_; done[0m
+2026-11-15T06:47:07.1504533Z [36;1m  printf 'toolchain<<%s\n%s\n%s\n' "$delimiter" "$toolchain" "$delimiter" >> $GITHUB_OUTPUT[0m
+2026-11-15T06:47:07.1504868Z [36;1mfi[0m
+2026-11-15T06:47:07.1525644Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:07.1525937Z env:
+2026-11-15T06:47:07.1526118Z   GOTOOLCHAIN: local
+2026-11-15T06:47:07.1526310Z   toolchain: 1.99.1
+2026-11-15T06:47:07.1526488Z ##[endgroup]
+2026-11-15T06:47:07.1606402Z ##[end-action id=__dtolnay_rust-toolchain.parse;outcome=success;conclusion=success;duration_ms=15]
+2026-11-15T06:47:07.1609657Z ##[start-action display=Set $CARGO_HOME;id=__dtolnay_rust-toolchain.__run]
+2026-11-15T06:47:07.1626212Z ##[group]Run echo CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV
+2026-11-15T06:47:07.1626615Z [36;1mecho CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV[0m
+2026-11-15T06:47:07.1642158Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:07.1642438Z env:
+2026-11-15T06:47:07.1642607Z   GOTOOLCHAIN: local
+2026-11-15T06:47:07.1642800Z ##[endgroup]
+2026-11-15T06:47:07.1705378Z ##[end-action id=__dtolnay_rust-toolchain.__run;outcome=success;conclusion=success;duration_ms=9]
+2026-11-15T06:47:07.1707097Z ##[start-action display=Install rustup if needed;id=__dtolnay_rust-toolchain.__run_2]
+2026-11-15T06:47:07.1727256Z ##[group]Run if ! command -v rustup &>/dev/null; then
+2026-11-15T06:47:07.1727575Z [36;1mif ! command -v rustup &>/dev/null; then[0m
+2026-11-15T06:47:07.1728170Z [36;1m  curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused --location --silent --show-error --fail https://sh.rustup.rs | sh -s -- --default-toolchain none -y[0m
+2026-11-15T06:47:07.1728733Z [36;1m  echo "$CARGO_HOME/bin" >> $GITHUB_PATH[0m
+2026-11-15T06:47:07.1728974Z [36;1mfi[0m
+2026-11-15T06:47:07.1744406Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:07.1744863Z env:
+2026-11-15T06:47:07.1745050Z   GOTOOLCHAIN: local
+2026-11-15T06:47:07.1745262Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:07.1745484Z ##[endgroup]
+2026-11-15T06:47:07.1785859Z ##[end-action id=__dtolnay_rust-toolchain.__run_2;outcome=success;conclusion=success;duration_ms=7]
+2026-11-15T06:47:07.1787578Z ##[start-action display=Install rustup if needed on windows;id=__dtolnay_rust-toolchain.__run_3]
+2026-11-15T06:47:07.1791857Z ##[end-action id=__dtolnay_rust-toolchain.__run_3;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-15T06:47:07.1800916Z ##[start-action display=rustup toolchain install 1.99.1;id=__dtolnay_rust-toolchain.__run_4]
+2026-11-15T06:47:07.1816262Z ##[group]Run set -f  # split targets and components on commas and whitespace, without glob expansion
+2026-11-15T06:47:07.1816831Z [36;1mset -f  # split targets and components on commas and whitespace, without glob expansion[0m
+2026-11-15T06:47:07.1817199Z [36;1mflags=()[0m
+2026-11-15T06:47:07.1817588Z [36;1mfor t in ${targets//,/ }; do flags+=(--target "$t"); done[0m
+2026-11-15T06:47:07.1817939Z [36;1mfor c in ${components//,/ }; do flags+=(--component "$c"); done[0m
+2026-11-15T06:47:07.1818412Z [36;1mif [[ $toolchain == nightly && -n $components ]]; then flags+=(--allow-downgrade); fi[0m
+2026-11-15T06:47:07.1818816Z [36;1mlog=$(mktemp)[0m
+2026-11-15T06:47:07.1819100Z [36;1mtrap 'rm -f "$log"' EXIT[0m
+2026-11-15T06:47:07.1819358Z [36;1mfor attempt in 1 2 3 4 5; do[0m
+2026-11-15T06:47:07.1819818Z [36;1m  if rustup toolchain install "$toolchain" "${flags[@]}" --profile minimal --no-self-update --force-non-host 2>&1 | tee "$log"; then[0m
+2026-11-15T06:47:07.1820255Z [36;1m    break[0m
+2026-11-15T06:47:07.1820445Z [36;1m  else[0m
+2026-11-15T06:47:07.1820624Z [36;1m    status=$?[0m
+2026-11-15T06:47:07.1820819Z [36;1m  fi[0m
+2026-11-15T06:47:07.1821071Z [36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' "$log" \[0m
+2026-11-15T06:47:07.1821522Z [36;1m      || ! grep -Fq 'this is likely due to an ongoing update of the official release server' "$log"; then[0m
+2026-11-15T06:47:07.1821900Z [36;1m    exit "$status"[0m
+2026-11-15T06:47:07.1822098Z [36;1m  fi[0m
+2026-11-15T06:47:07.1822400Z [36;1m  echo "Retrying rustup toolchain install in 30 seconds (retry $attempt of 4)" >&2[0m
+2026-11-15T06:47:07.1822738Z [36;1m  sleep 30[0m
+2026-11-15T06:47:07.1822927Z [36;1mdone[0m
+2026-11-15T06:47:07.1838294Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:07.1838588Z env:
+2026-11-15T06:47:07.1838759Z   GOTOOLCHAIN: local
+2026-11-15T06:47:07.1838955Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:07.1839171Z   toolchain: 1.99.1
+2026-11-15T06:47:07.1839345Z   targets: 
+2026-11-15T06:47:07.1839511Z   components: 
+2026-11-15T06:47:07.1839706Z   RUSTUP_PERMIT_COPY_RENAME: 1
+2026-11-15T06:47:07.1839912Z ##[endgroup]
+2026-11-15T06:47:07.2175982Z info: syncing channel updates for 1.99.1-x86_64-unknown-linux-gnu
+2026-11-15T06:47:07.4561718Z info: latest update on 2026-10-15 for version 1.99.1 (58cf8f9c3 2026-10-13)
+2026-11-15T06:47:07.4562423Z info: downloading 3 components
+2026-11-15T06:47:15.0338535Z 
+2026-11-15T06:47:15.0404312Z   1.99.1-x86_64-unknown-linux-gnu installed - rustc 1.99.1 (58cf8f9c3 2026-10-13)
+2026-11-15T06:47:15.0404633Z 
+2026-11-15T06:47:15.1209330Z ##[end-action id=__dtolnay_rust-toolchain.__run_4;outcome=success;conclusion=success;duration_ms=7940]
+2026-11-15T06:47:15.1215293Z ##[start-action display=rustup default 1.99.1;id=__dtolnay_rust-toolchain.__run_5]
+2026-11-15T06:47:15.1245627Z ##[group]Run rustup default "$toolchain" --force-non-host
+2026-11-15T06:47:15.1246141Z [36;1mrustup default "$toolchain" --force-non-host[0m
+2026-11-15T06:47:15.1268082Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:15.1268367Z env:
+2026-11-15T06:47:15.1268548Z   GOTOOLCHAIN: local
+2026-11-15T06:47:15.1268749Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:15.1268962Z   toolchain: 1.99.1
+2026-11-15T06:47:15.1269169Z ##[endgroup]
+2026-11-15T06:47:15.2546576Z info: using existing install for 1.99.1-x86_64-unknown-linux-gnu
+2026-11-15T06:47:15.3902496Z info: default toolchain set to 1.99.1-x86_64-unknown-linux-gnu
+2026-11-15T06:47:15.3902937Z 
+2026-11-15T06:47:15.3965058Z   1.99.1-x86_64-unknown-linux-gnu unchanged - rustc 1.99.1 (58cf8f9c3 2026-10-13)
+2026-11-15T06:47:15.3965518Z 
+2026-11-15T06:47:15.3966185Z info: note that the toolchain '1.99.1-x86_64-unknown-linux-gnu' is currently in use (overridden by '/home/runner/work/aegis-gate/aegis-gate/rust-toolchain.toml')
+2026-11-15T06:47:15.3983671Z ##[end-action id=__dtolnay_rust-toolchain.__run_5;outcome=success;conclusion=success;duration_ms=276]
+2026-11-15T06:47:15.3987185Z ##[start-action display=Create cachekey;id=__dtolnay_rust-toolchain.rustc-version]
+2026-11-15T06:47:15.4002746Z ##[group]Run DATE=$(rustc +"$toolchain" --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')
+2026-11-15T06:47:15.4003968Z [36;1mDATE=$(rustc +"$toolchain" --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')[0m
+2026-11-15T06:47:15.4004511Z [36;1mHASH=$(rustc +"$toolchain" --version --verbose | sed -ne 's/^commit-hash: //p')[0m
+2026-11-15T06:47:15.4004925Z [36;1mecho "cachekey=$(echo $DATE$HASH | head -c12)" >> $GITHUB_OUTPUT[0m
+2026-11-15T06:47:15.4022298Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:15.4022574Z env:
+2026-11-15T06:47:15.4022751Z   GOTOOLCHAIN: local
+2026-11-15T06:47:15.4022953Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:15.4023174Z   toolchain: 1.99.1
+2026-11-15T06:47:15.4023598Z ##[endgroup]
+2026-11-15T06:47:15.4616295Z ##[end-action id=__dtolnay_rust-toolchain.rustc-version;outcome=success;conclusion=success;duration_ms=62]
+2026-11-15T06:47:15.4619090Z ##[start-action display=Disable incremental compilation;id=__dtolnay_rust-toolchain.__run_6]
+2026-11-15T06:47:15.4722900Z ##[group]Run if [ -z "${CARGO_INCREMENTAL+set}" ]; then
+2026-11-15T06:47:15.4723552Z [36;1mif [ -z "${CARGO_INCREMENTAL+set}" ]; then[0m
+2026-11-15T06:47:15.4723981Z [36;1m  echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV[0m
+2026-11-15T06:47:15.4724343Z [36;1mfi[0m
+2026-11-15T06:47:15.4742213Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:15.4742498Z env:
+2026-11-15T06:47:15.4742668Z   GOTOOLCHAIN: local
+2026-11-15T06:47:15.4742877Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:15.4743093Z ##[endgroup]
+2026-11-15T06:47:15.4786764Z ##[end-action id=__dtolnay_rust-toolchain.__run_6;outcome=success;conclusion=success;duration_ms=16]
+2026-11-15T06:47:15.4788457Z ##[start-action display=Enable colors in Cargo output;id=__dtolnay_rust-toolchain.__run_7]
+2026-11-15T06:47:15.4802872Z ##[group]Run if [ -z "${CARGO_TERM_COLOR+set}" ]; then
+2026-11-15T06:47:15.4803355Z [36;1mif [ -z "${CARGO_TERM_COLOR+set}" ]; then[0m
+2026-11-15T06:47:15.4803728Z [36;1m  echo CARGO_TERM_COLOR=always >> $GITHUB_ENV[0m
+2026-11-15T06:47:15.4803992Z [36;1mfi[0m
+2026-11-15T06:47:15.4818935Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:15.4819220Z env:
+2026-11-15T06:47:15.4819394Z   GOTOOLCHAIN: local
+2026-11-15T06:47:15.4819606Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:15.4819832Z   CARGO_INCREMENTAL: 0
+2026-11-15T06:47:15.4820019Z ##[endgroup]
+2026-11-15T06:47:15.4860344Z ##[end-action id=__dtolnay_rust-toolchain.__run_7;outcome=success;conclusion=success;duration_ms=7]
+2026-11-15T06:47:15.4863793Z ##[start-action display=Enable Cargo sparse registry;id=__dtolnay_rust-toolchain.__run_8]
+2026-11-15T06:47:15.4883674Z ##[group]Run # implemented in 1.66, stabilized in 1.68, made default in 1.70
+2026-11-15T06:47:15.4884107Z [36;1m# implemented in 1.66, stabilized in 1.68, made default in 1.70[0m
+2026-11-15T06:47:15.4884675Z [36;1mif [ -z "${CARGO_REGISTRIES_CRATES_IO_PROTOCOL+set}" -o -f "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol ]; then[0m
+2026-11-15T06:47:15.4885448Z [36;1m  if rustc +"$toolchain" --version --verbose | grep -q '^release: 1\.6[89]\.'; then[0m
+2026-11-15T06:47:15.4885925Z [36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true[0m
+2026-11-15T06:47:15.4886389Z [36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse >> $GITHUB_ENV[0m
+2026-11-15T06:47:15.4886819Z [36;1m  elif rustc +"$toolchain" --version --verbose | grep -q '^release: 1\.6[67]\.'; then[0m
+2026-11-15T06:47:15.4887285Z [36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true[0m
+2026-11-15T06:47:15.4887706Z [36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git >> $GITHUB_ENV[0m
+2026-11-15T06:47:15.4887994Z [36;1m  fi[0m
+2026-11-15T06:47:15.4888171Z [36;1mfi[0m
+2026-11-15T06:47:15.4902939Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:15.4903388Z env:
+2026-11-15T06:47:15.4903565Z   GOTOOLCHAIN: local
+2026-11-15T06:47:15.4914045Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:15.4914668Z   CARGO_INCREMENTAL: 0
+2026-11-15T06:47:15.4914939Z   CARGO_TERM_COLOR: always
+2026-11-15T06:47:15.4915225Z   toolchain: 1.99.1
+2026-11-15T06:47:15.4915407Z ##[endgroup]
+2026-11-15T06:47:15.5179861Z ##[end-action id=__dtolnay_rust-toolchain.__run_8;outcome=success;conclusion=success;duration_ms=31]
+2026-11-15T06:47:15.5184074Z ##[start-action display=Work around spurious network errors in curl 8.0;id=__dtolnay_rust-toolchain.__run_9]
+2026-11-15T06:47:15.5264323Z ##[group]Run # https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation
+2026-11-15T06:47:15.5265235Z [36;1m# https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation[0m
+2026-11-15T06:47:15.5266023Z [36;1mif rustc +"$toolchain" --version --verbose | grep -q '^release: 1\.7[01]\.'; then[0m
+2026-11-15T06:47:15.5266618Z [36;1m  echo CARGO_HTTP_MULTIPLEXING=false >> $GITHUB_ENV[0m
+2026-11-15T06:47:15.5267021Z [36;1mfi[0m
+2026-11-15T06:47:15.5287557Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:15.5287854Z env:
+2026-11-15T06:47:15.5288030Z   GOTOOLCHAIN: local
+2026-11-15T06:47:15.5288238Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:15.5288458Z   CARGO_INCREMENTAL: 0
+2026-11-15T06:47:15.5288653Z   CARGO_TERM_COLOR: always
+2026-11-15T06:47:15.5288867Z   toolchain: 1.99.1
+2026-11-15T06:47:15.5289054Z ##[endgroup]
+2026-11-15T06:47:15.5465606Z ##[end-action id=__dtolnay_rust-toolchain.__run_9;outcome=success;conclusion=success;duration_ms=28]
+2026-11-15T06:47:15.5469198Z ##[start-action display=rustc +1.99.1 --version --verbose;id=__dtolnay_rust-toolchain.__run_10]
+2026-11-15T06:47:15.5503099Z ##[group]Run rustc +"$toolchain" --version --verbose
+2026-11-15T06:47:15.5503811Z [36;1mrustc +"$toolchain" --version --verbose[0m
+2026-11-15T06:47:15.5525779Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:15.5526212Z env:
+2026-11-15T06:47:15.5526464Z   GOTOOLCHAIN: local
+2026-11-15T06:47:15.5526800Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:15.5527151Z   CARGO_INCREMENTAL: 0
+2026-11-15T06:47:15.5527443Z   CARGO_TERM_COLOR: always
+2026-11-15T06:47:15.5527745Z   toolchain: 1.99.1
+2026-11-15T06:47:15.5527987Z ##[endgroup]
+2026-11-15T06:47:15.5674991Z rustc 1.99.1 (58cf8f9c3 2026-10-13)
+2026-11-15T06:47:15.5675618Z binary: rustc
+2026-11-15T06:47:15.5676627Z commit-hash: 58cf8f9c35b355199727627d07ae34a4e2846d67
+2026-11-15T06:47:15.5679905Z commit-date: 2026-10-13
+2026-11-15T06:47:15.5680493Z host: x86_64-unknown-linux-gnu
+2026-11-15T06:47:15.5681016Z release: 1.99.1
+2026-11-15T06:47:15.5681506Z LLVM version: 23.1.1
+2026-11-15T06:47:15.5689750Z ##[end-action id=__dtolnay_rust-toolchain.__run_10;outcome=success;conclusion=success;duration_ms=21]
+2026-11-15T06:47:15.5743484Z ##[group]Run make bootstrap
+2026-11-15T06:47:15.5743752Z [36;1mmake bootstrap[0m
+2026-11-15T06:47:15.5761530Z shell: /usr/bin/bash -e {0}
+2026-11-15T06:47:15.5761753Z env:
+2026-11-15T06:47:15.5761925Z   GOTOOLCHAIN: local
+2026-11-15T06:47:15.5762139Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:15.5762361Z   CARGO_INCREMENTAL: 0
+2026-11-15T06:47:15.5762550Z   CARGO_TERM_COLOR: always
+2026-11-15T06:47:15.5762749Z ##[endgroup]
+2026-11-15T06:47:15.5838672Z python3 scripts/bootstrap.py
+2026-11-15T06:47:18.7036511Z v26.13.0
+2026-11-15T06:47:18.7186825Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm ci --ignore-scripts
+2026-11-15T06:47:19.6690777Z 
+2026-11-15T06:47:19.6691632Z added 47 packages, and audited 48 packages in 881ms
+2026-11-15T06:47:19.6691989Z 
+2026-11-15T06:47:19.6692219Z 11 packages are looking for funding
+2026-11-15T06:47:19.6692634Z   run `npm fund` for details
+2026-11-15T06:47:19.6699719Z 
+2026-11-15T06:47:19.6699924Z found 0 vulnerabilities
+2026-11-15T06:47:19.7047780Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard ci --ignore-scripts
+2026-11-15T06:47:24.4308192Z 
+2026-11-15T06:47:24.4309070Z added 143 packages, and audited 144 packages in 5s
+2026-11-15T06:47:24.4309457Z 
+2026-11-15T06:47:24.4310074Z 40 packages are looking for funding
+2026-11-15T06:47:24.4310521Z   run `npm fund` for details
+2026-11-15T06:47:24.4318617Z 
+2026-11-15T06:47:24.4319103Z found 0 vulnerabilities
+2026-11-15T06:47:24.4742473Z GOTOOLCHAIN=go1.27.4 go mod download
+2026-11-15T06:47:24.4874693Z cargo +1.99.1 fetch --locked --manifest-path apps/edge/Cargo.toml
+2026-11-15T06:47:24.5031343Z [1m[92m    Updating[0m crates.io index
+2026-11-15T06:47:25.0966438Z [1m[92m Downloading[0m crates ...
+2026-11-15T06:47:25.1552681Z [1m[92m  Downloaded[0m uuid v1.29.2
+2026-11-15T06:47:25.1617597Z [1m[92m  Downloaded[0m itoa v1.0.19
+2026-11-15T06:47:25.1659712Z [1m[92m  Downloaded[0m wasm-bindgen-macro v0.2.130
+2026-11-15T06:47:25.1718689Z [1m[92m  Downloaded[0m futures-core v0.3.34
+2026-11-15T06:47:25.1734079Z [1m[92m  Downloaded[0m cfg-if v1.0.5
+2026-11-15T06:47:25.1746269Z [1m[92m  Downloaded[0m wasm-bindgen-shared v0.2.130
+2026-11-15T06:47:25.1756250Z [1m[92m  Downloaded[0m slab v0.4.12
+2026-11-15T06:47:25.1768143Z [1m[92m  Downloaded[0m futures-task v0.3.34
+2026-11-15T06:47:25.1778964Z [1m[92m  Downloaded[0m quote v1.0.47
+2026-11-15T06:47:25.1804450Z [1m[92m  Downloaded[0m unicode-ident v1.0.27
+2026-11-15T06:47:25.1832406Z [1m[92m  Downloaded[0m zmij v1.0.23
+2026-11-15T06:47:25.1848475Z [1m[92m  Downloaded[0m rustversion v1.0.23
+2026-11-15T06:47:25.1874376Z [1m[92m  Downloaded[0m pin-project-lite v0.2.17
+2026-11-15T06:47:25.1924489Z [1m[92m  Downloaded[0m proc-macro2 v1.0.107
+2026-11-15T06:47:25.1944370Z [1m[92m  Downloaded[0m serde_derive v1.0.229
+2026-11-15T06:47:25.1967530Z [1m[92m  Downloaded[0m serde_core v1.0.229
+2026-11-15T06:47:25.1988447Z [1m[92m  Downloaded[0m wasm-bindgen v0.2.130
+2026-11-15T06:47:25.2011481Z [1m[92m  Downloaded[0m serde v1.0.229
+2026-11-15T06:47:25.2037991Z [1m[92m  Downloaded[0m bumpalo v3.20.3
+2026-11-15T06:47:25.2059161Z [1m[92m  Downloaded[0m memchr v2.8.3
+2026-11-15T06:47:25.2101530Z [1m[92m  Downloaded[0m futures-util v0.3.34
+2026-11-15T06:47:25.2200830Z [1m[92m  Downloaded[0m wasm-bindgen-macro-support v0.2.130
+2026-11-15T06:47:25.2222847Z [1m[92m  Downloaded[0m js-sys v0.3.107
+2026-11-15T06:47:25.2251056Z [1m[92m  Downloaded[0m serde_json v1.0.154
+2026-11-15T06:47:25.2315179Z [1m[92m  Downloaded[0m syn v3.0.10
+2026-11-15T06:47:25.2548363Z cargo +1.99.1 fetch --locked --manifest-path spikes/hyper/Cargo.toml
+2026-11-15T06:47:25.2698075Z [1m[92m    Updating[0m crates.io index
+2026-11-15T06:47:25.4445066Z [1m[92m Downloading[0m crates ...
+2026-11-15T06:47:25.4936359Z [1m[92m  Downloaded[0m tower-service v0.3.3
+2026-11-15T06:47:25.4957260Z [1m[92m  Downloaded[0m tokio-macros v2.7.2
+2026-11-15T06:47:25.5076588Z [1m[92m  Downloaded[0m tokio-rustls v0.26.6
+2026-11-15T06:47:25.5090488Z [1m[92m  Downloaded[0m signal-hook-registry v1.4.8
+2026-11-15T06:47:25.5100154Z [1m[92m  Downloaded[0m errno v0.3.14
+2026-11-15T06:47:25.5115698Z [1m[92m  Downloaded[0m windows-link v0.2.1
+2026-11-15T06:47:25.5316432Z [1m[92m  Downloaded[0m httpdate v1.0.3
+2026-11-15T06:47:25.5344997Z [1m[92m  Downloaded[0m atomic-waker v1.1.2
+2026-11-15T06:47:25.5354143Z [1m[92m  Downloaded[0m foreign-types-shared v0.1.1
+2026-11-15T06:47:25.5358466Z [1m[92m  Downloaded[0m fnv v1.0.7
+2026-11-15T06:47:25.5395386Z [1m[92m  Downloaded[0m want v0.3.2
+2026-11-15T06:47:25.5402239Z [1m[92m  Downloaded[0m try-lock v0.2.5
+2026-11-15T06:47:25.5409234Z [1m[92m  Downloaded[0m futures-sink v0.3.34
+2026-11-15T06:47:25.5416118Z [1m[92m  Downloaded[0m foreign-types v0.3.2
+2026-11-15T06:47:25.5421487Z [1m[92m  Downloaded[0m equivalent v1.0.3
+2026-11-15T06:47:25.5429372Z [1m[92m  Downloaded[0m http-body v1.1.0
+2026-11-15T06:47:25.5437243Z [1m[92m  Downloaded[0m subtle v2.6.1
+2026-11-15T06:47:25.5447587Z [1m[92m  Downloaded[0m windows-targets v0.52.6
+2026-11-15T06:47:25.5465980Z [1m[92m  Downloaded[0m socket2 v0.6.5
+2026-11-15T06:47:25.5481201Z [1m[92m  Downloaded[0m openssl-macros v0.1.1
+2026-11-15T06:47:25.5486875Z [1m[92m  Downloaded[0m wasi v0.11.1+wasi-snapshot-preview1
+2026-11-15T06:47:25.5499209Z [1m[92m  Downloaded[0m shlex v2.0.1
+2026-11-15T06:47:25.5509984Z [1m[92m  Downloaded[0m pkg-config v0.3.34
+2026-11-15T06:47:25.5522169Z [1m[92m  Downloaded[0m untrusted v0.9.0
+2026-11-15T06:47:25.5538192Z [1m[92m  Downloaded[0m hyper-timeout v0.5.2
+2026-11-15T06:47:25.5550146Z [1m[92m  Downloaded[0m hyper-rustls v0.27.10
+2026-11-15T06:47:25.5562644Z [1m[92m  Downloaded[0m http-body-util v0.1.5
+2026-11-15T06:47:25.5579158Z [1m[92m  Downloaded[0m zeroize v1.9.1
+2026-11-15T06:47:25.5591353Z [1m[92m  Downloaded[0m find-msvc-tools v0.1.15
+2026-11-15T06:47:25.5604074Z [1m[92m  Downloaded[0m getrandom v0.2.17
+2026-11-15T06:47:25.5627850Z [1m[92m  Downloaded[0m once_cell v1.21.4
+2026-11-15T06:47:25.5650815Z [1m[92m  Downloaded[0m httparse v1.10.1
+2026-11-15T06:47:25.5675487Z [1m[92m  Downloaded[0m rustls-pki-types v1.16.0
+2026-11-15T06:47:25.5698406Z [1m[92m  Downloaded[0m futures-channel v0.3.34
+2026-11-15T06:47:25.5713843Z [1m[92m  Downloaded[0m smallvec v1.16.5
+2026-11-15T06:47:25.5725056Z [1m[92m  Downloaded[0m bitflags v2.13.2
+2026-11-15T06:47:25.5767600Z [1m[92m  Downloaded[0m openssl-sys v0.9.118
+2026-11-15T06:47:25.5818408Z [1m[92m  Downloaded[0m tracing-core v0.1.36
+2026-11-15T06:47:25.5846329Z [1m[92m  Downloaded[0m bytes v1.12.1
+2026-11-15T06:47:25.5883412Z [1m[92m  Downloaded[0m mio v1.2.4
+2026-11-15T06:47:25.5947503Z [1m[92m  Downloaded[0m arc-swap v1.9.5
+2026-11-15T06:47:25.5988571Z [1m[92m  Downloaded[0m rustls-webpki v0.103.16
+2026-11-15T06:47:25.6019638Z [1m[92m  Downloaded[0m http v1.5.0
+2026-11-15T06:47:25.6048693Z [1m[92m  Downloaded[0m indexmap v2.14.2
+2026-11-15T06:47:25.6082253Z [1m[92m  Downloaded[0m hyper-util v0.1.21
+2026-11-15T06:47:25.6134566Z [1m[92m  Downloaded[0m tokio-util v0.7.20
+2026-11-15T06:47:25.6198891Z [1m[92m  Downloaded[0m cc v1.11.1
+2026-11-15T06:47:25.6233808Z [1m[92m  Downloaded[0m hyper v1.12.0
+2026-11-15T06:47:25.6290170Z [1m[92m  Downloaded[0m h2 v0.4.20
+2026-11-15T06:47:25.6343447Z [1m[92m  Downloaded[0m hashbrown v0.17.1
+2026-11-15T06:47:25.6385596Z [1m[92m  Downloaded[0m vcpkg v0.2.15
+2026-11-15T06:47:25.6795151Z [1m[92m  Downloaded[0m openssl v0.10.82
+2026-11-15T06:47:25.6872342Z [1m[92m  Downloaded[0m syn v2.0.119
+2026-11-15T06:47:25.6955615Z [1m[92m  Downloaded[0m rustls v0.23.46
+2026-11-15T06:47:25.7050303Z [1m[92m  Downloaded[0m tracing v0.1.44
+2026-11-15T06:47:25.7180336Z [1m[92m  Downloaded[0m windows_x86_64_gnullvm v0.52.6
+2026-11-15T06:47:25.7246473Z [1m[92m  Downloaded[0m windows_aarch64_gnullvm v0.52.6
+2026-11-15T06:47:25.7314485Z [1m[92m  Downloaded[0m windows_i686_gnullvm v0.52.6
+2026-11-15T06:47:25.7388849Z [1m[92m  Downloaded[0m libc v0.2.191
+2026-11-15T06:47:25.7757660Z [1m[92m  Downloaded[0m windows_aarch64_msvc v0.52.6
+2026-11-15T06:47:25.7857589Z [1m[92m  Downloaded[0m windows_x86_64_gnu v0.52.6
+2026-11-15T06:47:25.8021685Z [1m[92m  Downloaded[0m windows_i686_msvc v0.52.6
+2026-11-15T06:47:25.8132115Z [1m[92m  Downloaded[0m windows_x86_64_msvc v0.52.6
+2026-11-15T06:47:25.8231135Z [1m[92m  Downloaded[0m windows_i686_gnu v0.52.6
+2026-11-15T06:47:25.8396459Z [1m[92m  Downloaded[0m tokio v1.54.1
+2026-11-15T06:47:25.8765172Z [1m[92m  Downloaded[0m ring v0.17.14
+2026-11-15T06:47:25.9121903Z [1m[92m  Downloaded[0m windows-sys v0.61.2
+2026-11-15T06:47:25.9634728Z [1m[92m  Downloaded[0m windows-sys v0.52.0
+2026-11-15T06:47:26.4787600Z ##[group]Run flock /tmp/aegisgate-sprint02-fixtures.lock bash -euo pipefail -c '
+2026-11-15T06:47:26.4788125Z [36;1mflock /tmp/aegisgate-sprint02-fixtures.lock bash -euo pipefail -c '[0m
+2026-11-15T06:47:26.4788460Z [36;1m  make fixture-images[0m
+2026-11-15T06:47:26.4788688Z [36;1m  make security-scan[0m
+2026-11-15T06:47:26.4788895Z [36;1m'[0m
+2026-11-15T06:47:26.4807016Z shell: /usr/bin/bash -e {0}
+2026-11-15T06:47:26.4807230Z env:
+2026-11-15T06:47:26.4807406Z   GOTOOLCHAIN: local
+2026-11-15T06:47:26.4807824Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:26.4808046Z   CARGO_INCREMENTAL: 0
+2026-11-15T06:47:26.4808250Z   CARGO_TERM_COLOR: always
+2026-11-15T06:47:26.4808451Z ##[endgroup]
+2026-11-15T06:47:26.6040514Z python3 scripts/dev-secrets.py
+2026-11-15T06:47:26.6725365Z Local development secrets ready (material not logged)
+2026-11-15T06:47:26.9827489Z 2026/11/15 06:47:26 unsafe local fixtures generated; material not logged
+2026-11-15T06:47:27.0060522Z python3 scripts/build-fixture-images.py
+2026-11-15T06:47:27.6021564Z #0 building with "default" instance using docker driver
+2026-11-15T06:47:27.6021833Z 
+2026-11-15T06:47:27.6022067Z #1 [internal] load build definition from Dockerfile.postgres
+2026-11-15T06:47:27.6022532Z #1 transferring dockerfile: 644B done
+2026-11-15T06:47:27.6022782Z #1 DONE 0.0s
+2026-11-15T06:47:27.6022889Z 
+2026-11-15T06:47:27.6023328Z #2 [auth] library/postgres:pull token for registry-1.docker.io
+2026-11-15T06:47:27.7527549Z #2 DONE 0.0s
+2026-11-15T06:47:27.7527707Z 
+2026-11-15T06:47:27.7528315Z #3 [internal] load metadata for docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395
+2026-11-15T06:47:28.1436337Z #3 DONE 0.7s
+2026-11-15T06:47:28.2564956Z 
+2026-11-15T06:47:28.2565627Z #4 [internal] load .dockerignore
+2026-11-15T06:47:28.2566131Z #4 transferring context: 102B done
+2026-11-15T06:47:28.2566496Z #4 DONE 0.0s
+2026-11-15T06:47:28.2566684Z 
+2026-11-15T06:47:28.2566860Z #5 [internal] load build context
+2026-11-15T06:47:28.2567151Z #5 transferring context: 165B done
+2026-11-15T06:47:28.2567379Z #5 DONE 0.0s
+2026-11-15T06:47:28.2567492Z 
+2026-11-15T06:47:28.2567961Z #6 [1/4] FROM docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395
+2026-11-15T06:47:28.2568760Z #6 resolve docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395 done
+2026-11-15T06:47:28.2569455Z #6 sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395 10.29kB / 10.29kB done
+2026-11-15T06:47:28.2570328Z #6 sha256:38b9ffe2d4c13d7c445b66306be6763dfa6f503689ea0c5b9f84544ccf3ca8e4 8.51kB / 8.51kB done
+2026-11-15T06:47:28.2571010Z #6 sha256:881fc932939efef04ca120ad44bbd2c0917851eb247aa4995428afb1e80ede17 2.10MB / 3.85MB 0.1s
+2026-11-15T06:47:28.2571640Z #6 sha256:300ebd02c6d4de9ee27ad7f6855d5d21b4d3a4a5117767c1197d284c635d9736 2.68kB / 2.68kB done
+2026-11-15T06:47:28.2572233Z #6 sha256:f9a5f8f89c069fdaa449d6191dce8751a40ff81e750a73a010d2b60fa5d9c320 0B / 968B 0.1s
+2026-11-15T06:47:28.2572903Z #6 sha256:63677b2e422dcc313c982a9f276c5344201e017d48035fb320d0fda846ece913 0B / 900.01kB 0.1s
+2026-11-15T06:47:28.3617872Z #6 sha256:881fc932939efef04ca120ad44bbd2c0917851eb247aa4995428afb1e80ede17 3.85MB / 3.85MB 0.1s done
+2026-11-15T06:47:28.3619895Z #6 sha256:f9a5f8f89c069fdaa449d6191dce8751a40ff81e750a73a010d2b60fa5d9c320 968B / 968B 0.1s done
+2026-11-15T06:47:28.3622395Z #6 sha256:63677b2e422dcc313c982a9f276c5344201e017d48035fb320d0fda846ece913 900.01kB / 900.01kB 0.2s done
+2026-11-15T06:47:28.3623917Z #6 extracting sha256:881fc932939efef04ca120ad44bbd2c0917851eb247aa4995428afb1e80ede17 0.1s done
+2026-11-15T06:47:28.3624974Z #6 sha256:84314b29d42166e310db70993819c128034677b2aa21b691669c40b4936db591 0B / 19.00kB 0.2s
+2026-11-15T06:47:28.3625618Z #6 sha256:08007d924193a5e83793bf258918e8f93dc4b73bf5f1e81bcecbb2b6ec7018dc 0B / 127B 0.2s
+2026-11-15T06:47:28.3626534Z #6 sha256:ef1860e97cefa5caf816631e64a1803a9f1a5c30aa4c77d05d9d83195fe6ecf8 116B / 116B 0.2s done
+2026-11-15T06:47:28.3627192Z #6 sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 0B / 115.29MB 0.2s
+2026-11-15T06:47:28.4866537Z #6 sha256:84314b29d42166e310db70993819c128034677b2aa21b691669c40b4936db591 19.00kB / 19.00kB 0.2s done
+2026-11-15T06:47:28.4867280Z #6 sha256:08007d924193a5e83793bf258918e8f93dc4b73bf5f1e81bcecbb2b6ec7018dc 127B / 127B 0.3s
+2026-11-15T06:47:28.4867983Z #6 extracting sha256:f9a5f8f89c069fdaa449d6191dce8751a40ff81e750a73a010d2b60fa5d9c320 done
+2026-11-15T06:47:28.4868990Z #6 sha256:8f865016089d0863f5ba57d56464ceb62252c972611983404670f22cd012f98a 6.10kB / 6.10kB 0.3s
+2026-11-15T06:47:28.6563723Z #6 sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 83.89MB / 115.29MB 0.5s
+2026-11-15T06:47:28.6564866Z #6 sha256:8f865016089d0863f5ba57d56464ceb62252c972611983404670f22cd012f98a 6.10kB / 6.10kB 0.4s done
+2026-11-15T06:47:28.7564257Z #6 sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 115.29MB / 115.29MB 0.6s
+2026-11-15T06:47:28.9565650Z #6 sha256:08007d924193a5e83793bf258918e8f93dc4b73bf5f1e81bcecbb2b6ec7018dc 127B / 127B 0.6s done
+2026-11-15T06:47:29.3569761Z #6 sha256:21a876ea75ef6fffb419194907dd5da653247e227e11adf311fd5ca16a6f809c 0B / 185B 1.2s
+2026-11-15T06:47:29.5563861Z #6 sha256:21a876ea75ef6fffb419194907dd5da653247e227e11adf311fd5ca16a6f809c 185B / 185B 1.4s
+2026-11-15T06:47:29.7566146Z #6 sha256:21a876ea75ef6fffb419194907dd5da653247e227e11adf311fd5ca16a6f809c 185B / 185B 1.5s done
+2026-11-15T06:47:29.9567902Z #6 sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 115.29MB / 115.29MB 1.7s done
+2026-11-15T06:47:36.6860804Z #6 extracting sha256:63677b2e422dcc313c982a9f276c5344201e017d48035fb320d0fda846ece913
+2026-11-15T06:47:36.8316826Z #6 extracting sha256:63677b2e422dcc313c982a9f276c5344201e017d48035fb320d0fda846ece913 0.0s done
+2026-11-15T06:47:36.8318566Z #6 extracting sha256:ef1860e97cefa5caf816631e64a1803a9f1a5c30aa4c77d05d9d83195fe6ecf8 done
+2026-11-15T06:47:36.8320487Z #6 extracting sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 0.1s
+2026-11-15T06:47:38.4418198Z #6 extracting sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 1.6s done
+2026-11-15T06:47:40.0387510Z #6 extracting sha256:84314b29d42166e310db70993819c128034677b2aa21b691669c40b4936db591
+2026-11-15T06:47:40.2420248Z #6 extracting sha256:84314b29d42166e310db70993819c128034677b2aa21b691669c40b4936db591 done
+2026-11-15T06:47:40.2421070Z #6 extracting sha256:08007d924193a5e83793bf258918e8f93dc4b73bf5f1e81bcecbb2b6ec7018dc done
+2026-11-15T06:47:40.2421701Z #6 extracting sha256:8f865016089d0863f5ba57d56464ceb62252c972611983404670f22cd012f98a done
+2026-11-15T06:47:40.2422277Z #6 extracting sha256:21a876ea75ef6fffb419194907dd5da653247e227e11adf311fd5ca16a6f809c done
+2026-11-15T06:47:40.2422653Z #6 DONE 11.9s
+2026-11-15T06:47:40.2422761Z 
+2026-11-15T06:47:40.2423164Z #7 [2/4] RUN apk add --no-cache krb5-libs=1.22.3-r0 libxslt=1.1.43-r4 su-exec=0.3-r0     && rm /usr/local/bin/gosu
+2026-11-15T06:47:40.5669359Z #7 0.475 (1/3) Upgrading krb5-libs (1.22.2-r1 -> 1.22.3-r0)
+2026-11-15T06:47:40.6876905Z #7 0.500 (2/3) Upgrading libxslt (1.1.43-r3 -> 1.1.43-r4)
+2026-11-15T06:47:40.6877610Z #7 0.517 (3/3) Installing su-exec (0.3-r0)
+2026-11-15T06:47:40.6878462Z #7 0.533 Executing busybox-1.37.0-r31.trigger
+2026-11-15T06:47:40.6878933Z #7 0.540 OK: 229.4 MiB in 54 packages
+2026-11-15T06:47:40.6879185Z #7 DONE 0.6s
+2026-11-15T06:47:40.8182497Z 
+2026-11-15T06:47:40.8186512Z #8 [3/4] COPY su-exec-wrapper.sh /usr/local/bin/gosu
+2026-11-15T06:47:40.8187716Z #8 DONE 0.0s
+2026-11-15T06:47:40.8188135Z 
+2026-11-15T06:47:40.8188860Z #9 [4/4] RUN chmod 0755 /usr/local/bin/gosu     && /usr/local/bin/gosu postgres id -u | grep -qx 70
+2026-11-15T06:47:40.8189481Z #9 DONE 0.1s
+2026-11-15T06:47:40.9699847Z 
+2026-11-15T06:47:40.9700432Z #10 exporting to image
+2026-11-15T06:47:40.9710371Z #10 exporting layers
+2026-11-15T06:47:41.0079135Z #10 exporting layers 0.2s done
+2026-11-15T06:47:41.0217049Z #10 writing image sha256:89d736014ad732469e77ec94f328f19720b8e9d251336008d1ee48904cb885cc done
+2026-11-15T06:47:41.0217741Z #10 DONE 0.2s
+2026-11-15T06:47:41.3739950Z #0 building with "default" instance using docker driver
+2026-11-15T06:47:41.3740205Z 
+2026-11-15T06:47:41.3740419Z #1 [internal] load build definition from Dockerfile.origin
+2026-11-15T06:47:41.3740798Z #1 transferring dockerfile: 658B done
+2026-11-15T06:47:41.3741041Z #1 DONE 0.0s
+2026-11-15T06:47:41.3741162Z 
+2026-11-15T06:47:41.3741399Z #2 [auth] library/python:pull token for registry-1.docker.io
+2026-11-15T06:47:41.3742070Z #2 DONE 0.0s
+2026-11-15T06:47:41.3742188Z 
+2026-11-15T06:47:41.3742799Z #3 [internal] load metadata for docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894
+2026-11-15T06:47:41.7009208Z #3 DONE 0.6s
+2026-11-15T06:47:41.8093094Z 
+2026-11-15T06:47:41.8094262Z #4 [internal] load .dockerignore
+2026-11-15T06:47:41.8094989Z #4 transferring context: 102B done
+2026-11-15T06:47:41.8095389Z #4 DONE 0.0s
+2026-11-15T06:47:41.8095586Z 
+2026-11-15T06:47:41.8096407Z #5 [1/2] FROM docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894
+2026-11-15T06:47:41.8097843Z #5 resolve docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894 done
+2026-11-15T06:47:41.8098988Z #5 extracting sha256:69f156d17328c6499d12383769c39c5de3ec2b8706bd81bb977f27cfe9aa0c30
+2026-11-15T06:47:41.8100082Z #5 sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894 10.30kB / 10.30kB done
+2026-11-15T06:47:41.8101180Z #5 sha256:76c65fc8c52c4d375e958298d9f66198b8fb6b06416c0e5500bf710c19cbaa77 1.74kB / 1.74kB done
+2026-11-15T06:47:41.8102213Z #5 sha256:05318f6e99ea9af0049ac2c0de060fe663cd81ddcea9148ba9d5bbf87f2939ea 4.85kB / 4.85kB done
+2026-11-15T06:47:41.8103445Z #5 sha256:69f156d17328c6499d12383769c39c5de3ec2b8706bd81bb977f27cfe9aa0c30 411.99kB / 411.99kB 0.1s done
+2026-11-15T06:47:41.8104556Z #5 sha256:ddab54470924185bca4fbf91b4991764cc716d44e363c60a4e3876db764f15d3 0B / 13.58MB 0.1s
+2026-11-15T06:47:41.8105509Z #5 sha256:6898526789b2690410db36a9609f51f6f36aceb6b77facb4aa13ff1039416523 0B / 252B 0.1s
+2026-11-15T06:47:41.9688783Z #5 extracting sha256:69f156d17328c6499d12383769c39c5de3ec2b8706bd81bb977f27cfe9aa0c30 0.1s done
+2026-11-15T06:47:41.9689954Z #5 sha256:ddab54470924185bca4fbf91b4991764cc716d44e363c60a4e3876db764f15d3 13.58MB / 13.58MB 0.2s
+2026-11-15T06:47:41.9691069Z #5 sha256:6898526789b2690410db36a9609f51f6f36aceb6b77facb4aa13ff1039416523 252B / 252B 0.1s done
+2026-11-15T06:47:41.9692175Z #5 extracting sha256:ddab54470924185bca4fbf91b4991764cc716d44e363c60a4e3876db764f15d3
+2026-11-15T06:47:42.0695211Z #5 sha256:ddab54470924185bca4fbf91b4991764cc716d44e363c60a4e3876db764f15d3 13.58MB / 13.58MB 0.2s done
+2026-11-15T06:47:42.5455184Z #5 extracting sha256:ddab54470924185bca4fbf91b4991764cc716d44e363c60a4e3876db764f15d3 0.4s done
+2026-11-15T06:47:42.6973951Z #5 extracting sha256:6898526789b2690410db36a9609f51f6f36aceb6b77facb4aa13ff1039416523
+2026-11-15T06:47:42.8623018Z #5 extracting sha256:6898526789b2690410db36a9609f51f6f36aceb6b77facb4aa13ff1039416523 done
+2026-11-15T06:47:42.8623844Z #5 DONE 1.0s
+2026-11-15T06:47:42.8624017Z 
+2026-11-15T06:47:42.8625556Z #6 [2/2] RUN rm -rf /usr/local/lib/python3.14/site-packages/*       /usr/local/lib/python3.14/ensurepip /root/.cache     && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.14     && python -I -c "import http.server, ssl; assert ssl.OPENSSL_VERSION"
+2026-11-15T06:47:43.2329041Z #6 DONE 0.5s
+2026-11-15T06:47:43.3839718Z 
+2026-11-15T06:47:43.3840504Z #7 exporting to image
+2026-11-15T06:47:43.3840812Z #7 exporting layers
+2026-11-15T06:47:44.0030548Z #7 exporting layers 0.8s done
+2026-11-15T06:47:44.0148282Z #7 writing image sha256:74af2bd8d0b7869ae5f8601fce8a733015dee66990b5316989cac733954acfa5 done
+2026-11-15T06:47:44.0149036Z #7 DONE 0.8s
+2026-11-15T06:47:44.0364671Z Local fixture images built and locked by immutable image ID; no publication
+2026-11-15T06:47:44.0439981Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" bash scripts/security-scan.sh
+2026-11-15T06:47:44.0739269Z Running install-govulncheck
+2026-11-15T06:47:47.5659295Z PASS install-govulncheck
+2026-11-15T06:47:47.5659735Z Running install-cargo-audit
+2026-11-15T06:50:04.4470262Z PASS install-cargo-audit
+2026-11-15T06:50:04.4470605Z Running rust-vulnerabilities
+2026-11-15T06:50:07.3481639Z PASS rust-vulnerabilities
+2026-11-15T06:50:07.3482094Z Running pingora-spike-vulnerabilities
+2026-11-15T06:50:07.8783772Z PASS pingora-spike-vulnerabilities
+2026-11-15T06:50:07.8784325Z Running hyper-spike-vulnerabilities
+2026-11-15T06:50:08.3618610Z PASS hyper-spike-vulnerabilities
+2026-11-15T06:50:08.3901457Z Running go-scanner-gate-selftest
+2026-11-15T06:50:09.1999293Z PASS go-scanner-gate-selftest
+2026-11-15T06:50:09.1999632Z Running go-vulnerabilities
+2026-11-15T06:50:09.7885717Z PASS go-vulnerabilities
+2026-11-15T06:50:09.7886356Z Running npm-root-vulnerabilities
+2026-11-15T06:50:10.1113678Z PASS npm-root-vulnerabilities
+2026-11-15T06:50:10.1114200Z Running npm-dashboard-vulnerabilities
+2026-11-15T06:50:10.4585718Z PASS npm-dashboard-vulnerabilities
+2026-11-15T06:50:10.4586353Z Running npm-spike-vulnerabilities
+2026-11-15T06:50:10.7739231Z PASS npm-spike-vulnerabilities
+2026-11-15T06:50:10.7772989Z Running worktree-secrets
+2026-11-15T06:50:58.6802848Z PASS worktree-secrets
+2026-11-15T06:50:58.6890790Z Running history-git-preflight
+2026-11-15T06:50:58.8779954Z PASS history-git-preflight
+2026-11-15T06:50:58.8780335Z Running history-secrets
+2026-11-15T06:52:24.7771414Z PASS history-secrets
+2026-11-15T06:52:24.7771751Z Running repository-sbom
+2026-11-15T06:52:41.6358324Z PASS repository-sbom
+2026-11-15T06:52:41.6358780Z Running filesystem-vulnerabilities
+2026-11-15T06:52:42.9056998Z PASS filesystem-vulnerabilities
+2026-11-15T06:52:42.9058142Z Running image-identity-selftest
+2026-11-15T06:52:43.0323119Z PASS image-identity-selftest
+2026-11-15T06:52:43.0558229Z Running envoy-spike-vulnerabilities
+2026-11-15T06:52:44.8206178Z PASS envoy-spike-vulnerabilities
+2026-11-15T06:52:44.8206650Z Running envoy-spike-sbom
+2026-11-15T06:52:46.6748267Z PASS envoy-spike-sbom
+2026-11-15T06:52:46.9746698Z Image 1: demo-origin sha256:74af2bd8d0b7869ae5f8601fce8a733015dee66990b5316989cac733954acfa5
+2026-11-15T06:52:47.5281987Z Running image-1-vulnerabilities
+2026-11-15T06:52:48.2211223Z PASS image-1-vulnerabilities
+2026-11-15T06:52:48.2211587Z Running image-1-sbom
+2026-11-15T06:52:48.5627759Z PASS image-1-sbom
+2026-11-15T06:52:48.5628357Z Running image-1-identity
+2026-11-15T06:52:48.7754248Z PASS image-1-identity
+2026-11-15T06:52:48.7824210Z Image 2: nats nats:2.15.2-alpine@sha256:afae2fdbe2e326c65e1246cb83b9d05d319188734f3bd577ac8072daae78a10f
+2026-11-15T06:52:48.7835198Z Running image-2-vulnerabilities
+2026-11-15T06:52:50.3550238Z PASS image-2-vulnerabilities
+2026-11-15T06:52:50.3550697Z Running image-2-sbom
+2026-11-15T06:52:51.3070611Z PASS image-2-sbom
+2026-11-15T06:52:51.3076166Z Image 3: postgres sha256:89d736014ad732469e77ec94f328f19720b8e9d251336008d1ee48904cb885cc
+2026-11-15T06:52:53.8802320Z Running image-3-vulnerabilities
+2026-11-15T06:52:56.3634594Z PASS image-3-vulnerabilities
+2026-11-15T06:52:56.3634979Z Running image-3-sbom
+2026-11-15T06:52:57.2366511Z PASS image-3-sbom
+2026-11-15T06:52:57.2367059Z Running image-3-identity
+2026-11-15T06:52:58.2286526Z PASS image-3-identity
+2026-11-15T06:52:58.2605206Z Image 4: redis redis:8.10.3-alpine@sha256:71885d8cc6e42f2bc0aa2eb853bfc4be200b5108a46ac50e117ae1df0531fb80
+2026-11-15T06:52:58.2616428Z Running image-4-vulnerabilities
+2026-11-15T06:53:00.0441617Z PASS image-4-vulnerabilities
+2026-11-15T06:53:00.0442095Z Running image-4-sbom
+2026-11-15T06:53:01.7365520Z PASS image-4-sbom
+2026-11-15T06:53:01.7422882Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-11-15T06:53:01.7423445Z with:
+2026-11-15T06:53:01.7423663Z   name: supply-chain-evidence
+2026-11-15T06:53:01.7423898Z   path: .local/evidence/security
+2026-11-15T06:53:01.7424121Z   include-hidden-files: true
+2026-11-15T06:53:01.7424327Z   retention-days: 14
+2026-11-15T06:53:01.7424520Z   if-no-files-found: warn
+2026-11-15T06:53:01.7424723Z   compression-level: 6
+2026-11-15T06:53:01.7424913Z   overwrite: false
+2026-11-15T06:53:01.7425089Z   archive: true
+2026-11-15T06:53:01.7425263Z env:
+2026-11-15T06:53:01.7425432Z   GOTOOLCHAIN: local
+2026-11-15T06:53:01.7425631Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:53:01.7425844Z   CARGO_INCREMENTAL: 0
+2026-11-15T06:53:01.7426036Z   CARGO_TERM_COLOR: always
+2026-11-15T06:53:01.7426418Z ##[endgroup]
+2026-11-15T06:53:01.8662365Z With the provided path, there will be 50 files uploaded
+2026-11-15T06:53:01.8667042Z Artifact name is valid!
+2026-11-15T06:53:01.8667548Z Root directory input is valid!
+2026-11-15T06:53:02.1312367Z Uploading artifact: supply-chain-evidence.zip
+2026-11-15T06:53:02.1340860Z Beginning upload of artifact content to blob storage
+2026-11-15T06:53:02.4350551Z Uploaded bytes 158531
+2026-11-15T06:53:02.4756342Z Finished uploading artifact content to blob storage!
+2026-11-15T06:53:02.4757270Z SHA256 digest of uploaded artifact is 262cd1aa292f24fc3f1c5c4fc0562f85bdc52ae177f21be904d53dc1fcce2839
+2026-11-15T06:53:02.4757972Z Finalizing artifact upload
+2026-11-15T06:53:02.8543403Z Artifact supply-chain-evidence successfully finalized. Artifact ID 14150644368
+2026-11-15T06:53:02.8544664Z Artifact supply-chain-evidence has been successfully uploaded! Final size is 158531 bytes. Artifact ID is 14150644368
+2026-11-15T06:53:02.8547477Z Artifact download URL: https://github.com/tiecont/aegis-gate/actions/runs/43686973829/artifacts/14150644368
+2026-11-15T06:53:02.8714650Z Post job cleanup.
+2026-11-15T06:53:02.9647513Z Cache hit occurred on the primary key node-cache-Linux-x64-npm-f8ac0b1f041bf4fdcb61a100da39e882b6326762ac4751d09e537ed4333230a9, not saving cache.
+2026-11-15T06:53:02.9760606Z Post job cleanup.
+2026-11-15T06:53:03.0735464Z [command]/opt/hostedtoolcache/go/1.27.4/x64/bin/go env GOMODCACHE
+2026-11-15T06:53:03.0780061Z [command]/opt/hostedtoolcache/go/1.27.4/x64/bin/go env GOCACHE
+2026-11-15T06:53:03.0824308Z /home/runner/go/pkg/mod
+2026-11-15T06:53:03.0842563Z /home/runner/.cache/go-build
+2026-11-15T06:53:03.0844518Z Cache hit occurred on the primary key setup-go-Linux-x64-ubuntu24-go-1.27.4-36375a5e7de5636dfac8581ad6d43d41c121db9c07f2dda457b8cc56ef596372, not saving cache.
+2026-11-15T06:53:03.0983871Z Post job cleanup.
+2026-11-15T06:53:03.1703862Z [command]/usr/bin/git version
+2026-11-15T06:53:03.1740299Z git version 2.56.1
+2026-11-15T06:53:03.1769301Z Temporarily overriding HOME='/home/runner/work/_temp/9ee18c74-3645-45a6-8e1f-4967b8342484' before making global git config changes
+2026-11-15T06:53:03.1770476Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-15T06:53:03.1773453Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/aegis-gate/aegis-gate
+2026-11-15T06:53:03.1804105Z Removing SSH command configuration
+2026-11-15T06:53:03.1809687Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-15T06:53:03.1844044Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-15T06:53:03.2079602Z Removing HTTP extra header
+2026-11-15T06:53:03.2085126Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-15T06:53:03.2121019Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-15T06:53:03.2359146Z Removing includeIf entries pointing to credentials config files
+2026-11-15T06:53:03.2363807Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-15T06:53:03.2399592Z includeif.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git.path
+2026-11-15T06:53:03.2400585Z includeif.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git/worktrees/*.path
+2026-11-15T06:53:03.2401520Z includeif.gitdir:/github/workspace/.git.path
+2026-11-15T06:53:03.2402335Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-15T06:53:03.2408034Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git.path
+2026-11-15T06:53:03.2437936Z /home/runner/work/_temp/git-credentials-a0f55a0c-05a9-4289-8347-e8ff0b88bf21.config
+2026-11-15T06:53:03.2446607Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-a0f55a0c\-05a9\-4289\-8347\-e8ff0b88bf21\.config
+2026-11-15T06:53:03.2490240Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git/worktrees/*.path
+2026-11-15T06:53:03.2519801Z /home/runner/work/_temp/git-credentials-a0f55a0c-05a9-4289-8347-e8ff0b88bf21.config
+2026-11-15T06:53:03.2526866Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-a0f55a0c\-05a9\-4289\-8347\-e8ff0b88bf21\.config
+2026-11-15T06:53:03.2563884Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-15T06:53:03.2591996Z /github/runner_temp/git-credentials-a0f55a0c-05a9-4289-8347-e8ff0b88bf21.config
+2026-11-15T06:53:03.2597968Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-a0f55a0c\-05a9\-4289\-8347\-e8ff0b88bf21\.config
+2026-11-15T06:53:03.2636756Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-15T06:53:03.2665179Z /github/runner_temp/git-credentials-a0f55a0c-05a9-4289-8347-e8ff0b88bf21.config
+2026-11-15T06:53:03.2672310Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-a0f55a0c\-05a9\-4289\-8347\-e8ff0b88bf21\.config
+2026-11-15T06:53:03.2712521Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-15T06:53:03.2925354Z Removing credentials config '/home/runner/work/_temp/git-credentials-a0f55a0c-05a9-4289-8347-e8ff0b88bf21.config'
+2026-11-15T06:53:03.3059511Z Cleaning up orphan processes
