@@ -234,6 +234,16 @@ func TestMissingFinalDecisionCannotPass(t *testing.T) {
 	record(t, r)
 }
 
+func TestHandlerNeedsCompleteHeaderBlockBeforeDispatch(t *testing.T) {
+	b := block(t)
+	e := capture(t, request("allowed", 5, false), binding("allowed", 5), origin(t, func(f *http2.Framer) { _ = f.WriteHeaders(http2.HeadersFrameParam{StreamID: 5, BlockFragment: b[:1]}) }), Event{Kind: "handler", Connection: "origin-1", Request: "allowed", Stream: 5}, origin(t, func(f *http2.Framer) { _ = f.WriteContinuation(5, true, b[1:]) }))
+	r := inspect(t, e)
+	if r.Research.Pass {
+		t.Fatal("handler preceded END_HEADERS")
+	}
+	record(t, r)
+}
+
 func TestStatefulDynamicTableReferences(t *testing.T) {
 	var b bytes.Buffer
 	enc := hpack.NewEncoder(&b)
