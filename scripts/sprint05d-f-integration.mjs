@@ -7,7 +7,7 @@ import { assertLock } from "../spikes/envoy/wire-fixtures.mjs";
 
 process.umask(0o077);
 assertLock();
-const [revision, clone, output] = process.argv.slice(2);
+const [revision, clone, output, exportRevision] = process.argv.slice(2);
 assert.match(output ?? "", /^evidence\/sprint05d-f\/integration-\d+$/);
 assert.ok(path.isAbsolute(clone) && !fs.existsSync(output));
 const sha = (b) => createHash("sha256").update(b).digest("hex");
@@ -160,6 +160,112 @@ try {
   assert.ok(
     gate.commands.every((row) => row.exit_code === 0 && row.signal === null),
   );
+  if (exportRevision) {
+    const prefix = "evidence/sprint05d-root/gates-01",
+      published = text("rev-parse", `${exportRevision}^{commit}`),
+      metadata = JSON.parse(get(published, `${prefix}/export.json`)),
+      derivedBytes = get(published, `${prefix}/commands.json`),
+      derived = JSON.parse(derivedBytes);
+    const changes = text("diff", "--name-only", source, published)
+      .split("\n")
+      .filter(Boolean);
+    assert.ok(
+      changes.every(
+        (file) =>
+          file.startsWith(`${prefix}/`) ||
+          [
+            "IMPLEMENTATION_STATUS.md",
+            "docs/RISK_REGISTER.md",
+            "docs/reports/sprint05d-completion.md",
+          ].includes(file),
+      ),
+      "post-gate executable source change",
+    );
+    assert.equal(metadata.exporter_commit, source);
+    assert.equal(metadata.original_commands_sha256, sha(gateBytes));
+    assert.deepEqual(metadata.redactions, []);
+    assert.equal(derived.export.kind, "sanitized derivative");
+    assert.equal(derived.export.original_commands_sha256, sha(gateBytes));
+    assert.equal(derived.export.original_outputs_preserved_by_digest, true);
+    assert.equal(derived.export.redaction_manifest, `${prefix}/export.json`);
+    const originalFiles = new Set();
+    for (const entry of metadata.files) {
+      assert.ok(
+        entry.relative &&
+          !path.isAbsolute(entry.relative) &&
+          !entry.relative.split("/").includes(".."),
+      );
+      assert.ok(!originalFiles.has(entry.relative), "duplicate export entry");
+      originalFiles.add(entry.relative);
+      const bytes = fs.readFileSync(path.join(raw, entry.relative));
+      assert.equal(sha(bytes), entry.original_sha256, entry.relative);
+      assert.equal(bytes.length, entry.original_bytes, entry.relative);
+      if (!["commands.json", "SHA256SUMS"].includes(entry.relative))
+        assert.deepEqual(get(published, `${prefix}/${entry.relative}`), bytes);
+    }
+    const manifestFiles = (bytes, read) => {
+      const files = new Set();
+      for (const line of bytes.toString().trim().split("\n")) {
+        const [digest, file] = line.split("  ");
+        assert.match(digest, /^[a-f0-9]{64}$/);
+        assert.ok(file.startsWith(`${prefix}/`) && !file.includes(".."));
+        assert.ok(!files.has(file), "duplicate manifest entry");
+        files.add(file);
+        assert.equal(sha(read(file)), digest, file);
+      }
+      return files;
+    };
+    const rawManifest = manifestFiles(
+      fs.readFileSync(`${raw}/SHA256SUMS`),
+      (file) => fs.readFileSync(path.join(clone, file)),
+    );
+    assert.deepEqual(
+      new Set([...rawManifest].map((file) => file.slice(prefix.length + 1))),
+      new Set([...originalFiles].filter((file) => file !== "SHA256SUMS")),
+    );
+    const exportManifest = manifestFiles(
+      get(published, `${prefix}/SHA256SUMS`),
+      (file) => get(published, file),
+    );
+    const trackedExport = text(
+      "ls-tree",
+      "-r",
+      "--name-only",
+      published,
+      prefix,
+    )
+      .split("\n")
+      .filter((file) => file !== `${prefix}/SHA256SUMS`);
+    assert.deepEqual(exportManifest, new Set(trackedExport));
+    assert.deepEqual(
+      exportManifest,
+      new Set([...rawManifest, `${prefix}/export.json`]),
+    );
+    const normalized = structuredClone(derived);
+    delete normalized.export;
+    for (const command of normalized.commands)
+      for (const stream of command.streams ?? []) {
+        assert.equal(sha(get(published, stream.file)), stream.sha256);
+        assert.equal(stream.sha256, stream.original_sha256);
+        delete stream.original_sha256;
+      }
+    assert.deepEqual(normalized, gate);
+    record.publishedExport = {
+      commit: published,
+      tree: text("rev-parse", `${published}^{tree}`),
+      commandsSha256: sha(derivedBytes),
+      metadataSha256: sha(get(published, `${prefix}/export.json`)),
+      originalFiles: originalFiles.size,
+      rawManifestHashes: rawManifest.size,
+      exportedManifestHashes: exportManifest.size,
+      redactions: 0,
+      commandsPreservedExceptDeclaredExportFields: true,
+      postGateDocumentation: changes
+        .filter((file) => !file.startsWith(`${prefix}/`))
+        .map((file) => ({ file, sha256: sha(get(published, file)) })),
+      accepted: true,
+    };
+  }
   const scanner = fs.readFileSync(`${raw}/security-scan.stdout.log`, "utf8"),
     quality = fs.readFileSync(`${raw}/check.stdout.log`, "utf8");
   assert.ok(!/^FAIL /m.test(scanner));
