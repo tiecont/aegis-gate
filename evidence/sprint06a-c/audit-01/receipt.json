@@ -1,0 +1,397 @@
+{
+  "source_commit": "aaf72e720ebaa2d30d0e19186bfea621b5d99a38",
+  "source_tree": "bc97afa63ba3113478539ae01cb8da8cef193a89",
+  "started": "2026-11-15T11:04:09.158Z",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/home/tiecont/.cache/aegisgate-06a/c/spikes/envoy/sprint06a-c-audit.mjs",
+    "evidence/sprint06a-c/audit-01"
+  ],
+  "node": {
+    "version": "v26.13.0",
+    "binary": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+  },
+  "source_files": [
+    {
+      "file": "spikes/envoy/sprint06a-c-audit.mjs",
+      "sha256": "9492e77be94b7fe95c33935af813ed6cc613113924e9e07a396412bcbfb679ff"
+    },
+    {
+      "file": "spikes/envoy/sprint06a-c-capabilities.json",
+      "sha256": "92bfe5d8efea1fa55fa00e3d24ed9281e9697e4491d71e0ce555c5c35a994be4"
+    },
+    {
+      "file": "spikes/envoy/sprint06a-c-package.mjs",
+      "sha256": "824438b2b7eb3187d914a5aacb7038aa948e5e0024c63d2537b8c984a45ab573"
+    }
+  ],
+  "commands": [
+    {
+      "label": "protected-before",
+      "command": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "binary": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "binary_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+      "args": [
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "began": "2026-11-15T11:04:09.381Z",
+      "ended": "2026-11-15T11:04:09.690Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint06a-c/audit-01/protected-before.stdout",
+          "bytes": 4342,
+          "sha256": "12fecd21d0163ccd7b6c2e53ba49a36bf9cd15aaeb5311710088bae5cb41d3f5"
+        },
+        {
+          "file": "evidence/sprint06a-c/audit-01/protected-before.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "gh-version",
+      "command": "gh",
+      "binary": "/usr/bin/gh",
+      "binary_sha256": "ce3200ab0615ae60ee68dd4833719cd3a3856e8b22ae1a3641998b39be8d3dbf",
+      "args": [
+        "--version"
+      ],
+      "began": "2026-11-15T11:04:09.703Z",
+      "ended": "2026-11-15T11:04:09.868Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint06a-c/audit-01/gh-version.stdout",
+          "bytes": 81,
+          "sha256": "55fec2ba526402883ce1898787ff24dec0d802dc65f405a805eaad15bd257dd6"
+        },
+        {
+          "file": "evidence/sprint06a-c/audit-01/gh-version.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "envoy-latest",
+      "command": "gh",
+      "binary": "/usr/bin/gh",
+      "binary_sha256": "ce3200ab0615ae60ee68dd4833719cd3a3856e8b22ae1a3641998b39be8d3dbf",
+      "args": [
+        "api",
+        "repos/envoyproxy/envoy/releases/latest"
+      ],
+      "began": "2026-11-15T11:04:09.879Z",
+      "ended": "2026-11-15T11:04:10.575Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint06a-c/audit-01/envoy-latest.stdout",
+          "bytes": 12858,
+          "sha256": "4accef492ba13bb9b199b8ac57805e50ba24a64fccdc36e81435d22c16c113ea"
+        },
+        {
+          "file": "evidence/sprint06a-c/audit-01/envoy-latest.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "envoy-recent",
+      "command": "gh",
+      "binary": "/usr/bin/gh",
+      "binary_sha256": "ce3200ab0615ae60ee68dd4833719cd3a3856e8b22ae1a3641998b39be8d3dbf",
+      "args": [
+        "api",
+        "repos/envoyproxy/envoy/releases?per_page=6"
+      ],
+      "began": "2026-11-15T11:04:10.585Z",
+      "ended": "2026-11-15T11:04:11.363Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint06a-c/audit-01/envoy-recent.stdout",
+          "bytes": 77960,
+          "sha256": "e55b909c59e6070da71914f3fbc8deb5b18bf97b2bd594d7b742646874866dc1"
+        },
+        {
+          "file": "evidence/sprint06a-c/audit-01/envoy-recent.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "envoy-ref",
+      "command": "gh",
+      "binary": "/usr/bin/gh",
+      "binary_sha256": "ce3200ab0615ae60ee68dd4833719cd3a3856e8b22ae1a3641998b39be8d3dbf",
+      "args": [
+        "api",
+        "repos/envoyproxy/envoy/git/ref/tags/v1.40.2"
+      ],
+      "began": "2026-11-15T11:04:11.372Z",
+      "ended": "2026-11-15T11:04:11.991Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint06a-c/audit-01/envoy-ref.stdout",
+          "bytes": 343,
+          "sha256": "4bde9ca07e237e0fcd5ec96496ed5401fc7519db05d4449bd23c91a60126f9d2"
+        },
+        {
+          "file": "evidence/sprint06a-c/audit-01/envoy-ref.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "llhttp-latest",
+      "command": "gh",
+      "binary": "/usr/bin/gh",
+      "binary_sha256": "ce3200ab0615ae60ee68dd4833719cd3a3856e8b22ae1a3641998b39be8d3dbf",
+      "args": [
+        "api",
+        "repos/nodejs/llhttp/releases/latest"
+      ],
+      "began": "2026-11-15T11:04:12.002Z",
+      "ended": "2026-11-15T11:04:12.647Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint06a-c/audit-01/llhttp-latest.stdout",
+          "bytes": 3238,
+          "sha256": "9af897161c8e2dfb0a617370a96b6243af7c97d777f5123f8a9af713357d65d4"
+        },
+        {
+          "file": "evidence/sprint06a-c/audit-01/llhttp-latest.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "llhttp-recent",
+      "command": "gh",
+      "binary": "/usr/bin/gh",
+      "binary_sha256": "ce3200ab0615ae60ee68dd4833719cd3a3856e8b22ae1a3641998b39be8d3dbf",
+      "args": [
+        "api",
+        "repos/nodejs/llhttp/releases?per_page=6"
+      ],
+      "began": "2026-11-15T11:04:12.652Z",
+      "ended": "2026-11-15T11:04:13.330Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint06a-c/audit-01/llhttp-recent.stdout",
+          "bytes": 23384,
+          "sha256": "d65a492cce63aced4975fc182da35dc73d794851432284bdb570335685ac1c1e"
+        },
+        {
+          "file": "evidence/sprint06a-c/audit-01/llhttp-recent.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "llhttp-ref",
+      "command": "gh",
+      "binary": "/usr/bin/gh",
+      "binary_sha256": "ce3200ab0615ae60ee68dd4833719cd3a3856e8b22ae1a3641998b39be8d3dbf",
+      "args": [
+        "api",
+        "repos/nodejs/llhttp/git/ref/tags/release/v9.4.4"
+      ],
+      "began": "2026-11-15T11:04:13.337Z",
+      "ended": "2026-11-15T11:04:13.950Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint06a-c/audit-01/llhttp-ref.stdout",
+          "bytes": 363,
+          "sha256": "708b1573e1b951c5381558915451ab1dfc995671f205b4ef77ad3a7637fc0220"
+        },
+        {
+          "file": "evidence/sprint06a-c/audit-01/llhttp-ref.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "protected-after",
+      "command": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "binary": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "binary_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+      "args": [
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "began": "2026-11-15T11:04:13.953Z",
+      "ended": "2026-11-15T11:04:14.233Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint06a-c/audit-01/protected-after.stdout",
+          "bytes": 4342,
+          "sha256": "12fecd21d0163ccd7b6c2e53ba49a36bf9cd15aaeb5311710088bae5cb41d3f5"
+        },
+        {
+          "file": "evidence/sprint06a-c/audit-01/protected-after.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "new_runtime_executed": false,
+  "full75_executed": false,
+  "full23_executed": false,
+  "qualifying_new_capability": false,
+  "module01_go": false,
+  "releases": [
+    {
+      "name": "envoy",
+      "tag": "v1.40.2",
+      "source": "b2d89e0ae53916f28770771fbdd49c5c99c5c5a2",
+      "object_type": "commit",
+      "expected_tag": "v1.40.2",
+      "expected_source": "b2d89e0ae53916f28770771fbdd49c5c99c5c5a2",
+      "published_at": "2026-10-27T01:51:56Z",
+      "official_url": "https://github.com/envoyproxy/envoy/releases/tag/v1.40.2",
+      "same_as_reviewed_release": true,
+      "recent_releases": [
+        {
+          "tag": "v1.40.2",
+          "published_at": "2026-10-27T01:51:56Z",
+          "prerelease": false,
+          "draft": false
+        },
+        {
+          "tag": "v1.39.6",
+          "published_at": "2026-10-27T00:45:01Z",
+          "prerelease": false,
+          "draft": false
+        },
+        {
+          "tag": "v1.38.9",
+          "published_at": "2026-10-26T23:41:15Z",
+          "prerelease": false,
+          "draft": false
+        },
+        {
+          "tag": "v1.37.11",
+          "published_at": "2026-10-26T21:59:50Z",
+          "prerelease": false,
+          "draft": false
+        },
+        {
+          "tag": "v1.40.1",
+          "published_at": "2026-10-23T02:09:40Z",
+          "prerelease": false,
+          "draft": false
+        },
+        {
+          "tag": "v1.39.5",
+          "published_at": "2026-10-23T00:59:13Z",
+          "prerelease": false,
+          "draft": false
+        }
+      ]
+    },
+    {
+      "name": "llhttp",
+      "tag": "release/v9.4.4",
+      "source": "816485216511b86459b2e6478190e14c38c14891",
+      "object_type": "commit",
+      "expected_tag": "release/v9.4.4",
+      "expected_source": "816485216511b86459b2e6478190e14c38c14891",
+      "published_at": "2026-11-13T15:00:15Z",
+      "official_url": "https://github.com/nodejs/llhttp/releases/tag/release/v9.4.4",
+      "same_as_reviewed_release": true,
+      "recent_releases": [
+        {
+          "tag": "release/v9.4.4",
+          "published_at": "2026-11-13T15:00:15Z",
+          "prerelease": false,
+          "draft": false
+        },
+        {
+          "tag": "release/v9.4.3",
+          "published_at": "2026-07-30T14:04:12Z",
+          "prerelease": false,
+          "draft": false
+        },
+        {
+          "tag": "release/v9.4.2",
+          "published_at": "2026-06-18T11:28:50Z",
+          "prerelease": false,
+          "draft": false
+        },
+        {
+          "tag": "release/v9.4.1",
+          "published_at": "2026-04-30T10:36:38Z",
+          "prerelease": false,
+          "draft": false
+        },
+        {
+          "tag": "release/v9.4.0",
+          "published_at": "2026-04-28T14:31:43Z",
+          "prerelease": false,
+          "draft": false
+        },
+        {
+          "tag": "release/v9.3.1",
+          "published_at": "2026-02-14T16:44:23Z",
+          "prerelease": false,
+          "draft": false
+        }
+      ]
+    }
+  ],
+  "maintainer_package_sha256": "8041b7f91b4eac486769106383782b5020e9c0c652eacc93d96ef51f893162d4",
+  "capability_results": [
+    {
+      "id": "C1",
+      "state": "LLHTTP_CAPABILITY_ONLY_COMPLETE_RUNTIME_MISSING",
+      "new_released_change": false,
+      "original_failure_repaired": false
+    },
+    {
+      "id": "C2",
+      "state": "MISSING_SUPPORTED_API",
+      "new_released_change": false,
+      "original_failure_repaired": false
+    },
+    {
+      "id": "C3",
+      "state": "MISSING_SUPPORTED_API",
+      "new_released_change": false,
+      "original_failure_repaired": false
+    },
+    {
+      "id": "C4",
+      "state": "MISSING_SUPPORTED_API",
+      "new_released_change": false,
+      "original_failure_repaired": false
+    }
+  ],
+  "protected_inventory_sha256": "85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa",
+  "passed": true,
+  "ended": "2026-11-15T11:04:14.233Z"
+}
