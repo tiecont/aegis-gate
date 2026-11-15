@@ -1,0 +1,1500 @@
+{
+  "source_commit": "f57a56ccccae96168b62391ceeb7d678f5a8d7a1",
+  "source_tree": "7c47c7718756134daa32669aa653009cd31b5890",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05c-b/spikes/envoy/sprint05c-b-matrix.mjs",
+    "/tmp/aegisgate-05c-b/evidence/sprint05c-b/go-ordering-02/matrix.json",
+    "/tmp/aegisgate-05c-b/.local/sprint05c-b-proof-OKcv3T"
+  ],
+  "scope": "supplemental protocol/causal observations only; original75/23 remain authoritative",
+  "started_at": "2026-11-15T04:41:11.824Z",
+  "tests": [
+    {
+      "name": "cold-host-mismatch-zero-origin",
+      "started_at": "2026-11-15T04:41:13.287Z",
+      "status": "pass",
+      "detail": {
+        "status": 421,
+        "rst_code": 0,
+        "error": null,
+        "body": "authority denied\n"
+      },
+      "before": {
+        "bytes": 0,
+        "accepts": 0,
+        "handlers": 0,
+        "events": 0
+      },
+      "after": {
+        "bytes": 0,
+        "accepts": 0,
+        "handlers": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "valid-cold-warm-sequential-h2-reuse",
+      "started_at": "2026-11-15T04:41:13.312Z",
+      "status": "pass",
+      "detail": [
+        {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        }
+      ],
+      "before": {
+        "bytes": 0,
+        "accepts": 0,
+        "handlers": 0,
+        "events": 0
+      },
+      "after": {
+        "bytes": 224,
+        "accepts": 1,
+        "handlers": 6,
+        "events": 16
+      }
+    },
+    {
+      "name": "concurrent-eight-streams-one-h2-pool",
+      "started_at": "2026-11-15T04:41:13.413Z",
+      "status": "pass",
+      "detail": [
+        {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        }
+      ],
+      "before": {
+        "bytes": 224,
+        "accepts": 1,
+        "handlers": 6,
+        "events": 16
+      },
+      "after": {
+        "bytes": 357,
+        "accepts": 1,
+        "handlers": 14,
+        "events": 26
+      }
+    },
+    {
+      "name": "warm-original-authority-status-requirements",
+      "started_at": "2026-11-15T04:41:13.612Z",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: [{\"headers\":{\"host\":\"edge-a.test\"},\"response\":{\"status\":421,\"rst_code\":0,\"error\":null,\"body\":\"authority denied\\n\"},\"before\":{\"bytes\":357,\"accepts\":1,\"handlers\":14,\"events\":26},\"after\":{\"bytes\":357,\"accepts\":1,\"handlers\":14,\"events\":26}},{\"headers\":{\":authority\":\"edge-a.test\"},\"response\":{\"status\":421,\"rst_code\":0,\"error\":null,\"body\":\"authority denied\\n\"},\"before\":{\"bytes\":357,\"accepts\":1,\"handlers\":14,\"events\":26},\"after\":{\"bytes\":357,\"accepts\":1,\"handlers\":14,\"events\":26}},{\"headers\":{\":authority\":\"user@edge-b.test\"},\"response\":{\"status\":null,\"rst_code\":1,\"error\":\"ERR_HTTP2_STREAM_ERROR\",\"body\":\"\"},\"before\":{\"bytes\":357,\"accepts\":1,\"handlers\":14,\"events\":26},\"after\":{\"bytes\":357,\"accepts\":1,\"handlers\":14,\"events\":26}}]\n    at file:///tmp/aegisgate-05c-b/spikes/envoy/sprint05c-b-matrix.mjs:136:12\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async test (file:///tmp/aegisgate-05c-b/spikes/envoy/sprint05c-b-matrix.mjs:33:66)\n    at async file:///tmp/aegisgate-05c-b/spikes/envoy/sprint05c-b-matrix.mjs:130:3",
+      "before": {
+        "bytes": 357,
+        "accepts": 1,
+        "handlers": 14,
+        "events": 26
+      },
+      "after": {
+        "bytes": 357,
+        "accepts": 1,
+        "handlers": 14,
+        "events": 26
+      }
+    },
+    {
+      "name": "independent-origin-settings-cause-exact-nine-byte-ack",
+      "started_at": "2026-11-15T04:41:13.616Z",
+      "status": "pass",
+      "detail": {
+        "raw_hex": "000000040100000000",
+        "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+        "downstream_requests": 0,
+        "peer_settings": {
+          "maxConcurrentStreams": 31
+        }
+      },
+      "before": {
+        "bytes": 357,
+        "accepts": 1,
+        "handlers": 14,
+        "events": 26
+      },
+      "after": {
+        "bytes": 366,
+        "accepts": 1,
+        "handlers": 14,
+        "events": 28
+      }
+    },
+    {
+      "name": "settings-during-421-is-all-byte-counterexample",
+      "started_at": "2026-11-15T04:41:13.619Z",
+      "status": "pass",
+      "detail": {
+        "response": {
+          "status": 421,
+          "rst_code": 0,
+          "error": null,
+          "body": "authority denied\n"
+        },
+        "raw_hex": "000000040100000000",
+        "original_all_byte_property": "FAIL",
+        "scope": "controlled overlapping peer SETTINGS; not an original75 measurement or repair"
+      },
+      "before": {
+        "bytes": 366,
+        "accepts": 1,
+        "handlers": 14,
+        "events": 28
+      },
+      "after": {
+        "bytes": 375,
+        "accepts": 1,
+        "handlers": 14,
+        "events": 30
+      }
+    },
+    {
+      "name": "tenant-pools-do-not-cross-reuse",
+      "started_at": "2026-11-15T04:41:13.621Z",
+      "status": "pass",
+      "detail": {
+        "a": {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "2",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        "b": {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        }
+      },
+      "before": {
+        "bytes": 375,
+        "accepts": 1,
+        "handlers": 14,
+        "events": 30
+      },
+      "after": {
+        "bytes": 535,
+        "accepts": 2,
+        "handlers": 16,
+        "events": 38
+      }
+    },
+    {
+      "name": "generation-swap-preserves-inflight-and-retires-pool",
+      "started_at": "2026-11-15T04:41:13.679Z",
+      "status": "pass",
+      "detail": {
+        "old": {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "1",
+          "generation": "1",
+          "body": "h2-origin"
+        },
+        "next": {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "3",
+          "generation": "2",
+          "body": "h2-origin"
+        }
+      },
+      "before": {
+        "bytes": 535,
+        "accepts": 2,
+        "handlers": 16,
+        "events": 38
+      },
+      "after": {
+        "bytes": 711,
+        "accepts": 3,
+        "handlers": 19,
+        "events": 48
+      }
+    },
+    {
+      "name": "trust-retirement-fails-closed-and-restores-new-pool",
+      "started_at": "2026-11-15T04:41:13.835Z",
+      "status": "pass",
+      "detail": {
+        "old": {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "3",
+          "generation": "2",
+          "body": "h2-origin"
+        },
+        "rejected": {
+          "status": 503,
+          "rst_code": 0,
+          "error": null,
+          "body": "origin unavailable\n"
+        },
+        "restored": {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "4",
+          "generation": "4",
+          "body": "h2-origin"
+        }
+      },
+      "before": {
+        "bytes": 711,
+        "accepts": 3,
+        "handlers": 19,
+        "events": 48
+      },
+      "after": {
+        "bytes": 887,
+        "accepts": 8,
+        "handlers": 22,
+        "events": 62
+      }
+    },
+    {
+      "name": "h2-stream-cancellation-reaches-origin",
+      "started_at": "2026-11-15T04:41:13.991Z",
+      "status": "pass",
+      "detail": {
+        "first_chunk_bytes": 4096,
+        "origin_stream_closed": true,
+        "upstream_protocol": "h2"
+      },
+      "before": {
+        "bytes": 887,
+        "accepts": 8,
+        "handlers": 22,
+        "events": 62
+      },
+      "after": {
+        "bytes": 948,
+        "accepts": 8,
+        "handlers": 23,
+        "events": 67
+      }
+    },
+    {
+      "name": "grpc-bidi-streaming-and-trailers-h2",
+      "started_at": "2026-11-15T04:41:14.053Z",
+      "status": "pass",
+      "detail": {
+        "values": [
+          "echo:one",
+          "echo:two"
+        ],
+        "status": 0,
+        "trailer": [
+          "complete"
+        ],
+        "upstream_alpn": "h2"
+      },
+      "before": {
+        "bytes": 948,
+        "accepts": 8,
+        "handlers": 23,
+        "events": 67
+      },
+      "after": {
+        "bytes": 1252,
+        "accepts": 9,
+        "handlers": 23,
+        "events": 79
+      }
+    },
+    {
+      "name": "drain-completes-established-h2-response",
+      "started_at": "2026-11-15T04:41:14.306Z",
+      "status": "pass",
+      "detail": {
+        "response": {
+          "status": 200,
+          "rst_code": 0,
+          "error": null,
+          "connection": "5",
+          "generation": "6",
+          "body": "h2-origin"
+        },
+        "code": 0,
+        "signal": null
+      },
+      "before": {
+        "bytes": 1252,
+        "accepts": 9,
+        "handlers": 23,
+        "events": 79
+      },
+      "after": {
+        "bytes": 1453,
+        "accepts": 10,
+        "handlers": 25,
+        "events": 91
+      }
+    }
+  ],
+  "security_pass": false,
+  "launcher_pid": 1146028,
+  "authority_observations": [
+    {
+      "headers": {
+        "host": "edge-a.test"
+      },
+      "response": {
+        "status": 421,
+        "rst_code": 0,
+        "error": null,
+        "body": "authority denied\n"
+      },
+      "before": {
+        "bytes": 357,
+        "accepts": 1,
+        "handlers": 14,
+        "events": 26
+      },
+      "after": {
+        "bytes": 357,
+        "accepts": 1,
+        "handlers": 14,
+        "events": 26
+      }
+    },
+    {
+      "headers": {
+        ":authority": "edge-a.test"
+      },
+      "response": {
+        "status": 421,
+        "rst_code": 0,
+        "error": null,
+        "body": "authority denied\n"
+      },
+      "before": {
+        "bytes": 357,
+        "accepts": 1,
+        "handlers": 14,
+        "events": 26
+      },
+      "after": {
+        "bytes": 357,
+        "accepts": 1,
+        "handlers": 14,
+        "events": 26
+      }
+    },
+    {
+      "headers": {
+        ":authority": "user@edge-b.test"
+      },
+      "response": {
+        "status": null,
+        "rst_code": 1,
+        "error": "ERR_HTTP2_STREAM_ERROR",
+        "body": ""
+      },
+      "before": {
+        "bytes": 357,
+        "accepts": 1,
+        "handlers": 14,
+        "events": 26
+      },
+      "after": {
+        "bytes": 357,
+        "accepts": 1,
+        "handlers": 14,
+        "events": 26
+      }
+    }
+  ],
+  "capture": {
+    "bounds": {
+      "bytes": 2097152,
+      "events": 4096
+    },
+    "kept": 11090,
+    "omitted": 0,
+    "events": [
+      {
+        "sequence": 1,
+        "time_ns": "60719345676242",
+        "kind": "secure",
+        "connection": "40473:1",
+        "sni": "lab-origin.test",
+        "alpn": "h2",
+        "local": {
+          "address": "127.0.0.1",
+          "port": 34151
+        },
+        "remote": {
+          "address": "127.0.0.1",
+          "port": 41270
+        }
+      },
+      {
+        "sequence": 2,
+        "time_ns": "60719353898976",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00001804000000000000020000000000040040000000050010000000060001014000000408000000000040000000"
+      },
+      {
+        "sequence": 3,
+        "time_ns": "60719354060517",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "000038010500000001418ba071ac7b0d31aa5d25427f828487408cf2b5038d698b516c1a4c7abf01314088f2b5038d6b0f6a4b882c931568d749509f50839bd9ab"
+      },
+      {
+        "sequence": 4,
+        "time_ns": "60719358050362",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:1",
+        "hex": "000000040000000000000000040100000000"
+      },
+      {
+        "sequence": 5,
+        "time_ns": "60719358257369",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:1",
+        "hex": "00003d01040000000188408ef2b1ec34c6a9621eaa8a4498f57f0131408ef2b1ec34c6a9698b516c1a4c7abf01316196dd6d5f4a05b5349fba82009c500d5c683702ca98b46f00000900010000000168322d6f726967696e"
+      },
+      {
+        "sequence": 6,
+        "time_ns": "60719387668506",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "000000040100000000"
+      },
+      {
+        "sequence": 7,
+        "time_ns": "60719389200945",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "000007010500000003c1828487c0bfbe"
+      },
+      {
+        "sequence": 8,
+        "time_ns": "60719429137315",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:1",
+        "hex": "00000401040000000388c0bfbe00000900010000000368322d6f726967696e"
+      },
+      {
+        "sequence": 9,
+        "time_ns": "60719430617863",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "000007010500000005c1828487c0bfbe"
+      },
+      {
+        "sequence": 10,
+        "time_ns": "60719431261233",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:1",
+        "hex": "00000401040000000588c0bfbe00000900010000000568322d6f726967696e"
+      },
+      {
+        "sequence": 11,
+        "time_ns": "60719432107280",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "000007010500000007c1828487c0bfbe"
+      },
+      {
+        "sequence": 12,
+        "time_ns": "60719432716429",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:1",
+        "hex": "00000401040000000788c0bfbe00000900010000000768322d6f726967696e"
+      },
+      {
+        "sequence": 13,
+        "time_ns": "60719434352231",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "000007010500000009c1828487c0bfbe"
+      },
+      {
+        "sequence": 14,
+        "time_ns": "60719435101689",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:1",
+        "hex": "00000401040000000988c0bfbe00000900010000000968322d6f726967696e"
+      },
+      {
+        "sequence": 15,
+        "time_ns": "60719436168572",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "00000701050000000bc1828487bfc0be"
+      },
+      {
+        "sequence": 16,
+        "time_ns": "60719436670515",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:1",
+        "hex": "00000401040000000b88c0bfbe00000900010000000b68322d6f726967696e"
+      },
+      {
+        "sequence": 17,
+        "time_ns": "60719439141051",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "00000c01050000000dc182458461141fc787c1c0bf"
+      },
+      {
+        "sequence": 18,
+        "time_ns": "60719439491161",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "00000701050000000fc282be87c1c0bf"
+      },
+      {
+        "sequence": 19,
+        "time_ns": "60719439557928",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "000007010500000011c282be87c1c0bf"
+      },
+      {
+        "sequence": 20,
+        "time_ns": "60719439595014",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "000007010500000013c282be87c0c1bf"
+      },
+      {
+        "sequence": 21,
+        "time_ns": "60719439613312",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "000007010500000015c282be87c1c0bf"
+      },
+      {
+        "sequence": 22,
+        "time_ns": "60719439624626",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "000007010500000017c282be87c1c0bf"
+      },
+      {
+        "sequence": 23,
+        "time_ns": "60719439635032",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "000007010500000019c282be87c1c0bf"
+      },
+      {
+        "sequence": 24,
+        "time_ns": "60719439780300",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "00000701050000001bc282be87c1c0bf"
+      },
+      {
+        "sequence": 25,
+        "time_ns": "60719590116808",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:1",
+        "hex": "00000401040000000d88c0bfbe00000900010000000d68322d6f726967696e"
+      },
+      {
+        "sequence": 26,
+        "time_ns": "60719632814530",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:1",
+        "hex": "00000401040000000f88c0bfbe00000401040000001188c0bfbe00000401040000001388c0bfbe00000401040000001588c0bfbe00000401040000001788c0bfbe00000401040000001988c0bfbe00000401040000001b88c0bfbe00000900010000000f68322d6f726967696e00000900010000001168322d6f726967696e00000900010000001368322d6f726967696e00000900010000001568322d6f726967696e00000900010000001768322d6f726967696e00000900010000001968322d6f726967696e00000900010000001b68322d6f726967696e"
+      },
+      {
+        "sequence": 27,
+        "time_ns": "60719640612076",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:1",
+        "hex": "00000604000000000000030000001f"
+      },
+      {
+        "sequence": 28,
+        "time_ns": "60719641170380",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "000000040100000000"
+      },
+      {
+        "sequence": 29,
+        "time_ns": "60719643653976",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:1",
+        "hex": "00000604000000000000030000001d"
+      },
+      {
+        "sequence": 30,
+        "time_ns": "60719643981109",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "000000040100000000"
+      },
+      {
+        "sequence": 31,
+        "time_ns": "60719657866785",
+        "kind": "secure",
+        "connection": "40473:2",
+        "sni": "lab-origin.test",
+        "alpn": "h2",
+        "local": {
+          "address": "127.0.0.1",
+          "port": 34151
+        },
+        "remote": {
+          "address": "127.0.0.1",
+          "port": 41284
+        }
+      },
+      {
+        "sequence": 32,
+        "time_ns": "60719661914039",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:2",
+        "hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00001804000000000000020000000000040040000000050010000000060001014000000408000000000040000000"
+      },
+      {
+        "sequence": 33,
+        "time_ns": "60719661958248",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:2",
+        "hex": "000038010500000001418ba071ac7b0d31aa5d25427f828487408cf2b5038d698b516c1a4c7abf01314088f2b5038d6b0f6a4b882c931561ae92a13f50839bd9ab"
+      },
+      {
+        "sequence": 34,
+        "time_ns": "60719663790372",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:2",
+        "hex": "000000040000000000000000040100000000"
+      },
+      {
+        "sequence": 35,
+        "time_ns": "60719663855603",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:2",
+        "hex": "00003d01040000000188408ef2b1ec34c6a9621eaa8a4498f57f0132408ef2b1ec34c6a9698b516c1a4c7abf01316196dd6d5f4a05b5349fba82009c500d5c683702ca98b46f00000900010000000168322d6f726967696e"
+      },
+      {
+        "sequence": 36,
+        "time_ns": "60719699390978",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:2",
+        "hex": "000000040100000000"
+      },
+      {
+        "sequence": 37,
+        "time_ns": "60719701308797",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "00000701050000001dc2828487c1c0bf"
+      },
+      {
+        "sequence": 38,
+        "time_ns": "60719702373864",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:1",
+        "hex": "00000401040000001d88c0bfbe00000900010000001d68322d6f726967696e"
+      },
+      {
+        "sequence": 39,
+        "time_ns": "60719705549858",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "00000701050000001fc282be87c1c0bf"
+      },
+      {
+        "sequence": 40,
+        "time_ns": "60719717140926",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:1",
+        "hex": "000007010500000021c2828487c1c0bf"
+      },
+      {
+        "sequence": 41,
+        "time_ns": "60719746963284",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:1",
+        "hex": "00000401040000002188c0bfbe00000900010000002168322d6f726967696e"
+      },
+      {
+        "sequence": 42,
+        "time_ns": "60719780519381",
+        "kind": "secure",
+        "connection": "40473:3",
+        "sni": "lab-origin.test",
+        "alpn": "h2",
+        "local": {
+          "address": "127.0.0.1",
+          "port": 34151
+        },
+        "remote": {
+          "address": "127.0.0.1",
+          "port": 41294
+        }
+      },
+      {
+        "sequence": 43,
+        "time_ns": "60719785141002",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:3",
+        "hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00001804000000000000020000000000040040000000050010000000060001014000000408000000000040000000"
+      },
+      {
+        "sequence": 44,
+        "time_ns": "60719785223693",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:3",
+        "hex": "000038010500000001418ba071ac7b0d31aa5d25427f828487408cf2b5038d698b516c1a4c7abf01324088f2b5038d6b0f6a4b882c931568d749509f50839bd9ab"
+      },
+      {
+        "sequence": 45,
+        "time_ns": "60719787222527",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:3",
+        "hex": "000000040000000000000000040100000000"
+      },
+      {
+        "sequence": 46,
+        "time_ns": "60719787350404",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:3",
+        "hex": "00003d01040000000188408ef2b1ec34c6a9621eaa8a4498f57f0133408ef2b1ec34c6a9698b516c1a4c7abf01326196dd6d5f4a05b5349fba82009c500d5c683702ca98b46f00000900010000000168322d6f726967696e"
+      },
+      {
+        "sequence": 47,
+        "time_ns": "60719822686315",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:3",
+        "hex": "000000040100000000"
+      },
+      {
+        "sequence": 48,
+        "time_ns": "60719857053260",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:1",
+        "hex": "00000401040000001f88c0bfbe00000900010000001f68322d6f726967696e"
+      },
+      {
+        "sequence": 49,
+        "time_ns": "60719860047459",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:3",
+        "hex": "000007010500000003c1828487c0bfbe"
+      },
+      {
+        "sequence": 50,
+        "time_ns": "60719864050504",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:3",
+        "hex": "00000401040000000388c0bfbe00000900010000000368322d6f726967696e"
+      },
+      {
+        "sequence": 51,
+        "time_ns": "60719866213462",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:3",
+        "hex": "000007010500000005c1828487c0bfbe"
+      },
+      {
+        "sequence": 52,
+        "time_ns": "60719867413181",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:3",
+        "hex": "00000401040000000588c0bfbe00000900010000000568322d6f726967696e"
+      },
+      {
+        "sequence": 53,
+        "time_ns": "60719897376756",
+        "kind": "transport-error"
+      },
+      {
+        "sequence": 54,
+        "time_ns": "60719903726928",
+        "kind": "transport-error"
+      },
+      {
+        "sequence": 55,
+        "time_ns": "60719908104387",
+        "kind": "transport-error"
+      },
+      {
+        "sequence": 56,
+        "time_ns": "60719940124134",
+        "kind": "transport-error"
+      },
+      {
+        "sequence": 57,
+        "time_ns": "60719972271201",
+        "kind": "secure",
+        "connection": "40473:4",
+        "sni": "lab-origin.test",
+        "alpn": "h2",
+        "local": {
+          "address": "127.0.0.1",
+          "port": 34151
+        },
+        "remote": {
+          "address": "127.0.0.1",
+          "port": 41330
+        }
+      },
+      {
+        "sequence": 58,
+        "time_ns": "60719976354631",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:4",
+        "hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00001804000000000000020000000000040040000000050010000000060001014000000408000000000040000000"
+      },
+      {
+        "sequence": 59,
+        "time_ns": "60719976426497",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:4",
+        "hex": "000038010500000001418ba071ac7b0d31aa5d25427f828487408cf2b5038d698b516c1a4c7abf01344088f2b5038d6b0f6a4b882c931568d749509f50839bd9ab"
+      },
+      {
+        "sequence": 60,
+        "time_ns": "60719977727555",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:4",
+        "hex": "000000040000000000000000040100000000"
+      },
+      {
+        "sequence": 61,
+        "time_ns": "60719977789573",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:4",
+        "hex": "00003d01040000000188408ef2b1ec34c6a9621eaa8a4498f57f0134408ef2b1ec34c6a9698b516c1a4c7abf01346196dd6d5f4a05b5349fba82009c500d5c683702ca98b46f00000900010000000168322d6f726967696e"
+      },
+      {
+        "sequence": 62,
+        "time_ns": "60720013531187",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:4",
+        "hex": "000000040100000000"
+      },
+      {
+        "sequence": 63,
+        "time_ns": "60720017635850",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:4",
+        "hex": "00000d010500000003c18245856083a885a387c1c0bf"
+      },
+      {
+        "sequence": 64,
+        "time_ns": "60720055155671",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:4",
+        "hex": "000019010400000003886196dd6d5f4a05b5349fba82009c500d5c683702d298b46f00100000000000000378787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878"
+      },
+      {
+        "sequence": 65,
+        "time_ns": "60720055710065",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:4",
+        "hex": "0000040800000000000000100900000408000000000300001000"
+      },
+      {
+        "sequence": 66,
+        "time_ns": "60720057297189",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:4",
+        "hex": "00000403000000000300000008"
+      },
+      {
+        "sequence": 67,
+        "time_ns": "60720075597061",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:4",
+        "hex": "00100000000000000378787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878"
+      },
+      {
+        "sequence": 68,
+        "time_ns": "60720080664474",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:4",
+        "hex": "00000408000000000000001000"
+      },
+      {
+        "sequence": 69,
+        "time_ns": "60720228368139",
+        "kind": "secure",
+        "connection": "41891:1",
+        "sni": "lab-origin.test",
+        "alpn": "h2",
+        "local": {
+          "address": "127.0.0.1",
+          "port": 33411
+        },
+        "remote": {
+          "address": "127.0.0.1",
+          "port": 51988
+        }
+      },
+      {
+        "sequence": 70,
+        "time_ns": "60720235695169",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "41891:1",
+        "hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00001804000000000000020000000000040040000000050010000000060001014000000408000000000040000000"
+      },
+      {
+        "sequence": 71,
+        "time_ns": "60720235750972",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "41891:1",
+        "hex": "0000a0010400000001418ba071ac7b0d31aa5d25427f83458b6281c6be024e762f4e34ff875f8b1d75d0620d263d4c4d656440027465864d833505b11f408e9acac8b0c842d6958b510f21aa9b903485a9264fafa90b2d03497ea6f66aff408cf2b5038d698b516c1a4c7abf01354088f2b5038d6b0f6a4b882c931568d749509f50863485a9264faf40899acac8b24d494f6a7f8469f7434f7a8e9acac8b54790ab7443015c2d2eef"
+      },
+      {
+        "sequence": 72,
+        "time_ns": "60720235761448",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "41891:1",
+        "hex": "00000800000000000100000000036f6e65"
+      },
+      {
+        "sequence": 73,
+        "time_ns": "60720242070275",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "41891:1",
+        "hex": "000000040000000000000000040100000000"
+      },
+      {
+        "sequence": 74,
+        "time_ns": "60720242460194",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "41891:1",
+        "hex": "00005f010400000001885f901d75d0620d263d4c4d6564ff75d8749f408e9acac8b0c842d6958b510f21aa9b903485a9264fafa90b2d03497ea6f66aff408a9acac8b16a21e435537f863485a9264faf6196dd6d5f4a05b5349fba82009c500d5c683702d298b46f00000d00000000000100000000086563686f3a6f6e65"
+      },
+      {
+        "sequence": 75,
+        "time_ns": "60720269366643",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "41891:1",
+        "hex": "000000040100000000"
+      },
+      {
+        "sequence": 76,
+        "time_ns": "60720279831046",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "41891:1",
+        "hex": "000008000000000001000000000374776f"
+      },
+      {
+        "sequence": 77,
+        "time_ns": "60720310628795",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "41891:1",
+        "hex": "00000d00000000000100000000086563686f3a74776f"
+      },
+      {
+        "sequence": 78,
+        "time_ns": "60720322540362",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "41891:1",
+        "hex": "000000000100000001"
+      },
+      {
+        "sequence": 79,
+        "time_ns": "60720324980657",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "41891:1",
+        "hex": "00002b01050000000140889acac8b21234da8f013040899acac8b5254207317f024f4b4088a071ac9b066a0b678621e9ae82a4bf"
+      },
+      {
+        "sequence": 80,
+        "time_ns": "60720334238287",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "41891:1",
+        "hex": "00000b010500000003c7828487c2c150839bd9ab"
+      },
+      {
+        "sequence": 81,
+        "time_ns": "60720335887080",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "41891:1",
+        "hex": "0000060105000000034803343135c2"
+      },
+      {
+        "sequence": 82,
+        "time_ns": "60720363210058",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "41891:1",
+        "hex": "000007010500000005c8828487c3c2be"
+      },
+      {
+        "sequence": 83,
+        "time_ns": "60720364892933",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "41891:1",
+        "hex": "000002010500000005bec2"
+      },
+      {
+        "sequence": 84,
+        "time_ns": "60720396439581",
+        "kind": "secure",
+        "connection": "40473:5",
+        "sni": "lab-origin.test",
+        "alpn": "h2",
+        "local": {
+          "address": "127.0.0.1",
+          "port": 34151
+        },
+        "remote": {
+          "address": "127.0.0.1",
+          "port": 41344
+        }
+      },
+      {
+        "sequence": 85,
+        "time_ns": "60720399657061",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:5",
+        "hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00001804000000000000020000000000040040000000050010000000060001014000000408000000000040000000"
+      },
+      {
+        "sequence": 86,
+        "time_ns": "60720399720965",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:5",
+        "hex": "000038010500000001418ba071ac7b0d31aa5d25427f828487408cf2b5038d698b516c1a4c7abf01364088f2b5038d6b0f6a4b882c931568d749509f50839bd9ab"
+      },
+      {
+        "sequence": 87,
+        "time_ns": "60720400978861",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:5",
+        "hex": "000000040000000000000000040100000000"
+      },
+      {
+        "sequence": 88,
+        "time_ns": "60720401049889",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:5",
+        "hex": "00003d01040000000188408ef2b1ec34c6a9621eaa8a4498f57f0135408ef2b1ec34c6a9698b516c1a4c7abf01366196dd6d5f4a05b5349fba82009c500d5c683702d298b46f00000900010000000168322d6f726967696e"
+      },
+      {
+        "sequence": 89,
+        "time_ns": "60720437762704",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:5",
+        "hex": "000000040100000000"
+      },
+      {
+        "sequence": 90,
+        "time_ns": "60720439261760",
+        "kind": "bytes",
+        "direction": "proxy_to_origin",
+        "connection": "40473:5",
+        "hex": "00000c010500000003c182458461141fc787c1c0bf"
+      },
+      {
+        "sequence": 91,
+        "time_ns": "60720629616284",
+        "kind": "bytes",
+        "direction": "origin_to_proxy",
+        "connection": "40473:5",
+        "hex": "00000401040000000388c0bfbe00000900010000000368322d6f726967696e"
+      }
+    ],
+    "handlers": [
+      {
+        "connection": 1,
+        "stream": 1,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/"
+      },
+      {
+        "connection": 1,
+        "stream": 3,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/"
+      },
+      {
+        "connection": 1,
+        "stream": 5,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/"
+      },
+      {
+        "connection": 1,
+        "stream": 7,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/"
+      },
+      {
+        "connection": 1,
+        "stream": 9,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/"
+      },
+      {
+        "connection": 1,
+        "stream": 11,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/"
+      },
+      {
+        "connection": 1,
+        "stream": 13,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/slow"
+      },
+      {
+        "connection": 1,
+        "stream": 15,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/slow"
+      },
+      {
+        "connection": 1,
+        "stream": 17,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/slow"
+      },
+      {
+        "connection": 1,
+        "stream": 19,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/slow"
+      },
+      {
+        "connection": 1,
+        "stream": 21,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/slow"
+      },
+      {
+        "connection": 1,
+        "stream": 23,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/slow"
+      },
+      {
+        "connection": 1,
+        "stream": 25,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/slow"
+      },
+      {
+        "connection": 1,
+        "stream": 27,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/slow"
+      },
+      {
+        "connection": 2,
+        "stream": 1,
+        "route": "edge-a.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/"
+      },
+      {
+        "connection": 1,
+        "stream": 29,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/"
+      },
+      {
+        "connection": 1,
+        "stream": 31,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/slow"
+      },
+      {
+        "connection": 1,
+        "stream": 33,
+        "route": "edge-b.test",
+        "generation": "1",
+        "protocol": "h2",
+        "path": "/"
+      },
+      {
+        "connection": 3,
+        "stream": 1,
+        "route": "edge-b.test",
+        "generation": "2",
+        "protocol": "h2",
+        "path": "/"
+      },
+      {
+        "connection": 3,
+        "stream": 3,
+        "route": "edge-b.test",
+        "generation": "2",
+        "protocol": "h2",
+        "path": "/"
+      },
+      {
+        "connection": 3,
+        "stream": 5,
+        "route": "edge-b.test",
+        "generation": "2",
+        "protocol": "h2",
+        "path": "/"
+      },
+      {
+        "connection": 4,
+        "stream": 1,
+        "route": "edge-b.test",
+        "generation": "4",
+        "protocol": "h2",
+        "path": "/"
+      },
+      {
+        "connection": 4,
+        "stream": 3,
+        "route": "edge-b.test",
+        "generation": "4",
+        "protocol": "h2",
+        "path": "/cancel"
+      },
+      {
+        "connection": 5,
+        "stream": 1,
+        "route": "edge-b.test",
+        "generation": "6",
+        "protocol": "h2",
+        "path": "/"
+      },
+      {
+        "connection": 5,
+        "stream": 3,
+        "route": "edge-b.test",
+        "generation": "6",
+        "protocol": "h2",
+        "path": "/slow"
+      }
+    ]
+  },
+  "cleanup_complete": true,
+  "lock_held_through_cleanup": true,
+  "ended_at": "2026-11-15T04:41:14.738Z"
+}

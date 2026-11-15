@@ -1,0 +1,87 @@
+FAIL malformed-HTTP-CL-TE: malformed request reached an owned origin
+
+1 !== 0
+
+FAIL malformed-HTTP-TE-CL: malformed request reached an owned origin
+
+1 !== 0
+
+FAIL malformed-HTTP-invalid-transfer-encoding: unsafe rejection response: HTTP/1.1 501 Not Implemented
+Content-Type: text/plain; charset=utf-8
+Connection: close
+
+Unsuppor
+FAIL malformed-HTTP-obsolete-folded-header: malformed request reached an owned origin
+
+1 !== 0
+
+FAIL malformed-HTTP-Connection-nominates-trusted-header: malformed request reached an owned origin
+
+1 !== 0
+
+FAIL strict-ingress-absolute-authority-Host-mismatch: malformed request reached an owned origin
+
+1 !== 0
+
+FAIL strict-ingress-absolute-authority-userinfo: malformed request reached an owned origin
+
+1 !== 0
+
+FAIL strict-ingress-absolute-unsupported-scheme: malformed request reached an owned origin
+
+1 !== 0
+
+FAIL strict-ingress-target-fragment: malformed request reached an owned origin
+
+1 !== 0
+
+FAIL strict-ingress-connect-authority-form-disabled: unsafe rejection response: HTTP/1.1 503 Service Unavailable
+Content-Type: text/plain; charset=utf-8
+X-Content-Type-Options: n
+FAIL strict-ingress-CL-TE-pipelined: malformed request reached an owned origin
+
+2 !== 0
+
+FAIL strict-ingress-TE-CL-pipelined: malformed request reached an owned origin
+
+2 !== 0
+
+FAIL strict-ingress-TE-obsolete-fold: malformed request reached an owned origin
+
+1 !== 0
+
+FAIL strict-ingress-TE-repeated-chunked: unsafe rejection response: HTTP/1.1 501 Not Implemented
+Content-Type: text/plain; charset=utf-8
+Connection: close
+
+Unsuppor
+FAIL strict-ingress-TE-not-final-chunked: unsafe rejection response: HTTP/1.1 501 Not Implemented
+Content-Type: text/plain; charset=utf-8
+Connection: close
+
+Unsuppor
+FAIL supplemental-repeated-transfer-encoding-fields: unsafe rejection response: HTTP/1.1 501 Not Implemented
+Content-Type: text/plain; charset=utf-8
+Connection: close
+
+Unsuppor
+FAIL pre-TLS-filter-rejects-unapproved-lab-source: Missing expected rejection.
+FAIL HTTP2-authority-Host-and-SNI-confusion-rejected: Stream closed with error code NGHTTP2_PROTOCOL_ERROR
+node:events:505
+    throw er; // Unhandled 'error' event
+    ^
+
+Error: source-filter deadline
+    at TLSSocket.<anonymous> (file:///tmp/aegisgate-05c-b/spikes/pingora/lab.mjs:442:50)
+    at TLSSocket.wrapper (node:events:639:12)
+    at TLSSocket.emit (node:events:514:20)
+    at Socket._onTimeout (node:net:886:8)
+    at Timeout.onStreamTimeout [as _onTimeout] (node:internal/stream_base_commons:242:10)
+    at listOnTimeout (node:internal/timers:687:11)
+    at process.processTimers (node:internal/timers:618:7)
+Emitted 'error' event on TLSSocket instance at:
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+Node.js v26.13.0
