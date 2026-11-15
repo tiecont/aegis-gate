@@ -19,7 +19,7 @@ const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 32 << 20 }).trim();
 assert.equal(git('status', '--porcelain', '--untracked-files=no'), '');
 const commit = git('rev-parse', `${revision}^{commit}`);
-const clone = path.resolve('.local/sprint05c-f-sources', `${mode}-${commit.slice(0, 12)}-${path.basename(output)}`);
+const clone = path.join('/home/tiecont/.cache/aegisgate-sprint05c-f', `${mode}-${commit.slice(0, 12)}-${path.basename(output)}`);
 assert.ok(!fs.existsSync(clone));
 fs.mkdirSync(output, { recursive: true });
 const record = {
