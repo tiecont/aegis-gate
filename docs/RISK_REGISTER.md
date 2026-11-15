@@ -17,8 +17,13 @@ Ciphertext orphans are discarded after crashes; uncertain requests never retry
 automatically. A causal H2 exception cannot excuse late-invalid H1 forwarding.
 
 The proposed finite profile and research-attributed H2 property are inactive;
-owners/signoff PENDING. Full integration gates and delivery receipts follow in
-`reports/sprint06a-completion.md`.01 NO-GO;04-12 LOCKED;production BLOCKED.
+owners/signoff PENDING. Full locked check/security-scan/cleanup PASS at c4a2fc5,
+independently accepted by F329c3f4. Failed runs preserve the initial source race,
+Git alternates mount failure and two findings on abandoned unmerged local04C
+refs. A separate full-history candidate clone scans all750 ancestors unchanged,
+findings0; no ref deletion, suppression or history rewrite. Exact export/hosted
+delivery receipts follow in `reports/sprint06a-completion.md`.01 NO-GO;
+04-12 LOCKED;production BLOCKED.
 
 ## Sprint05-D Tested Decision Boundary
 

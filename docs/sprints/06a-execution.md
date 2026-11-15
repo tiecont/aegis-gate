@@ -55,3 +55,16 @@ Pre-existing root local credentials are not sprint fixtures and are preserved.
    ADR012/v2 remain PROPOSED, human owners/reference/date PENDING.
 
 Completion report records actual commits, verdicts and receipts as they exist.
+
+## Executed Checkpoints
+
+- Baseline/immutable11-file inventory: complete, root6097872.
+- A/B/C/D and inactive E package: implemented and independently accepted within
+  their stated scope; no historical original assertion repaired.
+- Full local integration: complete at c4a2fc5, F329c3f4 ACCEPT; check/scan/
+  teardown/volumes0,11 packages/89 top-level/151 subtests and0 unresolved skips.
+- Failed gate01/02: retained invalid source/clone setup/history-scope evidence;
+  no suppression, ref deletion, private-data publication or false PASS.
+- Sanitized export/final head review and hosted PR/main delivery: pending.
+- Complete runtime and formal architecture: not eligible; all existing locks
+  and PENDING human-owner/signoff fields remain effective.

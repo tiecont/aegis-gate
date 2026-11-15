@@ -2,8 +2,8 @@
 
 Outcome B: hardened finite-message feasibility and signed-admission proof,
 with exact maintained API dependencies. No complete gateway or architecture GO.
-This checkpoint records completed component engineering; final integration
-gate and hosted delivery receipts are pending until observed below.
+Component engineering and independently executed local integration gates are
+complete. Exact export/head review and hosted delivery remain pending below.
 
 ## Source And Independent Review
 
@@ -19,12 +19,15 @@ Root baseline receipt is `evidence/sprint06a-root/baseline/`.
 | research/sprint06a-upstream-capabilities |2788cd6,4d3b6fa /0bce723|ACCEPT bounded official API-stop/package|
 | test/sprint06a-h2-attribution |69a3be8 /716780c|ACCEPT corrected bounded consistency only|
 | docs/sprint06a-architecture-resolution |27cdf2c /6a8280e|ACCEPT inactive proposal only|
-| review/sprint06a-security |c5520d9|Independent replay/report; complete runtime REJECT|
+| review/sprint06a-security |c5520d9 components /329c3f4 local integration|Independent scoped ACCEPT; complete runtime REJECT|
 
 Root cherry-picks preserve component file bytes and original source references.
 Integration through `6f8039c0e661fe65596389ef51dbf2ec8ce55c7f`, tree
 `7ab3f972f7d224bd191ef77a70ee81f54aaccec1`, includes all six accepted tracks.
-Final delivered source, PR and merge receipts will be appended after execution.
+Full local gate source `c4a2fc529688ef53ef213e07a6567aeab3fe4fcf`, tree
+`db9756b581b3afc70de2a514ebb17bb50a9c7dcb`, includes final A manifest review.
+Subsequent changes add F review tooling/evidence and root delivery records;
+the candidate runtime files are unchanged. Final PR/merge receipts follow.
 Full verdicts and exact reproduction argv are in
 [F review](sprint06a-f-security-review.md). Previous failed captures remain.
 
@@ -117,7 +120,7 @@ original client SNI is not recovered at the Go hop. Direct trusted-loopback
 callers, static05D generation1, owned-origin allowlist and fixture JWT are
 explicit limits. This is not unified pre-stage authority, production SSRF/DNS/
 JWKS or composition with A06a. [B report](sprint06a-b-signed-admission.md) records
-scope and commands. Full integrated Module00/02/03 gate replay remains pending.
+scope and commands. Full integrated Module00/02/03 replay also PASSes below.
 
 ## Upstream Capabilities And H2 Observer
 
@@ -178,17 +181,67 @@ equivalent comparison sprint; no upstream publication without authorization.
 
 ## Delivery Gates
 
-Full exact-source locked `make check`, `make security-scan`, sanitized export,
-fixture/volume/private-material cleanup and final independent integration review:
-PENDING. Exact final-head PR foundation-quality/supply-chain-security and actual
-merge-main checks: PENDING. These fields are updated only from executed receipts.
+Independent F source4bee73d executes exact-source full gates under the shared
+fixture lock. All four commands exit0: `make check`, `make security-scan`,
+`make dev-down` and Compose teardown with volumes/remove-orphans. Raw58 artifact
+hashes,9914 tracked file hashes and all11 protected pins verify afterward;
+HEAD/tree remain exactc4a2fc5 throughout. Private matches0, owned containers/
+networks/volumes empty. All six filesystem/Envoy/image vulnerability reports
+have0 HIGH/CRITICAL. Worktree and complete750-commit candidate history scans
+have zero findings; SBOM and image identity checks PASS. Maintenance warnings
+remain visible; scanner policy/dependencies are unchanged.
+
+Actual source-bound command (pinned Go/gofmt/Node PATH, GOAMD64=v1,
+GOFLAGS=-v and disk-backed TMPDIR are retained in the receipt):
+
+```sh
+flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock \
+ /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node \
+ scripts/sprint06a-f-gates.mjs \
+ /home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates \
+ c4a2fc529688ef53ef213e07a6567aeab3fe4fcf \
+ evidence/sprint06a-f/gate-run-03 evidence/sprint06a-root/gates-03
+```
+
+Full unchanged Go race phases cover11 packages,89 distinct top-level tests and
+151 distinct subtests PASS.32 unit skip events resolve only after actual live
+PASS; no remaining skipped case. Real PostgreSQL/Redis/NATS/JetStream/mTLS,
+tenant/RBAC/OIDC, snapshot/rotation/LKG/canary/rollback/recovery, dashboard,
+strict dependencies and generated contracts pass. This is existing local
+module safety, not full gateway acceptance.
+
+Raw gate command receipt SHA256:
+`20c3834169d6acd20db5bd9f98b38bc333bbd35f5adf1840723206b0623c484e`.
+Sanitized derivative `evidence/sprint06a-root/gates-03/` preserves raw digests,
+explicit exporter provenance and all59 input files;0 redacted fields were
+needed. F gate receipt62d9225 and postgate audit329c3f4 independently verify
+local acceptance,703 accepted file mappings and complete candidate history.
+The fresh clone uses `--no-local --single-branch --no-tags` with every candidate
+ancestor/object retained:750 commits/9260 objects; fsck0. No shallow history,
+source change or scanner flag changes are used.
+
+Two failed gate lifecycles are retained, never relabeled PASS. Run01 source
+changed during checkout by root while F started gates: exact-source evidence is
+INVALID. It also exposed an unavailable Git object alternate inside scanner
+mounts. Run02 repacked the full clone and verified all888 old local-ref commits,
+but its scanner found two historical values on abandoned unmerged04C refs.
+Both flagged commits are proven non-ancestors of candidatec4. The original refs,
+failed raw outputs and redacted finding receipts remain intact; no values are
+reproduced and no finding is suppressed. A separate self-contained candidate
+clone runs the unchanged `--all` history scanner on its entire deliverable
+ancestry. Cleanup succeeded even on both failed runs. Full details and paths
+are retained in F review and `evidence/sprint06a-f/gate-run-01/02/`.
+
+Final sanitized export/source-head review: PENDING. Exact final-head PR
+foundation-quality/supply-chain-security and actual merge-main jobs: PENDING.
+No hosted result is inferred from the local gate or component acceptance.
 
 | Module/gate | Final current state |
 | --- | --- |
-|00|PASS local retained; fresh full integration replay pending|
+|00|PASS local, fresh full integration replay|
 |01 / M0-PROXY-GO-NOGO|NO-GO|
-|02|PASS local retained; fresh full integration replay pending|
-|03|PASS local fresh scoped race replay; full gates pending|
+|02|PASS local, fresh full integration replay|
+|03|PASS local, fresh scoped and full race replay|
 |04-12|LOCKED|
 |Production|BLOCKED|
 |ADR012 v2 /06A profile|PROPOSED, NOT EFFECTIVE|

@@ -21,8 +21,12 @@ actual unrelated/overlapping nine-byte SETTINGS ACK stays aggregate FAIL.
 Official release/API checks identify no qualifying maintained repair. Original
 75/23 scores remain73/75 and19/23 from retained evidence, not a fresh run.
 
-All A-E scoped tooling/proposals ACCEPTed by independent F at `c5520d9`;
-full integration local/hosted gates remain pending at this source checkpoint.
+All A-E scoped tooling/proposals ACCEPTed by independent F at `c5520d9`.
+Full locked local check/security-scan/cleanup PASS at `c4a2fc5`, independently
+accepted by F `329c3f4`:11 packages/89 top-level/151 subtests, no remaining
+skips,750 candidate-history commits scanned with zero findings. Two failed
+setup/history-scope runs remain disclosed and retained. Final export/head
+review and hosted delivery remain pending at this receipt checkpoint.
 See `docs/reports/sprint06a-completion.md` for delivery receipts and limitations.
 The consolidated finite admission and versioned research suite remain PROPOSED,
 NOT EFFECTIVE; human owners/signoff PENDING.01 NO-GO;04-12 LOCKED;production
