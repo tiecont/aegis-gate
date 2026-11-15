@@ -62,7 +62,7 @@ try {
   run('protected-tests', process.execPath, ['--test', 'spikes/edge-comparison/contract.test.mjs', 'spikes/edge-comparison/evaluate.test.mjs',
     'spikes/edge-comparison/tls-observer.test.mjs', 'spikes/envoy/wire-observer.test.mjs', 'spikes/envoy/sprint05a-a-config.test.mjs']);
   for (const file of fs.readdirSync('scripts').filter((file) => /^sprint05c-f-.*\.mjs$/.test(file))) run(`syntax-${file}`, process.execPath, ['--check', `scripts/${file}`]);
-  const fmt = run('gofmt', '/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/gofmt', ['-l', 'scripts/sprint05c-f-observer_test.go']);
+  const fmt = run('gofmt', '/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/gofmt', ['-l', 'scripts/sprint05c-f-observer_test.go.txt']);
   assert.equal(fmt.stdout.toString(), '');
   run('whitespace', 'git', ['diff', '--check', '078d83c', '--', 'scripts/sprint05c-f-*', 'docs/reports/sprint05c-f-security-review.md']);
   check('evidence/sprint05c-f');

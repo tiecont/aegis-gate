@@ -94,7 +94,7 @@ try {
     await checked('go-version', `${goRoot}/bin/go`, ['version']);
     record.observer_suite_exit = (await run('original-observer', `${goRoot}/bin/go`, ['test', '-race', '-json', './spikes/envoy/sprint05c-attribution', '-count=1'])).exit_code;
     assert.ok([0, 1].includes(record.observer_suite_exit));
-    const attack = path.join(root, 'scripts/sprint05c-f-observer_test.go');
+    const attack = path.join(root, 'scripts/sprint05c-f-observer_test.go.txt');
     const virtual = path.join(clone, 'spikes/envoy/sprint05c-attribution/sprint05c_f_review_test.go');
     const overlay = path.join(clone, '.local/sprint05c-f-overlay.json');
     fs.writeFileSync(overlay, JSON.stringify({ Replace: { [virtual]: attack } }) + '\n');

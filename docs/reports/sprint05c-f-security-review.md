@@ -217,6 +217,10 @@ whitespace pass, gitleaks exits0 with `[]`, scanner container/stage absent.
 The initial empty ENOSPC manifest remains explicitly ineligible. Closeout checks02
 add the final D report and explicit55 protected-source comparisons across all
 five reviewed heads plus unchanged dependency manifest/lockfile assertions.
+Checks02 passes697 hashes/576 inputs,55 protected comparisons, unchanged
+dependencies and the same clean scanner/cleanup result. The unchanged overlay
+fixture is subsequently renamed `.go.txt` so ordinary package discovery cannot
+include it; only Go's explicit overlay exposes its virtual `_test.go` name.
 No executable mechanism or original suite is rerun solely for this report update.
 
 ## Agent Completion Report
