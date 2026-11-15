@@ -2,8 +2,9 @@
 
 ## Scope And Implementation
 
-Question D is pending independent acceptance for the corrected bounded fixture
-suite and UNRESOLVED for complete runtime attribution. This additive research tool cannot
+Question D is IMPLEMENTED/PASS for the corrected bounded fixture suite, as
+independently reproduced, and UNRESOLVED for complete runtime attribution.
+This additive research tool cannot
 replace the immutable original75/23 evaluators, change their intervals, subtract
 control bytes or grant Module01 GO. The current all-byte requirement remains binding.
 
@@ -108,3 +109,12 @@ control now starts with a pending decision before final denial. Fresh locked
 `adversarial-five` on clean be26f55 exits0; F's original independent attack overlay
 must pass before any corrected bounded completeness claim is accepted. No
 original runtime assertion or overall security gate is repaired by this change.
+
+F then reproduced a fourth false-PASS: initial HEADERS preceded handler dispatch
+but END_HEADERS/CONTINUATION completed afterward. Source `ee67bdd` records
+completed header blocks and requires END_HEADERS capture before a handler.
+Fresh locked `adversarial-six` passes; F independently reproduces the corrected
+own race suite and all five overlay tests (four findings plus deliberate DATA
+control), exit0. This supersedes prior bounded completeness claims only within
+the tested fixture. Full runtime attribution and exact dynamic-table visibility
+remain UNRESOLVED. F's final source/hash/security verdict is a separate report.
