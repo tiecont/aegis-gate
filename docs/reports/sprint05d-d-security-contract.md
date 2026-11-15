@@ -62,6 +62,19 @@ Receipt SHA256:
 Use the runtime-four command below with output runtime-five for reproduction.
 Independent F reproduction of this correction remains required.
 
+F's next overlay confirms the nonce repair and detects two response-coverage
+gaps: valid control-only reverse bytes, or captured200 for asserted421, still
+looked consistent. Source6bc71e8 decodes final response status per stream,
+requires response completion via DATA/trailers END_STREAM and exact response
+coverage, and compares raw downstream/upstream statuses against each request's
+observed stream binding. A reset cannot stand in for a completed response.
+This is a bounded fixture consistency rule, not a new HTTP parser or general
+protocol-state certification. Runtime-six full race proof exits0. Receipt:
+`5d37cf729ee4e28e1e1db04d1df3ee7848b768c83c958072dda9c0e95afc7473`.
+Independent F attacks remain authoritative for scoped acceptance. Earlier
+incorrect narrow-correlation claims are superseded only by tested corrections;
+the failed evidence and full runtime INCOMPLETE status remain visible.
+
 ## Completeness Boundary
 
 Both streams are discovered only after real captured HEADERS. A trusted signer
