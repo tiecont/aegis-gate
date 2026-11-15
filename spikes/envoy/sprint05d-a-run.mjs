@@ -111,6 +111,13 @@ try {
     const b = Buffer.from(raw), signal = AbortSignal.timeout(4000);
     for (let at = 0; at < b.length; at += limits.readBytes) await write(socket, b.subarray(at, at + limits.readBytes), signal);
   }
+  async function sendUntilRejection(socket, raw) {
+    try { await send(socket, raw); return { writeInterrupted: false }; }
+    catch (error) {
+      if (error.message !== 'socket closed' && !['EPIPE', 'ECONNRESET', 'ERR_STREAM_DESTROYED'].includes(error.code)) throw error;
+      return { writeInterrupted: true, error: error.code ?? error.message };
+    }
+  }
   const exact = (d, parts) => {
     assert.equal(d.bytes, parts.reduce((n, p) => n + Buffer.byteLength(p), 0));
     assert.deepEqual(d.raw.map((r) => r.sha256), parts.map((p) => hash(Buffer.from(p))));
@@ -192,11 +199,15 @@ try {
       await send(socket, req('Content-Length: 1400000\r\n', 'r'.repeat(800000)));
     }
     await until(() => front.quota.bytes >= 1600000);
-    const socket = await connect(), done = collect(socket); await send(socket, req('Content-Length: 1400000\r\n', 's'.repeat(600000)));
+    const socket = await connect(), done = collect(socket);
+    const attempted = req('Content-Length: 1400000\r\n', 's'.repeat(600000));
+    const writeResult = await sendUntilRejection(socket, attempted);
     const response = await done; assert.deepEqual(response.statuses, [503]);
     for (const socket of peers) socket.destroy(); await Promise.all(dones); await settled(); zero(delta(before));
     assert.equal(front.quota.files, 0); assert.equal(front.quota.bytes, 0);
-    record.probes.push({ name: 'aggregate-ciphertext-byte-quota', response, origin: delta(before), released: true });
+    record.probes.push({ name: 'aggregate-ciphertext-byte-quota', response, origin: delta(before), released: true,
+      attemptedBytes: Buffer.byteLength(attempted), writeResult,
+      writeScope: 'attempted upload may stop at peer rejection; full delivery is not asserted' });
   }
   await settled(); {
     const before = snap(), socket = await connect(), done = collect(socket); socket.write(clPrefix);
