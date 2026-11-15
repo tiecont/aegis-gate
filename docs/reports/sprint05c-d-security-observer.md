@@ -41,6 +41,9 @@ flock /tmp/aegisgate-sprint02-fixtures.lock \
 
 `evidence/sprint05c-d/adversarial-three/` records source `b58e7bb`, tree, exact
 argv, Node binary hash, timestamps, exit0, raw Go JSON output and SHA256SUMS.
+`adversarial-four` repeats the unchanged code at source8494aa2 with collector
+`c3db637`, adding the actual Go binary and collector hashes to the receipt.
+It is the final provenance-complete receipt, not a change to test semantics.
 The live loopback TLS/H2 control verifies CA, SNI and ALPN, reads response/trailer,
 records actual decrypted traffic through a wrapping net.Conn and joins reader
 termination before final close/seal. A runtime check requires an ancestor to
@@ -69,7 +72,8 @@ Development preflights found a test-helper/type name collision (fixed before
 source acceptance) and exercised a live control before adding its ancestor-lock
 guard. Those preflights are not accepted clean-source evidence. The retained
 adversarial-one receipt covers the earlier synthetic-only source; two adds live
-TLS; three supersedes both for final-decision completeness. Earlier receipts are
+TLS; three adds final-decision completeness; four binds collector/tool binaries.
+Earlier receipts are
 retained without relabeling their source or scope.
 
 ## Remaining Gaps And Gate Disposition
