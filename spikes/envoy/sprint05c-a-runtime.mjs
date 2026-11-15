@@ -273,7 +273,7 @@ export async function runtime({ addon, edgeTLS, routes, directory }) {
       clearTimeout(timer); clearTimeout(originTimer); client.setTimeout(0); parser.close();
       signal.removeEventListener('abort', cancelOrigin); upstream?.destroy(); release?.();
       if (stage) await stage.close();
-      if (!client.destroyed) client.end();
+      if (!client.destroyed) { client.end(); client.destroySoon(); }
       metrics.activeContexts--;
     }
   }
