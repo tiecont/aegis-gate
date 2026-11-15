@@ -1,7 +1,17 @@
 # Sprint06A F Independent Security Review
 
-Status: independent review in progress. Module01 NO-GO; Modules04-12 LOCKED;
-production BLOCKED. RuntimeComplete and RuntimePass remain false.
+Status: scoped independent A/B/C/D/E component review complete, all final tracks
+ACCEPT within the limits below. Full exact integration gates remain pending.
+Module01 NO-GO; Modules04-12 LOCKED; production BLOCKED. RuntimeComplete and
+RuntimePass remain false. These component verdicts issue no architecture signoff.
+
+| Track | Exact Executable / Final Source  | Final Verdict                                            |
+| ----- | -------------------------------- | -------------------------------------------------------- |
+| A     | 73d8f41 /20e4d29                 | ACCEPT finite67 + F29; streaming FAIL                    |
+| B     | 260dc7f /e18922a                 | ACCEPT tagged signed multi-hop experiment                |
+| C     | 2788cd6,4d3b6fa,45c1a7b /0bce723 | ACCEPT scoped official API stop/local package            |
+| D     | 69a3be8 /716780c                 | ACCEPT corrected bounded correlation; runtime INCOMPLETE |
+| E     | 27cdf2c /6a8280e                 | ACCEPT inactive proposed decision; approval PENDING      |
 
 ## Executable Plan
 
@@ -174,5 +184,53 @@ multi-hop costs; no implicit security downgrade, contract activation, human
 signoff or gateway GO is present. E's summary of other tracks remains subject
 to the exact component verdicts in this report.
 
-A exact container replay and final integration gates remain pending; no
-production eligibility is inferred.
+**A ACCEPT**, exact executable `73d8f41`, final report/evidence `20e4d29`, for
+the finite admission and lab resource proof only. Clean F `a-independent-03`
+(reviewer source `e398740`) executes the exact unchanged owner collector0,
+container ingress0 and all67 controls. F's29 independent spool/admission
+attacks also exit0. The clone has its own Git object database, five released
+llhttp sources are privately copied with pin verification, and no symlink or
+external Git mount is added to make container tests pass.
+
+The replay independently validates actual384MiB/no-swap memory,0.75 CPU and64
+task limits, kernel throttling/PID/OOM event increments and8MiB tmpfs ENOSPC.
+Ingress survives the deliberately killed memory child and serves healthy
+exact-wire requests. Hard-RST cancellation is observed before origin slot
+release, with zero cancelled-request dials and wiped stage buffers; the
+separate ambiguous FIN case retains its eventual dispatch rather than claiming
+zero. All67 unique probes, streamingPositive.pass=false, resource settings,
+raw stdout/stderr and artifact manifest match the retained receipt. Cleanup
+counters are zero, private fixture/stage absent, container removed, all tracked
+bytes and11 protected pins unchanged after execution under the same flock.
+
+Second F failure `a-independent-02` is preserved: the corrected lock ancestry
+works, but the reviewer's shared Git object alternate is outside container
+mounts and HEAD cannot be read before traffic. It is an F clone-isolation setup
+failure. `a-independent-03` dissociates the clone's object database; it does
+not alter A's runtime, parser, collector, lock assertions or container settings.
+Both failed captures keep their actual failures and successful cleanup.
+
+No active hostile same-UID race resistance, physical key erasure, production
+process custody, tenant fairness, availability/SLO, H2/JWT/SSRF or complete
+gateway claim follows. The host PID namespace remains a lab lock-verification
+choice. Mandatory pre-completion streaming is actually executed and FAIL.
+
+Exact successful A command:
+
+```sh
+env TMPDIR=/home/tiecont/.cache/aegisgate-06a/f/.local/tmp flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint06a-f-review.mjs 73d8f41 evidence/sprint06a-f/a-independent-03 a
+```
+
+Final mechanical `final-audit-01` (reviewer `de831d1`) independently binds
+B155/C58/D52 retained manifest artifacts, component scope and all11 pins. C's
+Go1.27.4/x-net0.62.0 official raw metadata, exact HTTPS arguments, collector
+SHA256 and source/tree match. E's JSON inactive/PENDING/disabled flags verify.
+Pinned offline Gitleaks scans F files and reviewed changed component sources:
+empty findings. Private audit stage is removed under lock. Later A/final gate
+sources and integration receipts are audited separately.
+
+Full exact integration gates remain pending. F's new
+`scripts/sprint06a-f-gates.mjs` records source/tree, binary identities, raw
+SHA256/exit evidence, scanner semantic results, private cleanup, all tracked
+source hashes and unchanged oracle pins. No local full-gate PASS is asserted
+before actual execution on the root-supplied reviewed integration candidate.
