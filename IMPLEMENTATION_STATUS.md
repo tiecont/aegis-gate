@@ -1,5 +1,22 @@
 # Implementation status
 
+## Sprint 05-C Integration Review / Module 01 NO-GO
+
+Maintained llhttp H1 runtime implements bounded private staging and streaming;
+77 additive controls pass, but known-length premature EOF sends89 origin bytes
+before400, and staged chunked input lacks early body progress. New Go H2 inline
+ACK ordering retains userinfo failure and independent9-byte control overlap.
+Alternate Envoy oghttp2 measures20/23:two frame negatives PASS but CONTINUATION
+regresses. Accepted baseline remains73/75 and19/23, independently reproduced.
+
+Research observer corrects four independently found false-PASS defects; bounded
+adversarial controls pass, full proxy attribution UNRESOLVED. Actual00/02/03
+regressions pass. Independent F1c99633 accepts scoped tooling and technical
+stops, rejects complete runtime eligibility. Full locked local gates/cleanup PASS
+at cd32311; exact-head hosted delivery pending. See
+`docs/reports/sprint05c-completion.md`.01 NO-GO;04-12 LOCKED;production BLOCKED;
+ADR012 and human approvals PENDING.
+
 ## Sprint 05-B Complete / Module 01 NO-GO
 
 PR19 merged as `dd445fda3d6989fdb50cca13d641571eecfcdc29`. Reviewed final head

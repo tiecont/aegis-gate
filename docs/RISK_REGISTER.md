@@ -1,5 +1,20 @@
 # Implementation risk register
 
+## Sprint05-C Measured Ingress Risks
+
+Known-length framing does not guarantee strict pre-origin admission: F's CL10/
+abc/EOF returns400 after89 origin bytes/one handler. Finite chunked staging
+prevents folded-trailer forwarding but blocks early upload progress and lacks
+encrypted crash recovery. No complete runtime accepted. Engineering owner:
+Module01/root; actual human architecture/security ownership remains PENDING.
+
+New maintained H2 ACK ordering does not prevent independent SETTINGS during
+denial on reused connections. Userinfo still resets before required status;
+alternate Envoy20/23 regresses CONTINUATION. Baseline73/75 and19/23 remain.
+Four independently found observer false-PASS defects are fixed, but complete
+dispatch/HPACK mutation attribution is unproven. No contract waiver or downstream
+unlock follows. See `reports/sprint05c-completion.md` and scoped A-F reports.
+
 This register tracks residual implementation and release risks. It does not accept risks on behalf of a human reviewer. The current module states and actual executed evidence are recorded in `IMPLEMENTATION_STATUS.md`; T01–T20 mappings are maintained in `docs/SECURITY_COVERAGE.md`.
 
 ## Sprint05-A measured disposition
