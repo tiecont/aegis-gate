@@ -157,7 +157,7 @@ try {
     "-days",
     "1",
     "-subj",
-    "/CN=disposable Sprint05D A CA",
+    "/CN=disposable Sprint06A A CA",
     "-addext",
     "basicConstraints=critical,CA:TRUE",
   );
@@ -181,23 +181,47 @@ try {
       "-addext",
       `subjectAltName=DNS:${host}`,
     );
-    await openssl(
-      "x509",
-      "-req",
-      "-in",
-      `${name}.csr`,
-      "-CA",
-      "ca.pem",
-      "-CAkey",
-      "ca.key",
-      "-CAcreateserial",
-      "-out",
-      `${name}.pem`,
-      "-days",
-      name === "expired" ? "-1" : "1",
-      "-copy_extensions",
-      "copy",
-    );
+    if (name === "expired") {
+      fs.writeFileSync(path.join(pki, "index.txt"), "", { mode: 0o600 });
+      fs.writeFileSync(path.join(pki, "serial"), "1000\n", { mode: 0o600 });
+      fs.writeFileSync(
+        path.join(pki, "ca.cnf"),
+        "[ca]\ndefault_ca=lab\n[lab]\ndatabase=index.txt\nserial=serial\nnew_certs_dir=.\ncertificate=ca.pem\nprivate_key=ca.key\ndefault_md=sha256\ndefault_days=1\npolicy=policy\ncopy_extensions=copy\n[policy]\ncommonName=supplied\n",
+        { mode: 0o600 },
+      );
+      await openssl(
+        "ca",
+        "-batch",
+        "-config",
+        "ca.cnf",
+        "-in",
+        `${name}.csr`,
+        "-out",
+        `${name}.pem`,
+        "-notext",
+        "-startdate",
+        "20200101000000Z",
+        "-enddate",
+        "20200102000000Z",
+      );
+    } else
+      await openssl(
+        "x509",
+        "-req",
+        "-in",
+        `${name}.csr`,
+        "-CA",
+        "ca.pem",
+        "-CAkey",
+        "ca.key",
+        "-CAcreateserial",
+        "-out",
+        `${name}.pem`,
+        "-days",
+        "1",
+        "-copy_extensions",
+        "copy",
+      );
   }
   await openssl(
     "req",

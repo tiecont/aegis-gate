@@ -12,6 +12,10 @@ mount of that public configuration; no TLS verification policy changes.
 empty tmpfs mountpoint remained and exclusive mkdir rejected it. The collector
 now permits only an existing empty0700 directory; no fixtures were active.
 
+`run-03` at `b1a0e37` is retained FAIL before traffic: this OpenSSL rejects
+negative x509 `-days`. Expired fixtures now use the established bounded CA
+start/end-date mechanism from the unchanged wire fixture helper.
+
 ## Declared Experiment
 
 | Field | Declaration before execution |
