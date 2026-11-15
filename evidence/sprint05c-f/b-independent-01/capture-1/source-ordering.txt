@@ -1,0 +1,85 @@
+2066: 
+2067: func (rl *clientConnReadLoop) run() error {
+2068: 	cc := rl.cc
+2069: 	gotSettings := false
+2070: 	readIdleTimeout := cc.readIdleTimeout
+2071: 	var t *time.Timer
+2072: 	if readIdleTimeout != 0 {
+2073: 		t = time.AfterFunc(readIdleTimeout, cc.healthCheck)
+2074: 	}
+2075: 	for {
+2076: 		f, err := cc.fr.ReadFrame()
+2077: 		if t != nil {
+2078: 			t.Reset(readIdleTimeout)
+2079: 		}
+2080: 		if err != nil {
+2081: 			cc.vlogf("http2: Transport readFrame error on conn %p: (%T) %v", cc, err, err)
+2082: 		}
+2083: 		if se, ok := err.(StreamError); ok {
+2084: 			if cs := rl.streamByID(se.StreamID, notHeaderOrDataFrame); cs != nil {
+2085: 				if se.Cause == nil {
+2086: 					se.Cause = cc.fr.errDetail
+2087: 				}
+2088: 				rl.endStreamError(cs, se)
+2089: 			}
+2090: 			continue
+2091: 		} else if err != nil {
+2092: 			cc.countReadFrameError(err)
+2093: 			return err
+2094: 		}
+2095: 		if VerboseLogs {
+2096: 			cc.vlogf("http2: Transport received %s", summarizeFrame(f))
+2097: 		}
+2098: 		if !gotSettings {
+2099: 			if _, ok := f.(*SettingsFrame); !ok {
+2100: 				cc.logf("protocol error: received %T before a SETTINGS frame", f)
+2101: 				return ConnectionError(ErrCodeProtocol)
+2102: 			}
+2103: 			gotSettings = true
+2104: 		}
+2105: 
+2106: 		switch f := f.(type) {
+2107: 		case *MetaHeadersFrame:
+2108: 			err = rl.processHeaders(f)
+2109: 		case *DataFrame:
+2110: 			err = rl.processData(f)
+2111: 		case *GoAwayFrame:
+2112: 			err = rl.processGoAway(f)
+2113: 		case *RSTStreamFrame:
+2114: 			err = rl.processResetStream(f)
+2115: 		case *SettingsFrame:
+2116: 			err = rl.processSettings(f)
+2117: 		case *PushPromiseFrame:
+2118: 			err = rl.processPushPromise(f)
+2119: 		case *WindowUpdateFrame:
+2120: 			err = rl.processWindowUpdate(f)
+2121: 		case *PingFrame:
+2122: 			err = rl.processPing(f)
+2123: 		default:
+2124: 			cc.logf("Transport: unhandled response frame type %T", f)
+2125: 		}
+2126: 		if err != nil {
+2127: 			if VerboseLogs && err != errStopReadLoop {
+2128: 				cc.vlogf("http2: Transport conn %p received error from processing frame %v: %v", cc, summarizeFrame(f), err)
+2129: 			}
+2130: 			return err
+2131: 		}
+2132: 	}
+2133: }
+
+2723: func (rl *clientConnReadLoop) processSettings(f *SettingsFrame) error {
+2724: 	cc := rl.cc
+2725: 	// Locking both mu and wmu here allows frame encoding to read settings with only wmu held.
+2726: 	// Acquiring wmu when f.IsAck() is unnecessary, but convenient and mostly harmless.
+2727: 	cc.wmu.Lock()
+2728: 	defer cc.wmu.Unlock()
+2729: 
+2730: 	if err := rl.processSettingsNoWrite(f); err != nil {
+2731: 		return err
+2732: 	}
+2733: 	if !f.IsAck() {
+2734: 		cc.fr.WriteSettingsAck()
+2735: 		cc.bw.Flush()
+2736: 	}
+2737: 	return nil
+2738: }

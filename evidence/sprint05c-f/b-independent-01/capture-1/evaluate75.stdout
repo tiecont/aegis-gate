@@ -1,0 +1,94 @@
+{
+  "candidate": "sprint05c-b-go1.27.4-net-http-h2-only-lab",
+  "mandatory_tests": 75,
+  "passed": 56,
+  "failed": [
+    "malformed-HTTP-CL-TE",
+    "malformed-HTTP-TE-CL",
+    "malformed-HTTP-invalid-transfer-encoding",
+    "malformed-HTTP-obsolete-folded-header",
+    "malformed-HTTP-Connection-nominates-trusted-header",
+    "strict-ingress-absolute-authority-Host-mismatch",
+    "strict-ingress-absolute-authority-userinfo",
+    "strict-ingress-absolute-unsupported-scheme",
+    "strict-ingress-target-fragment",
+    "strict-ingress-connect-authority-form-disabled",
+    "strict-ingress-CL-TE-pipelined",
+    "strict-ingress-TE-CL-pipelined",
+    "strict-ingress-TE-obsolete-fold",
+    "strict-ingress-TE-repeated-chunked",
+    "strict-ingress-TE-not-final-chunked",
+    "supplemental-repeated-transfer-encoding-fields",
+    "HTTP2-authority-Host-and-SNI-confusion-rejected",
+    "weighted-health-check-failover-and-recovery",
+    "bounded-reference-benchmark"
+  ],
+  "unsafe_or_unproven_rejections": [
+    {
+      "name": "CL-TE",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "TE-CL",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "invalid-transfer-encoding",
+      "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\nContent-Type: text/plain; charset=utf-8\r\nConnection: close\r\n\r\nUnsuppor"
+    },
+    {
+      "name": "obsolete-folded-header",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "Connection-nominates-trusted-header",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "absolute-authority-Host-mismatch",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "absolute-authority-userinfo",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "absolute-unsupported-scheme",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "target-fragment",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "connect-authority-form-disabled",
+      "reason": "unsafe rejection response: HTTP/1.1 503 Service Unavailable\r\nContent-Type: text/plain; charset=utf-8\r\nX-Content-Type-Options: n"
+    },
+    {
+      "name": "CL-TE-pipelined",
+      "reason": "malformed request reached an owned origin\n\n2 !== 0\n"
+    },
+    {
+      "name": "TE-CL-pipelined",
+      "reason": "malformed request reached an owned origin\n\n2 !== 0\n"
+    },
+    {
+      "name": "TE-obsolete-fold",
+      "reason": "malformed request reached an owned origin\n\n1 !== 0\n"
+    },
+    {
+      "name": "TE-repeated-chunked",
+      "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\nContent-Type: text/plain; charset=utf-8\r\nConnection: close\r\n\r\nUnsuppor"
+    },
+    {
+      "name": "TE-not-final-chunked",
+      "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\nContent-Type: text/plain; charset=utf-8\r\nConnection: close\r\n\r\nUnsuppor"
+    },
+    {
+      "name": "repeated-transfer-encoding-fields",
+      "reason": "unsafe rejection response: HTTP/1.1 501 Not Implemented\r\nContent-Type: text/plain; charset=utf-8\r\nConnection: close\r\n\r\nUnsuppor"
+    }
+  ],
+  "protocol_proof_pass": false,
+  "architecture_approval": "requires independent dependency/security review and human architecture decision"
+}
