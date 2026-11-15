@@ -135,7 +135,6 @@ try {
     "api/envoy/config/core/v3/protocol.proto",
     "api/envoy/extensions/filters/network/http_connection_manager/v3/http_connection_manager.proto",
     "api/envoy/extensions/http/header_validators/envoy_default/v3/header_validator.proto",
-    "bazel/repository_locations.bzl",
   ]) {
     assertLock();
     const url = `https://raw.githubusercontent.com/envoyproxy/envoy/${image.source_commit}/${file}`;
