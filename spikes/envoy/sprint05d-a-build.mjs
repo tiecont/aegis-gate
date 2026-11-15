@@ -34,7 +34,9 @@ export async function build(directory, record) {
   record.compiler = await command(record, ['/usr/bin/cc', '--version']);
   record.addonSource = { file: 'spikes/envoy/sprint05c-a-llhttp.c', sha256: hash(fs.readFileSync('spikes/envoy/sprint05c-a-llhttp.c')) };
   const output = path.join(directory, 'sprint05d-a-llhttp.node');
-  await command(record, ['/usr/bin/cc', '-std=c11', '-O2', '-shared', '-fPIC', '-Wall', '-Wextra', '-Werror',
+  await command(record, ['/usr/bin/cc', '-std=c11', '-Wall', '-Wextra', '-Werror', '-fsyntax-only',
+    `-I${include}`, `-I${upstream}`, record.addonSource.file]);
+  await command(record, ['/usr/bin/cc', '-std=c11', '-O2', '-shared', '-fPIC', '-Wall', '-Werror',
     `-I${include}`, `-I${upstream}`, record.addonSource.file,
     ...['api.c', 'http.c', 'llhttp.c'].map((name) => path.join(upstream, name)), '-o', output]);
   record.addonSha256 = hash(fs.readFileSync(output));
