@@ -72,16 +72,14 @@ func runtimeHeaders(rawHex string, field string, client bool) (map[string]uint32
 		}
 		raw = raw[len(http2.ClientPreface):]
 	}
-	fr := http2.NewFramer(io.Discard, bytes.NewReader(raw))
+	reader := bytes.NewReader(raw)
+	fr := http2.NewFramer(io.Discard, reader)
 	fr.SetMaxReadFrameSize(65536)
 	fr.ReadMetaHeaders = hpack.NewDecoder(4096, nil)
 	fr.MaxHeaderListSize = 16384
 	m := map[string]uint32{}
-	for {
+	for reader.Len() > 0 {
 		frame, err := fr.ReadFrame()
-		if err == io.EOF {
-			break
-		}
 		if err != nil {
 			return nil, fmt.Errorf("incomplete frame/header capture: %w", err)
 		}
