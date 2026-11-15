@@ -25,8 +25,8 @@ contract and accepts no risk. Finite/streaming semantics and causal H2 exception
 require named human architecture/security decisions plus versioned tests.
 
 Actual00/02/03 fixture/race/dependency/dashboard regressions pass. Full locked
-local check/security-scan/cleanup pass at2cb0c34; independent final export and
-exact-head/main hosted gates remain delivery obligations in
+local check/security-scan/cleanup pass at2cb0c34; F a91b6c5 accepts exact local
+integration/export. PR23 exact-final-head/main hosted gates remain obligations in
 `reports/sprint05d-completion.md`. No production architecture or downstream
 module opens. Resume wider runtime work only on a genuinely new supported
 mechanism with targeted unchanged-case proof or a formally approved contract.

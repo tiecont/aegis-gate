@@ -24,8 +24,8 @@ Root protected receipt: `evidence/sprint05d-root/baseline/`.
 | C fix/sprint05d-h2-frame-rejection | 3474579 source/API audit; final5bc9489; no supported post-error adapter-send hook | F3172979 scoped ACCEPT |
 | D test/sprint05d-origin-isolation | 6bc71e8 response/nonce-corrected real TLS/H2 correlation; final661f0d5 | F3763052 full race/13 adversarial mutations PASS, scoped ACCEPT |
 | E test/sprint05d-runtime-regression | 01fdaac real fixtures; f155927 report/evidence; all28 commands0 | F3172979 source/retained-evidence ACCEPT; full fresh gate replay pending |
-| F review/sprint05d-security | Clean-source builds and independent attacks;538820f component acceptance | Final integration gate review pending |
-| Root sprint/05d-integration | 619d883 ownership; 1ff79f3 evidence namespace; 30c9019 proposed ADR | Integration/gates/PR pending |
+| F review/sprint05d-security | Clean-source builds/attacks; a91b6c5 final local integration/export ACCEPT | Fresh full locked gates and semantic/source audit PASS |
+| Root sprint/05d-integration | 619d883 ownership; 1ff79f3 namespaces; 30c9019 proposed ADR;2cb0c34 tested integration | PR23 open; exact final-head/merge receipts pending |
 
 Agent reports and their receipts carry full source/tree/tool versions, exact
 argv, exits, artifact SHA256 and failed-attempt history. Shared fixtures hold
@@ -147,9 +147,18 @@ Private-value checks examine57 files with zero matches; all private fixture
 paths and project containers/networks/volumes are absent after cleanup.
 No scanner suppression or dependency change: historical Pingora derivative/
 unsafe-libyaml maintenance warnings remain visible, not accepted runtime risk.
-F538820f accepts components and each failed-case disposition; exact integration
-gate/export review follows separately.
-PR/final-head hosted jobs/merge/exact-main hosted jobs: PENDING.
+F a91b6c5 accepts exact local integration and export. It independently executes
+full gates, binds9095 tracked files before/after, verifies raw/export hashes and
+scanner semantics, and confirms real management-fixture replay/cleanup. Source
+`85066a0` drives gate-run-01; semantic audit sourcecdc93d9 and export audit
+de25477 produce integration-01/02. All58 published artifact hashes,57 raw
+artifacts and normalized original receipt match. Scope excludes runtime GO.
+
+PR: https://github.com/tiecont/aegis-gate/pull/23. Intermediate head0baf29c
+passes both hosted jobs in43699864411; this does not substitute for the final
+head after independent review receipts. Final-head hosted jobs, actual merge
+SHA and exact-main hosted jobs remain PENDING until observed. A receipt-only
+closeout records those actual events without a self-referential commit hash.
 These delivery fields must be completed before declaring the sprint delivered.
 
 ## Decision Boundary And Next Work
