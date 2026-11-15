@@ -1,0 +1,50 @@
+{
+  "version": "AEGISGATE_H2_ATTRIBUTION_CAPABILITY_V1",
+  "status": "RESEARCH_ONLY_SUPPORTED_API_STOP",
+  "runtimeComplete": false,
+  "runtimePass": false,
+  "module01Pass": false,
+  "effectiveContract": "all origin bytes in the original rejection interval count; any byte means FAIL",
+  "inspected": { "go": "go1.27.4", "golang.org/x/net": "v0.62.0" },
+  "supported": [
+    "httptrace.GotConn reports the connection after acquisition",
+    "httptrace.WroteHeaders runs after headers have been written and has no stream ID argument",
+    "http2.Framer.ReadMetaHeaders plus hpack.Decoder derives fields and stream IDs from captured bytes after serialization",
+    "http2.Transport.NewClientConn starts a real maintained client read loop that acknowledges independent server SETTINGS without RoundTrip",
+    "hpack.Decoder emit callback reports fields, not exact dynamic-table insertions, evictions or encoder mutations"
+  ],
+  "missingAuthority": [
+    "authenticated pre-wire downstream-request to origin-connection and stream allocation mapping",
+    "complete and unforgeable dispatch coverage, including attempts that produce no handler",
+    "exact encoder/decoder dynamic-table mutations bound to request, connection and byte offsets",
+    "signed snapshot deployment/digest, tenant/route/resource generation and TLS identity captured at the same admission boundary",
+    "authoritative loss/overflow, sequence and joined capture termination, resistant to trusted observer omission"
+  ],
+  "requiredHookProposal": {
+    "version": "AEGISGATE_H2_PREWIRE_COVERAGE_V1_PROPOSED",
+    "activation": "none",
+    "beforeEffects": [
+      "dial",
+      "stream reservation",
+      "HPACK mutation",
+      "HEADERS serialization",
+      "DATA serialization"
+    ],
+    "binding": [
+      "runtime epoch",
+      "monotonic event sequence",
+      "downstream connection and stream",
+      "request identity",
+      "verified TLS/SNI",
+      "verified snapshot artifact digest and deployment",
+      "tenant and route and resource generation",
+      "origin connection and stream",
+      "effect kind and byte span",
+      "control trigger and acknowledgement pairing"
+    ],
+    "coverage": "Every attempted effect, cancellation, completion and capture gap must be produced by the runtime boundary rather than reconstructed from observer-supplied nonce events. Independent capture must reconcile all bytes and effects. Trusted observer rewrites cannot certify completeness.",
+    "onMissingOrMismatch": "INCOMPLETE; RuntimeComplete=false and RuntimePass=false",
+    "compatibility": "No production hook, accepted schema/wire extension, contract activation, runtime eligibility or upstream publication implemented."
+  },
+  "stop": "No inspected supported public API supplies the combined pre-wire authority. Fresh research transcript consistency and control-only ACK classification never override the effective aggregate FAIL or establish runtime PASS."
+}
