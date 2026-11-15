@@ -51,7 +51,8 @@ function check(dir) {
       if (!lines.length) { (r.incomplete_manifests ??= []).push(full); continue; }
       for (const line of lines) {
         const [digest, target] = line.split('  ');
-        assert.equal(sha(fs.readFileSync(target)), digest, target); r.checked_hashes++;
+        const preserved = fs.existsSync(target) ? target : path.join(dir, path.basename(target));
+        assert.equal(sha(fs.readFileSync(preserved)), digest, target); r.checked_hashes++;
       }
     }
   }
