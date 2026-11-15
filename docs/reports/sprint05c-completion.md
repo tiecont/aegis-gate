@@ -155,6 +155,14 @@ Raw run/jobs and PR receipts are retained under
 run is not final-head or merge evidence. Independent final integration review
 and delivery receipts follow their actual events.
 
+F integration audits01/02 independently accept local gate provenance and safe
+research/test integration through4488524:five exact Prettier transformations,
+38 source bindings,11 protected files,58 raw/export files and8280 gate-clone
+source objects. All four gate commands exit0;26 scanner PASS labels and zero
+HIGH/CRITICAL findings are verified. Current cleanup is independently empty.
+F checkpoints9385e3b/b43127a and retained auditsb140dc6 accept this scope only;
+runtime/production remain rejected and final-head hosted delivery is separate.
+
 Root gate attempts01-03 are retained with failed exits. Attempts01/02 used
 734a9d6 and failed formatting before fixture setup;02 accidentally reused the
 old source because the gate clone fetched only its historical05b branch.
