@@ -403,3 +403,44 @@ Exact offline command:
 Root's full gates02 are running on this source separately. This addendum does
 not infer their outcome or authorize release; raw/public gate manifests and
 exact hosted results still require review when execution has completed.
+
+## Local Gate Acceptance
+
+**ACCEPT safe integration only at fe63aac; no production or ingress GO.**
+Full local gate source7725063/tree dcc33021cbac83a1f106b95d9ddd18ca5dfb1386
+passes make check, make security-scan, dev-down and volume removal, all exit0,
+ending2026-11-14T19:40:39.859Z. F independently compares public evidence dfe69c7
+with the private raw directory:58 file sizes/digests match,56 published bodies
+are byte-identical,57 raw manifest entries and58 public manifest entries verify.
+The derived receipt differs only in declared export metadata/original hash
+fields; zero redactions occurred. Original command receipt SHA256 is
+6d3f52d15dabc0ba6b6c70ad80ea02213e2537ce447d24a1a1a7a8f51a2a5c72.
+
+All26 expected scanner PASS labels are present; filesystem, Envoy and four
+fixture-image JSON reports contain zero HIGH/CRITICAL findings under unchanged
+policy. Worktree/history secret JSON findings are empty. Quality logs confirm
+actual serial race integration, credential/TLS, private-image restart, contracts,
+dashboard and gate selftests. The collector's lock checks and source support its
+declared cleanup continuity; F did not independently witness the past lock.
+The receipt records57 private checks/zero matches. Read-only current Docker
+inventories independently find no project containers/networks/volumes, and all
+eight private cleanup paths are absent. No fixture or scanner is rerun by F.
+
+Final source `fe63aacc3d7df106c99a2119f096c6474dea9857`, tree
+`cc1c7bbc2370194554b341fb0d51ff84f0da21b2`, differs from tested7725063 only
+in gates02 evidence and four reviewed documentation files. All11 protected
+files remain identical. Documentation correctly binds candidate05, the local
+gate source and artifacts, retained failures, NO-GO/LOCKED/BLOCKED states, and
+the distinction between intermediate7725063 CI and final-head/merge acceptance.
+No new finding. `gates-review-02` retains the initial successful gate binding;
+`gates-review-03` adds the exact final-source/document hashes without changing
+that prior receipt. Exact final command:
+
+```sh
+/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint05b-f-gates-review.mjs evidence/sprint05b-f/gates-review-03
+```
+
+Independent local integration review is complete at this scope. Original73/75,
+19/23 and all six ingress failures remain rejected. PR19 intermediate run
+43633078400 at7725063 does not cover the future final head or merge commit;
+their exact hosted receipts and final delta require separate closeout review.
