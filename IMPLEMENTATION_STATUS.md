@@ -17,9 +17,11 @@ Independent adversarial replay passes; full runtime attribution remains
 INCOMPLETE. Actual00/02/03 regressions pass11 packages/89 top-level/151 subtests,
 zero skips. F executes full locked local check/security-scan/cleanup at2cb0c34,
 all exit0, with fresh real-fixture replay. Independent F a91b6c5 ACCEPTs exact
-local integration/export. PR23 is open; intermediate0baf29c hosted43699864411
-passes both jobs. Exact final-head/merge delivery remains pending in
-`docs/reports/sprint05d-completion.md`.
+local integration/export. F also ACCEPTs exact final head eaedc620; both hosted
+jobs PASS in43700515321. PR23 merged as
+`ebd995439e0ef2529dc1cfda48ad257f5e0f9650`, with the identical reviewed tree;
+both exact-main hosted jobs PASS in43701448046. Raw metadata/logs and final
+Outcome B delivery receipts are in `docs/reports/sprint05d-completion.md`.
 
 The versioned ADR012 v2 package is PROPOSED, NOT EFFECTIVE. It recommends an
 explicit finite-versus-streaming decision and authoritative causal H2
