@@ -8,7 +8,7 @@ import { assertLock } from './wire-fixtures.mjs';
 process.umask(0o077); assertLock();
 const [output, mode = 'baseline', capture = 'direct'] = process.argv.slice(2);
 assert.match(output ?? '', /^evidence\/sprint05c-c\/attempt-\d+$/);
-assert.ok(['baseline', 'oghttp2'].includes(mode));
+assert.ok(['baseline', 'oghttp2', 'oghttp2-runtime'].includes(mode));
 assert.ok(['direct', 'relay'].includes(capture));
 assert.ok(!fs.existsSync(output));
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 16 << 20 }).trim();

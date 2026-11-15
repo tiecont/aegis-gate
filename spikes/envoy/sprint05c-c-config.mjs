@@ -3,7 +3,13 @@ export { validateManifest, readBounded } from './sprint05a-combined-config.mjs';
 
 export function compile(...args) {
   const result = base(...args);
-  if (process.env.AEGIS_05C_C_MODE !== 'oghttp2') throw new Error('explicit codec candidate required');
+  const mode = process.env.AEGIS_05C_C_MODE;
+  if (!['oghttp2', 'oghttp2-runtime'].includes(mode)) throw new Error('explicit codec candidate required');
+  if (mode === 'oghttp2-runtime') {
+    result.bootstrap.layered_runtime.layers.push({ name: 'sprint05c-c-codec',
+      static_layer: { 'envoy.reloadable_features.http2_use_oghttp2': true } });
+    return result;
+  }
   for (const listener of result.bootstrap.static_resources.listeners) {
     for (const chain of listener.filter_chains) {
       chain.filters[0].typed_config.http2_protocol_options.use_oghttp2_codec = true;

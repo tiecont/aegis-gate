@@ -6,7 +6,7 @@ registerHooks({ resolve(specifier, context, nextResolve) {
     return nextResolve(launcher.href, context);
   }
   if (context.parentURL === launcher.href && specifier === './sprint05a-combined-config.mjs' &&
-      process.env.AEGIS_05C_C_MODE === 'oghttp2') {
+      ['oghttp2', 'oghttp2-runtime'].includes(process.env.AEGIS_05C_C_MODE)) {
     return nextResolve(new URL('./sprint05c-c-config.mjs', import.meta.url).href, context);
   }
   return nextResolve(specifier, context);
