@@ -229,3 +229,51 @@ func TestTrustRotationSharedAcrossSnapshotAndSidecar(t *testing.T) {
 		t.Fatal("expired trust bundle admitted")
 	}
 }
+
+func TestConcurrentCaptureAndCancelledNewerRollback(t *testing.T) {
+	f := setup(t)
+	f.apply(t, 7, 7, f.signer)
+	raw8, n8, side8 := f.artifact(t, 8, 8, f.signer)
+	raw9, n9, side9 := f.artifact(t, 9, 7, f.signer)
+	start := make(chan struct{})
+	errors := make(chan error, 32)
+	var wg sync.WaitGroup
+	for range 4 {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			<-start
+			for range 8 {
+				lease, err := f.a.Capture("api-a.example.com", "api-a.example.com", "/v1", "POST")
+				if err != nil {
+					errors <- err
+					continue
+				}
+				route, ok := lease.Capture.Resolve("api-a.example.com", "/v1", "POST")
+				if !ok || route.Generation != lease.Route.Generation || route.Route.Generation != lease.Binding.RouteGeneration || route.Policy.Generation != route.Route.Generation || route.Pool.Generation != route.Route.Generation {
+					errors <- ErrDenied
+				}
+				lease.Close()
+			}
+		}()
+	}
+	close(start)
+	must(t, f.a.Apply(context.Background(), n8, raw8, side8))
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	if f.a.Apply(ctx, n9, raw9, side9) == nil {
+		t.Fatal("cancelled rollback changed active state")
+	}
+	must(t, f.a.Apply(context.Background(), n9, raw9, side9))
+	wg.Wait()
+	close(errors)
+	for err := range errors {
+		t.Errorf("concurrent capture: %v", err)
+	}
+	lease, err := f.a.Capture("api-a.example.com", "api-a.example.com", "/v1", "POST")
+	must(t, err)
+	defer lease.Close()
+	if lease.Route.Generation != 9 || lease.Route.Route.Generation != 7 {
+		t.Fatal("final monotonic rollback generation incorrect")
+	}
+}
