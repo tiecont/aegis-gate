@@ -60,6 +60,7 @@ try {
           "IMPLEMENTATION_STATUS.md",
           "docs/RISK_REGISTER.md",
           "docs/reports/sprint06a-completion.md",
+          "docs/sprints/06a-execution.md",
         ].includes(file) || file.startsWith("evidence/sprint06a-root/"),
         file,
       );
