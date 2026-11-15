@@ -56,3 +56,17 @@ func TestSprint05CFRejectedExistingStreamDATAControl(t *testing.T) {
 		t.Fatal("forbidden DATA/HEADERS control failed to reject")
 	}
 }
+
+func TestSprint05CFHandlerCannotPrecedeCompleteRequestHeaders(t *testing.T) {
+	fragment := block(t)
+	e := capture(t, request("incomplete-headers", 5, false), binding("incomplete-headers", 5), origin(t, func(f *http2.Framer) {
+		_ = f.WriteHeaders(http2.HeadersFrameParam{StreamID: 5, BlockFragment: fragment[:1]})
+	}), Event{Kind: "handler", Connection: "origin-1", Request: "incomplete-headers", Stream: 5}, origin(t, func(f *http2.Framer) {
+		_ = f.WriteContinuation(5, true, fragment[1:])
+	}))
+	r := inspect(t, e)
+	record(t, r)
+	if r.Research.Pass {
+		t.Fatal("handler ran before CONTINUATION completed the captured request header block")
+	}
+}
