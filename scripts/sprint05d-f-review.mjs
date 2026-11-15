@@ -215,15 +215,19 @@ try {
       "evidence/sprint05d-a/run-901",
       "evidence/sprint05d-a/verify-901",
     );
-    await run("a-exact-proof", node, [
-      "spikes/envoy/sprint05d-a-proof.mjs",
-      captures[0],
-    ]);
-    await run("a-exact-verifier", node, [
-      "spikes/envoy/sprint05d-a-verify.mjs",
-      captures[0],
-      captures[1],
-    ]);
+    await run(
+      "a-exact-proof",
+      node,
+      ["spikes/envoy/sprint05d-a-proof.mjs", captures[0]],
+      { allowedExits: [0, 1] },
+    );
+    record.exactProofExit = record.commands.at(-1).exit;
+    if (record.exactProofExit === 0)
+      await run("a-exact-verifier", node, [
+        "spikes/envoy/sprint05d-a-verify.mjs",
+        captures[0],
+        captures[1],
+      ]);
     record.overlaySha256 = sha(
       fs.readFileSync(`${root}/scripts/sprint05d-f-admission.mjs`),
     );

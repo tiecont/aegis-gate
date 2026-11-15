@@ -1,6 +1,7 @@
 # Sprint05D F Independent Security Review
 
-Status: execution in progress. No runtime acceptance or GO is issued. Module01
+Status: execution in progress; independent A reproduction FAIL and D nonce
+mapping findings retained below. No runtime acceptance or GO is issued. Module01
 remains NO-GO, Modules04-12 LOCKED, production BLOCKED. This report will record
 only executed results with exact source/evidence identities.
 
@@ -24,6 +25,30 @@ committed before evidence; new MJS uses the root-pinned Prettier.
 Original75/23 inputs, oracle, observation windows and raw bytes remain unchanged.
 No repeated codec/window/pool tuning, push, merge or shared documentation edits.
 The proposed ADR at `30c9019` remains PROPOSED and owner approval PENDING.
+
+## Findings In Progress
+
+1. D `aa72f2a` exact full proof exits0. F overlay at `b2a8d0f` exits1:
+   swapped accepted nonces and duplicate nonce with an orphan upstream stream
+   both produce `CorrelationConsistent:true`. `RuntimeComplete`, `RuntimePass`
+   and `Module01Pass` remain false. Evidence `d-independent-01` is committed
+   at `5c6d21a`; all11 protected files and all tracked source bytes match after
+   execution, private clone removed. Duplicate nonce is an objectively broken
+   bijection. Swaps cannot be distinguished from this summary alone: raw
+   upstream carries only nonce, downstream only probe, so an independent
+   trusted probe-to-nonce binding is absent. Public fixture headers could carry
+   both values for a bounded raw cross-check; this still cannot establish
+   authoritative pre-wire dispatch, signed generation or malicious trusted
+   signer coverage. HMAC authenticates supplied bytes, not their completeness.
+2. A `c289b26` first clean reproduction exits1 after22 probes, at aggregate
+   ciphertext quota `send()` receiving `socket closed`. Last completed control
+   is aggregate file quota. Likely test-driver rejection/write race; root/A are
+   investigating. Evidence `a-independent-01` committed `6f1f9b0` preserves
+   failure and cleanup zeros (sockets/children/parsers/files/bytes/contexts/
+   origin slots/waiters/listeners). F source inventory is retained; because
+   the collector stopped before postchecks this failed capture is not a
+   complete independent acceptance. No invalid request origin effect was
+   observed in those22 completed probes. Independent extra tests continue.
 
 ## Agent Completion Report
 
