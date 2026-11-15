@@ -7,7 +7,7 @@ import { assertLock } from "../spikes/envoy/wire-fixtures.mjs";
 
 process.umask(0o077);
 assertLock();
-const [revision, output, clone] = process.argv.slice(2);
+const [revision, output, clone, gateRelative] = process.argv.slice(2);
 assert.ok(path.isAbsolute(clone ?? ""));
 assert.match(output ?? "", /^evidence\/sprint06a-f\/integration-audit-\d+$/);
 assert.ok(!fs.existsSync(output));
@@ -174,6 +174,81 @@ try {
     fsckStdoutSha256: sha(fsck),
     historyMissingObjects: false,
   };
+  if (gateRelative) {
+    assert.match(gateRelative, /^evidence\/sprint06a-root\/gates-\d+$/);
+    const receiptBytes = fs.readFileSync(
+        path.join(clone, gateRelative, "commands.json"),
+      ),
+      receipt = JSON.parse(receiptBytes),
+      check = receipt.commands.find((command) => command.label === "check"),
+      log = fs.readFileSync(path.join(clone, check.streams[0].file));
+    assert.equal(receipt.source_commit, source);
+    assert.equal(receipt.passed, true);
+    assert.equal(sha(log), check.streams[0].sha256);
+    const text = log.toString(),
+      starts = [
+        ...text.matchAll(
+          /^(?:AEGIS_TENANCY_INTEGRATION=1 )?GOTOOLCHAIN=go1\.27\.4 go test (?:-p 1 )?-race \.\/apps\/control-api\/.*$/gm,
+        ),
+      ],
+      results = new Map(),
+      packages = new Set();
+    assert.equal(starts.length, 3);
+    for (let i = 0; i < starts.length; i++) {
+      const phase = text.slice(
+        starts[i].index,
+        starts[i + 1]?.index ?? text.length,
+      );
+      let pending = [];
+      for (const line of phase.split("\n")) {
+        const status = /^[\t ]*--- (PASS|SKIP): (\S+)/.exec(line),
+          summary = /^ok\s+(aegisgate\.dev\/aegisgate\/\S+)\s+/.exec(line);
+        if (status) pending.push({ status: status[1], name: status[2] });
+        if (!summary) continue;
+        if (pending.length) packages.add(summary[1]);
+        for (const test of pending) {
+          const key = `${summary[1]}:${test.name}`,
+            prior = results.get(key) ?? {
+              package: summary[1],
+              name: test.name,
+              passed: false,
+              skipped: false,
+            };
+          prior.passed ||= test.status === "PASS";
+          prior.skipped ||= test.status === "SKIP";
+          results.set(key, prior);
+        }
+        pending = [];
+      }
+      assert.equal(pending.length, 0);
+    }
+    const values = [...results.values()],
+      passes = values.filter((test) => test.passed),
+      unexecuted = values.filter((test) => test.skipped && !test.passed);
+    record.moduleRaceCoverage = {
+      gateReceiptSha256: sha(receiptBytes),
+      checkLogSha256: sha(log),
+      phases: starts.map((match) => match[0]),
+      packages: [...packages].sort(),
+      uniqueTopLevelPass: passes.filter((test) => !test.name.includes("/"))
+        .length,
+      uniqueSubtestPass: passes.filter((test) => test.name.includes("/"))
+        .length,
+      skipEventsResolvedByAnotherPhase: values.filter(
+        (test) => test.passed && test.skipped,
+      ).length,
+      remainingSkipped: unexecuted,
+      resultsInventorySha256: sha(
+        JSON.stringify(
+          values.sort((a, b) =>
+            `${a.package}:${a.name}`.localeCompare(`${b.package}:${b.name}`),
+          ),
+        ),
+      ),
+      interpretation:
+        "Unique package/test names across unchanged unit, live integration and negative phases; unit integration skips count as resolved only after an observed PASS in a later live phase",
+    };
+  }
   for (const entry of str("diff", "--name-status", baseline, source).split(
     "\n",
   )) {
