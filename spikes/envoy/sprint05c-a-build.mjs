@@ -31,7 +31,9 @@ export async function build(directory, record) {
   record.nodeApiHeader = { file: path.join(include, 'node_api.h'), sha256: hash(fs.readFileSync(path.join(include, 'node_api.h'))) };
   record.compiler = (await command(record, ['/usr/bin/cc', '--version'])).toString();
   const output = path.join(directory, 'sprint05c-a-llhttp.node');
-  const argv = ['/usr/bin/cc', '-std=c11', '-O2', '-shared', '-fPIC', '-Wall', '-Wextra', '-Werror',
+  await command(record, ['/usr/bin/cc', '-std=c11', '-Wall', '-Wextra', '-Werror', '-fsyntax-only',
+    `-I${include}`, `-I${upstream}`, 'spikes/envoy/sprint05c-a-llhttp.c']);
+  const argv = ['/usr/bin/cc', '-std=c11', '-O2', '-shared', '-fPIC', '-Wall', '-Werror',
     `-I${include}`, `-I${upstream}`, 'spikes/envoy/sprint05c-a-llhttp.c',
     ...['api.c', 'http.c', 'llhttp.c'].map((f) => path.join(upstream, f)), '-o', output];
   await command(record, argv);
