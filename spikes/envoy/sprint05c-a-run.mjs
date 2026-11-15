@@ -147,7 +147,8 @@ try {
     assert.deepEqual(response.statuses, status, name);
     if (status.every((v) => v >= 400) && !options.allowOrigin) zero(d);
     if (options.exact) { assert.equal(d.bytes, Buffer.byteLength(options.exact)); assert.equal(d.raw.map((r) => r.bytes).reduce((a, n) => a + n, 0), d.bytes);
-      if (d.raw.length === 1) assert.equal(d.raw[0].sha256, hash(Buffer.from(options.exact))); }
+      const expected = options.exactParts ?? [options.exact]; assert.equal(d.raw.length, expected.length);
+      assert.deepEqual(d.raw.map((r) => r.sha256), expected.map((raw) => hash(Buffer.from(raw)))); }
     const row = { name, inputBytes: Buffer.byteLength(raw), inputSha256: hash(Buffer.from(raw)), response, origin: d };
     if (originals.some((o) => o.request === raw)) row.originalInputHex = Buffer.from(raw).toString('hex');
     record.probes.push(row); return row;
@@ -191,18 +192,18 @@ try {
   const bValid = req('Content-Length: 0\r\n', '', '/', 'edge-b.test'); await probe('tenant-b', bValid, [200], { sni: 'edge-b.test', exact: bValid });
   const canonical = req('Content-Length: 0\r\n', '', '/', 'EDGE-A.TEST:443'); await probe('canonical-host', canonical, [200], { exact: canonical });
   const first = req('Content-Length: 3\r\n', 'abc', '/first', 'edge-a.test', false), second = chunked('def', undefined, true);
-  await probe('mixed-stream-disk-pipeline', first + second, [200, 200], { exact: first + second });
+  await probe('mixed-stream-disk-pipeline', first + second, [200, 200], { exact: first + second, exactParts: [first, second] });
   const dFirst = chunked('xyz', undefined, false), sLast = req('Content-Length: 0\r\n', '', '/last');
-  await probe('mixed-disk-stream-pipeline', dFirst + sLast, [200, 200], { exact: dFirst + sLast });
+  await probe('mixed-disk-stream-pipeline', dFirst + sLast, [200, 200], { exact: dFirst + sLast, exactParts: [dFirst, sLast] });
   await probe('valid-invalid-pipeline', first + originals[0].request + valid, [200, 400], { exact: first });
   await probe('invalid-valid-pipeline', originals[0].request + valid, [400]);
   const smuggle = req('Content-Length: 1\r\nTransfer-Encoding: chunked\r\n', '0\r\n\r\n') + valid;
   await probe('CL-TE-pipeline', smuggle, [400]);
   const wireFragment = chunked('fragmented');
   await probe('one-byte-valid-chunked', wireFragment, [200], { parts: [...Buffer.from(wireFragment)].map((v) => Buffer.from([v])), delay: 1, exact: wireFragment });
-  await probe('one-byte-valid-CL', first + sLast, [200, 200], { parts: [...Buffer.from(first + sLast)].map((v) => Buffer.from([v])), delay: 1, exact: first + sLast });
+  await probe('one-byte-valid-CL', first + sLast, [200, 200], { parts: [...Buffer.from(first + sLast)].map((v) => Buffer.from([v])), delay: 1, exact: first + sLast, exactParts: [first, sLast] });
   const pipelinePart = req('Content-Length: 0\r\n', '', '/pipeline-cap', 'edge-a.test', false);
-  await probe('ordered-connection-message-cap', pipelinePart.repeat(limits.messages + 1), [...Array(limits.messages).fill(200), 503], { exact: pipelinePart.repeat(limits.messages) });
+  await probe('ordered-connection-message-cap', pipelinePart.repeat(limits.messages + 1), [...Array(limits.messages).fill(200), 503], { exact: pipelinePart.repeat(limits.messages), exactParts: Array(limits.messages).fill(pipelinePart) });
   const fTrailer = chunked('abc', '0\r\nX-End: first\r\n second\r\n\r\n');
   await probe('late-fold-reused-pipeline', first + fTrailer, [200, 400], { exact: first });
 
