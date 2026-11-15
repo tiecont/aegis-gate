@@ -9,7 +9,7 @@ import { assertLock, listen } from './wire-fixtures.mjs';
 export const limits = Object.freeze({ connections: 6, originActive: 2, originQueue: 2,
   stageFiles: 3, diskBytes: 2 * 1024 * 1024, stageBytes: 1536 * 1024,
   bodyBytes: 4 * 1024 * 1024, headerWireBytes: 24576, messageWireBytes: 6 * 1024 * 1024,
-  readBytes: 16384, messages: 64, requestMs: 2500, idleMs: 700, originMs: 1800,
+  readBytes: 16384, readableBytes: 256 * 1024, messages: 64, requestMs: 2500, idleMs: 700, originMs: 1800,
   handshakeMs: 700, highWaterMark: 16384 });
 
 export class Rejection extends Error {
@@ -37,6 +37,7 @@ export class Reader {
     check(signal);
     if (this.pending.length) { const b = this.pending; this.pending = Buffer.alloc(0); return b; }
     for (;;) {
+      if (this.socket.readableLength > limits.readableBytes) fail(503, 'readable buffer limit');
       const n = Math.min(limits.readBytes, this.socket.readableLength);
       if (n) {
         this.metrics.peakReadable = Math.max(this.metrics.peakReadable ?? 0, this.socket.readableLength);
@@ -261,7 +262,7 @@ export async function runtime({ addon, edgeTLS, routes, directory }) {
         metrics.requests++;
         if (!keepAlive) return;
       }
-      fail(503, 'connection request quota');
+      responseStarted = false; fail(503, 'connection request quota');
     } catch (error) {
       const status = error.status ?? (signal.aborted ? signal.reason.status : undefined) ??
         (['ENOSPC', 'EDQUOT', 'EMFILE', 'ENFILE'].includes(error.code) ? 503 : 502);

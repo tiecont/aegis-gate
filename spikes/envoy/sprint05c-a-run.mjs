@@ -9,7 +9,7 @@ import { once } from 'node:events';
 import { setTimeout as delay } from 'node:timers/promises';
 import { assertLock, listen, until } from './wire-fixtures.mjs';
 import { build, command, hash } from './sprint05c-a-build.mjs';
-import { runtime, limits, Reader, write } from './sprint05c-a-runtime.mjs';
+import { runtime, limits, write } from './sprint05c-a-runtime.mjs';
 
 process.umask(0o077); assertLock();
 const pinnedNode = '/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node';
@@ -178,6 +178,8 @@ try {
     ['folded-trailer-sp', chunked('abc', '0\r\nX-End: one\r\n two\r\n\r\n'), 400],
     ['folded-trailer-tab', chunked('abc', '0\r\nX-End: one\r\n\ttwo\r\n\r\n'), 400],
     ['forbidden-trailer', chunked('abc', '0\r\nHost: edge-b.test\r\n\r\n'), 400],
+    ['forbidden-trailer-declaration', req('Transfer-Encoding: chunked\r\nTrailer: Host\r\n', '0\r\n\r\n'), 400],
+    ['invalid-declared-trailer', req('Transfer-Encoding: chunked\r\nTrailer: x bad\r\n', '0\r\n\r\n'), 400],
     ['undeclared-trailer', chunked('abc', '0\r\nX-Other: yes\r\n\r\n'), 400],
     ['bad-chunk', req('Transfer-Encoding: chunked\r\n', 'z\r\nabc\r\n0\r\n\r\n'), 400],
     ['declared-oversize', req(`Content-Length: ${limits.bodyBytes + 1}\r\n`), 413],
@@ -196,10 +198,25 @@ try {
   await probe('invalid-valid-pipeline', originals[0].request + valid, [400]);
   const smuggle = req('Content-Length: 1\r\nTransfer-Encoding: chunked\r\n', '0\r\n\r\n') + valid;
   await probe('CL-TE-pipeline', smuggle, [400]);
+  const wireFragment = chunked('fragmented');
+  await probe('one-byte-valid-chunked', wireFragment, [200], { parts: [...Buffer.from(wireFragment)].map((v) => Buffer.from([v])), delay: 1, exact: wireFragment });
+  await probe('one-byte-valid-CL', first + sLast, [200, 200], { parts: [...Buffer.from(first + sLast)].map((v) => Buffer.from([v])), delay: 1, exact: first + sLast });
+  const pipelinePart = req('Content-Length: 0\r\n', '', '/pipeline-cap', 'edge-a.test', false);
+  await probe('ordered-connection-message-cap', pipelinePart.repeat(limits.messages + 1), [...Array(limits.messages).fill(200), 503], { exact: pipelinePart.repeat(limits.messages) });
   const fTrailer = chunked('abc', '0\r\nX-End: first\r\n second\r\n\r\n');
   await probe('late-fold-reused-pipeline', first + fTrailer, [200, 400], { exact: first });
 
   // Observe upstream body progress before completing a known-length upload.
+  await settled(); {
+    const before = snapshot(), peers = [], finished = [];
+    for (let i = 0; i < limits.stageFiles; i++) {
+      const s = await connect(); peers.push(s); finished.push(collect(s)); s.write(req('Transfer-Encoding: chunked\r\nTrailer: X-End\r\n', '1000\r\n'));
+    }
+    await until(() => front.quota.files === limits.stageFiles);
+    const s = await connect(), done = collect(s); s.write(chunked('abc', '')); const response = await done; assert.deepEqual(response.statuses, [503]);
+    for (const p of peers) p.destroy(); await Promise.all(finished); await settled(); zero(delta(before));
+    assert.equal(front.quota.files, 0); record.probes.push({ name: 'aggregate-stage-file-cap', response, origin: delta(before), released: true });
+  }
   await settled(); {
     const before = snapshot(), s = await connect(), done = collect(s), body = Buffer.alloc(2 * 1024 * 1024, 97);
     const head = req(`Content-Length: ${body.length}\r\n`, '', '/slow-upload');
@@ -253,6 +270,12 @@ try {
   }
   await probe('stage-idle-408', chunked('abc', ''), [408]);
   await settled(); {
+    const before = snapshot(), s = await connect(), done = collect(s); s.write(req('Transfer-Encoding: chunked\r\nTrailer: X-End\r\n', 'fffff\r\n'));
+    const interval = setInterval(() => s.write('x'), 150); const response = await done; clearInterval(interval); await settled(); zero(delta(before));
+    assert.deepEqual(response.statuses, [408]); assert.ok(response.elapsedMs >= limits.requestMs - 20);
+    record.probes.push({ name: 'stage-absolute-408-waiting-for-progress', response, origin: delta(before), progressBeforeCompletion: false });
+  }
+  await settled(); {
     const before = snapshot(), s = await connect(), done = collect(s); s.write('POST / HTTP/1.1\r\nHost: edge-a.test\r\nX-Slow: ');
     const interval = setInterval(() => s.write('a'), 150); const response = await done; clearInterval(interval); await settled(); const d = delta(before); zero(d);
     assert.deepEqual(response.statuses, [408]); assert.ok(response.elapsedMs >= limits.requestMs - 20); assert.ok(response.elapsedMs < limits.requestMs + 500);
@@ -262,7 +285,7 @@ try {
     const before = snapshot(), peers = [], done = [];
     for (let i = 0; i < 4; i++) { const s = await connect(); peers.push(s); done.push(collect(s)); s.write(req('Content-Length: 0\r\n', '', '/hold')); }
     await until(() => front.slots.active === 2 && front.slots.queue.length === 2);
-    const s = await connect(), last = collect(s); s.write(valid); const response = await last; assert.deepEqual(response.statuses, [503]);
+    const fifthBefore = snapshot(), s = await connect(), last = collect(s); s.write(valid); const response = await last; assert.deepEqual(response.statuses, [503]); zero(delta(fifthBefore));
     for (const p of peers) p.destroy(); await Promise.all(done); await until(() => front.slots.active === 0 && front.slots.queue.length === 0); await settled();
     record.probes.push({ name: 'origin-queue-503-and-cancel', response, origin: delta(before), peak: front.metrics.peakOriginQueue });
   }
@@ -312,6 +335,7 @@ try {
   record.metrics = front.metrics;
   assert.ok(front.metrics.peakDisk <= limits.diskBytes); assert.ok(front.metrics.peakHeaderHeld <= limits.headerWireBytes);
   assert.ok(front.metrics.peakPending <= limits.readBytes); assert.ok(front.metrics.peakOriginQueue <= limits.originQueue);
+  assert.ok(front.metrics.peakReadable <= limits.readableBytes);
   assert.ok(front.metrics.peakOriginActive <= limits.originActive);
   record.complete = true;
 } catch (e) { record.error = { name: e.name, message: e.message, stack: e.stack }; process.exitCode = 1; }
