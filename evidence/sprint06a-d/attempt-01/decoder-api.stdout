@@ -1,0 +1,18 @@
+package hpack // import "golang.org/x/net/http2/hpack"
+
+type Decoder struct {
+	// Has unexported fields.
+}
+    A Decoder is the decoding context for incremental processing of header
+    blocks.
+
+func NewDecoder(maxDynamicTableSize uint32, emitFunc func(f HeaderField)) *Decoder
+func (d *Decoder) Close() error
+func (d *Decoder) DecodeFull(p []byte) ([]HeaderField, error)
+func (d *Decoder) EmitEnabled() bool
+func (d *Decoder) SetAllowedMaxDynamicTableSize(v uint32)
+func (d *Decoder) SetEmitEnabled(v bool)
+func (d *Decoder) SetEmitFunc(emitFunc func(f HeaderField))
+func (d *Decoder) SetMaxDynamicTableSize(v uint32)
+func (d *Decoder) SetMaxStringLength(n int)
+func (d *Decoder) Write(p []byte) (n int, err error)
