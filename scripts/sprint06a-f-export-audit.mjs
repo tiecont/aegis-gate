@@ -32,6 +32,52 @@ const record = {
   runtimePass: false,
 };
 try {
+  record.finalChanges = [];
+  for (const line of str(
+    "diff",
+    "--name-status",
+    "c4a2fc529688ef53ef213e07a6567aeab3fe4fcf",
+    revision,
+  )
+    .split("\n")
+    .filter(Boolean)) {
+    const [status, file] = line.split("\t");
+    assert.ok(["A", "M"].includes(status), line);
+    const bytes = get(file),
+      row = { file, status, bytes: bytes.length, sha256: sha(bytes) };
+    if (
+      /^(?:scripts\/sprint06a-f-|evidence\/sprint06a-f\/|docs\/reports\/sprint06a-f-security-review\.md$)/.test(
+        file,
+      )
+    ) {
+      assert.deepEqual(bytes, git("show", `HEAD:${file}`), file);
+      row.reviewerOwnedBytesMatch = true;
+    } else {
+      assert.ok(
+        [
+          "IMPLEMENTATION_STATUS.md",
+          "docs/RISK_REGISTER.md",
+          "docs/reports/sprint06a-completion.md",
+        ].includes(file) || file.startsWith("evidence/sprint06a-root/"),
+        file,
+      );
+      row.rootDeliveryOnly = true;
+    }
+    record.finalChanges.push(row);
+  }
+  const rootReport = get("docs/reports/sprint06a-completion.md").toString();
+  for (const marker of [
+    "Outcome B",
+    "73 PASS,2 FAIL",
+    "19 PASS,4 FAIL",
+    "NO-GO",
+    "LOCKED",
+    "BLOCKED",
+    "NOT EFFECTIVE",
+    "PENDING",
+  ])
+    assert.ok(rootReport.includes(marker), marker);
+  record.gatedImplementationUnchanged = true;
   const rawBytes = fs.readFileSync(`${rawDirectory}/commands.json`),
     raw = JSON.parse(rawBytes),
     metadata = JSON.parse(get(`${prefix}/export.json`)),
