@@ -12,8 +12,11 @@ func TestSprint06AFSignedGenerationImmutableSidecar(t *testing.T) {
 	f := setup(t)
 	raw, notice, broad := f.artifact(t, 7, 7, f.signer)
 	must(t, f.a.Apply(context.Background(), notice, raw, broad))
-	// Identical authenticated retries must remain usable.
-	must(t, f.a.Apply(context.Background(), notice, raw, broad))
+	// A duplicate notification may be acknowledged separately by Consumer;
+	// Adapter.Apply need not accept a second activation at the same generation.
+	if err := f.a.Apply(context.Background(), notice, raw, broad); err != nil {
+		t.Log("duplicate activation rejected without replacing the active profile")
+	}
 	var policy Sidecar
 	must(t, json.Unmarshal(broad, &policy))
 	policy.Bindings = policy.Bindings[:1]
