@@ -89,6 +89,7 @@ source and command are pending. No redundant third E collector is planned.
 | --- | --- | --- |
 | A `c289b26` | `a-independent-04`, commit `8bb5cd6` | A29 PASS; F23 PASS; streaming FAIL |
 | D `6bc71e8` | `d-independent-03`, commit `3763052` | Full original observer race suite plus five05C F overlays PASS; honest control and13 F adversarial mutations PASS |
+| A corrected `c13c7b1` (code `2d50c65`) | `a-independent-05` | A29 PASS; F23 PASS; streaming FAIL; peer-close driver repair independently reproduced |
 
 Both successful captures run clean source clones and verify all11 protected
 files plus every tracked source byte after execution; private stage removed.
@@ -155,6 +156,45 @@ at `audit-02`; writer offline verifier and final report review follow. Probe
 selection insertion is bounded and raw RST1 is diagnostic evidence, never a
 passed HTTP400/421 assertion or original23 rerun. Security/runtime flags stay
 false. No unchanged full75/23 is repeated absent a credible repair.
+
+Explicit component acceptance for root integration: C `5bc9489` ACCEPT scoped
+API-stop tooling/report/evidence; E `f155927` ACCEPT accepted-module regression
+collector/report/evidence with no dependency weakening. These are complete
+component reviews and may be integrated before the final full gate run.
+D `6bc71e8` ACCEPT corrected bounded runtime-correlation diagnostics, and A
+`2d50c65`/`c13c7b1` ACCEPT finite staging and repaired proof driver. Later A/D
+report/evidence-only commits still require byte binding in final integration.
+
+F `b-independent-01` at `ca27107` independently executes the clean B offline
+verifier on `a09565d`: exit0,40 artifact hashes/302 source bindings and1867 raw
+peer bytes decode correctly. Two exact RST1 frames on connections4/7 have hex
+`00000403000000000100000001`, with no preceding client RST and no response
+HEADERS for those streams; individual rejected request has zero origin effects.
+Three selected positive controls pass. Both required HTTP400/421 cases still
+FAIL. ACCEPT this diagnostic evidence and supported-API stop, subject to final
+B report staying inside those claims. This is an offline replay of captured
+raw evidence, not fresh F Envoy traffic or complete23 execution.
+
+Corrected A clean replay `a-independent-05` passes A29 plus all23 F controls.
+The driver now catches only documented peer-close write errors during the
+expected quota rejection, then still asserts actual503, zero origin effects,
+and released resources. It records attempted bytes without claiming delivery.
+No runtime/parser/security threshold changes; streaming remains FAIL. F did
+not invoke writer verifier in this successful fresh untracked evidence context.
+
+## Per-Failure Verdict
+
+| Mandatory original failure | Independent disposition |
+| --- | --- |
+| Original75 obsolete folded header | Isolated finite H1 stage rejects; maintained complete runtime remains FAIL/ineligible |
+| Original75 H2 authority/Host/SNI interval | Historical nine-byte SETTINGS ACK retained in original interval; FAIL unchanged |
+| Original23 compound settled authority negatives | B raw RST1 is not required HTTP400/421; FAIL |
+| Original23 individual userinfo denial | B raw RST1 with zero origin effects still fails required HTTP status; FAIL |
+| Original23 HEADERS stream zero | Accepted baseline FAIL; historical alternate PASS does not survive CONTINUATION tradeoff |
+| Original23 zero WINDOW_UPDATE | Same non-regressing supported repair absent; FAIL on accepted baseline |
+| Alternate unexpected CONTINUATION | No supported post-error emission API found; alternate stays rejected, baseline PASS retained |
+| Late-invalid CL/trailers | Strict finite staging closes tested prefix paths, but mandatory precompletion streaming FAIL |
+| Complete runtime/causal observer | INCOMPLETE: no authoritative pre-wire mapping, signed runtime generation or exact HPACK mutation authority; RuntimePass false |
 
 ## Agent Completion Report
 
