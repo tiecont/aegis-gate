@@ -37,6 +37,9 @@ assert.equal(record.go.sha256, 'de0ae3e082ce7599eae4fb69fa2ef1e43b8f31ffd3fce62c
 const save = () => fs.writeFileSync(`${output}/receipt.json`, JSON.stringify(record, null, 2) + '\n');
 async function run(label, program, args, { cwd = clone, env = {}, timeout = 900000 } = {}) {
   assertLock();
+  const resolvedProgram = path.isAbsolute(program) ? program : process.env.PATH.split(path.delimiter)
+    .map((dir) => path.join(dir, program)).find((file) => fs.existsSync(file));
+  assert.ok(resolvedProgram, `missing executable ${program}`);
   const started_at = new Date().toISOString();
   const child = spawn(program, args, { cwd, env: { ...process.env,
     PATH: `${path.dirname(node)}:${goRoot}/bin:${process.env.PATH}`,
@@ -58,8 +61,8 @@ async function run(label, program, args, { cwd = clone, env = {}, timeout = 9000
     fs.writeFileSync(`${output}/${file}`, bytes);
     return { file, bytes: bytes.length, sha256: sha(bytes) };
   });
-  record.commands.push({ label, program, binary_sha256: fs.existsSync(program) ? sha(fs.readFileSync(program)) : null,
-    args, cwd, environment: { GOTOOLCHAIN: 'local', GOWORK: 'off', GOAMD64: 'v1', GOFLAGS: '', ...env },
+  record.commands.push({ label, program, resolved_program: resolvedProgram, binary_sha256: sha(fs.readFileSync(resolvedProgram)),
+    args, cwd, environment: { GOTOOLCHAIN: 'local', GOWORK: 'off', GOAMD64: 'v1', GOFLAGS: '', TMPDIR: process.env.TMPDIR, ...env },
     started_at, ended_at: new Date().toISOString(), exit_code, signal, error, timedOut, streams });
   save();
   console.log(`${mode}/${label}: exit=${exit_code}`);
@@ -113,10 +116,17 @@ try {
     await checked('a-stream-admission', node, [path.join(root, 'scripts/sprint05c-f-ingress.mjs'), clone, path.resolve(output, 'a-stream-admission.json')]);
   } else if (mode === 'c') {
     await checked('spike-install', path.join(path.dirname(node), 'npm'), ['--prefix', 'spikes/pingora', 'ci', '--ignore-scripts', '--strict-peer-deps']);
-    captures.push('evidence/sprint05b-f/candidate-901');
-    await checked('unchanged-envoy-originals', node, ['spikes/envoy/sprint05a-combined-run.mjs', captures[0]], { env: {
-      AEGIS_05B_NATIVE_BINARY: `${upstream}/.local/sprint05b-native/envoy`,
-    } });
+    if (fs.existsSync(`${clone}/spikes/envoy/sprint05c-c-run.mjs`)) {
+      for (const [i, codec] of ['baseline', 'oghttp2'].entries()) {
+        captures.push(`evidence/sprint05c-c/attempt-${901 + i}`);
+        await checked(`c-original23-${codec}`, node, ['spikes/envoy/sprint05c-c-run.mjs', captures.at(-1), codec, 'relay']);
+      }
+    } else {
+      captures.push('evidence/sprint05b-f/candidate-901');
+      await checked('unchanged-envoy-originals', node, ['spikes/envoy/sprint05a-combined-run.mjs', captures[0]], { env: {
+        AEGIS_05B_NATIVE_BINARY: `${upstream}/.local/sprint05b-native/envoy`,
+      } });
+    }
   }
   await checked('protected-after', node, ['scripts/sprint05b-baseline.mjs']);
   const after = inventory();
