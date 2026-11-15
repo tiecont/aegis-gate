@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { assertLock } from "../spikes/envoy/wire-fixtures.mjs";
 
 process.umask(0o077);
@@ -131,6 +131,28 @@ try {
     originalCommits = storageGit(["rev-list", "--all", "--count"], true);
   assert.deepEqual(ownCommits, originalCommits);
   const fsck = storageGit(["fsck", "--full", "--no-dangling"]);
+  const candidateCommits = str("rev-list", source).split("\n").sort(),
+    candidateObjects = str("rev-list", "--objects", source)
+      .split("\n")
+      .map((line) => line.split(" ")[0])
+      .sort();
+  if (!alternatePreserved) {
+    assert.deepEqual(ownObjects, candidateObjects);
+    assert.deepEqual(
+      storageGit(["rev-list", "--all"]).toString().trim().split("\n").sort(),
+      candidateCommits,
+    );
+  }
+  record.historicalFindingAncestry = [
+    "cd8f4a760239086616809db8b55a651d3cc28d8e",
+    "551591395880ce87863b4e861c05d266c719b91f",
+  ].map((commit) => {
+    const args = ["merge-base", "--is-ancestor", commit, source],
+      result = spawnSync("git", args);
+    assert.equal(result.status, 1);
+    assert.equal(result.signal, null);
+    return { commit, args, exit: result.status, candidateAncestor: false };
+  });
   record.gitStorage = {
     clone,
     selfContained: true,
@@ -142,6 +164,11 @@ try {
     reachableObjects: ownObjects.length,
     objectInventorySha256: sha(JSON.stringify(ownObjects)),
     reachableCommits: Number(ownCommits.toString().trim()),
+    candidateAncestryCommits: candidateCommits.length,
+    candidateAncestrySha256: sha(JSON.stringify(candidateCommits)),
+    candidateObjects: candidateObjects.length,
+    candidateObjectInventorySha256: sha(JSON.stringify(candidateObjects)),
+    onlyCandidateAncestry: !alternatePreserved,
     fsckCommand: ["git", "-C", clone, "fsck", "--full", "--no-dangling"],
     fsckExit: 0,
     fsckStdoutSha256: sha(fsck),
