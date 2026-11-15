@@ -16,6 +16,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/http/httptrace"
+	"strconv"
 	"sync"
 	"testing"
 	"time"
@@ -61,14 +62,14 @@ func runtimeMAC(e runtimeEvidence, key []byte) string {
 	return hex.EncodeToString(h.Sum(nil))
 }
 
-func runtimeHeaders(rawHex string, field string, client bool) (map[string]uint32, error) {
+func runtimeFrames(rawHex string, client bool, visit func(http2.Frame) error) error {
 	raw, err := hex.DecodeString(rawHex)
 	if err != nil || len(raw) > maxBytes {
-		return nil, fmt.Errorf("invalid or oversized raw H2 capture")
+		return fmt.Errorf("invalid or oversized raw H2 capture")
 	}
 	if client {
 		if len(raw) < len(http2.ClientPreface) || !bytes.Equal(raw[:len(http2.ClientPreface)], []byte(http2.ClientPreface)) {
-			return nil, fmt.Errorf("missing captured H2 preface")
+			return fmt.Errorf("missing captured H2 preface")
 		}
 		raw = raw[len(http2.ClientPreface):]
 	}
@@ -77,32 +78,86 @@ func runtimeHeaders(rawHex string, field string, client bool) (map[string]uint32
 	fr.SetMaxReadFrameSize(65536)
 	fr.ReadMetaHeaders = hpack.NewDecoder(4096, nil)
 	fr.MaxHeaderListSize = 16384
-	m := map[string]uint32{}
 	for reader.Len() > 0 {
 		frame, err := fr.ReadFrame()
 		if err != nil {
-			return nil, fmt.Errorf("incomplete frame/header capture: %w", err)
+			return fmt.Errorf("incomplete frame/header capture: %w", err)
 		}
 		if h, ok := frame.(*http2.MetaHeadersFrame); ok {
 			if h.Truncated {
-				return nil, fmt.Errorf("truncated HPACK fields")
+				return fmt.Errorf("truncated HPACK fields")
 			}
+		}
+		if err := visit(frame); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func runtimeHeaders(rawHex string, field string, client bool) (map[string]uint32, error) {
+	m := map[string]uint32{}
+	err := runtimeFrames(rawHex, client, func(frame http2.Frame) error {
+		if h, ok := frame.(*http2.MetaHeadersFrame); ok {
 			for _, f := range h.Fields {
 				if f.Name == field {
 					if f.Value == "" || m[f.Value] != 0 {
-						return nil, fmt.Errorf("missing/duplicate correlation")
+						return fmt.Errorf("missing/duplicate correlation")
 					}
 					m[f.Value] = h.StreamID
 				}
 			}
 		}
+		return nil
+	})
+	return m, err
+}
+
+// This bounded fixture expects one final response followed by complete DATA or
+// trailers per stream. It does not certify general runtime protocol semantics.
+func runtimeStatuses(rawHex string) (map[uint32]int, error) {
+	statuses, ended := map[uint32]int{}, map[uint32]bool{}
+	err := runtimeFrames(rawHex, false, func(frame http2.Frame) error {
+		switch f := frame.(type) {
+		case *http2.MetaHeadersFrame:
+			if ended[f.StreamID] {
+				return fmt.Errorf("headers after completed response")
+			}
+			for _, h := range f.Fields {
+				if h.Name == ":status" {
+					status, err := strconv.Atoi(h.Value)
+					if err != nil || len(h.Value) != 3 || status < 200 || status > 599 || statuses[f.StreamID] != 0 {
+						return fmt.Errorf("invalid/duplicate final response status")
+					}
+					statuses[f.StreamID] = status
+				}
+			}
+			if statuses[f.StreamID] == 0 {
+				return fmt.Errorf("response headers without final status")
+			}
+			ended[f.StreamID] = f.StreamEnded()
+		case *http2.DataFrame:
+			if statuses[f.StreamID] == 0 || ended[f.StreamID] {
+				return fmt.Errorf("unbound response DATA")
+			}
+			ended[f.StreamID] = f.StreamEnded()
+		case *http2.RSTStreamFrame:
+			return fmt.Errorf("reset is not a completed fixture response")
+		}
+		return nil
+	})
+	for id := range statuses {
+		if !ended[id] {
+			return nil, fmt.Errorf("response end missing from capture")
+		}
 	}
-	return m, nil
+	return statuses, err
 }
 
 func assessRuntime(e runtimeEvidence, key []byte) runtimeAssessment {
 	r := runtimeAssessment{Raw: e, UpstreamStreams: map[string]uint32{}, DownstreamStreams: map[string]uint32{}}
 	upstreamProbes := map[string]uint32{}
+	downstreamStatuses, upstreamStatuses := map[uint32]int{}, map[uint32]int{}
 	fail := func(s string) { r.Incomplete = append(r.Incomplete, s) }
 	if len(key) != 32 || !hmac.Equal([]byte(e.MAC), []byte(runtimeMAC(e, key))) {
 		fail("runtime observation authentication")
@@ -126,13 +181,16 @@ func assessRuntime(e runtimeEvidence, key []byte) runtimeAssessment {
 			fail(err.Error())
 			continue
 		}
-		if _, err := runtimeHeaders(w.From, "", false); err != nil || w.From == "" {
+		statuses, err := runtimeStatuses(w.From)
+		if err != nil || len(statuses) == 0 {
 			fail("missing/truncated reverse capture")
 		}
 		if w.ID == "downstream" {
 			r.DownstreamStreams = m
+			downstreamStatuses = statuses
 		} else {
 			r.UpstreamStreams = m
+			upstreamStatuses = statuses
 			upstreamProbes, err = runtimeHeaders(w.To, "x-aegis-probe-id", true)
 			if err != nil {
 				fail("invalid upstream probe correlation")
@@ -147,18 +205,27 @@ func assessRuntime(e runtimeEvidence, key []byte) runtimeAssessment {
 			fail("missing/duplicate identity or downstream binding")
 		}
 		seen[q.Probe] = true
+		if downstreamStatuses[r.DownstreamStreams[q.Probe]] != q.Status {
+			fail("downstream response status/stream binding")
+		}
 		if q.Status == 200 {
 			accepted++
 			if q.Nonce == "" || nonces[q.Nonce] || !q.GotConnection || !q.Wrote || q.OriginHandlers != 1 || r.UpstreamStreams[q.Nonce] == 0 || upstreamProbes[q.Probe] != r.UpstreamStreams[q.Nonce] {
 				fail("missing runtime transport/handler binding")
 			}
 			nonces[q.Nonce] = true
+			if upstreamStatuses[r.UpstreamStreams[q.Nonce]] != q.Status {
+				fail("upstream response status/stream binding")
+			}
 		} else if q.Status != 421 || q.OriginHandlers != 0 || q.GotConnection || q.Wrote || q.Nonce != "" {
 			fail("denied request caused origin effect or forged decision")
 		}
 	}
 	if len(r.UpstreamStreams) != accepted || len(upstreamProbes) != accepted || len(r.DownstreamStreams) != len(e.Requests) {
 		fail("unattributed stream or omitted request")
+	}
+	if len(downstreamStatuses) != len(e.Requests) || len(upstreamStatuses) != accepted {
+		fail("response stream coverage")
 	}
 	r.CorrelationConsistent = len(r.Incomplete) == 0
 	// Supported callbacks do not expose authoritative origin handler stream IDs,
