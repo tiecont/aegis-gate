@@ -1,0 +1,174 @@
+{
+  "source_commit": "cd32311c81b9eb1b78b0f12c2bf021b0cd40b831",
+  "source_tree": "3826a32fa26365d0dd3a8d4519efadffc448912b",
+  "tracked_clean": true,
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/home/tiecont/Projects/aegis-gate/.local/sprint05b-gates/scripts/sprint04c-gates.mjs",
+    "evidence/sprint05c-root/gates-04"
+  ],
+  "cwd": "/home/tiecont/Projects/aegis-gate/.local/sprint05b-gates",
+  "started_at": "2026-11-15T06:17:26.955Z",
+  "node": "v26.13.0",
+  "node_binary": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "fixture_lock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "compose_project": "aegisgate-05c-root",
+  "commands": [
+    {
+      "label": "check",
+      "command": "make",
+      "args": [
+        "check"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate/.local/sprint05b-gates",
+      "started_at": "2026-11-15T06:17:27.205Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-15T06:19:25.618Z",
+      "streams": [
+        {
+          "file": "evidence/sprint05c-root/gates-04/check.stdout.log",
+          "sha256": "c333bd7ed3a400238d3ef95d1cfd36cb3c3c6d27e83c0acf750e0b6bee4c942e",
+          "original_sha256": "c333bd7ed3a400238d3ef95d1cfd36cb3c3c6d27e83c0acf750e0b6bee4c942e"
+        },
+        {
+          "file": "evidence/sprint05c-root/gates-04/check.stderr.log",
+          "sha256": "32830beaed7b9328056f8634d4284559fce6d3fc47f009f36e862f95bc107ca7",
+          "original_sha256": "32830beaed7b9328056f8634d4284559fce6d3fc47f009f36e862f95bc107ca7"
+        }
+      ]
+    },
+    {
+      "label": "security-scan",
+      "command": "make",
+      "args": [
+        "security-scan"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate/.local/sprint05b-gates",
+      "started_at": "2026-11-15T06:19:25.634Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-15T06:21:00.128Z",
+      "streams": [
+        {
+          "file": "evidence/sprint05c-root/gates-04/security-scan.stdout.log",
+          "sha256": "8f9869b2cf6f974be8699ef4de9ec66f30d21fe378b4cfdf12835c8f35244b32",
+          "original_sha256": "8f9869b2cf6f974be8699ef4de9ec66f30d21fe378b4cfdf12835c8f35244b32"
+        },
+        {
+          "file": "evidence/sprint05c-root/gates-04/security-scan.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "cleanup",
+      "command": "make",
+      "args": [
+        "dev-down"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate/.local/sprint05b-gates",
+      "started_at": "2026-11-15T06:21:00.137Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-15T06:21:10.659Z",
+      "streams": [
+        {
+          "file": "evidence/sprint05c-root/gates-04/cleanup.stdout.log",
+          "sha256": "54a436c053a8cdd9d5d9c057ba2076828e35449457b540d8847a89df29ff6a90",
+          "original_sha256": "54a436c053a8cdd9d5d9c057ba2076828e35449457b540d8847a89df29ff6a90"
+        },
+        {
+          "file": "evidence/sprint05c-root/gates-04/cleanup.stderr.log",
+          "sha256": "539c31c646399935e9fef45699290658480fbddfad44dafdbc70129f5074469b",
+          "original_sha256": "539c31c646399935e9fef45699290658480fbddfad44dafdbc70129f5074469b"
+        }
+      ]
+    },
+    {
+      "label": "cleanup-volumes",
+      "command": "docker",
+      "args": [
+        "compose",
+        "--env-file",
+        ".local/compose.env",
+        "--env-file",
+        ".local/fixture-images.env",
+        "-f",
+        "infra/compose/compose.yaml",
+        "down",
+        "--volumes",
+        "--remove-orphans"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate/.local/sprint05b-gates",
+      "started_at": "2026-11-15T06:21:10.667Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-15T06:21:10.828Z",
+      "streams": [
+        {
+          "file": "evidence/sprint05c-root/gates-04/cleanup-volumes.stdout.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05c-root/gates-04/cleanup-volumes.stderr.log",
+          "sha256": "1fd48cf76feb54ee93ed0d3d42f19a18c185d16f094515a8957b6b8fa8ecdf52",
+          "original_sha256": "1fd48cf76feb54ee93ed0d3d42f19a18c185d16f094515a8957b6b8fa8ecdf52"
+        }
+      ]
+    }
+  ],
+  "remaining_project_containers": [],
+  "private_material_check": {
+    "files_checked": 57,
+    "matches": 0
+  },
+  "private_fixture_cleanup": [
+    {
+      "file": ".local/pki",
+      "exists": false
+    },
+    {
+      "file": ".local/postgres-password",
+      "exists": false
+    },
+    {
+      "file": ".local/redis-password",
+      "exists": false
+    },
+    {
+      "file": ".local/nats-token",
+      "exists": false
+    },
+    {
+      "file": ".local/redis.conf",
+      "exists": false
+    },
+    {
+      "file": ".local/nats.conf",
+      "exists": false
+    },
+    {
+      "file": ".local/compose.env",
+      "exists": false
+    },
+    {
+      "file": ".local/evidence/security/compose-config.json",
+      "exists": false
+    }
+  ],
+  "remaining_project_networks": [],
+  "remaining_project_volumes": [],
+  "ended_at": "2026-11-15T06:21:10.954Z",
+  "passed": true,
+  "lock_held_through_cleanup": true,
+  "export": {
+    "kind": "sanitized derivative",
+    "original_commands_sha256": "7d70ea7226aab49638ce9afcafe3988d1dc3848f461e4580bd8eb56f8766968c",
+    "original_outputs_preserved_by_digest": true,
+    "redaction_manifest": "evidence/sprint05c-root/gates-04/export.json"
+  }
+}

@@ -12,7 +12,8 @@ regresses. Accepted baseline remains73/75 and19/23, independently reproduced.
 Research observer corrects four independently found false-PASS defects; bounded
 adversarial controls pass, full proxy attribution UNRESOLVED. Actual00/02/03
 regressions pass. Independent F1c99633 accepts scoped tooling and technical
-stops, rejects complete runtime eligibility. Final local/hosted gates pending. See
+stops, rejects complete runtime eligibility. Full locked local gates/cleanup PASS
+at cd32311; exact-head hosted delivery pending. See
 `docs/reports/sprint05c-completion.md`.01 NO-GO;04-12 LOCKED;production BLOCKED;
 ADR012 and human approvals PENDING.
 

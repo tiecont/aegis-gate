@@ -1,7 +1,7 @@
 # Sprint 05-C Measured Completion
 
-Status: component engineering and independent source review complete;
-final local gates and hosted delivery PENDING. Module01 remains
+Status: component engineering, independent source review and full local gates
+complete; hosted delivery PENDING. Module01 remains
 NO-GO. Baseline main `078d83c0ab1cb1364d0245d4c4f62f0fe0439e97`, tree
 `28aa22cf761092e31c84dc3d07d0d7593784afd3`; exact run43672825174 passes both
 hosted jobs. Actual final head/merge receipts follow observed events, never a
@@ -138,9 +138,14 @@ source-filter/timeout with separate recovery, E old namespace rejection, F `/tmp
 ENOSPC and four D findings. Cleanup and failed exits remain distinct. Only owned
 generated E caches were removed for space; evidence branches are preserved.
 
-Full locked check/security-scan/teardown, exact PR-head hosted jobs, actual merge
-SHA and exact-main hosted jobs are PENDING. Additive receipts must name actual
-source and events. No component result substitutes for final gates.
+Full locked `make check`, `make security-scan`, teardown and volume removal
+all exit0 at source `cd32311c81b9eb1b78b0f12c2bf021b0cd40b831`, tree
+`3826a32fa26365d0dd3a8d4519efadffc448912b`. Receipt `evidence/sprint05c-root/gates-04/commands.json`
+records the complete locked lifecycle, raw output hashes, scanner results,
+zero remaining project containers/networks/volumes and private fixture removal.
+The explicit sanitized export records zero redactions and preserves original
+hashes. Exact PR-head hosted jobs, actual merge SHA and exact-main hosted jobs
+are PENDING. No component result substitutes for those final gates.
 
 Root gate attempts01-03 are retained with failed exits. Attempts01/02 used
 734a9d6 and failed formatting before fixture setup;02 accidentally reused the
