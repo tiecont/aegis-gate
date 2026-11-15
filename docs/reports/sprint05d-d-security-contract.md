@@ -75,3 +75,30 @@ the original75 evaluator or its interval. These contracts are not universally
 equivalent: v2 permits a class of bytes v1 forbids and adds a causal proof burden
 that current public instrumentation cannot satisfy. Handler/status-only evidence
 is insufficient. See the separately PROPOSED05D ADR amendment for human decisions.
+
+## Executed Receipts
+
+Source `36abf92`, `evidence/sprint05d-d/runtime-four`, exits0 under the shared
+fixture lock. Full race execution includes the original observer tests, the
+five independently authored05C F finding overlays and the live runtime with12
+malicious mutations. Receipt SHA256:
+`90b368ac879fa7421ab4b9e1ab33a9e082a3c0ef55b065fe1b69981c0d57781d`.
+
+```sh
+flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock \
+ env GOAMD64=v1 GOTOOLCHAIN=local \
+ TMPDIR=/home/tiecont/.cache/aegisgate-05d/d/.local/tmp \
+ /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node \
+ scripts/sprint05a-receipt.mjs evidence/sprint05d-d/runtime-four \
+ /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node \
+ spikes/envoy/sprint05d-d-proof.mjs
+```
+
+Runtime-three is retained FAIL1: the maintained Framer can return io.EOF for a
+fully read frame header whose declared payload is entirely missing. The first
+reverse-capture implementation treated that as clean stream completion. The
+fix tests remaining raw bytes before each frame and treats every subsequent
+read error as incomplete. The exact truncated-reverse control now rejects.
+This diagnostic correction does not create full security attribution or repair
+an original75/23 failure. Private overlay staging is removed in the collector's
+finally path; evidence/source hashes and tool versions are retained by receipt.
