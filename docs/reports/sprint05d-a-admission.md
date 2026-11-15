@@ -122,6 +122,24 @@ syntax check and unchanged upstream compile profile. Verify01 retains a failed
 metadata TMPDIR assumption; verify02 distinguishes pre-fixture Git reads. No
 failed evidence is relabeled or overwritten.
 
+Independent F clean reproduction exposed a driver race at aggregate ciphertext
+quota: the runtime correctly returns503 and closes while the sender is still
+writing its attempted600000-byte body. Source2d50c65 records known peer-close
+write interruption only for this expected rejection; the unchanged assertion
+still requires an actual503, zero origin effects and complete quota cleanup.
+It explicitly does not claim the whole attempted upload was delivered. Runtime,
+parser, limits, deadlines and acceptance requirements are unchanged.
+
+Run03 at2d50c65 exits0,29 controls and cleanup all0. Receipt SHA256:
+`8dca5535801663fb1e348b5f61a49fa247ac1649b008c7b7498e7516e6006cfb`.
+After evidence commitc13c7b1, verify03 exits0 with12 artifact hashes and15 source
+bindings. Receipt SHA256:
+`8e98d20516b51e2134a989fa5aa659fdeec684557544edabf1f40daf51a2c883`.
+F's failed independent receipts remain retained on the review branch. The
+author verifier requires committed run evidence; calling it on a fresh
+untracked clone capture fails that explicit precondition and does not establish
+runtime failure. F independently checks fresh capture contents instead.
+
 ## Agent Completion Report
 
 - Module: Sprint05D A, isolated Module01 admission-policy research.
