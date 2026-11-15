@@ -1,0 +1,169 @@
+{
+  "source_commit": "a09565d47951c156123139ee45d8b26d944fc61c",
+  "source_tree": "f72ea2a51ef7a64090f994bcf658b46e7bbee0f9",
+  "node": "v26.13.0",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/home/tiecont/.cache/aegisgate-sprint05d-f-HxoU6H/source/spikes/envoy/sprint05d-b-verify.mjs",
+    "evidence/sprint05d-b/verify-901"
+  ],
+  "artifacts": 40,
+  "sourceBindings": 302,
+  "commands": [
+    {
+      "label": "protected",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "protected.stdout",
+          "sha256": "12fecd21d0163ccd7b6c2e53ba49a36bf9cd15aaeb5311710088bae5cb41d3f5",
+          "bytes": 4342
+        },
+        {
+          "file": "protected.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "label": "whitespace",
+      "program": "git",
+      "args": [
+        "diff",
+        "--check",
+        "aa289da",
+        "--",
+        "spikes/envoy/sprint05d-b*",
+        "docs/reports/sprint05d-b-h2-identity.md"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "whitespace.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "file": "whitespace.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "label": "syntax-0",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "spikes/envoy/sprint05d-b-peer.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "syntax-0.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "file": "syntax-0.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "label": "syntax-1",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "spikes/envoy/sprint05d-b-run.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "syntax-1.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "file": "syntax-1.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "label": "syntax-2",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "spikes/envoy/sprint05d-b-select.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "syntax-2.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "file": "syntax-2.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "label": "syntax-3",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--check",
+        "spikes/envoy/sprint05d-b-verify.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "syntax-3.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "file": "syntax-3.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    }
+  ],
+  "resets": [
+    {
+      "connection": 4,
+      "hex": "00000403000000000100000001",
+      "sha256": "902f528c71b3d55985510ee73256814dee0bdf71ce6320ad21bd0f6531f20185"
+    },
+    {
+      "connection": 7,
+      "hex": "00000403000000000100000001",
+      "sha256": "902f528c71b3d55985510ee73256814dee0bdf71ce6320ad21bd0f6531f20185"
+    }
+  ],
+  "capture_bytes": 1867,
+  "integrity_verified": true,
+  "semantic_security_pass": false,
+  "resource_eligible": false,
+  "runtime_eligible": false,
+  "lock_held_through_hashing": true,
+  "original75_or23_aggregate_rerun": false
+}

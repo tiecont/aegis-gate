@@ -6,7 +6,7 @@ import { execFileSync, spawnSync } from "node:child_process";
 const [output, command, ...args] = process.argv.slice(2);
 assert.match(
   output ?? "",
-  /^evidence\/sprint05[abc]-(root|d)\/[a-z][a-z0-9-]+$/,
+  /^evidence\/sprint05[abcd]-(root|d)\/[a-z][a-z0-9-]+$/,
 );
 assert.ok(
   command && !fs.existsSync(output),

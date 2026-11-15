@@ -1,5 +1,36 @@
 # Implementation risk register
 
+## Sprint05-D Tested Decision Boundary
+
+R01/R04 remain blocking. Strict finite all-message encrypted staging prevents
+the demonstrated CL EOF and late-trailer origin effects, but fails mandatory
+pre-completion streaming.1.5MiB message/2MiB aggregate staging and ephemeral
+crash-lost keys are bounded feasibility policy, not production custody or
+indefinite streaming. A common valid/invalid prefix cannot be forwarded early
+and retroactively removed from origin. Engineering owner: root/Module01;
+accountable human architecture/security owners remain PENDING.
+
+Original73/75 and19/23 remain unchanged. Userinfo peerRST1 does not satisfy
+400/421; alternate codec still regresses CONTINUATION. Supported inspected APIs
+do not expose the proposed pre-reset status or post-error adapter-send repair.
+The reused H2 SETTINGS ACK9 bytes still FAIL aggregate zero-byte acceptance.
+No control subtraction, shifted window or hidden-codec activation is accepted.
+
+Four newly independent observer consistency findings required unique same-stream
+probe/nonce bindings and raw completed response-status coverage. Corrected
+bounded tests pass, but authenticated summaries cannot prove unobserved events,
+pre-wire dispatch authority, exact HPACK mutations or signed generation. Full
+runtime attribution is INCOMPLETE. Proposed ADR012 v2 changes no effective
+contract and accepts no risk. Finite/streaming semantics and causal H2 exceptions
+require named human architecture/security decisions plus versioned tests.
+
+Actual00/02/03 fixture/race/dependency/dashboard regressions pass. Full locked
+local check/security-scan/cleanup pass at2cb0c34; F a91b6c5 accepts exact local
+integration/export. PR23 exact-final-head/main hosted gates remain obligations in
+`reports/sprint05d-completion.md`. No production architecture or downstream
+module opens. Resume wider runtime work only on a genuinely new supported
+mechanism with targeted unchanged-case proof or a formally approved contract.
+
 ## Sprint05-C Measured Ingress Risks
 
 Known-length framing does not guarantee strict pre-origin admission: F's CL10/

@@ -10,7 +10,7 @@ import time
 
 root = Path.cwd()
 project = os.environ['COMPOSE_PROJECT_NAME']
-assert re.fullmatch(r'aegisgate-05[abc]-e-attempt-\d{2}-[a-f0-9]{12}', project)
+assert re.fullmatch(r'aegisgate-05[abcd]-e-attempt-\d{2}-[a-f0-9]{12}', project)
 compose = ['docker', 'compose', '--env-file', '.local/compose.env',
            '--env-file', '.local/fixture-images.env', '-f', 'infra/compose/compose.yaml']
 

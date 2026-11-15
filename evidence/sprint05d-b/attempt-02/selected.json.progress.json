@@ -1,0 +1,150 @@
+{
+  "started_at": "2026-11-15T08:58:16.329Z",
+  "tests": [
+    {
+      "name": "settled-reuse-identity-and-three-authority-negatives",
+      "started_at": "2026-11-15T08:58:16.974Z",
+      "status": "fail",
+      "error": "Error [ERR_HTTP2_STREAM_ERROR]: Stream closed with error code NGHTTP2_PROTOCOL_ERROR\n    at ClientHttp2Stream._destroy (node:internal/http2/core:2544:13)\n    at _destroy (node:internal/streams/destroy:122:10)\n    at ClientHttp2Stream.destroy (node:internal/streams/destroy:84:5)\n    at Writable.destroy (node:internal/streams/writable:1161:11)\n    at Http2Stream.onStreamClose (node:internal/http2/core:624:12)",
+      "observation": {
+        "target": "/",
+        "headers": {
+          ":authority": "user@edge-b.test"
+        },
+        "goaway": [],
+        "stream_closed": true,
+        "rst_code": 1,
+        "session_closed": false,
+        "session_destroyed": false
+      },
+      "origin": {
+        "connections": 1,
+        "bytes": 324,
+        "handlers": 2,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 9
+      }
+    },
+    {
+      "name": "individual-settled-Host-denial",
+      "started_at": "2026-11-15T08:58:17.475Z",
+      "status_code": 421,
+      "interval": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      },
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "individual-settled-authority-denial",
+      "started_at": "2026-11-15T08:58:17.624Z",
+      "status_code": 421,
+      "interval": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      },
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "individual-settled-userinfo-denial",
+      "started_at": "2026-11-15T08:58:17.774Z",
+      "status": "fail",
+      "error": "Error [ERR_HTTP2_STREAM_ERROR]: Stream closed with error code NGHTTP2_PROTOCOL_ERROR\n    at ClientHttp2Stream._destroy (node:internal/http2/core:2544:13)\n    at _destroy (node:internal/streams/destroy:122:10)\n    at ClientHttp2Stream.destroy (node:internal/streams/destroy:84:5)\n    at Writable.destroy (node:internal/streams/writable:1161:11)\n    at Http2Stream.onStreamClose (node:internal/http2/core:624:12)",
+      "observation": {
+        "target": "/",
+        "headers": {
+          ":authority": "user@edge-b.test"
+        },
+        "goaway": [],
+        "stream_closed": true,
+        "rst_code": 1,
+        "session_closed": false,
+        "session_destroyed": false
+      },
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 0
+      }
+    },
+    {
+      "name": "valid-identity-and-pool-reuse-after-negative-frames",
+      "started_at": "2026-11-15T08:58:17.925Z",
+      "samples": [
+        {
+          "id": 5,
+          "path": "/reuse%2Ffirst?x=%2520",
+          "authority": "lab-origin.test",
+          "sni": "lab-origin.test",
+          "native_connection": 1,
+          "method": "GET",
+          "probe_header": "synthetic-first-only",
+          "alpn": "h2",
+          "tls": "TLSv1.3",
+          "produced": 0,
+          "pauses": 0,
+          "received": 0,
+          "closed": true,
+          "rst_code": 0
+        },
+        {
+          "id": 7,
+          "path": "/reuse%20second",
+          "authority": "lab-origin.test",
+          "sni": "lab-origin.test",
+          "native_connection": 1,
+          "method": "GET",
+          "probe_header": null,
+          "alpn": "h2",
+          "tls": "TLSv1.3",
+          "produced": 0,
+          "pauses": 0,
+          "received": 0,
+          "closed": true,
+          "rst_code": 0
+        }
+      ],
+      "status": "pass",
+      "origin": {
+        "connections": 0,
+        "bytes": 148,
+        "handlers": 2,
+        "parser_errors": 0,
+        "transport_errors": 0,
+        "events": 4
+      }
+    }
+  ],
+  "failures": [
+    "settled-reuse-identity-and-three-authority-negatives",
+    "individual-settled-userinfo-denial"
+  ]
+}

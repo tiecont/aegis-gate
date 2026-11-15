@@ -1,0 +1,12 @@
+{
+  "failure": "oghttp2 raw-H2-unexpected-CONTINUATION closes without the required peer PROTOCOL_ERROR frame; HEADERS stream zero and zero WINDOW_UPDATE must retain their prior PASS",
+  "hypothesis": "A released supported Envoy error-emission API may submit PROTOCOL_ERROR and flush the adapter after ProcessBytes fails, before HCM closes the connection",
+  "mechanism": "Inspect the pinned release's codec dispatch, adapter send boundary, public HTTP/network connection interfaces and HCM protocol options; implement a candidate only if a supported configurable hook connects the error path to error-frame emission",
+  "targeted_input": [
+    "raw-H2-HEADERS-stream-zero",
+    "raw-H2-unexpected-CONTINUATION",
+    "raw-H2-zero-WINDOW_UPDATE"
+  ],
+  "positive_control": "If a supported implementation exists, execute the three original wire-probes cases with their exact payloads, assertions and windows; only after all pass run unchanged original23 including reuse, identity, cancellation and header controls",
+  "stop": "No supported hook, missing peer PROTOCOL_ERROR, or loss of either prior frame PASS ends this attempt; no repeat baseline/codec comparison or full23 without a new credible mechanism"
+}
