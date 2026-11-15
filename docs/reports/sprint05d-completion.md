@@ -20,11 +20,11 @@ Root protected receipt: `evidence/sprint05d-root/baseline/`.
 | Track / branch | Executed source and result | Review/delivery |
 | --- | --- | --- |
 | A feat/sprint05d-admission-policy | 2d50c65 corrected quota driver; finala005a23;29 controls; streaming FAIL | F7894cef clean A29/F23 PASS, scoped ACCEPT |
-| B fix/sprint05d-h2-identity-status | 62d8a90 exact five-body diagnostic; two userinfo FAIL/three controls PASS | Final044afc6 report; F clean offline verification ca27107 |
+| B fix/sprint05d-h2-identity-status | 62d8a90 exact five-body diagnostic; two userinfo FAIL/three controls PASS | Finala419dcd; F538820f scoped ACCEPT and clean offline replay |
 | C fix/sprint05d-h2-frame-rejection | 3474579 source/API audit; final5bc9489; no supported post-error adapter-send hook | F3172979 scoped ACCEPT |
 | D test/sprint05d-origin-isolation | 6bc71e8 response/nonce-corrected real TLS/H2 correlation; final661f0d5 | F3763052 full race/13 adversarial mutations PASS, scoped ACCEPT |
 | E test/sprint05d-runtime-regression | 01fdaac real fixtures; f155927 report/evidence; all28 commands0 | F3172979 source/retained-evidence ACCEPT; full fresh gate replay pending |
-| F review/sprint05d-security | Clean-source builds and independent attacks | Final verdict pending |
+| F review/sprint05d-security | Clean-source builds and independent attacks;538820f component acceptance | Final integration gate review pending |
 | Root sprint/05d-integration | 619d883 ownership; 1ff79f3 evidence namespace; 30c9019 proposed ADR | Integration/gates/PR pending |
 
 Agent reports and their receipts carry full source/tree/tool versions, exact
@@ -135,8 +135,20 @@ All28 commands and cleanup/container/network/volume checks exit0; E receipt
 SHA256 `3f653cf0ee01ba653a6fd8a70c1196495a68a7f6f8f3fcef75dd6c7d45ea1ac5`.
 No collection of A/B/C separate proofs is presented as a compatible runtime.
 
-Final exact-source local check/security-scan/cleanup: PENDING.
-Independent F per-failure/source/integration acceptance: PENDING.
+Final locked local check/security-scan/teardown/volume cleanup all exit0 at
+`2cb0c34fa5a3b62da7349a4c7c33a0d31a8fdbf7`, tree
+`5e18b12e8bb393bab112d968c2e1205164e8c17b`. F executes this in the clean
+gate clone, freshly replaying real accepted-module fixtures. Source/tree,
+exact commands and scanner raw streams are in
+`evidence/sprint05d-root/gates-01/commands.json`, SHA256
+`72192094872b058dfd3c94a7175494b5b4917b30078e664c0bf52d8bdcf1702c`.
+Explicit derivative export preserves original hashes,58 files, zero redactions.
+Private-value checks examine57 files with zero matches; all private fixture
+paths and project containers/networks/volumes are absent after cleanup.
+No scanner suppression or dependency change: historical Pingora derivative/
+unsafe-libyaml maintenance warnings remain visible, not accepted runtime risk.
+F538820f accepts components and each failed-case disposition; exact integration
+gate/export review follows separately.
 PR/final-head hosted jobs/merge/exact-main hosted jobs: PENDING.
 These delivery fields must be completed before declaring the sprint delivered.
 

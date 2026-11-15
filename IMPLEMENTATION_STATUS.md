@@ -15,8 +15,9 @@ Bounded real TLS/H2 correlation now checks unique captured probe/nonce streams
 and completed response status after F found four false-consistency defects.
 Independent adversarial replay passes; full runtime attribution remains
 INCOMPLETE. Actual00/02/03 regressions pass11 packages/89 top-level/151 subtests,
-zero skips. Root/F final integration local/hosted delivery gates are pending,
-tracked in `docs/reports/sprint05d-completion.md`.
+zero skips. F executes full locked local check/security-scan/cleanup at2cb0c34,
+all exit0, with fresh real-fixture replay. Exact integration/export review and
+hosted delivery remain pending in `docs/reports/sprint05d-completion.md`.
 
 The versioned ADR012 v2 package is PROPOSED, NOT EFFECTIVE. It recommends an
 explicit finite-versus-streaming decision and authoritative causal H2
