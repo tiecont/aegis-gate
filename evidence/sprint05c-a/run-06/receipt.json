@@ -1,0 +1,901 @@
+{
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05c-a/spikes/envoy/sprint05c-a-run.mjs",
+    "evidence/sprint05c-a/run-06"
+  ],
+  "cwd": "/tmp/aegisgate-05c-a",
+  "started": "2026-11-15T04:55:37.339Z",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=all"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "feat/sprint05c-strict-ingress\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "ee04c4b6c39768e7244a4392b02448cb17b71011\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "83a2e597d63636565b13929c232b48ddd9569013\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "ls-files",
+        "spikes/envoy/sprint05c-a-*",
+        "spikes/envoy/sprint05b-a-build.mjs",
+        "spikes/envoy/wire-fixtures.mjs",
+        "spikes/edge-comparison/manifest.json",
+        "scripts/sprint05b-baseline.mjs",
+        "evidence/sprint05a-b/source-01/sources.json",
+        "evidence/sprint05c-a/PLAN.md"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "evidence/sprint05a-b/source-01/sources.json\nevidence/sprint05c-a/PLAN.md\nscripts/sprint05b-baseline.mjs\nspikes/edge-comparison/manifest.json\nspikes/envoy/sprint05b-a-build.mjs\nspikes/envoy/sprint05c-a-build.mjs\nspikes/envoy/sprint05c-a-llhttp.c\nspikes/envoy/sprint05c-a-proof.mjs\nspikes/envoy/sprint05c-a-run.mjs\nspikes/envoy/sprint05c-a-runtime.mjs\nspikes/envoy/wire-fixtures.mjs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "{\n  \"baseline\": \"8758b1c84b4186449cd79fabae461ca53ee05100\",\n  \"tree\": \"2c6b1d5ff56f9e60a7bf77b478e291f3f5bc420d\",\n  \"protectedFiles\": [\n    {\n      \"file\": \"spikes/pingora/lab.mjs\",\n      \"sha256\": \"9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d\",\n      \"bytes\": 45073\n    },\n    {\n      \"file\": \"spikes/edge-comparison/manifest.json\",\n      \"sha256\": \"8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141\",\n      \"bytes\": 9829\n    },\n    {\n      \"file\": \"spikes/edge-comparison/contract.mjs\",\n      \"sha256\": \"1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f\",\n      \"bytes\": 1686\n    },\n    {\n      \"file\": \"spikes/edge-comparison/supplemental.mjs\",\n      \"sha256\": \"606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf\",\n      \"bytes\": 1616\n    },\n    {\n      \"file\": \"spikes/edge-comparison/evaluate.mjs\",\n      \"sha256\": \"059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf\",\n      \"bytes\": 2119\n    },\n    {\n      \"file\": \"spikes/edge-comparison/run.mjs\",\n      \"sha256\": \"dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493\",\n      \"bytes\": 61\n    },\n    {\n      \"file\": \"spikes/edge-comparison/tls-observer.mjs\",\n      \"sha256\": \"b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065\",\n      \"bytes\": 1639\n    },\n    {\n      \"file\": \"spikes/edge-comparison/extract-baseline.mjs\",\n      \"sha256\": \"a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6\",\n      \"bytes\": 2908\n    },\n    {\n      \"file\": \"spikes/envoy/wire-probes.mjs\",\n      \"sha256\": \"fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a\",\n      \"bytes\": 20934\n    },\n    {\n      \"file\": \"spikes/envoy/wire-observer.mjs\",\n      \"sha256\": \"bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3\",\n      \"bytes\": 4052\n    },\n    {\n      \"file\": \"spikes/envoy/wire-fixtures.mjs\",\n      \"sha256\": \"4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278\",\n      \"bytes\": 3320\n    }\n  ],\n  \"protected_inventory_sha256\": \"85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa\",\n  \"historical\": [\n    {\n      \"file\": \"evidence/sprint05a-root/candidate-02/commands.json\",\n      \"sha256\": \"572ad993fe7f38b58c62c0b66de81a333006b3c6ed5a332478e38f60838d273a\"\n    },\n    {\n      \"file\": \"evidence/sprint05a-root/candidate-02/original75.json\",\n      \"sha256\": \"13a04311fa39f0e7c7d94c85051d6d375e9a281cf6a4aa0f4aafa8dbe337556a\"\n    },\n    {\n      \"file\": \"evidence/sprint05a-root/candidate-02/original23.json\",\n      \"sha256\": \"62fa6ba4082b20185d4958bbd034bbddef40dc7b46e2a89291fda507d3c99cee\"\n    },\n    {\n      \"file\": \"evidence/sprint05a-root/candidate-02/SHA256SUMS\",\n      \"sha256\": \"85e4968d3da9ce4381f6cae77073376c2cf6164ca3d278a42489abe2f00a9017\"\n    },\n    {\n      \"file\": \"evidence/sprint05a-b/source-01/sources.json\",\n      \"sha256\": \"75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d\"\n    }\n  ],\n  \"previous75\": {\n    \"passed\": 73,\n    \"failures\": [\n      {\n        \"name\": \"malformed-HTTP-obsolete-folded-header\",\n        \"status\": \"fail\",\n        \"milliseconds\": 7.12,\n        \"error\": \"malformed request reached an owned origin\\n\\n1 !== 0\\n\",\n        \"origin\": {\n          \"handler_invocations\": 1,\n          \"decrypted_bytes\": 263,\n          \"parser_errors\": 0,\n          \"transport_errors\": 0,\n          \"requests\": [\n            {\n              \"method\": \"GET\",\n              \"target\": \"/\",\n              \"protocol\": \"1.1\",\n              \"tls\": \"TLSv1.2\",\n              \"sni\": false,\n              \"alpn\": \"http/1.1\"\n            }\n          ],\n          \"omitted_request_samples\": 0\n        }\n      },\n      {\n        \"name\": \"HTTP2-authority-Host-and-SNI-confusion-rejected\",\n        \"status\": \"fail\",\n        \"milliseconds\": 7.38,\n        \"error\": \"confused authority forwarded bytes to origin\\n\\n3032 !== 3023\\n\",\n        \"origin\": {\n          \"handler_invocations\": 0,\n          \"decrypted_bytes\": 9,\n          \"parser_errors\": 0,\n          \"transport_errors\": 0,\n          \"requests\": [],\n          \"omitted_request_samples\": 0\n        }\n      }\n    ]\n  },\n  \"previous23\": {\n    \"passed\": 19,\n    \"failures\": [\n      \"settled-reuse-identity-and-three-authority-negatives\",\n      \"individual-settled-userinfo-denial\",\n      \"raw-H2-HEADERS-stream-zero\",\n      \"raw-H2-zero-WINDOW_UPDATE\"\n    ]\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/uname",
+        "-a"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "Linux ties-cachyos 7.3.3-1-cachyos #1 SMP PREEMPT_DYNAMIC Sat, 07 Nov 2026 13:54:44 +0000 x86_64 GNU/Linux\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "version"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "OpenSSL 4.1.0 23 Oct 2026 (Library: OpenSSL 4.1.0 23 Oct 2026)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "--version"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "cc (GCC) 16.2.1 20260810\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsyntax-only",
+        "-I/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node",
+        "-I/tmp/aegisgate-05c-a/.local/sprint05c-a-4oTNSk/upstream",
+        "spikes/envoy/sprint05c-a-llhttp.c"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c11",
+        "-O2",
+        "-shared",
+        "-fPIC",
+        "-Wall",
+        "-Werror",
+        "-I/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node",
+        "-I/tmp/aegisgate-05c-a/.local/sprint05c-a-4oTNSk/upstream",
+        "spikes/envoy/sprint05c-a-llhttp.c",
+        "/tmp/aegisgate-05c-a/.local/sprint05c-a-4oTNSk/upstream/api.c",
+        "/tmp/aegisgate-05c-a/.local/sprint05c-a-4oTNSk/upstream/http.c",
+        "/tmp/aegisgate-05c-a/.local/sprint05c-a-4oTNSk/upstream/llhttp.c",
+        "-o",
+        "/tmp/aegisgate-05c-a/.local/sprint05c-a-4oTNSk/sprint05c-a-llhttp.node"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "req",
+        "-x509",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "ca.key",
+        "-out",
+        "ca.pem",
+        "-days",
+        "1",
+        "-subj",
+        "/CN=disposable Sprint05C A CA",
+        "-addext",
+        "basicConstraints=critical,CA:TRUE"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a/.local/sprint05c-a-4oTNSk/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "..+....+......+............+.....+............+...+...+...+.......+.........+...+.....+.+.....+++++++++++++++++++++++++++++++++++++++*.....+..+..........+..+...+++++++++++++++++++++++++++++++++++++++*......+..+...+....+...+.....+.+..+...+.........+...+...+.......+........+.........+..........+...+........+.+.....+...............+..........+.....+....+............+..+.+.........+...........+......+.+..+.+..+.......+..+.........+.+..................+..+.+..+.+......+...+.....+...+............+......+....+............+.........+..+...+....+..+.............+..+....+.....+......+...+............+...+.+..+.......+...+..+...+.......+.....................+.....+.++++++\n...+..+......+......+.+..+++++++++++++++++++++++++++++++++++++++*...+....+..+.+............+........+....+...+......+..+...+.......+.....+.......+...+..+.+.....+......+.+..+......+.......+..+......+++++++++++++++++++++++++++++++++++++++*....+...+................+............+.....+...+................+......+........+......+.+..+...+....+...++++++\n-----\n"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "req",
+        "-new",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "edge-a.key",
+        "-out",
+        "edge-a.csr",
+        "-subj",
+        "/CN=edge-a.test",
+        "-addext",
+        "subjectAltName=DNS:edge-a.test"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a/.local/sprint05c-a-4oTNSk/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "..........+.....................+.+.........+.........+..+.+..............+...+.+..+.............+.........+..................+..+...+...+.+...+..+...+......+....+........+.........+.+..............+.............+...+..+.+..............+............+......+...+.+.....+...+.............+...+.........+..+.+..+...+....+...........+............+++++++++++++++++++++++++++++++++++++++*..+++++++++++++++++++++++++++++++++++++++*............................+.....+......+....+.....+.+.........+..+...+...............+...+...+.......+........+......+.........+.......+...+......+........+......+.......+..+..........+..+.+.................+...+...................+.........+..+...+....+......+.........+...............+.....+.......+.....+....+.....+.......+...+.....+.+......+..+...+...+.......+............+..+...+............+......+....+...+............+.....+..................+.+..+...+.......+..+...+.......+......+.........+...+.........+...........+............+.+..+............+......+......++++++\n.+............+++++++++++++++++++++++++++++++++++++++*...+.+...+..+++++++++++++++++++++++++++++++++++++++*.+......+........+...+...................+...+...+............+.....+.+.........+..+....+..+...+.+......+...+..............+...............++++++\n-----\n"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "x509",
+        "-req",
+        "-in",
+        "edge-a.csr",
+        "-CA",
+        "ca.pem",
+        "-CAkey",
+        "ca.key",
+        "-CAcreateserial",
+        "-out",
+        "edge-a.pem",
+        "-days",
+        "1",
+        "-copy_extensions",
+        "copy"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a/.local/sprint05c-a-4oTNSk/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "Certificate request self-signature ok\nsubject=CN=edge-a.test\n"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "req",
+        "-new",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "edge-b.key",
+        "-out",
+        "edge-b.csr",
+        "-subj",
+        "/CN=edge-b.test",
+        "-addext",
+        "subjectAltName=DNS:edge-b.test"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a/.local/sprint05c-a-4oTNSk/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "..+......+++++++++++++++++++++++++++++++++++++++*..+.......+..+.........+.........+.+...........+...+......+.+......+..+.......+...+...+........+.+......+..+......+.+++++++++++++++++++++++++++++++++++++++*...+.........+.....+......+...+...+...............+...+....+..+.+..+.+.........+...........+............+............+.......+.........+.....+.+.....+......+...+.......+...+..+.......+..+.+.....+....+...+.....+.....................+.+...+..+....+.....+.+......+..+.+.....+....+..+.........+............+.........+....+.........+..+...+...+..................+..........+......+.....+.........+.+...+.....+.............+.....+.......+..+..........+.....+......+...+....+......+...........+...+.......+......+.....+.........+.+..+......+.+...+......+............+..+...+.......+..+......+...+.......+.....+...+.+........................+..+....+.....+.+.....+.......+..+.+...+...........+....+...............+.........+...+............+.................+.+..+...+...++++++\n....+.........+...+.........+.........+....+...........+....+..+.+........+............+....+...+.....+......+......+++++++++++++++++++++++++++++++++++++++*.+......+.+..+......+....+.....+............+................+...+..+....+++++++++++++++++++++++++++++++++++++++*.+....+......+........+...+....+...+......+..+.......+..++++++\n-----\n"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "x509",
+        "-req",
+        "-in",
+        "edge-b.csr",
+        "-CA",
+        "ca.pem",
+        "-CAkey",
+        "ca.key",
+        "-CAcreateserial",
+        "-out",
+        "edge-b.pem",
+        "-days",
+        "1",
+        "-copy_extensions",
+        "copy"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a/.local/sprint05c-a-4oTNSk/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "Certificate request self-signature ok\nsubject=CN=edge-b.test\n"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "req",
+        "-new",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "origin.key",
+        "-out",
+        "origin.csr",
+        "-subj",
+        "/CN=lab-origin.test",
+        "-addext",
+        "subjectAltName=DNS:lab-origin.test"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a/.local/sprint05c-a-4oTNSk/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "..+........+.+...+..+++++++++++++++++++++++++++++++++++++++*.........+.+..+.+..+.........+..........+.........+.....+++++++++++++++++++++++++++++++++++++++*...........+...+............+.......+.........+.....+.+.....+.+.........+........+.+......+...+..+.+..+..................+.......+......+...........+...+.+......+...+......+............+.........+........+......+.........+......+......+....+.....+....+...+.....++++++\n......+.....+...+......+.+......+........+......+.+............+.....+.+......+.....+.........+....+......+..+....+...+...+........+.......+...+.........+++++++++++++++++++++++++++++++++++++++*..+++++++++++++++++++++++++++++++++++++++*.+...+......+.................+.......+..+.....................+.........+...+.+..++++++\n-----\n"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "x509",
+        "-req",
+        "-in",
+        "origin.csr",
+        "-CA",
+        "ca.pem",
+        "-CAkey",
+        "ca.key",
+        "-CAcreateserial",
+        "-out",
+        "origin.pem",
+        "-days",
+        "1",
+        "-copy_extensions",
+        "copy"
+      ],
+      "cwd": "/tmp/aegisgate-05c-a/.local/sprint05c-a-4oTNSk/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "Certificate request self-signature ok\nsubject=CN=lab-origin.test\n"
+    }
+  ],
+  "probes": [
+    {
+      "name": "observer-positive-control",
+      "inputBytes": 76,
+      "inputSha256": "264178451e436679ad81120e5d26f31e431c74fd2da96c74dcc93a8acfdb1435",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "6b300f639679da200f5de28028964a5ef431645dc1e5dfbcaa9f236a8d86fc25",
+        "elapsedMs": 36.123465000000124,
+        "peerClosed": true
+      },
+      "origin": {
+        "bytes": 76,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "host": "edge-a.test",
+            "method": "POST",
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 76,
+            "sha256": "264178451e436679ad81120e5d26f31e431c74fd2da96c74dcc93a8acfdb1435",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1",
+            "authorized": true
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0
+      }
+    },
+    {
+      "name": "malformed-HTTP-obsolete-folded-header",
+      "inputBytes": 82,
+      "inputSha256": "2fd5c8bf85674e67a1e8d75c11b53d58904ca3b56d8cb3be3d264d53f16eba9f",
+      "response": {
+        "statuses": [
+          400
+        ],
+        "bytes": 63,
+        "sha256": "107006dce3a7eb16429e5002a08d8617ad4e0fd72bdc7cb9a0da532db5f42882",
+        "elapsedMs": 4.416378999999779,
+        "peerClosed": true
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0
+      },
+      "originalInputHex": "474554202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a582d466f6c6465643a2066697273740d0a207365636f6e640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a"
+    }
+  ],
+  "nativeChecks": [
+    {
+      "name": "no-body",
+      "bytes": 76,
+      "sha256": "264178451e436679ad81120e5d26f31e431c74fd2da96c74dcc93a8acfdb1435",
+      "splits": 75,
+      "oneByte": {
+        "last": {
+          "error": "HPE_PAUSED",
+          "reason": "on_message_complete pause",
+          "consumed": 0,
+          "totalConsumed": 76,
+          "complete": true,
+          "headersReady": false,
+          "bodyBytes": 0,
+          "messages": 1,
+          "keepAlive": false,
+          "trailers": [],
+          "status": 0
+        },
+        "used": 76,
+        "complete": 1,
+        "eof": {
+          "error": "HPE_OK",
+          "reason": "on_message_complete pause",
+          "consumed": 0,
+          "totalConsumed": 76,
+          "complete": false,
+          "headersReady": false,
+          "bodyBytes": 0,
+          "messages": 1,
+          "keepAlive": true
+        }
+      }
+    },
+    {
+      "name": "trailer-valid",
+      "bytes": 126,
+      "sha256": "6ed3ac4816e06f6de8852bd8970d828916e9e4e2c5bbabf1667bf7a5ea595b31",
+      "splits": 125,
+      "oneByte": {
+        "last": {
+          "error": "HPE_PAUSED",
+          "reason": "on_message_complete pause",
+          "consumed": 1,
+          "totalConsumed": 126,
+          "complete": true,
+          "headersReady": false,
+          "bodyBytes": 3,
+          "messages": 1,
+          "keepAlive": false,
+          "trailers": [
+            [
+              "X-End",
+              "yes"
+            ]
+          ],
+          "status": 0
+        },
+        "used": 126,
+        "complete": 1,
+        "eof": {
+          "error": "HPE_OK",
+          "reason": "on_message_complete pause",
+          "consumed": 0,
+          "totalConsumed": 126,
+          "complete": false,
+          "headersReady": false,
+          "bodyBytes": 3,
+          "messages": 1,
+          "keepAlive": true
+        }
+      }
+    },
+    {
+      "name": "fold-sp",
+      "bytes": 132,
+      "sha256": "a1debc51dba1eb06282143ccc08b4fc727d8e7a642662611ba7c977a05fd469b",
+      "splits": 131,
+      "oneByte": {
+        "last": {
+          "error": "HPE_INVALID_HEADER_TOKEN",
+          "reason": "Unexpected whitespace after header value",
+          "consumed": 0,
+          "totalConsumed": 124,
+          "complete": false,
+          "headersReady": false,
+          "bodyBytes": 3,
+          "messages": 0,
+          "keepAlive": false
+        },
+        "used": 124,
+        "complete": 0
+      }
+    },
+    {
+      "name": "fold-tab",
+      "bytes": 132,
+      "sha256": "34278403f4d3ae0e7cc2d9ac39db5e3a49238082186b33f00a6263442f109135",
+      "splits": 131,
+      "oneByte": {
+        "last": {
+          "error": "HPE_INVALID_HEADER_TOKEN",
+          "reason": "Unexpected whitespace after header value",
+          "consumed": 0,
+          "totalConsumed": 124,
+          "complete": false,
+          "headersReady": false,
+          "bodyBytes": 3,
+          "messages": 0,
+          "keepAlive": false
+        },
+        "used": 124,
+        "complete": 0
+      }
+    },
+    {
+      "name": "malformed-HTTP-obsolete-folded-header",
+      "bytes": 82,
+      "sha256": "2fd5c8bf85674e67a1e8d75c11b53d58904ca3b56d8cb3be3d264d53f16eba9f",
+      "splits": 81,
+      "oneByte": {
+        "last": {
+          "error": "HPE_INVALID_HEADER_TOKEN",
+          "reason": "Unexpected whitespace after header value",
+          "consumed": 0,
+          "totalConsumed": 52,
+          "complete": false,
+          "headersReady": false,
+          "bodyBytes": 0,
+          "messages": 0,
+          "keepAlive": true
+        },
+        "used": 52,
+        "complete": 0
+      }
+    },
+    {
+      "name": "strict-ingress-TE-obsolete-fold",
+      "bytes": 111,
+      "sha256": "e9d3ff8fc8dff3411cc84fb3d60f46dfbcda5218ae8b1ff082e08512fbe3967a",
+      "splits": 110,
+      "oneByte": {
+        "last": {
+          "error": "HPE_INVALID_TRANSFER_ENCODING",
+          "reason": "Transfer-Encoding can't be present with Content-Length",
+          "consumed": 1,
+          "totalConsumed": 73,
+          "complete": false,
+          "headersReady": false,
+          "bodyBytes": 0,
+          "messages": 0,
+          "keepAlive": true
+        },
+        "used": 73,
+        "complete": 0
+      }
+    }
+  ],
+  "limits": {
+    "connections": 6,
+    "originActive": 2,
+    "originQueue": 2,
+    "stageFiles": 3,
+    "diskBytes": 2097152,
+    "stageBytes": 1572864,
+    "bodyBytes": 4194304,
+    "headerWireBytes": 24576,
+    "messageWireBytes": 6291456,
+    "readBytes": 16384,
+    "messages": 64,
+    "requestMs": 2500,
+    "idleMs": 700,
+    "originMs": 1800,
+    "handshakeMs": 700,
+    "highWaterMark": 16384
+  },
+  "productionEligible": false,
+  "runtimeGO": false,
+  "unchangedOriginalResult": {
+    "original75": "73/75 historical, not rerun by A",
+    "original23": "19/23 historical, not rerun by A"
+  },
+  "sourceCommit": "ee04c4b6c39768e7244a4392b02448cb17b71011",
+  "sourceTree": "83a2e597d63636565b13929c232b48ddd9569013",
+  "node": {
+    "version": "v26.13.0",
+    "file": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+  },
+  "sources": [
+    {
+      "file": "evidence/sprint05a-b/source-01/sources.json",
+      "sha256": "75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d"
+    },
+    {
+      "file": "evidence/sprint05c-a/PLAN.md",
+      "sha256": "d76e745f28d53b50689432ed7464ac555c93706c1d87dfa54698fcce8aa731bc"
+    },
+    {
+      "file": "scripts/sprint05b-baseline.mjs",
+      "sha256": "5e152bccaa199ae0995aba5e2cccbbe7b051057528a5931a65dcfe24b0a32631"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-a-build.mjs",
+      "sha256": "9769180e6cd5c9f4c51fbb6eb581f9df1942348b685c621f91a1cedca73613b2"
+    },
+    {
+      "file": "spikes/envoy/sprint05c-a-build.mjs",
+      "sha256": "5799dcb1930ff3f0b868c31eb35d6923f1707ac9df3c388ba6b5e6e8a802d57c"
+    },
+    {
+      "file": "spikes/envoy/sprint05c-a-llhttp.c",
+      "sha256": "17722fa316e20608bd74f43af9baa044bdf082d0876b4d7a859b5da200a10016"
+    },
+    {
+      "file": "spikes/envoy/sprint05c-a-proof.mjs",
+      "sha256": "1f8ab6ac85a94dcc8a6176cacfa0313385e3d8d5ea7c50518d2a6412759e13f8"
+    },
+    {
+      "file": "spikes/envoy/sprint05c-a-run.mjs",
+      "sha256": "34da0df9471bb8c52bf2f3e18f5f19d199396c3966b3ff570351d90a6f230146"
+    },
+    {
+      "file": "spikes/envoy/sprint05c-a-runtime.mjs",
+      "sha256": "46dff57efea918e52a83452159ab1d0d61d53ab6c69c1d5ec264ec5ec580d4bc"
+    },
+    {
+      "file": "spikes/envoy/wire-fixtures.mjs",
+      "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278"
+    }
+  ],
+  "baseline": {
+    "baseline": "8758b1c84b4186449cd79fabae461ca53ee05100",
+    "tree": "2c6b1d5ff56f9e60a7bf77b478e291f3f5bc420d",
+    "protectedFiles": [
+      {
+        "file": "spikes/pingora/lab.mjs",
+        "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d",
+        "bytes": 45073
+      },
+      {
+        "file": "spikes/edge-comparison/manifest.json",
+        "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+        "bytes": 9829
+      },
+      {
+        "file": "spikes/edge-comparison/contract.mjs",
+        "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f",
+        "bytes": 1686
+      },
+      {
+        "file": "spikes/edge-comparison/supplemental.mjs",
+        "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf",
+        "bytes": 1616
+      },
+      {
+        "file": "spikes/edge-comparison/evaluate.mjs",
+        "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf",
+        "bytes": 2119
+      },
+      {
+        "file": "spikes/edge-comparison/run.mjs",
+        "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493",
+        "bytes": 61
+      },
+      {
+        "file": "spikes/edge-comparison/tls-observer.mjs",
+        "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065",
+        "bytes": 1639
+      },
+      {
+        "file": "spikes/edge-comparison/extract-baseline.mjs",
+        "sha256": "a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6",
+        "bytes": 2908
+      },
+      {
+        "file": "spikes/envoy/wire-probes.mjs",
+        "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a",
+        "bytes": 20934
+      },
+      {
+        "file": "spikes/envoy/wire-observer.mjs",
+        "sha256": "bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3",
+        "bytes": 4052
+      },
+      {
+        "file": "spikes/envoy/wire-fixtures.mjs",
+        "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278",
+        "bytes": 3320
+      }
+    ],
+    "protected_inventory_sha256": "85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa",
+    "historical": [
+      {
+        "file": "evidence/sprint05a-root/candidate-02/commands.json",
+        "sha256": "572ad993fe7f38b58c62c0b66de81a333006b3c6ed5a332478e38f60838d273a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original75.json",
+        "sha256": "13a04311fa39f0e7c7d94c85051d6d375e9a281cf6a4aa0f4aafa8dbe337556a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original23.json",
+        "sha256": "62fa6ba4082b20185d4958bbd034bbddef40dc7b46e2a89291fda507d3c99cee"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/SHA256SUMS",
+        "sha256": "85e4968d3da9ce4381f6cae77073376c2cf6164ca3d278a42489abe2f00a9017"
+      },
+      {
+        "file": "evidence/sprint05a-b/source-01/sources.json",
+        "sha256": "75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d"
+      }
+    ],
+    "previous75": {
+      "passed": 73,
+      "failures": [
+        {
+          "name": "malformed-HTTP-obsolete-folded-header",
+          "status": "fail",
+          "milliseconds": 7.12,
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 263,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.2",
+                "sni": false,
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+          "status": "fail",
+          "milliseconds": 7.38,
+          "error": "confused authority forwarded bytes to origin\n\n3032 !== 3023\n",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 9,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        }
+      ]
+    },
+    "previous23": {
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ]
+    }
+  },
+  "tools": [
+    {
+      "name": "cc",
+      "file": "/usr/bin/gcc",
+      "sha256": "b0b49531b313e70aee0254fb5e69b050a781506184e16ebee6ebe68eee94a145"
+    },
+    {
+      "name": "openssl",
+      "file": "/usr/bin/openssl",
+      "sha256": "3c852df717ce7321bc9f38ceeb5c41244324e4d6a43a6b48ad0e5f274c3b52e0"
+    },
+    {
+      "name": "curl",
+      "file": "/usr/bin/curl",
+      "sha256": "e94f761d3f3d78060fdd1654e4b0f0475c519ec984764d0cc1d5bcef6a4a1732"
+    }
+  ],
+  "upstream": [
+    {
+      "name": "include/llhttp.h",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/include/llhttp.h",
+      "sha256": "52a7011f979b31f761403c1a333bf7fc26dc70f5745d8488eed1609c92097100",
+      "bytes": 31469
+    },
+    {
+      "name": "src/api.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/api.c",
+      "sha256": "0f8590206fe2f264db2825401b5fb856b979ee1363dc88b06f36dc9577afb941",
+      "bytes": 13384
+    },
+    {
+      "name": "src/http.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/http.c",
+      "sha256": "a1f2b23168f8e9b5bfa464c89027d3ca259fc649ae3d7e72bfff997d1aeb5d72",
+      "bytes": 5209
+    },
+    {
+      "name": "src/llhttp.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/llhttp.c",
+      "sha256": "f3ef756529b7444630717fa5540d4a1c9a1256874bda823c49c5a99c37f89429",
+      "bytes": 319064
+    },
+    {
+      "name": "LICENSE-MIT",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/LICENSE-MIT",
+      "sha256": "ebca854e0134cd256d673627c20499f42577eb74bacf08b9f25b626a73c91277",
+      "bytes": 1105
+    }
+  ],
+  "nodeApiHeader": {
+    "file": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node/node_api.h",
+    "sha256": "2d4560831e525b47b060ec8a0864ab73993df9e20215ce9f0fe7b24cd31af32a"
+  },
+  "compiler": "cc (GCC) 16.2.1 20260810\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "addonSha256": "9732aaa528694412a1f3373d2908b7f7082ca9a2405c4738326b166a907b4b37",
+  "native": {
+    "stateBytes": 22888,
+    "maxFeedBytes": 16384,
+    "maxWireBytes": 33554432
+  },
+  "error": {
+    "name": "AssertionError",
+    "message": "bounded observation deadline",
+    "stack": "AssertionError [ERR_ASSERTION]: bounded observation deadline\n    at until (file:///tmp/aegisgate-05c-a/spikes/envoy/wire-fixtures.mjs:31:33)\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at listOnTimeout (node:internal/timers:644:9)\n    at process.processTimers (node:internal/timers:618:7)\n    at async settled (file:///tmp/aegisgate-05c-a/spikes/envoy/sprint05c-a-run.mjs:128:33)\n    at async probe (file:///tmp/aegisgate-05c-a/spikes/envoy/sprint05c-a-run.mjs:146:34)\n    at async file:///tmp/aegisgate-05c-a/spikes/envoy/sprint05c-a-run.mjs:160:5"
+  },
+  "metrics": {
+    "peakDisk": 0,
+    "peakOriginActive": 1,
+    "peakOriginQueue": 0,
+    "peakConnections": 1,
+    "requests": 1,
+    "stream": 1,
+    "disk": 0,
+    "originDials": 1,
+    "rejections": {
+      "Unexpected whitespace after header value": 2
+    },
+    "cancellations": 3,
+    "peakHeaderHeld": 76,
+    "peakPending": 0,
+    "activeContexts": 0,
+    "peakContexts": 1,
+    "peakReadable": 96,
+    "peakWritable": 96,
+    "lastError": {
+      "name": "Error",
+      "message": "Unexpected whitespace after header value",
+      "stack": "Error: Unexpected whitespace after header value\n    at fail (file:///tmp/aegisgate-05c-a/spikes/envoy/sprint05c-a-runtime.mjs:18:42)\n    at serve (file:///tmp/aegisgate-05c-a/spikes/envoy/sprint05c-a-runtime.mjs:213:88)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)"
+    }
+  },
+  "observer": {
+    "allConnections": [
+      {
+        "bytes": 76,
+        "sha256": "264178451e436679ad81120e5d26f31e431c74fd2da96c74dcc93a8acfdb1435",
+        "sni": "lab-origin.test",
+        "alpn": "http/1.1",
+        "authorized": true
+      }
+    ],
+    "handlers": [
+      {
+        "target": "/",
+        "host": "edge-a.test",
+        "method": "POST",
+        "bodyBytes": 0,
+        "ended": true,
+        "aborted": false,
+        "bodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "trailers": []
+      }
+    ],
+    "rawBytes": 76,
+    "connections": 1,
+    "parserErrors": 0,
+    "tlsErrors": 0
+  },
+  "cleanup": {
+    "fixtureAbsent": true,
+    "sockets": 0,
+    "nativeParsers": 0,
+    "diskBytes": 0,
+    "stageFiles": 0,
+    "originActive": 0,
+    "originQueued": 0,
+    "activeContexts": 0,
+    "listenersClosed": true,
+    "lockHeld": true
+  },
+  "peakObserverProcessRSS": 75767808,
+  "ended": "2026-11-15T04:55:43.471Z"
+}
