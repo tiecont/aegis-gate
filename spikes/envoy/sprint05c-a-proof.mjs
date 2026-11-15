@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import { assertLock } from './wire-fixtures.mjs';
+import { rawCommand, hash } from './sprint05c-a-build.mjs';
+assertLock();
+const out = process.argv[2]; assert.match(out ?? '', /^evidence\/sprint05c-a\/run-\d+$/); assert.ok(!fs.existsSync(out));
+const result = await rawCommand([process.execPath, 'spikes/envoy/sprint05c-a-run.mjs', out], { timeout: 105000 });
+assertLock(); fs.mkdirSync(out, { recursive: true });
+fs.writeFileSync(`${out}/command.json`, JSON.stringify({ ...result, lockHeldAfterChild: true }, null, 2) + '\n');
+fs.writeFileSync(`${out}/SHA256SUMS`, ['command.json', 'receipt.json'].filter((f) => fs.existsSync(`${out}/${f}`)).map((f) => `${hash(fs.readFileSync(`${out}/${f}`))}  ${out}/${f}\n`).join(''));
+console.log(JSON.stringify(result)); process.exitCode = result.exit === 0 && !result.error ? 0 : 1;
