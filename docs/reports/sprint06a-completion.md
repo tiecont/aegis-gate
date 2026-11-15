@@ -2,8 +2,8 @@
 
 Outcome B: hardened finite-message feasibility and signed-admission proof,
 with exact maintained API dependencies. No complete gateway or architecture GO.
-Component engineering and independently executed local integration gates are
-complete. Exact export/head review and hosted delivery remain pending below.
+Component engineering, independently executed local integration gates and exact
+export/source review are complete. Hosted delivery remains pending below.
 
 ## Source And Independent Review
 
@@ -232,7 +232,18 @@ clone runs the unchanged `--all` history scanner on its entire deliverable
 ancestry. Cleanup succeeded even on both failed runs. Full details and paths
 are retained in F review and `evidence/sprint06a-f/gate-run-01/02/`.
 
-Final sanitized export/source-head review: PENDING. Exact final-head PR
+F `c0e03fb` ACCEPTs exact export/source `8e14132`, tree
+`3998c48d5e0f400493c287403fedbdece9245eba`. Corrected export03 verifies59 raw
+inputs,57 content files and59 manifest artifacts,0 redactions and all command
+fields/raw digests.139 delivery-diff files are identical reviewer bytes or
+root delivery records; gated implementation remains unchanged. The first
+export audit's omitted root-plan allowlist entry is retained as an F harness
+failure; corrected02/03 PASS. Final F head `b744d8e42de21824df2596cb8b82966c714ef388`
+includes final-audit04 empty pinned Gitleaks/protected checks and scoped verdict.
+Owner reports' earlier pending-review checkpoints are superseded by these exact
+F verdicts, without rewriting their historical source/evidence.
+
+Exact final-head PR
 foundation-quality/supply-chain-security and actual merge-main jobs: PENDING.
 No hosted result is inferred from the local gate or component acceptance.
 

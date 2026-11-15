@@ -25,8 +25,9 @@ All A-E scoped tooling/proposals ACCEPTed by independent F at `c5520d9`.
 Full locked local check/security-scan/cleanup PASS at `c4a2fc5`, independently
 accepted by F `329c3f4`:11 packages/89 top-level/151 subtests, no remaining
 skips,750 candidate-history commits scanned with zero findings. Two failed
-setup/history-scope runs remain disclosed and retained. Final export/head
-review and hosted delivery remain pending at this receipt checkpoint.
+setup/history-scope runs remain disclosed and retained. F `c0e03fb` ACCEPTs
+exact sanitized export/source8e14132; final F files audited at b744d8e.
+Hosted delivery remains pending at this receipt checkpoint.
 See `docs/reports/sprint06a-completion.md` for delivery receipts and limitations.
 The consolidated finite admission and versioned research suite remain PROPOSED,
 NOT EFFECTIVE; human owners/signoff PENDING.01 NO-GO;04-12 LOCKED;production

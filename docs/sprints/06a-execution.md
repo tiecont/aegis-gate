@@ -65,6 +65,7 @@ Completion report records actual commits, verdicts and receipts as they exist.
   teardown/volumes0,11 packages/89 top-level/151 subtests and0 unresolved skips.
 - Failed gate01/02: retained invalid source/clone setup/history-scope evidence;
   no suppression, ref deletion, private-data publication or false PASS.
-- Sanitized export/final head review and hosted PR/main delivery: pending.
+- Sanitized export/source review: complete, F c0e03fb ACCEPT exact8e14132;
+  final F head b744d8e. Hosted PR/main delivery: pending.
 - Complete runtime and formal architecture: not eligible; all existing locks
   and PENDING human-owner/signoff fields remain effective.
