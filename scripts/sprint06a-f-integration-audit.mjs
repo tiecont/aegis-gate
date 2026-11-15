@@ -1,12 +1,14 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import path from "node:path";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { assertLock } from "../spikes/envoy/wire-fixtures.mjs";
 
 process.umask(0o077);
 assertLock();
-const [revision, output] = process.argv.slice(2);
+const [revision, output, clone] = process.argv.slice(2);
+assert.ok(path.isAbsolute(clone ?? ""));
 assert.match(output ?? "", /^evidence\/sprint06a-f\/integration-audit-\d+$/);
 assert.ok(!fs.existsSync(output));
 assert.equal(execFileSync("git", ["status", "--porcelain"]).toString(), "");
@@ -88,6 +90,59 @@ const record = {
   productionPass: false,
 };
 try {
+  const storageGit = (args, original = false) => {
+    const env = { ...process.env };
+    delete env.GIT_ALTERNATE_OBJECT_DIRECTORIES;
+    delete env.GIT_OBJECT_DIRECTORY;
+    if (original)
+      env.GIT_OBJECT_DIRECTORY =
+        "/home/tiecont/Projects/aegis-gate/.git/objects";
+    return execFileSync("git", ["-C", clone, ...args], {
+      env,
+      maxBuffer: 32 << 20,
+    });
+  };
+  assert.equal(storageGit(["rev-parse", "HEAD"]).toString().trim(), source);
+  assert.equal(fs.existsSync(`${clone}/.git/objects/info/alternates`), false);
+  assert.equal(
+    fs
+      .readFileSync(
+        `${clone}/.local/sprint06a-git-alternates-preserved`,
+        "utf8",
+      )
+      .trim(),
+    "/home/tiecont/Projects/aegis-gate/.git/objects",
+  );
+  const objectInventory = (original) =>
+    storageGit(["rev-list", "--all", "--objects"], original)
+      .toString()
+      .trim()
+      .split("\n")
+      .map((line) => line.split(" ")[0])
+      .sort();
+  const ownObjects = objectInventory(false),
+    originalObjects = objectInventory(true);
+  assert.deepEqual(ownObjects, originalObjects);
+  const ownCommits = storageGit(["rev-list", "--all", "--count"]),
+    originalCommits = storageGit(["rev-list", "--all", "--count"], true);
+  assert.deepEqual(ownCommits, originalCommits);
+  const fsck = storageGit(["fsck", "--full", "--no-dangling"]);
+  record.gitStorage = {
+    clone,
+    selfContained: true,
+    originalAlternatePreserved: true,
+    inventoryCommand: ["git", "-C", clone, "rev-list", "--all", "--objects"],
+    originalObjectDirectory: "/home/tiecont/Projects/aegis-gate/.git/objects",
+    comparison:
+      "Same clone refs, standalone objects versus original backing objects through GIT_OBJECT_DIRECTORY; exact sorted object IDs match",
+    reachableObjects: ownObjects.length,
+    objectInventorySha256: sha(JSON.stringify(ownObjects)),
+    reachableCommits: Number(ownCommits.toString().trim()),
+    fsckCommand: ["git", "-C", clone, "fsck", "--full", "--no-dangling"],
+    fsckExit: 0,
+    fsckStdoutSha256: sha(fsck),
+    historyMissingObjects: false,
+  };
   for (const entry of str("diff", "--name-status", baseline, source).split(
     "\n",
   )) {
