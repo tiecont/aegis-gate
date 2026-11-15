@@ -4,6 +4,47 @@ Status: scoped finite container proof complete,67 controls; independent review
 pending. Mandatory pre-completion streaming positive is **FAIL**. Module01 remains
 NO-GO, Modules04-12 LOCKED, production BLOCKED. No contract or ADR activation.
 
+## Wrapped Collector Repair
+
+Current executable source `73d8f419171989ada8983f2780a103cadd207cdd`, tree
+`03c2774a5be8c9716bc7c7f3796c93aa7859e2b9`, repairs the independent F replay
+failure described below. Only the own06A collector and its new wrapper test
+change; ingress/spool/05D bytes do not. `run-08` executes the collector through
+an intermediate Node wrapper, rather than as a direct child of flock. The
+collector discovers PID3632735 holding the actual shared-inode WRITE FLOCK,
+while its immediate parent is wrapper PID3632746; it passes that verified
+holder to the container and rechecks the live lock before creation and cleanup.
+The full67 container controls, collector and wrapper all exit0, cleanup is zero,
+and all owned containers are absent.
+
+```sh
+flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock \
+ /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node \
+ scripts/sprint06a-a-wrapped.mjs evidence/sprint06a-a/run-08
+```
+
+The same retained wrapper receipt executes positive `--lock-check`0 and two
+negative checks: supplied non-holder wrapper PID returns1, and an independent
+network-none container with no holder ancestor returns1 even when its environment
+claims the real holder PID. No missing/fake lock grants fixture admission. The
+negative container publishes no ports, reads source/lock only, runs no traffic
+and is removed automatically. Raw exact argv/stdout/stderr/exits for all three
+controls are retained in `wrapper.json`; the shared lock covers the full test,
+real ingress replay, cleanup and regenerated artifact manifest.
+
+`verify-02` at clean evidence commit `272d085` exits0:30 retained raw hashes,
+41 source bindings,67 unique controls,10 syntax checks, formatting, protected
+inventory and empty pinned Gitleaks report. It uses the previous verifier
+command with `run-08` and `verify-02`. This is still owner verification;
+F's independent repaired-source replay and verdict remain pending.
+
+Run08 ingress receipt SHA256:
+`4a78be478cf0dbeaad390accac27b9e5550ae5b22e0003d473b7f7101235fc92`.
+Wrapper receipt SHA256:
+`64db806df6a669565ebbb3fadbf302a41675667c379bc38a58e3500cd414daf7`.
+Verify02 receipt SHA256:
+`14018d8422745ba7ce3efe5e5470a54548887a95d7c62cb7bfe8fc59763f519f`.
+
 ## Measured Result
 
 `run-07` executes clean source `5ca4e3a2de94425f766312bc8d1741a80cf515a6`,
@@ -83,8 +124,8 @@ flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock \
 
 Verify01 receipt SHA256:
 `30bb314d5b13b763433e55310a189ae0f28d407bad98a1d3646e0ea332d80b47`.
-No executable source changes follow run07/verify01. Final additions only record
-verification/report/evidence. No push, merge, shared source, dependency, TLS,
+The later collector-only repair is tested in run08/verify02 above; no ingress
+or spool changes follow run07. No push, merge, shared source, dependency, TLS,
 authorization, snapshot v1 wire, original corpus or evaluator change occurs.
 
 ## Retained Failures
@@ -176,10 +217,10 @@ never resumes requests because ephemeral keys were never persisted.
 
 - Module:01, Sprint06A A.
 - Status:complete scoped engineering proof; independent F verdict pending.
-- Commits/files:initial source `eb4cfe4`; final executable source `5ca4e3a`; measured report/evidence `492a5f9`; new `spikes/envoy/sprint06a-a-*`, `scripts/sprint06a-a-*`, this report and own evidence only.
+- Commits/files:initial source `eb4cfe4`; ingress source `5ca4e3a`; repaired collector source `73d8f41`; wrapped evidence `272d085`; new `spikes/envoy/sprint06a-a-*`, `scripts/sprint06a-a-*`, this report and own evidence only.
 - Architecture/ADR decisions:none.
 - Contracts changed:none.
-- Positive tests executed:locked run07 command above,collector0/ingress0,67 controls,verified finite/exact target/pipeline/restart/resource recovery positives. Earlier run06 passes66 controls; verify01 integrity/format/syntax/secret checks0.
+- Positive tests executed:locked run07/run08 commands above,collector0/ingress0,67 controls,verified finite/exact target/pipeline/restart/resource recovery positives; wrapped lock positive0 and fake/no-ancestor negatives1/1. Earlier run06 passes66 controls; verify01/02 integrity/format/syntax/secret checks0.
 - Security negative tests executed:EOF/fold/trailer/tamper/truncate/quotas/write/links/startup/cancel/hardRST/TLS/CPU/PID/OOM/ENOSPC controls above; mandatory streaming positive FAIL. Failures01-05 retained.
 - Performance data:not a throughput, capacity or soak benchmark.
 - Known risks/release blockers:streaming/full gateway and production custody remain unproved; independent review required.
