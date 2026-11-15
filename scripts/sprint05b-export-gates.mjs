@@ -57,7 +57,7 @@ if (process.argv[2] === "--selftest") {
 } else {
   const [input, output] = process.argv.slice(2);
   assert.ok(path.isAbsolute(input ?? ""));
-  assert.match(output ?? "", /^evidence\/sprint05[bcd]-root\/gates-\d+$/);
+  assert.match(output ?? "", /^evidence\/sprint(?:05[bcd]|06a)-root\/gates-\d+$/);
   assert.ok(!fs.existsSync(output));
   const original = JSON.parse(
     fs.readFileSync(path.join(input, "commands.json")),
