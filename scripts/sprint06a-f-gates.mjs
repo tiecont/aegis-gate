@@ -315,6 +315,7 @@ try {
     record.commands.find((c) => c.label === "full-locked-gates").exit,
     0,
   );
+  assert.equal(git("rev-parse", "HEAD"), commit, "exact source HEAD changed");
   record.localGatesAccepted = true;
   record.complete = true;
 } catch (error) {
@@ -324,6 +325,7 @@ try {
   assertLock();
   if (before) {
     try {
+      assert.equal(git("rev-parse", "HEAD"), commit, "exact source HEAD changed");
       assert.deepEqual(inventory(), before);
       record.sourceFilesAfter = before.length;
       record.protectedAfter = JSON.parse(
