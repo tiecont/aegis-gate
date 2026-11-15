@@ -122,7 +122,14 @@ try {
   run(
     "clone",
     "/usr/bin/git",
-    ["clone", "--shared", "--no-checkout", root, clone],
+    [
+      "clone",
+      "--shared",
+      ...(mode === "a" ? ["--dissociate"] : []),
+      "--no-checkout",
+      root,
+      clone,
+    ],
     { cwd: root },
   );
   run(
