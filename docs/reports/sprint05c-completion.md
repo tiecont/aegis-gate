@@ -1,7 +1,7 @@
 # Sprint 05-C Measured Completion
 
-Status: reviewed engineering delivery merged in PR21; exact-main hosted
-verification PENDING. Module01 remains
+Status: reviewed engineering delivery COMPLETE in PR21; exact-head and
+exact-main hosted gates PASS. Module01 remains
 NO-GO. Baseline main `078d83c0ab1cb1364d0245d4c4f62f0fe0439e97`, tree
 `28aa22cf761092e31c84dc3d07d0d7593784afd3`; exact run43672825174 passes both
 hosted jobs. Actual final head/merge receipts follow observed events, never a
@@ -185,9 +185,15 @@ retained under `evidence/sprint05c-root/pr21-final-*` and `pr21-merge`.
 The failed CLI attempts report terminal escape-sequence output protection;
 explicit raw-output downloads succeed separately, without changing bytes.
 
-Exact merge hosted run43687689500 is PENDING. This receipt-only closeout updates
-the historical pending delivery checkpoints; it changes no executable runtime,
-original assertion, security contract, dependency pin or gate disposition.
+Exact merge hosted run43687689500 passes foundation-quality132731499778 and
+supply-chain-security132731499911 on22f6986. Raw run/jobs and complete logs are
+retained in `evidence/sprint05c-root/pr21-main-*`, with exact source/tree, argv,
+binary identity, exits and SHA256. F's independent merge/tree comparison finds
+no delta from the accepted PR head. This receipt-only closeout supersedes the
+historical pending delivery checkpoints above; it changes no executable
+runtime, original assertion, security contract, dependency pin or gate state.
+Its own PR/head/main CI is separately verified after the observed events,
+without inventing a self-referential containing commit hash.
 
 Root gate attempts01-03 are retained with failed exits. Attempts01/02 used
 734a9d6 and failed formatting before fixture setup;02 accidentally reused the

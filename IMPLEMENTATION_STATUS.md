@@ -5,7 +5,7 @@
 PR21 merged as `22f6986713711a49de622ce9b6fb097ad31c26ef`; final reviewed head
 `5da55045efb827258238f15268b3877dbbb161b1` shares tree
 `8b04b9316a9e3c080aec8648e0741f124b4e6d11` with the merge. Both final-head
-hosted jobs PASS in43686973829. Exact merge run43687689500 is pending.
+hosted jobs PASS in43686973829. Both exact merge jobs PASS in43687689500.
 
 Maintained llhttp H1 runtime implements bounded private staging and streaming;
 77 additive controls pass, but known-length premature EOF sends89 origin bytes
