@@ -1,5 +1,20 @@
 # Implementation status
 
+## Sprint 05-B Complete / Module 01 NO-GO
+
+PR19 merged as `dd445fda3d6989fdb50cca13d641571eecfcdc29`. Reviewed final head
+`fe659f98422106123e845bb2fcf01ba4996f907c` shares tree
+`3be882edad4fb31984166ed4a577328fe338ba26` with the merge. Hosted runs43669783439
+(head) and43671151410 (merge) both PASS foundation-quality and supply-chain-security.
+Full locked local gates/cleanup PASS at7725063; independent F accepts scoped
+source/receipt integration. See `docs/reports/sprint05b-closeout-addendum.md`.
+
+Incremental in-process llhttp proof and executable trailer/H2 stops are accepted
+as isolated test tooling. Combined original counts remain73/75 and19/23, with
+zero newly repaired original assertions.00/02/03 retain PASS local;01 NO-GO;
+04-12 LOCKED; production BLOCKED. ADR012 and actual human owners/approval PENDING.
+The addendum supersedes pending delivery fields in the earlier checkpoint.
+
 ## Sprint 05-B Execution / Module 01 NO-GO
 
 Baseline main `8758b1c84b4186449cd79fabae461ca53ee05100`, hosted

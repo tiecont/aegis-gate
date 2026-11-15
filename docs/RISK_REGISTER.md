@@ -355,3 +355,9 @@ natural HTTP timeouts. Corrected source `7725063` passes both full locked local
 gates and cleanup (gates02); exact final PR19-head and merge hosted jobs remain
 required. This does not repair any of the six mandatory ingress failures.
 
+Sprint05B closeout: PR19 merge `dd445fd`, exact-head hosted43669783439 and
+exact-main43671151410 both PASS the required jobs. Source/local gate acceptance
+remains scoped to test/evidence integration. The strict parser, late-trailer
+streaming and aggregate H2 zero-byte blockers remain; Module01 NO-GO,
+04-12 LOCKED, production BLOCKED. Actual owners/approvals remain PENDING.
+

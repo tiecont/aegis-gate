@@ -1,6 +1,8 @@
 # Sprint 05-B Execution Contract
 
-Status: in progress. Module 01 remains NO-GO.
+Status: scoped engineering complete; PR19 merged as `dd445fd` with exact-head
+and merge hosted gates PASS. Closeout receipt: `docs/reports/sprint05b-closeout-addendum.md`.
+Module 01 remains NO-GO. Earlier checkpoint pending fields are historical.
 
 Root integration worktree: `/home/tiecont/Projects/aegis-gate`, branch
 `sprint/05b-integration`. Component worktrees A-F are `/tmp/aegisgate-05b-{a,b,c,d,e,f}`;
