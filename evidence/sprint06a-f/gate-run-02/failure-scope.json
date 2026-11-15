@@ -1,0 +1,44 @@
+{
+  "status": "FAIL_HISTORY_SCAN",
+  "source": "c4a2fc529688ef53ef213e07a6567aeab3fe4fcf",
+  "qualityExit": 0,
+  "securityScanExit": 2,
+  "cleanupExit": 0,
+  "cleanupVolumesExit": 0,
+  "sourceIntegrityAfter": true,
+  "protectedPinsAfter": "unchanged",
+  "privateMatches": 0,
+  "remainingProjectContainers": [],
+  "remainingProjectNetworks": [],
+  "remainingProjectVolumes": [],
+  "historyPreflightCommits": 888,
+  "candidateAncestryCommits": 750,
+  "findings": [
+    {
+      "rule": "private-key",
+      "commit": "cd8f4a760239086616809db8b55a651d3cc28d8e",
+      "file": "evidence/sprint04c-integration-audit/final-source.mjs",
+      "startLine": 243,
+      "candidateAncestor": false,
+      "mergeBaseIsAncestorExit": 1,
+      "containingRef": "refs/remotes/origin/review/sprint04c-integration"
+    },
+    {
+      "rule": "jwt",
+      "commit": "551591395880ce87863b4e861c05d266c719b91f",
+      "file": "evidence/sprint04c-e/attempt-01/stdout.log",
+      "startLine": 114,
+      "candidateAncestor": false,
+      "mergeBaseIsAncestorExit": 1,
+      "containingRefs": [
+        "refs/remotes/origin/hardening/sprint04c-regressions",
+        "refs/remotes/origin/sprint/04c-integration"
+      ]
+    }
+  ],
+  "disposition": "Preserve this failed broad-ref clone unchanged. A separate candidate clone must retain every candidate ancestor and run unchanged scanners with --all. No findings are suppressed and no refs are removed from this failed clone.",
+  "localGatesAccepted": false,
+  "runtimeComplete": false,
+  "runtimePass": false,
+  "productionPass": false
+}

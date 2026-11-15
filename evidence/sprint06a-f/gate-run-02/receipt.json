@@ -1,0 +1,905 @@
+{
+  "reviewerCommit": "c0ed7f787557b7914a200c56d6f8eed6e5a0d307",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/home/tiecont/.cache/aegisgate-06a/f/scripts/sprint06a-f-gates.mjs",
+    "/home/tiecont/Projects/aegis-gate/.local/sprint06a-gates",
+    "c4a2fc529688ef53ef213e07a6567aeab3fe4fcf",
+    "evidence/sprint06a-f/gate-run-02",
+    "evidence/sprint06a-root/gates-02"
+  ],
+  "collectorSha256": "f89a9dbb53df887b34289e31617c89cdc422b7f5c3eee0e17f611b0904094a35",
+  "sourceCommit": "c4a2fc529688ef53ef213e07a6567aeab3fe4fcf",
+  "sourceTree": "db9756b581b3afc70de2a514ebb17bb50a9c7dcb",
+  "clone": "/home/tiecont/Projects/aegis-gate/.local/sprint06a-gates",
+  "rawRelative": "evidence/sprint06a-root/gates-02",
+  "started": "2026-11-15T12:22:54.708Z",
+  "commands": [
+    {
+      "label": "version-go",
+      "executable": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "executableSha256": "de0ae3e082ce7599eae4fb69fa2ef1e43b8f31ffd3fce62cdf81930aa9005050",
+      "args": [
+        "version"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate/.local/sprint06a-gates",
+      "begun": "2026-11-15T12:22:56.307Z",
+      "ended": "2026-11-15T12:22:56.354Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "version-go.stdout",
+          "bytes": 32,
+          "sha256": "a29205bd83967c2f70e6768fae009600038d6056499fa289de9d5f9b79beaef4"
+        },
+        {
+          "file": "version-go.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "version-cargo",
+      "executable": "/home/tiecont/.cargo/bin/rustup",
+      "executableSha256": "b1c8cb14e30889e7e2999e6b69e62d9e9b9ffc0f4df8180564d306d9680e6c55",
+      "args": [
+        "+1.99.1",
+        "--version"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate/.local/sprint06a-gates",
+      "begun": "2026-11-15T12:22:56.370Z",
+      "ended": "2026-11-15T12:22:56.419Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "version-cargo.stdout",
+          "bytes": 36,
+          "sha256": "c35608815f43d0b8788a9b826fad2bb17384f49fb328dc4fe64da9db5f5ef4d6"
+        },
+        {
+          "file": "version-cargo.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "version-rustc",
+      "executable": "/home/tiecont/.cargo/bin/rustup",
+      "executableSha256": "b1c8cb14e30889e7e2999e6b69e62d9e9b9ffc0f4df8180564d306d9680e6c55",
+      "args": [
+        "+1.99.1",
+        "--version"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate/.local/sprint06a-gates",
+      "begun": "2026-11-15T12:22:56.429Z",
+      "ended": "2026-11-15T12:22:56.677Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "version-rustc.stdout",
+          "bytes": 36,
+          "sha256": "55cd0529c005d3f62869ea6e2271bfa9d5196f56dc65a8be00a371af114a4a98"
+        },
+        {
+          "file": "version-rustc.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "version-docker",
+      "executable": "/usr/bin/docker",
+      "executableSha256": "c1e694ef9b689019c593d726dbe9041604def6dd2ebe3271a6ba23cff867f057",
+      "args": [
+        "version",
+        "--format",
+        "{{.Server.Version}}"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate/.local/sprint06a-gates",
+      "begun": "2026-11-15T12:22:56.690Z",
+      "ended": "2026-11-15T12:22:56.800Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "version-docker.stdout",
+          "bytes": 7,
+          "sha256": "db4ba0a89ba3c63cd68d4eb99ccf9e51bd122c7d3c2e03f79e91d251fb5300ab"
+        },
+        {
+          "file": "version-docker.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "version-compose",
+      "executable": "/usr/bin/docker",
+      "executableSha256": "c1e694ef9b689019c593d726dbe9041604def6dd2ebe3271a6ba23cff867f057",
+      "args": [
+        "compose",
+        "version"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate/.local/sprint06a-gates",
+      "begun": "2026-11-15T12:22:56.811Z",
+      "ended": "2026-11-15T12:22:56.940Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "version-compose.stdout",
+          "bytes": 29,
+          "sha256": "293ffc7002d3801435d26593bccf5c4376a553898f53611ca5f2818354eff056"
+        },
+        {
+          "file": "version-compose.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "protected-before",
+      "executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "executableSha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+      "args": [
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate/.local/sprint06a-gates",
+      "begun": "2026-11-15T12:22:56.961Z",
+      "ended": "2026-11-15T12:22:57.356Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "protected-before.stdout",
+          "bytes": 4342,
+          "sha256": "12fecd21d0163ccd7b6c2e53ba49a36bf9cd15aaeb5311710088bae5cb41d3f5"
+        },
+        {
+          "file": "protected-before.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "full-locked-gates",
+      "executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "executableSha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+      "args": [
+        "scripts/sprint04c-gates.mjs",
+        "evidence/sprint06a-root/gates-02"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate/.local/sprint06a-gates",
+      "begun": "2026-11-15T12:22:57.368Z",
+      "ended": "2026-11-15T12:27:33.170Z",
+      "exit": 1,
+      "signal": null,
+      "streams": [
+        {
+          "file": "full-locked-gates.stdout",
+          "bytes": 204,
+          "sha256": "9e278f266445705ac5e806529f633179940a215b97b52b250899941aaec9f789"
+        },
+        {
+          "file": "full-locked-gates.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "protected-after",
+      "executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "executableSha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+      "args": [
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "cwd": "/home/tiecont/Projects/aegis-gate/.local/sprint06a-gates",
+      "begun": "2026-11-15T12:27:33.616Z",
+      "ended": "2026-11-15T12:27:33.862Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "protected-after.stdout",
+          "bytes": 4342,
+          "sha256": "12fecd21d0163ccd7b6c2e53ba49a36bf9cd15aaeb5311710088bae5cb41d3f5"
+        },
+        {
+          "file": "protected-after.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "name": "git",
+      "file": "/usr/bin/git",
+      "sha256": "0da72c00a915c06b9e7062e2dc999afe323223d000fef63111a94f522afd8ecf"
+    },
+    {
+      "name": "flock",
+      "file": "/usr/bin/flock",
+      "sha256": "6f70b9fc3793b39d52bc0769033eaaea91a5c1fecda71c1dde1c754fbd34f8d7"
+    },
+    {
+      "name": "make",
+      "file": "/usr/bin/make",
+      "sha256": "6f36064c643168dbe57adddebc60c63702f7b5cdf23739705d23c87fe5e8dce3"
+    },
+    {
+      "name": "bash",
+      "file": "/usr/bin/bash",
+      "sha256": "917e986de64e7d36e42bef7aff5db73b7ecef5b58477bdb990e595e8dfc930b2"
+    },
+    {
+      "name": "go",
+      "file": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "sha256": "de0ae3e082ce7599eae4fb69fa2ef1e43b8f31ffd3fce62cdf81930aa9005050"
+    },
+    {
+      "name": "gofmt",
+      "file": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/gofmt",
+      "sha256": "96d48ae3c8754e4a10e8f5ec2472d1344767d276e0ba6e94948c00cf8558e378"
+    },
+    {
+      "name": "cargo",
+      "file": "/home/tiecont/.cargo/bin/rustup",
+      "sha256": "b1c8cb14e30889e7e2999e6b69e62d9e9b9ffc0f4df8180564d306d9680e6c55"
+    },
+    {
+      "name": "rustc",
+      "file": "/home/tiecont/.cargo/bin/rustup",
+      "sha256": "b1c8cb14e30889e7e2999e6b69e62d9e9b9ffc0f4df8180564d306d9680e6c55"
+    },
+    {
+      "name": "python3",
+      "file": "/usr/bin/python3.14",
+      "sha256": "a38210a53e07ac5eb912ee35c2d92ddb7eaa349301b60c188a5f496c7c87449d"
+    },
+    {
+      "name": "docker",
+      "file": "/usr/bin/docker",
+      "sha256": "c1e694ef9b689019c593d726dbe9041604def6dd2ebe3271a6ba23cff867f057"
+    },
+    {
+      "name": "openssl",
+      "file": "/usr/bin/openssl",
+      "sha256": "3c852df717ce7321bc9f38ceeb5c41244324e4d6a43a6b48ad0e5f274c3b52e0"
+    },
+    {
+      "name": "cc",
+      "file": "/usr/bin/gcc",
+      "sha256": "b0b49531b313e70aee0254fb5e69b050a781506184e16ebee6ebe68eee94a145"
+    },
+    {
+      "name": "curl",
+      "file": "/usr/bin/curl",
+      "sha256": "e94f761d3f3d78060fdd1654e4b0f0475c519ec984764d0cc1d5bcef6a4a1732"
+    },
+    {
+      "file": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+    },
+    {
+      "file": "/home/tiecont/.rustup/toolchains/1.99.1-x86_64-unknown-linux-gnu/bin/cargo",
+      "sha256": "a670e02cfa39ac2e53f77a2d911ca1fc9e2c479b0603ec956625be1daf24e3af"
+    },
+    {
+      "file": "/home/tiecont/.rustup/toolchains/1.99.1-x86_64-unknown-linux-gnu/bin/rustc",
+      "sha256": "b53b780f77f952062f8ca8a3b70aef2390b1e45ad91939be94afdc9543026853"
+    },
+    {
+      "file": "/home/tiecont/Projects/aegis-gate/.local/sprint06a-gates/node_modules/prettier/bin/prettier.cjs",
+      "sha256": "6e922134a3c76fd4de202959bb6aef50bde0c994148075003a15569b7197906e"
+    }
+  ],
+  "runtimeComplete": false,
+  "runtimePass": false,
+  "module01Pass": false,
+  "productionPass": false,
+  "environment": {
+    "PATH": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin:/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin:/home/tiecont/.cargo/bin:/usr/local/bin:/usr/bin:/bin",
+    "TMPDIR": "/home/tiecont/Projects/aegis-gate/.local/sprint06a-gates/.local/tmp",
+    "GOTOOLCHAIN": "local",
+    "GOAMD64": "v1",
+    "CARGO_HOME": null,
+    "RUSTUP_HOME": null
+  },
+  "sourceFilesBefore": 9914,
+  "inventorySha256": "b0ef68738251164dbee98312fbef4219c473d56e3e096b25e66bc5f4ecca2785",
+  "protectedBefore": {
+    "baseline": "8758b1c84b4186449cd79fabae461ca53ee05100",
+    "tree": "2c6b1d5ff56f9e60a7bf77b478e291f3f5bc420d",
+    "protectedFiles": [
+      {
+        "file": "spikes/pingora/lab.mjs",
+        "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d",
+        "bytes": 45073
+      },
+      {
+        "file": "spikes/edge-comparison/manifest.json",
+        "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+        "bytes": 9829
+      },
+      {
+        "file": "spikes/edge-comparison/contract.mjs",
+        "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f",
+        "bytes": 1686
+      },
+      {
+        "file": "spikes/edge-comparison/supplemental.mjs",
+        "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf",
+        "bytes": 1616
+      },
+      {
+        "file": "spikes/edge-comparison/evaluate.mjs",
+        "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf",
+        "bytes": 2119
+      },
+      {
+        "file": "spikes/edge-comparison/run.mjs",
+        "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493",
+        "bytes": 61
+      },
+      {
+        "file": "spikes/edge-comparison/tls-observer.mjs",
+        "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065",
+        "bytes": 1639
+      },
+      {
+        "file": "spikes/edge-comparison/extract-baseline.mjs",
+        "sha256": "a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6",
+        "bytes": 2908
+      },
+      {
+        "file": "spikes/envoy/wire-probes.mjs",
+        "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a",
+        "bytes": 20934
+      },
+      {
+        "file": "spikes/envoy/wire-observer.mjs",
+        "sha256": "bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3",
+        "bytes": 4052
+      },
+      {
+        "file": "spikes/envoy/wire-fixtures.mjs",
+        "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278",
+        "bytes": 3320
+      }
+    ],
+    "protected_inventory_sha256": "85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa",
+    "historical": [
+      {
+        "file": "evidence/sprint05a-root/candidate-02/commands.json",
+        "sha256": "572ad993fe7f38b58c62c0b66de81a333006b3c6ed5a332478e38f60838d273a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original75.json",
+        "sha256": "13a04311fa39f0e7c7d94c85051d6d375e9a281cf6a4aa0f4aafa8dbe337556a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original23.json",
+        "sha256": "62fa6ba4082b20185d4958bbd034bbddef40dc7b46e2a89291fda507d3c99cee"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/SHA256SUMS",
+        "sha256": "85e4968d3da9ce4381f6cae77073376c2cf6164ca3d278a42489abe2f00a9017"
+      },
+      {
+        "file": "evidence/sprint05a-b/source-01/sources.json",
+        "sha256": "75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d"
+      }
+    ],
+    "previous75": {
+      "passed": 73,
+      "failures": [
+        {
+          "name": "malformed-HTTP-obsolete-folded-header",
+          "status": "fail",
+          "milliseconds": 7.12,
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 263,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.2",
+                "sni": false,
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+          "status": "fail",
+          "milliseconds": 7.38,
+          "error": "confused authority forwarded bytes to origin\n\n3032 !== 3023\n",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 9,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        }
+      ]
+    },
+    "previous23": {
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ]
+    }
+  },
+  "gateSourceHashes": [
+    {
+      "file": "scripts/sprint04c-gates.mjs",
+      "sha256": "2d11abc996b5909290ac0fbffae2453163c69d0a9e48ccd78b251c0eed023ea4"
+    },
+    {
+      "file": "scripts/security-scan.sh",
+      "sha256": "2e252c31e641e3fb0a48264f94f1ac9f8973d4621abefada9d3a7daedefa4231"
+    },
+    {
+      "file": "Makefile",
+      "sha256": "121a12783db5a208afc42d35a9780319a1369cb36fed5e2f8a05270d7ca89215"
+    }
+  ],
+  "running": false,
+  "gateReceiptSha256": "aaf305df5a4eb219e66876b4dd28600899f1c605b9805c705992ead6ad83385c",
+  "rawArtifacts": [
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-inventory.tsv",
+      "bytes": 385,
+      "sha256": "0d35a668b3bac252f94b828f2504e266b68bcd2a87da9020b7b9b947a7a9ba69"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/go-scanner-gate-selftest.log",
+      "bytes": 211,
+      "sha256": "1058de342452ca82ede738917d804b830760b19c504a67f3529794f11b410bca"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-identity-selftest.log",
+      "bytes": 3693,
+      "sha256": "116e022a6d2fb18ea412507627752a899f0eae5151da4327ce6adf36c40652b7"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/pingora-spike-vulnerabilities.log",
+      "bytes": 3065,
+      "sha256": "15911b4e575e9c5e5d5c40a1b224678c314a001ba823dffd0843e98e863558b5"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/npm-dashboard-vulnerabilities.log",
+      "bytes": 364,
+      "sha256": "16df78236b142bab0d75fbfceaed987ff99f163a48d574b43619c4154ffa099e"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-3-vulnerabilities.json",
+      "bytes": 114246,
+      "sha256": "1a3d4f738272c427aa05fc3f956a00ec45f6499de97aa72560e8a9e51c4f9ad1"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/envoy-spike.cdx.json",
+      "bytes": 19013,
+      "sha256": "1b101393711148d77d8b321511876bdce9c16486b7ccd5f665ef0719b9d420be"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/cleanup.stderr.log",
+      "bytes": 875,
+      "sha256": "1c84a3a90d959181c63a04e9bfad5b28a7f62b57aaca2a96e68c2b1c62405545"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-3-vulnerabilities.log",
+      "bytes": 911,
+      "sha256": "24a7665e1ed31e2f45bedea729b98a8b31b098844f822cf35a968a099ad4c497"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/history-gitleaks.log",
+      "bytes": 314,
+      "sha256": "2aba693fb0568bb38d20283cafbfb8f01afb63fef0b64ac420611eee198561a2"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/go-vulnerabilities.log",
+      "bytes": 26,
+      "sha256": "3016e51e4eac0d421674d2128bbbdefb2924b4646e0c14a1ab034977ad73fae5"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-1-vulnerabilities.json",
+      "bytes": 86751,
+      "sha256": "34857aeefbd773b07c5ad25556df367d3babf986c5b92667984f997853d13966"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security-scan.stdout.log",
+      "bytes": 1898,
+      "sha256": "34d6aef841d5ae2ec83f0f7a1b9744bdce311fcbfa679254ed5826133c0163ef"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/secrets.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/check.stdout.log",
+      "bytes": 31685,
+      "sha256": "3ebfa17261e4893b8b84a4eaab8bf23dcf711114747540104eee73376ca23644"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-1.cdx.json",
+      "bytes": 52225,
+      "sha256": "3ff1687fc250db1dbb38658da906ce4ecdea54392ee77608040323ba783c3dae"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/history-git-preflight.log",
+      "bytes": 39,
+      "sha256": "417c89c22061a79ee88480110b5f0efede3ab9d64ee16cdc23ba329736d0b214"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/npm-spike-vulnerabilities.log",
+      "bytes": 360,
+      "sha256": "455509daddf74eaed9304146ab18e579eb067266315c03c5c030afcc9c28ad5f"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-2.cdx.json",
+      "bytes": 45137,
+      "sha256": "464e82971aed0c5d3b2a1b041e47eacc183a709436d007206d4b1f978b27a6e6"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/envoy-spike-vulnerabilities.json",
+      "bytes": 99897,
+      "sha256": "49644cdd569f000c81117663effca43f8ce384cc13cd4125e488c87b145b7df0"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-4-vulnerabilities.json",
+      "bytes": 69892,
+      "sha256": "498f391a2d3e6a4eda4af9c90ed04efdb2af35a3141b2538baf54333490725a0"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/repository.cdx.json",
+      "bytes": 284761,
+      "sha256": "4ea5ceb05282af72bbb389630a63edc8e82508640158728165b7e6a537cd2bd3"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/cleanup.stdout.log",
+      "bytes": 117,
+      "sha256": "54a436c053a8cdd9d5d9c057ba2076828e35449457b540d8847a89df29ff6a90"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-1-identity.log",
+      "bytes": 88,
+      "sha256": "5fdf493dc9a6720e463c711c9860c33972fb04faf83fd31a39c3a1c87a904d5e"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-3-identity.log",
+      "bytes": 88,
+      "sha256": "5fdf493dc9a6720e463c711c9860c33972fb04faf83fd31a39c3a1c87a904d5e"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/npm-root-vulnerabilities.log",
+      "bytes": 360,
+      "sha256": "6711922b5c67f9dde45b996253b701f5f4906da4b08732d947cbe628a488fde9"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-2-vulnerabilities.log",
+      "bytes": 1058,
+      "sha256": "6f2f8ac6a700b45275549d69256d7ec185d154127f2035e913c182b18284abc2"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/filesystem-vulnerabilities.log",
+      "bytes": 1097,
+      "sha256": "71504e7dae1a268c425f7bd924380208a3f17e6dac9b959a4928c08c27b17cb3"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-1-vulnerabilities.log",
+      "bytes": 911,
+      "sha256": "722d3f867457dd54f12b3f633c4a55023c20d8fac625c46470ab174cb4e11eae"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-3.cdx.json",
+      "bytes": 94254,
+      "sha256": "7aae24d24127adc46ba1a3cb74d39f024224ddf9525cb11b723ccdd9c00ad801"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/rust-vulnerabilities.log",
+      "bytes": 374,
+      "sha256": "7f983ebd377645e108a23395c38f26d26521532cf2740b5aab4c7b19255ae799"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/hyper-spike-vulnerabilities.log",
+      "bytes": 374,
+      "sha256": "8f1648315a31e21e94f00c2b011ac9974862146adef81543696e62224b82b8be"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-3-sbom.log",
+      "bytes": 315,
+      "sha256": "9f01b6ef013d381302635de84892e7c84501b6eacc8609f603734edc67413e8a"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/install-cargo-audit.log",
+      "bytes": 9652,
+      "sha256": "a4944c7af8ec34e7eb3e6ea3a5c31d7d4997680f95bcca76704e641370d1bbf9"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-4-sbom.log",
+      "bytes": 492,
+      "sha256": "a6dcdd25991b06e16589e52886eae5db8306af91360775859c296c1996dd8994"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/commands.json",
+      "bytes": 4806,
+      "sha256": "aaf305df5a4eb219e66876b4dd28600899f1c605b9805c705992ead6ad83385c"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-1-sbom.log",
+      "bytes": 315,
+      "sha256": "b276d688c918a340e648c7d3bc75182f63e2c495858b8da6689e9f7210d59e22"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security-scan.stderr.log",
+      "bytes": 131,
+      "sha256": "b2e5b6fd7e08e60be1d0a5fd0d8677ffdc573be8498711b6cce5af40dd913fcc"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/history-secrets.json",
+      "bytes": 1532,
+      "sha256": "b3ce743759ab2b57a01d8d4845fc729968c25569c88b88f60bc4abf180ca3700"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/envoy-spike-vulnerabilities.log",
+      "bytes": 969,
+      "sha256": "b3eaa8ccecf9c33ce17c37e8a85b64f090f70febb91623b9065076f48fa2dc81"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/fixture-images.lock.json",
+      "bytes": 972,
+      "sha256": "b9284bfc0c1178ba02c8ffe404d88013baf18a86b5ca45eba9363997dcfb81b0"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/cleanup-volumes.stderr.log",
+      "bytes": 194,
+      "sha256": "c9883ab177f1334fc572797dea27641ddbe5efd3d27084a671c95996238768e7"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-4.cdx.json",
+      "bytes": 41225,
+      "sha256": "d7fd65450be84a434eafd395f0f1a3823f222246b74748154e083e56ade3595d"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-2-sbom.log",
+      "bytes": 492,
+      "sha256": "dd475444966f29914c0c5b4a21b92da7335c42f79a5101c50c6982ab8b8d405f"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/repository-sbom.log",
+      "bytes": 1097,
+      "sha256": "de9fcb10b06bff4d2f5c941e93dddda61c127689eb3a4ccc477ccbc93fe545da"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/cleanup-volumes.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/compose-images.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/history-secrets.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-1-export.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-3-export.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-inventory.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/install-govulncheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/check.stderr.log",
+      "bytes": 6886,
+      "sha256": "ec708f785163f007882142ddfb4e7a5e8dc13c929e17e47ca3b72fb6b6d40888"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/worktree-secrets.log",
+      "bytes": 137,
+      "sha256": "f0f2a27c6b7f4ca43acba9d644a3c3a351329d5ed8f6e4783fa06f0590e57be0"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-2-vulnerabilities.json",
+      "bytes": 78247,
+      "sha256": "f6dc8e0d7b39f62f5a77714730ad120330ad11bb27b93de8a2a3c89e89d0de63"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/filesystem-vulnerabilities.json",
+      "bytes": 252732,
+      "sha256": "f77dc87a28bdc9f34afe2f11bb3f4a852e6984abc6acde10717fd8bee265cbe9"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/image-4-vulnerabilities.log",
+      "bytes": 992,
+      "sha256": "fb709121d183c0898c4b7ae008d7eb00d6653f775a1d9e8e98f37f6a5af92b11"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-02/security/envoy-spike-sbom.log",
+      "bytes": 490,
+      "sha256": "fbfb0be08164952a87ac28c7655f0e84c18d7ecf74482c467881f585368a430c"
+    }
+  ],
+  "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(\n\n    at file:///home/tiecont/.cache/aegisgate-06a/f/scripts/sprint06a-f-gates.mjs:229:10\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+  "sourceFilesAfter": 9914,
+  "protectedAfter": {
+    "baseline": "8758b1c84b4186449cd79fabae461ca53ee05100",
+    "tree": "2c6b1d5ff56f9e60a7bf77b478e291f3f5bc420d",
+    "protectedFiles": [
+      {
+        "file": "spikes/pingora/lab.mjs",
+        "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d",
+        "bytes": 45073
+      },
+      {
+        "file": "spikes/edge-comparison/manifest.json",
+        "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+        "bytes": 9829
+      },
+      {
+        "file": "spikes/edge-comparison/contract.mjs",
+        "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f",
+        "bytes": 1686
+      },
+      {
+        "file": "spikes/edge-comparison/supplemental.mjs",
+        "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf",
+        "bytes": 1616
+      },
+      {
+        "file": "spikes/edge-comparison/evaluate.mjs",
+        "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf",
+        "bytes": 2119
+      },
+      {
+        "file": "spikes/edge-comparison/run.mjs",
+        "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493",
+        "bytes": 61
+      },
+      {
+        "file": "spikes/edge-comparison/tls-observer.mjs",
+        "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065",
+        "bytes": 1639
+      },
+      {
+        "file": "spikes/edge-comparison/extract-baseline.mjs",
+        "sha256": "a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6",
+        "bytes": 2908
+      },
+      {
+        "file": "spikes/envoy/wire-probes.mjs",
+        "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a",
+        "bytes": 20934
+      },
+      {
+        "file": "spikes/envoy/wire-observer.mjs",
+        "sha256": "bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3",
+        "bytes": 4052
+      },
+      {
+        "file": "spikes/envoy/wire-fixtures.mjs",
+        "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278",
+        "bytes": 3320
+      }
+    ],
+    "protected_inventory_sha256": "85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa",
+    "historical": [
+      {
+        "file": "evidence/sprint05a-root/candidate-02/commands.json",
+        "sha256": "572ad993fe7f38b58c62c0b66de81a333006b3c6ed5a332478e38f60838d273a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original75.json",
+        "sha256": "13a04311fa39f0e7c7d94c85051d6d375e9a281cf6a4aa0f4aafa8dbe337556a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original23.json",
+        "sha256": "62fa6ba4082b20185d4958bbd034bbddef40dc7b46e2a89291fda507d3c99cee"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/SHA256SUMS",
+        "sha256": "85e4968d3da9ce4381f6cae77073376c2cf6164ca3d278a42489abe2f00a9017"
+      },
+      {
+        "file": "evidence/sprint05a-b/source-01/sources.json",
+        "sha256": "75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d"
+      }
+    ],
+    "previous75": {
+      "passed": 73,
+      "failures": [
+        {
+          "name": "malformed-HTTP-obsolete-folded-header",
+          "status": "fail",
+          "milliseconds": 7.12,
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 263,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.2",
+                "sni": false,
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+          "status": "fail",
+          "milliseconds": 7.38,
+          "error": "confused authority forwarded bytes to origin\n\n3032 !== 3023\n",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 9,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        }
+      ]
+    },
+    "previous23": {
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ]
+    }
+  },
+  "sourceIntegrityAfter": true,
+  "ended": "2026-11-15T12:27:33.875Z",
+  "lockHeldThroughCleanupAndHashes": true
+}
