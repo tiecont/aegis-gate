@@ -158,6 +158,7 @@ function inventory() {
     }));
 }
 const captures = [];
+let beforeInventory;
 try {
   record.tools = [
     node,
@@ -197,6 +198,7 @@ try {
   ).trim();
   assert.equal(record.cleanBefore, "");
   const before = inventory();
+  beforeInventory = before;
   fs.writeFileSync(
     `${output}/source-inventory.json`,
     JSON.stringify(before) + "\n",
@@ -300,6 +302,27 @@ try {
   process.exitCode = 1;
 } finally {
   assertLock();
+  if (beforeInventory && !record.protectedAfter) {
+    try {
+      record.protectedAfter = JSON.parse(
+        await run("protected-after", node, ["scripts/sprint05b-baseline.mjs"]),
+      ).protectedFiles;
+      assert.deepEqual(record.protectedAfter, record.protectedBefore);
+      assert.deepEqual(inventory(), beforeInventory);
+      record.cleanTrackedAfter = (
+        await run("clean-tracked-after", "/usr/bin/git", [
+          "status",
+          "--porcelain",
+          "--untracked-files=no",
+        ])
+      ).trim();
+      assert.equal(record.cleanTrackedAfter, "");
+      record.sourceIntegrityAfter = true;
+    } catch (e) {
+      record.postcheckError = e.stack;
+      process.exitCode = 1;
+    }
+  }
   for (const [i, original] of captures.entries()) {
     if (!fs.existsSync(`${clone}/${original}`)) continue;
     const preserved = `capture-${i + 1}`;

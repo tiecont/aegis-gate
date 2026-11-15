@@ -50,6 +50,26 @@ The proposed ADR at `30c9019` remains PROPOSED and owner approval PENDING.
    complete independent acceptance. No invalid request origin effect was
    observed in those22 completed probes. Independent extra tests continue.
 
+D repair at `a532ea2` aligns with F's finding: emit the front-generated probe
+and nonce together, decode both from the same raw upstream HEADERS, require
+same stream, unique nonce and exact probe coverage. F's honest synthetic
+positive now carries that truthful raw binding; swap/duplicate mutations stay.
+This validates bounded fixture consistency only, not a malicious trusted
+signer, authoritative dispatcher, HPACK mutation or signed snapshot proof.
+F also tests whether syntactically valid control-only reverse capture or a raw
+200 paired with an asserted421 can pass the narrower consistency check.
+
+Second A reproduction preserves the same22-probe driver failure. Initial F
+extra controls pass exact1.5MiB request/2MiB aggregate/three-file boundaries,
+truncated GCM and injected ENOSPC release, then hit an F negative setup error:
+`umask077` masked requested0755 into0700, so expecting permission rejection
+was invalid. The corrected fixture explicitly chmods unsafe test objects.
+This is a retained F harness failure, not an A security finding.
+
+Root's requested final integration full locked check/security-scan review is
+accepted as F's next phase after component verdicts; exact clean integration
+source and command are pending. No redundant third E collector is planned.
+
 ## Agent Completion Report
 
 - Module: Sprint05D F independent Module01 security research review.

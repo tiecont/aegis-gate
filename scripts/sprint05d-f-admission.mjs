@@ -132,6 +132,7 @@ try {
         fs.mkdirSync(root, {
           mode: kind === "root-permissions" ? 0o755 : 0o700,
         });
+        if (kind === "root-permissions") fs.chmodSync(root, 0o755);
         if (kind === "unknown-session")
           fs.mkdirSync(path.join(root, "unknown"), { mode: 0o700 });
         else if (kind === "session-symlink")
@@ -146,6 +147,7 @@ try {
           fs.mkdirSync(session, {
             mode: kind === "session-permissions" ? 0o755 : 0o700,
           });
+          if (kind === "session-permissions") fs.chmodSync(session, 0o755);
           const file = path.join(session, `sprint05d-a-stage-${randomUUID()}`);
           if (kind === "stage-symlink") fs.symlinkSync(sentinel, file);
           else if (kind === "stage-hardlink") fs.linkSync(sentinel, file);
@@ -162,6 +164,7 @@ try {
               "x",
               { mode: kind === "stage-permissions" ? 0o644 : 0o600 },
             );
+            if (kind === "stage-permissions") fs.chmodSync(file, 0o644);
             if (kind === "stage-oversize")
               fs.truncateSync(file, limits.stageBytes + 1);
           }

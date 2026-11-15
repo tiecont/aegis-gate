@@ -10,7 +10,7 @@ import (
 	"golang.org/x/net/http2/hpack"
 )
 
-func sprint05dfWire(field string, values []string) string {
+func sprint05dfWire(field string, values []string, probes ...string) string {
 	var wire bytes.Buffer
 	wire.WriteString(http2.ClientPreface)
 	fr := http2.NewFramer(&wire, nil)
@@ -21,6 +21,9 @@ func sprint05dfWire(field string, values []string) string {
 		block.Reset()
 		for _, f := range []hpack.HeaderField{{Name: ":method", Value: "GET"}, {Name: ":scheme", Value: "https"}, {Name: ":authority", Value: "example.com"}, {Name: ":path", Value: "/"}, {Name: field, Value: value}} {
 			_ = enc.WriteField(f)
+		}
+		if len(probes) != 0 {
+			_ = enc.WriteField(hpack.HeaderField{Name: "x-aegis-probe-id", Value: probes[i]})
 		}
 		_ = fr.WriteHeaders(http2.HeadersFrameParam{StreamID: uint32(2*i + 1), BlockFragment: block.Bytes(), EndHeaders: true, EndStream: true})
 	}
@@ -51,10 +54,10 @@ func TestSprint05DFRuntimeBoundary(t *testing.T) {
 		},
 		Wires: []runtimeWire{
 			{ID: "downstream", SNI: "example.com", Verified: true, Closed: true, To: sprint05dfWire("x-aegis-probe-id", []string{"p0", "p1", "p2"}), From: sprint05dfResponse([]string{"200", "421", "200"})},
-			{ID: "upstream", SNI: "example.com", Verified: true, Closed: true, To: sprint05dfWire("x-aegis-fixture-id", []string{"n0", "n2"}), From: sprint05dfResponse([]string{"200", "200"})},
+			{ID: "upstream", SNI: "example.com", Verified: true, Closed: true, To: sprint05dfWire("x-aegis-fixture-id", []string{"n0", "n2"}, "p0", "p2"), From: sprint05dfResponse([]string{"200", "200"})},
 		},
 	}
-	for _, kind := range []string{"honest-bounded", "swapped-nonces", "duplicate-nonce-orphan-stream", "omitted-response-capture", "malformed-response-capture", "control-only-response-capture", "forged-rejection-response", "omitted-downstream-request", "omitted-origin-stream", "missing-TLS-verification", "wrong-generation", "capture-lost", "MAC-tamper"} {
+	for _, kind := range []string{"honest-bounded", "swapped-nonces", "duplicate-nonce-orphan-stream", "omitted-upstream-probe", "omitted-response-capture", "malformed-response-capture", "control-only-response-capture", "forged-rejection-response", "omitted-downstream-request", "omitted-origin-stream", "missing-TLS-verification", "wrong-generation", "capture-lost", "MAC-tamper"} {
 		t.Run(kind, func(t *testing.T) {
 			serialized, _ := json.Marshal(baseline)
 			var e runtimeEvidence
@@ -64,6 +67,8 @@ func TestSprint05DFRuntimeBoundary(t *testing.T) {
 				e.Requests[0].Nonce, e.Requests[2].Nonce = e.Requests[2].Nonce, e.Requests[0].Nonce
 			case "duplicate-nonce-orphan-stream":
 				e.Requests[2].Nonce = e.Requests[0].Nonce
+			case "omitted-upstream-probe":
+				e.Wires[1].To = sprint05dfWire("x-aegis-fixture-id", []string{"n0", "n2"})
 			case "omitted-response-capture":
 				e.Wires[0].From, e.Wires[1].From = "", ""
 			case "malformed-response-capture":
