@@ -223,6 +223,67 @@ fixture is subsequently renamed `.go.txt` so ordinary package discovery cannot
 include it; only Go's explicit overlay exposes its virtual `_test.go` name.
 No executable mechanism or original suite is rerun solely for this report update.
 
+## Integration And Exact Local Gates Addendum
+
+**ACCEPT safe research/test integration and exact local gate evidence at
+881fd85cd84e343209b732475e1310f6e6e383e6 only. Runtime and production remain
+REJECTED under the findings above.** Reviewed tree is
+f923242a13efe0ceeab1218c171ad6c4cdef75ed. Local gates actually tested source
+cd32311c81b9eb1b78b0f12c2bf021b0cd40b831, tree
+3826a32fa26365d0dd3a8d4519efadffc448912b; subsequent executable source is
+unchanged. The intervening changes contain truthful delivery docs and retained
+gate evidence. No dependency or protected evaluator change is accepted.
+
+F committed the new independent audit collector before execution at
+160908bc7709db6676476c2e27ae2da89e477261. Executed from the F worktree:
+
+```sh
+flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock \
+  /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node \
+  scripts/sprint05c-f-integration.mjs 881fd85 \
+  /home/tiecont/Projects/aegis-gate/.local/sprint05b-gates/evidence/sprint05c-root/gates-04 \
+  evidence/sprint05c-f/integration-01
+```
+
+Exit0, complete=true, local_gates_accepted=true. The audit independently proves
+all five file transformations in cfdc51c and cd32311 are exact pinned
+Prettier3.9.10 output; it binds38 integrated source/report files to accepted
+revisions, verifies11 protected files at tested/reviewed heads, and confirms
+all8280 currently retained gate-clone source objects match the tested tree.
+The narrowly scoped namespace/receipt helper changes retain their accepted
+semantics; receipt provenance now includes collector and actual binary hashes.
+
+All58 exported files match raw lengths/hashes; output bodies are byte-identical,
+with zero redactions. Both manifests and normalized command metadata verify.
+Raw command SHA256 is
+7d70ea7226aab49638ce9afcafe3988d1dc3848f461e4580bd8eb56f8766968c.
+The four actual gate commands check/security-scan/cleanup/cleanup-volumes each
+exit0, with continuous fixture locking. The quality output includes actual
+race-p1/integration/PostgreSQL, contracts/schema, vet and formatting checks.
+All26 scanner PASS labels are present, secret/history reports are empty, and
+filesystem/Envoy/four-image reports have zero HIGH/CRITICAL findings.
+Cleanup has zero errors; current project container/network/volume inventories
+are empty, all eight private paths are absent, and retained private-material
+checking reports57 files/zero matches. This read-only cleanup audit also holds
+the shared fixture lock throughout.
+
+Failed gate attempts01/02 at734a9d6 and03 atcfdc51c remain failed and retained.
+Their formatting/stale-source and missing-fixture scanner failures are not
+silently recast as successful runs. The integration receipt SHA256 is
+584080a528889ecfa573ecc0ac3a4672c84939242ddc15fe57a0562456e6f8bd;
+its manifest also independently verifies with `sha256sum -c`.
+
+After that audit, root supplied intermediate hosted metadata for run43685396399
+at the same881fd85 head. F read both `pr21-intermediate-run` and
+`pr21-intermediate-jobs` receipts/output, and both three-file SHA256 manifests
+verify with `sha256sum -c` from the root worktree. Metadata reports completed/
+success for the run and both foundation-quality/supply-chain-security jobs.
+These root-owned receipts are to be retained with the integration. This records
+the intermediate metadata result only; F has not audited the complete hosted
+logs/artifacts, and CI on the later final integrated head remains separate.
+The earlier integration receipt's hosted_acceptance_pending flag is preserved
+as recorded. No hosted/runtime/production acceptance is inferred from metadata.
+
 ## Agent Completion Report
 
 - Module/status: Sprint05C F independent security review, scoped work complete;
