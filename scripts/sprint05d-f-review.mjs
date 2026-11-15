@@ -199,9 +199,24 @@ try {
   assert.equal(record.cleanBefore, "");
   const before = inventory();
   beforeInventory = before;
+  record.inventorySha256 = sha(JSON.stringify(before));
+  record.inventoryCount = before.length;
+  const changedFiles = new Set(
+    execFileSync("git", ["diff", "--name-only", "aa289da", commit], {
+      cwd: clone,
+      encoding: "utf8",
+    })
+      .trim()
+      .split("\n"),
+  );
   fs.writeFileSync(
     `${output}/source-inventory.json`,
-    JSON.stringify(before) + "\n",
+    JSON.stringify(
+      before.filter(
+        (entry) =>
+          changedFiles.has(entry.file) && !entry.file.startsWith("evidence/"),
+      ),
+    ) + "\n",
   );
   fs.mkdirSync(`${clone}/.local`, { recursive: true });
   fs.symlinkSync(
@@ -306,14 +321,15 @@ try {
       { allowedExits: [0, 1] },
     );
     record.attackExit = record.commands.at(-1).exit;
+  } else if (mode === "b") {
+    captures.push("evidence/sprint05d-b/verify-901");
+    await run("b-independent-verifier", node, [
+      "spikes/envoy/sprint05d-b-verify.mjs",
+      captures[0],
+    ]);
   } else {
-    const entry = `spikes/envoy/sprint05d-${mode}-run.mjs`;
-    assert.ok(
-      fs.existsSync(`${clone}/${entry}`),
-      "review exact B/C runner before selecting execution",
-    );
     throw new Error(
-      "B/C runners require final source-specific review; no guessed command is executed",
+      "C has no new supported runtime mechanism; use F retained-source audit",
     );
   }
   record.protectedAfter = JSON.parse(

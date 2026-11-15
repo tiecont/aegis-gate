@@ -2,7 +2,7 @@
 
 Status: scoped A finite-stage and corrected D correlation tooling ACCEPT;
 historical failures retained below. Final integration gates and B/E/C receipt
-audit still pending. No runtime acceptance or GO is issued. Module01
+audit status are detailed below. No runtime acceptance or GO is issued. Module01
 remains NO-GO, Modules04-12 LOCKED, production BLOCKED. This report will record
 only executed results with exact source/evidence identities.
 
@@ -129,6 +129,32 @@ Both userinfo assertions remain FAIL; final B source/receipt review follows.
 The root completion draft `39cffa1` and proposed ADR retain NO-GO and identify
 pending delivery fields honestly. The proposed finite-versus-streaming profiles
 remain inactive; no human owner or approval is inferred from successful tooling.
+
+## C/E Retained-Evidence Review
+
+F `audit-01` at `fa10fed` exits0. C `5bc9489` manifest27 artifacts and
+historical three-frame reference match; all eight bounded static checks pass,
+with fresh protocol execution false. E `f155927` manifest57 artifacts match,
+all56 raw child streams match receipt hashes/lengths,28 exits0, raw Go counts
+independently recompute11 packages/89 top-level/151 subtests/zero skips. E's
+collector matches accepted05C exactly after namespace normalization; fixture
+helper only permits05D namespace. No dependency manifest changes exist in C/E.
+Current Docker checks including stopped containers find none for E's exact
+project; network/volume absent; private fixture paths absent. Pinned offline
+gitleaks returns empty findings for F artifacts and reviewed C/E source.
+
+E's receipt hashes Node and raw streams and records other binary versions;
+per-child binary SHA256 and TMPDIR are not embedded there. This is a provenance
+limit, not invented evidence. F's final exact integration gate phase will retain
+binary identities and reproduce real management fixtures. E acceptance here is
+retained-source/receipt integrity and scoped regression evidence, not a fresh
+F replay of the real integration yet.
+
+B `a09565d` manifests (including failed optional404 fetch) audit independently
+at `audit-02`; writer offline verifier and final report review follow. Probe
+selection insertion is bounded and raw RST1 is diagnostic evidence, never a
+passed HTTP400/421 assertion or original23 rerun. Security/runtime flags stay
+false. No unchanged full75/23 is repeated absent a credible repair.
 
 ## Agent Completion Report
 
