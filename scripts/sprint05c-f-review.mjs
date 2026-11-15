@@ -7,7 +7,7 @@ import { assertLock } from '../spikes/envoy/wire-fixtures.mjs';
 
 assertLock();
 process.umask(0o077);
-const [mode, revision, output] = process.argv.slice(2);
+const [mode, revision, output, variant] = process.argv.slice(2);
 assert.ok(['a', 'b', 'c', 'd', 'e'].includes(mode));
 assert.match(output ?? '', /^evidence\/sprint05c-f\/[a-z0-9-]+$/);
 assert.ok(!fs.existsSync(output));
@@ -117,9 +117,14 @@ try {
   } else if (mode === 'c') {
     await checked('spike-install', path.join(path.dirname(node), 'npm'), ['--prefix', 'spikes/pingora', 'ci', '--ignore-scripts', '--strict-peer-deps']);
     if (fs.existsSync(`${clone}/spikes/envoy/sprint05c-c-run.mjs`)) {
-      for (const [i, codec] of ['baseline', 'oghttp2'].entries()) {
+      const codecs = variant === 'runtime' ? ['oghttp2-runtime'] : ['baseline', 'oghttp2'];
+      for (const [i, codec] of codecs.entries()) {
         captures.push(`evidence/sprint05c-c/attempt-${901 + i}`);
-        await checked(`c-original23-${codec}`, node, ['spikes/envoy/sprint05c-c-run.mjs', captures.at(-1), codec, 'relay']);
+        await checked(`c-original23-${codec}`, node, ['spikes/envoy/sprint05c-c-run.mjs', captures.at(-1), codec, variant === 'runtime' ? 'direct' : 'relay']);
+      }
+      if (variant === 'runtime') {
+        captures.push('evidence/sprint05c-c/verify-901');
+        await checked('c-verifier', node, ['spikes/envoy/sprint05c-c-verify.mjs', captures.at(-1)]);
       }
     } else {
       captures.push('evidence/sprint05b-f/candidate-901');
