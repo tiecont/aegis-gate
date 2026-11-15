@@ -224,12 +224,45 @@ try {
       { allowedExits: [0, 1] },
     );
     record.exactProofExit = record.commands.at(-1).exit;
-    if (record.exactProofExit === 0)
-      await run("a-exact-verifier", node, [
-        "spikes/envoy/sprint05d-a-verify.mjs",
-        captures[0],
-        captures[1],
-      ]);
+    if (record.exactProofExit === 0) {
+      const proof = JSON.parse(
+        fs.readFileSync(`${clone}/${captures[0]}/receipt.json`),
+      );
+      const capture = JSON.parse(
+        fs.readFileSync(`${clone}/${captures[0]}/command.json`),
+      );
+      assert.equal(proof.probes.length, 29);
+      assert.equal(proof.completeValidationPass, true);
+      assert.equal(proof.streamingPass, false);
+      assert.equal(proof.streamingPositive.pass, false);
+      assert.equal(proof.runtimeGO, false);
+      assert.equal(proof.productionEligible, false);
+      assert.deepEqual(proof.baselineBefore, proof.baselineAfter);
+      assert.equal(proof.privateFixtureRemoved, true);
+      for (const value of Object.values(proof.cleanup)) assert.equal(value, 0);
+      assert.equal(capture.exit, 0);
+      assert.equal(capture.signal, null);
+      for (const name of ["stdout", "stderr"])
+        assert.equal(
+          capture[name],
+          fs.readFileSync(`${clone}/${captures[0]}/run.${name}`, "utf8"),
+        );
+      for (const line of fs
+        .readFileSync(`${clone}/${captures[0]}/SHA256SUMS`, "utf8")
+        .trim()
+        .split("\n")) {
+        const [digest, file] = line.split("  ");
+        assert.equal(sha(fs.readFileSync(`${clone}/${file}`)), digest);
+      }
+      record.proofSummary = {
+        probes: 29,
+        finitePass: true,
+        streamingPass: false,
+        cleanup: proof.cleanup,
+      };
+    }
+    record.writerVerifierContext =
+      "Fresh run output is untracked; writer verifier requires committing evidence first. F checks exact receipt/raw streams/hashes and immutable source directly without changing clone HEAD.";
     record.overlaySha256 = sha(
       fs.readFileSync(`${root}/scripts/sprint05d-f-admission.mjs`),
     );
