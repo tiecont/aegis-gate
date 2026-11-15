@@ -154,6 +154,10 @@ func main() {
 		ErrorLog: log.New(io.Discard, "", 0),
 		TLSConfig: &tls.Config{MinVersion: tls.VersionTLS12, SessionTicketsDisabled: true,
 			GetCertificate: func(hello *tls.ClientHelloInfo) (*tls.Certificate, error) {
+				peer, _, err := net.SplitHostPort(hello.Conn.RemoteAddr().String())
+				if err != nil || peer != "127.0.0.1" {
+					return nil, errors.New("unapproved lab source")
+				}
 				e := active.Load().routes[hello.ServerName]
 				if e == nil {
 					return nil, errors.New("unregistered SNI")

@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { receipt, sha, goRoot, archive } from './sprint05c-b-lib.mjs';
+import { cleanupOwned } from './sprint05c-b-cleanup.mjs';
 const [output] = process.argv.slice(2);
 const { r, run, finish } = receipt(output);
 fs.mkdirSync('.local', { recursive: true });
@@ -72,6 +73,7 @@ finally {
         r.owned_containers.push(id); run(`cleanup-container-${id}`, 'docker', ['rm', '-f', id]);
       }
     }
+    r.native_cleanup = await cleanupOwned();
     fs.rmSync(fixture, { recursive: true, force: true });
     r.remaining_launcher_directories = fs.readdirSync('.local').filter((f) => !before.has(f) && f.startsWith('sprint05c-b-launch-'));
     assert.equal(r.remaining_launcher_directories.length, 0);
