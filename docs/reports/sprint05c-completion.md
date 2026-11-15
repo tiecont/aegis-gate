@@ -1,7 +1,7 @@
 # Sprint 05-C Measured Completion
 
-Status: component engineering and independent mechanism reproductions complete;
-final source review, local gates and hosted delivery PENDING. Module01 remains
+Status: component engineering and independent source review complete;
+final local gates and hosted delivery PENDING. Module01 remains
 NO-GO. Baseline main `078d83c0ab1cb1364d0245d4c4f62f0fe0439e97`, tree
 `28aa22cf761092e31c84dc3d07d0d7593784afd3`; exact run43672825174 passes both
 hosted jobs. Actual final head/merge receipts follow observed events, never a
@@ -28,7 +28,7 @@ candidate qualifies for a combined runtime trial or replaces the baseline.
 | fix/sprint05c-h2-errors C |2487ebb/becc220 /7255fa2|Released Envoy alternate codec, peer-frame relay, explicit hidden-option experiment and separate runtime-key proof.|
 | test/sprint05c-request-isolation D |ee67bdd /cbc73f5|Authenticated event ledger, Framer/HPACK state, raw both-direction capture, identity/stream/final-decision/header causality.|
 | test/sprint05c-regressions E |a8e27f2 /dd1eaa4|Actual accepted-module regressions; scoped stale-volume namespace allowlist.|
-| review/sprint05c-security F |Final checkpoint PENDING|Independent clean-source reproduction, malicious overlays, known-length EOF proof, original baseline.|
+| review/sprint05c-security F |1c996337d1572ec835651122cdbff5cc35265c53|Independent clean-source reproduction, malicious overlays, known-length EOF proof, original baseline.|
 | sprint/05c-integration Root |1dafb9f execution;c3db637 provenance|Sole shared status/evidence ownership, collector/actual binary hashes,05c gate/export namespaces.|
 
 See A-F reports and `docs/sprints/05c-execution.md` for isolated worktrees and
@@ -114,8 +114,14 @@ UNRESOLVED; late-rejection attribution does not prevent earlier forwarding.
 
 F independently reproduces A77 controls plus EOF stop, B56/75/17/23/11/12 plus
 both ACK controls, C20/23 and frames, D own suite/overlays, E full real regressions
-and baseline73/75,19/23. Final hash/scanner/source verdict remains a delivery
-checkpoint before push/merge. Standalone proof never grants complete runtime GO.
+and baseline73/75,19/23. Final F checks03 validate736 hashes,617 scanner inputs,
+55 protected-source comparisons, unchanged dependencies, syntax/format and
+protected tests. Pinned offline gitleaks reports zero findings, with scanner
+and private staging removed. Receipt SHA256
+`a61d5b8867651f61607971029173799109b27385179438e55dc8ac16d867b279`.
+F accepts only scoped tooling, the corrected bounded observer and executable
+technical stops; complete ingress, streaming/resource eligibility and Module01
+GO are rejected. Standalone proof never grants complete runtime GO.
 
 ## Regression And Delivery
 
@@ -135,6 +141,16 @@ generated E caches were removed for space; evidence branches are preserved.
 Full locked check/security-scan/teardown, exact PR-head hosted jobs, actual merge
 SHA and exact-main hosted jobs are PENDING. Additive receipts must name actual
 source and events. No component result substitutes for final gates.
+
+Root gate attempts01-03 are retained with failed exits. Attempts01/02 used
+734a9d6 and failed formatting before fixture setup;02 accidentally reused the
+old source because the gate clone fetched only its historical05b branch.
+Attempt03 used cfdc51c and found three newly integrated F collector formatting
+issues. All three scanner/teardown failures identify absent fixture inputs;
+inventories show zero project containers/networks/volumes and private files.
+The explicit05c fetch and pinned Prettier corrections at cd32311 precede the
+fresh attempt04. Exported failed evidence has zero redactions; no failed result
+is represented as a passing security gate.
 
 | Gate | State |
 | --- | --- |
