@@ -8,8 +8,53 @@ import {
 } from "../spikes/envoy/sprint05d-a-build.mjs";
 import { assertLock } from "../spikes/envoy/wire-fixtures.mjs";
 
+function liveAncestorLock() {
+  const inode = fs.statSync("/tmp/aegisgate-sprint02-fixtures.lock").ino;
+  const ancestors = new Set();
+  let pid = process.ppid;
+  while (pid > 1 && !ancestors.has(pid)) {
+    ancestors.add(pid);
+    pid = Number(
+      fs
+        .readFileSync(`/proc/${pid}/status`, "utf8")
+        .match(/^PPid:\s+(\d+)/m)[1],
+    );
+  }
+  const entry = fs
+    .readFileSync("/proc/locks", "utf8")
+    .split("\n")
+    .find((line) => {
+      const f = line.trim().split(/\s+/);
+      return (
+        f[1] === "FLOCK" &&
+        f[3] === "WRITE" &&
+        ancestors.has(Number(f[4])) &&
+        f[5]?.endsWith(`:${inode}`)
+      );
+    });
+  assert.ok(entry, "live ancestor WRITE FLOCK required for shared lock inode");
+  return {
+    pid: Number(entry.trim().split(/\s+/)[4]),
+    inode,
+    immediateParent: process.ppid,
+    ancestors: [...ancestors],
+    entry: entry.trim(),
+  };
+}
+
 process.umask(0o077);
 assertLock();
+const lockHolder = liveAncestorLock();
+if (process.argv[2] === "--lock-check") {
+  if (process.argv[3])
+    assert.equal(
+      lockHolder.pid,
+      Number(process.argv[3]),
+      "supplied holder is not the live ancestor FLOCK owner",
+    );
+  console.log(JSON.stringify(lockHolder));
+  process.exit(0);
+}
 const out = process.argv[2];
 assert.match(out ?? "", /^evidence\/sprint06a-a\/run-\d+$/);
 assert.ok(!fs.existsSync(out));
@@ -18,7 +63,8 @@ const record = {
   argv: process.argv,
   commands: [],
   fixtureLock: "/tmp/aegisgate-sprint02-fixtures.lock",
-  lockPID: process.ppid,
+  lockPID: lockHolder.pid,
+  lockHolder,
   finiteControlsPass: false,
   streamingPass: false,
   runtimeGO: false,
@@ -208,6 +254,7 @@ try {
     "spikes/envoy/sprint06a-a-run.mjs",
     out,
   ];
+  assert.equal(liveAncestorLock().pid, record.lockPID);
   record.containerID = (await command(record, argv)).trim();
   created = true;
   record.inspectBefore = JSON.parse(
@@ -254,6 +301,7 @@ try {
   process.exitCode = 1;
 } finally {
   assertLock();
+  assert.equal(liveAncestorLock().pid, record.lockPID);
   if (created) {
     const removal = await rawCommand([
       "/usr/bin/docker",

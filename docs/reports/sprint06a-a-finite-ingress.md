@@ -89,6 +89,19 @@ authorization, snapshot v1 wire, original corpus or evaluator change occurs.
 
 ## Retained Failures
 
+Independent F clean replay `a-independent-01` at reviewed source `5ca4e3a`
+failed before traffic because the host collector supplied immediate parent
+PID3555280 instead of the actual ancestor FLOCK holder to the container. The
+container correctly refused the missing live holder; lock enforcement was not
+weakened. F retains the exact source and raw capture, receipt SHA256
+`c466ad81a7c6bef3779fdc1a95cc94cd202e43d20f39ef7291fffb042db25a96`,
+failed collector SHA256
+`134c67dfee22b8c59a145c7d460e281c8dad5cc691fca33c9edb5c29ba5d5993`.
+F's independent29 spool challenges PASS separately from that failed replay.
+The own06A collector now discovers the actual live ancestor WRITE FLOCK owner
+for the shared inode and rechecks it before container creation and cleanup.
+The ingress/spool and unchanged05D sources are untouched by this repair.
+
 `run-01` at source `eb4cfe4` is retained FAIL before traffic: the mounted host
 OpenSSL binary could not read `/etc/ssl/openssl.cnf` in the image. Container
 removal and protected-file checks completed. The next source adds a read-only
