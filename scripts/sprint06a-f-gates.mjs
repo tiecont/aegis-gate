@@ -260,6 +260,38 @@ try {
   }
   const scanner = fs.readFileSync(`${raw}/security-scan.stdout.log`, "utf8"),
     quality = fs.readFileSync(`${raw}/check.stdout.log`, "utf8");
+  const phaseStarts = [
+    ...quality.matchAll(
+      /^(?:AEGIS_TENANCY_INTEGRATION=1 )?GOTOOLCHAIN=go1\.27\.4 go test (?:-p 1 )?-race \.\/apps\/control-api\/.*$/gm,
+    ),
+  ];
+  record.goRacePhases = phaseStarts.map((match, i) => {
+    const text = quality.slice(
+      match.index,
+      phaseStarts[i + 1]?.index ?? quality.length,
+    );
+    const packages = [
+      ...text.matchAll(/^ok\s+(aegisgate\.dev\/aegisgate\/\S+)\s+(.+)$/gm),
+    ].map((m) => ({ name: m[1], result: m[2] }));
+    const count = (expression) => [...text.matchAll(expression)].length;
+    return {
+      command: match[0],
+      phase: match[0].includes("-run Integration")
+        ? "integration"
+        : match[0].includes("-run 'Negative")
+          ? "negative"
+          : "unit",
+      packages,
+      topLevelPass: count(/^--- PASS: /gm),
+      subtestPass: count(/^[\t ]+--- PASS: /gm),
+      topLevelSkip: count(/^--- SKIP: /gm),
+      subtestSkip: count(/^[\t ]+--- SKIP: /gm),
+    };
+  });
+  if (record.environment.GOFLAGS === "-v") {
+    assert.equal(record.goRacePhases.length, 3);
+    assert.ok(record.goRacePhases.every((phase) => phase.topLevelPass > 0));
+  }
   assert.ok(!/^FAIL /m.test(scanner));
   assert.ok(!/^FAIL\s|^--- FAIL:/m.test(quality));
   record.scannerPassLabels = [...scanner.matchAll(/^PASS (.+)$/gm)].map(
@@ -326,7 +358,11 @@ try {
   assertLock();
   if (before) {
     try {
-      assert.equal(git("rev-parse", "HEAD"), commit, "exact source HEAD changed");
+      assert.equal(
+        git("rev-parse", "HEAD"),
+        commit,
+        "exact source HEAD changed",
+      );
       assert.deepEqual(inventory(), before);
       record.sourceFilesAfter = before.length;
       record.protectedAfter = JSON.parse(

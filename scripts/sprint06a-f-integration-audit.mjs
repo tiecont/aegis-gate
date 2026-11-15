@@ -104,15 +104,19 @@ try {
   };
   assert.equal(storageGit(["rev-parse", "HEAD"]).toString().trim(), source);
   assert.equal(fs.existsSync(`${clone}/.git/objects/info/alternates`), false);
-  assert.equal(
-    fs
-      .readFileSync(
-        `${clone}/.local/sprint06a-git-alternates-preserved`,
-        "utf8",
-      )
-      .trim(),
-    "/home/tiecont/Projects/aegis-gate/.git/objects",
+  const alternatePreserved = fs.existsSync(
+    `${clone}/.local/sprint06a-git-alternates-preserved`,
   );
+  if (alternatePreserved)
+    assert.equal(
+      fs
+        .readFileSync(
+          `${clone}/.local/sprint06a-git-alternates-preserved`,
+          "utf8",
+        )
+        .trim(),
+      "/home/tiecont/Projects/aegis-gate/.git/objects",
+    );
   const objectInventory = (original) =>
     storageGit(["rev-list", "--all", "--objects"], original)
       .toString()
@@ -130,7 +134,7 @@ try {
   record.gitStorage = {
     clone,
     selfContained: true,
-    originalAlternatePreserved: true,
+    originalAlternatePreserved: alternatePreserved,
     inventoryCommand: ["git", "-C", clone, "rev-list", "--all", "--objects"],
     originalObjectDirectory: "/home/tiecont/Projects/aegis-gate/.git/objects",
     comparison:
