@@ -1,0 +1,5 @@
+python3 scripts/dev-secrets.py
+Local development secrets ready (material not logged)
+python3 scripts/build-fixture-images.py
+Local fixture images built and locked by immutable image ID; no publication
+docker compose --env-file .local/compose.env --env-file .local/fixture-images.env -f infra/compose/compose.yaml up -d --wait --wait-timeout 90

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "spikes/envoy/sprint05b-a-run.mjs",
+    "evidence/sprint05b-a/run-05"
+  ],
+  "cwd": "/tmp/aegisgate-05b-a",
+  "exit": 1,
+  "signal": null,
+  "stdout": "valid-original-bytes: 200 origin=97\nvalid-trailer: 200 origin=142\noriginal-malformed-HTTP-obsolete-folded-header: 400 origin=0\noriginal-strict-ingress-TE-obsolete-fold: 400 origin=0\nmalformed-HTTP-conflicting-content-length: 400 origin=0\nmalformed-HTTP-CL-TE: 400 origin=0\nmalformed-HTTP-TE-CL: 400 origin=0\nmalformed-HTTP-invalid-transfer-encoding: 400 origin=0\nstrict-ingress-CL-TE-pipelined: 400 origin=0\nstrict-ingress-TE-CL-pipelined: 400 origin=0\nstrict-ingress-CL-comma-conflict: 400 origin=0\nstrict-ingress-TE-repeated-chunked: 400 origin=0\nstrict-ingress-TE-not-final-chunked: 400 origin=0\noriginal-obs-fold-reused: 400 origin=0\nfragmented-original-obs-fold: 400 origin=0\nlate-folded-trailer-sp: 400 origin=0\nlate-folded-trailer-reused-sp: 400 origin=0\nlate-folded-trailer-tab: 400 origin=0\nlate-folded-trailer-reused-tab: 400 origin=0\nlate-valid-trailer-staged: 200 origin=142\nencoded-/bad%20target: 200 origin=88\nencoded-/bad%09target: 200 origin=88\nencoded-/bad%01target: 200 origin=88\nencoded-/bad%00target: 200 origin=88\nencoded-/encoded%2Fsegment?value=%2520: 200 origin=105\nencoded-/caf%C3%A9?x=a%20b: 200 origin=93\nvalid-pipeline: 200,200 origin=159\nvalid-then-original-fold: 200,400 origin=62\ncontent-length-stream-staged: 200 origin=97\n{\"completed\":false,\"error\":\"AssertionError [ERR_ASSERTION]: client-cancel-before-complete\\n\\n0 !== 92\\n\\n    at probe (file:///tmp/aegisgate-05b-a/spikes/envoy/sprint05b-a-run.mjs:230:14)\\n    at async file:///tmp/aegisgate-05b-a/spikes/envoy/sprint05b-a-run.mjs:266:3\",\"cleanup\":{\"fixtureAbsent\":true,\"remainingSockets\":0,\"listeners\":0,\"allocatedStaging\":0,\"liveNativeParsers\":0,\"lockHeldThroughCleanup\":true,\"elapsedMs\":7620}}\n",
+  "stderr": "",
+  "source_commit": "dbb21538888de1b72ec24e29ae6a00ff7feb1255",
+  "started_at": "2026-11-14T18:42:48.170Z",
+  "ended_at": "2026-11-14T18:42:57.657Z",
+  "shared_flock_held_after_child": true
+}

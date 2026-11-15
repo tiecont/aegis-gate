@@ -1,0 +1,266 @@
+{
+  "reviewer_commit": "50758c956f95f86917bcc5527293051733a82888",
+  "reviewer_tree": "443912ede2f25b04f663fd70a6fc416be09a266b",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05b-f/scripts/sprint05b-f-review.mjs",
+    "c",
+    "fe92fc1",
+    "evidence/sprint05b-f/c-01"
+  ],
+  "started_at": "2026-11-14T18:53:01.397Z",
+  "mode": "c",
+  "source_commit": "fe92fc16b8b84f6670a778070a4583b0225ced56",
+  "source_tree": "e0e98e696a2b0e46d8edc48c58ffbc984af7f043",
+  "clone": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/c-fe92fc16b8b8",
+  "node": {
+    "file": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+    "version": "v26.13.0"
+  },
+  "fixture_lock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "commands": [
+    {
+      "label": "clone",
+      "program": "git",
+      "args": [
+        "clone",
+        "--shared",
+        "--no-checkout",
+        "/tmp/aegisgate-05b-f",
+        "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/c-fe92fc16b8b8"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f",
+      "environment": {},
+      "started_at": "2026-11-14T18:53:01.847Z",
+      "ended_at": "2026-11-14T18:53:01.894Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/c-01/clone.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05b-f/c-01/clone.stderr",
+          "bytes": 87,
+          "sha256": "7d43c5052c35b97b165a6ff632d0ba9bc4361f598b53e93c5f6acb96678dcb1b"
+        }
+      ]
+    },
+    {
+      "label": "checkout",
+      "program": "git",
+      "args": [
+        "checkout",
+        "--detach",
+        "fe92fc16b8b84f6670a778070a4583b0225ced56"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/c-fe92fc16b8b8",
+      "environment": {},
+      "started_at": "2026-11-14T18:53:01.905Z",
+      "ended_at": "2026-11-14T18:53:02.308Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/c-01/checkout.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05b-f/c-01/checkout.stderr",
+          "bytes": 94,
+          "sha256": "a7878ceff9f9b71f14a1e8756300c9b3fb1fd464870cdd3a074c237f08eabedf"
+        }
+      ]
+    },
+    {
+      "label": "strict-spike-install",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/npm",
+      "args": [
+        "--prefix",
+        "spikes/pingora",
+        "ci",
+        "--ignore-scripts",
+        "--strict-peer-deps"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/c-fe92fc16b8b8",
+      "environment": {},
+      "started_at": "2026-11-14T18:53:02.399Z",
+      "ended_at": "2026-11-14T18:53:05.552Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/c-01/strict-spike-install.stdout",
+          "bytes": 140,
+          "sha256": "966538e72c792cad51f798a64b87d122f422e8b8828f4a6c828f05524111a012"
+        },
+        {
+          "file": "evidence/sprint05b-f/c-01/strict-spike-install.stderr",
+          "bytes": 247,
+          "sha256": "4bbccec26958f20124f8aefb4af9b4e17cecebfd23126c40a3f9f4f19f1e998c"
+        }
+      ]
+    },
+    {
+      "label": "matrix-901",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/envoy/sprint05b-c-run.mjs",
+        "evidence/sprint05b-c/attempt-901",
+        "untapped",
+        "native",
+        "events"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/c-fe92fc16b8b8",
+      "environment": {},
+      "started_at": "2026-11-14T18:53:05.560Z",
+      "ended_at": "2026-11-14T18:53:25.376Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/c-01/matrix-901.stdout",
+          "bytes": 507,
+          "sha256": "8f2152abb432e568a0513cad0cbcfd07630874a7601d3ed9d47772ee1c20b205"
+        },
+        {
+          "file": "evidence/sprint05b-f/c-01/matrix-901.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "matrix-902",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "spikes/envoy/sprint05b-c-run.mjs",
+        "evidence/sprint05b-c/attempt-902",
+        "baseline",
+        "native",
+        "relay"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/c-fe92fc16b8b8",
+      "environment": {},
+      "started_at": "2026-11-14T18:53:25.386Z",
+      "ended_at": "2026-11-14T18:53:44.584Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/c-01/matrix-902.stdout",
+          "bytes": 507,
+          "sha256": "8f2152abb432e568a0513cad0cbcfd07630874a7601d3ed9d47772ee1c20b205"
+        },
+        {
+          "file": "evidence/sprint05b-f/c-01/matrix-902.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "source-after",
+      "program": "git",
+      "args": [
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/c-fe92fc16b8b8",
+      "environment": {},
+      "started_at": "2026-11-14T18:53:44.629Z",
+      "ended_at": "2026-11-14T18:53:44.742Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/c-01/source-after.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint05b-f/c-01/source-after.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "complete": true,
+  "semantic_security_pass": false,
+  "protected": [
+    {
+      "file": "spikes/pingora/lab.mjs",
+      "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d",
+      "bytes": 45073
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+      "bytes": 9829
+    },
+    {
+      "file": "spikes/edge-comparison/contract.mjs",
+      "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f",
+      "bytes": 1686
+    },
+    {
+      "file": "spikes/edge-comparison/supplemental.mjs",
+      "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf",
+      "bytes": 1616
+    },
+    {
+      "file": "spikes/edge-comparison/evaluate.mjs",
+      "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf",
+      "bytes": 2119
+    },
+    {
+      "file": "spikes/edge-comparison/run.mjs",
+      "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493",
+      "bytes": 61
+    },
+    {
+      "file": "spikes/edge-comparison/tls-observer.mjs",
+      "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065",
+      "bytes": 1639
+    },
+    {
+      "file": "spikes/edge-comparison/extract-baseline.mjs",
+      "sha256": "a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6",
+      "bytes": 2908
+    },
+    {
+      "file": "spikes/envoy/wire-probes.mjs",
+      "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a",
+      "bytes": 20934
+    },
+    {
+      "file": "spikes/envoy/wire-observer.mjs",
+      "sha256": "bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3",
+      "bytes": 4052
+    },
+    {
+      "file": "spikes/envoy/wire-fixtures.mjs",
+      "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278",
+      "bytes": 3320
+    }
+  ],
+  "outputs": [
+    {
+      "original": "evidence/sprint05b-c/attempt-901",
+      "preserved": "evidence/sprint05b-f/c-01/capture-1"
+    },
+    {
+      "original": "evidence/sprint05b-c/attempt-902",
+      "preserved": "evidence/sprint05b-f/c-01/capture-2"
+    }
+  ],
+  "source_after": "",
+  "lock_held_through_capture_hashing": true,
+  "ended_at": "2026-11-14T18:53:44.750Z"
+}

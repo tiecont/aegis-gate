@@ -1,0 +1,285 @@
+{
+  "scope": "Offline aggregation; controlled lock coupling is distinct from attribution of natural HTTP timeout failures",
+  "source": {
+    "file": "evidence/sprint05b-f/focused-03/lock-samples.jsonl",
+    "sha256": "6f7d1e24e9251d043603676f170abc25109f08f6f62a85efde794cd5ba1486dd"
+  },
+  "samples": 646,
+  "observed_locks": 657,
+  "all_waiters": 22,
+  "migration_wait_samples": 20,
+  "maximum_migration_query_age_ms": 495.991,
+  "migration_waiters": [
+    187,
+    177,
+    284,
+    282,
+    390,
+    409,
+    401
+  ],
+  "receipts": [
+    {
+      "file": "evidence/sprint05b-f/focused-01/receipt.json",
+      "sha256": "0fce4faa9dbf936e86e5b4122fcaa836d513dbe133284211786eb97f3f997ca9",
+      "source_commit": "7755f7ae51d9a5e087c638371e41d8c2133e679c",
+      "complete": false,
+      "commands": [
+        {
+          "label": "fixtures-up",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "file": "evidence/sprint05b-f/focused-02/receipt.json",
+      "sha256": "fa8b425a355feb743440a3461856af16efc2230c30d74f5961e49180ca51d9b9",
+      "source_commit": "7755f7ae51d9a5e087c638371e41d8c2133e679c",
+      "complete": false,
+      "error": "AssertionError [ERR_ASSERTION]: fixture-tls-credentials",
+      "commands": [
+        {
+          "label": "fixtures-up",
+          "exit_code": 0
+        },
+        {
+          "label": "fixture-tls-credentials",
+          "exit_code": 1
+        },
+        {
+          "label": "cleanup",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-container",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-network",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-volume",
+          "exit_code": 0
+        }
+      ],
+      "private_output_matches": 0,
+      "private_material_removed": true
+    },
+    {
+      "file": "evidence/sprint05b-f/focused-03/receipt.json",
+      "sha256": "be3f92fb6a9e299511d9aa4f0b9e198045e82c95d6fb677fe6d079c226df0f57",
+      "source_commit": "7755f7ae51d9a5e087c638371e41d8c2133e679c",
+      "complete": false,
+      "error": "AssertionError [ERR_ASSERTION]: go-race-all",
+      "commands": [
+        {
+          "label": "fixtures-up",
+          "exit_code": 0
+        },
+        {
+          "label": "fixtures-ready",
+          "exit_code": 0
+        },
+        {
+          "label": "fixture-tls-credentials",
+          "exit_code": 0
+        },
+        {
+          "label": "go-race-all",
+          "exit_code": 1
+        },
+        {
+          "label": "cleanup",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-container",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-network",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-volume",
+          "exit_code": 0
+        }
+      ],
+      "private_output_matches": 0,
+      "private_material_removed": true
+    },
+    {
+      "file": "evidence/sprint05b-f/focused-04/receipt.json",
+      "sha256": "7248e48bb5609aaf2028d3d4fcb214c39ca3eaa7bd659753a65ba33a643b611e",
+      "source_commit": "7755f7ae51d9a5e087c638371e41d8c2133e679c",
+      "complete": true,
+      "commands": [
+        {
+          "label": "fixtures-up",
+          "exit_code": 0
+        },
+        {
+          "label": "fixtures-ready",
+          "exit_code": 0
+        },
+        {
+          "label": "fixture-tls-credentials",
+          "exit_code": 0
+        },
+        {
+          "label": "migration-cause",
+          "exit_code": 0
+        },
+        {
+          "label": "cleanup",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-container",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-network",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-volume",
+          "exit_code": 0
+        }
+      ],
+      "private_output_matches": 0,
+      "private_material_removed": true
+    },
+    {
+      "file": "evidence/sprint05b-f/focused-05/receipt.json",
+      "sha256": "5ac64b345c15824fd4a1ba9bbdd8d3dcdd75328a4cca0a17f3f56b7cf41c22cb",
+      "source_commit": "8f60c2af6553040289ab8679fba978db5f49f8e0",
+      "complete": true,
+      "commands": [
+        {
+          "label": "root-npm-ci",
+          "exit_code": 0
+        },
+        {
+          "label": "dashboard-npm-ci",
+          "exit_code": 0
+        },
+        {
+          "label": "fixtures-up",
+          "exit_code": 0
+        },
+        {
+          "label": "fixtures-ready",
+          "exit_code": 0
+        },
+        {
+          "label": "fixture-tls-credentials",
+          "exit_code": 0
+        },
+        {
+          "label": "go-race-all",
+          "exit_code": 0
+        },
+        {
+          "label": "contracts",
+          "exit_code": 0
+        },
+        {
+          "label": "contract-integration",
+          "exit_code": 0
+        },
+        {
+          "label": "dashboard-lint",
+          "exit_code": 0
+        },
+        {
+          "label": "dashboard-typecheck",
+          "exit_code": 0
+        },
+        {
+          "label": "dashboard-test",
+          "exit_code": 0
+        },
+        {
+          "label": "dashboard-build",
+          "exit_code": 0
+        },
+        {
+          "label": "dashboard-integration",
+          "exit_code": 0
+        },
+        {
+          "label": "cleanup",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-container",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-network",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-volume",
+          "exit_code": 0
+        }
+      ],
+      "private_output_matches": 0,
+      "private_material_removed": true,
+      "go": {
+        "packages": 11,
+        "top_level": 89,
+        "subtests": 151,
+        "skips": 0
+      }
+    },
+    {
+      "file": "evidence/sprint05b-f/focused-06/receipt.json",
+      "sha256": "d37cf5e6b5961893069bb276c5d0d89bc9179332029db5667715c5995f60c3ed",
+      "source_commit": "8f60c2af6553040289ab8679fba978db5f49f8e0",
+      "complete": true,
+      "commands": [
+        {
+          "label": "fixtures-up",
+          "exit_code": 0
+        },
+        {
+          "label": "fixtures-ready",
+          "exit_code": 0
+        },
+        {
+          "label": "fixture-tls-credentials",
+          "exit_code": 0
+        },
+        {
+          "label": "fixture-image-integration",
+          "exit_code": 0
+        },
+        {
+          "label": "fixture-stale-volume",
+          "exit_code": 0
+        },
+        {
+          "label": "cleanup",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-container",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-network",
+          "exit_code": 0
+        },
+        {
+          "label": "remaining-volume",
+          "exit_code": 0
+        }
+      ],
+      "private_output_matches": 0,
+      "private_material_removed": true
+    }
+  ]
+}

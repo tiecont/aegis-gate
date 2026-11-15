@@ -68,7 +68,8 @@ dev-down:
 	$(COMPOSE) down
 
 integration: dev-up
-	AEGIS_TENANCY_INTEGRATION=1 $(GO) test -race $(GO_PACKAGES) -run Integration -count=1
+	# Schema-isolated packages still share database-global migration locks.
+	AEGIS_TENANCY_INTEGRATION=1 $(GO) test -p 1 -race $(GO_PACKAGES) -run Integration -count=1
 	PATH="$(NODE_PATH):$$PATH" "$(NODE_CMD)" scripts/contract-integration.mjs
 	python3 scripts/integration.py
 	python3 scripts/fixture-image-integration.py

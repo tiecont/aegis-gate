@@ -1,0 +1,314 @@
+{
+  "reviewer_commit": "17a6e2d7c7f4d5457f77826a31332b24955f617d",
+  "source_commit": "7755f7ae51d9a5e087c638371e41d8c2133e679c",
+  "source_tree": "fcfff1a4c861b95975a967cd59cd33b91900f658",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05b-f/scripts/sprint05b-f-focused.mjs",
+    "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/e-7755f7ae51d9",
+    "evidence/sprint05b-f/focused-04",
+    "--migration-cause-only"
+  ],
+  "started_at": "2026-11-14T19:22:43.984Z",
+  "commands": [
+    {
+      "label": "fixtures-up",
+      "program": "make",
+      "args": [
+        "dev-up"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/e-7755f7ae51d9",
+      "started_at": "2026-11-14T19:22:44.048Z",
+      "ended_at": "2026-11-14T19:22:57.841Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/focused-04/fixtures-up.stdout",
+          "sha256": "15f2c1adb58953ebbfae908ceedaba4de22355d36fa54f9c395d81e1f6140ff8",
+          "bytes": 344,
+          "raw_sha256": "15f2c1adb58953ebbfae908ceedaba4de22355d36fa54f9c395d81e1f6140ff8",
+          "raw_bytes": 344,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        },
+        {
+          "file": "evidence/sprint05b-f/focused-04/fixtures-up.stderr",
+          "sha256": "8ad54b450ca6ca5a0c1b968c6aec799b0dc01a0e50fd5008aa95232204635b7a",
+          "bytes": 5133,
+          "raw_sha256": "8ad54b450ca6ca5a0c1b968c6aec799b0dc01a0e50fd5008aa95232204635b7a",
+          "raw_bytes": 5133,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        }
+      ]
+    },
+    {
+      "label": "fixtures-ready",
+      "program": "python3",
+      "args": [
+        "/tmp/aegisgate-05b-f/scripts/sprint05b-f-readiness.py"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/e-7755f7ae51d9",
+      "started_at": "2026-11-14T19:22:57.852Z",
+      "ended_at": "2026-11-14T19:22:58.554Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/focused-04/fixtures-ready.stdout",
+          "sha256": "db10193d2643fec8e2aef7896ca00bb0ff17cbfceb4d9cc6e37f4b6f48e1c040",
+          "bytes": 183,
+          "raw_sha256": "db10193d2643fec8e2aef7896ca00bb0ff17cbfceb4d9cc6e37f4b6f48e1c040",
+          "raw_bytes": 183,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        },
+        {
+          "file": "evidence/sprint05b-f/focused-04/fixtures-ready.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_bytes": 0,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        }
+      ]
+    },
+    {
+      "label": "fixture-tls-credentials",
+      "program": "python3",
+      "args": [
+        "scripts/integration.py"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/e-7755f7ae51d9",
+      "started_at": "2026-11-14T19:22:58.563Z",
+      "ended_at": "2026-11-14T19:23:00.594Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/focused-04/fixture-tls-credentials.stdout",
+          "sha256": "81b39325b357512f5b1d3530b28083d3678a4f6bd6ba4d3444cacc891ec98ca3",
+          "bytes": 170,
+          "raw_sha256": "81b39325b357512f5b1d3530b28083d3678a4f6bd6ba4d3444cacc891ec98ca3",
+          "raw_bytes": 170,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        },
+        {
+          "file": "evidence/sprint05b-f/focused-04/fixture-tls-credentials.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_bytes": 0,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        }
+      ]
+    },
+    {
+      "label": "migration-cause",
+      "program": "go",
+      "args": [
+        "run",
+        "-overlay",
+        "/tmp/aegisgate-05b-f/evidence/sprint05b-f/focused-04/migration-overlay.json",
+        "./apps/control-api/cmd/control-api"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/e-7755f7ae51d9",
+      "started_at": "2026-11-14T19:23:00.713Z",
+      "ended_at": "2026-11-14T19:23:06.837Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/focused-04/migration-cause.stdout",
+          "sha256": "4d344c1eb6dbf4e4e7e977c5f83f4aec073d5c3dc520415d261ea964a203630d",
+          "bytes": 1645,
+          "raw_sha256": "4d344c1eb6dbf4e4e7e977c5f83f4aec073d5c3dc520415d261ea964a203630d",
+          "raw_bytes": 1645,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        },
+        {
+          "file": "evidence/sprint05b-f/focused-04/migration-cause.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_bytes": 0,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        }
+      ]
+    },
+    {
+      "label": "cleanup",
+      "program": "docker",
+      "args": [
+        "compose",
+        "--env-file",
+        ".local/compose.env",
+        "--env-file",
+        ".local/fixture-images.env",
+        "-f",
+        "infra/compose/compose.yaml",
+        "down",
+        "--volumes",
+        "--remove-orphans"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/e-7755f7ae51d9",
+      "started_at": "2026-11-14T19:23:06.850Z",
+      "ended_at": "2026-11-14T19:23:18.851Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/focused-04/cleanup.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_bytes": 0,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        },
+        {
+          "file": "evidence/sprint05b-f/focused-04/cleanup.stderr",
+          "sha256": "c9cccf92163a1a11e13e0a79c88fd9e3d5f83fa6c2fd1c595e9bbb9467929367",
+          "bytes": 1531,
+          "raw_sha256": "c9cccf92163a1a11e13e0a79c88fd9e3d5f83fa6c2fd1c595e9bbb9467929367",
+          "raw_bytes": 1531,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        }
+      ]
+    },
+    {
+      "label": "remaining-container",
+      "program": "docker",
+      "args": [
+        "container",
+        "ls",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-05b-e-attempt-91-5cfbc1327a30",
+        "--format",
+        "{{.ID}}"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/e-7755f7ae51d9",
+      "started_at": "2026-11-14T19:23:18.861Z",
+      "ended_at": "2026-11-14T19:23:18.922Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/focused-04/remaining-container.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_bytes": 0,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        },
+        {
+          "file": "evidence/sprint05b-f/focused-04/remaining-container.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_bytes": 0,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        }
+      ]
+    },
+    {
+      "label": "remaining-network",
+      "program": "docker",
+      "args": [
+        "network",
+        "ls",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-05b-e-attempt-91-5cfbc1327a30",
+        "--format",
+        "{{.ID}}"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/e-7755f7ae51d9",
+      "started_at": "2026-11-14T19:23:18.930Z",
+      "ended_at": "2026-11-14T19:23:18.978Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/focused-04/remaining-network.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_bytes": 0,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        },
+        {
+          "file": "evidence/sprint05b-f/focused-04/remaining-network.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_bytes": 0,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        }
+      ]
+    },
+    {
+      "label": "remaining-volume",
+      "program": "docker",
+      "args": [
+        "volume",
+        "ls",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-05b-e-attempt-91-5cfbc1327a30",
+        "--format",
+        "{{.ID}}"
+      ],
+      "cwd": "/tmp/aegisgate-05b-f/.local/sprint05b-f-sources/e-7755f7ae51d9",
+      "started_at": "2026-11-14T19:23:18.987Z",
+      "ended_at": "2026-11-14T19:23:19.055Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-f/focused-04/remaining-volume.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_bytes": 0,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        },
+        {
+          "file": "evidence/sprint05b-f/focused-04/remaining-volume.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_bytes": 0,
+          "redacted_callback_urls": 0,
+          "retention": "unchanged"
+        }
+      ]
+    }
+  ],
+  "complete": true,
+  "scope": "Focused regression reproduction; e-01 private Postgres image-readiness failure remains unresolved",
+  "observer": {
+    "file": "/tmp/aegisgate-05b-f/.local/sprint05b-f-locks",
+    "sha256": "bf52f24901ffd8a05869fba31cb96a7abc6c9e9995d32d376b15a4fdc4216b37",
+    "scope": "Read-only pg_locks/allowlisted pg_stat_activity fields; no SQL text or credentials",
+    "exit_code": 0
+  },
+  "migration_helper": {
+    "file": "/tmp/aegisgate-05b-f/scripts/sprint05b-f-migration-cause.go",
+    "sha256": "f406be81e943c791398efc51052c68c3e7ec454ca394cde230b5f0026a8f2daa"
+  },
+  "private_output_matches": 0,
+  "private_material_removed": true,
+  "lock_held_through_cleanup_hashing": true,
+  "ended_at": "2026-11-14T19:23:19.059Z"
+}

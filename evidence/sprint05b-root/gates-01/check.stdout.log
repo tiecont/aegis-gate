@@ -1,0 +1,320 @@
+test -z "$(gofmt -l apps/control-api apps/config-publisher internal packages/test-fixtures)"
+cargo +1.99.1 fmt --all --check --manifest-path apps/edge/Cargo.toml
+cargo +1.99.1 fmt --all --check --manifest-path spikes/hyper/Cargo.toml
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm run format:check
+
+> aegisgate-contract-tools@0.0.0 format:check
+> prettier --check package.json packages/contracts scripts/*.mjs .github infra/compose/compose.yaml
+
+Checking formatting...
+All matched files use Prettier code style!
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run fmt:check
+
+> @aegisgate/dashboard@0.1.0 fmt:check
+> prettier --check app lib tests *.mjs *.json *.md
+
+Checking formatting...
+All matched files use Prettier code style!
+GOTOOLCHAIN=go1.27.4 go vet ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/...
+cargo +1.99.1 clippy --workspace --all-targets --locked --manifest-path apps/edge/Cargo.toml -- -D warnings
+cargo +1.99.1 clippy --workspace --all-targets --locked --manifest-path spikes/hyper/Cargo.toml -- -D warnings
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm run contracts:check
+
+> aegisgate-contract-tools@0.0.0 contracts:check
+> node scripts/module03-contracts.mjs --check && node scripts/contracts.mjs --check
+
+Module03 contract synchronized with shared snapshot schema
+Contracts validated: OpenAPI, Go, TypeScript, JSON Schema, baseline, fixture
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run lint
+
+> @aegisgate/dashboard@0.1.0 lint
+> eslint . --max-warnings=0
+
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run typecheck
+
+> @aegisgate/dashboard@0.1.0 typecheck
+> tsc --noEmit
+
+python3 scripts/dev-secrets.test.py
+python3 scripts/git_history_preflight_test.py
+python3 scripts/image_identity_test.py
+"$(scripts/node-path.sh)" --test spikes/edge-comparison/*.test.mjs
+✔ rejection permits explicit400 or immediate closed peer (1.403813ms)
+✔ negative: status and zero handlers cannot hide forwarded bytes or parser errors (2.638609ms)
+✔ negative: missing or duplicated functional and security cases cannot pass inventory (2.875512ms)
+✔ evaluator checks original wire bytes even when every test is labeled pass (6.163576ms)
+✔ negative: claimed pass cannot conceal forwarded bytes or origin parser errors (1.918754ms)
+✔ negative: wrong manifest, fatal setup, skipped cases and dishonest summary fail closed (1.543635ms)
+✔ H2 observer counts decrypted preface without handler dispatch and preserves valid frames (296.746331ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 509.708714
+"$(scripts/node-path.sh)" --test spikes/envoy/*.test.mjs
+✔ manifest rejects replay, unknown fields, duplicate hosts, invalid ports and weights (99.046815ms)
+✔ private key permissions, SAN mismatch, symlinks and fixture bounds fail closed (66.272675ms)
+✔ compiled origin trust and pools change across route and generation boundaries (101.354935ms)
+✔ trace drains coalesced input over old decoder chunk bound (5.939106ms)
+✔ fragmented control and bounded control samples preserve totals (9.65034ms)
+{"direct_and_observed":[{"path":"/encoded%2Ftarget?x=%2520","authority":"synthetic.test","sni":"lab-origin.test","bytes":262144,"sha256":"dd3dde87623d9a6b354c68c943d189c89c63652d945e7bbdf0986cae91a49521"},{"path":"/encoded%2Ftarget?x=%2520","authority":"synthetic.test","sni":"lab-origin.test","bytes":262144,"sha256":"dd3dde87623d9a6b354c68c943d189c89c63652d945e7bbdf0986cae91a49521"}],"peer_fingerprint256":"97:AC:BD:92:C8:94:E1:2B:14:6F:F3:61:1A:7C:79:F0:AB:62:8A:58:61:BA:9A:04:C1:77:CE:FE:2A:42:F6:90","wire":{"records":[{"id":1,"opened_ms":826.866204,"candidate_tls":{"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3","authorized":false,"authorization_error":null,"local_fingerprint256":"97:AC:BD:92:C8:94:E1:2B:14:6F:F3:61:1A:7C:79:F0:AB:62:8A:58:61:BA:9A:04:C1:77:CE:FE:2A:42:F6:90"},"candidate_to_origin":{"bytes":262590,"frames":36,"data_bytes":262144,"headers":1,"streams":{"1":{"frames":26,"data_bytes":262144,"headers":1,"resets":[]}},"events":[{"ms":841.51754,"kind":"preface","bytes":24},{"ms":841.624886,"kind":"frame","type":4,"name":"SETTINGS","flags":0,"stream":0,"length":0,"bytes":9,"sha256":"5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053","hex":"000000040000000000"},{"ms":841.687464,"kind":"frame","type":1,"name":"HEADERS","flags":4,"stream":1,"length":34,"bytes":43,"sha256":"74f24a6a88ed633fd50a67a4f818510ffbb9bbb1089677c6d2f640318c40916e"},{"ms":872.204119,"kind":"frame","type":4,"name":"SETTINGS","flags":1,"stream":0,"length":0,"bytes":9,"sha256":"a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6","hex":"000000040100000000"},{"ms":919.945069,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":919.953799,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":920.421737,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":920.432772,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"},{"ms":922.22169,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":922.230839,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":922.287341,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":922.295094,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"},{"ms":965.14386,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":965.159505,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":965.266921,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":965.274953,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"},{"ms":969.958589,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":969.988202,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":970.849626,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":970.868763,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"}],"omitted":0},"origin_to_candidate":{"bytes":262557,"frames":36,"data_bytes":262144,"headers":1,"streams":{"1":{"frames":26,"data_bytes":262144,"headers":1,"resets":[]}},"events":[{"ms":848.008533,"kind":"frame","type":4,"name":"SETTINGS","flags":0,"stream":0,"length":0,"bytes":9,"sha256":"5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053","hex":"000000040000000000"},{"ms":848.035771,"kind":"frame","type":4,"name":"SETTINGS","flags":1,"stream":0,"length":0,"bytes":9,"sha256":"a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6","hex":"000000040100000000"},{"ms":848.25661,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":848.280076,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":848.311575,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":848.317651,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"},{"ms":873.720866,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":873.729875,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":873.801323,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":873.806142,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"},{"ms":915.109877,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":915.119096,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":915.194036,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":915.200182,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"},{"ms":916.930154,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":916.948452,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":917.030167,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":917.041202,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"},{"ms":918.863854,"kind":"frame","type":1,"name":"HEADERS","flags":4,"stream":1,"length":25,"bytes":34,"sha256":"6cd7ae629872af45832cff99d9ac918d0f25545f625504f5d9cd636be9dad18c"}],"omitted":0},"lifecycle":[],"native_tls":{"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3","authorized":true,"authorization_error":null,"peer_fingerprint256":"97:AC:BD:92:C8:94:E1:2B:14:6F:F3:61:1A:7C:79:F0:AB:62:8A:58:61:BA:9A:04:C1:77:CE:FE:2A:42:F6:90"}}],"errors":0,"omitted":0,"bytes":262590,"headers":1,"data_bytes":262144}}
+✔ new relay preserves native H2 body, response, configured TLS identity and encoded target (844.359039ms)
+=== RUN   TestValidFragmentedStatefulHPACK
+--- PASS: TestValidFragmentedStatefulHPACK (0.00s)
+=== RUN   TestStatefulDynamicReference
+--- PASS: TestStatefulDynamicReference (0.00s)
+=== RUN   TestDeliberateLeaks
+=== RUN   TestDeliberateLeaks/HEADERS
+=== RUN   TestDeliberateLeaks/DATA
+=== RUN   TestDeliberateLeaks/RST_STREAM
+--- PASS: TestDeliberateLeaks (0.00s)
+    --- PASS: TestDeliberateLeaks/HEADERS (0.00s)
+    --- PASS: TestDeliberateLeaks/DATA (0.00s)
+    --- PASS: TestDeliberateLeaks/RST_STREAM (0.00s)
+=== RUN   TestPartialForbiddenHeadersFailClosed
+--- PASS: TestPartialForbiddenHeadersFailClosed (0.00s)
+=== RUN   TestIncompleteContinuation
+--- PASS: TestIncompleteContinuation (0.00s)
+=== RUN   TestInterleavedContinuation
+--- PASS: TestInterleavedContinuation (0.00s)
+=== RUN   TestNewDialWithoutHandler
+--- PASS: TestNewDialWithoutHandler (0.00s)
+=== RUN   TestCaptureOmissionAndIdentityFailClosed
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/drop
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/truncated
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/open
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/identity
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/registry
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/unmapped
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/forged
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/duplicate
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/transport
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/parser
+=== RUN   TestCaptureOmissionAndIdentityFailClosed/new
+--- PASS: TestCaptureOmissionAndIdentityFailClosed (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/drop (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/truncated (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/open (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/identity (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/registry (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/unmapped (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/forged (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/duplicate (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/transport (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/parser (0.00s)
+    --- PASS: TestCaptureOmissionAndIdentityFailClosed/new (0.00s)
+=== RUN   TestDecoderBoundsAndInvalidHPACK
+--- PASS: TestDecoderBoundsAndInvalidHPACK (0.02s)
+=== RUN   TestDecompressionAndContinuationBounds
+=== RUN   TestDecompressionAndContinuationBounds/string
+=== RUN   TestDecompressionAndContinuationBounds/fields
+=== RUN   TestDecompressionAndContinuationBounds/wrong-stream
+=== RUN   TestDecompressionAndContinuationBounds/table-size
+--- PASS: TestDecompressionAndContinuationBounds (0.01s)
+    --- PASS: TestDecompressionAndContinuationBounds/string (0.00s)
+    --- PASS: TestDecompressionAndContinuationBounds/fields (0.00s)
+    --- PASS: TestDecompressionAndContinuationBounds/wrong-stream (0.00s)
+    --- PASS: TestDecompressionAndContinuationBounds/table-size (0.00s)
+PASS
+ok  	aegisgate.dev/aegisgate/spikes/envoy/sprint04c-attribution	1.058s
+
+✔ Sprint04-C maintained H2/HPACK attribution rejects deliberate leaks and incomplete evidence (6365.500594ms)
+✔ bounded capture accounts for drops and closed lifecycle (2.132259ms)
+{"direct_and_relay":[{"target":"/encoded%2Ftarget?x=%2520","sni":"lab-origin.test"},{"target":"/encoded%2Ftarget?x=%2520","sni":"lab-origin.test"}],"capture_totals":[{"direction":"candidate-to-origin","bytes":98,"sha256":"a2149e57159ca5159d575e8b624c048e42dfb7a5ade40d50904f52eca253addc"},{"direction":"origin-to-candidate","bytes":73,"sha256":"917807dd417dc11d21b4c421e29d07b7ddbdd54b899aa3f2af519d5767c7681c"}]}
+✔ new raw relay preserves verified TLS, exact synthetic payload and encoded target (572.666505ms)
+✔ candidate changes only local reply mapping across every baseline filter chain (7.628779ms)
+✔ fragmented envelopes classify controls and preserve bounded decoder state (2.817613ms)
+{"native_h2_identity_controls":[{"peer_fingerprint":"3D:77:B5:8D:B0:64:90:7D:11:92:A9:FC:78:03:46:EF:8B:72:64:D8:93:28:B4:8E:3D:2E:3F:09:35:C0:65:D8","downstream_tls":"TLSv1.3","samples":[{"connection":1,"stream":1,"method":"GET","target":"/bad%20target","authority":"synthetic-authority.test","marker":"first-only","sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"},{"connection":1,"stream":3,"method":"GET","target":"/encoded%2Fsegment?value=%2520","authority":"synthetic-authority.test","marker":null,"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"}]},{"peer_fingerprint":"3D:77:B5:8D:B0:64:90:7D:11:92:A9:FC:78:03:46:EF:8B:72:64:D8:93:28:B4:8E:3D:2E:3F:09:35:C0:65:D8","downstream_tls":"TLSv1.3","samples":[{"connection":2,"stream":1,"method":"GET","target":"/bad%20target","authority":"synthetic-authority.test","marker":"first-only","sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"},{"connection":2,"stream":3,"method":"GET","target":"/encoded%2Fsegment?value=%2520","authority":"synthetic-authority.test","marker":null,"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"}]}],"observed_decrypted_bytes":139,"identity_scope":"configured origin SNI preserved; HTTP authority forwarded without binding or rewriting"}
+✔ native H2 direct and observed controls preserve authority, SNI, targets and reuse (737.567577ms)
+{"payload_bytes":37843,"sha256":"814492f3243b52ec0c40be131e59025e439d93efe4286906d2a4c61b121615ca","direct_and_observed":[{"fingerprint":"65:39:B2:7D:EA:DC:80:87:EF:15:EF:78:CD:59:38:BB:D7:19:16:9F:8C:63:ED:E5:48:FD:20:9C:8B:D1:0C:39","tls":"TLSv1.3","alpn":"h2"},{"fingerprint":"65:39:B2:7D:EA:DC:80:87:EF:15:EF:78:CD:59:38:BB:D7:19:16:9F:8C:63:ED:E5:48:FD:20:9C:8B:D1:0C:39","tls":"TLSv1.3","alpn":"h2"}],"invalid_origin_attempted_payload_bytes":37843,"samples":4096,"omitted":112}
+✔ observer preserves bytes, configured identity and verified TLS; bounds samples (1064.577737ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7112.523722
+"$(scripts/node-path.sh)" spikes/edge-comparison/extract-baseline.mjs --check
+PASS immutable baseline manifest matches pinned source and all65 test IDs
+GOTOOLCHAIN=go1.27.4 go test -race ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/...
+?   	aegisgate.dev/aegisgate/apps/control-api/cmd/control-api	[no test files]
+?   	aegisgate.dev/aegisgate/apps/control-api/internal/application	[no test files]
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/domain	1.035s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/identity	1.782s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/persistence	1.110s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/transport	2.693s
+?   	aegisgate.dev/aegisgate/apps/control-api/publication	[no test files]
+?   	aegisgate.dev/aegisgate/apps/config-publisher/cmd/config-publisher	[no test files]
+ok  	aegisgate.dev/aegisgate/internal/configconsumer	5.454s
+ok  	aegisgate.dev/aegisgate/internal/configpublish	1.360s
+ok  	aegisgate.dev/aegisgate/internal/configreview	1.564s
+ok  	aegisgate.dev/aegisgate/internal/configrollout	1.393s
+ok  	aegisgate.dev/aegisgate/internal/configsnapshot	1.704s
+ok  	aegisgate.dev/aegisgate/internal/contracts	1.262s
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/cmd/fixtures	[no test files]
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/configlab	[no test files]
+ok  	aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab	2.289s
+cargo +1.99.1 test --workspace --locked --manifest-path apps/edge/Cargo.toml
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test shared_fixture_is_consumed_without_configuration_activation ... ok
+test negative_missing_file_does_not_disclose_path ... ok
+test negative_malformed_and_oversized_inputs_rejected_without_echo ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test offline_check_reports_unready ... ok
+test negative_runtime_cannot_be_enabled_by_untrusted_flags ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 8 tests
+test tests::generation_is_monotonic_and_bounded ... ok
+test tests::negative_generation_replay_and_rollback_denied ... ok
+test tests::negative_diagnostics_never_echo_secret_input ... ok
+test tests::negative_oversized_error_rejected_before_parsing ... ok
+test tests::negative_noncanonical_or_nonrandom_uuid_denied ... ok
+test tests::negative_untrusted_codes_and_messages_denied ... ok
+test tests::negative_unknown_duplicate_fields_and_trailing_data_denied ... ok
+test tests::valid_wire_round_trip ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 1 test
+test tests::negative_bootstrap_never_authorizes_or_becomes_ready ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+cargo +1.99.1 test --workspace --locked --manifest-path spikes/hyper/Cargo.toml
+
+running 4 tests
+test config::tests::authority_rejects_ambiguous_hosts ... ok
+test config::tests::invalid_manifest_cannot_bootstrap ... ok
+test tests::parsed_policy_rejects_ambiguous_authority_and_framing ... ok
+test tests::preserved_encoded_targets_survive_uri_and_policy_layers ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm run contracts:test
+
+> aegisgate-contract-tools@0.0.0 contracts:test
+> node --test scripts/contracts.test.mjs
+
+✔ foundation error fixture follows generated JSON schema (72.238391ms)
+✔ negative: unknown fields, tenant header injection, malformed IDs and unbounded errors rejected (24.642292ms)
+✔ negative: intentionally broken schema and operation changes fail compatibility (11.652694ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2046.06443
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard test
+
+> @aegisgate/dashboard@0.1.0 test
+> node --test tests/unit.test.mjs
+
+✔ unconfigured dashboard never advertises live tenant services (1.276492ms)
+✔ browser security policy blocks framing and external connections on every path (0.373512ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 105.730012
+mkdir -p .local/bin
+GOTOOLCHAIN=go1.27.4 go build -o .local/bin/control-api ./apps/control-api/cmd/control-api
+GOTOOLCHAIN=go1.27.4 go build -o .local/bin/config-publisher ./apps/config-publisher/cmd/config-publisher
+GOTOOLCHAIN=go1.27.4 go build -o .local/bin/fixtures ./packages/test-fixtures/cmd/fixtures
+cargo +1.99.1 build --workspace --locked --manifest-path apps/edge/Cargo.toml
+cargo +1.99.1 build --workspace --locked --manifest-path spikes/hyper/Cargo.toml
+PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run build
+
+> @aegisgate/dashboard@0.1.0 build
+> NEXT_TELEMETRY_DISABLED=1 next build --webpack
+
+▲ Next.js 16.4.6 (webpack)
+✓ Running next.config.mjs took 31ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 8.2s
+  Running TypeScript ...
+  Finished TypeScript in 3.7s ...
+  Collecting page data using 4 workers ...
+  Generating static pages using 4 workers (0/3) ...
+✓ Generating static pages using 4 workers (3/3) in 1155ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ○ /
+└ ○ /_not-found
+
+
+○  (Static)  prerendered as static content
+
+python3 scripts/dev-secrets.py
+Local development secrets ready (material not logged)
+python3 scripts/build-fixture-images.py
+Local fixture images built and locked by immutable image ID; no publication
+docker compose --env-file .local/compose.env --env-file .local/fixture-images.env -f infra/compose/compose.yaml up -d --wait --wait-timeout 90
+AEGIS_TENANCY_INTEGRATION=1 GOTOOLCHAIN=go1.27.4 go test -race ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/... -run Integration -count=1
+?   	aegisgate.dev/aegisgate/apps/control-api/cmd/control-api	[no test files]
+?   	aegisgate.dev/aegisgate/apps/control-api/internal/application	[no test files]
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/domain	1.039s [no tests to run]
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/identity	1.090s
+ok  	aegisgate.dev/aegisgate/apps/control-api/internal/persistence	115.694s
+--- FAIL: TestIntegrationOIDCRotationOutageCallbacksAndMFA (27.35s)
+    --- FAIL: TestIntegrationOIDCRotationOutageCallbacksAndMFA/rotation-and-outage (5.09s)
+        acceptance_test.go:112: ERROR: canceling statement due to statement timeout (SQLSTATE 57014)
+    --- FAIL: TestIntegrationOIDCRotationOutageCallbacksAndMFA/signature (2.10s)
+        acceptance_test.go:158: ERROR: canceling statement due to lock timeout (SQLSTATE 55P03)
+--- FAIL: TestIntegrationAdminHTTPIsolationAndOIDC (26.72s)
+    admin_fixture_test.go:258: Get "https://127.0.0.1:38693/v1/callback?code=REDACTED&state=REDACTED": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+FAIL
+FAIL	aegisgate.dev/aegisgate/apps/control-api/internal/transport	74.120s
+?   	aegisgate.dev/aegisgate/apps/control-api/publication	[no test files]
+?   	aegisgate.dev/aegisgate/apps/config-publisher/cmd/config-publisher	[no test files]
+ok  	aegisgate.dev/aegisgate/internal/configconsumer	1.091s [no tests to run]
+ok  	aegisgate.dev/aegisgate/internal/configpublish	25.934s
+ok  	aegisgate.dev/aegisgate/internal/configreview	1.089s [no tests to run]
+ok  	aegisgate.dev/aegisgate/internal/configrollout	2.641s
+ok  	aegisgate.dev/aegisgate/internal/configsnapshot	1.090s [no tests to run]
+ok  	aegisgate.dev/aegisgate/internal/contracts	1.042s [no tests to run]
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/cmd/fixtures	[no test files]
+?   	aegisgate.dev/aegisgate/packages/test-fixtures/configlab	[no test files]
+ok  	aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab	2.064s
+FAIL

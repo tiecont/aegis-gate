@@ -1,0 +1,205 @@
+{
+  "source_commit": "f0e9792c4ecd42faf54327cfcc67cbd72251d670",
+  "source_tree": "133a12c536d5feeafe46d1c0b9185b9a1df2fe06",
+  "started_at": "2026-11-14T18:25:13.136Z",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/home/tiecont/Projects/aegis-gate/scripts/sprint05b-extract-envoy.mjs",
+    "evidence/sprint05b-root/native-extract-01"
+  ],
+  "image": "envoyproxy/envoy@sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded",
+  "name": "aegis-05b-extract-2224210",
+  "commands": [
+    {
+      "label": "image-identity",
+      "program": "docker",
+      "args": [
+        "image",
+        "inspect",
+        "envoyproxy/envoy@sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded",
+        "--format",
+        "{{.Id}} {{json .RepoDigests}}"
+      ],
+      "started_at": "2026-11-14T18:25:13.137Z",
+      "ended_at": "2026-11-14T18:25:13.410Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-root/native-extract-01/image-identity.stdout",
+          "sha256": "12f22d6ec9b555686fd4157aedffc053f0e78c7b0206c37c3ffa532e2d0e2984",
+          "bytes": 165
+        },
+        {
+          "file": "evidence/sprint05b-root/native-extract-01/image-identity.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "label": "create",
+      "program": "docker",
+      "args": [
+        "create",
+        "--name",
+        "aegis-05b-extract-2224210",
+        "--network",
+        "none",
+        "--entrypoint",
+        "/usr/local/bin/envoy",
+        "envoyproxy/envoy@sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded",
+        "--version"
+      ],
+      "started_at": "2026-11-14T18:25:13.411Z",
+      "ended_at": "2026-11-14T18:25:20.267Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-root/native-extract-01/create.stdout",
+          "sha256": "2caf8493044e60dd14f984b0636830672689552937d733030b0291cb261ef48c",
+          "bytes": 65
+        },
+        {
+          "file": "evidence/sprint05b-root/native-extract-01/create.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "label": "copy",
+      "program": "docker",
+      "args": [
+        "cp",
+        "aegis-05b-extract-2224210:/usr/local/bin/envoy",
+        "/home/tiecont/Projects/aegis-gate/.local/sprint05b-native/envoy"
+      ],
+      "started_at": "2026-11-14T18:25:20.267Z",
+      "ended_at": "2026-11-14T18:25:20.738Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-root/native-extract-01/copy.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "file": "evidence/sprint05b-root/native-extract-01/copy.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "label": "native-version",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/sprint05b-native/envoy",
+      "args": [
+        "--version"
+      ],
+      "started_at": "2026-11-14T18:25:20.985Z",
+      "ended_at": "2026-11-14T18:25:21.047Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-root/native-extract-01/native-version.stdout",
+          "sha256": "d4f3617963e0edc67307fa6cfa788e36e8c14b75a89d64e648a7b5aa3b5c618e",
+          "bytes": 148
+        },
+        {
+          "file": "evidence/sprint05b-root/native-extract-01/native-version.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "label": "dynamic-libraries",
+      "program": "ldd",
+      "args": [
+        "/home/tiecont/Projects/aegis-gate/.local/sprint05b-native/envoy"
+      ],
+      "started_at": "2026-11-14T18:25:21.047Z",
+      "ended_at": "2026-11-14T18:25:21.066Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-root/native-extract-01/dynamic-libraries.stdout",
+          "sha256": "6b1ae4b3414c8b0e6dda9431cfda936cbad5b9de13ba62bfad9d0c6099231e0c",
+          "bytes": 409
+        },
+        {
+          "file": "evidence/sprint05b-root/native-extract-01/dynamic-libraries.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "label": "cleanup",
+      "program": "docker",
+      "args": [
+        "rm",
+        "--force",
+        "aegis-05b-extract-2224210"
+      ],
+      "started_at": "2026-11-14T18:25:21.066Z",
+      "ended_at": "2026-11-14T18:25:21.163Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-root/native-extract-01/cleanup.stdout",
+          "sha256": "4412a51c6009ad261042bb8b91acce492485b86345909cda225b57fd68a527e8",
+          "bytes": 26
+        },
+        {
+          "file": "evidence/sprint05b-root/native-extract-01/cleanup.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "label": "remaining",
+      "program": "docker",
+      "args": [
+        "ps",
+        "-aq",
+        "--filter",
+        "name=^/aegis-05b-extract-2224210$"
+      ],
+      "started_at": "2026-11-14T18:25:21.163Z",
+      "ended_at": "2026-11-14T18:25:21.203Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05b-root/native-extract-01/remaining.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "file": "evidence/sprint05b-root/native-extract-01/remaining.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ]
+    }
+  ],
+  "binary": {
+    "file": "/home/tiecont/Projects/aegis-gate/.local/sprint05b-native/envoy",
+    "sha256": "1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc"
+  },
+  "complete": true,
+  "cleanup": {
+    "removal_exit": 0,
+    "absent": true,
+    "lock_held": true
+  },
+  "ended_at": "2026-11-14T18:25:21.203Z"
+}

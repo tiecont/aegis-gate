@@ -1,0 +1,130 @@
+34: //
+35: //   clusters:
+36: //     - name: some_service
+37: //       connect_timeout: 5s
+38: //       upstream_http_protocol_options:
+39: //         auto_sni: true
+40: //       common_http_protocol_options:
+41: //         idle_timeout: 1s
+42: //       http2_protocol_options:
+43: //         max_concurrent_streams: 100
+44: //        .... [further cluster config]
+45: //
+46: // Would now look like this:
+47: //
+48: // .. code::
+49: //
+50: //   clusters:
+51: //     - name: some_service
+52: //       connect_timeout: 5s
+53: //       typed_extension_protocol_options:
+54: //         envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
+55: //           "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
+56: //           upstream_http_protocol_options:
+57: //             auto_sni: true
+58: //           common_http_protocol_options:
+59: //             idle_timeout: 1s
+60: //           explicit_http_config:
+61: //             http2_protocol_options:
+62: //               max_concurrent_streams: 100
+63: //        .... [further cluster config]
+64: // [#next-free-field: 12]
+65: message HttpProtocolOptions {
+66:   // If this is used, the cluster will only operate on one of the possible upstream protocols.
+67:   // Note that HTTP/2 or above should generally be used for upstream gRPC clusters.
+68:   message ExplicitHttpConfig {
+69:     oneof protocol_config {
+70:       option (validate.required) = true;
+71: 
+72:       config.core.v3.Http1ProtocolOptions http_protocol_options = 1;
+73: 
+74:       config.core.v3.Http2ProtocolOptions http2_protocol_options = 2;
+75: 
+76:       config.core.v3.Http3ProtocolOptions http3_protocol_options = 3;
+77:     }
+78:   }
+79: 
+80:   // If this is used, the cluster can use either of the configured protocols, and
+81:   // will use whichever protocol was used by the downstream connection.
+82:   //
+83:   // If HTTP/3 is configured for downstream and not configured for upstream,
+84:   // HTTP/3 requests will fail over to HTTP/2.
+85:   message UseDownstreamHttpConfig {
+86:     config.core.v3.Http1ProtocolOptions http_protocol_options = 1;
+87: 
+88:     config.core.v3.Http2ProtocolOptions http2_protocol_options = 2;
+89: 
+90:     config.core.v3.Http3ProtocolOptions http3_protocol_options = 3;
+91:   }
+92: 
+93:   // If this is used, the cluster can use either HTTP/1 or HTTP/2, and will use whichever
+94:   // protocol is negotiated by ALPN with the upstream.
+95:   // Clusters configured with ``AutoHttpConfig`` will use the highest available
+96:   // protocol; HTTP/2 if supported, otherwise HTTP/1.
+97:   // If the upstream does not support ALPN, ``AutoHttpConfig`` will fail over to HTTP/1.
+98:   // This can only be used with transport sockets which support ALPN. Using a
+99:   // transport socket which does not support ALPN will result in configuration
+100:   // failure. The transport layer may be configured with custom ALPN, but the default ALPN
+101:   // for the cluster (or if custom ALPN fails) will be "h2,http/1.1".
+102:   message AutoHttpConfig {
+103:     config.core.v3.Http1ProtocolOptions http_protocol_options = 1;
+104: 
+105:     config.core.v3.Http2ProtocolOptions http2_protocol_options = 2;
+106: 
+107:     // Unlike HTTP/1 and HTTP/2, HTTP/3 will not be configured unless it is
+108:     // present, and only if there is an indication of server side
+109:     // support.
+110:     // See :ref:`here <arch_overview_http3_upstream>` for more information on
+111:     // when HTTP/3 will be used, and when Envoy will fail over to TCP.
+112:     config.core.v3.Http3ProtocolOptions http3_protocol_options = 3;
+113: 
+114:     // The presence of alternate protocols cache options causes the use of the
+115:     // alternate protocols cache, which is responsible for parsing and caching
+116:     // HTTP Alt-Svc headers. This enables the use of HTTP/3 for origins that
+117:     // advertise supporting it.
+118:     //
+119:     // .. note::
+120:     //   This is required when HTTP/3 is enabled.
+121:     config.core.v3.AlternateProtocolsCacheOptions alternate_protocols_cache_options = 4;
+122:   }
+123: 
+124:   message OutlierDetection {
+125:     // If specified, only responses matching the matcher will be treated by outlier detection as errors.
+126:     // If not specified, only 5xx codes are treated by outlier detection as errors.
+127:     config.common.matcher.v3.MatchPredicate error_matcher = 1
+128:         [(validate.rules).message = {required: true}];
+129:   }
+133: 
+134:   // This contains common protocol options which are only applied upstream.
+135:   config.core.v3.UpstreamHttpProtocolOptions upstream_http_protocol_options = 2;
+136: 
+137:   // This controls the actual protocol to be used upstream.
+138:   oneof upstream_protocol_options {
+139:     option (validate.required) = true;
+140: 
+141:     // To explicitly configure either HTTP/1 or HTTP/2 (but not both!) use ``explicit_http_config``.
+142:     ExplicitHttpConfig explicit_http_config = 3;
+143: 
+144:     // This allows switching on protocol based on what protocol the downstream
+145:     // connection used.
+146:     UseDownstreamHttpConfig use_downstream_protocol_config = 4;
+147: 
+148:     // This allows switching on protocol based on ALPN
+149:     AutoHttpConfig auto_config = 5;
+150:   }
+151: 
+152:   // Optional HTTP filters for the upstream HTTP filter chain.
+153:   //
+154:   // .. note::
+155:   //   Upstream HTTP filters are currently in alpha.
+156:   //
+157:   //
+158:   // These filters will be applied for all HTTP streams which flow through this
+159:   // cluster. Unlike downstream HTTP filters, they will *not* be applied to terminated CONNECT requests.
+160:   //
+161:   // If using upstream HTTP filters, please be aware that local errors sent by
+162:   // upstream HTTP filters will not trigger retries, and local errors sent by
+163:   // upstream HTTP filters will count as a final response if hedging is configured.
+164:   // [#extension-category: envoy.filters.http.upstream]
+165:   repeated filters.network.http_connection_manager.v3.HttpFilter http_filters = 6;
+166: 

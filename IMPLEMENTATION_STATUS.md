@@ -1,5 +1,40 @@
 # Implementation status
 
+## Sprint 05-B Execution / Module 01 NO-GO
+
+Baseline main `8758b1c84b4186449cd79fabae461ca53ee05100`, hosted
+`43620722442` passes both required jobs. Fresh exact-image native diagnostics
+at source `ff3f3fe` retain **73/75** original cases and **19/23** supplemental
+probes. Additive 17-control observations complete, including native RSS sampling;
+this native fixture lacks container cgroup memory/PID isolation and is not a
+complete runtime/resource eligibility proof. Original evaluators remain unchanged.
+
+The new in-process incremental llhttp 9.4.4 feasibility binding rejects exact
+historical folded inputs before origin admission. Source `95ded76`, wire run 06,
+also exercises fragmented input, valid targets/pipelines, bounded admission,
+trailers and cancellation. This is an isolated H1 capability, not an accepted
+production ingress boundary or an increase to the Envoy corpus PASS count.
+Independent streaming counterexample `eba8445` records 1,049,201 origin bytes
+before rejecting a late folded trailer when streaming; finite staging prevents
+those effects but waits for complete requests. H2 causal tracing attributes the
+unchanged nine-byte failure to origin SETTINGS/Envoy ACK on a valid reused pool.
+Supported H2 rejection-setting variants retain all four supplemental failures.
+
+Module 00/02/03 real fixture regressions pass locally and in F's clean-source
+serialized replay: 11 packages, 89 top-level tests, 151 subtests, zero skips;
+contracts/dashboard and private-image/stale-volume controls also pass. Independent
+F checkpoint `1d8769b` accepts scoped test tooling and fixture corrections,
+rejecting complete ingress eligibility and all six remaining failures. TCP
+readiness and package scheduling preserve existing assertions/timeouts. The first
+full check failed and remains retained. Corrected source `7725063`, tree
+`dcc33021cbac83a1f106b95d9ddd18ca5dfb1386`, passes full locked check/security-scan
+and cleanup/volume removal, all exit0 (`evidence/sprint05b-root/gates-02/`).
+Exact final-head hosted CI and merge receipts remain pending for PR19.
+No production or dependency replacement is introduced. See
+`docs/sprints/05b-execution.md` and `docs/reports/sprint05b-completion.md`.
+Module 01 remains NO-GO; 04-12 LOCKED; production BLOCKED. ADR-012 and actual
+human architecture/security owners/approval remain PENDING.
+
 ## Sprint05-A complete / Module01 NO-GO
 
 PR17 merged as `581a609df8c3c3a0ce62d75f4f58fa6db8f76816`, with exact

@@ -7,7 +7,7 @@ import { assertLock } from './wire-fixtures.mjs';
 
 process.umask(0o077); assertLock();
 const [output] = process.argv.slice(2);
-assert.match(output ?? '', /^evidence\/sprint05a-(?:root|f)\/candidate-\d+$/);
+assert.match(output ?? '', /^evidence\/sprint05[ab]-(?:root|f)\/candidate-\d+$/);
 assert.ok(!fs.existsSync(output));
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 8 << 20 }).trim();
 assert.equal(git('status', '--porcelain', '--untracked-files=no'), '');
@@ -25,6 +25,10 @@ const environment = { AEGIS_05A_D_POLICY: 'stream-errors',
   AEGIS_CANDIDATE_COMMAND: process.execPath,
   AEGIS_CANDIDATE_ARGS: JSON.stringify([path.resolve('spikes/envoy/sprint05a-a-launcher.mjs')]),
   AEGIS_CANDIDATE_ARTIFACTS: JSON.stringify(files.filter((f) => f.startsWith('spikes/envoy/')).map((f) => path.resolve(f))) };
+if (process.env.AEGIS_05B_NATIVE_BINARY) {
+  environment.AEGIS_05B_NATIVE_BINARY = path.resolve(process.env.AEGIS_05B_NATIVE_BINARY);
+  environment.AEGIS_05B_NATIVE_SHA256 = sha(fs.readFileSync(environment.AEGIS_05B_NATIVE_BINARY));
+}
 const record = { source_commit: git('rev-parse', 'HEAD'), source_tree: git('rev-parse', 'HEAD^{tree}'),
   source_clean: true, argv: process.argv, cwd: process.cwd(), started_at: new Date().toISOString(),
   node: process.version, node_binary_sha256: sha(fs.readFileSync(process.execPath)), environment,
@@ -52,6 +56,8 @@ try {
   const resultPath = original.stdout.toString().match(/^Evidence: (.+)$/m)?.[1];
   assert.ok(resultPath?.startsWith(fixture + '/'));
   const bytes = fs.readFileSync(resultPath); fs.writeFileSync(`${output}/original75.json`, bytes);
+  const proxyLog = path.join(path.dirname(resultPath), 'proxy.log');
+  if (fs.existsSync(proxyLog)) fs.copyFileSync(proxyLog, `${output}/proxy.log`);
   const result = JSON.parse(bytes); assert.ok(!result.fatal); assert.equal(result.tests.length, 75);
   record.original75 = { passed: result.tests.filter((t) => t.status === 'pass').length,
     failures: result.tests.filter((t) => t.status === 'fail').map((t) => ({ name: t.name, error: t.error, origin: t.origin })) };
@@ -66,18 +72,19 @@ try {
 finally {
   assertLock();
   try {
-    const ids = execFileSync('docker', ['ps', '-aq', '--filter', 'name=^/aegis-envoy-', '--filter', 'name=^/aegis-sprint05a-a-'],
-      { encoding: 'utf8' }).trim().split('\n').filter(Boolean);
+    const ids = [...new Set(['aegis-envoy-', 'aegis-sprint05a-a-'].flatMap((prefix) =>
+      execFileSync('docker', ['ps', '-aq', '--filter', `name=^/${prefix}`],
+        { encoding: 'utf8' }).trim().split('\n').filter(Boolean)))];
     const owned = [];
     for (const id of ids) {
       const mounts = JSON.parse(execFileSync('docker', ['inspect', '--format', '{{json .Mounts}}', id]));
       if (mounts.some((m) => m.Source.startsWith(path.resolve('.local') + '/'))) owned.push(id);
     }
     record.cleanup_stopped = owned;
-    for (const id of owned) run(`cleanup-${id}`, 'docker', ['stop', '--timeout', '2', id]);
+    for (const id of owned) run(`cleanup-${id}`, 'docker', ['rm', '--force', id]);
     for (const id of owned) assert.notEqual(spawnSync('docker', ['inspect', id], { stdio: 'ignore' }).status, 0, 'owned container retained');
     for (const entry of fs.readdirSync('.local')) {
-      if (!initial.has(entry) && /^(sprint05a-combined-|sprint05a-a-envoy-|envoy-run-)/.test(entry)) fs.rmSync(`.local/${entry}`, { recursive: true });
+      if (!initial.has(entry) && /^(sprint05a-combined-|sprint05a-a-envoy-|envoy-run-|sprint05b-native-run-)/.test(entry)) fs.rmSync(`.local/${entry}`, { recursive: true });
     }
     assert.ok(!fs.existsSync(fixture)); record.cleanup_complete = true;
   } catch (error) { record.cleanup_error = error.stack; complete = false; }

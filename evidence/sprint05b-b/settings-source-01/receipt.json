@@ -1,0 +1,162 @@
+{
+  "source_commit": "4171d99d51bcac65d669612ae0957dac712c4372",
+  "source_tree": "017aaf212f955039e13b38a42b59170b470baa9e",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05b-b/spikes/envoy/sprint05b-b-settings-source.mjs",
+    "evidence/sprint05b-b/settings-source-01"
+  ],
+  "node": "v26.13.0",
+  "started_at": "2026-11-14T18:30:30.184Z",
+  "files": [
+    {
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http2/codec_impl.h",
+      "status": 200,
+      "bytes": 41904,
+      "sha256": "98f46be10b514000d03c8d4436013818d36c952db5329fe14545d1ce739e0117"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/MODULE.bazel.lock",
+      "status": 200,
+      "bytes": 837931,
+      "sha256": "ab80a7371a68d0b52c7ca3e5990e2caa4f55dbb718c5597de8711d18a30c4b8b"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/envoyproxy/bazel-registry/8ef390e133ec41491e397681c91c30e9cda1395a/modules/nghttp2/1.66.0.envoy/source.json",
+      "status": 200,
+      "bytes": 1179,
+      "sha256": "9aeae96b83a7d38913a127bce69d80fbe16503b7c35c09cfa73cce5ba6eb007c"
+    },
+    {
+      "url": "https://github.com/nghttp2/nghttp2/releases/download/v1.66.0/nghttp2-1.66.0.tar.gz",
+      "status": 200,
+      "bytes": 2646134,
+      "sha256": "e178687730c207f3a659730096df192b52d3752786c068b8e5ee7aeb8edae05a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/envoyproxy/bazel-registry/8ef390e133ec41491e397681c91c30e9cda1395a/modules/nghttp2/1.66.0.envoy/patches/nghttp2.patch",
+      "status": 200,
+      "bytes": 531,
+      "sha256": "5d04d01f4109ceffba11929f0b319e341dc93c2b6195c06b684456e4eee8e4cf"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/envoyproxy/bazel-registry/8ef390e133ec41491e397681c91c30e9cda1395a/modules/nghttp2/1.66.0.envoy/patches/nghttp2_huffman.patch",
+      "status": 200,
+      "bytes": 9334,
+      "sha256": "76b38e9d451b30c29939bfcf484b2ce708101cfcfb3710bd37715b2369111ac9"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/envoyproxy/bazel-registry/8ef390e133ec41491e397681c91c30e9cda1395a/modules/nghttp2/1.66.0.envoy/patches/nghttp2_max_hd_nv.patch",
+      "status": 200,
+      "bytes": 3714,
+      "sha256": "3d32bda90f7cd2ac6fde00d3ce8d2279990b1b2bbfe21fe40dd9e9092553169b"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/envoyproxy/bazel-registry/8ef390e133ec41491e397681c91c30e9cda1395a/modules/nghttp2/1.66.0.envoy/patches/nghttp2-CVE-2026-27135_part1.patch",
+      "status": 200,
+      "bytes": 16776,
+      "sha256": "b8fe970c0ea60ebdce0f4ae44b33ab0b6bdb4ca26bca979682dd52528f73e30e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/envoyproxy/bazel-registry/8ef390e133ec41491e397681c91c30e9cda1395a/modules/nghttp2/1.66.0.envoy/patches/nghttp2-CVE-2026-27135_part2.patch",
+      "status": 200,
+      "bytes": 3385,
+      "sha256": "baab260e3cf446ac896e258e798ce5cce9bab10497ffc4b7ba7f8b19e1c5bb15"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/envoyproxy/bazel-registry/8ef390e133ec41491e397681c91c30e9cda1395a/modules/nghttp2/1.66.0.envoy/patches/nghttp2-CVE-2026-27135_part3.patch",
+      "status": 200,
+      "bytes": 1354,
+      "sha256": "ed073a4d6d965264b984b61d2533412735cb5c1d9f00b47090a3cf566678c5ce"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/envoyproxy/bazel-registry/8ef390e133ec41491e397681c91c30e9cda1395a/modules/nghttp2/1.66.0.envoy/patches/nghttp2-CVE-2026-27135_part4.patch",
+      "status": 200,
+      "bytes": 838,
+      "sha256": "3c7f1a07cb1b0c5779fffc6ba2a18973731a6110f021124a0a56f1b560ce9795"
+    }
+  ],
+  "patches": [
+    {
+      "name": "nghttp2.patch",
+      "sha256": "5d04d01f4109ceffba11929f0b319e341dc93c2b6195c06b684456e4eee8e4cf",
+      "paths": [
+        "+++ b/CMakeLists.txt\t2021-01-15 17:15:43.665745800 -0600"
+      ],
+      "settings_ack_symbol_mentions": []
+    },
+    {
+      "name": "nghttp2_huffman.patch",
+      "sha256": "76b38e9d451b30c29939bfcf484b2ce708101cfcfb3710bd37715b2369111ac9",
+      "paths": [
+        "+++ b/lib/includes/nghttp2/nghttp2.h",
+        "+++ b/lib/nghttp2_hd.c",
+        "+++ b/lib/nghttp2_hd.h",
+        "+++ b/lib/nghttp2_option.c",
+        "+++ b/lib/nghttp2_option.h",
+        "+++ b/lib/nghttp2_session.c"
+      ],
+      "settings_ack_symbol_mentions": []
+    },
+    {
+      "name": "nghttp2_max_hd_nv.patch",
+      "sha256": "3d32bda90f7cd2ac6fde00d3ce8d2279990b1b2bbfe21fe40dd9e9092553169b",
+      "paths": [
+        "+++ b/lib/includes/nghttp2/nghttp2.h",
+        "+++ b/lib/nghttp2_hd.h",
+        "+++ b/lib/nghttp2_hd.c",
+        "+++ b/lib/nghttp2_option.h",
+        "+++ b/lib/nghttp2_option.c",
+        "+++ b/lib/nghttp2_session.c"
+      ],
+      "settings_ack_symbol_mentions": []
+    },
+    {
+      "name": "nghttp2-CVE-2026-27135_part1.patch",
+      "sha256": "b8fe970c0ea60ebdce0f4ae44b33ab0b6bdb4ca26bca979682dd52528f73e30e",
+      "paths": [
+        "+++ b/tests/nghttp2_session_test.c",
+        "+++ b/tests/nghttp2_session_test.h"
+      ],
+      "settings_ack_symbol_mentions": []
+    },
+    {
+      "name": "nghttp2-CVE-2026-27135_part2.patch",
+      "sha256": "baab260e3cf446ac896e258e798ce5cce9bab10497ffc4b7ba7f8b19e1c5bb15",
+      "paths": [
+        "+++ b/lib/nghttp2_session.c"
+      ],
+      "settings_ack_symbol_mentions": []
+    },
+    {
+      "name": "nghttp2-CVE-2026-27135_part3.patch",
+      "sha256": "ed073a4d6d965264b984b61d2533412735cb5c1d9f00b47090a3cf566678c5ce",
+      "paths": [
+        "+++ b/lib/nghttp2_frame.c",
+        "+++ b/tests/nghttp2_frame_test.c"
+      ],
+      "settings_ack_symbol_mentions": []
+    },
+    {
+      "name": "nghttp2-CVE-2026-27135_part4.patch",
+      "sha256": "3c7f1a07cb1b0c5779fffc6ba2a18973731a6110f021124a0a56f1b560ce9795",
+      "paths": [
+        "+++ b/lib/nghttp2_session.c"
+      ],
+      "settings_ack_symbol_mentions": []
+    }
+  ],
+  "extraction": {
+    "program": "tar",
+    "args": [
+      "-xzOf",
+      "-",
+      "nghttp2-1.66.0/lib/nghttp2_session.c"
+    ],
+    "exit_code": 0,
+    "member_sha256": "33a007084426e93c486590334288b84b475a208263bbd3facc3ec3359db5d92d",
+    "archive_sha256": "e178687730c207f3a659730096df192b52d3752786c068b8e5ee7aeb8edae05a"
+  },
+  "exit_code": 0,
+  "ended_at": "2026-11-14T18:30:35.088Z"
+}

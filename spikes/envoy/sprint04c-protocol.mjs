@@ -12,6 +12,7 @@ import { setTimeout as delay } from 'node:timers/promises';
 import { frame } from './wire-observer.mjs';
 import { observedOrigin, traceFrames, identity } from './sprint04c-observer.mjs';
 import { assertLock, pki, listen, freePort, until } from './wire-fixtures.mjs';
+import { nativeResource } from './sprint05b-native-resource.mjs';
 
 const require = createRequire(new URL('../pingora/package.json', import.meta.url));
 const { WebSocket, WebSocketServer } = require('ws'); const grpc = require('@grpc/grpc-js');
@@ -84,6 +85,7 @@ async function rawCase(bytes, settled) {
   } finally { local = true; s.destroy(); }
 }
 function resource() {
+  if (process.env.AEGIS_05B_NATIVE_BINARY) return nativeResource(`${output}.proxy.log`);
   const name = `aegis-envoy-${child.pid}`;
   const pid = Number(execFileSync('docker', ['inspect', '--format', '{{.State.Pid}}', name], { encoding: 'utf8', timeout: 1000 }).trim());
   const status = fs.readFileSync(`/proc/${pid}/status`, 'utf8');
