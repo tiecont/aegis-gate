@@ -41,7 +41,8 @@ mutations. A subsequent naming correction calls this only
 false. This is a narrower correlation check, not a security PASS.
 Mutations omit handler/trace/identity/dial/HEADERS, duplicate probe identity,
 forge/late-change final status, truncate/lose capture or invalidate its MAC.
-The full original observer suite retains incomplete/forbidden request effects,
+Reverse traffic also undergoes bounded maintained frame/HPACK parsing, adding
+a12th deliberately truncated reverse-capture mutation. The original observer suite retains incomplete/forbidden request effects,
 HPACK stateful/dynamic references, missing and reordered events and prior four
 false-PASS regressions. Fresh source/receipt results follow actual execution.
 

@@ -61,12 +61,18 @@ func runtimeMAC(e runtimeEvidence, key []byte) string {
 	return hex.EncodeToString(h.Sum(nil))
 }
 
-func runtimeHeaders(rawHex string, field string) (map[string]uint32, error) {
+func runtimeHeaders(rawHex string, field string, client bool) (map[string]uint32, error) {
 	raw, err := hex.DecodeString(rawHex)
-	if err != nil || len(raw) < len(http2.ClientPreface) || !bytes.Equal(raw[:len(http2.ClientPreface)], []byte(http2.ClientPreface)) {
-		return nil, fmt.Errorf("missing captured H2 preface")
+	if err != nil || len(raw) > maxBytes {
+		return nil, fmt.Errorf("invalid or oversized raw H2 capture")
 	}
-	fr := http2.NewFramer(io.Discard, bytes.NewReader(raw[len(http2.ClientPreface):]))
+	if client {
+		if len(raw) < len(http2.ClientPreface) || !bytes.Equal(raw[:len(http2.ClientPreface)], []byte(http2.ClientPreface)) {
+			return nil, fmt.Errorf("missing captured H2 preface")
+		}
+		raw = raw[len(http2.ClientPreface):]
+	}
+	fr := http2.NewFramer(io.Discard, bytes.NewReader(raw))
 	fr.SetMaxReadFrameSize(65536)
 	fr.ReadMetaHeaders = hpack.NewDecoder(4096, nil)
 	fr.MaxHeaderListSize = 16384
@@ -116,10 +122,13 @@ func assessRuntime(e runtimeEvidence, key []byte) runtimeAssessment {
 		} else if w.ID != "upstream" {
 			fail("unattributed dial")
 		}
-		m, err := runtimeHeaders(w.To, field)
+		m, err := runtimeHeaders(w.To, field, true)
 		if err != nil {
 			fail(err.Error())
 			continue
+		}
+		if _, err := runtimeHeaders(w.From, "", false); err != nil || w.From == "" {
+			fail("missing/truncated reverse capture")
 		}
 		if w.ID == "downstream" {
 			r.DownstreamStreams = m
@@ -363,7 +372,7 @@ func TestSprint05DRuntimeDerivedMappings(t *testing.T) {
 	}
 	b, _ := json.Marshal(assessment)
 	t.Log(string(b))
-	for _, kind := range []string{"missing-handler", "missing-trace", "duplicate-probe", "forged-decision", "late-rejection", "missing-identity", "lost-capture", "truncated-capture", "omitted-dial", "tampered-MAC", "missing-header-block"} {
+	for _, kind := range []string{"missing-handler", "missing-trace", "duplicate-probe", "forged-decision", "late-rejection", "missing-identity", "lost-capture", "truncated-capture", "truncated-reverse", "omitted-dial", "tampered-MAC", "missing-header-block"} {
 		t.Run(kind, func(t *testing.T) {
 			copyBytes, _ := json.Marshal(e)
 			var bad runtimeEvidence
@@ -385,6 +394,8 @@ func TestSprint05DRuntimeDerivedMappings(t *testing.T) {
 				bad.Wires[0].Lost = true
 			case "truncated-capture":
 				bad.Wires[1].To = bad.Wires[1].To[:len(bad.Wires[1].To)-2]
+			case "truncated-reverse":
+				bad.Wires[1].From = bad.Wires[1].From[:len(bad.Wires[1].From)-2]
 			case "omitted-dial":
 				bad.Wires = bad.Wires[:1]
 			case "missing-header-block":
