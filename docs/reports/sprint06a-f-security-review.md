@@ -82,5 +82,32 @@ Exact command (from the F worktree):
 env TMPDIR=/home/tiecont/.cache/aegisgate-06a/f/.local/tmp GOAMD64=v1 GOTOOLCHAIN=local flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint06a-f-review.mjs 406d560 evidence/sprint06a-f/d-independent-01
 ```
 
-C/A/B/E and final integration gates remain pending review; no ACCEPT or
-production eligibility is inferred.
+**C ACCEPT**, exact source `2788cd6`, offline verifier `4d3b6fa` and reviewed
+tree `45c1a7b`, for the bounded official release/API stop and vector packaging.
+F clean capture `c-independent-01` (reviewer source `60b398d`) exits0: both
+official audits independently verify40 artifact hashes and40 raw child streams,
+source/tree bindings and metadata for Envoy1.40.2 and llhttp9.4.4. Their official
+release tag references match the already reviewed source commits. Both raw
+captures explicitly say no fresh runtime, full75/23 or qualifying repair.
+The writer's unchanged offline verifier also exits0 and materializes five exact
+vectors. F audits all immutable reference hashes and original H1 wire bytes/
+rejection contract. All11 protected pins and all tracked bytes match afterward;
+the private clean stage is removed under lock. No network/protocol replay occurs.
+
+The optional replay is source-reviewed only: it requires an explicit synthetic
+fixture on127.0.0.1, verified TLS and bounded byte/time limits. Its result keeps
+security_pass=false, original_evaluator_executed=false and
+origin_capture_complete=false. The userinfo branch reports maintained-session
+status/reset but does not capture complete bidirectional wire. Deadline/capture
+flags must be read; exit0 alone is not acceptance. This is a diagnostic helper,
+not a full maintainer-ready end-to-end proof or repaired acceptance oracle.
+Later Go/x-net official metadata and final C report remain subject to review.
+
+Exact command:
+
+```sh
+env TMPDIR=/home/tiecont/.cache/aegisgate-06a/f/.local/tmp flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint06a-f-review.mjs 45c1a7b evidence/sprint06a-f/c-independent-01 c
+```
+
+A/B/E and final integration gates remain pending review; no production
+eligibility is inferred.
