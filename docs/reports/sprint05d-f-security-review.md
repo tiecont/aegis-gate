@@ -59,6 +59,18 @@ signer, authoritative dispatcher, HPACK mutation or signed snapshot proof.
 F also tests whether syntactically valid control-only reverse capture or a raw
 200 paired with an asserted421 can pass the narrower consistency check.
 
+F `d-independent-02` at `57f2f8f` reproduces corrected D `c367fb7`:
+exact full proof0; swap/duplicate/omitted-upstream-probe negatives now PASS
+(rejected as inconsistent) with the truthful positive PASS. Two new negatives
+FAIL: control-only reverse capture and downstream raw200 for the asserted421
+remain `CorrelationConsistent:true`. Syntactic reverse frame parsing does not
+bind captured `:status`/response streams to decisions. RuntimePass stays false.
+Root should validate final response headers/status against raw downstream
+stream IDs and accepted upstream stream IDs; a SETTINGS-only capture must not
+stand in for responses. Evidence is complete with11 protected files and all
+tracked bytes unchanged, private stage absent. These are bounded research
+consistency findings, not an active runtime bypass or a contract waiver.
+
 Second A reproduction preserves the same22-probe driver failure. Initial F
 extra controls pass exact1.5MiB request/2MiB aggregate/three-file boundaries,
 truncated GCM and injected ENOSPC release, then hit an F negative setup error:
