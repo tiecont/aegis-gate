@@ -2,8 +2,9 @@
 
 Status: scoped independent A/B/C/D/E component review complete, all final tracks
 ACCEPT within the limits below. Exact local integration gates PASS at
-`c4a2fc529688ef53ef213e07a6567aeab3fe4fcf`; sanitized export and hosted delivery
-review remain pending at this checkpoint.
+`c4a2fc529688ef53ef213e07a6567aeab3fe4fcf`; sanitized export and delivery source
+`8e141321650f86195ec7008c4c6c476d6f2665e6` also ACCEPT. Hosted PR/main delivery
+remains root's pending responsibility.
 Module01 NO-GO; Modules04-12 LOCKED; production BLOCKED. RuntimeComplete and
 RuntimePass remain false. These component verdicts issue no architecture signoff.
 
@@ -350,15 +351,60 @@ Exact successful postgate audit:
 env TMPDIR=/home/tiecont/.cache/aegisgate-06a/f/.local/tmp flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint06a-f-integration-audit.mjs c4a2fc529688ef53ef213e07a6567aeab3fe4fcf evidence/sprint06a-f/integration-audit-02 /home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates evidence/sprint06a-root/gates-03
 ```
 
-Sanitized derivative verification and exact final root delivery-head review
-remain pending until root supplies committed artifacts. Hosted PR/main jobs,
-pushes and merges remain root's responsibility. No architecture/security human
-signoff is issued by this scoped independent review.
+Sanitized derivative verification and root delivery-head review are completed
+below. Hosted PR/main jobs, pushes and merges remain root's responsibility.
+No architecture/security human signoff is issued by this scoped review.
+
+### Export And Delivery Review
+
+**ACCEPT scoped export/delivery source**
+`8e141321650f86195ec7008c4c6c476d6f2665e6`, tree
+`3998c48d5e0f400493c287403fedbdece9245eba`. F `export-audit-03`, committed
+collector source `c618118`, verifies the exact included reviewer bytes against
+`6ddf44f3a93abdebe811a1894678f8abca0e347f`. All139 file changes since gated
+`c4a2fc5` are identical reviewed F tooling/evidence/report or root delivery
+documents/evidence; the gated implementation stays unchanged. New F collectors
+only enforce source/environment/bootstrap/history/count/export evidence. No
+dependency, authorization/TLS, scanner/workflow, parser, schema, oracle or
+effective architecture changes are introduced after the successful gates.
+
+The committed `evidence/sprint06a-root/gates-03` derivative binds all59 original
+input file digests, independently matches57 content files and validates59
+manifest artifacts. The declared0 redactions are independently reproduced.
+Original command receipt digest remains
+`20c3834169d6acd20db5bd9f98b38bc333bbd35f5adf1840723206b0623c484e`.
+Normalized exported command records are byte-for-byte structurally equal to
+the original records except declared export metadata and stream digest/path
+fields; exits, source/tree and cleanup outcomes are preserved. Raw artifacts
+remain in the isolated candidate clone. Earlier export source `84ac7ea` also
+passes `export-audit-02` with identical exported bytes.
+
+`export-audit-01` retains an F harness allowlist failure before raw checks:
+it omitted the already root-owned `docs/sprints/06a-execution.md`. Reviewing
+the13-line executed-checkpoint update finds only accurate completed gates,
+retained failures and pending delivery/architecture claims. Corrected collector
+`c618118` allows this fourth orchestration document and both fresh audits pass.
+This harness omission is not a candidate security defect or a suppressed scan.
+
+Root completion/status/risk/execution documents accurately retain original
+73/75 and19/23, Module01 NO-GO,04-12 LOCKED, production BLOCKED and inactive
+PENDING architecture. Their local gate/count/history/export claims match the
+actual receipts; final hosted PR/main jobs are still explicitly pending. F's
+`final-audit-03`, reviewer `329c3f4`, separately verifies all then-current F
+files with pinned offline Gitleaks: empty findings, protected pins unchanged,
+private audit stage removed. Subsequent export-only source changes are reviewed
+above; a final file audit is recorded separately before handoff.
+
+Exact final export command:
+
+```sh
+env TMPDIR=/home/tiecont/.cache/aegisgate-06a/f/.local/tmp flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint06a-f-export-audit.mjs 8e14132 evidence/sprint06a-root/gates-03 /home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates/evidence/sprint06a-root/gates-03 evidence/sprint06a-f/export-audit-03 6ddf44f
+```
 
 ## Agent Completion Report
 
 - Module: Sprint06A F independent review; existing00/02/03 regressions.
-- Status: partial pending sanitized export/final delivery-head review; component and exact local integration review complete.
+- Status: complete for scoped component, exact local integration, sanitized export and delivery source review through `8e14132`; final hosted delivery remains root's responsibility.
 - Commits / files changed: F branch through this report, restricted to new `scripts/sprint06a-f-*`, `evidence/sprint06a-f/` and this report. Exact executed source/evidence commits are bound above and in receipts.
 - Architecture/ADR decisions: accepted inactive proposal only; Module01 NO-GO,04-12 LOCKED, production BLOCKED; RuntimeComplete/RuntimePass=false.
 - Contracts changed: none effective; original75/23,11 pins, snapshot v1 and aggregate H2 contract retained.
