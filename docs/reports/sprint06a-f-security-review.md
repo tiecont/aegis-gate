@@ -1,7 +1,9 @@
 # Sprint06A F Independent Security Review
 
 Status: scoped independent A/B/C/D/E component review complete, all final tracks
-ACCEPT within the limits below. Full exact integration gates remain pending.
+ACCEPT within the limits below. Exact local integration gates PASS at
+`c4a2fc529688ef53ef213e07a6567aeab3fe4fcf`; sanitized export and hosted delivery
+review remain pending at this checkpoint.
 Module01 NO-GO; Modules04-12 LOCKED; production BLOCKED. RuntimeComplete and
 RuntimePass remain false. These component verdicts issue no architecture signoff.
 
@@ -229,8 +231,140 @@ Pinned offline Gitleaks scans F files and reviewed changed component sources:
 empty findings. Private audit stage is removed under lock. Later A/final gate
 sources and integration receipts are audited separately.
 
-Full exact integration gates remain pending. F's new
+The preceding component checkpoint left exact integration gates pending. F's new
 `scripts/sprint06a-f-gates.mjs` records source/tree, binary identities, raw
 SHA256/exit evidence, scanner semantic results, private cleanup, all tracked
 source hashes and unchanged oracle pins. No local full-gate PASS is asserted
 before actual execution on the root-supplied reviewed integration candidate.
+
+## Exact Integration Review
+
+**ACCEPT local integration** source
+`c4a2fc529688ef53ef213e07a6567aeab3fe4fcf`, tree
+`db9756b581b3afc70de2a514ebb17bb50a9c7dcb`, within the unchanged research scope.
+Fresh `gate-run-03`, reviewer source `4bee73d`, exits0: exact-source bootstrap,
+full `make check`, `make security-scan`, `make dev-down` and Compose volume
+cleanup all exit0. All58 raw manifest artifacts and child streams verify.
+Gate receipt SHA256 is
+`20c3834169d6acd20db5bd9f98b38bc333bbd35f5adf1840723206b0623c484e`;
+F collector SHA256 is
+`b5b2548b190ceb044061fdce366a5c94c74e2b98237d37063cbff8eded8fc199`.
+All9914 tracked file hashes and11 protected pins match before/after; HEAD stays
+exact. Private evidence comparison finds0 matches. Every generated private
+path is removed, and independent postchecks find no fixture containers,
+networks or volumes. No unrelated private material is removed.
+
+Actual Rust/Go/npm scans, pinned filesystem/Envoy/four fixture-image scans,
+SBOMs, image identity checks and scanner negative selftests PASS. The six
+vulnerability JSON reports contain0 HIGH/CRITICAL findings. Worktree and full
+candidate-history Gitleaks reports are empty. This is actual local gate evidence,
+not a production acceptance or a hosted-job result.
+
+Exact successful command from the F worktree:
+
+```sh
+env PATH=/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin:/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin:/home/tiecont/.cargo/bin:/usr/local/bin:/usr/bin:/bin TMPDIR=/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates/.local/tmp GOAMD64=v1 GOTOOLCHAIN=local GOFLAGS=-v flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint06a-f-gates.mjs /home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates c4a2fc529688ef53ef213e07a6567aeab3fe4fcf evidence/sprint06a-f/gate-run-03 evidence/sprint06a-root/gates-03 /home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates/.local/sprint06a-f-bootstrap-03
+```
+
+The fresh bootstrap executes the unchanged `scripts/sprint05a-receipt.mjs
+evidence/sprint06a-root/bootstrap-03 make bootstrap` under the same fixture
+flock, pinned PATH/GOAMD64 and disk TMPDIR. Its receipt and raw streams are
+preserved under the final absolute bootstrap directory above and independently
+hash-bound in `gate-run-03/receipt.json`. Full raw gate artifacts remain at
+the candidate clone's `evidence/sprint06a-root/gates-03`; only an explicitly
+sanitized derivative may be published by root.
+
+### Actual Module Coverage
+
+The unchanged full gate's Go race commands now emit verbose evidence through
+recorded `GOFLAGS=-v`; selection, assertions, deadlines and fixture policies are
+unchanged. Per-phase results are not added together as distinct tests:
+
+| Phase | Top-Level PASS | Subtest PASS | Top-Level SKIP | Subtest SKIP |
+| --- | --- | --- | --- | --- |
+| Unit before live fixture startup |67|131|22|10|
+| Real serialized integration, count1 |27|37|0|0|
+| Negative / local PKI, count1 |30|83|4|0|
+
+`integration-audit-02`, reviewer `62d9225`, binds the actual gate receipt and
+check stdout SHA256, associates emitted test outcomes with their real package
+summary and deduplicates package/test names across all three phases. It finds
+11 exercised packages,89 unique top-level and151 unique subtests PASS, with
+0 remaining unexecuted skips. The32 unique unit-phase skipped tests/subtests
+are resolved only by an observed PASS in the subsequent live fixture phase;
+unit-only skips are not hidden or reported as executed. Modules00/02/03 retain
+local PASS. These are regressions of existing modules, not complete Module01
+runtime acceptance.
+
+### Retained Gate Failures
+
+`gate-run-01` is INVALID and exits1. Root changed clone HEAD from authorized
+`2bacc023` to `c4a2fc5` after the run started. The source inventory postcheck
+detects the change. Check exits0, scan exits2, cleanup/volume cleanup exit0.
+An additional real setup failure prevents the history scanner from resolving
+shared Git object alternates outside its container mounts. No PASS from this
+mixed-source run is accepted. Its explicit `invalidation.json`, wrapper raw
+streams and receipt are retained. The original raw directory is preserved at
+`/home/tiecont/Projects/aegis-gate/.local/sprint06a-gates/.local/sprint06a-f-invalid-gates-01`.
+
+The supported metadata repair repacks Git objects, preserves the old alternates
+file and verifies `git fsck --full --no-dangling` exit0. No runtime, scanner,
+mount, credential policy or source file changes. `integration-audit-01` proves
+the repaired clone retains all888 reachable commits and the exact original
+backing-store object inventory, with no missing history.
+
+`gate-run-02` is an honest scan FAIL on exact unchanged `c4a2fc5`: check0,
+scan2, both cleanup commands0; source/11 pins intact and private matches0.
+Its broad clone has copied root's abandoned local branch refs. Two historical
+Gitleaks findings belong to unmerged Sprint04C revisions: `cd8f4a7` in
+`evidence/sprint04c-integration-audit/final-source.mjs:243` (`private-key`) and
+`5515913` in `evidence/sprint04c-e/attempt-01/stdout.log:114` (`jwt`). No matched
+value is reproduced here. Both `git merge-base --is-ancestor FINDING c4a2fc5`
+commands actually exit1. `failure-scope.json` records the containing refs and
+outcomes. That clone and its raw failed scan are preserved without ref deletion.
+
+The separately authorized fresh clone uses `git clone --no-local --single-branch
+--no-tags --branch sprint/06a-integration`, retaining the complete deliverable
+history as an isolated hosted checkout does. It has no object alternates.
+`integration-audit-02` proves all750 candidate ancestors and9260 reachable
+objects exactly match the original source's candidate graph and backing object
+database; `git fsck` exits0. The unchanged history scanner still uses `--all`
+and scans all750 commits, returning an empty report. No ignore, suppression,
+history rewrite, archived-ref removal or scanner bypass is introduced.
+
+### Source And Document Mapping
+
+Both integration audits verify703 changed file byte mappings against the exact
+accepted A/B/C/D/E/F sources. The only three edits to existing executable
+collectors are their reviewed06a evidence namespace extensions. Dependency
+locks, workflow/scanner policy, infrastructure, accepted snapshot schema,
+authorization/TLS and historical evaluator/corpus remain unchanged. Root's
+four orchestration/status/risk/completion documents preserve Outcome B,
+original73/75 and19/23, executed streaming FAIL, runtime incompleteness,
+inactive/PENDING architecture and explicit pending hosted delivery. No new
+runtime comparison or component-suite rerun is used to fill a missing claim.
+
+Exact successful postgate audit:
+
+```sh
+env TMPDIR=/home/tiecont/.cache/aegisgate-06a/f/.local/tmp flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint06a-f-integration-audit.mjs c4a2fc529688ef53ef213e07a6567aeab3fe4fcf evidence/sprint06a-f/integration-audit-02 /home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates evidence/sprint06a-root/gates-03
+```
+
+Sanitized derivative verification and exact final root delivery-head review
+remain pending until root supplies committed artifacts. Hosted PR/main jobs,
+pushes and merges remain root's responsibility. No architecture/security human
+signoff is issued by this scoped independent review.
+
+## Agent Completion Report
+
+- Module: Sprint06A F independent review; existing00/02/03 regressions.
+- Status: partial pending sanitized export/final delivery-head review; component and exact local integration review complete.
+- Commits / files changed: F branch through this report, restricted to new `scripts/sprint06a-f-*`, `evidence/sprint06a-f/` and this report. Exact executed source/evidence commits are bound above and in receipts.
+- Architecture/ADR decisions: accepted inactive proposal only; Module01 NO-GO,04-12 LOCKED, production BLOCKED; RuntimeComplete/RuntimePass=false.
+- Contracts changed: none effective; original75/23,11 pins, snapshot v1 and aggregate H2 contract retained.
+- Positive tests executed (exact commands + outcome): exact component commands above; full locked collector command above exits0,67 finite container controls/F29 attacks and B real signed/TLS replay pass within scope; full existing module coverage11 packages/89 top-level/151 subtests with0 unexecuted skips.
+- Security negative tests executed (exact commands + outcome): corrected D/F attacks and B signed binding challenges above; full negative phase30 top-level/83 subtests PASS, unit integration skips resolved by actual live tests; real security scan PASS on all750 candidate ancestors. Initial D rejection and both failed integration captures retained.
+- Performance data: actual bounded lab resource failure/recovery only, as recorded for A; no production throughput/latency/availability/fairness SLO claim.
+- Known risks and release blockers: streaming, complete H1/H2 runtime, unified pre-stage signed authority, production custody/SSRF/JWKS and authoritative pre-wire attribution remain unresolved. Exact final head/main hosted gates and human architecture/security review remain required.
+- Human review needed: named architecture/security owners, explicit versioned decision and production release requirements; none fabricated.
+- Next unblocked module(s): scoped approved research and delivery review only;04-12 remain locked.
