@@ -1,5 +1,29 @@
 # Implementation status
 
+## Sprint 05-D Decision Boundary / Module 01 NO-GO
+
+Baseline aa289da. Isolated complete-message H1 admission now validates CL EOF
+and late trailers before origin admission using maintained incremental llhttp
+and finite encrypted staging. Independent A29/F23 controls pass; mandatory
+pre-completion origin progress remains FAIL. No complete H1/H2 runtime is
+accepted and original scores remain73/75 and19/23, reused immutably rather
+than rerun without a credible repair. Both exact userinfo negatives still
+receive peer RST1 instead of400/421. The inspected released codec offers no
+supported post-error serialization hook for a non-regressing frame repair.
+
+Bounded real TLS/H2 correlation now checks unique captured probe/nonce streams
+and completed response status after F found four false-consistency defects.
+Independent adversarial replay passes; full runtime attribution remains
+INCOMPLETE. Actual00/02/03 regressions pass11 packages/89 top-level/151 subtests,
+zero skips. Root/F final integration local/hosted delivery gates are pending,
+tracked in `docs/reports/sprint05d-completion.md`.
+
+The versioned ADR012 v2 package is PROPOSED, NOT EFFECTIVE. It recommends an
+explicit finite-versus-streaming decision and authoritative causal H2
+instrumentation before considering any contract revision. Human owners and
+approval remain PENDING. No equivalent feasibility loop starts automatically.
+01 NO-GO;04-12 LOCKED;production BLOCKED.
+
 ## Sprint 05-C Reviewed Integration / Module 01 NO-GO
 
 PR21 merged as `22f6986713711a49de622ce9b6fb097ad31c26ef`; final reviewed head

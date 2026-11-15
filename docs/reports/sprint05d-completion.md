@@ -19,11 +19,11 @@ Root protected receipt: `evidence/sprint05d-root/baseline/`.
 
 | Track / branch | Executed source and result | Review/delivery |
 | --- | --- | --- |
-| A feat/sprint05d-admission-policy | 3a709ae finite encrypted complete-message H1 stage,29 controls; streaming FAIL | Independent driver correction/reproduction in progress |
-| B fix/sprint05d-h2-identity-status | Supported pre-reset HTTP-response hook search and exact userinfo capture | Final source/report pending |
-| C fix/sprint05d-h2-frame-rejection | 3474579 source/API audit; final5bc9489; no supported post-error adapter-send hook | F review pending |
-| D test/sprint05d-origin-isolation | a532ea2 real verified TLS/H2 trace,14 mutation controls/full race PASS; c367fb7 evidence | Independent correlation correction replay pending |
-| E test/sprint05d-runtime-regression | 01fdaac real fixtures; f155927 report/evidence; all28 commands0 | F review pending |
+| A feat/sprint05d-admission-policy | 2d50c65 corrected quota driver; finala005a23;29 controls; streaming FAIL | F7894cef clean A29/F23 PASS, scoped ACCEPT |
+| B fix/sprint05d-h2-identity-status | 62d8a90 exact five-body diagnostic; two userinfo FAIL/three controls PASS | Final044afc6 report; F clean offline verification ca27107 |
+| C fix/sprint05d-h2-frame-rejection | 3474579 source/API audit; final5bc9489; no supported post-error adapter-send hook | F3172979 scoped ACCEPT |
+| D test/sprint05d-origin-isolation | 6bc71e8 response/nonce-corrected real TLS/H2 correlation; final661f0d5 | F3763052 full race/13 adversarial mutations PASS, scoped ACCEPT |
+| E test/sprint05d-runtime-regression | 01fdaac real fixtures; f155927 report/evidence; all28 commands0 | F3172979 source/retained-evidence ACCEPT; full fresh gate replay pending |
 | F review/sprint05d-security | Clean-source builds and independent attacks | Final verdict pending |
 | Root sprint/05d-integration | 619d883 ownership; 1ff79f3 evidence namespace; 30c9019 proposed ADR | Integration/gates/PR pending |
 
@@ -81,7 +81,8 @@ counterexamples for the tested request types, not universal protocol impossibili
 Limits:1.5MiB wire/message,2MiB aggregate ciphertext,3 stage files,24KiB headers,
 6 connections,2 active origin slots/2 waiters,700ms idle/handshake,2500ms request,
 1800ms origin. Size/timeout/quota outcomes are413/408/503; malformed framing400.
-Exact quota boundaries and recovery require independent F validation. Hard
+F independently validates exact quota boundaries, recovery, unsafe orphan
+objects, ENOSPC and TLS/identity negatives. Hard
 process RSS, cgroup isolation, same-UID mutation resistance, production key
 custody, signed route policy, H2/WS/gRPC integration remain unproved. Indefinite
 streaming is not supplied by finite staging. See A report for raw measurements.
@@ -108,7 +109,10 @@ in the bounded fixture. Whole-capture authentication, capture caps/loss state,
 reader joins, generated nonces and observed stream bindings improve diagnostics.
 An adversarial reverse-payload EOF initially passed and was corrected. F then
 found swapped/duplicate nonces accepted as consistent; same-stream probe/nonce
-and uniqueness checks correct that narrower claim, pending independent replay.
+and uniqueness checks correct that narrower claim. F then detects control-only
+reverse capture and raw200/asserted421 false consistency; completed per-stream
+raw response-status validation corrects both. F's honest control and13 mutations
+pass at6bc71e8, including all four independent findings.
 All failed receipts remain retained. Full RuntimeComplete/RuntimePass/Module01Pass
 always remain false: no authoritative pre-wire dispatch hook, signed generation,
 exact HPACK mutation trace or trustworthy complete production capture exists.
