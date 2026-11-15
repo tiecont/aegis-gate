@@ -32,7 +32,7 @@ func block(t *testing.T) []byte {
 	return b.Bytes()
 }
 func request(id string, stream uint32, rejected bool) Event {
-	return Event{Kind: "request", Request: id, Downstream: "downstream-1", DownStream: stream, Identity: fixtureIdentity, TLSVerified: true, Rejected: rejected}
+	return Event{Kind: "request", Request: id, Downstream: "downstream-1", DownStream: stream, Identity: fixtureIdentity, TLSVerified: true, Rejected: rejected, FinalDecision: true}
 }
 func binding(id string, stream uint32) Event {
 	return Event{Kind: "bind", Connection: "origin-1", Request: id, Downstream: "downstream-1", DownStream: stream, Stream: stream, Identity: fixtureIdentity}
@@ -100,7 +100,7 @@ func TestNoEffects(t *testing.T) {
 }
 
 func TestLateRejectionRetainsEarlierOriginEffects(t *testing.T) {
-	e := capture(t, Event{Kind: "handler", Connection: "origin-1", Stream: 1, Request: "valid"}, Event{Kind: "decision", Request: "valid", Rejected: true})
+	e := capture(t, Event{Kind: "handler", Connection: "origin-1", Stream: 1, Request: "valid"}, Event{Kind: "decision", Request: "valid", Rejected: true, FinalDecision: true})
 	r := inspect(t, e)
 	if r.Research.Pass || len(r.Research.Violations) < 3 {
 		t.Fatalf("late invalidation hidden: %+v", r)
@@ -221,6 +221,16 @@ func TestFragmentedHPACKAndBounds(t *testing.T) {
 	if r.Research.Pass {
 		t.Fatal("byte limit accepted")
 	}
+}
+
+func TestMissingFinalDecisionCannotPass(t *testing.T) {
+	e := capture(t)
+	e[0].FinalDecision = false
+	r := inspect(t, e)
+	if r.Research.Pass || r.Current.Pass {
+		t.Fatal("missing decision accepted")
+	}
+	record(t, r)
 }
 
 func TestStatefulDynamicTableReferences(t *testing.T) {

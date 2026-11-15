@@ -25,20 +25,21 @@ type Identity struct {
 	OriginSNI  string `json:"verified_origin_sni"`
 }
 type Event struct {
-	Sequence    int      `json:"sequence"`
-	Kind        string   `json:"kind"`
-	Connection  string   `json:"origin_connection"`
-	Direction   string   `json:"direction,omitempty"`
-	Request     string   `json:"request,omitempty"`
-	Downstream  string   `json:"downstream_connection,omitempty"`
-	DownStream  uint32   `json:"downstream_stream,omitempty"`
-	Stream      uint32   `json:"upstream_stream,omitempty"`
-	Identity    Identity `json:"identity"`
-	Rejected    bool     `json:"rejected,omitempty"`
-	TLSVerified bool     `json:"tls_verified,omitempty"`
-	Hex         string   `json:"raw_hex,omitempty"`
-	Reason      string   `json:"reason,omitempty"`
-	MAC         string   `json:"mac"`
+	Sequence      int      `json:"sequence"`
+	Kind          string   `json:"kind"`
+	Connection    string   `json:"origin_connection"`
+	Direction     string   `json:"direction,omitempty"`
+	Request       string   `json:"request,omitempty"`
+	Downstream    string   `json:"downstream_connection,omitempty"`
+	DownStream    uint32   `json:"downstream_stream,omitempty"`
+	Stream        uint32   `json:"upstream_stream,omitempty"`
+	Identity      Identity `json:"identity"`
+	Rejected      bool     `json:"rejected,omitempty"`
+	FinalDecision bool     `json:"final_decision"`
+	TLSVerified   bool     `json:"tls_verified,omitempty"`
+	Hex           string   `json:"raw_hex,omitempty"`
+	Reason        string   `json:"reason,omitempty"`
+	MAC           string   `json:"mac"`
 }
 type Ledger struct {
 	Events []Event `json:"events"`
@@ -168,6 +169,7 @@ func analyze(l Ledger, key []byte) Result {
 				continue
 			}
 			request.Rejected = e.Rejected
+			request.FinalDecision = e.FinalDecision
 			requests[e.Request] = request
 			for _, conn := range connections {
 				for stream, bound := range conn.bindings {
@@ -288,6 +290,11 @@ func analyze(l Ledger, key []byte) Result {
 	}
 	if !began || !ended || inInterval || !sealed {
 		fail("unsealed/incomplete interval")
+	}
+	for _, request := range requests {
+		if !request.FinalDecision {
+			fail("missing final request decision")
+		}
 	}
 	for id, c := range connections {
 		if requests[c.request].Rejected {
@@ -464,8 +471,8 @@ func main() {
 		fmt.Fprintln(os.Stderr, "usage: observer private-fixture-key-file")
 		os.Exit(2)
 	}
-	info, err := os.Stat(os.Args[1])
-	if err != nil || info.Mode().Perm() != 0600 {
+	info, err := os.Lstat(os.Args[1])
+	if err != nil || !info.Mode().IsRegular() || info.Mode().Perm() != 0600 {
 		fmt.Fprintln(os.Stderr, "fixture key must have mode0600")
 		os.Exit(2)
 	}
