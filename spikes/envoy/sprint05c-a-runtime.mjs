@@ -167,7 +167,8 @@ class Slots {
 export async function runtime({ addon, edgeTLS, routes, directory }) {
   assertLock(); await fs.mkdir(directory, { mode: 0o700 });
   assert.equal((await fs.stat(directory)).mode & 0o777, 0o700);
-  const sockets = new Set(), tasks = new Set();
+  const sockets = new Set(), tasks = new Set(), handshakes = new Map();
+  const socketKey = (socket) => `${socket.remoteAddress}:${socket.remotePort}`;
   const metrics = { peakDisk: 0, peakOriginActive: 0, peakOriginQueue: 0, peakConnections: 0,
     requests: 0, stream: 0, disk: 0, originDials: 0, rejections: {}, cancellations: 0,
     peakHeaderHeld: 0, peakPending: 0, activeContexts: 0, peakContexts: 0 };
@@ -282,15 +283,19 @@ export async function runtime({ addon, edgeTLS, routes, directory }) {
   const server = tls.createServer({ ...edgeTLS, allowHalfOpen: true, minVersion: 'TLSv1.2', ALPNProtocols: ['http/1.1'],
     handshakeTimeout: limits.handshakeMs, highWaterMark: limits.highWaterMark,
     SNICallback(name, cb) { const context = contexts.get(name); cb(context ? null : new Error('unknown SNI'), context); } }, (client) => {
+    const key = socketKey(client); clearTimeout(handshakes.get(key)); handshakes.delete(key);
     const task = serve(client).catch((e) => { metrics.cleanupError = e.message; client.destroy(); });
     tasks.add(task); task.finally(() => tasks.delete(task));
   });
   server.on('connection', (socket) => {
     if (sockets.size >= limits.connections) { metrics.connectionRejects = (metrics.connectionRejects ?? 0) + 1; socket.destroy(); return; }
     sockets.add(socket); socket.once('close', () => sockets.delete(socket));
+    const key = socketKey(socket), timer = setTimeout(() => socket.destroy(), limits.handshakeMs);
+    handshakes.set(key, timer);
+    socket.once('close', () => { clearTimeout(timer); handshakes.delete(key); });
     metrics.peakConnections = Math.max(metrics.peakConnections, sockets.size);
   });
-  server.on('tlsClientError', () => {});
+  server.on('tlsClientError', (_error, socket) => socket.destroy());
   const port = await listen(server);
   return { port, metrics, quota, slots, get tcpConnections() { return sockets.size; }, async close() {
     assertLock(); for (const socket of sockets) socket.destroy();
