@@ -55,6 +55,11 @@ type Frame struct {
 	Fields        []hpack.HeaderField `json:"fields,omitempty"`
 	HPACKBefore   string              `json:"hpack_history_before,omitempty"`
 	HPACKAfter    string              `json:"hpack_history_after,omitempty"`
+	Identity      Identity            `json:"verified_fixture_identity"`
+	Request       string              `json:"request,omitempty"`
+	Downstream    string              `json:"downstream_connection,omitempty"`
+	DownStream    uint32              `json:"downstream_stream,omitempty"`
+	StreamState   string              `json:"stream_state,omitempty"`
 }
 type Result struct {
 	Current struct {
@@ -105,11 +110,13 @@ type wireCapture struct {
 	closed    bool
 }
 type connection struct {
-	identity Identity
-	captures map[string]*wireCapture
-	bindings map[uint32]Event
-	boundAt  map[uint32]int
-	streams  map[uint32]bool
+	request       string
+	identity      Identity
+	captures      map[string]*wireCapture
+	bindings      map[uint32]Event
+	boundAt       map[uint32]int
+	streams       map[uint32]bool
+	closedStreams map[uint32]bool
 }
 
 func analyze(l Ledger, key []byte) Result {
@@ -130,6 +137,7 @@ func analyze(l Ledger, key []byte) Result {
 	connections := map[string]*connection{}
 	requests := map[string]Event{}
 	downBindings := map[string]string{}
+	var handlerRequests []string
 	previous := ""
 	inInterval, began, ended, sealed := false, false, false, false
 	total := 0
@@ -153,6 +161,21 @@ func analyze(l Ledger, key []byte) Result {
 				fail("duplicate request identity")
 			}
 			requests[e.Request] = e
+		case "decision":
+			request, ok := requests[e.Request]
+			if !ok {
+				fail("decision for unknown request")
+				continue
+			}
+			request.Rejected = e.Rejected
+			requests[e.Request] = request
+			for _, conn := range connections {
+				for stream, bound := range conn.bindings {
+					if bound.Request == e.Request {
+						conn.bindings[stream] = request
+					}
+				}
+			}
 		case "dial":
 			r.Dials++
 			if c != nil || e.Connection == "" {
@@ -165,7 +188,7 @@ func analyze(l Ledger, key []byte) Result {
 			if request.Rejected {
 				violate("rejected request caused origin dial")
 			}
-			connections[e.Connection] = &connection{identity: e.Identity, captures: map[string]*wireCapture{"to-origin": {}, "from-origin": {}}, bindings: map[uint32]Event{}, boundAt: map[uint32]int{}, streams: map[uint32]bool{}}
+			connections[e.Connection] = &connection{request: e.Request, identity: e.Identity, captures: map[string]*wireCapture{"to-origin": {}, "from-origin": {}}, bindings: map[uint32]Event{}, boundAt: map[uint32]int{}, streams: map[uint32]bool{}, closedStreams: map[uint32]bool{}}
 		case "bind":
 			request, ok := requests[e.Request]
 			if c == nil || !ok || e.Stream == 0 || e.Stream%2 == 0 {
@@ -230,6 +253,7 @@ func analyze(l Ledger, key []byte) Result {
 			cap.raw = append(cap.raw, b...)
 		case "handler":
 			r.Handlers++
+			handlerRequests = append(handlerRequests, e.Request)
 			if c == nil {
 				fail("unmapped handler connection")
 				continue
@@ -266,6 +290,9 @@ func analyze(l Ledger, key []byte) Result {
 		fail("unsealed/incomplete interval")
 	}
 	for id, c := range connections {
+		if requests[c.request].Rejected {
+			violate("origin dial belongs to finally rejected request")
+		}
 		for _, direction := range []string{"to-origin", "from-origin"} {
 			cap := c.captures[direction]
 			r.Captures = append(r.Captures, RawCapture{Connection: id, Direction: direction, Hex: hex.EncodeToString(cap.raw), SHA256: digest(cap.raw), Bytes: len(cap.raw), Closed: cap.closed})
@@ -273,6 +300,11 @@ func analyze(l Ledger, key []byte) Result {
 				fail("unclosed capture")
 			}
 			r.decode(id, direction, cap, c, fail, violate)
+		}
+	}
+	for _, request := range handlerRequests {
+		if requests[request].Rejected {
+			violate("handler belongs to finally rejected request")
 		}
 	}
 	r.Current.Zero = r.Current.Bytes == 0
@@ -337,6 +369,10 @@ func (r *Result) decode(id, direction string, cap *wireCapture, c *connection, f
 		}
 		if h.StreamID != 0 {
 			request, ok := c.bindings[h.StreamID]
+			ev.Identity = c.identity
+			ev.Request = request.Request
+			ev.Downstream = request.Downstream
+			ev.DownStream = request.DownStream
 			if c.boundAt[h.StreamID] > ev.FirstSequence {
 				fail("stream binding supplied after origin effect")
 			}
@@ -357,7 +393,13 @@ func (r *Result) decode(id, direction string, cap *wireCapture, c *connection, f
 			fragment = v.HeaderBlockFragment()
 			ended = v.HeadersEnded()
 			if direction == "to-origin" {
+				if c.closedStreams[h.StreamID] {
+					fail("HEADERS on closed request stream")
+				}
 				c.streams[h.StreamID] = true
+				if v.StreamEnded() {
+					c.closedStreams[h.StreamID] = true
+				}
 			}
 		case *http2.ContinuationFrame:
 			if pending != h.StreamID {
@@ -369,10 +411,25 @@ func (r *Result) decode(id, direction string, cap *wireCapture, c *connection, f
 			if direction == "to-origin" && !c.streams[h.StreamID] {
 				fail("DATA without observed stream creation")
 			}
+			if direction == "to-origin" {
+				if c.closedStreams[h.StreamID] {
+					fail("DATA on closed request stream")
+				}
+				if v.StreamEnded() {
+					c.closedStreams[h.StreamID] = true
+				}
+			}
 		case *http2.RSTStreamFrame:
 			delete(c.streams, h.StreamID)
+			c.closedStreams[h.StreamID] = true
 		case *http2.PushPromiseFrame, *http2.UnknownFrame:
 			fail("unsupported frame semantics")
+		}
+		if h.StreamID != 0 {
+			ev.StreamState = "open"
+			if c.closedStreams[h.StreamID] {
+				ev.StreamState = "request-ended-or-reset"
+			}
 		}
 		if fragment != nil {
 			compressed += len(fragment)
@@ -417,8 +474,8 @@ func main() {
 		fmt.Fprintln(os.Stderr, "invalid fixture key")
 		os.Exit(2)
 	}
-	b, err := io.ReadAll(io.LimitReader(os.Stdin, 2*maxBytes+1<<18))
-	if err != nil || len(b) > 2*maxBytes+1<<17 {
+	b, err := io.ReadAll(io.LimitReader(os.Stdin, 2*maxBytes+(1<<18)))
+	if err != nil || len(b) > 2*maxBytes+(1<<17) {
 		fmt.Fprintln(os.Stderr, "input bound")
 		os.Exit(2)
 	}

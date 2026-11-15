@@ -98,6 +98,15 @@ func TestNoEffects(t *testing.T) {
 	}
 	record(t, r)
 }
+
+func TestLateRejectionRetainsEarlierOriginEffects(t *testing.T) {
+	e := capture(t, Event{Kind: "handler", Connection: "origin-1", Stream: 1, Request: "valid"}, Event{Kind: "decision", Request: "valid", Rejected: true})
+	r := inspect(t, e)
+	if r.Research.Pass || len(r.Research.Violations) < 3 {
+		t.Fatalf("late invalidation hidden: %+v", r)
+	}
+	record(t, r)
+}
 func TestDeliberateForbiddenEffects(t *testing.T) {
 	for _, kind := range []string{"HEADERS-no-handler", "DATA-existing-stream", "dial-no-request", "partial-HEADERS", "missing-CONTINUATION", "HPACK-only", "cross-tenant", "missing-binding", "handler", "parser-error", "transport-error", "missing-identity"} {
 		t.Run(kind, func(t *testing.T) {
