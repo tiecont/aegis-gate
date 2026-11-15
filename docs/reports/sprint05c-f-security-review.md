@@ -284,6 +284,18 @@ logs/artifacts, and CI on the later final integrated head remains separate.
 The earlier integration receipt's hosted_acceptance_pending flag is preserved
 as recorded. No hosted/runtime/production acceptance is inferred from metadata.
 
+**ACCEPT the receipt/documentation-only extension at
+4488524a4fd979f640ff6511c9ff6ced04365d94**, tree
+6877d556453c3cf25af675b6e88df3b100337e1c. F inspected its exact13-file delta
+from881fd85: eight completion-report lines and the three four-file PR/run/jobs
+receipt directories only. The PR-open receipt correctly retains its earlier
+IN_PROGRESS observation; later run/jobs metadata records success. All three
+receipt manifests verify. No executable bytes changed. Reexecuting the same
+locked audit command with revision4488524 and output
+`evidence/sprint05c-f/integration-02` exits0 with complete=true, the same
+5/38/11/58/8280 verified counts and all four local gates accepted. The final
+integrated head and its hosted CI remain root's next checkpoint.
+
 ## Agent Completion Report
 
 - Module/status: Sprint05C F independent security review, scoped work complete;
@@ -298,8 +310,8 @@ as recorded. No hosted/runtime/production acceptance is inferred from metadata.
 - Performance: finite observations only; no capacity/resource/production claim.
 - Known release blockers: original H1/H2 failures, userinfo/status failures,
   CONTINUATION regression, streaming admission conflict, missing production
-  observer integration, architecture/human approval and final root gates.
+  observer integration, architecture/human approval and final-head hosted gates.
 - Human review: root may integrate only specified safe research/test scope;
   no push/merge by F and no production GO.
-- Next unblocked action: root exact-source integration/full local/hosted gates;
+- Next unblocked action: root final-source integration and exact-head hosted gates;
   Modules04-12 remain locked.
