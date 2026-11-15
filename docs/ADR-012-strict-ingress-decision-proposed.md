@@ -66,6 +66,15 @@ codec/parser fork, policy waiver or public maintainer request is authorized here
 Completing research or integrating this proposal cannot fill these approval
 fields. Only supplied/formally recorded human decisions may do so.
 
+## Sprint 05-D Versioned Amendment Proposal
+
+The [v2 admission and origin-isolation proposal](ADR-012-sprint05d-contract-v2-proposed.md)
+records the executed common-prefix/late-invalidity boundary, finite strict
+staging costs, incomplete runtime attribution and supported API prerequisites.
+It remains PROPOSED, NOT EFFECTIVE. It does not revise any original75/23 input,
+assertion or observation interval, supply human approval, select a production
+runtime or unlock a module. Existing aggregate zero-byte acceptance still binds.
+
 ## Sprint 04-C proposed decision handoff
 
 The [proposed addendum](ADR-012-sprint04c-decision-addendum-proposed.md),
