@@ -38,7 +38,7 @@ try {
   const port = await listen(origin);
   const route = { tenant: 'tenant-a', enabled: true, generation: 7, port, ca: keys.read('ca.pem'), originName: 'lab-origin.test', edge: serverTLS('edge-a') };
   front = await runtime({ addon, edgeTLS: serverTLS('edge-a'), routes: new Map([['edge-a.test', route]]), directory: path.join(dir, 'stage') });
-  async function probe(name, raw) {
+  async function probe(name, raw, waitForOrigin = false) {
     const beforeBytes = bytes, beforeHandlers = handlers.length, beforeWire = wire.length;
     const s = track(tls.connect({ host: '127.0.0.1', port: front.port, servername: 'edge-a.test', ca: keys.read('ca.pem'), rejectUnauthorized: true,
       minVersion: 'TLSv1.2', ALPNProtocols: ['http/1.1'] }));
@@ -47,7 +47,11 @@ try {
     s.on('data', (b) => response.push(Buffer.from(b)));
     const closed = once(s, 'close');
     const timer = setTimeout(() => s.destroy(), 4500);
-    s.end(raw);
+    if (waitForOrigin) {
+      s.write(raw);
+      await until(() => handlers.length > beforeHandlers && handlers.at(-1).bodyBytes >= 3);
+      s.end();
+    } else s.end(raw);
     await closed; clearTimeout(timer);
     await until(() => front.tcpConnections === 0 && front.metrics.activeContexts === 0);
     const outputBytes = Buffer.concat(response), originBytes = Buffer.concat(wire.slice(beforeWire));
@@ -58,7 +62,7 @@ try {
   }
   const valid = await probe('complete-known-length-half-close-control', 'POST /valid HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 3\r\nConnection: close\r\n\r\nabc');
   assert.deepEqual(valid.statuses, [200]); assert.equal(valid.origin.handlers[0].ended, true);
-  const truncated = await probe('truncated-known-length-after-stream-admission', 'POST /truncated HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 10\r\nConnection: close\r\n\r\nabc');
+  const truncated = await probe('truncated-known-length-after-stream-admission', 'POST /truncated HTTP/1.1\r\nHost: edge-a.test\r\nContent-Length: 10\r\nConnection: close\r\n\r\nabc', true);
   assert.deepEqual(truncated.statuses, [400]); assert.ok(truncated.origin.bytes > 0); assert.equal(truncated.origin.handlers.length, 1);
   assert.equal(truncated.origin.handlers[0].ended, false);
   r.conclusion = 'Known-length stream admission can still be invalidated by premature EOF after origin bytes/handler; conditional streaming proof is not complete syntax-before-origin admission.';
