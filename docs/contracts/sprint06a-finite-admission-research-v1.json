@@ -1,0 +1,62 @@
+{
+  "version": "AEGISGATE_FINITE_ADMISSION_RESEARCH_V1",
+  "status": "PROPOSED_NOT_EFFECTIVE",
+  "profile": "strict_finite",
+  "production_enabled": false,
+  "opens_module01": false,
+  "architecture_owner": "PENDING",
+  "security_owner": "PENDING",
+  "approval_reference": "PENDING",
+  "original75_23_authoritative": true,
+  "protected_inventory_sha256": "85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa",
+  "limits_proposed": {
+    "wire_bytes": 1572864,
+    "ciphertext_bytes_global": 2097152,
+    "stage_files": 3,
+    "connections": 6,
+    "origin_active": 2,
+    "origin_waiters": 2,
+    "request_ms": 2500,
+    "idle_ms": 700,
+    "origin_ms": 1800
+  },
+  "required_finite_controls": [
+    "historical_folded_header_400_zero_origin",
+    "folded_late_trailer_400_zero_origin",
+    "content_length_10_abc_eof_400_zero_origin",
+    "complete_valid_exactly_once_verified_origin",
+    "encoded_target_bytes_and_ordered_pipeline",
+    "strict_cl_te_ambiguity_rejection",
+    "stage_size_413_global_quota_503_timeout_408",
+    "partial_zero_write_eio_enospc_corruption_reject_before_origin",
+    "private_permissions_symlink_hardlink_descriptor_identity",
+    "ephemeral_key_cleanup_authenticated_replay",
+    "sigkill_startup_orphans_no_resume",
+    "staged_cancel_and_observed_transport_cancel_releases_resources",
+    "container_memory_cpu_pid_and_disk_limits_with_recovery",
+    "verified_tls_sni_host_and_tenant_binding",
+    "signed_profile_exact_snapshot_digest_resource_generations",
+    "unknown_missing_unsigned_streaming_downgraded_profile_deny",
+    "monotonic_floor_new_generation_rollback_canary_trust_rotation_lkg",
+    "captured_route_generation_stable_during_update_and_cancel",
+    "auth_required_jwt_negatives_no_header_authority",
+    "private_fixture_and_evidence_cleanup"
+  ],
+  "unsupported_in_limited_component": [
+    "precompletion_origin_streaming",
+    "indefinite_streaming",
+    "websocket",
+    "grpc",
+    "complete_h2_runtime",
+    "production_ssrf_dial_policy",
+    "production_key_custody",
+    "complete_authoritative_runtime_attribution"
+  ],
+  "simultaneous_reports": [
+    "effective_original_aggregate_byte_verdict_unchanged",
+    "additive_finite_profile_verdict",
+    "research_causal_attribution_completeness"
+  ],
+  "on_incomplete_or_unknown": "DENY_OR_INCOMPLETE_NEVER_PASS",
+  "migration": "No activation. Formal versioned approval, complete unified runtime, independent clean-source review and all original gates required. Rollback never enables weaker admission or replays uncertain origin effects."
+}
