@@ -253,4 +253,3 @@ try {
   );
 }
 process.exitCode = record.passed && record.private_material_removed ? 0 : 1;
-
