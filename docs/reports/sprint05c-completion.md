@@ -147,6 +147,14 @@ The explicit sanitized export records zero redactions and preserves original
 hashes. Exact PR-head hosted jobs, actual merge SHA and exact-main hosted jobs
 are PENDING. No component result substitutes for those final gates.
 
+Integration PR: https://github.com/tiecont/aegis-gate/pull/21. Intermediate
+head `881fd85cd84e343209b732475e1310f6e6e383e6` passes both hosted jobs in
+run43685396399 (foundation132724704043, supply-chain132724704242).
+Raw run/jobs and PR receipts are retained under
+`evidence/sprint05c-root/pr21-intermediate-*` and `pr21-open`. This intermediate
+run is not final-head or merge evidence. Independent final integration review
+and delivery receipts follow their actual events.
+
 Root gate attempts01-03 are retained with failed exits. Attempts01/02 used
 734a9d6 and failed formatting before fixture setup;02 accidentally reused the
 old source because the gate clone fetched only its historical05b branch.
