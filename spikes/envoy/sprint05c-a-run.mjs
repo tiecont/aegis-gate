@@ -142,6 +142,7 @@ try {
   async function probe(name, raw, status, options = {}) {
     await settled(); const before = snapshot(), s = await connect(options.sni); const done = collect(s);
     if (options.parts) { for (const p of options.parts) { s.write(p); await delay(options.delay ?? 2); } }
+    else if (options.halfClose) s.end(raw);
     else s.write(raw);
     const response = await done; await settled(); const d = delta(before);
     assert.deepEqual(response.statuses, status, name);
@@ -156,6 +157,8 @@ try {
 
   const valid = req('Content-Length: 0\r\n');
   await probe('observer-positive-control', valid, [200], { exact: valid });
+  await probe('valid-request-EOF', valid, [200], { halfClose: true, exact: valid });
+  await probe('truncated-chunk-EOF', chunked('abc', ''), [400], { halfClose: true });
   for (const o of originals) {
     await probe(o.name, o.request, [400]);
     await probe(`${o.name}-one-byte`, o.request, [400], { parts: [...Buffer.from(o.request)].map((v) => Buffer.from([v])), delay: 1 });

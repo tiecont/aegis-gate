@@ -279,7 +279,7 @@ export async function runtime({ addon, edgeTLS, routes, directory }) {
     }
   }
   const contexts = new Map([...routes].map(([name, route]) => [name, tls.createSecureContext(route.edge)]));
-  const server = tls.createServer({ ...edgeTLS, minVersion: 'TLSv1.2', ALPNProtocols: ['http/1.1'],
+  const server = tls.createServer({ ...edgeTLS, allowHalfOpen: true, minVersion: 'TLSv1.2', ALPNProtocols: ['http/1.1'],
     handshakeTimeout: limits.handshakeMs, highWaterMark: limits.highWaterMark,
     SNICallback(name, cb) { const context = contexts.get(name); cb(context ? null : new Error('unknown SNI'), context); } }, (client) => {
     const task = serve(client).catch((e) => { metrics.cleanupError = e.message; client.destroy(); });
