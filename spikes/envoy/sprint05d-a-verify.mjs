@@ -38,7 +38,8 @@ try {
   assert.ok(receipt.tmpdir.startsWith('/home/')); assert.equal(Object.keys(receipt.hypothesis).length, 6);
   assert.equal(receipt.node.sha256, hash(fs.readFileSync(process.execPath)));
   for (const tool of receipt.tools) assert.equal(hash(fs.readFileSync(tool.file)), tool.sha256);
-  for (const c of receipt.commands) { assert.equal(c.exit, 0); assert.equal(c.error, undefined); assert.ok(c.tmpdir.startsWith('/home/'));
+  for (const c of receipt.commands) { assert.equal(c.exit, 0); assert.equal(c.error, undefined);
+    assert.ok(c.tmpdir?.startsWith('/home/') || c.argv[0] === '/usr/bin/git' && c.tmpdir === null);
     assert.equal(hash(fs.readFileSync(c.argv[0])), c.executableSha256); }
   const pins = JSON.parse(fs.readFileSync('evidence/sprint05a-b/source-01/sources.json'));
   assert.equal(receipt.upstream.length, 5);
