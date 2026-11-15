@@ -3,6 +3,11 @@
 Status: executable source prepared; measurements pending. Module01 remains
 NO-GO, Modules04-12 LOCKED, production BLOCKED. No contract or ADR activation.
 
+`run-01` at source `eb4cfe4` is retained FAIL before traffic: the mounted host
+OpenSSL binary could not read `/etc/ssl/openssl.cnf` in the image. Container
+removal and protected-file checks completed. The next source adds a read-only
+mount of that public configuration; no TLS verification policy changes.
+
 ## Declared Experiment
 
 | Field | Declaration before execution |
