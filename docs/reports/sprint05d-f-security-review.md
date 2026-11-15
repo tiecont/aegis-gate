@@ -1,7 +1,8 @@
 # Sprint05D F Independent Security Review
 
-Status: execution in progress; independent A reproduction FAIL and D nonce
-mapping findings retained below. No runtime acceptance or GO is issued. Module01
+Status: scoped A finite-stage and corrected D correlation tooling ACCEPT;
+historical failures retained below. Final integration gates and B/E/C receipt
+audit still pending. No runtime acceptance or GO is issued. Module01
 remains NO-GO, Modules04-12 LOCKED, production BLOCKED. This report will record
 only executed results with exact source/evidence identities.
 
@@ -81,6 +82,53 @@ This is a retained F harness failure, not an A security finding.
 Root's requested final integration full locked check/security-scan review is
 accepted as F's next phase after component verdicts; exact clean integration
 source and command are pending. No redundant third E collector is planned.
+
+## Reproduced Component Verdicts
+
+| Exact source | F capture | Actual outcome |
+| --- | --- | --- |
+| A `c289b26` | `a-independent-04`, commit `8bb5cd6` | A29 PASS; F23 PASS; streaming FAIL |
+| D `6bc71e8` | `d-independent-03`, commit `3763052` | Full original observer race suite plus five05C F overlays PASS; honest control and13 F adversarial mutations PASS |
+
+Both successful captures run clean source clones and verify all11 protected
+files plus every tracked source byte after execution; private stage removed.
+The D overlay has14 cases total (one honest positive and13 mutations), distinct
+from D's14 live mutations. All four F false-consistency findings now reject:
+swapped nonce, duplicated nonce/orphan stream, control-only reverse capture,
+and raw200 versus asserted421. RuntimeComplete/RuntimePass/Module01Pass remain
+false throughout. ACCEPT covers the corrected bounded consistency check only.
+
+A extra controls measure exact1572864-byte stage,2097152-byte aggregate and
+three-file limits; truncation authentication failure; injected ENOSPC release;
+12 orphan startup failures (unsafe permissions, symlinks/hardlink, unknown
+names, oversize/enumeration); validated12345-byte orphan reclamation; trusted
+TLS positive before/after wrong-host/expired/untrusted origin negatives;
+Host/SNI421 and unknown-SNI handshake refusal. Invalid origin TLS returns502
+with zero decrypted origin request bytes, though one necessary attempted TLS
+dial is counted. Invalid ingress identity produces zero origin dials/bytes.
+All extra probes clean private fixtures and sockets. Actual SIGKILL recovery,
+cancel, tamper, deadlines and shared-prefix late-invalidity remain independently
+reproduced in A29. No hard RSS, same-UID attacker or production custody claim.
+
+A first two failures retain the quota driver write/503-close race; a third run
+completed all29 but F invoked the writer verifier before committing generated
+evidence, which its clean-tree prerequisite correctly rejects. F now directly
+validates source/receipt/raw hashes/cleanup without changing the clone HEAD.
+This context error is not a writer-verifier bypass. A owner is repairing the
+intermittent quota driver separately; no failed run is relabeled PASS.
+
+C source/report `5bc9489` is a reasonable scoped API stop: pinned static
+dispatch/adapter/public-interface anchors support that the examined public
+config does not supply the proposed repair. It does not prove exact historical
+internal causality or universal impossibility. No fresh3/23/75 result exists;
+historical alternate20/23 remains rejected. B's selection hook preserves probe
+bodies/assertions/deadlines but selects five probes and adds a verified TLS
+relay, so those diagnostics cannot replace unchanged aggregate23 timing proof.
+Both userinfo assertions remain FAIL; final B source/receipt review follows.
+
+The root completion draft `39cffa1` and proposed ADR retain NO-GO and identify
+pending delivery fields honestly. The proposed finite-versus-streaming profiles
+remain inactive; no human owner or approval is inferred from successful tooling.
 
 ## Agent Completion Report
 
