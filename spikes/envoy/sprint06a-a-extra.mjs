@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import tls from "node:tls";
+import net from "node:net";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { spawn } from "node:child_process";
@@ -222,7 +223,7 @@ export async function exercise(c) {
       fs.rmSync(outside, { recursive: true, force: true });
     }
   }
-  // Three admitted requests hold two real origin slots and one queue entry.
+  // TLS FIN is ambiguous with valid write EOF; keep its eventual dispatch visible.
   await settled();
   {
     const before = snap(),
@@ -251,11 +252,86 @@ export async function exercise(c) {
     await settled();
     assert.equal(front.slots.active, 0);
     assert.equal(front.slots.queue.length, 0);
-    row("actual-origin-slots-queue-cancel", {
+    row("actual-origin-slots-queue-FIN-observation", {
       peak,
       origin: delta(before),
       released: true,
+      zeroDispatchClaim: false,
     });
+  }
+  await settled();
+  {
+    const before = snap(),
+      peers = [],
+      dones = [];
+    let tcp;
+    try {
+      for (let i = 0; i < 2; i++) {
+        const peer = await connect();
+        peers.push(peer);
+        dones.push(collect(peer));
+        await send(peer, cl("RST-held", true, "/hold"));
+      }
+      await until(() => front.slots.active === 2 && front.quota.files === 0);
+      tcp = net.connect({ host: "127.0.0.1", port: front.port });
+      tcp.on("error", () => {});
+      await once(tcp, "connect");
+      const peer = tls.connect({
+        socket: tcp,
+        servername: "edge-a.test",
+        ca: fs.readFileSync(path.join(fixture, "pki/ca.pem")),
+        rejectUnauthorized: true,
+        minVersion: "TLSv1.2",
+        ALPNProtocols: ["http/1.1"],
+      });
+      sockets.add(peer);
+      peer.on("error", () => {});
+      peer.once("close", () => sockets.delete(peer));
+      peers.push(peer);
+      dones.push(collect(peer));
+      await once(peer, "secureConnect");
+      assert.equal(peer.authorized, true);
+      await send(peer, cl("queued-RST", true, "/hold"));
+      await until(
+        () => front.slots.queue.length === 1 && front.quota.files === 1,
+      );
+      const stage = [...front.quota.stages][0],
+        key = stage.key,
+        iv = stage.iv,
+        tag = stage.tag,
+        file = stage.file;
+      assert.equal(delta(before).dials, 2);
+      tcp.resetAndDestroy();
+      await until(
+        () =>
+          front.slots.queue.length === 0 &&
+          front.metrics.activeContexts === 2 &&
+          front.quota.files === 0,
+        1000,
+      );
+      assert.equal(front.slots.active, 2);
+      assert.equal(front.quota.bytes, 0);
+      assert.equal(delta(before).dials, 2);
+      assert.ok([key, iv, tag].every((bytes) => bytes.every((b) => b === 0)));
+      assert.equal(fs.existsSync(file), false);
+      row("observed-hard-RST-queued-request-no-dispatch", {
+        serverObservedBeforeSlotRelease: true,
+        activeOrigins: front.slots.active,
+        queue: front.slots.queue.length,
+        stageFiles: front.quota.files,
+        origin: delta(before),
+        cancelledRequestDials: 0,
+        keyIVTagZero: true,
+        ciphertextAbsent: true,
+      });
+    } finally {
+      tcp?.destroy();
+      peers.forEach((peer) => peer.destroy());
+      await Promise.all(dones);
+      await settled();
+    }
+    assert.equal(delta(before).dials, 2);
+    assert.equal(delta(before).handlers.length, 2);
   }
   await settled();
   {
