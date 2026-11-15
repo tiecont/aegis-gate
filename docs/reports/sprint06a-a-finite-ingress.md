@@ -62,6 +62,31 @@ Collector SHA256:
 Artifact manifest SHA256:
 `0fffc39d552fe409fdafcaffee9048e3bc2cc091a255fe66459a3511bfe0c6a2`.
 
+## Offline Integrity And Secret Check
+
+Verifier source `5ca4e3a` executes from clean report/evidence commit
+`492a5f943004e6fe9ed22512495034a6a192b4d3`; verify01 exits0. It checks25 raw
+artifact hashes across retained runs01-07,39 committed-source bindings,67
+unique controls, exact positive wire hashes, zero pre-admission effects,
+cgroup CPU/PID/OOM events, tmpfs ENOSPC, raw collector streams, empty cleanup
+and all11 protected pins. Nine new MJS syntax checks, pinned Prettier3.9.10,
+whitespace and pinned offline Gitleaks8.30.1 all exit0. The secret report is[];
+private audit staging is removed under the shared lock. This is owner integrity
+verification, not independent F acceptance or complete-runtime validation.
+
+```sh
+flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock \
+ /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node \
+ scripts/sprint06a-a-verify.mjs evidence/sprint06a-a/run-07 \
+ evidence/sprint06a-a/verify-01
+```
+
+Verify01 receipt SHA256:
+`30bb314d5b13b763433e55310a189ae0f28d407bad98a1d3646e0ea332d80b47`.
+No executable source changes follow run07/verify01. Final additions only record
+verification/report/evidence. No push, merge, shared source, dependency, TLS,
+authorization, snapshot v1 wire, original corpus or evaluator change occurs.
+
 ## Retained Failures
 
 `run-01` at source `eb4cfe4` is retained FAIL before traffic: the mounted host
@@ -138,10 +163,10 @@ never resumes requests because ephemeral keys were never persisted.
 
 - Module:01, Sprint06A A.
 - Status:complete scoped engineering proof; independent F verdict pending.
-- Commits/files:new `spikes/envoy/sprint06a-a-*`, `scripts/sprint06a-a-*`, this report and own evidence only.
+- Commits/files:initial source `eb4cfe4`; final executable source `5ca4e3a`; measured report/evidence `492a5f9`; new `spikes/envoy/sprint06a-a-*`, `scripts/sprint06a-a-*`, this report and own evidence only.
 - Architecture/ADR decisions:none.
 - Contracts changed:none.
-- Positive tests executed:locked run07 command above,collector0/ingress0,67 controls,verified finite/exact target/pipeline/restart/resource recovery positives. Earlier run06 passes66 controls.
+- Positive tests executed:locked run07 command above,collector0/ingress0,67 controls,verified finite/exact target/pipeline/restart/resource recovery positives. Earlier run06 passes66 controls; verify01 integrity/format/syntax/secret checks0.
 - Security negative tests executed:EOF/fold/trailer/tamper/truncate/quotas/write/links/startup/cancel/hardRST/TLS/CPU/PID/OOM/ENOSPC controls above; mandatory streaming positive FAIL. Failures01-05 retained.
 - Performance data:not a throughput, capacity or soak benchmark.
 - Known risks/release blockers:streaming/full gateway and production custody remain unproved; independent review required.
