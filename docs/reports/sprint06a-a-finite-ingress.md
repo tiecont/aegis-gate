@@ -1,7 +1,68 @@
 # Sprint06A A Finite Ingress Hardening
 
-Status: executable source prepared; measurements pending. Module01 remains
+Status: scoped finite container proof complete,67 controls; independent review
+pending. Mandatory pre-completion streaming positive is **FAIL**. Module01 remains
 NO-GO, Modules04-12 LOCKED, production BLOCKED. No contract or ADR activation.
+
+## Measured Result
+
+`run-07` executes clean source `5ca4e3a2de94425f766312bc8d1741a80cf515a6`,
+tree `fb27874eb105cf511c22bf0345f0689e3a5932c7`. The source commit precedes
+all retained execution. Collector and ingress exit0;67 controls complete, all
+cleanup counters zero, private PKI/build fixture removed and container absent.
+The locked lifecycle is2026-11-15T11:28:25Z through11:28:43Z for the ingress;
+collector setup/hash/cleanup surrounds that interval. `run-06` independently
+retains the earlier66-control container pass; no original75/23 rerun is claimed.
+
+```sh
+flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock \
+ /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node \
+ scripts/sprint06a-a-container.mjs evidence/sprint06a-a/run-07
+```
+
+Use a fresh suffix from clean committed source on the assigned branch. The
+collector takes no public endpoint, publishes no port and executes all ingress,
+client and origin traffic on127.0.0.1 inside the network-none container. Exact
+argv, exits, stdout/stderr, image metadata, commands and per-executable hashes
+are retained in `collector.json` and `receipt.json`; artifact hashes are in
+`SHA256SUMS`. Node26.13.0 SHA256 is
+`0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b`.
+All five llhttp release-file pins are verified before unchanged05C binding
+compilation. All11 protected inputs/evaluators/windows match immutable8758b1c;
+inventory remains85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa.
+
+| Executed control | Observed result |
+| --- | --- |
+| CL10/abc shared prefix |No dial/bytes/connection/handler/parser/TLS effects before completion; seven bytes then200 exactly once, EOF400 with zero effects.|
+| Chunked common prefix |Valid declared trailer200 exactly once; EOF and late folded trailer400 with zero effects.|
+| Original folded header/TE, CL-TE, undeclared trailer |400,zero origin effects; original inputs unchanged.|
+| Exact targets and pipeline |Encoded targets unchanged; ordered200/200,valid-invalid200/400 and invalid-valid400 preserve exact expected origin wire hashes.|
+| Complete request plus write EOF |200 exactly once; no half-close regression.|
+|512KiB CL/chunk uploads |Complete matching body/raw SHA256,one origin handler each.|
+| Exact spool quotas |1572864 wire bytes/message,2097152 aggregate bytes,3 files; next byte/file refused; all accounting released.|
+| FileHandle faults |Repeated actual7-byte partial writes complete200; injected zero-progress and EIO reject503 before origin; no file/quota leak.|
+| Corrupt/truncated ciphertext |Authentication/size failure503 before any dial; normal cleanup.|
+| Live hardlink, symlink replacement and unsafe mode |502 before dial, zero origin effects; owned stage path unlinked, reachable key/IV buffers zeroed. Same-UID attack limits below remain.|
+| Startup/recovery |12 unsafe root/session/file/name/permission/link/size/enumeration cases refuse listener creation and preserve outside canary; SIGKILL ciphertext orphan is discarded before restart; healthy200 follows.|
+| Staging cancellation |Zero origin effects, key/IV buffer wiping, ciphertext path absent, quotas released.|
+| Observed hard TCP reset while queued |Two occupied origin slots remain held; server observes queue0/contexts2/files0 before release, cancelled request has zero dials and key/IV/tag buffers zeroed. Two valid held requests remain visible in raw effects.|
+| Ambiguous TLS FIN |Three eventual dials are retained; no zero-dispatch cancellation claim. FIN can mean valid write EOF and is separately tested from reset.|
+| Application bounds |Six live TCP connections, excess connection closed; two active origins and one queued observed; idle408 and absolute408 around2500ms; held origin504 around1800ms. Configured queue ceiling2 is not a measured two-waiter positive.|
+| Verified origin TLS |Wrong name,expired and untrusted cert return502 with zero decrypted request bytes; required TLS dial is not hidden. Host/SNI421 has zero origin effects; unknown SNI handshake denied.|
+| Kernel CPU cap |cpu.max=75000/100000,actual nr_throttled increase; healthy exact200 afterward.|
+| Kernel task cap |pids.max64,pids.current reaches64,spawn EAGAIN and pids.events.max increase; healthy200 afterward.|
+| Kernel memory cap |memory.max402653184,swap.max0,peak exactly cap,oom_kill increases1; targeted memory child SIGKILL,ingress survives and serves exact healthy200. Docker OOMKilled=true is intentionally retained.|
+| Real bounded disk failure |8MiB tmpfs mount flags retained;8388608-byte filler hits actual ENOSPC; actual ingress503 and zero origin effects,healthy200 after filler removal.|
+| Required streaming positive |Client waits for origin before completing chunk syntax:408 and no progress; **FAIL**, never a streaming acceptance.|
+
+Run07 receipt SHA256:
+`eaeca4930bbc002935f8c53f06122388ba31777ad3c6033312688d3955e5e66b`.
+Collector SHA256:
+`972980e88729788c371cc73810902f221b631ead091bf47740ba83b878cbe593`.
+Artifact manifest SHA256:
+`0fffc39d552fe409fdafcaffee9048e3bc2cc091a255fe66459a3511bfe0c6a2`.
+
+## Retained Failures
 
 `run-01` at source `eb4cfe4` is retained FAIL before traffic: the mounted host
 OpenSSL binary could not read `/etc/ssl/openssl.cnf` in the image. Container
@@ -76,12 +137,12 @@ never resumes requests because ephemeral keys were never persisted.
 ## Agent Completion Report
 
 - Module:01, Sprint06A A.
-- Status:partial, tests pending.
+- Status:complete scoped engineering proof; independent F verdict pending.
 - Commits/files:new `spikes/envoy/sprint06a-a-*`, `scripts/sprint06a-a-*`, this report and own evidence only.
 - Architecture/ADR decisions:none.
 - Contracts changed:none.
-- Positive tests executed:pending.
-- Security negative tests executed:pending.
+- Positive tests executed:locked run07 command above,collector0/ingress0,67 controls,verified finite/exact target/pipeline/restart/resource recovery positives. Earlier run06 passes66 controls.
+- Security negative tests executed:EOF/fold/trailer/tamper/truncate/quotas/write/links/startup/cancel/hardRST/TLS/CPU/PID/OOM/ENOSPC controls above; mandatory streaming positive FAIL. Failures01-05 retained.
 - Performance data:not a throughput, capacity or soak benchmark.
 - Known risks/release blockers:streaming/full gateway and production custody remain unproved; independent review required.
 - Human review needed:existing architecture/security owners and exact-source independent review.
