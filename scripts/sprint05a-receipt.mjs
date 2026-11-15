@@ -12,6 +12,11 @@ assert.ok(
 const git = (...argv) => execFileSync("git", argv, { encoding: "utf8" }).trim();
 assert.equal(git("status", "--porcelain", "--untracked-files=no"), "");
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const executable = fs.realpathSync(
+  command.includes("/")
+    ? command
+    : execFileSync("which", [command], { encoding: "utf8" }).trim(),
+);
 fs.mkdirSync(output, { recursive: true });
 const receipt = {
   source_commit: git("rev-parse", "HEAD"),
@@ -21,7 +26,11 @@ const receipt = {
   argv: process.argv,
   node: process.version,
   node_sha256: hash(fs.readFileSync(process.execPath)),
+  collector_file: process.argv[1],
+  collector_sha256: hash(fs.readFileSync(process.argv[1])),
   command,
+  command_binary: executable,
+  command_sha256: hash(fs.readFileSync(executable)),
   args,
   started_at: new Date().toISOString(),
 };
