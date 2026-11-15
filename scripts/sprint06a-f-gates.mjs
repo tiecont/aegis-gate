@@ -54,6 +54,7 @@ const record = {
       "TMPDIR",
       "GOTOOLCHAIN",
       "GOAMD64",
+      "GOFLAGS",
       "CARGO_HOME",
       "RUSTUP_HOME",
     ].map((k) => [k, process.env[k] ?? null]),
