@@ -113,7 +113,7 @@ class Stage {
     quota.files++;
     const s = new Stage(); s.quota = quota; s.size = 0;
     s.file = path.join(directory, `sprint05c-a-stage-${randomUUID()}`);
-    try { s.handle = await fs.open(s.file, 'wx', 0o600); return s; }
+    try { s.handle = await fs.open(s.file, 'wx+', 0o600); return s; }
     catch (e) { quota.files--; throw e; }
   }
   async append(b, signal) {
