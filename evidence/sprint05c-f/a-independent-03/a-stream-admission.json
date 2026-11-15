@@ -1,0 +1,164 @@
+{
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05c-f/scripts/sprint05c-f-ingress.mjs",
+    "/home/tiecont/.cache/aegisgate-sprint05c-f/a-1019a602c4d5-a-independent-03",
+    "/tmp/aegisgate-05c-f/evidence/sprint05c-f/a-independent-03/a-stream-admission.json"
+  ],
+  "started_at": "2026-11-15T05:27:55.567Z",
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "--version"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-sprint05c-f/a-1019a602c4d5-a-independent-03",
+      "exit": 0,
+      "signal": null,
+      "stdout": "cc (GCC) 16.2.1 20260810\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsyntax-only",
+        "-I/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node",
+        "-I/home/tiecont/.cache/aegisgate-sprint05c-f/a-1019a602c4d5-a-independent-03/.local/sprint05c-f-ingress-wUCvql/upstream",
+        "spikes/envoy/sprint05c-a-llhttp.c"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-sprint05c-f/a-1019a602c4d5-a-independent-03",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c11",
+        "-O2",
+        "-shared",
+        "-fPIC",
+        "-Wall",
+        "-Werror",
+        "-I/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node",
+        "-I/home/tiecont/.cache/aegisgate-sprint05c-f/a-1019a602c4d5-a-independent-03/.local/sprint05c-f-ingress-wUCvql/upstream",
+        "spikes/envoy/sprint05c-a-llhttp.c",
+        "/home/tiecont/.cache/aegisgate-sprint05c-f/a-1019a602c4d5-a-independent-03/.local/sprint05c-f-ingress-wUCvql/upstream/api.c",
+        "/home/tiecont/.cache/aegisgate-sprint05c-f/a-1019a602c4d5-a-independent-03/.local/sprint05c-f-ingress-wUCvql/upstream/http.c",
+        "/home/tiecont/.cache/aegisgate-sprint05c-f/a-1019a602c4d5-a-independent-03/.local/sprint05c-f-ingress-wUCvql/upstream/llhttp.c",
+        "-o",
+        "/home/tiecont/.cache/aegisgate-sprint05c-f/a-1019a602c4d5-a-independent-03/.local/sprint05c-f-ingress-wUCvql/sprint05c-a-llhttp.node"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-sprint05c-f/a-1019a602c4d5-a-independent-03",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "probes": [
+    {
+      "name": "complete-known-length-half-close-control",
+      "request_hex": "504f5354202f76616c696420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20330d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a616263",
+      "request_sha256": "d0dd4581e166a4fb4f0d0e00604323bba57af8ecb759f395cd6ff67b4f8244ab",
+      "response_hex": "485454502f312e3120323030204f4b0d0a636f6e74656e742d6c656e6774683a20320d0a446174653a2053756e2c203135204e6f7620323032362030353a32373a353720474d540d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a4f4b",
+      "statuses": [
+        200
+      ],
+      "origin": {
+        "bytes": 84,
+        "raw_hex": "504f5354202f76616c696420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20330d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a616263",
+        "sha256": "d0dd4581e166a4fb4f0d0e00604323bba57af8ecb759f395cd6ff67b4f8244ab",
+        "handlers": [
+          {
+            "target": "/valid",
+            "bodyBytes": 3,
+            "ended": true,
+            "aborted": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "truncated-known-length-after-stream-admission",
+      "request_hex": "504f5354202f7472756e636174656420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a2031300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a616263",
+      "request_sha256": "3e1f8dc0ab7c696caa66f87f2051c84b7af2200d70a8d5665efe112e0011ecf9",
+      "response_hex": "485454502f312e31203430302052656a65637465640d0a436f6e74656e742d4c656e6774683a20300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "statuses": [
+        400
+      ],
+      "origin": {
+        "bytes": 89,
+        "raw_hex": "504f5354202f7472756e636174656420485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a2031300d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a616263",
+        "sha256": "3e1f8dc0ab7c696caa66f87f2051c84b7af2200d70a8d5665efe112e0011ecf9",
+        "handlers": [
+          {
+            "target": "/truncated",
+            "bodyBytes": 3,
+            "ended": false,
+            "aborted": true
+          }
+        ]
+      }
+    }
+  ],
+  "security_pass": false,
+  "script_sha256": "08d3aa3fa4d8824d8d34b398afa325db38963f888b003152fb72cb70706240aa",
+  "upstream": [
+    {
+      "name": "include/llhttp.h",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/include/llhttp.h",
+      "sha256": "52a7011f979b31f761403c1a333bf7fc26dc70f5745d8488eed1609c92097100",
+      "bytes": 31469
+    },
+    {
+      "name": "src/api.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/api.c",
+      "sha256": "0f8590206fe2f264db2825401b5fb856b979ee1363dc88b06f36dc9577afb941",
+      "bytes": 13384
+    },
+    {
+      "name": "src/http.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/http.c",
+      "sha256": "a1f2b23168f8e9b5bfa464c89027d3ca259fc649ae3d7e72bfff997d1aeb5d72",
+      "bytes": 5209
+    },
+    {
+      "name": "src/llhttp.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/llhttp.c",
+      "sha256": "f3ef756529b7444630717fa5540d4a1c9a1256874bda823c49c5a99c37f89429",
+      "bytes": 319064
+    },
+    {
+      "name": "LICENSE-MIT",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/LICENSE-MIT",
+      "sha256": "ebca854e0134cd256d673627c20499f42577eb74bacf08b9f25b626a73c91277",
+      "bytes": 1105
+    }
+  ],
+  "nodeApiHeader": {
+    "file": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node/node_api.h",
+    "sha256": "2d4560831e525b47b060ec8a0864ab73993df9e20215ce9f0fe7b24cd31af32a"
+  },
+  "compiler": "cc (GCC) 16.2.1 20260810\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "addonSha256": "9732aaa528694412a1f3373d2908b7f7082ca9a2405c4738326b166a907b4b37",
+  "native": {
+    "stateBytes": 22888,
+    "maxFeedBytes": 16384,
+    "maxWireBytes": 33554432
+  },
+  "conclusion": "Known-length stream admission can still be invalidated by premature EOF after origin bytes/handler; conditional streaming proof is not complete syntax-before-origin admission.",
+  "complete": true,
+  "cleanup": {
+    "fixture_absent": true,
+    "sockets": 0,
+    "parsers": 0,
+    "origin_listener_closed": true
+  },
+  "ended_at": "2026-11-15T05:27:57.674Z"
+}

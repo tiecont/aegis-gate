@@ -1,0 +1,3970 @@
+{
+  "observer_revision": "Sprint04-C additive bounded raw capture; not an acceptance evaluator",
+  "started_at": "2026-11-15T05:30:05.136Z",
+  "tests": [
+    {
+      "name": "HEADERS-stream-zero-immediate",
+      "mode": "coalesced-with-preface",
+      "tls": {
+        "sni": "edge-b.test",
+        "alpn": "h2",
+        "tls": "TLSv1.3",
+        "authorized": true,
+        "authorization_error": null,
+        "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+      },
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00000004000000000000001d010500000000828704012f000a3a617574686f726974790b656467652d622e74657374",
+      "malformed_sent_ms": 0.1727889999999661,
+      "lifecycle": [
+        {
+          "event": "end",
+          "ms": 1003.5600350000001,
+          "local_cleanup_started": false
+        },
+        {
+          "event": "close",
+          "ms": 1004.785761,
+          "local_cleanup_started": false
+        }
+      ],
+      "received": {
+        "bytes": 0,
+        "frames": 0,
+        "data_bytes": 0,
+        "headers": 0,
+        "streams": {},
+        "events": [],
+        "omitted": 0
+      },
+      "peer_closed": true,
+      "error_frame_observed": false,
+      "local_deadline_ms": 3500,
+      "historical_error_frame_expectation": "FAIL retained",
+      "status": "observation-complete",
+      "elapsed_ms": 1040.192459,
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "HEADERS-stream-zero-settled",
+      "mode": "after-server-SETTINGS-and-client-ACK",
+      "tls": {
+        "sni": "edge-b.test",
+        "alpn": "h2",
+        "tls": "TLSv1.3",
+        "authorized": true,
+        "authorization_error": null,
+        "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+      },
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00000004000000000000000004010000000000001d010500000000828704012f000a3a617574686f726974790b656467652d622e74657374",
+      "malformed_sent_ms": 10.461686999999984,
+      "lifecycle": [
+        {
+          "event": "end",
+          "ms": 1052.356527,
+          "local_cleanup_started": false
+        },
+        {
+          "event": "close",
+          "ms": 1052.6701869999997,
+          "local_cleanup_started": false
+        }
+      ],
+      "received": {
+        "bytes": 55,
+        "frames": 3,
+        "data_bytes": 0,
+        "headers": 0,
+        "streams": {},
+        "events": [
+          {
+            "ms": 1900.998672,
+            "kind": "frame",
+            "type": 4,
+            "name": "SETTINGS",
+            "flags": 0,
+            "stream": 0,
+            "length": 24,
+            "bytes": 33,
+            "sha256": "feb923637348f05328b8273d0adae370436408a4b6dd29bdd52099d31b2ae7c4"
+          },
+          {
+            "ms": 1901.048679,
+            "kind": "frame",
+            "type": 4,
+            "name": "SETTINGS",
+            "flags": 1,
+            "stream": 0,
+            "length": 0,
+            "bytes": 9,
+            "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+            "hex": "000000040100000000"
+          },
+          {
+            "ms": 1901.065301,
+            "kind": "frame",
+            "type": 8,
+            "name": "WINDOW_UPDATE",
+            "flags": 0,
+            "stream": 0,
+            "length": 4,
+            "bytes": 13,
+            "sha256": "3a4631461c8af8f01378774b105d15da36f29834ff95d9f5a12c4704a3c783bb",
+            "hex": "000004080000000000017f0001"
+          }
+        ],
+        "omitted": 0
+      },
+      "peer_closed": true,
+      "error_frame_observed": false,
+      "local_deadline_ms": 3500,
+      "historical_error_frame_expectation": "FAIL retained",
+      "status": "observation-complete",
+      "elapsed_ms": 1090.8091,
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "zero-WINDOW_UPDATE-immediate",
+      "mode": "coalesced-with-preface",
+      "tls": {
+        "sni": "edge-b.test",
+        "alpn": "h2",
+        "tls": "TLSv1.3",
+        "authorized": true,
+        "authorization_error": null,
+        "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+      },
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00000004000000000000000408000000000000000000",
+      "malformed_sent_ms": 0.08541700000023411,
+      "lifecycle": [
+        {
+          "event": "end",
+          "ms": 1002.1742710000003,
+          "local_cleanup_started": false
+        },
+        {
+          "event": "close",
+          "ms": 1002.819191,
+          "local_cleanup_started": false
+        }
+      ],
+      "received": {
+        "bytes": 0,
+        "frames": 0,
+        "data_bytes": 0,
+        "headers": 0,
+        "streams": {},
+        "events": [],
+        "omitted": 0
+      },
+      "peer_closed": true,
+      "error_frame_observed": false,
+      "local_deadline_ms": 3500,
+      "historical_error_frame_expectation": "FAIL retained",
+      "status": "observation-complete",
+      "elapsed_ms": 1042.466758,
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "zero-WINDOW_UPDATE-settled",
+      "mode": "after-server-SETTINGS-and-client-ACK",
+      "tls": {
+        "sni": "edge-b.test",
+        "alpn": "h2",
+        "tls": "TLSv1.3",
+        "authorized": true,
+        "authorization_error": null,
+        "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+      },
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00000004000000000000000004010000000000000408000000000000000000",
+      "malformed_sent_ms": 10.048153000000184,
+      "lifecycle": [
+        {
+          "event": "end",
+          "ms": 1051.893023,
+          "local_cleanup_started": false
+        },
+        {
+          "event": "close",
+          "ms": 1052.293357,
+          "local_cleanup_started": false
+        }
+      ],
+      "received": {
+        "bytes": 55,
+        "frames": 3,
+        "data_bytes": 0,
+        "headers": 0,
+        "streams": {},
+        "events": [
+          {
+            "ms": 4035.370349,
+            "kind": "frame",
+            "type": 4,
+            "name": "SETTINGS",
+            "flags": 0,
+            "stream": 0,
+            "length": 24,
+            "bytes": 33,
+            "sha256": "feb923637348f05328b8273d0adae370436408a4b6dd29bdd52099d31b2ae7c4"
+          },
+          {
+            "ms": 4035.404223,
+            "kind": "frame",
+            "type": 4,
+            "name": "SETTINGS",
+            "flags": 1,
+            "stream": 0,
+            "length": 0,
+            "bytes": 9,
+            "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+            "hex": "000000040100000000"
+          },
+          {
+            "ms": 4035.427201,
+            "kind": "frame",
+            "type": 8,
+            "name": "WINDOW_UPDATE",
+            "flags": 0,
+            "stream": 0,
+            "length": 4,
+            "bytes": 13,
+            "sha256": "3a4631461c8af8f01378774b105d15da36f29834ff95d9f5a12c4704a3c783bb",
+            "hex": "000004080000000000017f0001"
+          }
+        ],
+        "omitted": 0
+      },
+      "peer_closed": true,
+      "error_frame_observed": false,
+      "local_deadline_ms": 3500,
+      "historical_error_frame_expectation": "FAIL retained",
+      "status": "observation-complete",
+      "elapsed_ms": 1088.3534950000003,
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "uppercase-header-name-immediate",
+      "mode": "coalesced-with-preface",
+      "tls": {
+        "sni": "edge-b.test",
+        "alpn": "h2",
+        "tls": "TLSv1.3",
+        "authorized": true,
+        "authorization_error": null,
+        "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+      },
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a000000040000000000000026010500000001828704012f000a3a617574686f726974790b656467652d622e746573740005582d4c61620178",
+      "malformed_sent_ms": 0.07019099999979517,
+      "lifecycle": [
+        {
+          "event": "close",
+          "ms": 37.99014899999929,
+          "local_cleanup_started": true
+        }
+      ],
+      "received": {
+        "bytes": 68,
+        "frames": 4,
+        "data_bytes": 0,
+        "headers": 0,
+        "streams": {
+          "1": {
+            "frames": 1,
+            "data_bytes": 0,
+            "headers": 0,
+            "resets": [
+              1
+            ]
+          }
+        },
+        "events": [
+          {
+            "ms": 5124.885943,
+            "kind": "frame",
+            "type": 4,
+            "name": "SETTINGS",
+            "flags": 0,
+            "stream": 0,
+            "length": 24,
+            "bytes": 33,
+            "sha256": "feb923637348f05328b8273d0adae370436408a4b6dd29bdd52099d31b2ae7c4"
+          },
+          {
+            "ms": 5125.298918,
+            "kind": "frame",
+            "type": 4,
+            "name": "SETTINGS",
+            "flags": 1,
+            "stream": 0,
+            "length": 0,
+            "bytes": 9,
+            "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+            "hex": "000000040100000000"
+          },
+          {
+            "ms": 5125.411084,
+            "kind": "frame",
+            "type": 8,
+            "name": "WINDOW_UPDATE",
+            "flags": 0,
+            "stream": 0,
+            "length": 4,
+            "bytes": 13,
+            "sha256": "3a4631461c8af8f01378774b105d15da36f29834ff95d9f5a12c4704a3c783bb",
+            "hex": "000004080000000000017f0001"
+          },
+          {
+            "ms": 5125.759316,
+            "kind": "frame",
+            "type": 3,
+            "name": "RST_STREAM",
+            "flags": 0,
+            "stream": 1,
+            "length": 4,
+            "bytes": 13,
+            "sha256": "902f528c71b3d55985510ee73256814dee0bdf71ce6320ad21bd0f6531f20185",
+            "error_code": 1,
+            "hex": "00000403000000000100000001"
+          }
+        ],
+        "omitted": 0
+      },
+      "peer_closed": false,
+      "error_frame_observed": true,
+      "local_deadline_ms": 3500,
+      "historical_error_frame_expectation": "observed; historical results unchanged",
+      "status": "observation-complete",
+      "elapsed_ms": 40.24331800000073,
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "uppercase-header-name-settled",
+      "mode": "after-server-SETTINGS-and-client-ACK",
+      "tls": {
+        "sni": "edge-b.test",
+        "alpn": "h2",
+        "tls": "TLSv1.3",
+        "authorized": true,
+        "authorization_error": null,
+        "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+      },
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a000000040000000000000000040100000000000026010500000001828704012f000a3a617574686f726974790b656467652d622e746573740005582d4c61620178",
+      "malformed_sent_ms": 10.754046000000017,
+      "lifecycle": [
+        {
+          "event": "close",
+          "ms": 89.87806600000022,
+          "local_cleanup_started": true
+        }
+      ],
+      "received": {
+        "bytes": 68,
+        "frames": 4,
+        "data_bytes": 0,
+        "headers": 0,
+        "streams": {
+          "1": {
+            "frames": 1,
+            "data_bytes": 0,
+            "headers": 0,
+            "resets": [
+              1
+            ]
+          }
+        },
+        "events": [
+          {
+            "ms": 5165.085749,
+            "kind": "frame",
+            "type": 4,
+            "name": "SETTINGS",
+            "flags": 0,
+            "stream": 0,
+            "length": 24,
+            "bytes": 33,
+            "sha256": "feb923637348f05328b8273d0adae370436408a4b6dd29bdd52099d31b2ae7c4"
+          },
+          {
+            "ms": 5165.136315,
+            "kind": "frame",
+            "type": 4,
+            "name": "SETTINGS",
+            "flags": 1,
+            "stream": 0,
+            "length": 0,
+            "bytes": 9,
+            "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+            "hex": "000000040100000000"
+          },
+          {
+            "ms": 5165.15636,
+            "kind": "frame",
+            "type": 8,
+            "name": "WINDOW_UPDATE",
+            "flags": 0,
+            "stream": 0,
+            "length": 4,
+            "bytes": 13,
+            "sha256": "3a4631461c8af8f01378774b105d15da36f29834ff95d9f5a12c4704a3c783bb",
+            "hex": "000004080000000000017f0001"
+          },
+          {
+            "ms": 5215.616778,
+            "kind": "frame",
+            "type": 3,
+            "name": "RST_STREAM",
+            "flags": 0,
+            "stream": 1,
+            "length": 4,
+            "bytes": 13,
+            "sha256": "902f528c71b3d55985510ee73256814dee0bdf71ce6320ad21bd0f6531f20185",
+            "error_code": 1,
+            "hex": "00000403000000000100000001"
+          }
+        ],
+        "omitted": 0
+      },
+      "peer_closed": false,
+      "error_frame_observed": true,
+      "local_deadline_ms": 3500,
+      "historical_error_frame_expectation": "observed; historical results unchanged",
+      "status": "observation-complete",
+      "elapsed_ms": 90.30982799999947,
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "connection-specific-header-immediate",
+      "mode": "coalesced-with-preface",
+      "tls": {
+        "sni": "edge-b.test",
+        "alpn": "h2",
+        "tls": "TLSv1.3",
+        "authorized": true,
+        "authorization_error": null,
+        "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+      },
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00000004000000000000002f010500000001828704012f000a3a617574686f726974790b656467652d622e74657374000a636f6e6e656374696f6e05636c6f7365",
+      "malformed_sent_ms": 0.07668700000067474,
+      "lifecycle": [
+        {
+          "event": "close",
+          "ms": 38.67124700000022,
+          "local_cleanup_started": true
+        }
+      ],
+      "received": {
+        "bytes": 68,
+        "frames": 4,
+        "data_bytes": 0,
+        "headers": 0,
+        "streams": {
+          "1": {
+            "frames": 1,
+            "data_bytes": 0,
+            "headers": 0,
+            "resets": [
+              1
+            ]
+          }
+        },
+        "events": [
+          {
+            "ms": 5258.425877,
+            "kind": "frame",
+            "type": 4,
+            "name": "SETTINGS",
+            "flags": 0,
+            "stream": 0,
+            "length": 24,
+            "bytes": 33,
+            "sha256": "feb923637348f05328b8273d0adae370436408a4b6dd29bdd52099d31b2ae7c4"
+          },
+          {
+            "ms": 5258.458284,
+            "kind": "frame",
+            "type": 4,
+            "name": "SETTINGS",
+            "flags": 1,
+            "stream": 0,
+            "length": 0,
+            "bytes": 9,
+            "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+            "hex": "000000040100000000"
+          },
+          {
+            "ms": 5258.470646,
+            "kind": "frame",
+            "type": 8,
+            "name": "WINDOW_UPDATE",
+            "flags": 0,
+            "stream": 0,
+            "length": 4,
+            "bytes": 13,
+            "sha256": "3a4631461c8af8f01378774b105d15da36f29834ff95d9f5a12c4704a3c783bb",
+            "hex": "000004080000000000017f0001"
+          },
+          {
+            "ms": 5258.494462,
+            "kind": "frame",
+            "type": 3,
+            "name": "RST_STREAM",
+            "flags": 0,
+            "stream": 1,
+            "length": 4,
+            "bytes": 13,
+            "sha256": "902f528c71b3d55985510ee73256814dee0bdf71ce6320ad21bd0f6531f20185",
+            "error_code": 1,
+            "hex": "00000403000000000100000001"
+          }
+        ],
+        "omitted": 0
+      },
+      "peer_closed": false,
+      "error_frame_observed": true,
+      "local_deadline_ms": 3500,
+      "historical_error_frame_expectation": "observed; historical results unchanged",
+      "status": "observation-complete",
+      "elapsed_ms": 41.80086100000062,
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "connection-specific-header-settled",
+      "mode": "after-server-SETTINGS-and-client-ACK",
+      "tls": {
+        "sni": "edge-b.test",
+        "alpn": "h2",
+        "tls": "TLSv1.3",
+        "authorized": true,
+        "authorization_error": null,
+        "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+      },
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a00000004000000000000000004010000000000002f010500000001828704012f000a3a617574686f726974790b656467652d622e74657374000a636f6e6e656374696f6e05636c6f7365",
+      "malformed_sent_ms": 11.102276999999958,
+      "lifecycle": [
+        {
+          "event": "close",
+          "ms": 88.2098219999998,
+          "local_cleanup_started": true
+        }
+      ],
+      "received": {
+        "bytes": 68,
+        "frames": 4,
+        "data_bytes": 0,
+        "headers": 0,
+        "streams": {
+          "1": {
+            "frames": 1,
+            "data_bytes": 0,
+            "headers": 0,
+            "resets": [
+              1
+            ]
+          }
+        },
+        "events": [
+          {
+            "ms": 5300.561282,
+            "kind": "frame",
+            "type": 4,
+            "name": "SETTINGS",
+            "flags": 0,
+            "stream": 0,
+            "length": 24,
+            "bytes": 33,
+            "sha256": "feb923637348f05328b8273d0adae370436408a4b6dd29bdd52099d31b2ae7c4"
+          },
+          {
+            "ms": 5300.580768,
+            "kind": "frame",
+            "type": 4,
+            "name": "SETTINGS",
+            "flags": 1,
+            "stream": 0,
+            "length": 0,
+            "bytes": 9,
+            "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+            "hex": "000000040100000000"
+          },
+          {
+            "ms": 5300.592292,
+            "kind": "frame",
+            "type": 8,
+            "name": "WINDOW_UPDATE",
+            "flags": 0,
+            "stream": 0,
+            "length": 4,
+            "bytes": 13,
+            "sha256": "3a4631461c8af8f01378774b105d15da36f29834ff95d9f5a12c4704a3c783bb",
+            "hex": "000004080000000000017f0001"
+          },
+          {
+            "ms": 5352.546558,
+            "kind": "frame",
+            "type": 3,
+            "name": "RST_STREAM",
+            "flags": 0,
+            "stream": 1,
+            "length": 4,
+            "bytes": 13,
+            "sha256": "902f528c71b3d55985510ee73256814dee0bdf71ce6320ad21bd0f6531f20185",
+            "error_code": 1,
+            "hex": "00000403000000000100000001"
+          }
+        ],
+        "omitted": 0
+      },
+      "peer_closed": false,
+      "error_frame_observed": true,
+      "local_deadline_ms": 3500,
+      "historical_error_frame_expectation": "observed; historical results unchanged",
+      "status": "observation-complete",
+      "elapsed_ms": 92.32322999999997,
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "userinfo-native-after-Host-and-authority-controls",
+      "observations": [
+        {
+          "headers": {
+            "host": "edge-a.test"
+          },
+          "tls": {
+            "sni": "edge-b.test",
+            "alpn": "h2",
+            "tls": "TLSv1.3",
+            "authorized": true,
+            "authorization_error": null,
+            "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+          },
+          "events": [
+            {
+              "event": "session-goaway",
+              "code": 0,
+              "last": 2147483647,
+              "ms": 2.0075350000006438
+            },
+            {
+              "event": "response",
+              "ms": 2.496708000000581,
+              "local_cleanup_started": false,
+              "status": 421,
+              "rst_code": 0
+            },
+            {
+              "event": "end",
+              "ms": 2.5208730000003925,
+              "local_cleanup_started": false,
+              "rst_code": 0
+            },
+            {
+              "event": "close",
+              "ms": 2.8102280000002793,
+              "local_cleanup_started": false,
+              "rst_code": 0
+            },
+            {
+              "event": "socket-end",
+              "local_cleanup_started": false,
+              "ms": 3.929235000000517
+            },
+            {
+              "event": "socket-close",
+              "local_cleanup_started": false,
+              "ms": 4.0858900000002905
+            },
+            {
+              "event": "session-close",
+              "local_cleanup_started": false,
+              "ms": 4.1329640000003565
+            }
+          ],
+          "received_wire_trace": {
+            "available": false,
+            "reason": "Node native HTTP2 consumes TLSSocket internally; JavaScript data tap is not a wire observer. Use separate raw-client and origin relay evidence."
+          },
+          "stream_closed_before_local_cleanup": true,
+          "rst_code_before_local_cleanup": 0,
+          "observation_ms": 3200,
+          "historical_response_and_end_expectation": "observed"
+        },
+        {
+          "headers": {
+            ":authority": "edge-a.test"
+          },
+          "tls": {
+            "sni": "edge-b.test",
+            "alpn": "h2",
+            "tls": "TLSv1.3",
+            "authorized": true,
+            "authorization_error": null,
+            "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+          },
+          "events": [
+            {
+              "event": "session-goaway",
+              "code": 0,
+              "last": 2147483647,
+              "ms": 0.6854980000007345
+            },
+            {
+              "event": "response",
+              "ms": 0.809956000000966,
+              "local_cleanup_started": false,
+              "status": 421,
+              "rst_code": 0
+            },
+            {
+              "event": "end",
+              "ms": 0.8208520000007411,
+              "local_cleanup_started": false,
+              "rst_code": 0
+            },
+            {
+              "event": "close",
+              "ms": 0.8595440000008239,
+              "local_cleanup_started": false,
+              "rst_code": 0
+            },
+            {
+              "event": "socket-end",
+              "local_cleanup_started": false,
+              "ms": 1.0927460000002611
+            },
+            {
+              "event": "socket-close",
+              "local_cleanup_started": false,
+              "ms": 1.1756480000003648
+            },
+            {
+              "event": "session-close",
+              "local_cleanup_started": false,
+              "ms": 1.1817940000000817
+            }
+          ],
+          "received_wire_trace": {
+            "available": false,
+            "reason": "Node native HTTP2 consumes TLSSocket internally; JavaScript data tap is not a wire observer. Use separate raw-client and origin relay evidence."
+          },
+          "stream_closed_before_local_cleanup": true,
+          "rst_code_before_local_cleanup": 0,
+          "observation_ms": 3200,
+          "historical_response_and_end_expectation": "observed"
+        },
+        {
+          "headers": {
+            ":authority": "user@edge-b.test"
+          },
+          "tls": {
+            "sni": "edge-b.test",
+            "alpn": "h2",
+            "tls": "TLSv1.3",
+            "authorized": true,
+            "authorization_error": null,
+            "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+          },
+          "events": [
+            {
+              "event": "error",
+              "ms": 1.3022019999989425,
+              "local_cleanup_started": false,
+              "code": "ERR_HTTP2_STREAM_ERROR",
+              "rst_code": 1
+            },
+            {
+              "event": "close",
+              "ms": 1.3135869999987335,
+              "local_cleanup_started": false,
+              "rst_code": 1
+            },
+            {
+              "event": "socket-close",
+              "local_cleanup_started": true,
+              "ms": 3219.4756689999995
+            },
+            {
+              "event": "session-close",
+              "local_cleanup_started": true,
+              "ms": 3219.485096999999
+            }
+          ],
+          "received_wire_trace": {
+            "available": false,
+            "reason": "Node native HTTP2 consumes TLSSocket internally; JavaScript data tap is not a wire observer. Use separate raw-client and origin relay evidence."
+          },
+          "stream_closed_before_local_cleanup": true,
+          "rst_code_before_local_cleanup": 1,
+          "observation_ms": 3200,
+          "historical_response_and_end_expectation": "FAIL retained"
+        }
+      ],
+      "status": "observation-complete",
+      "elapsed_ms": 9657.633488,
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "userinfo-native-independent",
+      "observations": [
+        {
+          "headers": {
+            ":authority": "user@edge-b.test"
+          },
+          "tls": {
+            "sni": "edge-b.test",
+            "alpn": "h2",
+            "tls": "TLSv1.3",
+            "authorized": true,
+            "authorization_error": null,
+            "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+          },
+          "events": [
+            {
+              "event": "error",
+              "ms": 0.7721719999990455,
+              "local_cleanup_started": false,
+              "code": "ERR_HTTP2_STREAM_ERROR",
+              "rst_code": 1
+            },
+            {
+              "event": "close",
+              "ms": 0.7907500000001164,
+              "local_cleanup_started": false,
+              "rst_code": 1
+            },
+            {
+              "event": "socket-close",
+              "local_cleanup_started": true,
+              "ms": 3219.516028
+            },
+            {
+              "event": "session-close",
+              "local_cleanup_started": true,
+              "ms": 3219.5274120000013
+            }
+          ],
+          "received_wire_trace": {
+            "available": false,
+            "reason": "Node native HTTP2 consumes TLSSocket internally; JavaScript data tap is not a wire observer. Use separate raw-client and origin relay evidence."
+          },
+          "stream_closed_before_local_cleanup": true,
+          "rst_code_before_local_cleanup": 1,
+          "observation_ms": 3200,
+          "historical_response_and_end_expectation": "FAIL retained"
+        }
+      ],
+      "status": "observation-complete",
+      "elapsed_ms": 3221.135382000002,
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "userinfo-raw-settled",
+      "mode": "after-server-SETTINGS-and-client-ACK",
+      "tls": {
+        "sni": "edge-b.test",
+        "alpn": "h2",
+        "tls": "TLSv1.3",
+        "authorized": true,
+        "authorization_error": null,
+        "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+      },
+      "sent_hex": "505249202a20485454502f322e300d0a0d0a534d0d0a0d0a000000040000000000000000040100000000000022010500000001828704012f000a3a617574686f72697479107573657240656467652d622e74657374",
+      "malformed_sent_ms": 9.949812999999267,
+      "lifecycle": [
+        {
+          "event": "close",
+          "ms": 88.57961799999975,
+          "local_cleanup_started": true
+        }
+      ],
+      "received": {
+        "bytes": 68,
+        "frames": 4,
+        "data_bytes": 0,
+        "headers": 0,
+        "streams": {
+          "1": {
+            "frames": 1,
+            "data_bytes": 0,
+            "headers": 0,
+            "resets": [
+              1
+            ]
+          }
+        },
+        "events": [
+          {
+            "ms": 18273.044911,
+            "kind": "frame",
+            "type": 4,
+            "name": "SETTINGS",
+            "flags": 0,
+            "stream": 0,
+            "length": 24,
+            "bytes": 33,
+            "sha256": "feb923637348f05328b8273d0adae370436408a4b6dd29bdd52099d31b2ae7c4"
+          },
+          {
+            "ms": 18273.065933,
+            "kind": "frame",
+            "type": 4,
+            "name": "SETTINGS",
+            "flags": 1,
+            "stream": 0,
+            "length": 0,
+            "bytes": 9,
+            "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+            "hex": "000000040100000000"
+          },
+          {
+            "ms": 18273.072079,
+            "kind": "frame",
+            "type": 8,
+            "name": "WINDOW_UPDATE",
+            "flags": 0,
+            "stream": 0,
+            "length": 4,
+            "bytes": 13,
+            "sha256": "3a4631461c8af8f01378774b105d15da36f29834ff95d9f5a12c4704a3c783bb",
+            "hex": "000004080000000000017f0001"
+          },
+          {
+            "ms": 18323.674268,
+            "kind": "frame",
+            "type": 3,
+            "name": "RST_STREAM",
+            "flags": 0,
+            "stream": 1,
+            "length": 4,
+            "bytes": 13,
+            "sha256": "902f528c71b3d55985510ee73256814dee0bdf71ce6320ad21bd0f6531f20185",
+            "error_code": 1,
+            "hex": "00000403000000000100000001"
+          }
+        ],
+        "omitted": 0
+      },
+      "peer_closed": false,
+      "error_frame_observed": true,
+      "local_deadline_ms": 3500,
+      "status": "observation-complete",
+      "elapsed_ms": 90.99949900000138,
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "paused-native-reader-large8",
+      "tls": {
+        "sni": "edge-b.test",
+        "alpn": "h2",
+        "tls": "TLSv1.3",
+        "authorized": true,
+        "authorization_error": null,
+        "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+      },
+      "samples": [
+        {
+          "after_ms": 0,
+          "produced": 65536,
+          "pauses": 1,
+          "origin_last_backpressure_writable_length": 65536,
+          "client_readable_length": 0,
+          "stream_state": {
+            "state": 5,
+            "weight": 16,
+            "sumDependencyWeight": 0,
+            "localClose": 1,
+            "remoteClose": 0,
+            "localWindowSize": 65535
+          },
+          "session_state": {
+            "effectiveLocalWindowSize": 65535,
+            "effectiveRecvDataLength": 0,
+            "nextStreamID": 3,
+            "localWindowSize": 65535,
+            "lastProcStreamID": 0,
+            "remoteWindowSize": 25165824,
+            "outboundQueueSize": 0,
+            "deflateDynamicTableSize": 53,
+            "inflateDynamicTableSize": 220
+          },
+          "received_wire_trace": {
+            "available": false,
+            "reason": "Node native HTTP2 consumes TLSSocket internally; JavaScript data tap is not a wire observer. Use separate raw-client and origin relay evidence."
+          },
+          "origin_wire_at_sample": {
+            "records": [
+              {
+                "id": 1,
+                "opened_ms": 18371.059539,
+                "candidate_tls": {
+                  "sni": "lab-origin.test",
+                  "alpn": "h2",
+                  "tls": "TLSv1.2",
+                  "authorized": false,
+                  "authorization_error": null,
+                  "local_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+                },
+                "candidate_to_origin": {
+                  "bytes": 241,
+                  "frames": 2,
+                  "data_bytes": 0,
+                  "headers": 1,
+                  "streams": {
+                    "1": {
+                      "frames": 1,
+                      "data_bytes": 0,
+                      "headers": 1,
+                      "resets": []
+                    }
+                  },
+                  "events": [
+                    {
+                      "ms": 18375.773935,
+                      "kind": "preface",
+                      "bytes": 24
+                    },
+                    {
+                      "ms": 18375.807809,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 30,
+                      "bytes": 39,
+                      "sha256": "af8ffcfa6ac22de3f60c9039c2c098db1fb1053e99a319ce5341b1aba2f9f5a4"
+                    },
+                    {
+                      "ms": 18375.822406,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 5,
+                      "stream": 1,
+                      "length": 169,
+                      "bytes": 178,
+                      "sha256": "9ca585228d9a3854eafd385862bc35f18e262c5ce2c01091d23f5e8eb89dc665"
+                    }
+                  ],
+                  "omitted": 0
+                },
+                "origin_to_candidate": {
+                  "bytes": 65626,
+                  "frames": 7,
+                  "data_bytes": 65535,
+                  "headers": 1,
+                  "streams": {
+                    "1": {
+                      "frames": 5,
+                      "data_bytes": 65535,
+                      "headers": 1,
+                      "resets": []
+                    }
+                  },
+                  "events": [
+                    {
+                      "ms": 18378.4618,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053",
+                      "hex": "000000040000000000"
+                    },
+                    {
+                      "ms": 18378.474022,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 1,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                      "hex": "000000040100000000"
+                    },
+                    {
+                      "ms": 18378.486315,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 4,
+                      "stream": 1,
+                      "length": 28,
+                      "bytes": 37,
+                      "sha256": "7f8b7b88ea1383b3934ba4f32f3fee8e2781f3f6a78fa593f4cea4b8101d6361"
+                    }
+                  ],
+                  "omitted": 0
+                },
+                "lifecycle": [],
+                "native_tls": {
+                  "sni": "lab-origin.test",
+                  "alpn": "h2",
+                  "tls": "TLSv1.3",
+                  "authorized": true,
+                  "authorization_error": null,
+                  "peer_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+                }
+              }
+            ],
+            "errors": 0,
+            "omitted": 0,
+            "bytes": 241,
+            "headers": 1,
+            "data_bytes": 0
+          },
+          "origin_closed": false,
+          "resources": {
+            "ms": 18483.806543,
+            "envoy_pid": 1450570,
+            "rss_kib": 82140,
+            "executable_sha256": "1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc",
+            "isolation": "prlimit core0 nofile1024 cpu180; no container cgroup memory/pid isolation; not a resource-eligibility proof",
+            "observer_process": {
+              "rss": 190029824,
+              "heapTotal": 16388096,
+              "heapUsed": 12865048,
+              "external": 110871695,
+              "arrayBuffers": 107450053
+            }
+          }
+        },
+        {
+          "after_ms": 200,
+          "produced": 196608,
+          "pauses": 3,
+          "origin_last_backpressure_writable_length": 65536,
+          "client_readable_length": 65535,
+          "stream_state": {
+            "state": 5,
+            "weight": 16,
+            "sumDependencyWeight": 0,
+            "localClose": 1,
+            "remoteClose": 0,
+            "localWindowSize": 0
+          },
+          "session_state": {
+            "effectiveLocalWindowSize": 65535,
+            "effectiveRecvDataLength": 0,
+            "nextStreamID": 3,
+            "localWindowSize": 65535,
+            "lastProcStreamID": 0,
+            "remoteWindowSize": 25165824,
+            "outboundQueueSize": 0,
+            "deflateDynamicTableSize": 53,
+            "inflateDynamicTableSize": 220
+          },
+          "received_wire_trace": {
+            "available": false,
+            "reason": "Node native HTTP2 consumes TLSSocket internally; JavaScript data tap is not a wire observer. Use separate raw-client and origin relay evidence."
+          },
+          "origin_wire_at_sample": {
+            "records": [
+              {
+                "id": 1,
+                "opened_ms": 18371.059539,
+                "candidate_tls": {
+                  "sni": "lab-origin.test",
+                  "alpn": "h2",
+                  "tls": "TLSv1.2",
+                  "authorized": false,
+                  "authorization_error": null,
+                  "local_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+                },
+                "candidate_to_origin": {
+                  "bytes": 354,
+                  "frames": 11,
+                  "data_bytes": 0,
+                  "headers": 1,
+                  "streams": {
+                    "1": {
+                      "frames": 5,
+                      "data_bytes": 0,
+                      "headers": 1,
+                      "resets": []
+                    }
+                  },
+                  "events": [
+                    {
+                      "ms": 18375.773935,
+                      "kind": "preface",
+                      "bytes": 24
+                    },
+                    {
+                      "ms": 18375.807809,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 30,
+                      "bytes": 39,
+                      "sha256": "af8ffcfa6ac22de3f60c9039c2c098db1fb1053e99a319ce5341b1aba2f9f5a4"
+                    },
+                    {
+                      "ms": 18375.822406,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 5,
+                      "stream": 1,
+                      "length": 169,
+                      "bytes": 178,
+                      "sha256": "9ca585228d9a3854eafd385862bc35f18e262c5ce2c01091d23f5e8eb89dc665"
+                    },
+                    {
+                      "ms": 18484.129003,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 1,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                      "hex": "000000040100000000"
+                    },
+                    {
+                      "ms": 18484.273505,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                      "hex": "00000408000000000000008000"
+                    },
+                    {
+                      "ms": 18484.281607,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf",
+                      "hex": "00000408000000000100008000"
+                    },
+                    {
+                      "ms": 18484.318903,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6",
+                      "hex": "00000408000000000000007fff"
+                    },
+                    {
+                      "ms": 18484.325538,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3",
+                      "hex": "00000408000000000100007fff"
+                    },
+                    {
+                      "ms": 18526.411416,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "ba10014c10adaccd6feb180df84cf4e8e6a12d2c6215c0c66439cb3d27ad7d0a",
+                      "hex": "00000408000000000000008001"
+                    },
+                    {
+                      "ms": 18526.420845,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "b8c00b09178b65c267d8a6afa4b6be3d8cfd792ce25c6f9e38d57586874ec189",
+                      "hex": "00000408000000000100008001"
+                    },
+                    {
+                      "ms": 18527.146432,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                      "hex": "00000408000000000000008000"
+                    },
+                    {
+                      "ms": 18527.155302,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf",
+                      "hex": "00000408000000000100008000"
+                    }
+                  ],
+                  "omitted": 0
+                },
+                "origin_to_candidate": {
+                  "bytes": 196788,
+                  "frames": 17,
+                  "data_bytes": 196607,
+                  "headers": 1,
+                  "streams": {
+                    "1": {
+                      "frames": 15,
+                      "data_bytes": 196607,
+                      "headers": 1,
+                      "resets": []
+                    }
+                  },
+                  "events": [
+                    {
+                      "ms": 18378.4618,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053",
+                      "hex": "000000040000000000"
+                    },
+                    {
+                      "ms": 18378.474022,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 1,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                      "hex": "000000040100000000"
+                    },
+                    {
+                      "ms": 18378.486315,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 4,
+                      "stream": 1,
+                      "length": 28,
+                      "bytes": 37,
+                      "sha256": "7f8b7b88ea1383b3934ba4f32f3fee8e2781f3f6a78fa593f4cea4b8101d6361"
+                    }
+                  ],
+                  "omitted": 0
+                },
+                "lifecycle": [],
+                "native_tls": {
+                  "sni": "lab-origin.test",
+                  "alpn": "h2",
+                  "tls": "TLSv1.3",
+                  "authorized": true,
+                  "authorization_error": null,
+                  "peer_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+                }
+              }
+            ],
+            "errors": 0,
+            "omitted": 0,
+            "bytes": 354,
+            "headers": 1,
+            "data_bytes": 0
+          },
+          "origin_closed": false,
+          "resources": {
+            "ms": 18781.639976,
+            "envoy_pid": 1450570,
+            "rss_kib": 82144,
+            "executable_sha256": "1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc",
+            "isolation": "prlimit core0 nofile1024 cpu180; no container cgroup memory/pid isolation; not a resource-eligibility proof",
+            "observer_process": {
+              "rss": 297418752,
+              "heapTotal": 12718080,
+              "heapUsed": 9870352,
+              "external": 218104502,
+              "arrayBuffers": 214736714
+            }
+          }
+        },
+        {
+          "after_ms": 500,
+          "produced": 196608,
+          "pauses": 3,
+          "origin_last_backpressure_writable_length": 65536,
+          "client_readable_length": 65535,
+          "stream_state": {
+            "state": 5,
+            "weight": 16,
+            "sumDependencyWeight": 0,
+            "localClose": 1,
+            "remoteClose": 0,
+            "localWindowSize": 0
+          },
+          "session_state": {
+            "effectiveLocalWindowSize": 65535,
+            "effectiveRecvDataLength": 0,
+            "nextStreamID": 3,
+            "localWindowSize": 65535,
+            "lastProcStreamID": 0,
+            "remoteWindowSize": 25165824,
+            "outboundQueueSize": 0,
+            "deflateDynamicTableSize": 53,
+            "inflateDynamicTableSize": 220
+          },
+          "received_wire_trace": {
+            "available": false,
+            "reason": "Node native HTTP2 consumes TLSSocket internally; JavaScript data tap is not a wire observer. Use separate raw-client and origin relay evidence."
+          },
+          "origin_wire_at_sample": {
+            "records": [
+              {
+                "id": 1,
+                "opened_ms": 18371.059539,
+                "candidate_tls": {
+                  "sni": "lab-origin.test",
+                  "alpn": "h2",
+                  "tls": "TLSv1.2",
+                  "authorized": false,
+                  "authorization_error": null,
+                  "local_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+                },
+                "candidate_to_origin": {
+                  "bytes": 354,
+                  "frames": 11,
+                  "data_bytes": 0,
+                  "headers": 1,
+                  "streams": {
+                    "1": {
+                      "frames": 5,
+                      "data_bytes": 0,
+                      "headers": 1,
+                      "resets": []
+                    }
+                  },
+                  "events": [
+                    {
+                      "ms": 18375.773935,
+                      "kind": "preface",
+                      "bytes": 24
+                    },
+                    {
+                      "ms": 18375.807809,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 30,
+                      "bytes": 39,
+                      "sha256": "af8ffcfa6ac22de3f60c9039c2c098db1fb1053e99a319ce5341b1aba2f9f5a4"
+                    },
+                    {
+                      "ms": 18375.822406,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 5,
+                      "stream": 1,
+                      "length": 169,
+                      "bytes": 178,
+                      "sha256": "9ca585228d9a3854eafd385862bc35f18e262c5ce2c01091d23f5e8eb89dc665"
+                    },
+                    {
+                      "ms": 18484.129003,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 1,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                      "hex": "000000040100000000"
+                    },
+                    {
+                      "ms": 18484.273505,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                      "hex": "00000408000000000000008000"
+                    },
+                    {
+                      "ms": 18484.281607,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf",
+                      "hex": "00000408000000000100008000"
+                    },
+                    {
+                      "ms": 18484.318903,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6",
+                      "hex": "00000408000000000000007fff"
+                    },
+                    {
+                      "ms": 18484.325538,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3",
+                      "hex": "00000408000000000100007fff"
+                    },
+                    {
+                      "ms": 18526.411416,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "ba10014c10adaccd6feb180df84cf4e8e6a12d2c6215c0c66439cb3d27ad7d0a",
+                      "hex": "00000408000000000000008001"
+                    },
+                    {
+                      "ms": 18526.420845,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "b8c00b09178b65c267d8a6afa4b6be3d8cfd792ce25c6f9e38d57586874ec189",
+                      "hex": "00000408000000000100008001"
+                    },
+                    {
+                      "ms": 18527.146432,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                      "hex": "00000408000000000000008000"
+                    },
+                    {
+                      "ms": 18527.155302,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf",
+                      "hex": "00000408000000000100008000"
+                    }
+                  ],
+                  "omitted": 0
+                },
+                "origin_to_candidate": {
+                  "bytes": 196788,
+                  "frames": 17,
+                  "data_bytes": 196607,
+                  "headers": 1,
+                  "streams": {
+                    "1": {
+                      "frames": 15,
+                      "data_bytes": 196607,
+                      "headers": 1,
+                      "resets": []
+                    }
+                  },
+                  "events": [
+                    {
+                      "ms": 18378.4618,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053",
+                      "hex": "000000040000000000"
+                    },
+                    {
+                      "ms": 18378.474022,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 1,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                      "hex": "000000040100000000"
+                    },
+                    {
+                      "ms": 18378.486315,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 4,
+                      "stream": 1,
+                      "length": 28,
+                      "bytes": 37,
+                      "sha256": "7f8b7b88ea1383b3934ba4f32f3fee8e2781f3f6a78fa593f4cea4b8101d6361"
+                    }
+                  ],
+                  "omitted": 0
+                },
+                "lifecycle": [],
+                "native_tls": {
+                  "sni": "lab-origin.test",
+                  "alpn": "h2",
+                  "tls": "TLSv1.3",
+                  "authorized": true,
+                  "authorization_error": null,
+                  "peer_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+                }
+              }
+            ],
+            "errors": 0,
+            "omitted": 0,
+            "bytes": 354,
+            "headers": 1,
+            "data_bytes": 0
+          },
+          "origin_closed": false,
+          "resources": {
+            "ms": 19191.970237,
+            "envoy_pid": 1450570,
+            "rss_kib": 82144,
+            "executable_sha256": "1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc",
+            "isolation": "prlimit core0 nofile1024 cpu180; no container cgroup memory/pid isolation; not a resource-eligibility proof",
+            "observer_process": {
+              "rss": 297820160,
+              "heapTotal": 12980224,
+              "heapUsed": 9828712,
+              "external": 217842246,
+              "arrayBuffers": 214474458
+            }
+          }
+        }
+      ],
+      "origin_closed_before_client_cancel": false,
+      "cancel_ms": 4.569335000000137,
+      "origin_rst_code": 2,
+      "cancellation_proven": true,
+      "actual_cancel_started_ms": 19192.038053,
+      "historical_8MiB_expectation": "not a historical PASS",
+      "caveat": "producer write count, transport DATA/window state and process RSS are distinct measurements",
+      "status": "observation-complete",
+      "elapsed_ms": 846.3995619999987,
+      "origin": {
+        "connections": 1,
+        "bytes": 380,
+        "headers": 1,
+        "data_bytes": 0,
+        "handlers": 1,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "paused-native-reader-large32",
+      "tls": {
+        "sni": "edge-b.test",
+        "alpn": "h2",
+        "tls": "TLSv1.3",
+        "authorized": true,
+        "authorization_error": null,
+        "peer_fingerprint256": "B6:EC:8B:D5:4B:FC:C3:E1:04:C5:1D:AF:5B:D5:63:43:01:F1:6B:4F:08:CA:ED:87:10:1C:A5:61:E6:35:E5:C7"
+      },
+      "samples": [
+        {
+          "after_ms": 0,
+          "produced": 65536,
+          "pauses": 1,
+          "origin_last_backpressure_writable_length": 65536,
+          "client_readable_length": 0,
+          "stream_state": {
+            "state": 5,
+            "weight": 16,
+            "sumDependencyWeight": 0,
+            "localClose": 1,
+            "remoteClose": 0,
+            "localWindowSize": 65535
+          },
+          "session_state": {
+            "effectiveLocalWindowSize": 65535,
+            "effectiveRecvDataLength": 0,
+            "nextStreamID": 3,
+            "localWindowSize": 65535,
+            "lastProcStreamID": 0,
+            "remoteWindowSize": 25165824,
+            "outboundQueueSize": 0,
+            "deflateDynamicTableSize": 53,
+            "inflateDynamicTableSize": 220
+          },
+          "received_wire_trace": {
+            "available": false,
+            "reason": "Node native HTTP2 consumes TLSSocket internally; JavaScript data tap is not a wire observer. Use separate raw-client and origin relay evidence."
+          },
+          "origin_wire_at_sample": {
+            "records": [
+              {
+                "id": 1,
+                "opened_ms": 18371.059539,
+                "candidate_tls": {
+                  "sni": "lab-origin.test",
+                  "alpn": "h2",
+                  "tls": "TLSv1.2",
+                  "authorized": false,
+                  "authorization_error": null,
+                  "local_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+                },
+                "candidate_to_origin": {
+                  "bytes": 434,
+                  "frames": 14,
+                  "data_bytes": 0,
+                  "headers": 2,
+                  "streams": {
+                    "1": {
+                      "frames": 6,
+                      "data_bytes": 0,
+                      "headers": 1,
+                      "resets": [
+                        2
+                      ]
+                    },
+                    "3": {
+                      "frames": 1,
+                      "data_bytes": 0,
+                      "headers": 1,
+                      "resets": []
+                    }
+                  },
+                  "events": [
+                    {
+                      "ms": 18375.773935,
+                      "kind": "preface",
+                      "bytes": 24
+                    },
+                    {
+                      "ms": 18375.807809,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 30,
+                      "bytes": 39,
+                      "sha256": "af8ffcfa6ac22de3f60c9039c2c098db1fb1053e99a319ce5341b1aba2f9f5a4"
+                    },
+                    {
+                      "ms": 18375.822406,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 5,
+                      "stream": 1,
+                      "length": 169,
+                      "bytes": 178,
+                      "sha256": "9ca585228d9a3854eafd385862bc35f18e262c5ce2c01091d23f5e8eb89dc665"
+                    },
+                    {
+                      "ms": 18484.129003,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 1,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                      "hex": "000000040100000000"
+                    },
+                    {
+                      "ms": 18484.273505,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                      "hex": "00000408000000000000008000"
+                    },
+                    {
+                      "ms": 18484.281607,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf",
+                      "hex": "00000408000000000100008000"
+                    },
+                    {
+                      "ms": 18484.318903,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6",
+                      "hex": "00000408000000000000007fff"
+                    },
+                    {
+                      "ms": 18484.325538,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3",
+                      "hex": "00000408000000000100007fff"
+                    },
+                    {
+                      "ms": 18526.411416,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "ba10014c10adaccd6feb180df84cf4e8e6a12d2c6215c0c66439cb3d27ad7d0a",
+                      "hex": "00000408000000000000008001"
+                    },
+                    {
+                      "ms": 18526.420845,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "b8c00b09178b65c267d8a6afa4b6be3d8cfd792ce25c6f9e38d57586874ec189",
+                      "hex": "00000408000000000100008001"
+                    },
+                    {
+                      "ms": 18527.146432,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                      "hex": "00000408000000000000008000"
+                    },
+                    {
+                      "ms": 18527.155302,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf",
+                      "hex": "00000408000000000100008000"
+                    },
+                    {
+                      "ms": 19195.456953,
+                      "kind": "frame",
+                      "type": 3,
+                      "name": "RST_STREAM",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "be05886d6c3a9b4aa5bd410ed9e68fa7a47f089f082517b140a6ac7e1dfe3dca",
+                      "error_code": 2,
+                      "hex": "00000403000000000100000002"
+                    },
+                    {
+                      "ms": 19195.486985,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "adce1975bc8380c32b6ef030b50feadbfb3f33632c993690b956ff8e39da814f",
+                      "hex": "0000040800000000000000ffff"
+                    },
+                    {
+                      "ms": 19211.447461,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 5,
+                      "stream": 3,
+                      "length": 45,
+                      "bytes": 54,
+                      "sha256": "08f615ebe41c95f3d91e3877a4aaf4aa74b96d82f25462bf63ee48ce322ecf5c"
+                    }
+                  ],
+                  "omitted": 0
+                },
+                "origin_to_candidate": {
+                  "bytes": 262393,
+                  "frames": 22,
+                  "data_bytes": 262142,
+                  "headers": 2,
+                  "streams": {
+                    "1": {
+                      "frames": 15,
+                      "data_bytes": 196607,
+                      "headers": 1,
+                      "resets": []
+                    },
+                    "3": {
+                      "frames": 5,
+                      "data_bytes": 65535,
+                      "headers": 1,
+                      "resets": []
+                    }
+                  },
+                  "events": [
+                    {
+                      "ms": 18378.4618,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053",
+                      "hex": "000000040000000000"
+                    },
+                    {
+                      "ms": 18378.474022,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 1,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                      "hex": "000000040100000000"
+                    },
+                    {
+                      "ms": 18378.486315,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 4,
+                      "stream": 1,
+                      "length": 28,
+                      "bytes": 37,
+                      "sha256": "7f8b7b88ea1383b3934ba4f32f3fee8e2781f3f6a78fa593f4cea4b8101d6361"
+                    },
+                    {
+                      "ms": 19237.464958,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 4,
+                      "stream": 3,
+                      "length": 25,
+                      "bytes": 34,
+                      "sha256": "a7d1834cd6cfdbd398ef7b41d2fd92ba88879b9fd7a5992962f2d1475ae37381"
+                    }
+                  ],
+                  "omitted": 0
+                },
+                "lifecycle": [],
+                "native_tls": {
+                  "sni": "lab-origin.test",
+                  "alpn": "h2",
+                  "tls": "TLSv1.3",
+                  "authorized": true,
+                  "authorization_error": null,
+                  "peer_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+                }
+              }
+            ],
+            "errors": 0,
+            "omitted": 0,
+            "bytes": 434,
+            "headers": 2,
+            "data_bytes": 0
+          },
+          "origin_closed": false,
+          "resources": {
+            "ms": 19338.984599,
+            "envoy_pid": 1450570,
+            "rss_kib": 82144,
+            "executable_sha256": "1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc",
+            "isolation": "prlimit core0 nofile1024 cpu180; no container cgroup memory/pid isolation; not a resource-eligibility proof",
+            "observer_process": {
+              "rss": 298106880,
+              "heapTotal": 12718080,
+              "heapUsed": 10222552,
+              "external": 218158353,
+              "arrayBuffers": 214785976
+            }
+          }
+        },
+        {
+          "after_ms": 200,
+          "produced": 196608,
+          "pauses": 3,
+          "origin_last_backpressure_writable_length": 65536,
+          "client_readable_length": 65535,
+          "stream_state": {
+            "state": 5,
+            "weight": 16,
+            "sumDependencyWeight": 0,
+            "localClose": 1,
+            "remoteClose": 0,
+            "localWindowSize": 0
+          },
+          "session_state": {
+            "effectiveLocalWindowSize": 65535,
+            "effectiveRecvDataLength": 0,
+            "nextStreamID": 3,
+            "localWindowSize": 65535,
+            "lastProcStreamID": 0,
+            "remoteWindowSize": 25165824,
+            "outboundQueueSize": 0,
+            "deflateDynamicTableSize": 53,
+            "inflateDynamicTableSize": 220
+          },
+          "received_wire_trace": {
+            "available": false,
+            "reason": "Node native HTTP2 consumes TLSSocket internally; JavaScript data tap is not a wire observer. Use separate raw-client and origin relay evidence."
+          },
+          "origin_wire_at_sample": {
+            "records": [
+              {
+                "id": 1,
+                "opened_ms": 18371.059539,
+                "candidate_tls": {
+                  "sni": "lab-origin.test",
+                  "alpn": "h2",
+                  "tls": "TLSv1.2",
+                  "authorized": false,
+                  "authorization_error": null,
+                  "local_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+                },
+                "candidate_to_origin": {
+                  "bytes": 538,
+                  "frames": 22,
+                  "data_bytes": 0,
+                  "headers": 2,
+                  "streams": {
+                    "1": {
+                      "frames": 6,
+                      "data_bytes": 0,
+                      "headers": 1,
+                      "resets": [
+                        2
+                      ]
+                    },
+                    "3": {
+                      "frames": 5,
+                      "data_bytes": 0,
+                      "headers": 1,
+                      "resets": []
+                    }
+                  },
+                  "events": [
+                    {
+                      "ms": 18375.773935,
+                      "kind": "preface",
+                      "bytes": 24
+                    },
+                    {
+                      "ms": 18375.807809,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 30,
+                      "bytes": 39,
+                      "sha256": "af8ffcfa6ac22de3f60c9039c2c098db1fb1053e99a319ce5341b1aba2f9f5a4"
+                    },
+                    {
+                      "ms": 18375.822406,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 5,
+                      "stream": 1,
+                      "length": 169,
+                      "bytes": 178,
+                      "sha256": "9ca585228d9a3854eafd385862bc35f18e262c5ce2c01091d23f5e8eb89dc665"
+                    },
+                    {
+                      "ms": 18484.129003,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 1,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                      "hex": "000000040100000000"
+                    },
+                    {
+                      "ms": 18484.273505,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                      "hex": "00000408000000000000008000"
+                    },
+                    {
+                      "ms": 18484.281607,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf",
+                      "hex": "00000408000000000100008000"
+                    },
+                    {
+                      "ms": 18484.318903,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6",
+                      "hex": "00000408000000000000007fff"
+                    },
+                    {
+                      "ms": 18484.325538,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3",
+                      "hex": "00000408000000000100007fff"
+                    },
+                    {
+                      "ms": 18526.411416,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "ba10014c10adaccd6feb180df84cf4e8e6a12d2c6215c0c66439cb3d27ad7d0a",
+                      "hex": "00000408000000000000008001"
+                    },
+                    {
+                      "ms": 18526.420845,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "b8c00b09178b65c267d8a6afa4b6be3d8cfd792ce25c6f9e38d57586874ec189",
+                      "hex": "00000408000000000100008001"
+                    },
+                    {
+                      "ms": 18527.146432,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                      "hex": "00000408000000000000008000"
+                    },
+                    {
+                      "ms": 18527.155302,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf",
+                      "hex": "00000408000000000100008000"
+                    },
+                    {
+                      "ms": 19195.456953,
+                      "kind": "frame",
+                      "type": 3,
+                      "name": "RST_STREAM",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "be05886d6c3a9b4aa5bd410ed9e68fa7a47f089f082517b140a6ac7e1dfe3dca",
+                      "error_code": 2,
+                      "hex": "00000403000000000100000002"
+                    },
+                    {
+                      "ms": 19195.486985,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "adce1975bc8380c32b6ef030b50feadbfb3f33632c993690b956ff8e39da814f",
+                      "hex": "0000040800000000000000ffff"
+                    },
+                    {
+                      "ms": 19211.447461,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 5,
+                      "stream": 3,
+                      "length": 45,
+                      "bytes": 54,
+                      "sha256": "08f615ebe41c95f3d91e3877a4aaf4aa74b96d82f25462bf63ee48ce322ecf5c"
+                    },
+                    {
+                      "ms": 19340.963917,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                      "hex": "00000408000000000000008000"
+                    },
+                    {
+                      "ms": 19340.978165,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 3,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "7ca05a020c324f718a4d5cf94549eb66b104d96b4df74327a281da0655693bbb",
+                      "hex": "00000408000000000300008000"
+                    },
+                    {
+                      "ms": 19341.248663,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6",
+                      "hex": "00000408000000000000007fff"
+                    },
+                    {
+                      "ms": 19341.258301,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 3,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "b148a20d6d5d03e11ef777a503708f9df6096f0f1639feea4b2d6c50ebe9e46d",
+                      "hex": "00000408000000000300007fff"
+                    },
+                    {
+                      "ms": 19342.633278,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "ba10014c10adaccd6feb180df84cf4e8e6a12d2c6215c0c66439cb3d27ad7d0a",
+                      "hex": "00000408000000000000008001"
+                    },
+                    {
+                      "ms": 19342.641729,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 3,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "798d27a9f99d7146ced9d1ee42a59c35d579a53b2175e04a74949d1de373bdb3",
+                      "hex": "00000408000000000300008001"
+                    },
+                    {
+                      "ms": 19384.609784,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                      "hex": "00000408000000000000008000"
+                    },
+                    {
+                      "ms": 19384.623612,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 3,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "7ca05a020c324f718a4d5cf94549eb66b104d96b4df74327a281da0655693bbb",
+                      "hex": "00000408000000000300008000"
+                    }
+                  ],
+                  "omitted": 0
+                },
+                "origin_to_candidate": {
+                  "bytes": 393555,
+                  "frames": 32,
+                  "data_bytes": 393214,
+                  "headers": 2,
+                  "streams": {
+                    "1": {
+                      "frames": 15,
+                      "data_bytes": 196607,
+                      "headers": 1,
+                      "resets": []
+                    },
+                    "3": {
+                      "frames": 15,
+                      "data_bytes": 196607,
+                      "headers": 1,
+                      "resets": []
+                    }
+                  },
+                  "events": [
+                    {
+                      "ms": 18378.4618,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053",
+                      "hex": "000000040000000000"
+                    },
+                    {
+                      "ms": 18378.474022,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 1,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                      "hex": "000000040100000000"
+                    },
+                    {
+                      "ms": 18378.486315,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 4,
+                      "stream": 1,
+                      "length": 28,
+                      "bytes": 37,
+                      "sha256": "7f8b7b88ea1383b3934ba4f32f3fee8e2781f3f6a78fa593f4cea4b8101d6361"
+                    },
+                    {
+                      "ms": 19237.464958,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 4,
+                      "stream": 3,
+                      "length": 25,
+                      "bytes": 34,
+                      "sha256": "a7d1834cd6cfdbd398ef7b41d2fd92ba88879b9fd7a5992962f2d1475ae37381"
+                    }
+                  ],
+                  "omitted": 0
+                },
+                "lifecycle": [],
+                "native_tls": {
+                  "sni": "lab-origin.test",
+                  "alpn": "h2",
+                  "tls": "TLSv1.3",
+                  "authorized": true,
+                  "authorization_error": null,
+                  "peer_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+                }
+              }
+            ],
+            "errors": 0,
+            "omitted": 0,
+            "bytes": 538,
+            "headers": 2,
+            "data_bytes": 0
+          },
+          "origin_closed": false,
+          "resources": {
+            "ms": 19643.662043,
+            "envoy_pid": 1450570,
+            "rss_kib": 82144,
+            "executable_sha256": "1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc",
+            "isolation": "prlimit core0 nofile1024 cpu180; no container cgroup memory/pid isolation; not a resource-eligibility proof",
+            "observer_process": {
+              "rss": 298323968,
+              "heapTotal": 12980224,
+              "heapUsed": 9930944,
+              "external": 218366889,
+              "arrayBuffers": 214999078
+            }
+          }
+        },
+        {
+          "after_ms": 500,
+          "produced": 196608,
+          "pauses": 3,
+          "origin_last_backpressure_writable_length": 65536,
+          "client_readable_length": 65535,
+          "stream_state": {
+            "state": 5,
+            "weight": 16,
+            "sumDependencyWeight": 0,
+            "localClose": 1,
+            "remoteClose": 0,
+            "localWindowSize": 0
+          },
+          "session_state": {
+            "effectiveLocalWindowSize": 65535,
+            "effectiveRecvDataLength": 0,
+            "nextStreamID": 3,
+            "localWindowSize": 65535,
+            "lastProcStreamID": 0,
+            "remoteWindowSize": 25165824,
+            "outboundQueueSize": 0,
+            "deflateDynamicTableSize": 53,
+            "inflateDynamicTableSize": 220
+          },
+          "received_wire_trace": {
+            "available": false,
+            "reason": "Node native HTTP2 consumes TLSSocket internally; JavaScript data tap is not a wire observer. Use separate raw-client and origin relay evidence."
+          },
+          "origin_wire_at_sample": {
+            "records": [
+              {
+                "id": 1,
+                "opened_ms": 18371.059539,
+                "candidate_tls": {
+                  "sni": "lab-origin.test",
+                  "alpn": "h2",
+                  "tls": "TLSv1.2",
+                  "authorized": false,
+                  "authorization_error": null,
+                  "local_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+                },
+                "candidate_to_origin": {
+                  "bytes": 538,
+                  "frames": 22,
+                  "data_bytes": 0,
+                  "headers": 2,
+                  "streams": {
+                    "1": {
+                      "frames": 6,
+                      "data_bytes": 0,
+                      "headers": 1,
+                      "resets": [
+                        2
+                      ]
+                    },
+                    "3": {
+                      "frames": 5,
+                      "data_bytes": 0,
+                      "headers": 1,
+                      "resets": []
+                    }
+                  },
+                  "events": [
+                    {
+                      "ms": 18375.773935,
+                      "kind": "preface",
+                      "bytes": 24
+                    },
+                    {
+                      "ms": 18375.807809,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 30,
+                      "bytes": 39,
+                      "sha256": "af8ffcfa6ac22de3f60c9039c2c098db1fb1053e99a319ce5341b1aba2f9f5a4"
+                    },
+                    {
+                      "ms": 18375.822406,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 5,
+                      "stream": 1,
+                      "length": 169,
+                      "bytes": 178,
+                      "sha256": "9ca585228d9a3854eafd385862bc35f18e262c5ce2c01091d23f5e8eb89dc665"
+                    },
+                    {
+                      "ms": 18484.129003,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 1,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                      "hex": "000000040100000000"
+                    },
+                    {
+                      "ms": 18484.273505,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                      "hex": "00000408000000000000008000"
+                    },
+                    {
+                      "ms": 18484.281607,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf",
+                      "hex": "00000408000000000100008000"
+                    },
+                    {
+                      "ms": 18484.318903,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6",
+                      "hex": "00000408000000000000007fff"
+                    },
+                    {
+                      "ms": 18484.325538,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3",
+                      "hex": "00000408000000000100007fff"
+                    },
+                    {
+                      "ms": 18526.411416,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "ba10014c10adaccd6feb180df84cf4e8e6a12d2c6215c0c66439cb3d27ad7d0a",
+                      "hex": "00000408000000000000008001"
+                    },
+                    {
+                      "ms": 18526.420845,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "b8c00b09178b65c267d8a6afa4b6be3d8cfd792ce25c6f9e38d57586874ec189",
+                      "hex": "00000408000000000100008001"
+                    },
+                    {
+                      "ms": 18527.146432,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                      "hex": "00000408000000000000008000"
+                    },
+                    {
+                      "ms": 18527.155302,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf",
+                      "hex": "00000408000000000100008000"
+                    },
+                    {
+                      "ms": 19195.456953,
+                      "kind": "frame",
+                      "type": 3,
+                      "name": "RST_STREAM",
+                      "flags": 0,
+                      "stream": 1,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "be05886d6c3a9b4aa5bd410ed9e68fa7a47f089f082517b140a6ac7e1dfe3dca",
+                      "error_code": 2,
+                      "hex": "00000403000000000100000002"
+                    },
+                    {
+                      "ms": 19195.486985,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "adce1975bc8380c32b6ef030b50feadbfb3f33632c993690b956ff8e39da814f",
+                      "hex": "0000040800000000000000ffff"
+                    },
+                    {
+                      "ms": 19211.447461,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 5,
+                      "stream": 3,
+                      "length": 45,
+                      "bytes": 54,
+                      "sha256": "08f615ebe41c95f3d91e3877a4aaf4aa74b96d82f25462bf63ee48ce322ecf5c"
+                    },
+                    {
+                      "ms": 19340.963917,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                      "hex": "00000408000000000000008000"
+                    },
+                    {
+                      "ms": 19340.978165,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 3,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "7ca05a020c324f718a4d5cf94549eb66b104d96b4df74327a281da0655693bbb",
+                      "hex": "00000408000000000300008000"
+                    },
+                    {
+                      "ms": 19341.248663,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6",
+                      "hex": "00000408000000000000007fff"
+                    },
+                    {
+                      "ms": 19341.258301,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 3,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "b148a20d6d5d03e11ef777a503708f9df6096f0f1639feea4b2d6c50ebe9e46d",
+                      "hex": "00000408000000000300007fff"
+                    },
+                    {
+                      "ms": 19342.633278,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "ba10014c10adaccd6feb180df84cf4e8e6a12d2c6215c0c66439cb3d27ad7d0a",
+                      "hex": "00000408000000000000008001"
+                    },
+                    {
+                      "ms": 19342.641729,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 3,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "798d27a9f99d7146ced9d1ee42a59c35d579a53b2175e04a74949d1de373bdb3",
+                      "hex": "00000408000000000300008001"
+                    },
+                    {
+                      "ms": 19384.609784,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                      "hex": "00000408000000000000008000"
+                    },
+                    {
+                      "ms": 19384.623612,
+                      "kind": "frame",
+                      "type": 8,
+                      "name": "WINDOW_UPDATE",
+                      "flags": 0,
+                      "stream": 3,
+                      "length": 4,
+                      "bytes": 13,
+                      "sha256": "7ca05a020c324f718a4d5cf94549eb66b104d96b4df74327a281da0655693bbb",
+                      "hex": "00000408000000000300008000"
+                    }
+                  ],
+                  "omitted": 0
+                },
+                "origin_to_candidate": {
+                  "bytes": 393555,
+                  "frames": 32,
+                  "data_bytes": 393214,
+                  "headers": 2,
+                  "streams": {
+                    "1": {
+                      "frames": 15,
+                      "data_bytes": 196607,
+                      "headers": 1,
+                      "resets": []
+                    },
+                    "3": {
+                      "frames": 15,
+                      "data_bytes": 196607,
+                      "headers": 1,
+                      "resets": []
+                    }
+                  },
+                  "events": [
+                    {
+                      "ms": 18378.4618,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 0,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053",
+                      "hex": "000000040000000000"
+                    },
+                    {
+                      "ms": 18378.474022,
+                      "kind": "frame",
+                      "type": 4,
+                      "name": "SETTINGS",
+                      "flags": 1,
+                      "stream": 0,
+                      "length": 0,
+                      "bytes": 9,
+                      "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                      "hex": "000000040100000000"
+                    },
+                    {
+                      "ms": 18378.486315,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 4,
+                      "stream": 1,
+                      "length": 28,
+                      "bytes": 37,
+                      "sha256": "7f8b7b88ea1383b3934ba4f32f3fee8e2781f3f6a78fa593f4cea4b8101d6361"
+                    },
+                    {
+                      "ms": 19237.464958,
+                      "kind": "frame",
+                      "type": 1,
+                      "name": "HEADERS",
+                      "flags": 4,
+                      "stream": 3,
+                      "length": 25,
+                      "bytes": 34,
+                      "sha256": "a7d1834cd6cfdbd398ef7b41d2fd92ba88879b9fd7a5992962f2d1475ae37381"
+                    }
+                  ],
+                  "omitted": 0
+                },
+                "lifecycle": [],
+                "native_tls": {
+                  "sni": "lab-origin.test",
+                  "alpn": "h2",
+                  "tls": "TLSv1.3",
+                  "authorized": true,
+                  "authorization_error": null,
+                  "peer_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+                }
+              }
+            ],
+            "errors": 0,
+            "omitted": 0,
+            "bytes": 538,
+            "headers": 2,
+            "data_bytes": 0
+          },
+          "origin_closed": false,
+          "resources": {
+            "ms": 20065.711697,
+            "envoy_pid": 1450570,
+            "rss_kib": 82144,
+            "executable_sha256": "1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc",
+            "isolation": "prlimit core0 nofile1024 cpu180; no container cgroup memory/pid isolation; not a resource-eligibility proof",
+            "observer_process": {
+              "rss": 298246144,
+              "heapTotal": 12718080,
+              "heapUsed": 9892480,
+              "external": 218039069,
+              "arrayBuffers": 214671258
+            }
+          }
+        }
+      ],
+      "origin_closed_before_client_cancel": false,
+      "cancel_ms": 2.821052999999665,
+      "origin_rst_code": 2,
+      "cancellation_proven": true,
+      "actual_cancel_started_ms": 20065.757444,
+      "historical_8MiB_expectation": "not a historical PASS",
+      "caveat": "producer write count, transport DATA/window state and process RSS are distinct measurements",
+      "status": "observation-complete",
+      "elapsed_ms": 869.6279130000003,
+      "origin": {
+        "connections": 0,
+        "bytes": 184,
+        "headers": 1,
+        "data_bytes": 0,
+        "handlers": 1,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "partial-upload-native-cancel",
+      "received": 16384,
+      "cancel_ms": 0.8665279999986524,
+      "origin_rst_code": 2,
+      "downstream_wire_trace": {
+        "available": false,
+        "reason": "Node native HTTP2 consumes TLSSocket internally; JavaScript data tap is not a wire observer. Use separate raw-client and origin relay evidence."
+      },
+      "origin_wire": {
+        "records": [
+          {
+            "id": 1,
+            "opened_ms": 18371.059539,
+            "candidate_tls": {
+              "sni": "lab-origin.test",
+              "alpn": "h2",
+              "tls": "TLSv1.2",
+              "authorized": false,
+              "authorization_error": null,
+              "local_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+            },
+            "candidate_to_origin": {
+              "bytes": 17031,
+              "frames": 28,
+              "data_bytes": 16384,
+              "headers": 3,
+              "streams": {
+                "1": {
+                  "frames": 6,
+                  "data_bytes": 0,
+                  "headers": 1,
+                  "resets": [
+                    2
+                  ]
+                },
+                "3": {
+                  "frames": 6,
+                  "data_bytes": 0,
+                  "headers": 1,
+                  "resets": [
+                    2
+                  ]
+                },
+                "5": {
+                  "frames": 4,
+                  "data_bytes": 16384,
+                  "headers": 1,
+                  "resets": [
+                    2
+                  ]
+                }
+              },
+              "events": [
+                {
+                  "ms": 18375.773935,
+                  "kind": "preface",
+                  "bytes": 24
+                },
+                {
+                  "ms": 18375.807809,
+                  "kind": "frame",
+                  "type": 4,
+                  "name": "SETTINGS",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 30,
+                  "bytes": 39,
+                  "sha256": "af8ffcfa6ac22de3f60c9039c2c098db1fb1053e99a319ce5341b1aba2f9f5a4"
+                },
+                {
+                  "ms": 18375.822406,
+                  "kind": "frame",
+                  "type": 1,
+                  "name": "HEADERS",
+                  "flags": 5,
+                  "stream": 1,
+                  "length": 169,
+                  "bytes": 178,
+                  "sha256": "9ca585228d9a3854eafd385862bc35f18e262c5ce2c01091d23f5e8eb89dc665"
+                },
+                {
+                  "ms": 18484.129003,
+                  "kind": "frame",
+                  "type": 4,
+                  "name": "SETTINGS",
+                  "flags": 1,
+                  "stream": 0,
+                  "length": 0,
+                  "bytes": 9,
+                  "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                  "hex": "000000040100000000"
+                },
+                {
+                  "ms": 18484.273505,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                  "hex": "00000408000000000000008000"
+                },
+                {
+                  "ms": 18484.281607,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 1,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf",
+                  "hex": "00000408000000000100008000"
+                },
+                {
+                  "ms": 18484.318903,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6",
+                  "hex": "00000408000000000000007fff"
+                },
+                {
+                  "ms": 18484.325538,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 1,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3",
+                  "hex": "00000408000000000100007fff"
+                },
+                {
+                  "ms": 18526.411416,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "ba10014c10adaccd6feb180df84cf4e8e6a12d2c6215c0c66439cb3d27ad7d0a",
+                  "hex": "00000408000000000000008001"
+                },
+                {
+                  "ms": 18526.420845,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 1,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "b8c00b09178b65c267d8a6afa4b6be3d8cfd792ce25c6f9e38d57586874ec189",
+                  "hex": "00000408000000000100008001"
+                },
+                {
+                  "ms": 18527.146432,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                  "hex": "00000408000000000000008000"
+                },
+                {
+                  "ms": 18527.155302,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 1,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf",
+                  "hex": "00000408000000000100008000"
+                },
+                {
+                  "ms": 19195.456953,
+                  "kind": "frame",
+                  "type": 3,
+                  "name": "RST_STREAM",
+                  "flags": 0,
+                  "stream": 1,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "be05886d6c3a9b4aa5bd410ed9e68fa7a47f089f082517b140a6ac7e1dfe3dca",
+                  "error_code": 2,
+                  "hex": "00000403000000000100000002"
+                },
+                {
+                  "ms": 19195.486985,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "adce1975bc8380c32b6ef030b50feadbfb3f33632c993690b956ff8e39da814f",
+                  "hex": "0000040800000000000000ffff"
+                },
+                {
+                  "ms": 19211.447461,
+                  "kind": "frame",
+                  "type": 1,
+                  "name": "HEADERS",
+                  "flags": 5,
+                  "stream": 3,
+                  "length": 45,
+                  "bytes": 54,
+                  "sha256": "08f615ebe41c95f3d91e3877a4aaf4aa74b96d82f25462bf63ee48ce322ecf5c"
+                },
+                {
+                  "ms": 19340.963917,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                  "hex": "00000408000000000000008000"
+                },
+                {
+                  "ms": 19340.978165,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 3,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "7ca05a020c324f718a4d5cf94549eb66b104d96b4df74327a281da0655693bbb",
+                  "hex": "00000408000000000300008000"
+                },
+                {
+                  "ms": 19341.248663,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6",
+                  "hex": "00000408000000000000007fff"
+                },
+                {
+                  "ms": 19341.258301,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 3,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "b148a20d6d5d03e11ef777a503708f9df6096f0f1639feea4b2d6c50ebe9e46d",
+                  "hex": "00000408000000000300007fff"
+                },
+                {
+                  "ms": 19342.633278,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "ba10014c10adaccd6feb180df84cf4e8e6a12d2c6215c0c66439cb3d27ad7d0a",
+                  "hex": "00000408000000000000008001"
+                },
+                {
+                  "ms": 19342.641729,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 3,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "798d27a9f99d7146ced9d1ee42a59c35d579a53b2175e04a74949d1de373bdb3",
+                  "hex": "00000408000000000300008001"
+                },
+                {
+                  "ms": 19384.609784,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0",
+                  "hex": "00000408000000000000008000"
+                },
+                {
+                  "ms": 19384.623612,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 3,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "7ca05a020c324f718a4d5cf94549eb66b104d96b4df74327a281da0655693bbb",
+                  "hex": "00000408000000000300008000"
+                },
+                {
+                  "ms": 20068.142823,
+                  "kind": "frame",
+                  "type": 3,
+                  "name": "RST_STREAM",
+                  "flags": 0,
+                  "stream": 3,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "6a4f001ddb9877e6431a9f1c77d4bd8c550556bf6076058984ff2bbbd1c5221e",
+                  "error_code": 2,
+                  "hex": "00000403000000000300000002"
+                },
+                {
+                  "ms": 20068.159027,
+                  "kind": "frame",
+                  "type": 8,
+                  "name": "WINDOW_UPDATE",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "adce1975bc8380c32b6ef030b50feadbfb3f33632c993690b956ff8e39da814f",
+                  "hex": "0000040800000000000000ffff"
+                },
+                {
+                  "ms": 20083.28545,
+                  "kind": "frame",
+                  "type": 1,
+                  "name": "HEADERS",
+                  "flags": 4,
+                  "stream": 5,
+                  "length": 43,
+                  "bytes": 52,
+                  "sha256": "e9f00c17609ca70aea536029de24764898404b13785907b50d18ff7f78c15060"
+                },
+                {
+                  "ms": 20112.811244,
+                  "kind": "frame",
+                  "type": 3,
+                  "name": "RST_STREAM",
+                  "flags": 0,
+                  "stream": 5,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "f64e075a9284b58476b5a93386efa7537bcef8799b0aca91d54c38bb9a7647c2",
+                  "error_code": 2,
+                  "hex": "00000403000000000500000002"
+                }
+              ],
+              "omitted": 0
+            },
+            "origin_to_candidate": {
+              "bytes": 393555,
+              "frames": 32,
+              "data_bytes": 393214,
+              "headers": 2,
+              "streams": {
+                "1": {
+                  "frames": 15,
+                  "data_bytes": 196607,
+                  "headers": 1,
+                  "resets": []
+                },
+                "3": {
+                  "frames": 15,
+                  "data_bytes": 196607,
+                  "headers": 1,
+                  "resets": []
+                }
+              },
+              "events": [
+                {
+                  "ms": 18378.4618,
+                  "kind": "frame",
+                  "type": 4,
+                  "name": "SETTINGS",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 0,
+                  "bytes": 9,
+                  "sha256": "5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053",
+                  "hex": "000000040000000000"
+                },
+                {
+                  "ms": 18378.474022,
+                  "kind": "frame",
+                  "type": 4,
+                  "name": "SETTINGS",
+                  "flags": 1,
+                  "stream": 0,
+                  "length": 0,
+                  "bytes": 9,
+                  "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                  "hex": "000000040100000000"
+                },
+                {
+                  "ms": 18378.486315,
+                  "kind": "frame",
+                  "type": 1,
+                  "name": "HEADERS",
+                  "flags": 4,
+                  "stream": 1,
+                  "length": 28,
+                  "bytes": 37,
+                  "sha256": "7f8b7b88ea1383b3934ba4f32f3fee8e2781f3f6a78fa593f4cea4b8101d6361"
+                },
+                {
+                  "ms": 19237.464958,
+                  "kind": "frame",
+                  "type": 1,
+                  "name": "HEADERS",
+                  "flags": 4,
+                  "stream": 3,
+                  "length": 25,
+                  "bytes": 34,
+                  "sha256": "a7d1834cd6cfdbd398ef7b41d2fd92ba88879b9fd7a5992962f2d1475ae37381"
+                }
+              ],
+              "omitted": 0
+            },
+            "lifecycle": [],
+            "native_tls": {
+              "sni": "lab-origin.test",
+              "alpn": "h2",
+              "tls": "TLSv1.3",
+              "authorized": true,
+              "authorization_error": null,
+              "peer_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+            }
+          }
+        ],
+        "errors": 0,
+        "omitted": 0,
+        "bytes": 17031,
+        "headers": 3,
+        "data_bytes": 16384
+      },
+      "status": "observation-complete",
+      "elapsed_ms": 45.50526600000012,
+      "origin": {
+        "connections": 0,
+        "bytes": 16467,
+        "headers": 1,
+        "data_bytes": 16384,
+        "handlers": 1,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "WebSocket-two-messages-and-close",
+      "values": [
+        "first",
+        "second"
+      ],
+      "close_code": 1000,
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      },
+      "status": "observation-complete",
+      "elapsed_ms": 23.48000200000024
+    },
+    {
+      "name": "gRPC-streaming-trailers",
+      "values": [
+        "echo:one",
+        "echo:two"
+      ],
+      "status": "observation-complete",
+      "trailers": {
+        "lab-trailer": "complete"
+      },
+      "origin_wire": {
+        "records": [
+          {
+            "id": 1,
+            "opened_ms": 20686.049772,
+            "candidate_tls": {
+              "sni": "lab-origin.test",
+              "alpn": "h2",
+              "tls": "TLSv1.2",
+              "authorized": false,
+              "authorization_error": null,
+              "local_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+            },
+            "candidate_to_origin": {
+              "bytes": 396,
+              "frames": 6,
+              "data_bytes": 16,
+              "headers": 1,
+              "streams": {
+                "1": {
+                  "frames": 4,
+                  "data_bytes": 16,
+                  "headers": 1,
+                  "resets": []
+                }
+              },
+              "events": [
+                {
+                  "ms": 20691.468454,
+                  "kind": "preface",
+                  "bytes": 24
+                },
+                {
+                  "ms": 20691.510569,
+                  "kind": "frame",
+                  "type": 4,
+                  "name": "SETTINGS",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 30,
+                  "bytes": 39,
+                  "sha256": "af8ffcfa6ac22de3f60c9039c2c098db1fb1053e99a319ce5341b1aba2f9f5a4"
+                },
+                {
+                  "ms": 20691.522442,
+                  "kind": "frame",
+                  "type": 1,
+                  "name": "HEADERS",
+                  "flags": 4,
+                  "stream": 1,
+                  "length": 272,
+                  "bytes": 281,
+                  "sha256": "7036bc74d03c1652f5d25543c6dde1b7a9a560753c305a8863243d4e17603b09"
+                },
+                {
+                  "ms": 20698.185706,
+                  "kind": "frame",
+                  "type": 4,
+                  "name": "SETTINGS",
+                  "flags": 1,
+                  "stream": 0,
+                  "length": 0,
+                  "bytes": 9,
+                  "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                  "hex": "000000040100000000"
+                }
+              ],
+              "omitted": 0
+            },
+            "origin_to_candidate": {
+              "bytes": 221,
+              "frames": 6,
+              "data_bytes": 26,
+              "headers": 2,
+              "streams": {
+                "1": {
+                  "frames": 4,
+                  "data_bytes": 26,
+                  "headers": 2,
+                  "resets": []
+                }
+              },
+              "events": [
+                {
+                  "ms": 20696.290756,
+                  "kind": "frame",
+                  "type": 4,
+                  "name": "SETTINGS",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 0,
+                  "bytes": 9,
+                  "sha256": "5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053",
+                  "hex": "000000040000000000"
+                },
+                {
+                  "ms": 20696.300255,
+                  "kind": "frame",
+                  "type": 4,
+                  "name": "SETTINGS",
+                  "flags": 1,
+                  "stream": 0,
+                  "length": 0,
+                  "bytes": 9,
+                  "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                  "hex": "000000040100000000"
+                },
+                {
+                  "ms": 20696.311849,
+                  "kind": "frame",
+                  "type": 1,
+                  "name": "HEADERS",
+                  "flags": 4,
+                  "stream": 1,
+                  "length": 98,
+                  "bytes": 107,
+                  "sha256": "78fc386bb3d385cebbb251f406e6717aa1d52f3d83716bf030e6e16c5594521c"
+                },
+                {
+                  "ms": 20742.359297,
+                  "kind": "frame",
+                  "type": 1,
+                  "name": "HEADERS",
+                  "flags": 5,
+                  "stream": 1,
+                  "length": 43,
+                  "bytes": 52,
+                  "sha256": "6181bde022bb940ad7f36133dd200264b0eff263e78bf76e3022d95921a8e0ed"
+                }
+              ],
+              "omitted": 0
+            },
+            "lifecycle": [],
+            "native_tls": {
+              "sni": "lab-origin.test",
+              "alpn": "h2",
+              "tls": "TLSv1.3",
+              "authorized": true,
+              "authorization_error": null,
+              "peer_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+            }
+          }
+        ],
+        "errors": 0,
+        "omitted": 0,
+        "bytes": 396,
+        "headers": 1,
+        "data_bytes": 16
+      },
+      "elapsed_ms": 84.45042499999909,
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    },
+    {
+      "name": "gRPC-cancel-reaches-origin",
+      "cancel_ms": 2.139885000000504,
+      "origin_wire": {
+        "records": [
+          {
+            "id": 1,
+            "opened_ms": 20686.049772,
+            "candidate_tls": {
+              "sni": "lab-origin.test",
+              "alpn": "h2",
+              "tls": "TLSv1.2",
+              "authorized": false,
+              "authorization_error": null,
+              "local_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+            },
+            "candidate_to_origin": {
+              "bytes": 512,
+              "frames": 10,
+              "data_bytes": 30,
+              "headers": 2,
+              "streams": {
+                "1": {
+                  "frames": 4,
+                  "data_bytes": 16,
+                  "headers": 1,
+                  "resets": []
+                },
+                "3": {
+                  "frames": 4,
+                  "data_bytes": 14,
+                  "headers": 1,
+                  "resets": [
+                    2
+                  ]
+                }
+              },
+              "events": [
+                {
+                  "ms": 20691.468454,
+                  "kind": "preface",
+                  "bytes": 24
+                },
+                {
+                  "ms": 20691.510569,
+                  "kind": "frame",
+                  "type": 4,
+                  "name": "SETTINGS",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 30,
+                  "bytes": 39,
+                  "sha256": "af8ffcfa6ac22de3f60c9039c2c098db1fb1053e99a319ce5341b1aba2f9f5a4"
+                },
+                {
+                  "ms": 20691.522442,
+                  "kind": "frame",
+                  "type": 1,
+                  "name": "HEADERS",
+                  "flags": 4,
+                  "stream": 1,
+                  "length": 272,
+                  "bytes": 281,
+                  "sha256": "7036bc74d03c1652f5d25543c6dde1b7a9a560753c305a8863243d4e17603b09"
+                },
+                {
+                  "ms": 20698.185706,
+                  "kind": "frame",
+                  "type": 4,
+                  "name": "SETTINGS",
+                  "flags": 1,
+                  "stream": 0,
+                  "length": 0,
+                  "bytes": 9,
+                  "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                  "hex": "000000040100000000"
+                },
+                {
+                  "ms": 20749.095477,
+                  "kind": "frame",
+                  "type": 1,
+                  "name": "HEADERS",
+                  "flags": 4,
+                  "stream": 3,
+                  "length": 62,
+                  "bytes": 71,
+                  "sha256": "cf6b6506643911bae047e781cb6672da0bd59a4576492d2b1ea3eba86dc71550"
+                },
+                {
+                  "ms": 20753.047689,
+                  "kind": "frame",
+                  "type": 3,
+                  "name": "RST_STREAM",
+                  "flags": 0,
+                  "stream": 3,
+                  "length": 4,
+                  "bytes": 13,
+                  "sha256": "6a4f001ddb9877e6431a9f1c77d4bd8c550556bf6076058984ff2bbbd1c5221e",
+                  "error_code": 2,
+                  "hex": "00000403000000000300000002"
+                }
+              ],
+              "omitted": 0
+            },
+            "origin_to_candidate": {
+              "bytes": 275,
+              "frames": 9,
+              "data_bytes": 45,
+              "headers": 4,
+              "streams": {
+                "1": {
+                  "frames": 4,
+                  "data_bytes": 26,
+                  "headers": 2,
+                  "resets": []
+                },
+                "3": {
+                  "frames": 3,
+                  "data_bytes": 19,
+                  "headers": 2,
+                  "resets": []
+                }
+              },
+              "events": [
+                {
+                  "ms": 20696.290756,
+                  "kind": "frame",
+                  "type": 4,
+                  "name": "SETTINGS",
+                  "flags": 0,
+                  "stream": 0,
+                  "length": 0,
+                  "bytes": 9,
+                  "sha256": "5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053",
+                  "hex": "000000040000000000"
+                },
+                {
+                  "ms": 20696.300255,
+                  "kind": "frame",
+                  "type": 4,
+                  "name": "SETTINGS",
+                  "flags": 1,
+                  "stream": 0,
+                  "length": 0,
+                  "bytes": 9,
+                  "sha256": "a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6",
+                  "hex": "000000040100000000"
+                },
+                {
+                  "ms": 20696.311849,
+                  "kind": "frame",
+                  "type": 1,
+                  "name": "HEADERS",
+                  "flags": 4,
+                  "stream": 1,
+                  "length": 98,
+                  "bytes": 107,
+                  "sha256": "78fc386bb3d385cebbb251f406e6717aa1d52f3d83716bf030e6e16c5594521c"
+                },
+                {
+                  "ms": 20742.359297,
+                  "kind": "frame",
+                  "type": 1,
+                  "name": "HEADERS",
+                  "flags": 5,
+                  "stream": 1,
+                  "length": 43,
+                  "bytes": 52,
+                  "sha256": "6181bde022bb940ad7f36133dd200264b0eff263e78bf76e3022d95921a8e0ed"
+                },
+                {
+                  "ms": 20750.530727,
+                  "kind": "frame",
+                  "type": 1,
+                  "name": "HEADERS",
+                  "flags": 4,
+                  "stream": 3,
+                  "length": 5,
+                  "bytes": 14,
+                  "sha256": "b10a50516ef695a52e2b220f359e3e2257efa77a95712fb269c95522c631daaa"
+                },
+                {
+                  "ms": 20753.758819,
+                  "kind": "frame",
+                  "type": 1,
+                  "name": "HEADERS",
+                  "flags": 5,
+                  "stream": 3,
+                  "length": 3,
+                  "bytes": 12,
+                  "sha256": "2946a9b7f7a2ea9ae70530233538309b9b38072a46de9eb03d623a84b3952518"
+                }
+              ],
+              "omitted": 0
+            },
+            "lifecycle": [],
+            "native_tls": {
+              "sni": "lab-origin.test",
+              "alpn": "h2",
+              "tls": "TLSv1.3",
+              "authorized": true,
+              "authorization_error": null,
+              "peer_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+            }
+          }
+        ],
+        "errors": 0,
+        "omitted": 0,
+        "bytes": 512,
+        "headers": 2,
+        "data_bytes": 30
+      },
+      "status": "observation-complete",
+      "elapsed_ms": 15.894196000001102,
+      "origin": {
+        "connections": 0,
+        "bytes": 0,
+        "headers": 0,
+        "data_bytes": 0,
+        "handlers": 0,
+        "parser_errors": 0,
+        "transport_errors": 0
+      }
+    }
+  ],
+  "semantic_security_pass": false,
+  "limits": {
+    "downstream_cases": 24,
+    "response_max_bytes": 33554432,
+    "per_operation_ms": 4000,
+    "origin_connections": 16,
+    "trace_control_events_per_direction": 256,
+    "container_memory_bytes": 268435456
+  },
+  "websocket_origin": {
+    "tls": {
+      "sni": "lab-origin.test",
+      "alpn": "http/1.1",
+      "tls": "TLSv1.2",
+      "authorized": false,
+      "authorization_error": null,
+      "local_fingerprint256": "8E:D7:F9:34:B6:5B:BB:5F:8B:07:2C:3E:90:46:96:B2:57:79:EF:23:37:9E:4E:AF:52:7D:41:5A:E8:EA:8D:17"
+    },
+    "host": "lab-origin.test",
+    "path": "/ws",
+    "messages": [
+      "first",
+      "second"
+    ],
+    "close": 1000
+  },
+  "grpc_origin": [
+    {
+      "values": [
+        "one",
+        "two"
+      ],
+      "cancelled_ms": 20741.986411
+    },
+    {
+      "values": [
+        "cancel-me"
+      ],
+      "cancelled_ms": 20753.452911
+    }
+  ]
+}
