@@ -291,7 +291,7 @@ export async function runtime({ addon, edgeTLS, routes, directory }) {
   });
   server.on('tlsClientError', () => {});
   const port = await listen(server);
-  return { port, metrics, quota, slots, async close() {
+  return { port, metrics, quota, slots, get tcpConnections() { return sockets.size; }, async close() {
     assertLock(); for (const socket of sockets) socket.destroy();
     await new Promise((resolve) => server.close(resolve)); await Promise.all(tasks);
     assert.equal(metrics.cleanupError, undefined);

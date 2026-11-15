@@ -125,7 +125,7 @@ try {
   const delta = (b) => ({ bytes: rawBytes - b.bytes, connections: connections - b.connections,
     handlers: handlers.slice(b.handlers), raw: rows.slice(b.rows), parserErrors: parserErrors - b.parserErrors, tlsErrors: tlsErrors - b.tlsErrors });
   const zero = (d) => { assert.equal(d.bytes, 0); assert.equal(d.connections, 0); assert.equal(d.handlers.length, 0); assert.equal(d.parserErrors, 0); assert.equal(d.tlsErrors, 0); };
-  const settled = async () => { await until(() => observerActive === 0); await delay(15); };
+  const settled = async () => { await until(() => observerActive === 0 && front.tcpConnections === 0 && front.metrics.activeContexts === 0); await delay(15); };
   const connect = async (name = 'edge-a.test', port = front.port) => {
     const socket = track(tls.connect(clientTLS(port, name))); await once(socket, 'secureConnect');
     assert.equal(socket.authorized, true); assert.equal(socket.alpnProtocol, 'http/1.1'); return socket;
