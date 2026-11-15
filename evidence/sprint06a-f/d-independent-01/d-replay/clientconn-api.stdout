@@ -1,0 +1,18 @@
+package http2 // import "golang.org/x/net/http2"
+
+type ClientConn struct {
+	// Has unexported fields.
+}
+    ClientConn is the state of a single HTTP/2 client connection to an HTTP/2
+    server.
+
+    Deprecated: Use http.ClientConn instead.
+
+func (cc *ClientConn) CanTakeNewRequest() bool
+func (cc *ClientConn) Close() error
+func (cc *ClientConn) Ping(ctx context.Context) error
+func (cc *ClientConn) ReserveNewRequest() bool
+func (cc *ClientConn) RoundTrip(req *http.Request) (*http.Response, error)
+func (cc *ClientConn) SetDoNotReuse()
+func (cc *ClientConn) Shutdown(ctx context.Context) error
+func (cc *ClientConn) State() ClientConnState

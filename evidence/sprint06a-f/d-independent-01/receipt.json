@@ -1,0 +1,594 @@
+{
+  "reviewerCommit": "7694b614fae56b34d96e4c4495301595cb19e676",
+  "reviewerTree": "3247cced869fd07e2be4ede9755814a69a686fe9",
+  "sourceCommit": "406d560f23bb9cc39c7b6f4a8e5eeaf1ea148a7d",
+  "sourceTree": "c6affd863db975e17a05c793b9e0fb77317f26e1",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/home/tiecont/.cache/aegisgate-06a/f/scripts/sprint06a-f-review.mjs",
+    "406d560",
+    "evidence/sprint06a-f/d-independent-01"
+  ],
+  "nodeVersion": "v26.13.0",
+  "collectorSha256": "159102c5b1e1222df33532f392f9d4f08e3e89003506a20dee887fdde29a0a91",
+  "environment": {
+    "TMPDIR": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/tmp",
+    "GOTOOLCHAIN": "local",
+    "GOWORK": "off",
+    "GOAMD64": "v1",
+    "GOFLAGS": "",
+    "GOPATH": "/home/tiecont/go",
+    "GOMODCACHE": "/home/tiecont/go/pkg/mod",
+    "GOCACHE": "/home/tiecont/.cache/go-build"
+  },
+  "started": "2026-11-15T11:17:04.094Z",
+  "commands": [
+    {
+      "label": "clone",
+      "executable": "/usr/bin/git",
+      "executableSha256": "0da72c00a915c06b9e7062e2dc999afe323223d000fef63111a94f522afd8ecf",
+      "args": [
+        "clone",
+        "--shared",
+        "--no-checkout",
+        "/home/tiecont/.cache/aegisgate-06a/f",
+        "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/source"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f",
+      "begun": "2026-11-15T11:17:04.113Z",
+      "ended": "2026-11-15T11:17:04.146Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "clone.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "clone.stderr",
+          "bytes": 94,
+          "sha256": "6d9ac30c916194b606588d50f03447fd1e1ea3b434cf47d25bae90ceb20bd741"
+        }
+      ]
+    },
+    {
+      "label": "checkout",
+      "executable": "/usr/bin/git",
+      "executableSha256": "0da72c00a915c06b9e7062e2dc999afe323223d000fef63111a94f522afd8ecf",
+      "args": [
+        "checkout",
+        "--detach",
+        "406d560f23bb9cc39c7b6f4a8e5eeaf1ea148a7d"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/source",
+      "begun": "2026-11-15T11:17:04.164Z",
+      "ended": "2026-11-15T11:17:04.943Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "checkout.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "checkout.stderr",
+          "bytes": 94,
+          "sha256": "8245d1fdad4223dd81aa8bacc4ae7a6c3e80348046f5bf91bb9db99f25b6b75b"
+        }
+      ]
+    },
+    {
+      "label": "clean-before",
+      "executable": "/usr/bin/git",
+      "executableSha256": "0da72c00a915c06b9e7062e2dc999afe323223d000fef63111a94f522afd8ecf",
+      "args": [
+        "status",
+        "--porcelain"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/source",
+      "begun": "2026-11-15T11:17:04.954Z",
+      "ended": "2026-11-15T11:17:05.371Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "clean-before.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "clean-before.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "protected-before",
+      "executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "executableSha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+      "args": [
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/source",
+      "begun": "2026-11-15T11:17:05.626Z",
+      "ended": "2026-11-15T11:17:05.861Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "protected-before.stdout",
+          "bytes": 4342,
+          "sha256": "12fecd21d0163ccd7b6c2e53ba49a36bf9cd15aaeb5311710088bae5cb41d3f5"
+        },
+        {
+          "file": "protected-before.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "go-version",
+      "executable": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "executableSha256": "de0ae3e082ce7599eae4fb69fa2ef1e43b8f31ffd3fce62cdf81930aa9005050",
+      "args": [
+        "version"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/source",
+      "begun": "2026-11-15T11:17:05.878Z",
+      "ended": "2026-11-15T11:17:05.902Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "go-version.stdout",
+          "bytes": 32,
+          "sha256": "a29205bd83967c2f70e6768fae009600038d6056499fa289de9d5f9b79beaef4"
+        },
+        {
+          "file": "go-version.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "d-exact-proof",
+      "executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "executableSha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+      "args": [
+        "scripts/sprint06a-d-proof.mjs",
+        "evidence/sprint06a-d/f-replay-01"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/source",
+      "begun": "2026-11-15T11:17:05.903Z",
+      "ended": "2026-11-15T11:17:10.061Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "d-exact-proof.stdout",
+          "bytes": 424,
+          "sha256": "a8da6f55a24c9c7faf9446362fd59ce4f5758c0fbb3da118de7e2d1be5e0b013"
+        },
+        {
+          "file": "d-exact-proof.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "f-compile",
+      "executable": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "executableSha256": "de0ae3e082ce7599eae4fb69fa2ef1e43b8f31ffd3fce62cdf81930aa9005050",
+      "args": [
+        "test",
+        "-c",
+        "-race",
+        "-overlay",
+        "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/overlay.json",
+        "-o",
+        "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/independent.test",
+        "./spikes/envoy/sprint05c-attribution"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/source",
+      "begun": "2026-11-15T11:17:10.079Z",
+      "ended": "2026-11-15T11:17:11.709Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "f-compile.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "f-compile.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "f-full-proof",
+      "executable": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/independent.test",
+      "executableSha256": "2a45373d2b2f3618c46dfa6eb794bf1827f86b8d8079c1e0ae2c0ee7f48d4332",
+      "args": [
+        "-test.v",
+        "-test.timeout=80s",
+        "-test.count=1"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/source",
+      "begun": "2026-11-15T11:17:11.736Z",
+      "ended": "2026-11-15T11:17:12.052Z",
+      "exit": 1,
+      "signal": null,
+      "streams": [
+        {
+          "file": "f-full-proof.stdout",
+          "bytes": 210830,
+          "sha256": "80216c00bf43b0e5ea2c24009761af7cd64de5b5c0bbf59ecce140c9424e585b"
+        },
+        {
+          "file": "f-full-proof.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "protected-after",
+      "executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "executableSha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+      "args": [
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/source",
+      "begun": "2026-11-15T11:17:12.068Z",
+      "ended": "2026-11-15T11:17:12.322Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "protected-after.stdout",
+          "bytes": 4342,
+          "sha256": "12fecd21d0163ccd7b6c2e53ba49a36bf9cd15aaeb5311710088bae5cb41d3f5"
+        },
+        {
+          "file": "protected-after.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "clean-tracked-after",
+      "executable": "/usr/bin/git",
+      "executableSha256": "0da72c00a915c06b9e7062e2dc999afe323223d000fef63111a94f522afd8ecf",
+      "args": [
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/source",
+      "begun": "2026-11-15T11:17:13.072Z",
+      "ended": "2026-11-15T11:17:13.088Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "clean-tracked-after.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "clean-tracked-after.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "checksComplete": true,
+  "runtimeComplete": false,
+  "runtimePass": false,
+  "module01Pass": false,
+  "inventoryCount": 9219,
+  "inventorySha256": "e8cd0b5872ba595292661860b450e9ef6b0e28857349f63c03288ba0d69a0926",
+  "dependencyChanges": [],
+  "protectedBefore": {
+    "baseline": "8758b1c84b4186449cd79fabae461ca53ee05100",
+    "tree": "2c6b1d5ff56f9e60a7bf77b478e291f3f5bc420d",
+    "protectedFiles": [
+      {
+        "file": "spikes/pingora/lab.mjs",
+        "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d",
+        "bytes": 45073
+      },
+      {
+        "file": "spikes/edge-comparison/manifest.json",
+        "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+        "bytes": 9829
+      },
+      {
+        "file": "spikes/edge-comparison/contract.mjs",
+        "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f",
+        "bytes": 1686
+      },
+      {
+        "file": "spikes/edge-comparison/supplemental.mjs",
+        "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf",
+        "bytes": 1616
+      },
+      {
+        "file": "spikes/edge-comparison/evaluate.mjs",
+        "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf",
+        "bytes": 2119
+      },
+      {
+        "file": "spikes/edge-comparison/run.mjs",
+        "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493",
+        "bytes": 61
+      },
+      {
+        "file": "spikes/edge-comparison/tls-observer.mjs",
+        "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065",
+        "bytes": 1639
+      },
+      {
+        "file": "spikes/edge-comparison/extract-baseline.mjs",
+        "sha256": "a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6",
+        "bytes": 2908
+      },
+      {
+        "file": "spikes/envoy/wire-probes.mjs",
+        "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a",
+        "bytes": 20934
+      },
+      {
+        "file": "spikes/envoy/wire-observer.mjs",
+        "sha256": "bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3",
+        "bytes": 4052
+      },
+      {
+        "file": "spikes/envoy/wire-fixtures.mjs",
+        "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278",
+        "bytes": 3320
+      }
+    ],
+    "protected_inventory_sha256": "85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa",
+    "historical": [
+      {
+        "file": "evidence/sprint05a-root/candidate-02/commands.json",
+        "sha256": "572ad993fe7f38b58c62c0b66de81a333006b3c6ed5a332478e38f60838d273a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original75.json",
+        "sha256": "13a04311fa39f0e7c7d94c85051d6d375e9a281cf6a4aa0f4aafa8dbe337556a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original23.json",
+        "sha256": "62fa6ba4082b20185d4958bbd034bbddef40dc7b46e2a89291fda507d3c99cee"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/SHA256SUMS",
+        "sha256": "85e4968d3da9ce4381f6cae77073376c2cf6164ca3d278a42489abe2f00a9017"
+      },
+      {
+        "file": "evidence/sprint05a-b/source-01/sources.json",
+        "sha256": "75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d"
+      }
+    ],
+    "previous75": {
+      "passed": 73,
+      "failures": [
+        {
+          "name": "malformed-HTTP-obsolete-folded-header",
+          "status": "fail",
+          "milliseconds": 7.12,
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 263,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.2",
+                "sni": false,
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+          "status": "fail",
+          "milliseconds": 7.38,
+          "error": "confused authority forwarded bytes to origin\n\n3032 !== 3023\n",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 9,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        }
+      ]
+    },
+    "previous23": {
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ]
+    }
+  },
+  "overlays": [
+    {
+      "file": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/source/scripts/sprint05c-f-observer_test.go.txt",
+      "sha256": "e6b9e7583bc28ba110c215f7ab6a58417de1b6cbd713072530c9482168f5b7b4"
+    },
+    {
+      "file": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-NWSzIb/source/scripts/sprint05d-f-runtime_test.go.txt",
+      "sha256": "d19bad44a94c08b228546c4f0dd6b0b1d6a01889834e1974a69e96ab4fcde124"
+    },
+    {
+      "file": "/home/tiecont/.cache/aegisgate-06a/f/scripts/sprint06a-f-attribution_test.go.txt",
+      "sha256": "224469de9d5355ad5ecd01ed768bd50cd4998938558dcd2401004531b3f3cd89"
+    }
+  ],
+  "overlaySha256": "437a8f0775b62b7643cbc4dc88b8da3f3b0cb593cf27ce8a864ffb22b3b8cf77",
+  "testBinarySha256": "2a45373d2b2f3618c46dfa6eb794bf1827f86b8d8079c1e0ae2c0ee7f48d4332",
+  "independentAttackExit": 1,
+  "protectedAfter": {
+    "baseline": "8758b1c84b4186449cd79fabae461ca53ee05100",
+    "tree": "2c6b1d5ff56f9e60a7bf77b478e291f3f5bc420d",
+    "protectedFiles": [
+      {
+        "file": "spikes/pingora/lab.mjs",
+        "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d",
+        "bytes": 45073
+      },
+      {
+        "file": "spikes/edge-comparison/manifest.json",
+        "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+        "bytes": 9829
+      },
+      {
+        "file": "spikes/edge-comparison/contract.mjs",
+        "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f",
+        "bytes": 1686
+      },
+      {
+        "file": "spikes/edge-comparison/supplemental.mjs",
+        "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf",
+        "bytes": 1616
+      },
+      {
+        "file": "spikes/edge-comparison/evaluate.mjs",
+        "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf",
+        "bytes": 2119
+      },
+      {
+        "file": "spikes/edge-comparison/run.mjs",
+        "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493",
+        "bytes": 61
+      },
+      {
+        "file": "spikes/edge-comparison/tls-observer.mjs",
+        "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065",
+        "bytes": 1639
+      },
+      {
+        "file": "spikes/edge-comparison/extract-baseline.mjs",
+        "sha256": "a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6",
+        "bytes": 2908
+      },
+      {
+        "file": "spikes/envoy/wire-probes.mjs",
+        "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a",
+        "bytes": 20934
+      },
+      {
+        "file": "spikes/envoy/wire-observer.mjs",
+        "sha256": "bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3",
+        "bytes": 4052
+      },
+      {
+        "file": "spikes/envoy/wire-fixtures.mjs",
+        "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278",
+        "bytes": 3320
+      }
+    ],
+    "protected_inventory_sha256": "85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa",
+    "historical": [
+      {
+        "file": "evidence/sprint05a-root/candidate-02/commands.json",
+        "sha256": "572ad993fe7f38b58c62c0b66de81a333006b3c6ed5a332478e38f60838d273a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original75.json",
+        "sha256": "13a04311fa39f0e7c7d94c85051d6d375e9a281cf6a4aa0f4aafa8dbe337556a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original23.json",
+        "sha256": "62fa6ba4082b20185d4958bbd034bbddef40dc7b46e2a89291fda507d3c99cee"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/SHA256SUMS",
+        "sha256": "85e4968d3da9ce4381f6cae77073376c2cf6164ca3d278a42489abe2f00a9017"
+      },
+      {
+        "file": "evidence/sprint05a-b/source-01/sources.json",
+        "sha256": "75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d"
+      }
+    ],
+    "previous75": {
+      "passed": 73,
+      "failures": [
+        {
+          "name": "malformed-HTTP-obsolete-folded-header",
+          "status": "fail",
+          "milliseconds": 7.12,
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 263,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.2",
+                "sni": false,
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+          "status": "fail",
+          "milliseconds": 7.38,
+          "error": "confused authority forwarded bytes to origin\n\n3032 !== 3023\n",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 9,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        }
+      ]
+    },
+    "previous23": {
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ]
+    }
+  },
+  "sourceIntegrityAfter": true,
+  "privateStageAbsent": true,
+  "lockHeldThroughCleanupAndHashes": true,
+  "ended": "2026-11-15T11:17:13.437Z"
+}

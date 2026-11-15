@@ -1,0 +1,177 @@
+{
+  "schema": "aegisgate.maintainer-package/1",
+  "published": false,
+  "fresh_runtime_execution": false,
+  "requirements": {
+    "version": "aegisgate.upstream-capabilities/1",
+    "effective": false,
+    "envoy_source": "b2d89e0ae53916f28770771fbdd49c5c99c5c5a2",
+    "llhttp_source": "816485216511b86459b2e6478190e14c38c14891",
+    "requirements": [
+      {
+        "id": "C1",
+        "name": "strict-h1-wire-rejection",
+        "required_api": "Public strict codec option rejecting continuation lines in request headers AND trailers before normalization or origin admission; original error offset retained; no lenient fallback.",
+        "current_boundary": "Envoy parsed-map filters have lost continuation syntax. Released llhttp rejects it through maintained incremental C API but supplies no complete H2/TLS/identity gateway.",
+        "cases": [
+          "malformed-HTTP-obsolete-folded-header",
+          "strict-ingress-TE-obsolete-fold"
+        ],
+        "positive": "Valid unfolded headers/trailers, exact encoded target and ordered pipeline remain valid; no early origin effect for staged late-invalid requests.",
+        "policy_vs_protocol": "AegisGate requires rejection rather than permissive normalization; the missing stricter option alone is not a vendor vulnerability claim."
+      },
+      {
+        "id": "C2",
+        "name": "h2-authority-response-before-reset",
+        "required_api": "Supported invalid-authority decision callback after bounded pseudoheader decoding but before irreversible reset, with verified downstream SNI and a safe HTTP400/421 response path; never forward malformed authority.",
+        "current_boundary": "override_stream_error_on_invalid_http_message changes termination scope, not HTTP status. Local reply requires decoded headers; inspected UHV extension is hidden/unsupported.",
+        "cases": [
+          "settled-reuse-identity-and-three-authority-negatives",
+          "individual-settled-userinfo-denial"
+        ],
+        "positive": "Valid authority, Host/SNI denial, encoded targets and reused H2 origin identity controls retain existing assertions.",
+        "policy_vs_protocol": "AegisGate400/421 is a project response contract; a peer PROTOCOL_ERROR reset is not by itself a vendor security vulnerability."
+      },
+      {
+        "id": "C3",
+        "name": "h2-error-serialization-before-close",
+        "required_api": "Supported public codec error submission and adapter-send completion before HCM closes; exposes actual protocol error code and bounded close/flush result, preserving all three exact frame negatives.",
+        "current_boundary": "ProcessBytes may return before adapter Send; ordinary goAway submits NO_ERROR; protocolErrorForTest is not a supported runtime API. A network buffer flush cannot serialize unsent codec frames.",
+        "cases": [
+          "raw-H2-HEADERS-stream-zero",
+          "raw-H2-zero-WINDOW_UPDATE",
+          "raw-H2-unexpected-CONTINUATION"
+        ],
+        "positive": "No CONTINUATION regression, valid reuse/gRPC/cancellation/backpressure and the two already repaired malformed-header cases.",
+        "policy_vs_protocol": "Malformed frame handling must be compared with RFC9113 error scope and GOAWAY/close requirements; the project additionally requires observable peer error frames within its unchanged bounded oracle. No unsupported universal conformance claim."
+      },
+      {
+        "id": "C4",
+        "name": "authoritative-runtime-effects",
+        "required_api": "Authenticated pre-wire admission/dispatch ledger with stable downstream connection+stream, verified SNI/tenant/signed generation, origin dial+connection+stream assignment, all HEADERS/CONTINUATION/DATA and HPACK mutations, final decision/cancellation, sequence/coverage/loss commitments.",
+        "current_boundary": "Transport/httptrace/Framer/HPACK permit bounded correlation, not complete authoritative proxy dispatch, signed generation or exact HPACK mutation coverage. Trusted record signers can omit events.",
+        "cases": [
+          "HTTP2-authority-Host-and-SNI-confusion-rejected"
+        ],
+        "positive": "Every raw origin byte remains visible, including SETTINGS ACK with no downstream request. Missing, aliased, reordered or lost coverage is INCOMPLETE.",
+        "policy_vs_protocol": "Research causality is a proposed AegisGate security property, not an HTTP2 conformance requirement or replacement for the current aggregate zero-byte contract."
+      }
+    ]
+  },
+  "vectors": [
+    {
+      "id": "malformed-HTTP-obsolete-folded-header",
+      "encoding": "hex",
+      "raw": "474554202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a582d466f6c6465643a2066697273740d0a207365636f6e640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a",
+      "sha256": "2fd5c8bf85674e67a1e8d75c11b53d58904ca3b56d8cb3be3d264d53f16eba9f",
+      "historical_result": "FAIL on accepted Envoy"
+    },
+    {
+      "id": "strict-ingress-TE-obsolete-fold",
+      "encoding": "hex",
+      "raw": "504f5354202f20485454502f312e310d0a486f73743a20656467652d612e746573740d0a436f6e74656e742d4c656e6774683a20340d0a5472616e736665722d456e636f64696e673a0d0a206368756e6b65640d0a436f6e6e656374696f6e3a20636c6f73650d0a0d0a300d0a0d0a",
+      "sha256": "e9d3ff8fc8dff3411cc84fb3d60f46dfbcda5218ae8b1ff082e08512fbe3967a",
+      "historical_result": "FAIL on accepted Envoy"
+    },
+    {
+      "id": "raw-H2-HEADERS-stream-zero",
+      "encoding": "hex",
+      "raw": "00001d010500000000828704012f000a3a617574686f726974790b656467652d622e74657374",
+      "sha256": "4cc2de2e0e611c684642350114f03758df58c39f4dae222c4b9af29a8833b0fa",
+      "historical_result": "fail",
+      "alternate_result": "pass",
+      "expected": "Peer RST_STREAM or GOAWAY code1 under original assertions; no origin bytes/handlers; original deadline unchanged"
+    },
+    {
+      "id": "raw-H2-zero-WINDOW_UPDATE",
+      "encoding": "hex",
+      "raw": "00000408000000000000000000",
+      "sha256": "c58176c3b0bfe789c0c1ed3e414b8b84772b173e29cd217eec612489359a0e3a",
+      "historical_result": "fail",
+      "alternate_result": "pass",
+      "expected": "Peer RST_STREAM or GOAWAY code1 under original assertions; no origin bytes/handlers; original deadline unchanged"
+    },
+    {
+      "id": "raw-H2-unexpected-CONTINUATION",
+      "encoding": "hex",
+      "raw": "000000090400000001",
+      "sha256": "522504bbe78a7ae93672be5324c98de871000caf79ed9e02144d54aeccddd9f7",
+      "historical_result": "pass",
+      "alternate_result": "fail",
+      "expected": "Peer RST_STREAM or GOAWAY code1 under original assertions; no origin bytes/handlers; original deadline unchanged"
+    }
+  ],
+  "h2_userinfo": {
+    "method": "GET",
+    "path": "/",
+    "authority": "user@edge-b.test",
+    "verified_sni": "edge-b.test",
+    "expected_http_status": [
+      400,
+      421
+    ],
+    "actual_peer_rst_hex": "00000403000000000100000001",
+    "peer_capture": "evidence/sprint05d-b/attempt-02/peer.json",
+    "controls": [
+      "individual-settled-Host-denial",
+      "individual-settled-authority-denial",
+      "valid-identity-and-pool-reuse-after-negative-frames"
+    ]
+  },
+  "observation": {
+    "aggregate_ack_hex": "000000040100000000",
+    "current_contract": "FAIL whenever these9 bytes exist in the original interval; never subtract them",
+    "research": "No complete authoritative runtime instrumentation"
+  },
+  "immutable_references": [
+    {
+      "file": "spikes/envoy/image.lock.json",
+      "sha256": "a96054e7fe3b8994f708f54c221758ecd786b91655c641cb7648067d1f02889d"
+    },
+    {
+      "file": "spikes/envoy/config.mjs",
+      "sha256": "53fd7c0c624f8a4771ce75d6059981762694a89d61f24482803289b979cebeef"
+    },
+    {
+      "file": "spikes/envoy/wire-probes.mjs",
+      "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "evidence/sprint05d-b/attempt-02/bootstrap.json",
+      "sha256": "64c26f9ddcf7bdf1d625c13eaa05c9a3e22ab44726da696e827b8c38257ac7a9"
+    },
+    {
+      "file": "evidence/sprint05d-b/attempt-02/peer.json",
+      "sha256": "ebc3797a2c60a05011abe1394301dad5f090119c8ffa5b12195511d049832c6d"
+    },
+    {
+      "file": "evidence/sprint05d-b/attempt-02/receipt.json",
+      "sha256": "aabeb2f877bcfa820f3d31083561fb2c265cc8aa213327b72012593b3c82f49a"
+    },
+    {
+      "file": "evidence/sprint05d-c/audit-01/receipt.json",
+      "sha256": "be4b56ae946f8c5c5cfc2f92e1c3c5e46f6d9da6fcca15eb82ad4fa94cd90497"
+    },
+    {
+      "file": "evidence/sprint05a-root/candidate-02/original23.json",
+      "sha256": "62fa6ba4082b20185d4958bbd034bbddef40dc7b46e2a89291fda507d3c99cee"
+    },
+    {
+      "file": "evidence/sprint05c-c/attempt-04/original23.json",
+      "sha256": "f9a4e050fb13229395590244f057a5622fae1e1d5c04cc1a720d34cdfaf760a5"
+    }
+  ],
+  "reproduction": {
+    "h1": "The exact hex vectors may be sent over verified owned fixture TLS using the pinned native candidate; the complete historical runner/oracle remains unchanged.",
+    "h2": "Send client preface then empty SETTINGS before each frame vector. Userinfo uses maintained native H2 request API and the immutable peer capture includes actual compressed blocks/state.",
+    "historical_commands": [
+      "spikes/envoy/sprint05d-b-run.mjs (five selected exact bodies, diagnostic relay, not full23)",
+      "spikes/envoy/sprint05d-c-audit.mjs (source/API stop, no runtime)"
+    ],
+    "resource_rule": "flock /tmp/aegisgate-sprint02-fixtures.lock for setup through capture/hash/cleanup; owned loopback only; no public target"
+  }
+}

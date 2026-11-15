@@ -1,0 +1,133 @@
+package main
+
+import (
+	"bytes"
+	"encoding/hex"
+	"encoding/json"
+	"testing"
+
+	"golang.org/x/net/http2"
+	"golang.org/x/net/http2/hpack"
+)
+
+type sprint06afBlock struct {
+	id             uint32
+	probes, nonces []string
+}
+
+func sprint06afRequests(blocks []sprint06afBlock) string {
+	var wire, block bytes.Buffer
+	wire.WriteString(http2.ClientPreface)
+	fr := http2.NewFramer(&wire, nil)
+	_ = fr.WriteSettings()
+	enc := hpack.NewEncoder(&block)
+	for _, b := range blocks {
+		block.Reset()
+		fields := []hpack.HeaderField{{Name: ":method", Value: "GET"}, {Name: ":scheme", Value: "https"}, {Name: ":authority", Value: "example.com"}, {Name: ":path", Value: "/f-independent"}}
+		for _, probe := range b.probes {
+			fields = append(fields, hpack.HeaderField{Name: "x-aegis-probe-id", Value: probe})
+		}
+		for _, nonce := range b.nonces {
+			fields = append(fields, hpack.HeaderField{Name: "x-aegis-fixture-id", Value: nonce})
+		}
+		for _, field := range fields {
+			_ = enc.WriteField(field)
+		}
+		_ = fr.WriteHeaders(http2.HeadersFrameParam{StreamID: b.id, BlockFragment: block.Bytes(), EndHeaders: true, EndStream: true})
+	}
+	return hex.EncodeToString(wire.Bytes())
+}
+
+func sprint06afResponses(statuses ...string) string {
+	var wire, block bytes.Buffer
+	fr := http2.NewFramer(&wire, nil)
+	_ = fr.WriteSettings()
+	enc := hpack.NewEncoder(&block)
+	for i, status := range statuses {
+		block.Reset()
+		_ = enc.WriteField(hpack.HeaderField{Name: ":status", Value: status})
+		_ = fr.WriteHeaders(http2.HeadersFrameParam{StreamID: uint32(i*2 + 1), BlockFragment: block.Bytes(), EndHeaders: true, EndStream: true})
+	}
+	return hex.EncodeToString(wire.Bytes())
+}
+
+func TestSprint06AFIndependentBoundary(t *testing.T) {
+	requireFixtureLock(t)
+	key := bytes.Repeat([]byte{0x4f}, 32)
+	down := []sprint06afBlock{{1, []string{"f-a"}, nil}, {3, []string{"f-denied"}, nil}, {5, []string{"f-b"}, nil}}
+	up := []sprint06afBlock{{1, []string{"f-a"}, []string{"f-na"}}, {3, []string{"f-b"}, []string{"f-nb"}}}
+	base := runtimeEvidence{
+		Requests: []runtimeRequest{
+			{Probe: "f-a", Nonce: "f-na", SNI: "example.com", Tenant: "fixture-A", Generation: 7, Status: 200, OriginHandlers: 1, GotConnection: true, Wrote: true},
+			{Probe: "f-denied", SNI: "example.com", Tenant: "fixture-A", Generation: 7, Status: 421},
+			{Probe: "f-b", Nonce: "f-nb", SNI: "example.com", Tenant: "fixture-A", Generation: 7, Status: 200, OriginHandlers: 1, GotConnection: true, Wrote: true},
+		},
+		Wires: []runtimeWire{
+			{ID: "downstream", SNI: "example.com", Verified: true, Closed: true, To: sprint06afRequests(down), From: sprint06afResponses("200", "421", "200")},
+			{ID: "upstream", SNI: "example.com", Verified: true, Closed: true, To: sprint06afRequests(up), From: sprint06afResponses("200", "200")},
+		},
+	}
+	for _, kind := range []string{"honest", "omitted-dispatch", "omitted-request", "old-stream-alias", "nonce-swap", "incomplete-hpack", "false-final-response", "capture-loss", "old-orphan-data", "duplicate-capture", "mac-tamper", "trusted-signer-rewrite", "untagged-upstream-headers", "untagged-downstream-headers", "same-block-upstream-alias", "same-block-downstream-alias"} {
+		t.Run(kind, func(t *testing.T) {
+			b, _ := json.Marshal(base)
+			var e runtimeEvidence
+			_ = json.Unmarshal(b, &e)
+			switch kind {
+			case "omitted-dispatch":
+				e.Requests[0].Wrote = false
+			case "omitted-request":
+				e.Requests = e.Requests[:2]
+			case "old-stream-alias":
+				e.Wires[1].To = sprint06afRequests([]sprint06afBlock{{1, []string{"f-a"}, []string{"f-na"}}, {1, []string{"f-b"}, []string{"f-nb"}}})
+			case "nonce-swap":
+				e.Requests[0].Nonce, e.Requests[2].Nonce = e.Requests[2].Nonce, e.Requests[0].Nonce
+			case "incomplete-hpack":
+				var w bytes.Buffer
+				w.WriteString(http2.ClientPreface)
+				fr := http2.NewFramer(&w, nil)
+				_ = fr.WriteSettings()
+				_ = fr.WriteHeaders(http2.HeadersFrameParam{StreamID: 1, BlockFragment: []byte{0x40, 0x7f}, EndHeaders: false, EndStream: true})
+				e.Wires[1].To = hex.EncodeToString(w.Bytes())
+			case "false-final-response":
+				e.Wires[0].From = sprint06afResponses("200", "200", "200")
+			case "capture-loss":
+				e.Wires[1].Lost = true
+			case "old-orphan-data":
+				var w bytes.Buffer
+				_ = http2.NewFramer(&w, nil).WriteData(99, true, []byte("F-only-synthetic"))
+				e.Wires[1].To += hex.EncodeToString(w.Bytes())
+			case "duplicate-capture":
+				e.Wires[0].ID = "upstream"
+			case "trusted-signer-rewrite":
+				e.Requests[0].Probe, e.Requests[0].Nonce = "rewrite", "rewrite-nonce"
+				e.Wires[0].To = sprint06afRequests([]sprint06afBlock{{1, []string{"rewrite"}, nil}, down[1], down[2]})
+				e.Wires[1].To = sprint06afRequests([]sprint06afBlock{{1, []string{"rewrite"}, []string{"rewrite-nonce"}}, up[1]})
+			case "untagged-upstream-headers":
+				e.Wires[1].To = sprint06afRequests(append(append([]sprint06afBlock{}, up...), sprint06afBlock{id: 99}))
+			case "untagged-downstream-headers":
+				e.Wires[0].To = sprint06afRequests(append(append([]sprint06afBlock{}, down...), sprint06afBlock{id: 99}))
+			case "same-block-upstream-alias":
+				e.Wires[1].To = sprint06afRequests([]sprint06afBlock{{1, []string{"f-a", "f-b"}, []string{"f-na", "f-nb"}}})
+			case "same-block-downstream-alias":
+				e.Wires[0].To = sprint06afRequests([]sprint06afBlock{{1, []string{"f-a", "f-b"}, nil}, down[1]})
+			}
+			e.MAC = runtimeMAC(e, key)
+			if kind == "mac-tamper" {
+				e.Requests[0].Tenant = "wrong"
+			}
+			prior, got := assessRuntime(e, key), sprint06aAssess(e, key)
+			want := kind == "honest" || kind == "trusted-signer-rewrite"
+			log, _ := json.Marshal(map[string]any{"independentF": true, "case": kind, "expectedConsistency": want, "priorConsistency": prior.CorrelationConsistent, "assessment": got})
+			t.Log(string(log))
+			if got.RuntimeComplete || got.RuntimePass || got.Module01Pass || len(got.Incomplete) == 0 {
+				t.Fatalf("incomplete observer promoted: %+v", got)
+			}
+			if (kind == "old-stream-alias" || kind == "old-orphan-data") && !prior.CorrelationConsistent {
+				t.Fatal("historical false consistency not reproduced")
+			}
+			if got.CorrelationConsistent != want {
+				t.Fatalf("F boundary %s: correlation=%t want=%t", kind, got.CorrelationConsistent, want)
+			}
+		})
+	}
+}

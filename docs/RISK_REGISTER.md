@@ -1,5 +1,30 @@
 # Implementation risk register
 
+## Sprint06-A Finite Scope And Remaining Risks
+
+R01/R04 remain blocking: original73/75 and19/23 are retained unchanged, with
+zero newly repaired historical assertions. Independent F `c5520d9` accepts
+finite tooling (67 container/29 independent attacks), limited signed-admission
+integration, corrected bounded H2 consistency tooling and inactive proposals.
+Streaming before completion FAILs; full H1/H2 runtime eligibility is rejected.
+
+Real384MiB/no-swap,0.75CPU,64PID and8MiB staging limits demonstrate bounded
+lab failure/recovery, not availability/SLO or tenant fairness. Same-UID active
+races, physical key erasure, secret custody, signed policy capture before
+staging, original SNI across the multi-hop fixture, production DNS/SSRF/JWKS,
+H2/WS/gRPC and authoritative pre-wire dispatch/HPACK coverage remain unproved.
+Ciphertext orphans are discarded after crashes; uncertain requests never retry
+automatically. A causal H2 exception cannot excuse late-invalid H1 forwarding.
+
+The proposed finite profile and research-attributed H2 property are inactive;
+owners/signoff PENDING. Full locked check/security-scan/cleanup PASS at c4a2fc5,
+independently accepted by F329c3f4. Failed runs preserve the initial source race,
+Git alternates mount failure and two findings on abandoned unmerged local04C
+refs. A separate full-history candidate clone scans all750 ancestors unchanged,
+findings0; no ref deletion, suppression or history rewrite. Exact export/hosted
+delivery receipts follow in `reports/sprint06a-completion.md`.01 NO-GO;
+04-12 LOCKED;production BLOCKED.
+
 ## Sprint05-D Tested Decision Boundary
 
 R01/R04 remain blocking. Strict finite all-message encrypted staging prevents

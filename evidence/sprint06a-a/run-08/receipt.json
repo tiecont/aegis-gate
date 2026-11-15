@@ -1,0 +1,2761 @@
+{
+  "started": "2026-11-15T11:48:57.565Z",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/home/tiecont/.cache/aegisgate-06a/a/spikes/envoy/sprint06a-a-run.mjs",
+    "evidence/sprint06a-a/run-08"
+  ],
+  "cwd": "/home/tiecont/.cache/aegisgate-06a/a",
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/git",
+        "status",
+        "--porcelain",
+        "--untracked-files=all"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "",
+      "started": "2026-11-15T11:48:57.566Z",
+      "ended": "2026-11-15T11:48:57.590Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/tmp",
+      "executableSha256": "0da72c00a915c06b9e7062e2dc999afe323223d000fef63111a94f522afd8ecf"
+    },
+    {
+      "argv": [
+        "/usr/bin/git",
+        "branch",
+        "--show-current"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "feat/sprint06a-finite-ingress\n",
+      "stderr": "",
+      "started": "2026-11-15T11:48:57.637Z",
+      "ended": "2026-11-15T11:48:57.643Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/tmp",
+      "executableSha256": "0da72c00a915c06b9e7062e2dc999afe323223d000fef63111a94f522afd8ecf"
+    },
+    {
+      "argv": [
+        "/usr/bin/git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "73d8f419171989ada8983f2780a103cadd207cdd\n",
+      "stderr": "",
+      "started": "2026-11-15T11:48:57.650Z",
+      "ended": "2026-11-15T11:48:57.653Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/tmp",
+      "executableSha256": "0da72c00a915c06b9e7062e2dc999afe323223d000fef63111a94f522afd8ecf"
+    },
+    {
+      "argv": [
+        "/usr/bin/git",
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "03c2774a5be8c9716bc7c7f3796c93aa7859e2b9\n",
+      "stderr": "",
+      "started": "2026-11-15T11:48:57.659Z",
+      "ended": "2026-11-15T11:48:57.663Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/tmp",
+      "executableSha256": "0da72c00a915c06b9e7062e2dc999afe323223d000fef63111a94f522afd8ecf"
+    },
+    {
+      "argv": [
+        "/usr/bin/git",
+        "ls-files",
+        "spikes/envoy/sprint06a-a-*",
+        "scripts/sprint06a-a-*",
+        "spikes/envoy/sprint05c-a-runtime.mjs",
+        "spikes/envoy/sprint05c-a-llhttp.c",
+        "spikes/envoy/sprint05b-a-build.mjs",
+        "spikes/envoy/wire-fixtures.mjs",
+        "scripts/sprint05b-baseline.mjs",
+        "evidence/sprint05a-b/source-01/sources.json",
+        "spikes/edge-comparison/manifest.json",
+        "spikes/envoy/sprint06a-a-fixtures.mjs"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "evidence/sprint05a-b/source-01/sources.json\nscripts/sprint05b-baseline.mjs\nscripts/sprint06a-a-container.mjs\nscripts/sprint06a-a-verify.mjs\nscripts/sprint06a-a-wrapped.mjs\nspikes/edge-comparison/manifest.json\nspikes/envoy/sprint05b-a-build.mjs\nspikes/envoy/sprint05c-a-llhttp.c\nspikes/envoy/sprint05c-a-runtime.mjs\nspikes/envoy/sprint06a-a-build.mjs\nspikes/envoy/sprint06a-a-child.mjs\nspikes/envoy/sprint06a-a-extra.mjs\nspikes/envoy/sprint06a-a-fixtures.mjs\nspikes/envoy/sprint06a-a-run.mjs\nspikes/envoy/sprint06a-a-runtime.mjs\nspikes/envoy/sprint06a-a-spool.mjs\nspikes/envoy/wire-fixtures.mjs\n",
+      "stderr": "",
+      "started": "2026-11-15T11:48:57.668Z",
+      "ended": "2026-11-15T11:48:57.674Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/tmp",
+      "executableSha256": "0da72c00a915c06b9e7062e2dc999afe323223d000fef63111a94f522afd8ecf"
+    },
+    {
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "{\n  \"baseline\": \"8758b1c84b4186449cd79fabae461ca53ee05100\",\n  \"tree\": \"2c6b1d5ff56f9e60a7bf77b478e291f3f5bc420d\",\n  \"protectedFiles\": [\n    {\n      \"file\": \"spikes/pingora/lab.mjs\",\n      \"sha256\": \"9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d\",\n      \"bytes\": 45073\n    },\n    {\n      \"file\": \"spikes/edge-comparison/manifest.json\",\n      \"sha256\": \"8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141\",\n      \"bytes\": 9829\n    },\n    {\n      \"file\": \"spikes/edge-comparison/contract.mjs\",\n      \"sha256\": \"1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f\",\n      \"bytes\": 1686\n    },\n    {\n      \"file\": \"spikes/edge-comparison/supplemental.mjs\",\n      \"sha256\": \"606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf\",\n      \"bytes\": 1616\n    },\n    {\n      \"file\": \"spikes/edge-comparison/evaluate.mjs\",\n      \"sha256\": \"059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf\",\n      \"bytes\": 2119\n    },\n    {\n      \"file\": \"spikes/edge-comparison/run.mjs\",\n      \"sha256\": \"dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493\",\n      \"bytes\": 61\n    },\n    {\n      \"file\": \"spikes/edge-comparison/tls-observer.mjs\",\n      \"sha256\": \"b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065\",\n      \"bytes\": 1639\n    },\n    {\n      \"file\": \"spikes/edge-comparison/extract-baseline.mjs\",\n      \"sha256\": \"a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6\",\n      \"bytes\": 2908\n    },\n    {\n      \"file\": \"spikes/envoy/wire-probes.mjs\",\n      \"sha256\": \"fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a\",\n      \"bytes\": 20934\n    },\n    {\n      \"file\": \"spikes/envoy/wire-observer.mjs\",\n      \"sha256\": \"bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3\",\n      \"bytes\": 4052\n    },\n    {\n      \"file\": \"spikes/envoy/wire-fixtures.mjs\",\n      \"sha256\": \"4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278\",\n      \"bytes\": 3320\n    }\n  ],\n  \"protected_inventory_sha256\": \"85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa\",\n  \"historical\": [\n    {\n      \"file\": \"evidence/sprint05a-root/candidate-02/commands.json\",\n      \"sha256\": \"572ad993fe7f38b58c62c0b66de81a333006b3c6ed5a332478e38f60838d273a\"\n    },\n    {\n      \"file\": \"evidence/sprint05a-root/candidate-02/original75.json\",\n      \"sha256\": \"13a04311fa39f0e7c7d94c85051d6d375e9a281cf6a4aa0f4aafa8dbe337556a\"\n    },\n    {\n      \"file\": \"evidence/sprint05a-root/candidate-02/original23.json\",\n      \"sha256\": \"62fa6ba4082b20185d4958bbd034bbddef40dc7b46e2a89291fda507d3c99cee\"\n    },\n    {\n      \"file\": \"evidence/sprint05a-root/candidate-02/SHA256SUMS\",\n      \"sha256\": \"85e4968d3da9ce4381f6cae77073376c2cf6164ca3d278a42489abe2f00a9017\"\n    },\n    {\n      \"file\": \"evidence/sprint05a-b/source-01/sources.json\",\n      \"sha256\": \"75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d\"\n    }\n  ],\n  \"previous75\": {\n    \"passed\": 73,\n    \"failures\": [\n      {\n        \"name\": \"malformed-HTTP-obsolete-folded-header\",\n        \"status\": \"fail\",\n        \"milliseconds\": 7.12,\n        \"error\": \"malformed request reached an owned origin\\n\\n1 !== 0\\n\",\n        \"origin\": {\n          \"handler_invocations\": 1,\n          \"decrypted_bytes\": 263,\n          \"parser_errors\": 0,\n          \"transport_errors\": 0,\n          \"requests\": [\n            {\n              \"method\": \"GET\",\n              \"target\": \"/\",\n              \"protocol\": \"1.1\",\n              \"tls\": \"TLSv1.2\",\n              \"sni\": false,\n              \"alpn\": \"http/1.1\"\n            }\n          ],\n          \"omitted_request_samples\": 0\n        }\n      },\n      {\n        \"name\": \"HTTP2-authority-Host-and-SNI-confusion-rejected\",\n        \"status\": \"fail\",\n        \"milliseconds\": 7.38,\n        \"error\": \"confused authority forwarded bytes to origin\\n\\n3032 !== 3023\\n\",\n        \"origin\": {\n          \"handler_invocations\": 0,\n          \"decrypted_bytes\": 9,\n          \"parser_errors\": 0,\n          \"transport_errors\": 0,\n          \"requests\": [],\n          \"omitted_request_samples\": 0\n        }\n      }\n    ]\n  },\n  \"previous23\": {\n    \"passed\": 19,\n    \"failures\": [\n      \"settled-reuse-identity-and-three-authority-negatives\",\n      \"individual-settled-userinfo-denial\",\n      \"raw-H2-HEADERS-stream-zero\",\n      \"raw-H2-zero-WINDOW_UPDATE\"\n    ]\n  }\n}\n",
+      "stderr": "",
+      "started": "2026-11-15T11:48:57.941Z",
+      "ended": "2026-11-15T11:48:58.074Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+    },
+    {
+      "argv": [
+        "/usr/bin/uname",
+        "-a"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "Linux 2997690d718b 7.3.3-1-cachyos #1 SMP PREEMPT_DYNAMIC Sat, 07 Nov 2026 13:54:44 +0000 x86_64 GNU/Linux\n",
+      "stderr": "",
+      "started": "2026-11-15T11:48:58.336Z",
+      "ended": "2026-11-15T11:48:58.348Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "c8e5d3f5c5eb303ad75107b5fd9ecc81afdb555d24379851f5b9aa1e70a95d46"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "version"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "OpenSSL 4.1.0 23 Oct 2026 (Library: OpenSSL 4.1.0 23 Oct 2026)\n",
+      "stderr": "",
+      "started": "2026-11-15T11:48:58.349Z",
+      "ended": "2026-11-15T11:48:58.371Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "3c852df717ce7321bc9f38ceeb5c41244324e4d6a43a6b48ad0e5f274c3b52e0"
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "--version"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "cc (GCC) 16.2.1 20260810\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "stderr": "",
+      "started": "2026-11-15T11:48:58.400Z",
+      "ended": "2026-11-15T11:48:58.410Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "b0b49531b313e70aee0254fb5e69b050a781506184e16ebee6ebe68eee94a145"
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsyntax-only",
+        "-I/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node",
+        "-I/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/upstream",
+        "spikes/envoy/sprint05c-a-llhttp.c"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "",
+      "started": "2026-11-15T11:48:58.413Z",
+      "ended": "2026-11-15T11:48:58.526Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "b0b49531b313e70aee0254fb5e69b050a781506184e16ebee6ebe68eee94a145"
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c11",
+        "-O2",
+        "-shared",
+        "-fPIC",
+        "-Wall",
+        "-Werror",
+        "-I/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node",
+        "-I/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/upstream",
+        "spikes/envoy/sprint05c-a-llhttp.c",
+        "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/upstream/api.c",
+        "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/upstream/http.c",
+        "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/upstream/llhttp.c",
+        "-o",
+        "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/sprint06a-a-llhttp.node"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "",
+      "started": "2026-11-15T11:48:58.529Z",
+      "ended": "2026-11-15T11:49:00.644Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "b0b49531b313e70aee0254fb5e69b050a781506184e16ebee6ebe68eee94a145"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "req",
+        "-x509",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "ca.key",
+        "-out",
+        "ca.pem",
+        "-days",
+        "1",
+        "-subj",
+        "/CN=disposable Sprint06A A CA",
+        "-addext",
+        "basicConstraints=critical,CA:TRUE"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ".+.......+.....+.+++++++++++++++++++++++++++++++++++++++*..+.......+...+..+................+..............+..........+........+....+++++++++++++++++++++++++++++++++++++++*.+............+...+...+.....+.........+....+...........+.............+.....+.......+......+..+.......+.........+..+........................+......+...+....+...+.........+.....+.............+.....+......+.+......+...++++++\n.+..........+.........+..+..........+...+..+...+....+.....+.......+..............+.+...+.....+...+...+.+.........+..+.........+.+..+...+.............+............+..+.+..+.......+..+....+.....+.+.....+++++++++++++++++++++++++++++++++++++++*.+.......+...+.....+....+.....+...+.............+..+....+...+.....+..........+...........+.......+..+.+.........+...+........+...............+.......+.................+.+.....+....+++++++++++++++++++++++++++++++++++++++*..+...............+.+.....+.+...+.....+....+...+.........+.....+.+...............+..+.+..............+.+..+...+.........+.+...........+.+.........+........+......+.....................+......+.......+............+.....+................+..+.+...........+...+......+.+.....+.+.........+...+...+..+..........+......+.....+......+....+..............+.............+..+......+.+.....+.+...+......+......+...+..+...+.+...+..+...............+.+............+.....+...+............+...+....+......+..+.......+...+...........+.+......+.....+............+...+...+.......+...+.....+......+.+..++++++\n-----\n",
+      "started": "2026-11-15T11:49:00.650Z",
+      "ended": "2026-11-15T11:49:00.766Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "3c852df717ce7321bc9f38ceeb5c41244324e4d6a43a6b48ad0e5f274c3b52e0"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "req",
+        "-new",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "edge.key",
+        "-out",
+        "edge.csr",
+        "-subj",
+        "/CN=edge-a.test",
+        "-addext",
+        "subjectAltName=DNS:edge-a.test"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ".....+.+..+...+.......+..+++++++++++++++++++++++++++++++++++++++*..+.....+.+.....+.......+...+.....+...+.+.....+...............+.+..+...+++++++++++++++++++++++++++++++++++++++*....+....+...+.....+..........+..+..........+..+....+......+...+...+.............................+.+..+...+....+........+................+.....+......+....+..............+.............+.....+...+....+...+...+......+.....+......+....+.....+.........++++++\n.........+......+......+.+...+.........+.....+++++++++++++++++++++++++++++++++++++++*.+...+..+............+...+....+...............+........+..........+..+.+...+.....+.+.....+....+...........+.+..+++++++++++++++++++++++++++++++++++++++*.....+.........+....+............++++++\n-----\n",
+      "started": "2026-11-15T11:49:00.768Z",
+      "ended": "2026-11-15T11:49:00.858Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "3c852df717ce7321bc9f38ceeb5c41244324e4d6a43a6b48ad0e5f274c3b52e0"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "x509",
+        "-req",
+        "-in",
+        "edge.csr",
+        "-CA",
+        "ca.pem",
+        "-CAkey",
+        "ca.key",
+        "-CAcreateserial",
+        "-out",
+        "edge.pem",
+        "-days",
+        "1",
+        "-copy_extensions",
+        "copy"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "Certificate request self-signature ok\nsubject=CN=edge-a.test\n",
+      "started": "2026-11-15T11:49:00.859Z",
+      "ended": "2026-11-15T11:49:00.870Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "3c852df717ce7321bc9f38ceeb5c41244324e4d6a43a6b48ad0e5f274c3b52e0"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "req",
+        "-new",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "origin.key",
+        "-out",
+        "origin.csr",
+        "-subj",
+        "/CN=lab-origin.test",
+        "-addext",
+        "subjectAltName=DNS:lab-origin.test"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ".....+......+.+...+..............+...+....+......+...+..+.........+.+..+.+...........+.........+.+......+..+......+....+...+..+++++++++++++++++++++++++++++++++++++++*....+....+++++++++++++++++++++++++++++++++++++++*..+...+..........+..+............+......+....+.....................+......+........+......+.+.....+..........+......+...+..+.........+...+.......+...+...........+.+......+.........+......+........+.+.......................+......+....+........+...............+....+.....+....+.....+.+...+......+..+.......+.....+.......+........+......+.+......+..+............+.+...+.....+......+.+...+...........+......+...+....+...+..+......+....+...+..............+.+.....+.........+.+..+............+......+.......+...++++++\n.+...+..+++++++++++++++++++++++++++++++++++++++*.....+....+...+.....+......+.......+.........+..............+.........+.+......+++++++++++++++++++++++++++++++++++++++*..........+......+............+.+..+....+.........+..+.......+............+......+.......................+.......+...+.........+...+..+.+...........+...+..........+...........+.........+.+..........................+..........+.....+.+.....+............+.......+...+........+.......+......+............+........+.......+..+.+..+.......+..+.........+.+...+..+.+........+................+...+..+...+..........+........+............+......+.+.....+......+.......+...+..+......+.+...+......+............+.....+.............+...............+.....+.+...+...+..............+.+...+..+....+...............+...........+...+.......+..+...+.......+.....+..................+...+.+.....+.+.........+.........+.....+....+...........+....+..+.........+....+..+...+.+...........+..................+.+..+...+....+..+.........+.+.....+.+.........+...+...+...............+...............+...+......+...........+...+.+...........+.......+...+........+.......+..+.+..+....+...............+.....+.........+....+..+...+.+..+............+.+.........+.....+...+....+........++++++\n-----\n",
+      "started": "2026-11-15T11:49:00.871Z",
+      "ended": "2026-11-15T11:49:01.041Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "3c852df717ce7321bc9f38ceeb5c41244324e4d6a43a6b48ad0e5f274c3b52e0"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "x509",
+        "-req",
+        "-in",
+        "origin.csr",
+        "-CA",
+        "ca.pem",
+        "-CAkey",
+        "ca.key",
+        "-CAcreateserial",
+        "-out",
+        "origin.pem",
+        "-days",
+        "1",
+        "-copy_extensions",
+        "copy"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "Certificate request self-signature ok\nsubject=CN=lab-origin.test\n",
+      "started": "2026-11-15T11:49:01.042Z",
+      "ended": "2026-11-15T11:49:01.055Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "3c852df717ce7321bc9f38ceeb5c41244324e4d6a43a6b48ad0e5f274c3b52e0"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "req",
+        "-new",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "expired.key",
+        "-out",
+        "expired.csr",
+        "-subj",
+        "/CN=lab-origin.test",
+        "-addext",
+        "subjectAltName=DNS:lab-origin.test"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "...+......+..+..........+..+......+...+....+..+....+..+....+.....+......+...+....+........+............+.......+........+..........+...+.........+......+...+..............+.+......+.....+...+.+......+......+..+...+..........+...+.....+++++++++++++++++++++++++++++++++++++++*...+.+++++++++++++++++++++++++++++++++++++++*....+...+....+...+...+..+...+...+....+...+..+......+...............+.+...+..+.........+.+......+.....+.......+.....+............+....+..++++++\n..+......+............+++++++++++++++++++++++++++++++++++++++*..+...+......+...+...+.......+.....+......+.+......+........+.+......+.........+.....+..........+........+......+.+...........+.......+...+++++++++++++++++++++++++++++++++++++++*......+........+.........+.+......+.........+......+.....+...+...+...+....+..+....+..+...+.........................+..+...+..........+..+...+.+...+..+.+...+...........+...+.+..+.........+.+........+.......+..................+..+....+..............+.........+......+..........+............+........+....+...+.....+.........+.+............+......++++++\n-----\n",
+      "started": "2026-11-15T11:49:01.056Z",
+      "ended": "2026-11-15T11:49:01.136Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "3c852df717ce7321bc9f38ceeb5c41244324e4d6a43a6b48ad0e5f274c3b52e0"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "ca",
+        "-batch",
+        "-config",
+        "ca.cnf",
+        "-in",
+        "expired.csr",
+        "-out",
+        "expired.pem",
+        "-notext",
+        "-startdate",
+        "20200101000000Z",
+        "-enddate",
+        "20200102000000Z"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": "Using configuration from ca.cnf\nWarning: -enddate or -not_after option overriding -days option\nCheck that the request matches the signature\nSignature ok\nThe Subject's Distinguished Name is as follows\ncommonName            :ASN.1 12:'lab-origin.test'\nCertificate is to be certified until Jan  2 00:00:00 2020 GMT (-2509 days)\n\nWrite out database with 1 new entries\nDatabase updated\n",
+      "started": "2026-11-15T11:49:01.138Z",
+      "ended": "2026-11-15T11:49:01.152Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "3c852df717ce7321bc9f38ceeb5c41244324e4d6a43a6b48ad0e5f274c3b52e0"
+    },
+    {
+      "argv": [
+        "/usr/bin/openssl",
+        "req",
+        "-x509",
+        "-newkey",
+        "rsa:2048",
+        "-nodes",
+        "-keyout",
+        "untrusted.key",
+        "-out",
+        "untrusted.pem",
+        "-days",
+        "1",
+        "-subj",
+        "/CN=lab-origin.test",
+        "-addext",
+        "subjectAltName=DNS:lab-origin.test"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/pki",
+      "exit": 0,
+      "signal": null,
+      "stdout": "",
+      "stderr": ".............+.+.....+.+...+.....+...................+.....+......+.......+++++++++++++++++++++++++++++++++++++++*.+..+.+...........+...+.+..+....+...+......+..+...+.........+......+++++++++++++++++++++++++++++++++++++++*......+......+...+...........+..........+............+...............+........+......+.................................+.......+.........+..........................+.+..+...+...+.+...+.....+............+......+...+..........+......+.....+.........+................+......+...+.....+.......+.........+...+..+.+.....+.........+....+............+..+.......+.....+.........+.........+.+.....+....+............+.....+.+........+.....................+.+............+..+.+..+...+....+.....+...+.+..+....+.........+..+...+..........+......+......+.....+....+.....+.+..+.....................+....+............+.....+....+.........+.....+.+..+...+....+..+.+...+............+...+..+...+.+.....+...+.......+.....+.........+....+.....+.+..+.......+......+..+....+...........+....+...+...+...............+...+..+....+...........+...+.+...+......+..+...+....+..+....+......+.....+......+....+....................+.+........+......+.........+.......+........+.+...+...............+...+.........+.....+.........+.+...............+...+..+....+.....+......+.+..+.+.....+.......+....................+..........+.........+.....+...+.+.....+.........+...+............+.......+........+...+...+....+..+...+.......+...+...+..............++++++\n...+....+...........+....+.....+.........+....+++++++++++++++++++++++++++++++++++++++*......+..+...+..........+.....+.......+.....+.+..+....+...+..+......+....+........+...+............+......+......+.+..+...+.......+..+......+....+...+...........+.......+.........+...+..+.........+.......+...+......+..............+.+.....+...+++++++++++++++++++++++++++++++++++++++*.+......+...........+...+.+...+........+...++++++\n-----\n",
+      "started": "2026-11-15T11:49:01.153Z",
+      "ended": "2026-11-15T11:49:01.272Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "3c852df717ce7321bc9f38ceeb5c41244324e4d6a43a6b48ad0e5f274c3b52e0"
+    },
+    {
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/a",
+      "exit": 0,
+      "signal": null,
+      "stdout": "{\n  \"baseline\": \"8758b1c84b4186449cd79fabae461ca53ee05100\",\n  \"tree\": \"2c6b1d5ff56f9e60a7bf77b478e291f3f5bc420d\",\n  \"protectedFiles\": [\n    {\n      \"file\": \"spikes/pingora/lab.mjs\",\n      \"sha256\": \"9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d\",\n      \"bytes\": 45073\n    },\n    {\n      \"file\": \"spikes/edge-comparison/manifest.json\",\n      \"sha256\": \"8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141\",\n      \"bytes\": 9829\n    },\n    {\n      \"file\": \"spikes/edge-comparison/contract.mjs\",\n      \"sha256\": \"1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f\",\n      \"bytes\": 1686\n    },\n    {\n      \"file\": \"spikes/edge-comparison/supplemental.mjs\",\n      \"sha256\": \"606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf\",\n      \"bytes\": 1616\n    },\n    {\n      \"file\": \"spikes/edge-comparison/evaluate.mjs\",\n      \"sha256\": \"059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf\",\n      \"bytes\": 2119\n    },\n    {\n      \"file\": \"spikes/edge-comparison/run.mjs\",\n      \"sha256\": \"dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493\",\n      \"bytes\": 61\n    },\n    {\n      \"file\": \"spikes/edge-comparison/tls-observer.mjs\",\n      \"sha256\": \"b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065\",\n      \"bytes\": 1639\n    },\n    {\n      \"file\": \"spikes/edge-comparison/extract-baseline.mjs\",\n      \"sha256\": \"a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6\",\n      \"bytes\": 2908\n    },\n    {\n      \"file\": \"spikes/envoy/wire-probes.mjs\",\n      \"sha256\": \"fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a\",\n      \"bytes\": 20934\n    },\n    {\n      \"file\": \"spikes/envoy/wire-observer.mjs\",\n      \"sha256\": \"bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3\",\n      \"bytes\": 4052\n    },\n    {\n      \"file\": \"spikes/envoy/wire-fixtures.mjs\",\n      \"sha256\": \"4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278\",\n      \"bytes\": 3320\n    }\n  ],\n  \"protected_inventory_sha256\": \"85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa\",\n  \"historical\": [\n    {\n      \"file\": \"evidence/sprint05a-root/candidate-02/commands.json\",\n      \"sha256\": \"572ad993fe7f38b58c62c0b66de81a333006b3c6ed5a332478e38f60838d273a\"\n    },\n    {\n      \"file\": \"evidence/sprint05a-root/candidate-02/original75.json\",\n      \"sha256\": \"13a04311fa39f0e7c7d94c85051d6d375e9a281cf6a4aa0f4aafa8dbe337556a\"\n    },\n    {\n      \"file\": \"evidence/sprint05a-root/candidate-02/original23.json\",\n      \"sha256\": \"62fa6ba4082b20185d4958bbd034bbddef40dc7b46e2a89291fda507d3c99cee\"\n    },\n    {\n      \"file\": \"evidence/sprint05a-root/candidate-02/SHA256SUMS\",\n      \"sha256\": \"85e4968d3da9ce4381f6cae77073376c2cf6164ca3d278a42489abe2f00a9017\"\n    },\n    {\n      \"file\": \"evidence/sprint05a-b/source-01/sources.json\",\n      \"sha256\": \"75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d\"\n    }\n  ],\n  \"previous75\": {\n    \"passed\": 73,\n    \"failures\": [\n      {\n        \"name\": \"malformed-HTTP-obsolete-folded-header\",\n        \"status\": \"fail\",\n        \"milliseconds\": 7.12,\n        \"error\": \"malformed request reached an owned origin\\n\\n1 !== 0\\n\",\n        \"origin\": {\n          \"handler_invocations\": 1,\n          \"decrypted_bytes\": 263,\n          \"parser_errors\": 0,\n          \"transport_errors\": 0,\n          \"requests\": [\n            {\n              \"method\": \"GET\",\n              \"target\": \"/\",\n              \"protocol\": \"1.1\",\n              \"tls\": \"TLSv1.2\",\n              \"sni\": false,\n              \"alpn\": \"http/1.1\"\n            }\n          ],\n          \"omitted_request_samples\": 0\n        }\n      },\n      {\n        \"name\": \"HTTP2-authority-Host-and-SNI-confusion-rejected\",\n        \"status\": \"fail\",\n        \"milliseconds\": 7.38,\n        \"error\": \"confused authority forwarded bytes to origin\\n\\n3032 !== 3023\\n\",\n        \"origin\": {\n          \"handler_invocations\": 0,\n          \"decrypted_bytes\": 9,\n          \"parser_errors\": 0,\n          \"transport_errors\": 0,\n          \"requests\": [],\n          \"omitted_request_samples\": 0\n        }\n      }\n    ]\n  },\n  \"previous23\": {\n    \"passed\": 19,\n    \"failures\": [\n      \"settled-reuse-identity-and-three-authority-negatives\",\n      \"individual-settled-userinfo-denial\",\n      \"raw-H2-HEADERS-stream-zero\",\n      \"raw-H2-zero-WINDOW_UPDATE\"\n    ]\n  }\n}\n",
+      "stderr": "",
+      "started": "2026-11-15T11:49:15.168Z",
+      "ended": "2026-11-15T11:49:15.278Z",
+      "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+      "executableSha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+    }
+  ],
+  "probes": [
+    {
+      "name": "no-body-staged-positive",
+      "inputBytes": 76,
+      "inputSha256": "264178451e436679ad81120e5d26f31e431c74fd2da96c74dcc93a8acfdb1435",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "1f78138754455b035462d229cb4a32e372b4ee8ab55ccd620e977bb44935e854",
+        "peerClosed": true,
+        "elapsedMs": 49.26209200000039
+      },
+      "origin": {
+        "bytes": 76,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 0,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 76,
+            "sha256": "264178451e436679ad81120e5d26f31e431c74fd2da96c74dcc93a8acfdb1435",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "CL-common-prefix-valid",
+      "commonPrefixSha256": "17e217776e42b2be452eb21fa64ea4be9c1fa44f23b8140384735332b4c55cc8",
+      "prefixBytes": 80,
+      "beforeCompletion": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "ciphertextSha256": "677a09be01f9d5b631238d5ea6b6d281fa8db2da44faadb1c44a9a67d4db391f",
+      "privateMode": "0700/0600",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "1f78138754455b035462d229cb4a32e372b4ee8ab55ccd620e977bb44935e854",
+        "peerClosed": true,
+        "elapsedMs": 122.0757249999997
+      },
+      "origin": {
+        "bytes": 87,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 10,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "b117ef94c554ede113d1296020dc9a5078826e1b27762f49fbbda8445b6a02f2",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 87,
+            "sha256": "9b024a30c590762fad9a08458a1505624e652ab308a647441db9a54dc209e618",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "CL-common-prefix-EOF",
+      "commonPrefixSha256": "17e217776e42b2be452eb21fa64ea4be9c1fa44f23b8140384735332b4c55cc8",
+      "prefixBytes": 80,
+      "beforeCompletion": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "ciphertextSha256": "9a3307fbe0f7c96e57e0c6b8cc27f9b7f1fd7aa260fe7f6a30ea2e124a8357aa",
+      "privateMode": "0700/0600",
+      "response": {
+        "statuses": [
+          400
+        ],
+        "bytes": 63,
+        "sha256": "107006dce3a7eb16429e5002a08d8617ad4e0fd72bdc7cb9a0da532db5f42882",
+        "peerClosed": true,
+        "elapsedMs": 112.77688399999988
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "chunk-common-prefix-valid",
+      "commonPrefixSha256": "afda17995eb91f47f16179af03f36ce8d8ec8e15882e70bc6632b095a808ec6a",
+      "prefixBytes": 109,
+      "beforeCompletion": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "ciphertextSha256": "312cb5f2bc2c6cce733cdeff0d058d594548bb198ba2ba99a618173ef93782c8",
+      "privateMode": "0700/0600",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "1f78138754455b035462d229cb4a32e372b4ee8ab55ccd620e977bb44935e854",
+        "peerClosed": true,
+        "elapsedMs": 124.19632300000012
+      },
+      "origin": {
+        "bytes": 126,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 3,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+            "trailers": [
+              "X-End",
+              "yes"
+            ]
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 126,
+            "sha256": "6ed3ac4816e06f6de8852bd8970d828916e9e4e2c5bbabf1667bf7a5ea595b31",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "chunk-common-prefix-EOF",
+      "commonPrefixSha256": "afda17995eb91f47f16179af03f36ce8d8ec8e15882e70bc6632b095a808ec6a",
+      "prefixBytes": 109,
+      "beforeCompletion": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "ciphertextSha256": "088d0781c7df377d8a7f83be5078607cd0ba068dcfef245a3e9722167d8fe8e5",
+      "privateMode": "0700/0600",
+      "response": {
+        "statuses": [
+          400
+        ],
+        "bytes": 63,
+        "sha256": "107006dce3a7eb16429e5002a08d8617ad4e0fd72bdc7cb9a0da532db5f42882",
+        "peerClosed": true,
+        "elapsedMs": 112.13210799999979
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "chunk-common-prefix-late-fold",
+      "commonPrefixSha256": "afda17995eb91f47f16179af03f36ce8d8ec8e15882e70bc6632b095a808ec6a",
+      "prefixBytes": 109,
+      "beforeCompletion": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "ciphertextSha256": "2777f25cf6becb8eb98f4eca982975b6ba0d9df846db3339f987012d1146c869",
+      "privateMode": "0700/0600",
+      "response": {
+        "statuses": [
+          400
+        ],
+        "bytes": 63,
+        "sha256": "107006dce3a7eb16429e5002a08d8617ad4e0fd72bdc7cb9a0da532db5f42882",
+        "peerClosed": true,
+        "elapsedMs": 114.7012279999999
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "complete-CL-write-EOF",
+      "inputBytes": 79,
+      "inputSha256": "a40ed82ba1aa0f1850831da6a49c4b0e3ab93accfa3d771af5b05664164e5517",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "ffdd26f0e9658dc09222c9fcf99c43ecb20512d137495c04f9f13d154f95f5d7",
+        "peerClosed": true,
+        "elapsedMs": 12.466852000000472
+      },
+      "origin": {
+        "bytes": 79,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 3,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 79,
+            "sha256": "a40ed82ba1aa0f1850831da6a49c4b0e3ab93accfa3d771af5b05664164e5517",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "malformed-HTTP-obsolete-folded-header",
+      "inputBytes": 82,
+      "inputSha256": "2fd5c8bf85674e67a1e8d75c11b53d58904ca3b56d8cb3be3d264d53f16eba9f",
+      "response": {
+        "statuses": [
+          400
+        ],
+        "bytes": 63,
+        "sha256": "107006dce3a7eb16429e5002a08d8617ad4e0fd72bdc7cb9a0da532db5f42882",
+        "peerClosed": true,
+        "elapsedMs": 1.198062000000391
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "strict-ingress-TE-obsolete-fold",
+      "inputBytes": 111,
+      "inputSha256": "e9d3ff8fc8dff3411cc84fb3d60f46dfbcda5218ae8b1ff082e08512fbe3967a",
+      "response": {
+        "statuses": [
+          400
+        ],
+        "bytes": 63,
+        "sha256": "107006dce3a7eb16429e5002a08d8617ad4e0fd72bdc7cb9a0da532db5f42882",
+        "peerClosed": true,
+        "elapsedMs": 1.3239160000002812
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "CL-TE-rejected",
+      "inputBytes": 107,
+      "inputSha256": "6b9f94d9a0df188c6034dd0242b6004c61a4906f41b1307a6c42e07c4d22c30c",
+      "response": {
+        "statuses": [
+          400
+        ],
+        "bytes": 63,
+        "sha256": "107006dce3a7eb16429e5002a08d8617ad4e0fd72bdc7cb9a0da532db5f42882",
+        "peerClosed": true,
+        "elapsedMs": 2.1557990000001155
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "undeclared-trailer",
+      "inputBytes": 128,
+      "inputSha256": "126699da74c0dfda60128aeaacb931213bf0148e506fcd9e750d408b081aa1f2",
+      "response": {
+        "statuses": [
+          400
+        ],
+        "bytes": 63,
+        "sha256": "107006dce3a7eb16429e5002a08d8617ad4e0fd72bdc7cb9a0da532db5f42882",
+        "peerClosed": true,
+        "elapsedMs": 2.5546639999993204
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "encoded-target-/a%2Fb?x=%23",
+      "inputBytes": 94,
+      "inputSha256": "79aa6082d8728a1fd6db2791d2e37e67e7543b9151a6a32e74362287d6c307d0",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "ffdd26f0e9658dc09222c9fcf99c43ecb20512d137495c04f9f13d154f95f5d7",
+        "peerClosed": true,
+        "elapsedMs": 17.150354999999763
+      },
+      "origin": {
+        "bytes": 94,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/a%2Fb?x=%23",
+            "bodyBytes": 7,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "766adc67b02bf315b9b5057994bfe6cfbd9354c433f259b29ba415dbe0f7afa5",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 94,
+            "sha256": "79aa6082d8728a1fd6db2791d2e37e67e7543b9151a6a32e74362287d6c307d0",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "encoded-target-/a/../b?x=%00",
+      "inputBytes": 95,
+      "inputSha256": "9bf3094747490aa6be9bf5787e800ede4e2b8c3cfd5350ded33b703e734ad0c4",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "ffdd26f0e9658dc09222c9fcf99c43ecb20512d137495c04f9f13d154f95f5d7",
+        "peerClosed": true,
+        "elapsedMs": 7.877494999999726
+      },
+      "origin": {
+        "bytes": 95,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/a/../b?x=%00",
+            "bodyBytes": 7,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "766adc67b02bf315b9b5057994bfe6cfbd9354c433f259b29ba415dbe0f7afa5",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 95,
+            "sha256": "9bf3094747490aa6be9bf5787e800ede4e2b8c3cfd5350ded33b703e734ad0c4",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "ordered-CL-chunk-pipeline",
+      "inputBytes": 191,
+      "inputSha256": "3751f6136651af4c47c43bd72cbff8a48e4969b619b622bd2cbde79116f8a579",
+      "response": {
+        "statuses": [
+          200,
+          200
+        ],
+        "bytes": 220,
+        "sha256": "7aa197986743510c417bbf746540d2f945d4d0b3ddbdc13c1629d9c6f4d69210",
+        "peerClosed": true,
+        "elapsedMs": 15.970172999999704
+      },
+      "origin": {
+        "bytes": 191,
+        "connections": 2,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 8,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "23bf0d244a4cb62c85fc3aa0e8ebf8eb7eb970522a51326adf1ac015fc738c7c",
+            "trailers": []
+          },
+          {
+            "target": "/",
+            "bodyBytes": 3,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+            "trailers": [
+              "X-End",
+              "yes"
+            ]
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 65,
+            "sha256": "4655e7393085aa52023d5ff352473b62a5d618d0bf33a2ded779932d3c954c7f",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "bytes": 126,
+            "sha256": "6ed3ac4816e06f6de8852bd8970d828916e9e4e2c5bbabf1667bf7a5ea595b31",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 2
+      }
+    },
+    {
+      "name": "valid-late-fold-pipeline",
+      "inputBytes": 202,
+      "inputSha256": "422ba35579cd4da991cb30a561d9ac24842011d9ae76832b585aea88dfad037b",
+      "response": {
+        "statuses": [
+          200,
+          400
+        ],
+        "bytes": 187,
+        "sha256": "33bc4ff4e529189502df4a7d70adf94eb92b8a6a3febaee70fc2a4efd7e6692b",
+        "peerClosed": true,
+        "elapsedMs": 8.502927000000454
+      },
+      "origin": {
+        "bytes": 65,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 8,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "23bf0d244a4cb62c85fc3aa0e8ebf8eb7eb970522a51326adf1ac015fc738c7c",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 65,
+            "sha256": "4655e7393085aa52023d5ff352473b62a5d618d0bf33a2ded779932d3c954c7f",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "invalid-valid-pipeline",
+      "inputBytes": 216,
+      "inputSha256": "42b8fa16b34954dd0e9be8f4e867dd0fa4fbdd8260d1ff72567e5f0d4592f999",
+      "response": {
+        "statuses": [
+          400
+        ],
+        "bytes": 63,
+        "sha256": "107006dce3a7eb16429e5002a08d8617ad4e0fd72bdc7cb9a0da532db5f42882",
+        "peerClosed": true,
+        "elapsedMs": 1.070531000000301
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "finite-CL-upload",
+      "inputBytes": 524369,
+      "inputSha256": "f5d8133e9f687d9da732ae4a995001e45d94a3e92b9760ae81651a49a8dc0eea",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "ffdd26f0e9658dc09222c9fcf99c43ecb20512d137495c04f9f13d154f95f5d7",
+        "peerClosed": true,
+        "elapsedMs": 121.40992600000027
+      },
+      "origin": {
+        "bytes": 524369,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 524288,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "c66d52cc8a8fccdf9a720a0179f2c66c13f68afa631ba976d879ed6e9298232c",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 524369,
+            "sha256": "f5d8133e9f687d9da732ae4a995001e45d94a3e92b9760ae81651a49a8dc0eea",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "finite-chunk-upload",
+      "inputBytes": 524415,
+      "inputSha256": "415fa1957a64631881d6431437529b7e8e4a9a9f169beb82f9d6d90e31b2cf28",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "ffdd26f0e9658dc09222c9fcf99c43ecb20512d137495c04f9f13d154f95f5d7",
+        "peerClosed": true,
+        "elapsedMs": 158.6718460000002
+      },
+      "origin": {
+        "bytes": 524415,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 524288,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "c66d52cc8a8fccdf9a720a0179f2c66c13f68afa631ba976d879ed6e9298232c",
+            "trailers": [
+              "X-End",
+              "yes"
+            ]
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 524415,
+            "sha256": "415fa1957a64631881d6431437529b7e8e4a9a9f169beb82f9d6d90e31b2cf28",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "declared-stage-oversize",
+      "inputBytes": 82,
+      "inputSha256": "16c7ed0b25996f1338bf3e53605291493795f058322a947fd925412ecb4fbecc",
+      "response": {
+        "statuses": [
+          413
+        ],
+        "bytes": 63,
+        "sha256": "c98c3f97f072648c7e160a54bc16b60c79e57fd0dd6f720f47a8b0c95df900ec",
+        "peerClosed": true,
+        "elapsedMs": 1.2993319999995947
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "chunk-stage-oversize",
+      "inputBytes": 1572964,
+      "inputSha256": "2279a5484650cd5259b082946c9c98456679d230d411949a9a63f1eb17db5dee",
+      "response": {
+        "statuses": [
+          413
+        ],
+        "bytes": 63,
+        "sha256": "c98c3f97f072648c7e160a54bc16b60c79e57fd0dd6f720f47a8b0c95df900ec",
+        "peerClosed": true,
+        "elapsedMs": 68.05176699999993
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "staged-CL-cancellation",
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "released": true
+    },
+    {
+      "name": "aggregate-stage-file-quota",
+      "response": {
+        "statuses": [
+          503
+        ],
+        "bytes": 63,
+        "sha256": "f6da04e97b543461e968c599ea1f57e2d03630ff96185c42a12cd5e5eeb44002",
+        "peerClosed": true,
+        "elapsedMs": 0.9453750000002401
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "released": true
+    },
+    {
+      "name": "aggregate-ciphertext-byte-quota",
+      "response": {
+        "statuses": [
+          503
+        ],
+        "bytes": 63,
+        "sha256": "f6da04e97b543461e968c599ea1f57e2d03630ff96185c42a12cd5e5eeb44002",
+        "peerClosed": true,
+        "elapsedMs": 7.009156000000075
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "released": true,
+      "attemptedBytes": 600082,
+      "writeResult": {
+        "writeInterrupted": false
+      },
+      "writeScope": "attempted upload may stop at peer rejection; full delivery is not asserted"
+    },
+    {
+      "name": "ciphertext-tamper-auth-before-dial",
+      "response": {
+        "statuses": [
+          503
+        ],
+        "bytes": 63,
+        "sha256": "f6da04e97b543461e968c599ea1f57e2d03630ff96185c42a12cd5e5eeb44002",
+        "peerClosed": true,
+        "elapsedMs": 11.906654000000344
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "incomplete-chunk-waits-for-origin-progress",
+      "inputBytes": 109,
+      "inputSha256": "afda17995eb91f47f16179af03f36ce8d8ec8e15882e70bc6632b095a808ec6a",
+      "response": {
+        "statuses": [
+          408
+        ],
+        "bytes": 63,
+        "sha256": "5d75770a99f14b4a6f72db98d3f49f46d172d0f99e9cc01c7fa0fc69ea2a3a4a",
+        "peerClosed": true,
+        "elapsedMs": 704.8855240000003
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "absolute-incomplete-request-deadline",
+      "response": {
+        "statuses": [
+          408
+        ],
+        "bytes": 63,
+        "sha256": "5d75770a99f14b4a6f72db98d3f49f46d172d0f99e9cc01c7fa0fc69ea2a3a4a",
+        "peerClosed": true,
+        "elapsedMs": 2502.3986300000006
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "healthy-after-quotas-auth-timeouts",
+      "inputBytes": 83,
+      "inputSha256": "d5815c57301a7b4af9890f0c2dc932f2812948f063320053a68f280270f8a6a4",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "549d103943c9e3a10d24376a80f948bb5b1321425b5c245ff87744beb898fb40",
+        "peerClosed": true,
+        "elapsedMs": 11.533628999999564
+      },
+      "origin": {
+        "bytes": 83,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 7,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "87695fdac81728b9d7f2d4a1335c2632bb5e6ba1bed21d2dff0254fba31c7d5b",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 83,
+            "sha256": "d5815c57301a7b4af9890f0c2dc932f2812948f063320053a68f280270f8a6a4",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "SIGKILL-ciphertext-orphan-restart",
+      "orphan": {
+        "bytes": 21081,
+        "sha256": "ba7f2138133c08dd8962429fa98a693b8a2a851ff4d7ba7179db48666b60e2c7",
+        "mode": 384,
+        "keyPersisted": false
+      },
+      "recovery": {
+        "ready": true,
+        "port": 39711,
+        "reclaimedFiles": 1,
+        "reclaimedBytes": 21081
+      },
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "549d103943c9e3a10d24376a80f948bb5b1321425b5c245ff87744beb898fb40",
+        "peerClosed": true,
+        "elapsedMs": 20.851816000000326
+      },
+      "origin": {
+        "bytes": 83,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 7,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "3ace60b0a0c1b6c9345e31494142947aa97d4ef4912e895d8795663393819759",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 83,
+            "sha256": "843b8e9f22357d2b2b47732545f0dc5fbc671ffb87fca7c6e7d7631d9d790e0e",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "stopped": {
+        "stopped": true,
+        "metrics": {
+          "peakDisk": 83,
+          "peakOriginActive": 1,
+          "peakOriginQueue": 0,
+          "peakConnections": 1,
+          "activeContexts": 0,
+          "originDials": 1,
+          "requests": 1,
+          "staged": 1,
+          "admitted": 1,
+          "rejections": {},
+          "peakReadable": 96,
+          "peakWritable": 96,
+          "keyBuffersErased": 1
+        }
+      }
+    },
+    {
+      "name": "exact-stage-aggregate-file-quotas-key-tag-wiping",
+      "stageBytes": 1572864,
+      "aggregateBytes": 2097152,
+      "files": 3,
+      "keyIVTagZero": true
+    },
+    {
+      "name": "FileHandle-partial-write",
+      "inputBytes": 91,
+      "inputSha256": "d7e4f7749805a3eb01e9fe1de131d3539e7971875a9c759eba2980ce2decb702",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "549d103943c9e3a10d24376a80f948bb5b1321425b5c245ff87744beb898fb40",
+        "peerClosed": true,
+        "elapsedMs": 16.420651000000362
+      },
+      "origin": {
+        "bytes": 91,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 14,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "a48192d475795c661157d160d9f426194237de9b965e89bda9d7ac7ad51af70c",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 91,
+            "sha256": "d7e4f7749805a3eb01e9fe1de131d3539e7971875a9c759eba2980ce2decb702",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      },
+      "actualFileWriteCalls": 13
+    },
+    {
+      "name": "FileHandle-zero-write",
+      "inputBytes": 91,
+      "inputSha256": "d7e4f7749805a3eb01e9fe1de131d3539e7971875a9c759eba2980ce2decb702",
+      "response": {
+        "statuses": [
+          503
+        ],
+        "bytes": 63,
+        "sha256": "f6da04e97b543461e968c599ea1f57e2d03630ff96185c42a12cd5e5eeb44002",
+        "peerClosed": true,
+        "elapsedMs": 2.0275000000001455
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "actualFileWriteCalls": 1
+    },
+    {
+      "name": "FileHandle-EIO-write",
+      "inputBytes": 91,
+      "inputSha256": "d7e4f7749805a3eb01e9fe1de131d3539e7971875a9c759eba2980ce2decb702",
+      "response": {
+        "statuses": [
+          503
+        ],
+        "bytes": 63,
+        "sha256": "f6da04e97b543461e968c599ea1f57e2d03630ff96185c42a12cd5e5eeb44002",
+        "peerClosed": true,
+        "elapsedMs": 1.9929279999996652
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "actualFileWriteCalls": 1
+    },
+    {
+      "name": "pre-admission-truncate-rejected",
+      "response": {
+        "statuses": [
+          503
+        ],
+        "bytes": 63,
+        "sha256": "f6da04e97b543461e968c599ea1f57e2d03630ff96185c42a12cd5e5eeb44002",
+        "peerClosed": true,
+        "elapsedMs": 12.869837000000189
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "keyBuffersZero": true,
+      "stagePathRemoved": true
+    },
+    {
+      "name": "pre-admission-hardlink-rejected",
+      "response": {
+        "statuses": [
+          502
+        ],
+        "bytes": 63,
+        "sha256": "278940d7068d05b1044e828d7b6b00d4c569a6400bf638cf4a8e75b3b66b9603",
+        "peerClosed": true,
+        "elapsedMs": 24.172570999999152
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "keyBuffersZero": true,
+      "stagePathRemoved": true
+    },
+    {
+      "name": "pre-admission-symlink-replace-rejected",
+      "response": {
+        "statuses": [
+          502
+        ],
+        "bytes": 63,
+        "sha256": "278940d7068d05b1044e828d7b6b00d4c569a6400bf638cf4a8e75b3b66b9603",
+        "peerClosed": true,
+        "elapsedMs": 12.429277000001093
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "keyBuffersZero": true,
+      "stagePathRemoved": true
+    },
+    {
+      "name": "pre-admission-mode-rejected",
+      "response": {
+        "statuses": [
+          502
+        ],
+        "bytes": 63,
+        "sha256": "278940d7068d05b1044e828d7b6b00d4c569a6400bf638cf4a8e75b3b66b9603",
+        "peerClosed": true,
+        "elapsedMs": 11.716544000000795
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "keyBuffersZero": true,
+      "stagePathRemoved": true
+    },
+    {
+      "name": "cancel-erases-key-buffers-and-ciphertext",
+      "keyBuffersZero": true,
+      "ciphertextAbsent": true,
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "startup-root-symlink-closed",
+      "listenerCreated": false,
+      "outsideUnchanged": true
+    },
+    {
+      "name": "startup-root-mode-closed",
+      "listenerCreated": false,
+      "outsideUnchanged": true
+    },
+    {
+      "name": "startup-session-symlink-closed",
+      "listenerCreated": false,
+      "outsideUnchanged": true
+    },
+    {
+      "name": "startup-session-mode-closed",
+      "listenerCreated": false,
+      "outsideUnchanged": true
+    },
+    {
+      "name": "startup-unknown-session-closed",
+      "listenerCreated": false,
+      "outsideUnchanged": true
+    },
+    {
+      "name": "startup-stage-symlink-closed",
+      "listenerCreated": false,
+      "outsideUnchanged": true
+    },
+    {
+      "name": "startup-stage-hardlink-closed",
+      "listenerCreated": false,
+      "outsideUnchanged": true
+    },
+    {
+      "name": "startup-stage-mode-closed",
+      "listenerCreated": false,
+      "outsideUnchanged": true
+    },
+    {
+      "name": "startup-unknown-stage-closed",
+      "listenerCreated": false,
+      "outsideUnchanged": true
+    },
+    {
+      "name": "startup-stage-oversize-closed",
+      "listenerCreated": false,
+      "outsideUnchanged": true
+    },
+    {
+      "name": "startup-session-overflow-closed",
+      "listenerCreated": false,
+      "outsideUnchanged": true
+    },
+    {
+      "name": "startup-stage-overflow-closed",
+      "listenerCreated": false,
+      "outsideUnchanged": true
+    },
+    {
+      "name": "actual-origin-slots-queue-FIN-observation",
+      "peak": {
+        "active": 2,
+        "queue": 1
+      },
+      "origin": {
+        "bytes": 252,
+        "connections": 3,
+        "handlers": [
+          {
+            "target": "/hold",
+            "bodyBytes": 4,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "c20dea4d876b5b8fb0a1814b43017030cea6d4ac30b2d9ae71b404d2faba49b5",
+            "trailers": []
+          },
+          {
+            "target": "/hold",
+            "bodyBytes": 4,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "c20dea4d876b5b8fb0a1814b43017030cea6d4ac30b2d9ae71b404d2faba49b5",
+            "trailers": []
+          },
+          {
+            "target": "/hold",
+            "bodyBytes": 4,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "c20dea4d876b5b8fb0a1814b43017030cea6d4ac30b2d9ae71b404d2faba49b5",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 84,
+            "sha256": "fb7db87320947cbf13ca432f8ac94de9f75443777f5c2e453a3403ca613b6af7",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "bytes": 84,
+            "sha256": "fb7db87320947cbf13ca432f8ac94de9f75443777f5c2e453a3403ca613b6af7",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "bytes": 84,
+            "sha256": "fb7db87320947cbf13ca432f8ac94de9f75443777f5c2e453a3403ca613b6af7",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 3
+      },
+      "released": true,
+      "zeroDispatchClaim": false
+    },
+    {
+      "name": "observed-hard-RST-queued-request-no-dispatch",
+      "serverObservedBeforeSlotRelease": true,
+      "activeOrigins": 2,
+      "queue": 0,
+      "stageFiles": 0,
+      "origin": {
+        "bytes": 176,
+        "connections": 2,
+        "handlers": [
+          {
+            "target": "/hold",
+            "bodyBytes": 8,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "c46797a64dfe1edfbfc0f83053d989024376a4939bbd7fdda93d38b5e1b502ec",
+            "trailers": []
+          },
+          {
+            "target": "/hold",
+            "bodyBytes": 8,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "c46797a64dfe1edfbfc0f83053d989024376a4939bbd7fdda93d38b5e1b502ec",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 88,
+            "sha256": "0f788f0ad594c752d2e6c1930d2c2e629b4c017b194ebc61b42f4a39f6f8f214",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          },
+          {
+            "bytes": 88,
+            "sha256": "0f788f0ad594c752d2e6c1930d2c2e629b4c017b194ebc61b42f4a39f6f8f214",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 2
+      },
+      "cancelledRequestDials": 0,
+      "keyIVTagZero": true,
+      "ciphertextAbsent": true
+    },
+    {
+      "name": "actual-TCP-connection-cap",
+      "occupied": 6,
+      "extraClosed": true,
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "actual-origin-absolute-deadline",
+      "inputBytes": 88,
+      "inputSha256": "b0a3e8ab34d89e23aaecbe7501054f37cdfc194653ef23c606f6074c470a41b8",
+      "response": {
+        "statuses": [
+          504
+        ],
+        "bytes": 63,
+        "sha256": "548f5647b0458b746d658748eeac897b046405183282b1f4d861f971263dd806",
+        "peerClosed": true,
+        "elapsedMs": 1807.1686090000003
+      },
+      "origin": {
+        "bytes": 88,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/hold",
+            "bodyBytes": 8,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "dfc8aeb39828e31c4cf8fec553c76b65cf91b5ec8b2b00f397788b9f58bbd80e",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 88,
+            "sha256": "b0a3e8ab34d89e23aaecbe7501054f37cdfc194653ef23c606f6074c470a41b8",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "verified-origin-TLS-origin-wrong.test",
+      "response": {
+        "statuses": [
+          502
+        ],
+        "bytes": 63,
+        "sha256": "278940d7068d05b1044e828d7b6b00d4c569a6400bf638cf4a8e75b3b66b9603",
+        "peerClosed": true,
+        "elapsedMs": 7.902080000001661
+      },
+      "decryptedOriginBytes": 0,
+      "secureConnections": 0,
+      "originDialExpected": true
+    },
+    {
+      "name": "verified-origin-TLS-expired-lab-origin.test",
+      "response": {
+        "statuses": [
+          502
+        ],
+        "bytes": 63,
+        "sha256": "278940d7068d05b1044e828d7b6b00d4c569a6400bf638cf4a8e75b3b66b9603",
+        "peerClosed": true,
+        "elapsedMs": 4.207811999998739
+      },
+      "decryptedOriginBytes": 0,
+      "secureConnections": 0,
+      "originDialExpected": true
+    },
+    {
+      "name": "verified-origin-TLS-untrusted-lab-origin.test",
+      "response": {
+        "statuses": [
+          502
+        ],
+        "bytes": 63,
+        "sha256": "278940d7068d05b1044e828d7b6b00d4c569a6400bf638cf4a8e75b3b66b9603",
+        "peerClosed": true,
+        "elapsedMs": 5.263327000000572
+      },
+      "decryptedOriginBytes": 0,
+      "secureConnections": 0,
+      "originDialExpected": true
+    },
+    {
+      "name": "Host-SNI-identity-reject",
+      "inputBytes": 79,
+      "inputSha256": "c539328bcdcef96e128aa0299091c445c9cf7be0747c5261ddd657f302343527",
+      "response": {
+        "statuses": [
+          421
+        ],
+        "bytes": 63,
+        "sha256": "395453c0054edf80622c953bcbfc73708a085be3f7459689bbcfa7fbfeb2763f",
+        "peerClosed": true,
+        "elapsedMs": 1.1775980000002164
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "unknown-SNI-handshake-denied",
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      }
+    },
+    {
+      "name": "kernel-CPU-quota-enforced",
+      "controls": {
+        "memoryMax": "402653184",
+        "swapMax": "0",
+        "cpuMax": "75000 100000",
+        "pidsMax": "64"
+      },
+      "before": {
+        "usage_usec": 4100776,
+        "user_usec": 3223730,
+        "system_usec": 877045,
+        "nice_usec": 3016553,
+        "core_sched.force_idle_usec": 0,
+        "nr_periods": 125,
+        "nr_throttled": 40,
+        "throttled_usec": 1118828,
+        "nr_bursts": 0,
+        "burst_usec": 0
+      },
+      "after": {
+        "usage_usec": 4875932,
+        "user_usec": 3303479,
+        "system_usec": 1572453,
+        "nice_usec": 3106547,
+        "core_sched.force_idle_usec": 0,
+        "nr_periods": 135,
+        "nr_throttled": 50,
+        "throttled_usec": 1345382,
+        "nr_bursts": 0,
+        "burst_usec": 0
+      }
+    },
+    {
+      "name": "healthy-after-CPU-throttle",
+      "inputBytes": 79,
+      "inputSha256": "bb640976dc01e41c50e0ba7e29302d689b520daeb3b39b583f3bfab22e78f566",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "740aed3181d4b6c00851da1f6de1f6b970849f11e8fafec89b5aa0a5bd44415a",
+        "peerClosed": true,
+        "elapsedMs": 10.465753000000404
+      },
+      "origin": {
+        "bytes": 79,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 3,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "68ab84f7c6d0f5781585eb1b5289499fb29081b918f71ebddb5f72021c9ef9c5",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 79,
+            "sha256": "bb640976dc01e41c50e0ba7e29302d689b520daeb3b39b583f3bfab22e78f566",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "kernel-PID-cap-enforced",
+      "before": {
+        "max": 0
+      },
+      "after": {
+        "max": 1
+      },
+      "peak": "64",
+      "attemptedChildren": 54
+    },
+    {
+      "name": "healthy-after-PID-exhaustion",
+      "inputBytes": 80,
+      "inputSha256": "03266cd6dbe7507f8ea3fa9f2153b56c859eeef3af3c4ccd9e11c08e3f3bc72f",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "740aed3181d4b6c00851da1f6de1f6b970849f11e8fafec89b5aa0a5bd44415a",
+        "peerClosed": true,
+        "elapsedMs": 9.997883999996702
+      },
+      "origin": {
+        "bytes": 80,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 4,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "d99a9d88afffa3d62e47a298465fec652140cdc76b38ec93972204ab0c41991f",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 80,
+            "sha256": "03266cd6dbe7507f8ea3fa9f2153b56c859eeef3af3c4ccd9e11c08e3f3bc72f",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "kernel-memory-OOM-killed-child-ingress-survived",
+      "controls": {
+        "memoryMax": "402653184",
+        "swapMax": "0",
+        "cpuMax": "75000 100000",
+        "pidsMax": "64"
+      },
+      "before": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0,
+        "sock_throttled": 0
+      },
+      "after": {
+        "low": 0,
+        "high": 0,
+        "max": 357,
+        "oom": 1,
+        "oom_kill": 1,
+        "oom_group_kill": 0,
+        "sock_throttled": 0
+      },
+      "peak": "402653184",
+      "childSignal": "SIGKILL"
+    },
+    {
+      "name": "healthy-after-cgroup-OOM",
+      "inputBytes": 82,
+      "inputSha256": "131acf03b29950117ce84c2421cbf74a57c93cc73017469dc4182687b10e1fac",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "0c4bb3f8c936a39b4e3a6af903aa85cb9b3901b2b43e866b33ac3a3398dc4a2a",
+        "peerClosed": true,
+        "elapsedMs": 13.8826799999988
+      },
+      "origin": {
+        "bytes": 82,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 6,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "c064fbca9d9de8dd9bb0624984403b28d0da807a69365d4f7fb09123ecb0c405",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 82,
+            "sha256": "131acf03b29950117ce84c2421cbf74a57c93cc73017469dc4182687b10e1fac",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "actual-tmpfs-ENOSPC-before-origin",
+      "inputBytes": 80,
+      "inputSha256": "cda41cbe81f51d4d99e8284dbb81aeb3e5d4d57ab219e7edfaa97de91cf59b6a",
+      "response": {
+        "statuses": [
+          503
+        ],
+        "bytes": 63,
+        "sha256": "f6da04e97b543461e968c599ea1f57e2d03630ff96185c42a12cd5e5eeb44002",
+        "peerClosed": true,
+        "elapsedMs": 1.487834000003204
+      },
+      "origin": {
+        "bytes": 0,
+        "connections": 0,
+        "handlers": [],
+        "raw": [],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 0
+      },
+      "tmpfs": {
+        "flags": [
+          "tmpfs /home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-spool tmpfs rw,nosuid,nodev,noexec,relatime,size=8192k,mode=700,uid=1000,gid=1000,inode64,huge=advise 0 0"
+        ],
+        "fillerBytes": 8388608,
+        "failure": "ENOSPC"
+      }
+    },
+    {
+      "name": "healthy-after-actual-ENOSPC",
+      "inputBytes": 80,
+      "inputSha256": "b8b60a24435838550d45b9df6a3f8b88fa0528da0420ac89db5f3aaf29fe2711",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "0c4bb3f8c936a39b4e3a6af903aa85cb9b3901b2b43e866b33ac3a3398dc4a2a",
+        "peerClosed": true,
+        "elapsedMs": 46.0821360000009
+      },
+      "origin": {
+        "bytes": 80,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 4,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "1044dec7206e8d7c9fbb4ae8f766668406d2567fc7fc1a160a9d4700fcf8f8e9",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 80,
+            "sha256": "b8b60a24435838550d45b9df6a3f8b88fa0528da0420ac89db5f3aaf29fe2711",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    },
+    {
+      "name": "healthy-after-subprocess-restart",
+      "inputBytes": 81,
+      "inputSha256": "114f9686635fe3f4450dc82fe9bbe123f79daa07af5e92d3966d45b90739bfd8",
+      "response": {
+        "statuses": [
+          200
+        ],
+        "bytes": 96,
+        "sha256": "0c4bb3f8c936a39b4e3a6af903aa85cb9b3901b2b43e866b33ac3a3398dc4a2a",
+        "peerClosed": true,
+        "elapsedMs": 7.793475999998918
+      },
+      "origin": {
+        "bytes": 81,
+        "connections": 1,
+        "handlers": [
+          {
+            "target": "/",
+            "bodyBytes": 5,
+            "ended": true,
+            "aborted": false,
+            "bodySha256": "2443630b4620165c8b173e7265e17526fe2787ae594364dd6d839ad58f2fc007",
+            "trailers": []
+          }
+        ],
+        "raw": [
+          {
+            "bytes": 81,
+            "sha256": "114f9686635fe3f4450dc82fe9bbe123f79daa07af5e92d3966d45b90739bfd8",
+            "sni": "lab-origin.test",
+            "alpn": "http/1.1"
+          }
+        ],
+        "parserErrors": 0,
+        "tlsErrors": 0,
+        "dials": 1
+      }
+    }
+  ],
+  "limits": {
+    "connections": 6,
+    "originActive": 2,
+    "originQueue": 2,
+    "stageFiles": 3,
+    "diskBytes": 2097152,
+    "stageBytes": 1572864,
+    "bodyBytes": 4194304,
+    "headerWireBytes": 24576,
+    "messageWireBytes": 6291456,
+    "readBytes": 16384,
+    "readableBytes": 262144,
+    "messages": 64,
+    "requestMs": 2500,
+    "idleMs": 700,
+    "originMs": 1800,
+    "handshakeMs": 700,
+    "highWaterMark": 16384
+  },
+  "hypothesis": {
+    "failure": "05C CL10/abc/EOF had89 origin bytes/one handler; late-fold may follow any chunk prefix",
+    "hypothesis": "complete validation before every admission eliminates these effects within finite staging bounds",
+    "API": "unchanged maintained llhttp9.4.4 callbacks; Node AES-256-GCM and private bounded FileHandles",
+    "minimumtest": "identical unfinished CL/chunk prefixes followed by valid completion, EOF and late-fold",
+    "positive": "exact raw-byte hashes, completed bodies/trailers, encoded targets, ordered pipeline, upload, restart",
+    "stop": "no pre-completion origin progress is an explicit streaming FAIL; no resource benchmark or runtime GO"
+  },
+  "completeValidationPass": true,
+  "streamingPass": false,
+  "runtimeGO": false,
+  "productionEligible": false,
+  "unchangedOriginalResult": {
+    "original75": "73/75 historical, not rerun",
+    "original23": "19/23 historical, not rerun"
+  },
+  "sourceCommit": "73d8f419171989ada8983f2780a103cadd207cdd",
+  "sourceTree": "03c2774a5be8c9716bc7c7f3796c93aa7859e2b9",
+  "sources": [
+    {
+      "file": "evidence/sprint05a-b/source-01/sources.json",
+      "sha256": "75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d"
+    },
+    {
+      "file": "scripts/sprint05b-baseline.mjs",
+      "sha256": "5e152bccaa199ae0995aba5e2cccbbe7b051057528a5931a65dcfe24b0a32631"
+    },
+    {
+      "file": "scripts/sprint06a-a-container.mjs",
+      "sha256": "9392c18606639315de4382768691dd58afbdb89ad9d378332446b4fbe6fbdde4"
+    },
+    {
+      "file": "scripts/sprint06a-a-verify.mjs",
+      "sha256": "c2a591c7b4226560a93f6966b415bf7f49d608e27d752ed03c5178d2b00370ef"
+    },
+    {
+      "file": "scripts/sprint06a-a-wrapped.mjs",
+      "sha256": "615322712e77fac45b058dd7d83685e36be40643a711c976d48cd4802dbfc55d"
+    },
+    {
+      "file": "spikes/edge-comparison/manifest.json",
+      "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141"
+    },
+    {
+      "file": "spikes/envoy/sprint05b-a-build.mjs",
+      "sha256": "9769180e6cd5c9f4c51fbb6eb581f9df1942348b685c621f91a1cedca73613b2"
+    },
+    {
+      "file": "spikes/envoy/sprint05c-a-llhttp.c",
+      "sha256": "17722fa316e20608bd74f43af9baa044bdf082d0876b4d7a859b5da200a10016"
+    },
+    {
+      "file": "spikes/envoy/sprint05c-a-runtime.mjs",
+      "sha256": "fa3fad4b3945bff9f1e824dfdf8e52609c2599663a666585b075a33d43998a63"
+    },
+    {
+      "file": "spikes/envoy/sprint06a-a-build.mjs",
+      "sha256": "603531f872f14f9cb6c2ef764dac73fe377727206fed7ad15af3d2b383b111c5"
+    },
+    {
+      "file": "spikes/envoy/sprint06a-a-child.mjs",
+      "sha256": "b2ee3734d60fc1236ba0aa87f34863bf59c4f91a7b7ad17a426cfbaae092b143"
+    },
+    {
+      "file": "spikes/envoy/sprint06a-a-extra.mjs",
+      "sha256": "7541d1431a161a46652549fc2012b7f8ff7bbc2235064f934d4bfa9cc28cf6d3"
+    },
+    {
+      "file": "spikes/envoy/sprint06a-a-fixtures.mjs",
+      "sha256": "e55bddf1807c0399b85286d2b21c2dd765f7fd6a660554bc3e92cdfbeb4c55d3"
+    },
+    {
+      "file": "spikes/envoy/sprint06a-a-run.mjs",
+      "sha256": "58f2aa7bcd851807476d3c76e283a27815b39111ed1a62c6d04ffc1bac99fdab"
+    },
+    {
+      "file": "spikes/envoy/sprint06a-a-runtime.mjs",
+      "sha256": "78bb6863aacafdd98cbafac7357d3db33b66b18e7fd1b78392103b72768bbc94"
+    },
+    {
+      "file": "spikes/envoy/sprint06a-a-spool.mjs",
+      "sha256": "dbd8eb9aca29c53fbc07ac73424b914ae5364e1468547bcf0843f7894e65a2c3"
+    },
+    {
+      "file": "spikes/envoy/wire-fixtures.mjs",
+      "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278"
+    }
+  ],
+  "node": {
+    "file": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "version": "v26.13.0",
+    "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+  },
+  "tmpdir": "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/tmp",
+  "baselineBefore": {
+    "baseline": "8758b1c84b4186449cd79fabae461ca53ee05100",
+    "tree": "2c6b1d5ff56f9e60a7bf77b478e291f3f5bc420d",
+    "protectedFiles": [
+      {
+        "file": "spikes/pingora/lab.mjs",
+        "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d",
+        "bytes": 45073
+      },
+      {
+        "file": "spikes/edge-comparison/manifest.json",
+        "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+        "bytes": 9829
+      },
+      {
+        "file": "spikes/edge-comparison/contract.mjs",
+        "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f",
+        "bytes": 1686
+      },
+      {
+        "file": "spikes/edge-comparison/supplemental.mjs",
+        "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf",
+        "bytes": 1616
+      },
+      {
+        "file": "spikes/edge-comparison/evaluate.mjs",
+        "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf",
+        "bytes": 2119
+      },
+      {
+        "file": "spikes/edge-comparison/run.mjs",
+        "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493",
+        "bytes": 61
+      },
+      {
+        "file": "spikes/edge-comparison/tls-observer.mjs",
+        "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065",
+        "bytes": 1639
+      },
+      {
+        "file": "spikes/edge-comparison/extract-baseline.mjs",
+        "sha256": "a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6",
+        "bytes": 2908
+      },
+      {
+        "file": "spikes/envoy/wire-probes.mjs",
+        "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a",
+        "bytes": 20934
+      },
+      {
+        "file": "spikes/envoy/wire-observer.mjs",
+        "sha256": "bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3",
+        "bytes": 4052
+      },
+      {
+        "file": "spikes/envoy/wire-fixtures.mjs",
+        "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278",
+        "bytes": 3320
+      }
+    ],
+    "protected_inventory_sha256": "85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa",
+    "historical": [
+      {
+        "file": "evidence/sprint05a-root/candidate-02/commands.json",
+        "sha256": "572ad993fe7f38b58c62c0b66de81a333006b3c6ed5a332478e38f60838d273a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original75.json",
+        "sha256": "13a04311fa39f0e7c7d94c85051d6d375e9a281cf6a4aa0f4aafa8dbe337556a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original23.json",
+        "sha256": "62fa6ba4082b20185d4958bbd034bbddef40dc7b46e2a89291fda507d3c99cee"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/SHA256SUMS",
+        "sha256": "85e4968d3da9ce4381f6cae77073376c2cf6164ca3d278a42489abe2f00a9017"
+      },
+      {
+        "file": "evidence/sprint05a-b/source-01/sources.json",
+        "sha256": "75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d"
+      }
+    ],
+    "previous75": {
+      "passed": 73,
+      "failures": [
+        {
+          "name": "malformed-HTTP-obsolete-folded-header",
+          "status": "fail",
+          "milliseconds": 7.12,
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 263,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.2",
+                "sni": false,
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+          "status": "fail",
+          "milliseconds": 7.38,
+          "error": "confused authority forwarded bytes to origin\n\n3032 !== 3023\n",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 9,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        }
+      ]
+    },
+    "previous23": {
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ]
+    }
+  },
+  "tools": [
+    {
+      "file": "/usr/bin/gcc",
+      "sha256": "b0b49531b313e70aee0254fb5e69b050a781506184e16ebee6ebe68eee94a145"
+    },
+    {
+      "file": "/usr/bin/curl",
+      "sha256": "e94f761d3f3d78060fdd1654e4b0f0475c519ec984764d0cc1d5bcef6a4a1732"
+    },
+    {
+      "file": "/usr/bin/openssl",
+      "sha256": "3c852df717ce7321bc9f38ceeb5c41244324e4d6a43a6b48ad0e5f274c3b52e0"
+    },
+    {
+      "file": "/usr/bin/git",
+      "sha256": "0da72c00a915c06b9e7062e2dc999afe323223d000fef63111a94f522afd8ecf"
+    },
+    {
+      "file": "/usr/bin/flock",
+      "sha256": "6f70b9fc3793b39d52bc0769033eaaea91a5c1fecda71c1dde1c754fbd34f8d7"
+    }
+  ],
+  "upstream": [
+    {
+      "name": "include/llhttp.h",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/include/llhttp.h",
+      "sha256": "52a7011f979b31f761403c1a333bf7fc26dc70f5745d8488eed1609c92097100",
+      "bytes": 31469
+    },
+    {
+      "name": "src/api.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/api.c",
+      "sha256": "0f8590206fe2f264db2825401b5fb856b979ee1363dc88b06f36dc9577afb941",
+      "bytes": 13384
+    },
+    {
+      "name": "src/http.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/http.c",
+      "sha256": "a1f2b23168f8e9b5bfa464c89027d3ca259fc649ae3d7e72bfff997d1aeb5d72",
+      "bytes": 5209
+    },
+    {
+      "name": "src/llhttp.c",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/src/llhttp.c",
+      "sha256": "f3ef756529b7444630717fa5540d4a1c9a1256874bda823c49c5a99c37f89429",
+      "bytes": 319064
+    },
+    {
+      "name": "LICENSE-MIT",
+      "url": "https://raw.githubusercontent.com/nodejs/llhttp/816485216511b86459b2e6478190e14c38c14891/LICENSE-MIT",
+      "sha256": "ebca854e0134cd256d673627c20499f42577eb74bacf08b9f25b626a73c91277",
+      "bytes": 1105
+    }
+  ],
+  "nodeApiHeader": {
+    "file": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/include/node/node_api.h",
+    "sha256": "2d4560831e525b47b060ec8a0864ab73993df9e20215ce9f0fe7b24cd31af32a"
+  },
+  "compiler": "cc (GCC) 16.2.1 20260810\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "addonSource": {
+    "file": "spikes/envoy/sprint05c-a-llhttp.c",
+    "sha256": "17722fa316e20608bd74f43af9baa044bdf082d0876b4d7a859b5da200a10016"
+  },
+  "addonSha256": "9732aaa528694412a1f3373d2908b7f7082ca9a2405c4738326b166a907b4b37",
+  "streamingPositive": {
+    "expected": "origin progress before client completes request",
+    "observed": "none;408",
+    "pass": false,
+    "reason": "strict finite staging necessarily withholds the entire request until completion"
+  },
+  "children": [
+    {
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/envoy/sprint06a-a-child.mjs",
+        "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV",
+        "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/sprint06a-a-llhttp.node",
+        "37157",
+        "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-spool/restart-spool"
+      ],
+      "started": "2026-11-15T11:49:06.229Z",
+      "stdout": "",
+      "stderr": "",
+      "ready": {
+        "ready": true,
+        "port": 35241,
+        "reclaimedFiles": 0,
+        "reclaimedBytes": 0
+      },
+      "exit": null,
+      "signal": "SIGKILL",
+      "ended": "2026-11-15T11:49:06.352Z"
+    },
+    {
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "spikes/envoy/sprint06a-a-child.mjs",
+        "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV",
+        "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-d2vdYV/sprint06a-a-llhttp.node",
+        "37157",
+        "/home/tiecont/.cache/aegisgate-06a/a/.local/sprint06a-a-spool/restart-spool"
+      ],
+      "started": "2026-11-15T11:49:06.356Z",
+      "stdout": "",
+      "stderr": "",
+      "ready": {
+        "ready": true,
+        "port": 39711,
+        "reclaimedFiles": 1,
+        "reclaimedBytes": 21081
+      },
+      "exit": 0,
+      "signal": null,
+      "ended": "2026-11-15T11:49:06.511Z"
+    }
+  ],
+  "resourceChild": {
+    "argv": [
+      "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "--max-old-space-size=16",
+      "--eval",
+      "require('node:fs').writeFileSync('/proc/self/oom_score_adj','1000'); const blocks=[]; for(let i=0;i<90;i++) blocks.push(Buffer.alloc(8*1024*1024,1)); setTimeout(()=>{},5000)"
+    ],
+    "cwd": "/home/tiecont/.cache/aegisgate-06a/a",
+    "exit": null,
+    "signal": "SIGKILL",
+    "stdout": "",
+    "stderr": ""
+  },
+  "cgroupFinal": {
+    "controls": {
+      "memoryMax": "402653184",
+      "swapMax": "0",
+      "cpuMax": "75000 100000",
+      "pidsMax": "64"
+    },
+    "memoryCurrent": "46034944",
+    "memoryPeak": "402653184",
+    "cpu": {
+      "usage_usec": 5662957,
+      "user_usec": 3637324,
+      "system_usec": 2025633,
+      "nice_usec": 3449595,
+      "core_sched.force_idle_usec": 0,
+      "nr_periods": 146,
+      "nr_throttled": 61,
+      "throttled_usec": 2137066,
+      "nr_bursts": 0,
+      "burst_usec": 0
+    },
+    "pids": "11"
+  },
+  "metrics": {
+    "peakDisk": 2091684,
+    "peakOriginActive": 2,
+    "peakOriginQueue": 1,
+    "peakConnections": 6,
+    "activeContexts": 0,
+    "originDials": 27,
+    "requests": 18,
+    "staged": 58,
+    "admitted": 28,
+    "rejections": {
+      "400": 16,
+      "408": 3,
+      "413": 2,
+      "421": 1,
+      "502": 8,
+      "503": 7,
+      "504": 5
+    },
+    "peakReadable": 114688,
+    "peakWritable": 16384,
+    "keyBuffersErased": 58,
+    "writeWaits": 64
+  },
+  "baselineAfter": {
+    "baseline": "8758b1c84b4186449cd79fabae461ca53ee05100",
+    "tree": "2c6b1d5ff56f9e60a7bf77b478e291f3f5bc420d",
+    "protectedFiles": [
+      {
+        "file": "spikes/pingora/lab.mjs",
+        "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d",
+        "bytes": 45073
+      },
+      {
+        "file": "spikes/edge-comparison/manifest.json",
+        "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+        "bytes": 9829
+      },
+      {
+        "file": "spikes/edge-comparison/contract.mjs",
+        "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f",
+        "bytes": 1686
+      },
+      {
+        "file": "spikes/edge-comparison/supplemental.mjs",
+        "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf",
+        "bytes": 1616
+      },
+      {
+        "file": "spikes/edge-comparison/evaluate.mjs",
+        "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf",
+        "bytes": 2119
+      },
+      {
+        "file": "spikes/edge-comparison/run.mjs",
+        "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493",
+        "bytes": 61
+      },
+      {
+        "file": "spikes/edge-comparison/tls-observer.mjs",
+        "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065",
+        "bytes": 1639
+      },
+      {
+        "file": "spikes/edge-comparison/extract-baseline.mjs",
+        "sha256": "a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6",
+        "bytes": 2908
+      },
+      {
+        "file": "spikes/envoy/wire-probes.mjs",
+        "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a",
+        "bytes": 20934
+      },
+      {
+        "file": "spikes/envoy/wire-observer.mjs",
+        "sha256": "bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3",
+        "bytes": 4052
+      },
+      {
+        "file": "spikes/envoy/wire-fixtures.mjs",
+        "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278",
+        "bytes": 3320
+      }
+    ],
+    "protected_inventory_sha256": "85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa",
+    "historical": [
+      {
+        "file": "evidence/sprint05a-root/candidate-02/commands.json",
+        "sha256": "572ad993fe7f38b58c62c0b66de81a333006b3c6ed5a332478e38f60838d273a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original75.json",
+        "sha256": "13a04311fa39f0e7c7d94c85051d6d375e9a281cf6a4aa0f4aafa8dbe337556a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original23.json",
+        "sha256": "62fa6ba4082b20185d4958bbd034bbddef40dc7b46e2a89291fda507d3c99cee"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/SHA256SUMS",
+        "sha256": "85e4968d3da9ce4381f6cae77073376c2cf6164ca3d278a42489abe2f00a9017"
+      },
+      {
+        "file": "evidence/sprint05a-b/source-01/sources.json",
+        "sha256": "75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d"
+      }
+    ],
+    "previous75": {
+      "passed": 73,
+      "failures": [
+        {
+          "name": "malformed-HTTP-obsolete-folded-header",
+          "status": "fail",
+          "milliseconds": 7.12,
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 263,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.2",
+                "sni": false,
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+          "status": "fail",
+          "milliseconds": 7.38,
+          "error": "confused authority forwarded bytes to origin\n\n3032 !== 3023\n",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 9,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        }
+      ]
+    },
+    "previous23": {
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ]
+    }
+  },
+  "cleanup": {
+    "sockets": 0,
+    "children": 0,
+    "liveParsers": 0,
+    "stageFiles": 0,
+    "stageBytes": 0,
+    "contexts": 0,
+    "originSlots": 0,
+    "originQueue": 0,
+    "listeners": 0
+  },
+  "privateFixtureRemoved": true,
+  "lockHeldThroughCleanup": true,
+  "ended": "2026-11-15T11:49:15.555Z"
+}

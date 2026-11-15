@@ -1,5 +1,38 @@
 # Implementation status
 
+## Sprint 06-A Finite Proof / Module 01 NO-GO
+
+Baseline `8929adfd10f245ec0dac70b5304f1a2b445e7357`. Independently replayed
+finite H1 tooling passes67 container controls and29 separate reviewer attacks:
+complete framing/trailers, encrypted bounded staging, verified TLS, premature
+EOF400 before origin admission, real CPU/PID/memory/disk exhaustion and cleanup.
+Mandatory pre-completion origin streaming remains FAIL. This is isolated
+feasibility tooling, not an accepted gateway or production architecture.
+
+Build-tagged signed admission uses actual Module03 trust/consumer/lease/LKG
+APIs and passes6 top-level/42 subtests; unchanged Module03 passes46/90 with
+real fixtures. The multi-hop fixture captures signed policy after staging;
+original SNI and signed pre-stage admission are not unified. Independent
+same-generation conflicting sidecar and notice-binding attacks reject.
+
+Four independently found H2 transcript-consistency defects are corrected and
+replayed. Complete authoritative runtime attribution remains INCOMPLETE;
+actual unrelated/overlapping nine-byte SETTINGS ACK stays aggregate FAIL.
+Official release/API checks identify no qualifying maintained repair. Original
+75/23 scores remain73/75 and19/23 from retained evidence, not a fresh run.
+
+All A-E scoped tooling/proposals ACCEPTed by independent F at `c5520d9`.
+Full locked local check/security-scan/cleanup PASS at `c4a2fc5`, independently
+accepted by F `329c3f4`:11 packages/89 top-level/151 subtests, no remaining
+skips,750 candidate-history commits scanned with zero findings. Two failed
+setup/history-scope runs remain disclosed and retained. F `c0e03fb` ACCEPTs
+exact sanitized export/source8e14132; final F files audited at b744d8e.
+Hosted delivery remains pending at this receipt checkpoint.
+See `docs/reports/sprint06a-completion.md` for delivery receipts and limitations.
+The consolidated finite admission and versioned research suite remain PROPOSED,
+NOT EFFECTIVE; human owners/signoff PENDING.01 NO-GO;04-12 LOCKED;production
+BLOCKED. No equivalent feasibility sprint begins automatically.
+
 ## Sprint 05-D Decision Boundary / Module 01 NO-GO
 
 Baseline aa289da. Isolated complete-message H1 admission now validates CL EOF

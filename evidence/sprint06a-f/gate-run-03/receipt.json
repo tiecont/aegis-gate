@@ -1,0 +1,1394 @@
+{
+  "reviewerCommit": "4bee73d9bcfe33b91274e3675a16afca5fe19246",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/home/tiecont/.cache/aegisgate-06a/f/scripts/sprint06a-f-gates.mjs",
+    "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+    "c4a2fc529688ef53ef213e07a6567aeab3fe4fcf",
+    "evidence/sprint06a-f/gate-run-03",
+    "evidence/sprint06a-root/gates-03",
+    "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates/.local/sprint06a-f-bootstrap-03"
+  ],
+  "collectorSha256": "b5b2548b190ceb044061fdce366a5c94c74e2b98237d37063cbff8eded8fc199",
+  "sourceCommit": "c4a2fc529688ef53ef213e07a6567aeab3fe4fcf",
+  "sourceTree": "db9756b581b3afc70de2a514ebb17bb50a9c7dcb",
+  "clone": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+  "rawRelative": "evidence/sprint06a-root/gates-03",
+  "started": "2026-11-15T12:42:23.728Z",
+  "commands": [
+    {
+      "label": "version-go",
+      "executable": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "executableSha256": "de0ae3e082ce7599eae4fb69fa2ef1e43b8f31ffd3fce62cdf81930aa9005050",
+      "args": [
+        "version"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "begun": "2026-11-15T12:42:25.528Z",
+      "ended": "2026-11-15T12:42:25.573Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "version-go.stdout",
+          "bytes": 32,
+          "sha256": "a29205bd83967c2f70e6768fae009600038d6056499fa289de9d5f9b79beaef4"
+        },
+        {
+          "file": "version-go.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "version-cargo",
+      "executable": "/home/tiecont/.cargo/bin/rustup",
+      "executableSha256": "b1c8cb14e30889e7e2999e6b69e62d9e9b9ffc0f4df8180564d306d9680e6c55",
+      "args": [
+        "+1.99.1",
+        "--version"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "begun": "2026-11-15T12:42:25.580Z",
+      "ended": "2026-11-15T12:42:25.625Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "version-cargo.stdout",
+          "bytes": 36,
+          "sha256": "c35608815f43d0b8788a9b826fad2bb17384f49fb328dc4fe64da9db5f5ef4d6"
+        },
+        {
+          "file": "version-cargo.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "version-rustc",
+      "executable": "/home/tiecont/.cargo/bin/rustup",
+      "executableSha256": "b1c8cb14e30889e7e2999e6b69e62d9e9b9ffc0f4df8180564d306d9680e6c55",
+      "args": [
+        "+1.99.1",
+        "--version"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "begun": "2026-11-15T12:42:25.636Z",
+      "ended": "2026-11-15T12:42:25.698Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "version-rustc.stdout",
+          "bytes": 36,
+          "sha256": "55cd0529c005d3f62869ea6e2271bfa9d5196f56dc65a8be00a371af114a4a98"
+        },
+        {
+          "file": "version-rustc.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "version-docker",
+      "executable": "/usr/bin/docker",
+      "executableSha256": "c1e694ef9b689019c593d726dbe9041604def6dd2ebe3271a6ba23cff867f057",
+      "args": [
+        "version",
+        "--format",
+        "{{.Server.Version}}"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "begun": "2026-11-15T12:42:25.708Z",
+      "ended": "2026-11-15T12:42:25.919Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "version-docker.stdout",
+          "bytes": 7,
+          "sha256": "db4ba0a89ba3c63cd68d4eb99ccf9e51bd122c7d3c2e03f79e91d251fb5300ab"
+        },
+        {
+          "file": "version-docker.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "version-compose",
+      "executable": "/usr/bin/docker",
+      "executableSha256": "c1e694ef9b689019c593d726dbe9041604def6dd2ebe3271a6ba23cff867f057",
+      "args": [
+        "compose",
+        "version"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "begun": "2026-11-15T12:42:25.932Z",
+      "ended": "2026-11-15T12:42:26.079Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "version-compose.stdout",
+          "bytes": 29,
+          "sha256": "293ffc7002d3801435d26593bccf5c4376a553898f53611ca5f2818354eff056"
+        },
+        {
+          "file": "version-compose.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "protected-before",
+      "executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "executableSha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+      "args": [
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "begun": "2026-11-15T12:42:26.087Z",
+      "ended": "2026-11-15T12:42:26.425Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "protected-before.stdout",
+          "bytes": 4342,
+          "sha256": "12fecd21d0163ccd7b6c2e53ba49a36bf9cd15aaeb5311710088bae5cb41d3f5"
+        },
+        {
+          "file": "protected-before.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "full-locked-gates",
+      "executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "executableSha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+      "args": [
+        "scripts/sprint04c-gates.mjs",
+        "evidence/sprint06a-root/gates-03"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "begun": "2026-11-15T12:42:26.438Z",
+      "ended": "2026-11-15T12:50:25.079Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "full-locked-gates.stdout",
+          "bytes": 204,
+          "sha256": "19b2f77b52d72ece7964811b8649ec3915ee28724dc7d6d47ce82084d7db8cd8"
+        },
+        {
+          "file": "full-locked-gates.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "current-containers",
+      "executable": "/usr/bin/docker",
+      "executableSha256": "c1e694ef9b689019c593d726dbe9041604def6dd2ebe3271a6ba23cff867f057",
+      "args": [
+        "ps",
+        "-aq",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-06a-root"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "begun": "2026-11-15T12:50:25.100Z",
+      "ended": "2026-11-15T12:50:25.153Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "current-containers.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "current-containers.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "current-networks",
+      "executable": "/usr/bin/docker",
+      "executableSha256": "c1e694ef9b689019c593d726dbe9041604def6dd2ebe3271a6ba23cff867f057",
+      "args": [
+        "network",
+        "ls",
+        "-q",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-06a-root"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "begun": "2026-11-15T12:50:25.169Z",
+      "ended": "2026-11-15T12:50:25.218Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "current-networks.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "current-networks.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "current-volumes",
+      "executable": "/usr/bin/docker",
+      "executableSha256": "c1e694ef9b689019c593d726dbe9041604def6dd2ebe3271a6ba23cff867f057",
+      "args": [
+        "volume",
+        "ls",
+        "-q",
+        "--filter",
+        "label=com.docker.compose.project=aegisgate-06a-root"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "begun": "2026-11-15T12:50:25.229Z",
+      "ended": "2026-11-15T12:50:25.276Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "current-volumes.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "current-volumes.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "protected-after",
+      "executable": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "executableSha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+      "args": [
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "begun": "2026-11-15T12:50:25.657Z",
+      "ended": "2026-11-15T12:50:25.918Z",
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "protected-after.stdout",
+          "bytes": 4342,
+          "sha256": "12fecd21d0163ccd7b6c2e53ba49a36bf9cd15aaeb5311710088bae5cb41d3f5"
+        },
+        {
+          "file": "protected-after.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "name": "git",
+      "file": "/usr/bin/git",
+      "sha256": "0da72c00a915c06b9e7062e2dc999afe323223d000fef63111a94f522afd8ecf"
+    },
+    {
+      "name": "flock",
+      "file": "/usr/bin/flock",
+      "sha256": "6f70b9fc3793b39d52bc0769033eaaea91a5c1fecda71c1dde1c754fbd34f8d7"
+    },
+    {
+      "name": "make",
+      "file": "/usr/bin/make",
+      "sha256": "6f36064c643168dbe57adddebc60c63702f7b5cdf23739705d23c87fe5e8dce3"
+    },
+    {
+      "name": "bash",
+      "file": "/usr/bin/bash",
+      "sha256": "917e986de64e7d36e42bef7aff5db73b7ecef5b58477bdb990e595e8dfc930b2"
+    },
+    {
+      "name": "go",
+      "file": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "sha256": "de0ae3e082ce7599eae4fb69fa2ef1e43b8f31ffd3fce62cdf81930aa9005050"
+    },
+    {
+      "name": "gofmt",
+      "file": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/gofmt",
+      "sha256": "96d48ae3c8754e4a10e8f5ec2472d1344767d276e0ba6e94948c00cf8558e378"
+    },
+    {
+      "name": "cargo",
+      "file": "/home/tiecont/.cargo/bin/rustup",
+      "sha256": "b1c8cb14e30889e7e2999e6b69e62d9e9b9ffc0f4df8180564d306d9680e6c55"
+    },
+    {
+      "name": "rustc",
+      "file": "/home/tiecont/.cargo/bin/rustup",
+      "sha256": "b1c8cb14e30889e7e2999e6b69e62d9e9b9ffc0f4df8180564d306d9680e6c55"
+    },
+    {
+      "name": "python3",
+      "file": "/usr/bin/python3.14",
+      "sha256": "a38210a53e07ac5eb912ee35c2d92ddb7eaa349301b60c188a5f496c7c87449d"
+    },
+    {
+      "name": "docker",
+      "file": "/usr/bin/docker",
+      "sha256": "c1e694ef9b689019c593d726dbe9041604def6dd2ebe3271a6ba23cff867f057"
+    },
+    {
+      "name": "openssl",
+      "file": "/usr/bin/openssl",
+      "sha256": "3c852df717ce7321bc9f38ceeb5c41244324e4d6a43a6b48ad0e5f274c3b52e0"
+    },
+    {
+      "name": "cc",
+      "file": "/usr/bin/gcc",
+      "sha256": "b0b49531b313e70aee0254fb5e69b050a781506184e16ebee6ebe68eee94a145"
+    },
+    {
+      "name": "curl",
+      "file": "/usr/bin/curl",
+      "sha256": "e94f761d3f3d78060fdd1654e4b0f0475c519ec984764d0cc1d5bcef6a4a1732"
+    },
+    {
+      "file": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+    },
+    {
+      "file": "/home/tiecont/.rustup/toolchains/1.99.1-x86_64-unknown-linux-gnu/bin/cargo",
+      "sha256": "a670e02cfa39ac2e53f77a2d911ca1fc9e2c479b0603ec956625be1daf24e3af"
+    },
+    {
+      "file": "/home/tiecont/.rustup/toolchains/1.99.1-x86_64-unknown-linux-gnu/bin/rustc",
+      "sha256": "b53b780f77f952062f8ca8a3b70aef2390b1e45ad91939be94afdc9543026853"
+    },
+    {
+      "file": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates/node_modules/prettier/bin/prettier.cjs",
+      "sha256": "6e922134a3c76fd4de202959bb6aef50bde0c994148075003a15569b7197906e"
+    }
+  ],
+  "runtimeComplete": false,
+  "runtimePass": false,
+  "module01Pass": false,
+  "productionPass": false,
+  "environment": {
+    "PATH": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin:/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin:/home/tiecont/.cargo/bin:/usr/local/bin:/usr/bin:/bin",
+    "TMPDIR": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates/.local/tmp",
+    "GOTOOLCHAIN": "local",
+    "GOAMD64": "v1",
+    "GOFLAGS": "-v",
+    "CARGO_HOME": null,
+    "RUSTUP_HOME": null
+  },
+  "bootstrap": {
+    "directory": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates/.local/sprint06a-f-bootstrap-03",
+    "receiptSha256": "605a744dc0659486b4b28463c2be77991f4b86fbc81727fbe30fbb7973a06e9e",
+    "proof": {
+      "source_commit": "c4a2fc529688ef53ef213e07a6567aeab3fe4fcf",
+      "source_tree": "db9756b581b3afc70de2a514ebb17bb50a9c7dcb",
+      "tracked_clean": true,
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "argv": [
+        "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+        "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates/scripts/sprint05a-receipt.mjs",
+        "evidence/sprint06a-root/bootstrap-03",
+        "make",
+        "bootstrap"
+      ],
+      "node": "v26.13.0",
+      "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+      "collector_file": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates/scripts/sprint05a-receipt.mjs",
+      "collector_sha256": "701ff48b3fc915cd0ae1fc9067d36fef7cae81a1c9716aaa7302d40e7b77948d",
+      "command": "make",
+      "command_binary": "/usr/bin/make",
+      "command_sha256": "6f36064c643168dbe57adddebc60c63702f7b5cdf23739705d23c87fe5e8dce3",
+      "args": [
+        "bootstrap"
+      ],
+      "started_at": "2026-11-15T12:36:11.465Z",
+      "ended_at": "2026-11-15T12:36:24.263Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint06a-root/bootstrap-03/stdout.log",
+          "bytes": 666,
+          "sha256": "7cf4b99f4bbb064635ba0a5c8a9e18b26540d7d64d87f322eaca7f977090183d"
+        },
+        {
+          "file": "evidence/sprint06a-root/bootstrap-03/stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  },
+  "sourceFilesBefore": 9914,
+  "inventorySha256": "b0ef68738251164dbee98312fbef4219c473d56e3e096b25e66bc5f4ecca2785",
+  "protectedBefore": {
+    "baseline": "8758b1c84b4186449cd79fabae461ca53ee05100",
+    "tree": "2c6b1d5ff56f9e60a7bf77b478e291f3f5bc420d",
+    "protectedFiles": [
+      {
+        "file": "spikes/pingora/lab.mjs",
+        "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d",
+        "bytes": 45073
+      },
+      {
+        "file": "spikes/edge-comparison/manifest.json",
+        "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+        "bytes": 9829
+      },
+      {
+        "file": "spikes/edge-comparison/contract.mjs",
+        "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f",
+        "bytes": 1686
+      },
+      {
+        "file": "spikes/edge-comparison/supplemental.mjs",
+        "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf",
+        "bytes": 1616
+      },
+      {
+        "file": "spikes/edge-comparison/evaluate.mjs",
+        "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf",
+        "bytes": 2119
+      },
+      {
+        "file": "spikes/edge-comparison/run.mjs",
+        "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493",
+        "bytes": 61
+      },
+      {
+        "file": "spikes/edge-comparison/tls-observer.mjs",
+        "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065",
+        "bytes": 1639
+      },
+      {
+        "file": "spikes/edge-comparison/extract-baseline.mjs",
+        "sha256": "a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6",
+        "bytes": 2908
+      },
+      {
+        "file": "spikes/envoy/wire-probes.mjs",
+        "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a",
+        "bytes": 20934
+      },
+      {
+        "file": "spikes/envoy/wire-observer.mjs",
+        "sha256": "bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3",
+        "bytes": 4052
+      },
+      {
+        "file": "spikes/envoy/wire-fixtures.mjs",
+        "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278",
+        "bytes": 3320
+      }
+    ],
+    "protected_inventory_sha256": "85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa",
+    "historical": [
+      {
+        "file": "evidence/sprint05a-root/candidate-02/commands.json",
+        "sha256": "572ad993fe7f38b58c62c0b66de81a333006b3c6ed5a332478e38f60838d273a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original75.json",
+        "sha256": "13a04311fa39f0e7c7d94c85051d6d375e9a281cf6a4aa0f4aafa8dbe337556a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original23.json",
+        "sha256": "62fa6ba4082b20185d4958bbd034bbddef40dc7b46e2a89291fda507d3c99cee"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/SHA256SUMS",
+        "sha256": "85e4968d3da9ce4381f6cae77073376c2cf6164ca3d278a42489abe2f00a9017"
+      },
+      {
+        "file": "evidence/sprint05a-b/source-01/sources.json",
+        "sha256": "75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d"
+      }
+    ],
+    "previous75": {
+      "passed": 73,
+      "failures": [
+        {
+          "name": "malformed-HTTP-obsolete-folded-header",
+          "status": "fail",
+          "milliseconds": 7.12,
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 263,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.2",
+                "sni": false,
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+          "status": "fail",
+          "milliseconds": 7.38,
+          "error": "confused authority forwarded bytes to origin\n\n3032 !== 3023\n",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 9,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        }
+      ]
+    },
+    "previous23": {
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ]
+    }
+  },
+  "gateSourceHashes": [
+    {
+      "file": "scripts/sprint04c-gates.mjs",
+      "sha256": "2d11abc996b5909290ac0fbffae2453163c69d0a9e48ccd78b251c0eed023ea4"
+    },
+    {
+      "file": "scripts/security-scan.sh",
+      "sha256": "2e252c31e641e3fb0a48264f94f1ac9f8973d4621abefada9d3a7daedefa4231"
+    },
+    {
+      "file": "Makefile",
+      "sha256": "121a12783db5a208afc42d35a9780319a1369cb36fed5e2f8a05270d7ca89215"
+    }
+  ],
+  "running": false,
+  "gateReceiptSha256": "20c3834169d6acd20db5bd9f98b38bc333bbd35f5adf1840723206b0623c484e",
+  "rawArtifacts": [
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-inventory.tsv",
+      "bytes": 385,
+      "sha256": "0d35a668b3bac252f94b828f2504e266b68bcd2a87da9020b7b9b947a7a9ba69"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/repository.cdx.json",
+      "bytes": 284758,
+      "sha256": "0fcca123521ed608742939ed02b654242613ffaf0d19811dda8fd8f797771251"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/go-scanner-gate-selftest.log",
+      "bytes": 211,
+      "sha256": "1058de342452ca82ede738917d804b830760b19c504a67f3529794f11b410bca"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-3-vulnerabilities.json",
+      "bytes": 114246,
+      "sha256": "11c10bb97bdf5cc4cb69728e724e4db10d2c1bd14141dd4f654072be6d505047"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-1-sbom.log",
+      "bytes": 648,
+      "sha256": "14bdc795e7d1d764e173964cd4585fca11eb51587e8e07f9b41fdfb845bde5c0"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/pingora-spike-vulnerabilities.log",
+      "bytes": 3065,
+      "sha256": "15911b4e575e9c5e5d5c40a1b224678c314a001ba823dffd0843e98e863558b5"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-3-sbom.log",
+      "bytes": 492,
+      "sha256": "15f0fb2fa091c0a1ed096905c06eecb7794a4183a7f0de1223d38c9b1a57fc46"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/npm-dashboard-vulnerabilities.log",
+      "bytes": 364,
+      "sha256": "16df78236b142bab0d75fbfceaed987ff99f163a48d574b43619c4154ffa099e"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-1-vulnerabilities.json",
+      "bytes": 86751,
+      "sha256": "1b05309a6ee12dd0328ac54db3499816c847de47b93ef5ea5ea19e03c2dca03c"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/commands.json",
+      "bytes": 4883,
+      "sha256": "20c3834169d6acd20db5bd9f98b38bc333bbd35f5adf1840723206b0623c484e"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-2-vulnerabilities.json",
+      "bytes": 78247,
+      "sha256": "2f0e808aced93c2f286de96a6bc1c62afb249e086d8d8e6903fcebbb61d05868"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/go-vulnerabilities.log",
+      "bytes": 26,
+      "sha256": "3016e51e4eac0d421674d2128bbbdefb2924b4646e0c14a1ab034977ad73fae5"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-4-sbom.log",
+      "bytes": 492,
+      "sha256": "36bd9d0eeb3b4cfa2989b950d85f67bd6bbf04cd053308c94b271f2a7d33e7fa"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/history-secrets.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/secrets.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/history-gitleaks.log",
+      "bytes": 316,
+      "sha256": "39f99552a0637dbc28a4c5edd6a731020cecd178a5019eec86d8a88e4b241993"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/npm-spike-vulnerabilities.log",
+      "bytes": 360,
+      "sha256": "455509daddf74eaed9304146ab18e579eb067266315c03c5c030afcc9c28ad5f"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/envoy-spike.cdx.json",
+      "bytes": 19013,
+      "sha256": "49ac529f561b55a84ed56a050f18f02486936cd0ca34536022536e051a1fc2cd"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/filesystem-vulnerabilities.json",
+      "bytes": 252769,
+      "sha256": "4f0a663bb36623204472eb962dd7c71239f6bc3a03f92c5d17721fbf90105586"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/cleanup.stdout.log",
+      "bytes": 117,
+      "sha256": "54a436c053a8cdd9d5d9c057ba2076828e35449457b540d8847a89df29ff6a90"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/envoy-spike-vulnerabilities.log",
+      "bytes": 969,
+      "sha256": "552b1ba8c7670862a0b3037a5d67719cb2e40c0822401c2828cd16f70b04fe06"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/repository-sbom.log",
+      "bytes": 6924,
+      "sha256": "56c0815d300b11a9a453de08ea99f9d18ac2d3f621cc421795c19f131def6d4b"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/worktree-secrets.log",
+      "bytes": 137,
+      "sha256": "5e6de4056776e0fe2eedee36bd4149e0b3bb9b5805f9e21830a85ea823775864"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-1-identity.log",
+      "bytes": 88,
+      "sha256": "5fdf493dc9a6720e463c711c9860c33972fb04faf83fd31a39c3a1c87a904d5e"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-3-identity.log",
+      "bytes": 88,
+      "sha256": "5fdf493dc9a6720e463c711c9860c33972fb04faf83fd31a39c3a1c87a904d5e"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/npm-root-vulnerabilities.log",
+      "bytes": 360,
+      "sha256": "6711922b5c67f9dde45b996253b701f5f4906da4b08732d947cbe628a488fde9"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/install-cargo-audit.log",
+      "bytes": 9678,
+      "sha256": "6bc6b9f06e492453f126657ac146025a0689dccc3a63e6df80068d209f3413c6"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-1.cdx.json",
+      "bytes": 52225,
+      "sha256": "734ef6038e24e3fc6ad3fd37a404d7c926b967085d669bd5a53f9a5a86ff2f9b"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-2.cdx.json",
+      "bytes": 45137,
+      "sha256": "7cfa03f23e20b7bdb424c7cb498205fb6821e7425907ec89ff5641c56b4f82de"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/envoy-spike-vulnerabilities.json",
+      "bytes": 99897,
+      "sha256": "7d3d2fb6d6432e8bc535f81c4702ae3dc5987c965f13ca67d87fc7494c3ec8ec"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/rust-vulnerabilities.log",
+      "bytes": 374,
+      "sha256": "7f983ebd377645e108a23395c38f26d26521532cf2740b5aab4c7b19255ae799"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/hyper-spike-vulnerabilities.log",
+      "bytes": 374,
+      "sha256": "8f1648315a31e21e94f00c2b011ac9974862146adef81543696e62224b82b8be"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security-scan.stdout.log",
+      "bytes": 2025,
+      "sha256": "a58499c5b2e055fc7f8978f6a3bb61cfd15d049a8ee9082726ea4fccedeca622"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/envoy-spike-sbom.log",
+      "bytes": 490,
+      "sha256": "a6e2433efe6e65bf69e1c0caecb657aa6ad4786aeed84eeaf0de56d9237a59ec"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-4-vulnerabilities.json",
+      "bytes": 69892,
+      "sha256": "affb5782973185351250b4b9cec914579560ade4564f8c9613cf811dfa1a6e78"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-3.cdx.json",
+      "bytes": 94254,
+      "sha256": "b69cba0dd6b2bcf3ae2608b859771925bba46770c3b7dd74f46a4e3b12fbebf2"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/fixture-images.lock.json",
+      "bytes": 972,
+      "sha256": "b9284bfc0c1178ba02c8ffe404d88013baf18a86b5ca45eba9363997dcfb81b0"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-4-vulnerabilities.log",
+      "bytes": 992,
+      "sha256": "bef8dc2b533855026973c5327518c4563631a8fbbe4fefa4905477546f92d3e2"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-4.cdx.json",
+      "bytes": 41225,
+      "sha256": "d16ac42dc7dc9601521d702a60ad5d39c8421a15baae6d6181a450f9bb4ca05b"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-3-vulnerabilities.log",
+      "bytes": 1088,
+      "sha256": "d1ad34a348d7fdba5a3d3b9d376f6ce6d3ddef4db0f851208b2436130817945c"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-2-sbom.log",
+      "bytes": 492,
+      "sha256": "d367c913435abad1d3449e989150db9759d829c1304a5f4c628b96847a6bf1e6"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-identity-selftest.log",
+      "bytes": 3693,
+      "sha256": "dba2c9b68ae451bf5ba951da73e7877f6834d849fe9ef2bcb4e8c5db3a62ab78"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/check.stderr.log",
+      "bytes": 14649,
+      "sha256": "dc716e4524f5e763fb1ad31ed6db79b1d2eee17321848cab2b4a9f85c0f84bdf"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/filesystem-vulnerabilities.log",
+      "bytes": 1097,
+      "sha256": "df0e40fea6f72d851232ca045ff02ca97a33de243996a1522ac30bb6d5745509"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-1-vulnerabilities.log",
+      "bytes": 1244,
+      "sha256": "df4ea4a4728b40c5da9ba52ef615bbd9e743f39895f3e4619e7a3aaba4417a9f"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/cleanup-volumes.stderr.log",
+      "bytes": 194,
+      "sha256": "e31f9cde7e702f483c138ab0a028ee43197c0b7ab227a05c168f679ebdf84ee6"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/cleanup-volumes.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security-scan.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/compose-images.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-1-export.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-3-export.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-inventory.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/install-govulncheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/history-secrets.log",
+      "bytes": 20,
+      "sha256": "eb59fffa8f6f7abff0b8115e11ed39de047f97097727fafc11f31638e13c4cc6"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/image-2-vulnerabilities.log",
+      "bytes": 1058,
+      "sha256": "f7e6dc0c125dcb2e6ab19a1afc90bdc37baa2daac32df3bb202dfbb24ae343ee"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/check.stdout.log",
+      "bytes": 90964,
+      "sha256": "fc5dc1a20d8c720f88f4762459fcd0564a3a42dfa2a234bb83fbb5526f9c8463"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/security/history-git-preflight.log",
+      "bytes": 39,
+      "sha256": "fff09d9887356ba496497a4614aaece798023635d8edce580487c03818652606"
+    },
+    {
+      "file": "evidence/sprint06a-root/gates-03/cleanup.stderr.log",
+      "bytes": 875,
+      "sha256": "fff61b3ecfe0a6ac0b75d5e6b4eaf4cc934097d66d6436de580a7c9fda948282"
+    }
+  ],
+  "gateCommands": [
+    {
+      "label": "check",
+      "command": "make",
+      "args": [
+        "check"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "started_at": "2026-11-15T12:42:26.699Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-15T12:45:36.040Z",
+      "streams": [
+        {
+          "file": "evidence/sprint06a-root/gates-03/check.stdout.log",
+          "sha256": "fc5dc1a20d8c720f88f4762459fcd0564a3a42dfa2a234bb83fbb5526f9c8463"
+        },
+        {
+          "file": "evidence/sprint06a-root/gates-03/check.stderr.log",
+          "sha256": "dc716e4524f5e763fb1ad31ed6db79b1d2eee17321848cab2b4a9f85c0f84bdf"
+        }
+      ]
+    },
+    {
+      "label": "security-scan",
+      "command": "make",
+      "args": [
+        "security-scan"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "started_at": "2026-11-15T12:45:36.055Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-15T12:50:14.061Z",
+      "streams": [
+        {
+          "file": "evidence/sprint06a-root/gates-03/security-scan.stdout.log",
+          "sha256": "a58499c5b2e055fc7f8978f6a3bb61cfd15d049a8ee9082726ea4fccedeca622"
+        },
+        {
+          "file": "evidence/sprint06a-root/gates-03/security-scan.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "cleanup",
+      "command": "make",
+      "args": [
+        "dev-down"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "started_at": "2026-11-15T12:50:14.080Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-15T12:50:24.563Z",
+      "streams": [
+        {
+          "file": "evidence/sprint06a-root/gates-03/cleanup.stdout.log",
+          "sha256": "54a436c053a8cdd9d5d9c057ba2076828e35449457b540d8847a89df29ff6a90"
+        },
+        {
+          "file": "evidence/sprint06a-root/gates-03/cleanup.stderr.log",
+          "sha256": "fff61b3ecfe0a6ac0b75d5e6b4eaf4cc934097d66d6436de580a7c9fda948282"
+        }
+      ]
+    },
+    {
+      "label": "cleanup-volumes",
+      "command": "docker",
+      "args": [
+        "compose",
+        "--env-file",
+        ".local/compose.env",
+        "--env-file",
+        ".local/fixture-images.env",
+        "-f",
+        "infra/compose/compose.yaml",
+        "down",
+        "--volumes",
+        "--remove-orphans"
+      ],
+      "cwd": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-candidate-gates",
+      "started_at": "2026-11-15T12:50:24.578Z",
+      "exit_code": 0,
+      "signal": null,
+      "ended_at": "2026-11-15T12:50:24.729Z",
+      "streams": [
+        {
+          "file": "evidence/sprint06a-root/gates-03/cleanup-volumes.stdout.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "evidence/sprint06a-root/gates-03/cleanup-volumes.stderr.log",
+          "sha256": "e31f9cde7e702f483c138ab0a028ee43197c0b7ab227a05c168f679ebdf84ee6"
+        }
+      ]
+    }
+  ],
+  "privateCleanup": [
+    {
+      "file": ".local/pki",
+      "exists": false
+    },
+    {
+      "file": ".local/postgres-password",
+      "exists": false
+    },
+    {
+      "file": ".local/redis-password",
+      "exists": false
+    },
+    {
+      "file": ".local/nats-token",
+      "exists": false
+    },
+    {
+      "file": ".local/redis.conf",
+      "exists": false
+    },
+    {
+      "file": ".local/nats.conf",
+      "exists": false
+    },
+    {
+      "file": ".local/compose.env",
+      "exists": false
+    },
+    {
+      "file": ".local/evidence/security/compose-config.json",
+      "exists": false
+    }
+  ],
+  "privateCheck": {
+    "files_checked": 58,
+    "matches": 0
+  },
+  "goRacePhases": [
+    {
+      "command": "GOTOOLCHAIN=go1.27.4 go test -race ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/...",
+      "phase": "unit",
+      "packages": [
+        {
+          "name": "aegisgate.dev/aegisgate/apps/control-api/internal/domain",
+          "result": "1.028s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/apps/control-api/internal/identity",
+          "result": "1.539s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/apps/control-api/internal/persistence",
+          "result": "1.059s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/apps/control-api/internal/transport",
+          "result": "2.172s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configconsumer",
+          "result": "4.474s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configpublish",
+          "result": "1.216s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configreview",
+          "result": "1.438s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configrollout",
+          "result": "1.254s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configsnapshot",
+          "result": "1.515s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/contracts",
+          "result": "1.194s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab",
+          "result": "1.884s"
+        }
+      ],
+      "topLevelPass": 67,
+      "subtestPass": 131,
+      "topLevelSkip": 22,
+      "subtestSkip": 10
+    },
+    {
+      "command": "AEGIS_TENANCY_INTEGRATION=1 GOTOOLCHAIN=go1.27.4 go test -p 1 -race ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/... -run Integration -count=1",
+      "phase": "integration",
+      "packages": [
+        {
+          "name": "aegisgate.dev/aegisgate/apps/control-api/internal/domain",
+          "result": "1.017s [no tests to run]"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/apps/control-api/internal/identity",
+          "result": "1.035s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/apps/control-api/internal/persistence",
+          "result": "12.928s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/apps/control-api/internal/transport",
+          "result": "21.407s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configconsumer",
+          "result": "1.039s [no tests to run]"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configpublish",
+          "result": "2.646s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configreview",
+          "result": "1.049s [no tests to run]"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configrollout",
+          "result": "1.365s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configsnapshot",
+          "result": "1.055s [no tests to run]"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/contracts",
+          "result": "1.018s [no tests to run]"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab",
+          "result": "1.809s"
+        }
+      ],
+      "topLevelPass": 27,
+      "subtestPass": 37,
+      "topLevelSkip": 0,
+      "subtestSkip": 0
+    },
+    {
+      "command": "GOTOOLCHAIN=go1.27.4 go test -race ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/... -run 'Negative|IntegrationLocalPKI' -count=1",
+      "phase": "negative",
+      "packages": [
+        {
+          "name": "aegisgate.dev/aegisgate/apps/control-api/internal/domain",
+          "result": "1.045s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/apps/control-api/internal/identity",
+          "result": "1.400s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/apps/control-api/internal/persistence",
+          "result": "1.111s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/apps/control-api/internal/transport",
+          "result": "2.027s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configconsumer",
+          "result": "1.476s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configpublish",
+          "result": "1.200s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configreview",
+          "result": "1.082s [no tests to run]"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configrollout",
+          "result": "1.119s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/configsnapshot",
+          "result": "1.286s"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/internal/contracts",
+          "result": "1.039s [no tests to run]"
+        },
+        {
+          "name": "aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab",
+          "result": "1.834s"
+        }
+      ],
+      "topLevelPass": 30,
+      "subtestPass": 83,
+      "topLevelSkip": 4,
+      "subtestSkip": 0
+    }
+  ],
+  "scannerPassLabels": [
+    "install-govulncheck",
+    "install-cargo-audit",
+    "rust-vulnerabilities",
+    "pingora-spike-vulnerabilities",
+    "hyper-spike-vulnerabilities",
+    "go-scanner-gate-selftest",
+    "go-vulnerabilities",
+    "npm-root-vulnerabilities",
+    "npm-dashboard-vulnerabilities",
+    "npm-spike-vulnerabilities",
+    "worktree-secrets",
+    "history-git-preflight",
+    "history-secrets",
+    "repository-sbom",
+    "filesystem-vulnerabilities",
+    "image-identity-selftest",
+    "envoy-spike-vulnerabilities",
+    "envoy-spike-sbom",
+    "image-1-vulnerabilities",
+    "image-1-sbom",
+    "image-1-identity",
+    "image-2-vulnerabilities",
+    "image-2-sbom",
+    "image-3-vulnerabilities",
+    "image-3-sbom",
+    "image-3-identity",
+    "image-4-vulnerabilities",
+    "image-4-sbom"
+  ],
+  "vulnerabilityReports": [
+    {
+      "file": "filesystem-vulnerabilities.json",
+      "highCritical": 0
+    },
+    {
+      "file": "envoy-spike-vulnerabilities.json",
+      "highCritical": 0
+    },
+    {
+      "file": "image-1-vulnerabilities.json",
+      "highCritical": 0
+    },
+    {
+      "file": "image-2-vulnerabilities.json",
+      "highCritical": 0
+    },
+    {
+      "file": "image-3-vulnerabilities.json",
+      "highCritical": 0
+    },
+    {
+      "file": "image-4-vulnerabilities.json",
+      "highCritical": 0
+    }
+  ],
+  "localGatesAccepted": true,
+  "complete": true,
+  "sourceFilesAfter": 9914,
+  "protectedAfter": {
+    "baseline": "8758b1c84b4186449cd79fabae461ca53ee05100",
+    "tree": "2c6b1d5ff56f9e60a7bf77b478e291f3f5bc420d",
+    "protectedFiles": [
+      {
+        "file": "spikes/pingora/lab.mjs",
+        "sha256": "9ba636fe61aab1c4a9e47fe7f64eee5ac9a4826173fc2acab9599627451d6b5d",
+        "bytes": 45073
+      },
+      {
+        "file": "spikes/edge-comparison/manifest.json",
+        "sha256": "8dd056bb69f53e0a41bf6445c7054f2345ce969d3c22784a7567268e0733f141",
+        "bytes": 9829
+      },
+      {
+        "file": "spikes/edge-comparison/contract.mjs",
+        "sha256": "1c0b681de08b97ecce89834ae1d96b9021c032e250fb6a101fcb1f8048dac37f",
+        "bytes": 1686
+      },
+      {
+        "file": "spikes/edge-comparison/supplemental.mjs",
+        "sha256": "606047f95e3fca51c0a94a7b6b31594dcf5248a42053c4be110b901428a13ecf",
+        "bytes": 1616
+      },
+      {
+        "file": "spikes/edge-comparison/evaluate.mjs",
+        "sha256": "059c2eb06c66f71e01e07273cb8b9459d8adeebbd1c6a3776858d7f490611dbf",
+        "bytes": 2119
+      },
+      {
+        "file": "spikes/edge-comparison/run.mjs",
+        "sha256": "dc2f4e83971b44ab5d35fc90bc4a22c5330d6d5f4706ec030339ba81d2504493",
+        "bytes": 61
+      },
+      {
+        "file": "spikes/edge-comparison/tls-observer.mjs",
+        "sha256": "b07d34259de297eb204298f052220beb782c9e734994ced4e6410665c55bf065",
+        "bytes": 1639
+      },
+      {
+        "file": "spikes/edge-comparison/extract-baseline.mjs",
+        "sha256": "a65f2df00c12e12b529897e3ce73e95d556ad95b56757032c770bccffbfde4c6",
+        "bytes": 2908
+      },
+      {
+        "file": "spikes/envoy/wire-probes.mjs",
+        "sha256": "fbe3cf3e1041cea5879f5e44600bea7fcef0138441e3752a8edae8c75488e09a",
+        "bytes": 20934
+      },
+      {
+        "file": "spikes/envoy/wire-observer.mjs",
+        "sha256": "bcb92412086e4a6f8aa9c82abb1aa3f5c46a53e260f8fbe64bb8b1a47c5ad6c3",
+        "bytes": 4052
+      },
+      {
+        "file": "spikes/envoy/wire-fixtures.mjs",
+        "sha256": "4d5163852a7d74e05a9998ab029bdd8f631faa9cc5bbd39a098ef08ef8775278",
+        "bytes": 3320
+      }
+    ],
+    "protected_inventory_sha256": "85de42e7d2ac54b0f199bcced46760bec41b7687dd7c7016dd580ea4a300c1fa",
+    "historical": [
+      {
+        "file": "evidence/sprint05a-root/candidate-02/commands.json",
+        "sha256": "572ad993fe7f38b58c62c0b66de81a333006b3c6ed5a332478e38f60838d273a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original75.json",
+        "sha256": "13a04311fa39f0e7c7d94c85051d6d375e9a281cf6a4aa0f4aafa8dbe337556a"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/original23.json",
+        "sha256": "62fa6ba4082b20185d4958bbd034bbddef40dc7b46e2a89291fda507d3c99cee"
+      },
+      {
+        "file": "evidence/sprint05a-root/candidate-02/SHA256SUMS",
+        "sha256": "85e4968d3da9ce4381f6cae77073376c2cf6164ca3d278a42489abe2f00a9017"
+      },
+      {
+        "file": "evidence/sprint05a-b/source-01/sources.json",
+        "sha256": "75991f76850b45d3df00ab0ac3b21054e3c246e96c85ac7593c43f84ca9fb73d"
+      }
+    ],
+    "previous75": {
+      "passed": 73,
+      "failures": [
+        {
+          "name": "malformed-HTTP-obsolete-folded-header",
+          "status": "fail",
+          "milliseconds": 7.12,
+          "error": "malformed request reached an owned origin\n\n1 !== 0\n",
+          "origin": {
+            "handler_invocations": 1,
+            "decrypted_bytes": 263,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [
+              {
+                "method": "GET",
+                "target": "/",
+                "protocol": "1.1",
+                "tls": "TLSv1.2",
+                "sni": false,
+                "alpn": "http/1.1"
+              }
+            ],
+            "omitted_request_samples": 0
+          }
+        },
+        {
+          "name": "HTTP2-authority-Host-and-SNI-confusion-rejected",
+          "status": "fail",
+          "milliseconds": 7.38,
+          "error": "confused authority forwarded bytes to origin\n\n3032 !== 3023\n",
+          "origin": {
+            "handler_invocations": 0,
+            "decrypted_bytes": 9,
+            "parser_errors": 0,
+            "transport_errors": 0,
+            "requests": [],
+            "omitted_request_samples": 0
+          }
+        }
+      ]
+    },
+    "previous23": {
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ]
+    }
+  },
+  "sourceIntegrityAfter": true,
+  "ended": "2026-11-15T12:50:25.932Z",
+  "lockHeldThroughCleanupAndHashes": true
+}

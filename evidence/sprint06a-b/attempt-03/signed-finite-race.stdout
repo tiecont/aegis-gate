@@ -1,0 +1,105 @@
+=== RUN   TestSignedSidecarNegativesAndBindings
+=== RUN   TestSignedSidecarNegativesAndBindings/missing
+=== RUN   TestSignedSidecarNegativesAndBindings/unsigned
+=== RUN   TestSignedSidecarNegativesAndBindings/tampered
+=== RUN   TestSignedSidecarNegativesAndBindings/unknown_version
+=== RUN   TestSignedSidecarNegativesAndBindings/downgrade
+=== RUN   TestSignedSidecarNegativesAndBindings/unknown_context
+=== RUN   TestSignedSidecarNegativesAndBindings/missing_profile
+=== RUN   TestSignedSidecarNegativesAndBindings/unknown_profile
+=== RUN   TestSignedSidecarNegativesAndBindings/streaming
+=== RUN   TestSignedSidecarNegativesAndBindings/cross_tenant
+=== RUN   TestSignedSidecarNegativesAndBindings/cross_route
+=== RUN   TestSignedSidecarNegativesAndBindings/snapshot_digest
+=== RUN   TestSignedSidecarNegativesAndBindings/deployment
+=== RUN   TestSignedSidecarNegativesAndBindings/generation
+=== RUN   TestSignedSidecarNegativesAndBindings/route_generation
+=== RUN   TestSignedSidecarNegativesAndBindings/policy_generation
+=== RUN   TestSignedSidecarNegativesAndBindings/pool_generation
+=== RUN   TestSignedSidecarNegativesAndBindings/endpoint_generation
+=== RUN   TestSignedSidecarNegativesAndBindings/wire_limit
+=== RUN   TestSignedSidecarNegativesAndBindings/deadline
+=== RUN   TestSignedSidecarNegativesAndBindings/duplicate_binding
+=== RUN   TestSignedSidecarNegativesAndBindings/unknown_field
+=== RUN   TestSignedSidecarNegativesAndBindings/missing_field
+=== RUN   TestSignedSidecarNegativesAndBindings/duplicate_field
+=== RUN   TestSignedSidecarNegativesAndBindings/oversized
+=== RUN   TestSignedSidecarNegativesAndBindings/deep
+=== RUN   TestSignedSidecarNegativesAndBindings/wrong_signature_context
+--- PASS: TestSignedSidecarNegativesAndBindings (0.67s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/missing (0.01s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/unsigned (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/tampered (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/unknown_version (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/downgrade (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/unknown_context (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/missing_profile (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/unknown_profile (0.03s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/streaming (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/cross_tenant (0.03s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/cross_route (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/snapshot_digest (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/deployment (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/generation (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/route_generation (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/policy_generation (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/pool_generation (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/endpoint_generation (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/wire_limit (0.03s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/deadline (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/duplicate_binding (0.02s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/unknown_field (0.01s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/missing_field (0.01s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/duplicate_field (0.01s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/oversized (0.01s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/deep (0.01s)
+    --- PASS: TestSignedSidecarNegativesAndBindings/wrong_signature_context (0.02s)
+=== RUN   TestCaptureRollbackCancellationRecoveryAndFloor
+--- PASS: TestCaptureRollbackCancellationRecoveryAndFloor (0.16s)
+=== RUN   TestTrustRotationSharedAcrossSnapshotAndSidecar
+--- PASS: TestTrustRotationSharedAcrossSnapshotAndSidecar (0.09s)
+=== RUN   TestConcurrentCaptureAndCancelledNewerRollback
+--- PASS: TestConcurrentCaptureAndCancelledNewerRollback (0.55s)
+=== RUN   TestSignedFiniteTLSAndJWTEndToEnd
+=== RUN   TestSignedFiniteTLSAndJWTEndToEnd/JWT_missing
+=== RUN   TestSignedFiniteTLSAndJWTEndToEnd/JWT_expired
+=== RUN   TestSignedFiniteTLSAndJWTEndToEnd/JWT_audience
+=== RUN   TestSignedFiniteTLSAndJWTEndToEnd/JWT_issuer
+=== RUN   TestSignedFiniteTLSAndJWTEndToEnd/JWT_future
+=== RUN   TestSignedFiniteTLSAndJWTEndToEnd/JWT_kid
+=== RUN   TestSignedFiniteTLSAndJWTEndToEnd/JWT_tampered
+=== RUN   TestSignedFiniteTLSAndJWTEndToEnd/JWT_cross_tenant
+=== NAME  TestSignedFiniteTLSAndJWTEndToEnd
+    e2e_test.go:262: signed_finite_positive tenant=a generation=7 status=200 body_sha256=eebbf6457e46a7f63acdf9b97390f790ba443d60cfa44b607da7e5c40aa1cc1d
+    e2e_test.go:262: signed_finite_positive tenant=b generation=7 status=200 body_sha256=eebbf6457e46a7f63acdf9b97390f790ba443d60cfa44b607da7e5c40aa1cc1d
+=== RUN   TestSignedFiniteTLSAndJWTEndToEnd/Host_SNI_mismatch
+=== RUN   TestSignedFiniteTLSAndJWTEndToEnd/unknown_SNI
+=== RUN   TestSignedFiniteTLSAndJWTEndToEnd/origin_TLS_mismatch
+=== NAME  TestSignedFiniteTLSAndJWTEndToEnd
+    e2e_test.go:172: finite_metrics={"peakDisk":446,"peakOriginActive":1,"peakOriginQueue":0,"peakConnections":1,"activeContexts":0,"originDials":12,"requests":12,"staged":13,"admitted":12,"rejections":{"421":1},"peakReadable":446,"peakWritable":446}
+--- PASS: TestSignedFiniteTLSAndJWTEndToEnd (1.12s)
+    --- PASS: TestSignedFiniteTLSAndJWTEndToEnd/JWT_missing (0.08s)
+    --- PASS: TestSignedFiniteTLSAndJWTEndToEnd/JWT_expired (0.07s)
+    --- PASS: TestSignedFiniteTLSAndJWTEndToEnd/JWT_audience (0.08s)
+    --- PASS: TestSignedFiniteTLSAndJWTEndToEnd/JWT_issuer (0.07s)
+    --- PASS: TestSignedFiniteTLSAndJWTEndToEnd/JWT_future (0.07s)
+    --- PASS: TestSignedFiniteTLSAndJWTEndToEnd/JWT_kid (0.07s)
+    --- PASS: TestSignedFiniteTLSAndJWTEndToEnd/JWT_tampered (0.07s)
+    --- PASS: TestSignedFiniteTLSAndJWTEndToEnd/JWT_cross_tenant (0.07s)
+    --- PASS: TestSignedFiniteTLSAndJWTEndToEnd/Host_SNI_mismatch (0.01s)
+    --- PASS: TestSignedFiniteTLSAndJWTEndToEnd/unknown_SNI (0.00s)
+    --- PASS: TestSignedFiniteTLSAndJWTEndToEnd/origin_TLS_mismatch (0.10s)
+=== RUN   TestFiniteLateInvalidityAndPinnedRollbackEndToEnd
+=== RUN   TestFiniteLateInvalidityAndPinnedRollbackEndToEnd/CL10_prefix_valid_completion
+=== RUN   TestFiniteLateInvalidityAndPinnedRollbackEndToEnd/CL10_EOF
+=== RUN   TestFiniteLateInvalidityAndPinnedRollbackEndToEnd/folded_header
+=== RUN   TestFiniteLateInvalidityAndPinnedRollbackEndToEnd/late_folded_trailer
+=== NAME  TestFiniteLateInvalidityAndPinnedRollbackEndToEnd
+    e2e_test.go:361: rollback_capture old_deployment=7 new_deployment=9 rollback_resource=7 status=200
+    e2e_test.go:172: finite_metrics={"peakDisk":464,"peakOriginActive":1,"peakOriginQueue":0,"peakConnections":2,"activeContexts":0,"originDials":5,"requests":4,"staged":8,"admitted":5,"rejections":{"400":3,"502":1},"peakReadable":496,"peakWritable":451,"writeWaits":1}
+--- PASS: TestFiniteLateInvalidityAndPinnedRollbackEndToEnd (1.79s)
+    --- PASS: TestFiniteLateInvalidityAndPinnedRollbackEndToEnd/CL10_prefix_valid_completion (0.25s)
+    --- PASS: TestFiniteLateInvalidityAndPinnedRollbackEndToEnd/CL10_EOF (0.01s)
+    --- PASS: TestFiniteLateInvalidityAndPinnedRollbackEndToEnd/folded_header (0.00s)
+    --- PASS: TestFiniteLateInvalidityAndPinnedRollbackEndToEnd/late_folded_trailer (0.01s)
+PASS
