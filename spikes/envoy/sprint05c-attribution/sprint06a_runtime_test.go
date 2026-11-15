@@ -24,29 +24,85 @@ import (
 // This is a bounded transcript check, never a runtime authority certificate.
 func sprint06aAssess(e runtimeEvidence, key []byte) runtimeAssessment {
 	r := assessRuntime(e, key)
+	fail := func(reason string) {
+		r.CorrelationConsistent = false
+		r.Incomplete = append(r.Incomplete, reason)
+	}
 	seenWires := map[string]bool{}
 	for _, w := range e.Wires {
 		if seenWires[w.ID] {
-			r.CorrelationConsistent = false
-			r.Incomplete = append(r.Incomplete, "duplicate capture identity")
+			fail("duplicate capture identity")
 		}
 		seenWires[w.ID] = true
-		streams := map[uint32]bool{}
+		expected := map[string]runtimeRequest{}
+		for _, q := range e.Requests {
+			if w.ID == "upstream" && q.Status != 200 {
+				continue
+			}
+			if _, exists := expected[q.Probe]; exists || q.Probe == "" {
+				fail("duplicate or empty request event identity")
+			}
+			expected[q.Probe] = q
+		}
+		streams := map[uint32]string{}
+		seenProbes, seenNonces := map[string]bool{}, map[string]bool{}
 		err := runtimeFrames(w.To, true, func(frame http2.Frame) error {
 			switch f := frame.(type) {
 			case *http2.MetaHeadersFrame:
-				if streams[f.StreamID] || !f.StreamEnded() {
+				if _, exists := streams[f.StreamID]; exists || !f.StreamEnded() {
 					return fmt.Errorf("aliased or incomplete bounded GET stream")
 				}
-				streams[f.StreamID] = true
+				var probes, nonces []string
+				for _, field := range f.Fields {
+					switch field.Name {
+					case "x-aegis-probe-id":
+						probes = append(probes, field.Value)
+					case "x-aegis-fixture-id":
+						nonces = append(nonces, field.Value)
+					}
+				}
+				if len(probes) != 1 || probes[0] == "" || seenProbes[probes[0]] {
+					return fmt.Errorf("request block lacks one unique probe identity")
+				}
+				probe := probes[0]
+				q, exists := expected[probe]
+				if !exists {
+					return fmt.Errorf("request block without matching request event")
+				}
+				if w.ID == "upstream" {
+					if len(nonces) != 1 || nonces[0] == "" || seenNonces[nonces[0]] || nonces[0] != q.Nonce {
+						return fmt.Errorf("request block lacks one unique matching nonce")
+					}
+					seenNonces[nonces[0]] = true
+				} else if len(nonces) != 0 {
+					return fmt.Errorf("unexpected fixture nonce on downstream bounded block")
+				}
+				seenProbes[probe] = true
+				streams[f.StreamID] = probe
 			case *http2.DataFrame:
 				return fmt.Errorf("unexpected DATA in bounded GET transcript")
 			}
 			return nil
 		})
 		if err != nil {
-			r.CorrelationConsistent = false
-			r.Incomplete = append(r.Incomplete, err.Error())
+			fail(err.Error())
+		}
+		if len(streams) != len(expected) || len(seenProbes) != len(expected) {
+			fail("request block and event coverage mismatch")
+		}
+		statuses, err := runtimeStatuses(w.From)
+		if err != nil || len(statuses) != len(streams) {
+			fail("response and request stream coverage mismatch")
+		}
+		for stream, probe := range streams {
+			if statuses[stream] != expected[probe].Status {
+				fail("response stream lacks its unique request block/event binding")
+			}
+		}
+		for stream := range statuses {
+			if _, exists := streams[stream]; !exists {
+				fail("completed response without a request block")
+			}
 		}
 	}
 	return r

@@ -75,6 +75,7 @@ function run(label, command, args) {
   );
   assert.equal(child.signal, null, label);
   assert.equal(child.status, 0, label);
+  return child.stdout;
 }
 try {
   const sources = [
@@ -131,6 +132,52 @@ try {
   ]);
   record.testBinarySha256 = sha(fs.readFileSync(binary));
   run("proof", binary, ["-test.v", "-test.timeout=70s", "-test.count=1"]);
+  const reviewerSource = git("rev-parse", "7694b61^{commit}");
+  const rejectedEvidence = git("rev-parse", "f6b1413^{commit}");
+  const reviewerFile = "scripts/sprint06a-f-attribution_test.go.txt";
+  const reviewerBytes = run("f-overlay", "/usr/bin/git", [
+    "show",
+    `${reviewerSource}:${reviewerFile}`,
+  ]);
+  record.independentReviewer = {
+    source: reviewerSource,
+    file: reviewerFile,
+    sha256: sha(reviewerBytes),
+    rejectedEvidence,
+  };
+  for (const name of [
+    "receipt.json",
+    "SHA256SUMS",
+    "f-full-proof.stdout",
+    "f-full-proof.stderr",
+  ]) {
+    run(`rejected-f-${name}`, "/usr/bin/git", [
+      "show",
+      `${rejectedEvidence}:evidence/sprint06a-f/d-independent-01/${name}`,
+    ]);
+  }
+  replace[
+    path.resolve(
+      "spikes/envoy/sprint05c-attribution/sprint06a_independent_f_test.go",
+    )
+  ] = path.resolve(output, "f-overlay.stdout");
+  fs.writeFileSync(overlay, JSON.stringify({ Replace: replace }));
+  run("f-compile", go, [
+    "test",
+    "-c",
+    "-race",
+    "-overlay",
+    overlay,
+    "-o",
+    binary,
+    "./spikes/envoy/sprint05c-attribution",
+  ]);
+  record.independentTestBinarySha256 = sha(fs.readFileSync(binary));
+  run("f-full-proof", binary, [
+    "-test.v",
+    "-test.timeout=70s",
+    "-test.count=1",
+  ]);
   run("protected-after", process.execPath, ["scripts/sprint05b-baseline.mjs"]);
   assert.equal(git("status", "--porcelain", "--untracked-files=no"), "");
   record.checksComplete = true;
