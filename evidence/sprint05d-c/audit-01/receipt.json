@@ -1,0 +1,592 @@
+{
+  "source_commit": "3474579f9a35de62f1eb338012a185f7ad5499c1",
+  "source_tree": "f672951afe4efdc85c09c4ef497ed71db7664ad3",
+  "source_clean": true,
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/home/tiecont/.cache/aegisgate-05d/c/spikes/envoy/sprint05d-c-audit.mjs",
+    "evidence/sprint05d-c/audit-01"
+  ],
+  "started_at": "2026-11-15T08:43:31.006Z",
+  "pin": {
+    "version": "1.40.2",
+    "image": "envoyproxy/envoy@sha256:09ca6f2140a61ad8df11779a4a30d52b48433d444466328494f9188c9c35eded",
+    "discovery_tag": "envoyproxy/envoy:distroless-v1.40.2",
+    "release": "https://github.com/envoyproxy/envoy/releases/tag/v1.40.2",
+    "source_commit": "b2d89e0ae53916f28770771fbdd49c5c99c5c5a2",
+    "license": "Apache-2.0"
+  },
+  "hypothesis": {
+    "failure": "oghttp2 raw-H2-unexpected-CONTINUATION closes without the required peer PROTOCOL_ERROR frame; HEADERS stream zero and zero WINDOW_UPDATE must retain their prior PASS",
+    "hypothesis": "A released supported Envoy error-emission API may submit PROTOCOL_ERROR and flush the adapter after ProcessBytes fails, before HCM closes the connection",
+    "mechanism": "Inspect the pinned release's codec dispatch, adapter send boundary, public HTTP/network connection interfaces and HCM protocol options; implement a candidate only if a supported configurable hook connects the error path to error-frame emission",
+    "targeted_input": [
+      "raw-H2-HEADERS-stream-zero",
+      "raw-H2-unexpected-CONTINUATION",
+      "raw-H2-zero-WINDOW_UPDATE"
+    ],
+    "positive_control": "If a supported implementation exists, execute the three original wire-probes cases with their exact payloads, assertions and windows; only after all pass run unchanged original23 including reuse, identity, cancellation and header controls",
+    "stop": "No supported hook, missing peer PROTOCOL_ERROR, or loss of either prior frame PASS ends this attempt; no repeat baseline/codec comparison or full23 without a new credible mechanism"
+  },
+  "hypothesis_sha256": "501599ca9597ed2d5eff5485c1fa35e9df01a04be88c10eb42c43bd1be25d688",
+  "source_files": [
+    {
+      "file": "spikes/envoy/sprint05d-c-audit.mjs",
+      "sha256": "0e5a66799b1c97496e84c408b0dc291cfbaa3575ec82d4f49d2b039700b8f2dc"
+    },
+    {
+      "file": "spikes/envoy/sprint05d-c-hypothesis.json",
+      "sha256": "501599ca9597ed2d5eff5485c1fa35e9df01a04be88c10eb42c43bd1be25d688"
+    }
+  ],
+  "extraction": {
+    "file": "/home/tiecont/Projects/aegis-gate/evidence/sprint05b-root/native-extract-01/receipt.json",
+    "sha256": "9961348d1c0349a092eb9cee143238a7c0e69fe253c257f1e574f3bf28b2d08c",
+    "binary": {
+      "file": "/home/tiecont/Projects/aegis-gate/.local/sprint05b-native/envoy",
+      "sha256": "1d64506e25c1844f146162ddb2ece7010fa4e784faddb40a079021491f1f03cc"
+    }
+  },
+  "node": {
+    "version": "v26.13.0",
+    "binary": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+  },
+  "environment": {
+    "TMPDIR": "/home/tiecont/.cache"
+  },
+  "commands": [
+    {
+      "label": "protected-before",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "started_at": "2026-11-15T08:43:31.206Z",
+      "ended_at": "2026-11-15T08:43:31.376Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05d-c/audit-01/protected-before.stdout",
+          "bytes": 4342,
+          "sha256": "12fecd21d0163ccd7b6c2e53ba49a36bf9cd15aaeb5311710088bae5cb41d3f5"
+        },
+        {
+          "file": "evidence/sprint05d-c/audit-01/protected-before.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "node-version",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "--version"
+      ],
+      "started_at": "2026-11-15T08:43:31.385Z",
+      "ended_at": "2026-11-15T08:43:31.394Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05d-c/audit-01/node-version.stdout",
+          "bytes": 9,
+          "sha256": "d4b8a831ea4925f1c54be7746ec0b846cb04bbc35295b64ccdb2101bfcf5d70c"
+        },
+        {
+          "file": "evidence/sprint05d-c/audit-01/node-version.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "envoy-version",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/sprint05b-native/envoy",
+      "args": [
+        "--version"
+      ],
+      "started_at": "2026-11-15T08:43:31.396Z",
+      "ended_at": "2026-11-15T08:43:31.445Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05d-c/audit-01/envoy-version.stdout",
+          "bytes": 148,
+          "sha256": "d4f3617963e0edc67307fa6cfa788e36e8c14b75a89d64e648a7b5aa3b5c618e"
+        },
+        {
+          "file": "evidence/sprint05d-c/audit-01/envoy-version.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "openssl-version",
+      "program": "openssl",
+      "args": [
+        "version"
+      ],
+      "started_at": "2026-11-15T08:43:31.457Z",
+      "ended_at": "2026-11-15T08:43:31.470Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05d-c/audit-01/openssl-version.stdout",
+          "bytes": 63,
+          "sha256": "bdd7122ae3788e889ce96da25f99fe5023a80a88ab0e6db9f93cf3174187301c"
+        },
+        {
+          "file": "evidence/sprint05d-c/audit-01/openssl-version.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "curl-version",
+      "program": "curl",
+      "args": [
+        "--version"
+      ],
+      "started_at": "2026-11-15T08:43:31.472Z",
+      "ended_at": "2026-11-15T08:43:31.485Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05d-c/audit-01/curl-version.stdout",
+          "bytes": 525,
+          "sha256": "974a7183d6eab3311c241ad5e9ff6dd20b26a7abc632239e8e2c8e0d02da4b34"
+        },
+        {
+          "file": "evidence/sprint05d-c/audit-01/curl-version.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "upstream-0",
+      "program": "curl",
+      "args": [
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--max-time",
+        "30",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http2/codec_impl.cc"
+      ],
+      "started_at": "2026-11-15T08:43:31.494Z",
+      "ended_at": "2026-11-15T08:43:31.958Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05d-c/audit-01/upstream-0.stdout",
+          "bytes": 112582,
+          "sha256": "b789452da3c5ee2b0278b3c52f1764698d80d5bf1a639dc8a02d5139447f2e37"
+        },
+        {
+          "file": "evidence/sprint05d-c/audit-01/upstream-0.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "upstream-1",
+      "program": "curl",
+      "args": [
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--max-time",
+        "30",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/conn_manager_impl.cc"
+      ],
+      "started_at": "2026-11-15T08:43:31.968Z",
+      "ended_at": "2026-11-15T08:43:32.521Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05d-c/audit-01/upstream-1.stdout",
+          "bytes": 133284,
+          "sha256": "f502b22004db1298d35ada75294e1de337ca488dbd7475962ce0704442ff2278"
+        },
+        {
+          "file": "evidence/sprint05d-c/audit-01/upstream-1.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "upstream-2",
+      "program": "curl",
+      "args": [
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--max-time",
+        "30",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http2/codec_impl.h"
+      ],
+      "started_at": "2026-11-15T08:43:32.533Z",
+      "ended_at": "2026-11-15T08:43:32.905Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05d-c/audit-01/upstream-2.stdout",
+          "bytes": 41904,
+          "sha256": "98f46be10b514000d03c8d4436013818d36c952db5329fe14545d1ce739e0117"
+        },
+        {
+          "file": "evidence/sprint05d-c/audit-01/upstream-2.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "upstream-3",
+      "program": "curl",
+      "args": [
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--max-time",
+        "30",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/envoy/http/codec.h"
+      ],
+      "started_at": "2026-11-15T08:43:32.912Z",
+      "ended_at": "2026-11-15T08:43:33.569Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05d-c/audit-01/upstream-3.stdout",
+          "bytes": 28763,
+          "sha256": "79c1c00d5f1cd8d3d02a02a187f3d2881a10429808f4cbd4a75492fdfde99eaa"
+        },
+        {
+          "file": "evidence/sprint05d-c/audit-01/upstream-3.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "upstream-4",
+      "program": "curl",
+      "args": [
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--max-time",
+        "30",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/envoy/network/connection.h"
+      ],
+      "started_at": "2026-11-15T08:43:33.577Z",
+      "ended_at": "2026-11-15T08:43:34.052Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05d-c/audit-01/upstream-4.stdout",
+          "bytes": 18564,
+          "sha256": "622252476303ea3b743e4ada5878057cc78acbb441960761ca58f32289f0ecf2"
+        },
+        {
+          "file": "evidence/sprint05d-c/audit-01/upstream-4.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "upstream-5",
+      "program": "curl",
+      "args": [
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--max-time",
+        "30",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/api/envoy/config/core/v3/protocol.proto"
+      ],
+      "started_at": "2026-11-15T08:43:34.060Z",
+      "ended_at": "2026-11-15T08:43:34.556Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05d-c/audit-01/upstream-5.stdout",
+          "bytes": 51174,
+          "sha256": "cd3e8569d0ffdd9963f85ab20e4247c3cef97742430a74edf35cb7a62b964ba2"
+        },
+        {
+          "file": "evidence/sprint05d-c/audit-01/upstream-5.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "upstream-6",
+      "program": "curl",
+      "args": [
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--max-time",
+        "30",
+        "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/api/envoy/extensions/filters/network/http_connection_manager/v3/http_connection_manager.proto"
+      ],
+      "started_at": "2026-11-15T08:43:34.567Z",
+      "ended_at": "2026-11-15T08:43:35.073Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05d-c/audit-01/upstream-6.stdout",
+          "bytes": 76809,
+          "sha256": "9dba6a58413d662019c769b29827632bfdaa67bc5f71aa1f45bf322f7ac955cb"
+        },
+        {
+          "file": "evidence/sprint05d-c/audit-01/upstream-6.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "protected-after",
+      "program": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "started_at": "2026-11-15T08:43:35.084Z",
+      "ended_at": "2026-11-15T08:43:35.189Z",
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "evidence/sprint05d-c/audit-01/protected-after.stdout",
+          "bytes": 4342,
+          "sha256": "12fecd21d0163ccd7b6c2e53ba49a36bf9cd15aaeb5311710088bae5cb41d3f5"
+        },
+        {
+          "file": "evidence/sprint05d-c/audit-01/protected-after.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "upstream": [
+    {
+      "file": "source/common/http/http2/codec_impl.cc",
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http2/codec_impl.cc",
+      "artifact": "evidence/sprint05d-c/audit-01/upstream-0.stdout",
+      "bytes": 112582,
+      "sha256": "b789452da3c5ee2b0278b3c52f1764698d80d5bf1a639dc8a02d5139447f2e37",
+      "prior_sha256_verified": "b789452da3c5ee2b0278b3c52f1764698d80d5bf1a639dc8a02d5139447f2e37"
+    },
+    {
+      "file": "source/common/http/conn_manager_impl.cc",
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/conn_manager_impl.cc",
+      "artifact": "evidence/sprint05d-c/audit-01/upstream-1.stdout",
+      "bytes": 133284,
+      "sha256": "f502b22004db1298d35ada75294e1de337ca488dbd7475962ce0704442ff2278",
+      "prior_sha256_verified": "f502b22004db1298d35ada75294e1de337ca488dbd7475962ce0704442ff2278"
+    },
+    {
+      "file": "source/common/http/http2/codec_impl.h",
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/source/common/http/http2/codec_impl.h",
+      "artifact": "evidence/sprint05d-c/audit-01/upstream-2.stdout",
+      "bytes": 41904,
+      "sha256": "98f46be10b514000d03c8d4436013818d36c952db5329fe14545d1ce739e0117",
+      "prior_sha256_verified": null
+    },
+    {
+      "file": "envoy/http/codec.h",
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/envoy/http/codec.h",
+      "artifact": "evidence/sprint05d-c/audit-01/upstream-3.stdout",
+      "bytes": 28763,
+      "sha256": "79c1c00d5f1cd8d3d02a02a187f3d2881a10429808f4cbd4a75492fdfde99eaa",
+      "prior_sha256_verified": null
+    },
+    {
+      "file": "envoy/network/connection.h",
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/envoy/network/connection.h",
+      "artifact": "evidence/sprint05d-c/audit-01/upstream-4.stdout",
+      "bytes": 18564,
+      "sha256": "622252476303ea3b743e4ada5878057cc78acbb441960761ca58f32289f0ecf2",
+      "prior_sha256_verified": null
+    },
+    {
+      "file": "api/envoy/config/core/v3/protocol.proto",
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/api/envoy/config/core/v3/protocol.proto",
+      "artifact": "evidence/sprint05d-c/audit-01/upstream-5.stdout",
+      "bytes": 51174,
+      "sha256": "cd3e8569d0ffdd9963f85ab20e4247c3cef97742430a74edf35cb7a62b964ba2",
+      "prior_sha256_verified": null
+    },
+    {
+      "file": "api/envoy/extensions/filters/network/http_connection_manager/v3/http_connection_manager.proto",
+      "url": "https://raw.githubusercontent.com/envoyproxy/envoy/b2d89e0ae53916f28770771fbdd49c5c99c5c5a2/api/envoy/extensions/filters/network/http_connection_manager/v3/http_connection_manager.proto",
+      "artifact": "evidence/sprint05d-c/audit-01/upstream-6.stdout",
+      "bytes": 76809,
+      "sha256": "9dba6a58413d662019c769b29827632bfdaa67bc5f71aa1f45bf322f7ac955cb",
+      "prior_sha256_verified": "9dba6a58413d662019c769b29827632bfdaa67bc5f71aa1f45bf322f7ac955cb"
+    }
+  ],
+  "checks": [
+    {
+      "name": "dispatch-error-before-adapter-send",
+      "pass": true,
+      "boundary": "Static ordering only; no claim that this exact callback/return executed for historical CONTINUATION"
+    },
+    {
+      "name": "hcm-assumes-goaway-already-sent",
+      "pass": true,
+      "boundary": "Network-buffer flush is not adapter Send"
+    },
+    {
+      "name": "ordinary-goaway-is-no-error",
+      "pass": true,
+      "boundary": "Does not satisfy original PROTOCOL_ERROR=1"
+    },
+    {
+      "name": "protocol-error-helper-explicitly-for-tests",
+      "pass": true,
+      "boundary": "Concrete test method is not a configurable production error hook"
+    },
+    {
+      "name": "send-blocked-during-dispatch",
+      "pass": true,
+      "boundary": "No claim of a queued GOAWAY in the historical failure"
+    },
+    {
+      "name": "invalid-frame-callback-fatal-return",
+      "pass": true,
+      "boundary": "Static potential path only"
+    },
+    {
+      "name": "hidden-codec-field-excluded",
+      "pass": true,
+      "boundary": "No hidden/WIP field is configured or accepted"
+    },
+    {
+      "name": "public-close-and-stream-timeout-boundaries",
+      "pass": true,
+      "boundary": "Timeout APIs do not connect ProcessBytes failure to SubmitGoAway/Send"
+    }
+  ],
+  "fixture_executed": false,
+  "targeted3_executed": false,
+  "full23_executed": false,
+  "semantic_security_pass": false,
+  "resource_eligible": false,
+  "supported_candidate_found": false,
+  "historical_reference": {
+    "file": "evidence/sprint05c-c/attempt-04/original23.json",
+    "sha256": "f9a4e050fb13229395590244f057a5622fae1e1d5c04cc1a720d34cdfaf760a5",
+    "fresh_execution": false,
+    "tests": [
+      {
+        "name": "raw-H2-HEADERS-stream-zero",
+        "started_at": "2026-11-15T05:33:21.479Z",
+        "error_frames": [
+          {
+            "kind": "frame",
+            "type": 7,
+            "name": "GOAWAY",
+            "flags": 0,
+            "stream": 0,
+            "length": 18,
+            "bytes": 27,
+            "sha256": "e0b2ed24599a6f359c7084119b88a00160c1df62be1ff18a2a5e2a761b6ea4e3",
+            "error_code": 1,
+            "code": 1
+          }
+        ],
+        "sent_sha256_note": "exact bytes generated by committed source",
+        "status": "pass",
+        "origin": {
+          "connections": 0,
+          "bytes": 0,
+          "handlers": 0,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "events": 0
+        }
+      },
+      {
+        "name": "raw-H2-unexpected-CONTINUATION",
+        "started_at": "2026-11-15T05:33:21.524Z",
+        "status": "fail",
+        "error": "AssertionError [ERR_ASSERTION]: no protocol error frame\n    at raw (file:///tmp/aegisgate-05c-c/spikes/envoy/wire-probes.mjs:85:12)\n    at async file:///tmp/aegisgate-05c-c/spikes/envoy/wire-probes.mjs:187:47\n    at async probe (file:///tmp/aegisgate-05c-c/spikes/envoy/wire-probes.mjs:38:51)\n    at async file:///tmp/aegisgate-05c-c/spikes/envoy/wire-probes.mjs:186:6",
+        "observation": {
+          "received_frames": [],
+          "peer_closed": true,
+          "sent_hex": "000000090400000001"
+        },
+        "origin": {
+          "connections": 0,
+          "bytes": 0,
+          "handlers": 0,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "events": 0
+        }
+      },
+      {
+        "name": "raw-H2-zero-WINDOW_UPDATE",
+        "started_at": "2026-11-15T05:33:22.539Z",
+        "error_frames": [
+          {
+            "kind": "frame",
+            "type": 7,
+            "name": "GOAWAY",
+            "flags": 0,
+            "stream": 0,
+            "length": 24,
+            "bytes": 33,
+            "sha256": "04a80e2c6fcf2fde744d587d46b0b5c124293d79ace6a17bcc03d13709e59d79",
+            "error_code": 1,
+            "code": 1
+          }
+        ],
+        "sent_sha256_note": "exact bytes generated by committed source",
+        "status": "pass",
+        "origin": {
+          "connections": 0,
+          "bytes": 0,
+          "handlers": 0,
+          "parser_errors": 0,
+          "transport_errors": 0,
+          "events": 0
+        }
+      }
+    ]
+  },
+  "technical_stop": "No supported configurable error emission/adapter flush hook identified in the pinned released interfaces. Do not execute unchanged historical codec mechanism again.",
+  "recording_complete": true,
+  "cleanup": {
+    "fixture_created": false,
+    "listeners_created": false,
+    "private_material_created": false,
+    "native_runtime_started": false,
+    "lock_held_through_hashing": true
+  },
+  "ended_at": "2026-11-15T08:43:35.198Z"
+}
