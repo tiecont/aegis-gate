@@ -177,7 +177,60 @@ for (const c of peer.connections) {
 }
 assert.equal(resets.length, 2);
 const commands = [];
+const scanner =
+  "ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f";
+const ownedFiles = git("ls-files", "spikes/envoy/sprint05d-b*.mjs")
+  .toString()
+  .trim()
+  .split("\n");
 for (const [label, program, args] of [
+  [
+    "format",
+    process.execPath,
+    [
+      "/home/tiecont/Projects/aegis-gate/node_modules/prettier/bin/prettier.cjs",
+      "--check",
+      ...ownedFiles,
+    ],
+  ],
+  [
+    "scanner-image",
+    "docker",
+    ["image", "inspect", scanner, "--format", "{{.Id}} {{json .RepoDigests}}"],
+  ],
+  ...[
+    ["source", "spikes/envoy"],
+    ["evidence", "evidence/sprint05d-b"],
+    ["report", "docs/reports/sprint05d-b-h2-identity.md"],
+  ].map(([label, target]) => [
+    `scan-${label}`,
+    "docker",
+    [
+      "run",
+      "--rm",
+      "--network",
+      "none",
+      "--name",
+      `aegis-sprint05d-b-scan-${process.pid}-${label}`,
+      "--user",
+      `${process.getuid()}:${process.getgid()}`,
+      "-v",
+      `${process.cwd()}:/repo:ro`,
+      "-v",
+      `${path.resolve(output)}:/reports`,
+      scanner,
+      "dir",
+      `/repo/${target}`,
+      "--config",
+      "/repo/.github/gitleaks.toml",
+      "--redact",
+      "--report-format",
+      "json",
+      "--report-path",
+      `/reports/${label}-secrets.json`,
+      "--no-banner",
+    ],
+  ]),
   ["protected", process.execPath, ["scripts/sprint05b-baseline.mjs"]],
   [
     "whitespace",
@@ -215,6 +268,22 @@ for (const [label, program, args] of [
   assert.equal(c.status, 0);
 }
 assertLock();
+for (const label of ["source", "evidence", "report"])
+  assert.deepEqual(
+    JSON.parse(fs.readFileSync(`${output}/${label}-secrets.json`)),
+    [],
+  );
+const toolIdentities = [
+  "git",
+  "openssl",
+  "ldd",
+  "prlimit",
+  "flock",
+  "docker",
+].map((name) => {
+  const file = execFileSync("which", [name], { encoding: "utf8" }).trim();
+  return { name, file, sha256: sha(fs.readFileSync(file)) };
+});
 const result = {
   source_commit: git("rev-parse", "HEAD").toString().trim(),
   source_tree: git("rev-parse", "HEAD^{tree}").toString().trim(),
@@ -224,6 +293,15 @@ const result = {
   artifacts,
   sourceBindings,
   commands,
+  tool_identities_observed_at_verification: toolIdentities,
+  prettier: {
+    version: "3.9.10",
+    cli_sha256: sha(
+      fs.readFileSync(
+        "/home/tiecont/Projects/aegis-gate/node_modules/prettier/bin/prettier.cjs",
+      ),
+    ),
+  },
   resets,
   capture_bytes: peer.captured_bytes,
   integrity_verified: true,
