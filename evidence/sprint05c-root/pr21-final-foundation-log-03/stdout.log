@@ -1,0 +1,1607 @@
+﻿2026-11-15T06:46:44.4714554Z Current runner version: '2.338.2'
+2026-11-15T06:46:44.4736285Z ##[group]Runner Image Provisioner
+2026-11-15T06:46:44.4737011Z Hosted Compute Agent
+2026-11-15T06:46:44.4737444Z Version: 20261103.629
+2026-11-15T06:46:44.4737911Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+2026-11-15T06:46:44.4738436Z Build Date: 2026-11-03T17:26:59Z
+2026-11-15T06:46:44.4738912Z Worker ID: {c202bac8-05e8-4ea1-ad10-985f25d9b8bb}
+2026-11-15T06:46:44.4739438Z Region: us-east-1
+2026-11-15T06:46:44.4739834Z Cloud: AWS
+2026-11-15T06:46:44.4740279Z ##[endgroup]
+2026-11-15T06:46:44.4741173Z ##[group]Operating System
+2026-11-15T06:46:44.4741637Z Ubuntu
+2026-11-15T06:46:44.4742257Z 24.04.5
+2026-11-15T06:46:44.4742780Z LTS
+2026-11-15T06:46:44.4743178Z ##[endgroup]
+2026-11-15T06:46:44.4743579Z ##[group]Runner Image
+2026-11-15T06:46:44.4743995Z Image: ubuntu-24.04
+2026-11-15T06:46:44.4744435Z Version: 20261111.127.1
+2026-11-15T06:46:44.4745497Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.127/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-15T06:46:44.4746609Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.127
+2026-11-15T06:46:44.4747296Z ##[endgroup]
+2026-11-15T06:46:44.4748162Z ##[group]GITHUB_TOKEN Permissions
+2026-11-15T06:46:44.4749866Z Contents: read
+2026-11-15T06:46:44.4750286Z Metadata: read
+2026-11-15T06:46:44.4750680Z ##[endgroup]
+2026-11-15T06:46:44.4752781Z Secret source: Actions
+2026-11-15T06:46:44.4753462Z Cache mode: write
+2026-11-15T06:46:44.4754067Z Prepare workflow directory
+2026-11-15T06:46:44.4985159Z Prepare all required actions
+2026-11-15T06:46:44.5023592Z Getting action download info
+2026-11-15T06:46:44.6767065Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-11-15T06:46:46.4178181Z Download action repository 'actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e' (SHA:b7ad1dad31e06c5925ef5d2fc7ad053ef454303e)
+2026-11-15T06:46:46.5591356Z Download action repository 'actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+2026-11-15T06:46:46.7621551Z Download action repository 'dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8' (SHA:683b588c487a69d01f6c6ddf40f036ff682cc2c8)
+2026-11-15T06:46:46.9216149Z Complete job name: foundation-quality
+2026-11-15T06:46:46.9848439Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-11-15T06:46:46.9849007Z with:
+2026-11-15T06:46:46.9849282Z   fetch-depth: 0
+2026-11-15T06:46:46.9849574Z   repository: tiecont/aegis-gate
+2026-11-15T06:46:46.9851476Z   token: ***
+2026-11-15T06:46:46.9851770Z   ssh-strict: true
+2026-11-15T06:46:46.9852254Z   ssh-user: git
+2026-11-15T06:46:46.9852555Z   persist-credentials: true
+2026-11-15T06:46:46.9852855Z   clean: true
+2026-11-15T06:46:46.9853141Z   sparse-checkout-cone-mode: true
+2026-11-15T06:46:46.9853480Z   fetch-tags: false
+2026-11-15T06:46:46.9853761Z   show-progress: true
+2026-11-15T06:46:46.9854042Z   lfs: false
+2026-11-15T06:46:46.9854317Z   submodules: false
+2026-11-15T06:46:46.9854633Z   set-safe-directory: true
+2026-11-15T06:46:46.9854943Z   allow-unsafe-pr-checkout: false
+2026-11-15T06:46:46.9855395Z ##[endgroup]
+2026-11-15T06:46:49.2926626Z Syncing repository: tiecont/aegis-gate
+2026-11-15T06:46:49.2928173Z ##[group]Getting Git version info
+2026-11-15T06:46:49.2928786Z Working directory is '/home/runner/work/aegis-gate/aegis-gate'
+2026-11-15T06:46:49.2929387Z [command]/usr/bin/git version
+2026-11-15T06:46:49.5030596Z git version 2.56.1
+2026-11-15T06:46:49.5046349Z ##[endgroup]
+2026-11-15T06:46:49.5054955Z Temporarily overriding HOME='/home/runner/work/_temp/ff436c93-c876-462d-98e8-a0669108750e' before making global git config changes
+2026-11-15T06:46:49.5055974Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-15T06:46:49.5058762Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/aegis-gate/aegis-gate
+2026-11-15T06:46:49.5450486Z Deleting the contents of '/home/runner/work/aegis-gate/aegis-gate'
+2026-11-15T06:46:49.5452911Z ##[group]Determining repository object format
+2026-11-15T06:46:49.5454096Z ##[endgroup]
+2026-11-15T06:46:49.5454564Z ##[group]Initializing the repository
+2026-11-15T06:46:49.5457922Z [command]/usr/bin/git init /home/runner/work/aegis-gate/aegis-gate
+2026-11-15T06:46:49.5995494Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-15T06:46:49.5996333Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-15T06:46:49.5996840Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-15T06:46:49.5997221Z hint: call:
+2026-11-15T06:46:49.5997485Z hint:
+2026-11-15T06:46:49.5997847Z hint: 	git config --global init.defaultBranch <name>
+2026-11-15T06:46:49.5998169Z hint:
+2026-11-15T06:46:49.5998541Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-15T06:46:49.5999035Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-15T06:46:49.5999511Z hint:
+2026-11-15T06:46:49.5999829Z hint: 	git branch -m <name>
+2026-11-15T06:46:49.6000150Z hint:
+2026-11-15T06:46:49.6000659Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-15T06:46:49.6001423Z Initialized empty Git repository in /home/runner/work/aegis-gate/aegis-gate/.git/
+2026-11-15T06:46:49.6009896Z [command]/usr/bin/git remote add origin https://github.com/tiecont/aegis-gate
+2026-11-15T06:46:49.6063952Z ##[endgroup]
+2026-11-15T06:46:49.6064758Z ##[group]Disabling automatic garbage collection
+2026-11-15T06:46:49.6066967Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-15T06:46:49.6091614Z ##[endgroup]
+2026-11-15T06:46:49.6092308Z ##[group]Setting up auth
+2026-11-15T06:46:49.6092747Z Removing SSH command configuration
+2026-11-15T06:46:49.6095974Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-15T06:46:49.6123102Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-15T06:46:49.9369964Z Removing HTTP extra header
+2026-11-15T06:46:49.9375190Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-15T06:46:49.9410017Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-15T06:46:49.9566133Z Removing includeIf entries pointing to credentials config files
+2026-11-15T06:46:49.9571310Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-15T06:46:49.9607019Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-15T06:46:49.9760353Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-39bb4aad-35cc-4142-8333-780a46ff61cd.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-15T06:46:49.9791517Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git.path /home/runner/work/_temp/git-credentials-39bb4aad-35cc-4142-8333-780a46ff61cd.config
+2026-11-15T06:46:49.9816115Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-39bb4aad-35cc-4142-8333-780a46ff61cd.config
+2026-11-15T06:46:49.9838964Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-39bb4aad-35cc-4142-8333-780a46ff61cd.config
+2026-11-15T06:46:49.9862573Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-39bb4aad-35cc-4142-8333-780a46ff61cd.config
+2026-11-15T06:46:49.9883314Z ##[endgroup]
+2026-11-15T06:46:49.9884235Z ##[group]Fetching the repository
+2026-11-15T06:46:49.9888869Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +6d6beb5584ef2444044b59cb5dc683eca1beb251:refs/remotes/pull/21/merge
+2026-11-15T06:46:51.0051711Z From https://github.com/tiecont/aegis-gate
+2026-11-15T06:46:51.0052959Z  * [new branch]      dependabot/github_actions/actions/setup-go-7.0.0 -> origin/dependabot/github_actions/actions/setup-go-7.0.0
+2026-11-15T06:46:51.0053838Z  * [new branch]      dependabot/github_actions/actions/upload-artifact-7.0.2 -> origin/dependabot/github_actions/actions/upload-artifact-7.0.2
+2026-11-15T06:46:51.0054806Z  * [new branch]      dependabot/go_modules/github.com/go-jose/go-jose/v4-4.1.9 -> origin/dependabot/go_modules/github.com/go-jose/go-jose/v4-4.1.9
+2026-11-15T06:46:51.0055604Z  * [new branch]      docs/sprint04b-closeout-receipt          -> origin/docs/sprint04b-closeout-receipt
+2026-11-15T06:46:51.0056370Z  * [new branch]      docs/sprint04c-closeout                  -> origin/docs/sprint04c-closeout
+2026-11-15T06:46:51.0057065Z  * [new branch]      docs/sprint05a-closeout                  -> origin/docs/sprint05a-closeout
+2026-11-15T06:46:51.0057669Z  * [new branch]      docs/sprint05b-closeout                  -> origin/docs/sprint05b-closeout
+2026-11-15T06:46:51.0058375Z  * [new branch]      feat/module02-acceptance                 -> origin/feat/module02-acceptance
+2026-11-15T06:46:51.0059043Z  * [new branch]      feat/module03-config-consumer            -> origin/feat/module03-config-consumer
+2026-11-15T06:46:51.0059764Z  * [new branch]      feat/module03-management                 -> origin/feat/module03-management
+2026-11-15T06:46:51.0060406Z  * [new branch]      feat/module03-publisher                  -> origin/feat/module03-publisher
+2026-11-15T06:46:51.0061052Z  * [new branch]      feat/module03-rollout                    -> origin/feat/module03-rollout
+2026-11-15T06:46:51.0061714Z  * [new branch]      feat/module03-snapshot-trust             -> origin/feat/module03-snapshot-trust
+2026-11-15T06:46:51.0062569Z  * [new branch]      fix/ci-image-identity                    -> origin/fix/ci-image-identity
+2026-11-15T06:46:51.0063402Z  * [new branch]      fix/dashboard-dependency-resolution      -> origin/fix/dashboard-dependency-resolution
+2026-11-15T06:46:51.0064183Z  * [new branch]      fix/module01-envoy-codec-boundary        -> origin/fix/module01-envoy-codec-boundary
+2026-11-15T06:46:51.0064771Z  * [new branch]      fix/module01-envoy-strict-ingress        -> origin/fix/module01-envoy-strict-ingress
+2026-11-15T06:46:51.0065331Z  * [new branch]      hardening/module03-local-recovery        -> origin/hardening/module03-local-recovery
+2026-11-15T06:46:51.0065828Z  * [new branch]      main                                     -> origin/main
+2026-11-15T06:46:51.0066423Z  * [new branch]      research/module01-maintained-parser-resolution -> origin/research/module01-maintained-parser-resolution
+2026-11-15T06:46:51.0067134Z  * [new branch]      research/module01-upstream-capability    -> origin/research/module01-upstream-capability
+2026-11-15T06:46:51.0067781Z  * [new branch]      research/module01-upstream-resolution    -> origin/research/module01-upstream-resolution
+2026-11-15T06:46:51.0068413Z  * [new branch]      research/pingora-blocker-fix             -> origin/research/pingora-blocker-fix
+2026-11-15T06:46:51.0068934Z  * [new branch]      research/pingora-strict-ingress          -> origin/research/pingora-strict-ingress
+2026-11-15T06:46:51.0069446Z  * [new branch]      review/sprint03a-architecture            -> origin/review/sprint03a-architecture
+2026-11-15T06:46:51.0069999Z  * [new branch]      review/sprint03b-security                -> origin/review/sprint03b-security
+2026-11-15T06:46:51.0070484Z  * [new branch]      review/sprint04a-security                -> origin/review/sprint04a-security
+2026-11-15T06:46:51.0071057Z  * [new branch]      spike/envoy-feasibility                  -> origin/spike/envoy-feasibility
+2026-11-15T06:46:51.0071672Z  * [new branch]      spike/hyper-tokio-feasibility            -> origin/spike/hyper-tokio-feasibility
+2026-11-15T06:46:51.0072343Z  * [new branch]      sprint/02-integration                    -> origin/sprint/02-integration
+2026-11-15T06:46:51.0072861Z  * [new branch]      sprint/03b-integration                   -> origin/sprint/03b-integration
+2026-11-15T06:46:51.0073324Z  * [new branch]      sprint/04a-integration                   -> origin/sprint/04a-integration
+2026-11-15T06:46:51.0073789Z  * [new branch]      sprint/04b-integration                   -> origin/sprint/04b-integration
+2026-11-15T06:46:51.0074281Z  * [new branch]      sprint/04c-integration                   -> origin/sprint/04c-integration
+2026-11-15T06:46:51.0074744Z  * [new branch]      sprint/05a-integration                   -> origin/sprint/05a-integration
+2026-11-15T06:46:51.0075222Z  * [new branch]      sprint/05b-integration                   -> origin/sprint/05b-integration
+2026-11-15T06:46:51.0075680Z  * [new branch]      sprint/05c-integration                   -> origin/sprint/05c-integration
+2026-11-15T06:46:51.0076192Z  * [new branch]      test/edge-architecture-comparison        -> origin/test/edge-architecture-comparison
+2026-11-15T06:46:51.0076743Z  * [new branch]      test/module01-origin-boundary            -> origin/test/module01-origin-boundary
+2026-11-15T06:46:51.0077268Z  * [new branch]      test/module01-wire-boundary              -> origin/test/module01-wire-boundary
+2026-11-15T06:46:51.0077776Z  * [new ref]         6d6beb5584ef2444044b59cb5dc683eca1beb251 -> pull/21/merge
+2026-11-15T06:46:51.0078878Z ##[endgroup]
+2026-11-15T06:46:51.0079306Z ##[group]Determining the checkout info
+2026-11-15T06:46:51.0079737Z ##[endgroup]
+2026-11-15T06:46:51.0079990Z [command]/usr/bin/git sparse-checkout disable
+2026-11-15T06:46:51.0135505Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-15T06:46:51.0158385Z ##[group]Checking out the ref
+2026-11-15T06:46:51.0161363Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/21/merge
+2026-11-15T06:46:51.2827065Z Note: switching to 'refs/remotes/pull/21/merge'.
+2026-11-15T06:46:51.2827933Z 
+2026-11-15T06:46:51.2828345Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-11-15T06:46:51.2829510Z changes and commit them, and you can discard any commits you make in this
+2026-11-15T06:46:51.2830237Z state without impacting any branches by switching back to a branch.
+2026-11-15T06:46:51.2830688Z 
+2026-11-15T06:46:51.2831040Z If you want to create a new branch to retain commits you create, you may
+2026-11-15T06:46:51.2831738Z do so (now or later) by using -c with the switch command. Example:
+2026-11-15T06:46:51.2832350Z 
+2026-11-15T06:46:51.2832655Z   git switch -c <new-branch-name>
+2026-11-15T06:46:51.2833164Z 
+2026-11-15T06:46:51.2833575Z Or undo this operation with:
+2026-11-15T06:46:51.2833938Z 
+2026-11-15T06:46:51.2834072Z   git switch -
+2026-11-15T06:46:51.2834275Z 
+2026-11-15T06:46:51.2834493Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-11-15T06:46:51.2834728Z 
+2026-11-15T06:46:51.2835321Z HEAD is now at 6d6beb5 Merge 5da55045efb827258238f15268b3877dbbb161b1 into 078d83c0ab1cb1364d0245d4c4f62f0fe0439e97
+2026-11-15T06:46:51.2861592Z ##[endgroup]
+2026-11-15T06:46:51.2900280Z [command]/usr/bin/git log -1 --format=%H
+2026-11-15T06:46:51.2920313Z 6d6beb5584ef2444044b59cb5dc683eca1beb251
+2026-11-15T06:46:51.3114202Z ##[group]Run actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e
+2026-11-15T06:46:51.3114601Z with:
+2026-11-15T06:46:51.3114833Z   go-version-file: go.mod
+2026-11-15T06:46:51.3115137Z   cache: true
+2026-11-15T06:46:51.3115362Z   check-latest: false
+2026-11-15T06:46:51.3117152Z   token: ***
+2026-11-15T06:46:51.3117409Z ##[endgroup]
+2026-11-15T06:46:51.4019910Z Setup go version spec 1.27.4
+2026-11-15T06:46:51.4442662Z Attempting to download 1.27.4...
+2026-11-15T06:46:51.8881219Z matching 1.27.4...
+2026-11-15T06:46:51.8899916Z Acquiring 1.27.4 from https://github.com/actions/go-versions/releases/download/1.27.4-42945153609/go-1.27.4-linux-x64.tar.gz
+2026-11-15T06:46:52.2618876Z Extracting Go...
+2026-11-15T06:46:52.2727194Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/3e3c2f1c-f1ce-4651-83d2-b822ef0061d3 -f /home/runner/work/_temp/eba3ad84-f561-4a56-a1d2-68ead8cb77a5
+2026-11-15T06:46:53.5968977Z Successfully extracted go to /home/runner/work/_temp/3e3c2f1c-f1ce-4651-83d2-b822ef0061d3
+2026-11-15T06:46:53.5969847Z Adding to the cache ...
+2026-11-15T06:46:56.3331823Z Successfully cached go to /opt/hostedtoolcache/go/1.27.4/x64
+2026-11-15T06:46:56.3332765Z Added go to the path
+2026-11-15T06:46:56.3336627Z Successfully set up Go version 1.27.4
+2026-11-15T06:46:56.3496592Z [command]/opt/hostedtoolcache/go/1.27.4/x64/bin/go env GOMODCACHE
+2026-11-15T06:46:56.3526471Z [command]/opt/hostedtoolcache/go/1.27.4/x64/bin/go env GOCACHE
+2026-11-15T06:46:56.3552815Z /home/runner/go/pkg/mod
+2026-11-15T06:46:56.3564221Z /home/runner/.cache/go-build
+2026-11-15T06:46:56.4049431Z Cache hit for: setup-go-Linux-x64-ubuntu24-go-1.27.4-36375a5e7de5636dfac8581ad6d43d41c121db9c07f2dda457b8cc56ef596372
+2026-11-15T06:46:57.4988159Z Received 197132288 of 239403722 (82.3%), 188.0 MBs/sec
+2026-11-15T06:46:57.7241062Z Received 239403722 of 239403722 (100.0%), 186.4 MBs/sec
+2026-11-15T06:46:57.7241633Z Cache Size: ~228 MB (239403722 B)
+2026-11-15T06:46:57.7297370Z [command]/usr/bin/tar -xf /home/runner/work/_temp/f52aed02-b110-47dc-add3-6a05965d6976/cache.tzst -P -C /home/runner/work/aegis-gate/aegis-gate --use-compress-program unzstd
+2026-11-15T06:46:58.5295084Z Cache restored successfully
+2026-11-15T06:46:58.5385900Z Cache restored from key: setup-go-Linux-x64-ubuntu24-go-1.27.4-36375a5e7de5636dfac8581ad6d43d41c121db9c07f2dda457b8cc56ef596372
+2026-11-15T06:46:58.5412630Z go version go1.27.4 linux/amd64
+2026-11-15T06:46:58.5412987Z 
+2026-11-15T06:46:58.5413528Z ##[group]go env
+2026-11-15T06:46:58.6939707Z AR='ar'
+2026-11-15T06:46:58.6940350Z CC='gcc'
+2026-11-15T06:46:58.6940633Z CGO_CFLAGS='-O2 -g'
+2026-11-15T06:46:58.6940988Z CGO_CPPFLAGS=''
+2026-11-15T06:46:58.6941315Z CGO_CXXFLAGS='-O2 -g'
+2026-11-15T06:46:58.6941618Z CGO_ENABLED='1'
+2026-11-15T06:46:58.6941917Z CGO_FFLAGS='-O2 -g'
+2026-11-15T06:46:58.6942380Z CGO_LDFLAGS='-O2 -g'
+2026-11-15T06:46:58.6942736Z CXX='g++'
+2026-11-15T06:46:58.6943051Z GCCGO='gccgo'
+2026-11-15T06:46:58.6943325Z GO111MODULE=''
+2026-11-15T06:46:58.6943736Z GOAMD64='v1'
+2026-11-15T06:46:58.6944051Z GOARCH='amd64'
+2026-11-15T06:46:58.6944316Z GOAUTH='netrc'
+2026-11-15T06:46:58.6944643Z GOBIN='/home/runner/go/bin'
+2026-11-15T06:46:58.6944997Z GOCACHE='/home/runner/.cache/go-build'
+2026-11-15T06:46:58.6945440Z GOCACHEPROG=''
+2026-11-15T06:46:58.6945724Z GODEBUG=''
+2026-11-15T06:46:58.6946057Z GOENV='/home/runner/.config/go/env'
+2026-11-15T06:46:58.6946407Z GOEXE=''
+2026-11-15T06:46:58.6946700Z GOEXPERIMENT=''
+2026-11-15T06:46:58.6947017Z GOFIPS140='off'
+2026-11-15T06:46:58.6947297Z GOFLAGS=''
+2026-11-15T06:46:58.6948115Z GOGCCFLAGS='-fPIC -m64 -pthread -Wl,--no-gc-sections -fmessage-length=0 -ffile-prefix-map=/tmp/go-build3767170175=/tmp/go-build -gno-record-gcc-switches'
+2026-11-15T06:46:58.6948904Z GOHOSTARCH='amd64'
+2026-11-15T06:46:58.6949184Z GOHOSTOS='linux'
+2026-11-15T06:46:58.6949493Z GOINSECURE=''
+2026-11-15T06:46:58.6949845Z GOMOD='/home/runner/work/aegis-gate/aegis-gate/go.mod'
+2026-11-15T06:46:58.6950703Z GOMODCACHE='/home/runner/go/pkg/mod'
+2026-11-15T06:46:58.6951047Z GONOPROXY=''
+2026-11-15T06:46:58.6951302Z GONOSUMDB=''
+2026-11-15T06:46:58.6951594Z GOOS='linux'
+2026-11-15T06:46:58.6951917Z GOPACKAGESDRIVER=''
+2026-11-15T06:46:58.6952416Z GOPATH='/home/runner/go'
+2026-11-15T06:46:58.6952721Z GOPRIVATE=''
+2026-11-15T06:46:58.6953056Z GOPROXY='https://proxy.golang.org,direct'
+2026-11-15T06:46:58.6953510Z GOROOT='/opt/hostedtoolcache/go/1.27.4/x64'
+2026-11-15T06:46:58.6953982Z GOSUMDB='sum.golang.org'
+2026-11-15T06:46:58.6954306Z GOTELEMETRY='local'
+2026-11-15T06:46:58.6954774Z GOTELEMETRYDIR='/home/runner/.config/go/telemetry'
+2026-11-15T06:46:58.6955178Z GOTMPDIR=''
+2026-11-15T06:46:58.6955472Z GOTOOLCHAIN='local'
+2026-11-15T06:46:58.6955921Z GOTOOLDIR='/opt/hostedtoolcache/go/1.27.4/x64/pkg/tool/linux_amd64'
+2026-11-15T06:46:58.6956403Z GOVCS=''
+2026-11-15T06:46:58.6956694Z GOVERSION='go1.27.4'
+2026-11-15T06:46:58.6957037Z GOWORK=''
+2026-11-15T06:46:58.6957350Z PKG_CONFIG='pkg-config'
+2026-11-15T06:46:58.6957569Z 
+2026-11-15T06:46:58.6958085Z ##[endgroup]
+2026-11-15T06:46:58.7178483Z ##[group]Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+2026-11-15T06:46:58.7178876Z with:
+2026-11-15T06:46:58.7179144Z   node-version-file: .node-version
+2026-11-15T06:46:58.7179426Z   cache: npm
+2026-11-15T06:46:58.7179816Z   cache-dependency-path: package-lock.json
+apps/dashboard/package-lock.json
+
+2026-11-15T06:46:58.7180191Z   check-latest: false
+2026-11-15T06:46:58.7182204Z   token: ***
+2026-11-15T06:46:58.7182447Z   package-manager-cache: true
+2026-11-15T06:46:58.7182752Z env:
+2026-11-15T06:46:58.7182973Z   GOTOOLCHAIN: local
+2026-11-15T06:46:58.7183209Z ##[endgroup]
+2026-11-15T06:46:58.8259288Z Node version file is not JSON file
+2026-11-15T06:46:58.8259666Z Node version file is not TOML file
+2026-11-15T06:46:58.8259911Z Resolved .node-version as 26.13.0
+2026-11-15T06:46:58.8501276Z Attempting to download 26.13.0...
+2026-11-15T06:46:59.3383583Z Acquiring 26.13.0 - x64 from https://github.com/actions/node-versions/releases/download/26.13.0-41378513395/node-26.13.0-linux-x64.tar.gz
+2026-11-15T06:46:59.6241567Z Extracting ...
+2026-11-15T06:46:59.6327908Z [command]/usr/bin/tar xz --strip 1 --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/1061b21e-d4ef-4748-8ac8-59cc693dd3b9 -f /home/runner/work/_temp/7f54fcfd-d70b-4e24-b420-650b4042a876
+2026-11-15T06:47:00.7797510Z Adding to the cache ...
+2026-11-15T06:47:01.8457846Z ##[group]Environment details
+2026-11-15T06:47:02.3989164Z node: v26.13.0
+2026-11-15T06:47:02.3989468Z npm: 11.20.0
+2026-11-15T06:47:02.3989736Z yarn: 1.22.22
+2026-11-15T06:47:02.3990293Z ##[endgroup]
+2026-11-15T06:47:02.4003813Z [command]/opt/hostedtoolcache/node/26.13.0/x64/bin/npm config get cache
+2026-11-15T06:47:02.4682399Z /home/runner/.npm
+2026-11-15T06:47:02.5193740Z Cache hit for: node-cache-Linux-x64-npm-f8ac0b1f041bf4fdcb61a100da39e882b6326762ac4751d09e537ed4333230a9
+2026-11-15T06:47:03.0446807Z Received 108351876 of 108351876 (100.0%), 221.7 MBs/sec
+2026-11-15T06:47:03.0447205Z Cache Size: ~103 MB (108351876 B)
+2026-11-15T06:47:03.0551108Z [command]/usr/bin/tar -xf /home/runner/work/_temp/25db3ada-74ea-4a26-9c47-c0690070bdb5/cache.tzst -P -C /home/runner/work/aegis-gate/aegis-gate --use-compress-program unzstd
+2026-11-15T06:47:03.1521185Z Cache restored successfully
+2026-11-15T06:47:03.1576003Z Cache restored from key: node-cache-Linux-x64-npm-f8ac0b1f041bf4fdcb61a100da39e882b6326762ac4751d09e537ed4333230a9
+2026-11-15T06:47:03.1829192Z ##[group]Run dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8
+2026-11-15T06:47:03.1829582Z with:
+2026-11-15T06:47:03.1829798Z   toolchain: 1.99.1
+2026-11-15T06:47:03.1830014Z   components: rustfmt, clippy
+2026-11-15T06:47:03.1830246Z env:
+2026-11-15T06:47:03.1830436Z   GOTOOLCHAIN: local
+2026-11-15T06:47:03.1830649Z ##[endgroup]
+2026-11-15T06:47:03.1909837Z ##[start-action display=Parse toolchain version;id=__dtolnay_rust-toolchain.parse]
+2026-11-15T06:47:03.1967065Z ##[group]Run if [[ -z $toolchain ]]; then
+2026-11-15T06:47:03.1967590Z [36;1mif [[ -z $toolchain ]]; then[0m
+2026-11-15T06:47:03.1968080Z [36;1m  # GitHub does not enforce `required: true` inputs itself. https://github.com/actions/runner/issues/1070[0m
+2026-11-15T06:47:03.1968568Z [36;1m  echo "'toolchain' is a required input" >&2[0m
+2026-11-15T06:47:03.1968903Z [36;1m  exit 1[0m
+2026-11-15T06:47:03.1969367Z [36;1melif [[ $toolchain =~ ^stable' '[0-9]+' '(year|month|week|day)s?' 'ago$ ]]; then[0m
+2026-11-15T06:47:03.1969767Z [36;1m  if [[ Linux == macOS ]]; then[0m
+2026-11-15T06:47:03.1970268Z [36;1m    echo "toolchain=1.$((($(date -v-$(sed 's/stable \([0-9]*\) \(.\).*/\1\2/' <<< $toolchain) +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT[0m
+2026-11-15T06:47:03.1970871Z [36;1m  else[0m
+2026-11-15T06:47:03.1971366Z [36;1m    echo "toolchain=1.$((($(date --date "${toolchain#stable }" +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT[0m
+2026-11-15T06:47:03.1971912Z [36;1m  fi[0m
+2026-11-15T06:47:03.1972566Z [36;1melif [[ $toolchain =~ ^stable' 'minus' '[0-9]+' 'releases?$ ]]; then[0m
+2026-11-15T06:47:03.1973205Z [36;1m  echo "toolchain=1.$((($(date +%s)/60/60/24-16569)/7/6-${toolchain//[^0-9]/}))" >> $GITHUB_OUTPUT[0m
+2026-11-15T06:47:03.1973770Z [36;1melif [[ $toolchain =~ ^1\.[0-9]+$ ]]; then[0m
+2026-11-15T06:47:03.1974461Z [36;1m  echo "toolchain=1.$((i=${toolchain#1.}, c=($(date +%s)/60/60/24-16569)/7/6, i+9*i*(10*i<=c)+90*i*(100*i<=c)))" >> $GITHUB_OUTPUT[0m
+2026-11-15T06:47:03.1975071Z [36;1melse[0m
+2026-11-15T06:47:03.1975439Z [36;1m  delimiter=EOF[0m
+2026-11-15T06:47:03.1975882Z [36;1m  while [[ $toolchain == *$delimiter* ]]; do delimiter+=_; done[0m
+2026-11-15T06:47:03.1976508Z [36;1m  printf 'toolchain<<%s\n%s\n%s\n' "$delimiter" "$toolchain" "$delimiter" >> $GITHUB_OUTPUT[0m
+2026-11-15T06:47:03.1977071Z [36;1mfi[0m
+2026-11-15T06:47:03.3881563Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:03.3882354Z env:
+2026-11-15T06:47:03.3882662Z   GOTOOLCHAIN: local
+2026-11-15T06:47:03.3883175Z   toolchain: 1.99.1
+2026-11-15T06:47:03.3883434Z ##[endgroup]
+2026-11-15T06:47:03.4016235Z ##[end-action id=__dtolnay_rust-toolchain.parse;outcome=success;conclusion=success;duration_ms=210]
+2026-11-15T06:47:03.4019592Z ##[start-action display=Set $CARGO_HOME;id=__dtolnay_rust-toolchain.__run]
+2026-11-15T06:47:03.4046314Z ##[group]Run echo CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV
+2026-11-15T06:47:03.4046764Z [36;1mecho CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV[0m
+2026-11-15T06:47:03.4074055Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:03.4074348Z env:
+2026-11-15T06:47:03.4074550Z   GOTOOLCHAIN: local
+2026-11-15T06:47:03.4074747Z ##[endgroup]
+2026-11-15T06:47:03.4156058Z ##[end-action id=__dtolnay_rust-toolchain.__run;outcome=success;conclusion=success;duration_ms=13]
+2026-11-15T06:47:03.4157858Z ##[start-action display=Install rustup if needed;id=__dtolnay_rust-toolchain.__run_2]
+2026-11-15T06:47:03.4197587Z ##[group]Run if ! command -v rustup &>/dev/null; then
+2026-11-15T06:47:03.4197887Z [36;1mif ! command -v rustup &>/dev/null; then[0m
+2026-11-15T06:47:03.4198462Z [36;1m  curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused --location --silent --show-error --fail https://sh.rustup.rs | sh -s -- --default-toolchain none -y[0m
+2026-11-15T06:47:03.4199012Z [36;1m  echo "$CARGO_HOME/bin" >> $GITHUB_PATH[0m
+2026-11-15T06:47:03.4199248Z [36;1mfi[0m
+2026-11-15T06:47:03.4218869Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:03.4219152Z env:
+2026-11-15T06:47:03.4219325Z   GOTOOLCHAIN: local
+2026-11-15T06:47:03.4219528Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:03.4219744Z ##[endgroup]
+2026-11-15T06:47:03.4420163Z ##[end-action id=__dtolnay_rust-toolchain.__run_2;outcome=success;conclusion=success;duration_ms=26]
+2026-11-15T06:47:03.4422409Z ##[start-action display=Install rustup if needed on windows;id=__dtolnay_rust-toolchain.__run_3]
+2026-11-15T06:47:03.4428194Z ##[end-action id=__dtolnay_rust-toolchain.__run_3;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-11-15T06:47:03.4438722Z ##[start-action display=rustup toolchain install 1.99.1;id=__dtolnay_rust-toolchain.__run_4]
+2026-11-15T06:47:03.4451738Z ##[group]Run set -f  # split targets and components on commas and whitespace, without glob expansion
+2026-11-15T06:47:03.4452476Z [36;1mset -f  # split targets and components on commas and whitespace, without glob expansion[0m
+2026-11-15T06:47:03.4452822Z [36;1mflags=()[0m
+2026-11-15T06:47:03.4453057Z [36;1mfor t in ${targets//,/ }; do flags+=(--target "$t"); done[0m
+2026-11-15T06:47:03.4453492Z [36;1mfor c in ${components//,/ }; do flags+=(--component "$c"); done[0m
+2026-11-15T06:47:03.4453878Z [36;1mif [[ $toolchain == nightly && -n $components ]]; then flags+=(--allow-downgrade); fi[0m
+2026-11-15T06:47:03.4454192Z [36;1mlog=$(mktemp)[0m
+2026-11-15T06:47:03.4454395Z [36;1mtrap 'rm -f "$log"' EXIT[0m
+2026-11-15T06:47:03.4454625Z [36;1mfor attempt in 1 2 3 4 5; do[0m
+2026-11-15T06:47:03.4455048Z [36;1m  if rustup toolchain install "$toolchain" "${flags[@]}" --profile minimal --no-self-update --force-non-host 2>&1 | tee "$log"; then[0m
+2026-11-15T06:47:03.4455464Z [36;1m    break[0m
+2026-11-15T06:47:03.4455638Z [36;1m  else[0m
+2026-11-15T06:47:03.4455804Z [36;1m    status=$?[0m
+2026-11-15T06:47:03.4455989Z [36;1m  fi[0m
+2026-11-15T06:47:03.4456232Z [36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' "$log" \[0m
+2026-11-15T06:47:03.4456653Z [36;1m      || ! grep -Fq 'this is likely due to an ongoing update of the official release server' "$log"; then[0m
+2026-11-15T06:47:03.4457000Z [36;1m    exit "$status"[0m
+2026-11-15T06:47:03.4457188Z [36;1m  fi[0m
+2026-11-15T06:47:03.4457669Z [36;1m  echo "Retrying rustup toolchain install in 30 seconds (retry $attempt of 4)" >&2[0m
+2026-11-15T06:47:03.4457997Z [36;1m  sleep 30[0m
+2026-11-15T06:47:03.4458186Z [36;1mdone[0m
+2026-11-15T06:47:03.4483036Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:03.4483412Z env:
+2026-11-15T06:47:03.4483649Z   GOTOOLCHAIN: local
+2026-11-15T06:47:03.4483918Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:03.4484221Z   toolchain: 1.99.1
+2026-11-15T06:47:03.4484465Z   targets: 
+2026-11-15T06:47:03.4484708Z   components: rustfmt, clippy
+2026-11-15T06:47:03.4485000Z   RUSTUP_PERMIT_COPY_RENAME: 1
+2026-11-15T06:47:03.4485282Z ##[endgroup]
+2026-11-15T06:47:04.2721035Z info: syncing channel updates for 1.99.1-x86_64-unknown-linux-gnu
+2026-11-15T06:47:04.6266015Z info: latest update on 2026-10-15 for version 1.99.1 (58cf8f9c3 2026-10-13)
+2026-11-15T06:47:04.6266479Z info: downloading 5 components
+2026-11-15T06:47:12.6910707Z 
+2026-11-15T06:47:12.6964885Z   1.99.1-x86_64-unknown-linux-gnu installed - rustc 1.99.1 (58cf8f9c3 2026-10-13)
+2026-11-15T06:47:12.6965191Z 
+2026-11-15T06:47:12.7045410Z ##[end-action id=__dtolnay_rust-toolchain.__run_4;outcome=success;conclusion=success;duration_ms=9260]
+2026-11-15T06:47:12.7050225Z ##[start-action display=rustup default 1.99.1;id=__dtolnay_rust-toolchain.__run_5]
+2026-11-15T06:47:12.7063593Z ##[group]Run rustup default "$toolchain" --force-non-host
+2026-11-15T06:47:12.7063938Z [36;1mrustup default "$toolchain" --force-non-host[0m
+2026-11-15T06:47:12.7091706Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:12.7092394Z env:
+2026-11-15T06:47:12.7092590Z   GOTOOLCHAIN: local
+2026-11-15T06:47:12.7092788Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:12.7093309Z   toolchain: 1.99.1
+2026-11-15T06:47:12.7093498Z ##[endgroup]
+2026-11-15T06:47:12.7173196Z info: using existing install for 1.99.1-x86_64-unknown-linux-gnu
+2026-11-15T06:47:12.7176351Z info: default toolchain set to 1.99.1-x86_64-unknown-linux-gnu
+2026-11-15T06:47:12.7176609Z 
+2026-11-15T06:47:12.7227880Z   1.99.1-x86_64-unknown-linux-gnu unchanged - rustc 1.99.1 (58cf8f9c3 2026-10-13)
+2026-11-15T06:47:12.7228665Z info: note that the toolchain '1.99.1-x86_64-unknown-linux-gnu' is currently in use (overridden by '/home/runner/work/aegis-gate/aegis-gate/rust-toolchain.toml')
+2026-11-15T06:47:12.7229403Z 
+2026-11-15T06:47:12.7239713Z ##[end-action id=__dtolnay_rust-toolchain.__run_5;outcome=success;conclusion=success;duration_ms=18]
+2026-11-15T06:47:12.7243218Z ##[start-action display=Create cachekey;id=__dtolnay_rust-toolchain.rustc-version]
+2026-11-15T06:47:12.7255240Z ##[group]Run DATE=$(rustc +"$toolchain" --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')
+2026-11-15T06:47:12.7255855Z [36;1mDATE=$(rustc +"$toolchain" --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')[0m
+2026-11-15T06:47:12.7256437Z [36;1mHASH=$(rustc +"$toolchain" --version --verbose | sed -ne 's/^commit-hash: //p')[0m
+2026-11-15T06:47:12.7256822Z [36;1mecho "cachekey=$(echo $DATE$HASH | head -c12)" >> $GITHUB_OUTPUT[0m
+2026-11-15T06:47:12.7281533Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:12.7281804Z env:
+2026-11-15T06:47:12.7282132Z   GOTOOLCHAIN: local
+2026-11-15T06:47:12.7282363Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:12.7282621Z   toolchain: 1.99.1
+2026-11-15T06:47:12.7282828Z ##[endgroup]
+2026-11-15T06:47:12.7522599Z ##[end-action id=__dtolnay_rust-toolchain.rustc-version;outcome=success;conclusion=success;duration_ms=27]
+2026-11-15T06:47:12.7524653Z ##[start-action display=Disable incremental compilation;id=__dtolnay_rust-toolchain.__run_6]
+2026-11-15T06:47:12.7538412Z ##[group]Run if [ -z "${CARGO_INCREMENTAL+set}" ]; then
+2026-11-15T06:47:12.7538717Z [36;1mif [ -z "${CARGO_INCREMENTAL+set}" ]; then[0m
+2026-11-15T06:47:12.7538999Z [36;1m  echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV[0m
+2026-11-15T06:47:12.7539222Z [36;1mfi[0m
+2026-11-15T06:47:12.7565041Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:12.7565322Z env:
+2026-11-15T06:47:12.7565498Z   GOTOOLCHAIN: local
+2026-11-15T06:47:12.7565703Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:12.7565913Z ##[endgroup]
+2026-11-15T06:47:12.7610732Z ##[end-action id=__dtolnay_rust-toolchain.__run_6;outcome=success;conclusion=success;duration_ms=8]
+2026-11-15T06:47:12.7612947Z ##[start-action display=Enable colors in Cargo output;id=__dtolnay_rust-toolchain.__run_7]
+2026-11-15T06:47:12.7625450Z ##[group]Run if [ -z "${CARGO_TERM_COLOR+set}" ]; then
+2026-11-15T06:47:12.7625753Z [36;1mif [ -z "${CARGO_TERM_COLOR+set}" ]; then[0m
+2026-11-15T06:47:12.7626045Z [36;1m  echo CARGO_TERM_COLOR=always >> $GITHUB_ENV[0m
+2026-11-15T06:47:12.7626297Z [36;1mfi[0m
+2026-11-15T06:47:12.7647153Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:12.7647435Z env:
+2026-11-15T06:47:12.7647612Z   GOTOOLCHAIN: local
+2026-11-15T06:47:12.7647866Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:12.7648094Z   CARGO_INCREMENTAL: 0
+2026-11-15T06:47:12.7648281Z ##[endgroup]
+2026-11-15T06:47:12.7690375Z ##[end-action id=__dtolnay_rust-toolchain.__run_7;outcome=success;conclusion=success;duration_ms=7]
+2026-11-15T06:47:12.7693675Z ##[start-action display=Enable Cargo sparse registry;id=__dtolnay_rust-toolchain.__run_8]
+2026-11-15T06:47:12.7706555Z ##[group]Run # implemented in 1.66, stabilized in 1.68, made default in 1.70
+2026-11-15T06:47:12.7706974Z [36;1m# implemented in 1.66, stabilized in 1.68, made default in 1.70[0m
+2026-11-15T06:47:12.7707613Z [36;1mif [ -z "${CARGO_REGISTRIES_CRATES_IO_PROTOCOL+set}" -o -f "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol ]; then[0m
+2026-11-15T06:47:12.7708176Z [36;1m  if rustc +"$toolchain" --version --verbose | grep -q '^release: 1\.6[89]\.'; then[0m
+2026-11-15T06:47:12.7708628Z [36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true[0m
+2026-11-15T06:47:12.7709045Z [36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse >> $GITHUB_ENV[0m
+2026-11-15T06:47:12.7709436Z [36;1m  elif rustc +"$toolchain" --version --verbose | grep -q '^release: 1\.6[67]\.'; then[0m
+2026-11-15T06:47:12.7709871Z [36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true[0m
+2026-11-15T06:47:12.7710268Z [36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git >> $GITHUB_ENV[0m
+2026-11-15T06:47:12.7710545Z [36;1m  fi[0m
+2026-11-15T06:47:12.7710724Z [36;1mfi[0m
+2026-11-15T06:47:12.7729843Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:12.7730128Z env:
+2026-11-15T06:47:12.7730305Z   GOTOOLCHAIN: local
+2026-11-15T06:47:12.7730523Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:12.7730742Z   CARGO_INCREMENTAL: 0
+2026-11-15T06:47:12.7730937Z   CARGO_TERM_COLOR: always
+2026-11-15T06:47:12.7731267Z   toolchain: 1.99.1
+2026-11-15T06:47:12.7731450Z ##[endgroup]
+2026-11-15T06:47:12.7944480Z ##[end-action id=__dtolnay_rust-toolchain.__run_8;outcome=success;conclusion=success;duration_ms=25]
+2026-11-15T06:47:12.7947797Z ##[start-action display=Work around spurious network errors in curl 8.0;id=__dtolnay_rust-toolchain.__run_9]
+2026-11-15T06:47:12.7961026Z ##[group]Run # https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation
+2026-11-15T06:47:12.7961589Z [36;1m# https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation[0m
+2026-11-15T06:47:12.7962267Z [36;1mif rustc +"$toolchain" --version --verbose | grep -q '^release: 1\.7[01]\.'; then[0m
+2026-11-15T06:47:12.7962693Z [36;1m  echo CARGO_HTTP_MULTIPLEXING=false >> $GITHUB_ENV[0m
+2026-11-15T06:47:12.7962956Z [36;1mfi[0m
+2026-11-15T06:47:12.7986455Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:12.7986739Z env:
+2026-11-15T06:47:12.7986922Z   GOTOOLCHAIN: local
+2026-11-15T06:47:12.7987118Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:12.7987338Z   CARGO_INCREMENTAL: 0
+2026-11-15T06:47:12.7987525Z   CARGO_TERM_COLOR: always
+2026-11-15T06:47:12.7987720Z   toolchain: 1.99.1
+2026-11-15T06:47:12.7987890Z ##[endgroup]
+2026-11-15T06:47:12.8114664Z ##[end-action id=__dtolnay_rust-toolchain.__run_9;outcome=success;conclusion=success;duration_ms=16]
+2026-11-15T06:47:12.8118645Z ##[start-action display=rustc +1.99.1 --version --verbose;id=__dtolnay_rust-toolchain.__run_10]
+2026-11-15T06:47:12.8130526Z ##[group]Run rustc +"$toolchain" --version --verbose
+2026-11-15T06:47:12.8130826Z [36;1mrustc +"$toolchain" --version --verbose[0m
+2026-11-15T06:47:12.8154103Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-15T06:47:12.8154378Z env:
+2026-11-15T06:47:12.8154551Z   GOTOOLCHAIN: local
+2026-11-15T06:47:12.8154755Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:12.8154962Z   CARGO_INCREMENTAL: 0
+2026-11-15T06:47:12.8155166Z   CARGO_TERM_COLOR: always
+2026-11-15T06:47:12.8155354Z   toolchain: 1.99.1
+2026-11-15T06:47:12.8155525Z ##[endgroup]
+2026-11-15T06:47:12.8276969Z rustc 1.99.1 (58cf8f9c3 2026-10-13)
+2026-11-15T06:47:12.8277491Z binary: rustc
+2026-11-15T06:47:12.8277857Z commit-hash: 58cf8f9c35b355199727627d07ae34a4e2846d67
+2026-11-15T06:47:12.8278222Z commit-date: 2026-10-13
+2026-11-15T06:47:12.8278541Z host: x86_64-unknown-linux-gnu
+2026-11-15T06:47:12.8278837Z release: 1.99.1
+2026-11-15T06:47:12.8279089Z LLVM version: 23.1.1
+2026-11-15T06:47:12.8288105Z ##[end-action id=__dtolnay_rust-toolchain.__run_10;outcome=success;conclusion=success;duration_ms=16]
+2026-11-15T06:47:12.8335286Z ##[group]Run make bootstrap
+2026-11-15T06:47:12.8335550Z [36;1mmake bootstrap[0m
+2026-11-15T06:47:12.8360316Z shell: /usr/bin/bash -e {0}
+2026-11-15T06:47:12.8360551Z env:
+2026-11-15T06:47:12.8360720Z   GOTOOLCHAIN: local
+2026-11-15T06:47:12.8360920Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:12.8361127Z   CARGO_INCREMENTAL: 0
+2026-11-15T06:47:12.8361349Z   CARGO_TERM_COLOR: always
+2026-11-15T06:47:12.8361543Z ##[endgroup]
+2026-11-15T06:47:12.8807887Z python3 scripts/bootstrap.py
+2026-11-15T06:47:15.6377204Z v26.13.0
+2026-11-15T06:47:15.6504051Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm ci --ignore-scripts
+2026-11-15T06:47:16.4487788Z 
+2026-11-15T06:47:16.4488474Z added 47 packages, and audited 48 packages in 742ms
+2026-11-15T06:47:16.4488763Z 
+2026-11-15T06:47:16.4488940Z 11 packages are looking for funding
+2026-11-15T06:47:16.4489281Z   run `npm fund` for details
+2026-11-15T06:47:16.4494793Z 
+2026-11-15T06:47:16.4495141Z found 0 vulnerabilities
+2026-11-15T06:47:16.4678762Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard ci --ignore-scripts
+2026-11-15T06:47:20.2958436Z 
+2026-11-15T06:47:20.2959428Z added 143 packages, and audited 144 packages in 4s
+2026-11-15T06:47:20.2960113Z 
+2026-11-15T06:47:20.2960454Z 40 packages are looking for funding
+2026-11-15T06:47:20.2960953Z   run `npm fund` for details
+2026-11-15T06:47:20.2967406Z 
+2026-11-15T06:47:20.2967929Z found 0 vulnerabilities
+2026-11-15T06:47:20.3164873Z GOTOOLCHAIN=go1.27.4 go mod download
+2026-11-15T06:47:20.3272494Z cargo +1.99.1 fetch --locked --manifest-path apps/edge/Cargo.toml
+2026-11-15T06:47:20.3404930Z [1m[92m    Updating[0m crates.io index
+2026-11-15T06:47:20.4786210Z [1m[92m Downloading[0m crates ...
+2026-11-15T06:47:20.5004783Z [1m[92m  Downloaded[0m zmij v1.0.23
+2026-11-15T06:47:20.5041949Z [1m[92m  Downloaded[0m wasm-bindgen-macro v0.2.130
+2026-11-15T06:47:20.5049113Z [1m[92m  Downloaded[0m itoa v1.0.19
+2026-11-15T06:47:20.5063720Z [1m[92m  Downloaded[0m futures-task v0.3.34
+2026-11-15T06:47:20.5068705Z [1m[92m  Downloaded[0m futures-core v0.3.34
+2026-11-15T06:47:20.5074832Z [1m[92m  Downloaded[0m wasm-bindgen-shared v0.2.130
+2026-11-15T06:47:20.5080521Z [1m[92m  Downloaded[0m cfg-if v1.0.5
+2026-11-15T06:47:20.5085928Z [1m[92m  Downloaded[0m wasm-bindgen v0.2.130
+2026-11-15T06:47:20.5101215Z [1m[92m  Downloaded[0m rustversion v1.0.23
+2026-11-15T06:47:20.5123022Z [1m[92m  Downloaded[0m slab v0.4.12
+2026-11-15T06:47:20.5123612Z [1m[92m  Downloaded[0m pin-project-lite v0.2.17
+2026-11-15T06:47:20.5143962Z [1m[92m  Downloaded[0m unicode-ident v1.0.27
+2026-11-15T06:47:20.5156694Z [1m[92m  Downloaded[0m proc-macro2 v1.0.107
+2026-11-15T06:47:20.5169629Z [1m[92m  Downloaded[0m quote v1.0.47
+2026-11-15T06:47:20.5181346Z [1m[92m  Downloaded[0m serde_derive v1.0.229
+2026-11-15T06:47:20.5196720Z [1m[92m  Downloaded[0m wasm-bindgen-macro-support v0.2.130
+2026-11-15T06:47:20.5214187Z [1m[92m  Downloaded[0m serde_core v1.0.229
+2026-11-15T06:47:20.5226638Z [1m[92m  Downloaded[0m uuid v1.29.2
+2026-11-15T06:47:20.5241826Z [1m[92m  Downloaded[0m js-sys v0.3.107
+2026-11-15T06:47:20.5261699Z [1m[92m  Downloaded[0m serde v1.0.229
+2026-11-15T06:47:20.5278314Z [1m[92m  Downloaded[0m bumpalo v3.20.3
+2026-11-15T06:47:20.5292367Z [1m[92m  Downloaded[0m memchr v2.8.3
+2026-11-15T06:47:20.5319646Z [1m[92m  Downloaded[0m serde_json v1.0.154
+2026-11-15T06:47:20.5352112Z [1m[92m  Downloaded[0m futures-util v0.3.34
+2026-11-15T06:47:20.5401856Z [1m[92m  Downloaded[0m syn v3.0.10
+2026-11-15T06:47:20.5808115Z cargo +1.99.1 fetch --locked --manifest-path spikes/hyper/Cargo.toml
+2026-11-15T06:47:20.5949011Z [1m[92m    Updating[0m crates.io index
+2026-11-15T06:47:20.6890137Z [1m[92m Downloading[0m crates ...
+2026-11-15T06:47:20.7070839Z [1m[92m  Downloaded[0m tower-service v0.3.3
+2026-11-15T06:47:20.7080614Z [1m[92m  Downloaded[0m zeroize v1.9.1
+2026-11-15T06:47:20.7107294Z [1m[92m  Downloaded[0m rustls-webpki v0.103.16
+2026-11-15T06:47:20.7138114Z [1m[92m  Downloaded[0m subtle v2.6.1
+2026-11-15T06:47:20.7163189Z [1m[92m  Downloaded[0m bytes v1.12.1
+2026-11-15T06:47:20.7163736Z [1m[92m  Downloaded[0m rustls v0.23.46
+2026-11-15T06:47:20.7226352Z [1m[92m  Downloaded[0m wasi v0.11.1+wasi-snapshot-preview1
+2026-11-15T06:47:20.7234430Z [1m[92m  Downloaded[0m tokio-rustls v0.26.6
+2026-11-15T06:47:20.7242861Z [1m[92m  Downloaded[0m socket2 v0.6.5
+2026-11-15T06:47:20.7252160Z [1m[92m  Downloaded[0m cc v1.11.1
+2026-11-15T06:47:20.7275949Z [1m[92m  Downloaded[0m h2 v0.4.20
+2026-11-15T06:47:20.7307889Z [1m[92m  Downloaded[0m pkg-config v0.3.34
+2026-11-15T06:47:20.7315006Z [1m[92m  Downloaded[0m httpdate v1.0.3
+2026-11-15T06:47:20.7319428Z [1m[92m  Downloaded[0m tokio-macros v2.7.2
+2026-11-15T06:47:20.7323919Z [1m[92m  Downloaded[0m want v0.3.2
+2026-11-15T06:47:20.7327748Z [1m[92m  Downloaded[0m untrusted v0.9.0
+2026-11-15T06:47:20.7333874Z [1m[92m  Downloaded[0m windows-targets v0.52.6
+2026-11-15T06:47:20.7337680Z [1m[92m  Downloaded[0m atomic-waker v1.1.2
+2026-11-15T06:47:20.7343019Z [1m[92m  Downloaded[0m openssl-macros v0.1.1
+2026-11-15T06:47:20.7345750Z [1m[92m  Downloaded[0m equivalent v1.0.3
+2026-11-15T06:47:20.7349009Z [1m[92m  Downloaded[0m fnv v1.0.7
+2026-11-15T06:47:20.7353633Z [1m[92m  Downloaded[0m foreign-types v0.3.2
+2026-11-15T06:47:20.7356576Z [1m[92m  Downloaded[0m foreign-types-shared v0.1.1
+2026-11-15T06:47:20.7359803Z [1m[92m  Downloaded[0m try-lock v0.2.5
+2026-11-15T06:47:20.7363985Z [1m[92m  Downloaded[0m futures-sink v0.3.34
+2026-11-15T06:47:20.7370400Z [1m[92m  Downloaded[0m windows-link v0.2.1
+2026-11-15T06:47:20.7374610Z [1m[92m  Downloaded[0m http-body v1.1.0
+2026-11-15T06:47:20.7377721Z [1m[92m  Downloaded[0m signal-hook-registry v1.4.8
+2026-11-15T06:47:20.7383924Z [1m[92m  Downloaded[0m rustls-pki-types v1.16.0
+2026-11-15T06:47:20.7405685Z [1m[92m  Downloaded[0m find-msvc-tools v0.1.15
+2026-11-15T06:47:20.7406252Z [1m[92m  Downloaded[0m errno v0.3.14
+2026-11-15T06:47:20.7414088Z [1m[92m  Downloaded[0m shlex v2.0.1
+2026-11-15T06:47:20.7418634Z [1m[92m  Downloaded[0m smallvec v1.16.5
+2026-11-15T06:47:20.7425185Z [1m[92m  Downloaded[0m hyper-timeout v0.5.2
+2026-11-15T06:47:20.7434808Z [1m[92m  Downloaded[0m hyper-rustls v0.27.10
+2026-11-15T06:47:20.7442533Z [1m[92m  Downloaded[0m http-body-util v0.1.5
+2026-11-15T06:47:20.7451426Z [1m[92m  Downloaded[0m tracing-core v0.1.36
+2026-11-15T06:47:20.7465673Z [1m[92m  Downloaded[0m futures-channel v0.3.34
+2026-11-15T06:47:20.7475962Z [1m[92m  Downloaded[0m httparse v1.10.1
+2026-11-15T06:47:20.7487931Z [1m[92m  Downloaded[0m once_cell v1.21.4
+2026-11-15T06:47:20.7501711Z [1m[92m  Downloaded[0m bitflags v2.13.2
+2026-11-15T06:47:20.7520921Z [1m[92m  Downloaded[0m getrandom v0.2.17
+2026-11-15T06:47:20.7538143Z [1m[92m  Downloaded[0m openssl-sys v0.9.118
+2026-11-15T06:47:20.7573478Z [1m[92m  Downloaded[0m hyper-util v0.1.21
+2026-11-15T06:47:20.7611161Z [1m[92m  Downloaded[0m indexmap v2.14.2
+2026-11-15T06:47:20.7638145Z [1m[92m  Downloaded[0m arc-swap v1.9.5
+2026-11-15T06:47:20.7661707Z [1m[92m  Downloaded[0m mio v1.2.4
+2026-11-15T06:47:20.7694356Z [1m[92m  Downloaded[0m http v1.5.0
+2026-11-15T06:47:20.7714137Z [1m[92m  Downloaded[0m hashbrown v0.17.1
+2026-11-15T06:47:20.7742353Z [1m[92m  Downloaded[0m tokio-util v0.7.20
+2026-11-15T06:47:20.7776861Z [1m[92m  Downloaded[0m hyper v1.12.0
+2026-11-15T06:47:20.7814776Z [1m[92m  Downloaded[0m vcpkg v0.2.15
+2026-11-15T06:47:20.7996124Z [1m[92m  Downloaded[0m syn v2.0.119
+2026-11-15T06:47:20.8047491Z [1m[92m  Downloaded[0m openssl v0.10.82
+2026-11-15T06:47:20.8097103Z [1m[92m  Downloaded[0m windows_x86_64_gnullvm v0.52.6
+2026-11-15T06:47:20.8149817Z [1m[92m  Downloaded[0m windows_aarch64_gnullvm v0.52.6
+2026-11-15T06:47:20.8202164Z [1m[92m  Downloaded[0m windows_i686_gnullvm v0.52.6
+2026-11-15T06:47:20.8260697Z [1m[92m  Downloaded[0m tracing v0.1.44
+2026-11-15T06:47:20.8349100Z [1m[92m  Downloaded[0m windows_i686_msvc v0.52.6
+2026-11-15T06:47:20.8436615Z [1m[92m  Downloaded[0m windows_x86_64_msvc v0.52.6
+2026-11-15T06:47:20.8517368Z [1m[92m  Downloaded[0m windows_x86_64_gnu v0.52.6
+2026-11-15T06:47:20.8632557Z [1m[92m  Downloaded[0m windows_i686_gnu v0.52.6
+2026-11-15T06:47:20.8754899Z [1m[92m  Downloaded[0m windows_aarch64_msvc v0.52.6
+2026-11-15T06:47:20.8839436Z [1m[92m  Downloaded[0m libc v0.2.191
+2026-11-15T06:47:20.9034557Z [1m[92m  Downloaded[0m tokio v1.54.1
+2026-11-15T06:47:20.9240475Z [1m[92m  Downloaded[0m ring v0.17.14
+2026-11-15T06:47:20.9463512Z [1m[92m  Downloaded[0m windows-sys v0.61.2
+2026-11-15T06:47:20.9815569Z [1m[92m  Downloaded[0m windows-sys v0.52.0
+2026-11-15T06:47:21.0939321Z ##[group]Run flock /tmp/aegisgate-sprint02-fixtures.lock bash -euo pipefail -c '
+2026-11-15T06:47:21.0940032Z [36;1mflock /tmp/aegisgate-sprint02-fixtures.lock bash -euo pipefail -c '[0m
+2026-11-15T06:47:21.0940511Z [36;1m  trap "make dev-down" EXIT[0m
+2026-11-15T06:47:21.0940836Z [36;1m  make fixture-images[0m
+2026-11-15T06:47:21.0941115Z [36;1m  make check[0m
+2026-11-15T06:47:21.0941358Z [36;1m'[0m
+2026-11-15T06:47:21.0978673Z shell: /usr/bin/bash -e {0}
+2026-11-15T06:47:21.0979023Z env:
+2026-11-15T06:47:21.0979273Z   GOTOOLCHAIN: local
+2026-11-15T06:47:21.0979535Z   CARGO_HOME: /home/runner/.cargo
+2026-11-15T06:47:21.0980049Z   CARGO_INCREMENTAL: 0
+2026-11-15T06:47:21.0980323Z   CARGO_TERM_COLOR: always
+2026-11-15T06:47:21.0980600Z ##[endgroup]
+2026-11-15T06:47:21.1082517Z python3 scripts/dev-secrets.py
+2026-11-15T06:47:21.1291028Z Local development secrets ready (material not logged)
+2026-11-15T06:47:21.4623053Z 2026/11/15 06:47:21 unsafe local fixtures generated; material not logged
+2026-11-15T06:47:21.4784585Z python3 scripts/build-fixture-images.py
+2026-11-15T06:47:26.6523266Z #0 building with "default" instance using docker driver
+2026-11-15T06:47:26.6523537Z 
+2026-11-15T06:47:26.6523764Z #1 [internal] load build definition from Dockerfile.postgres
+2026-11-15T06:47:26.6524092Z #1 transferring dockerfile: 644B done
+2026-11-15T06:47:26.6524316Z #1 DONE 0.0s
+2026-11-15T06:47:26.6524421Z 
+2026-11-15T06:47:26.6524606Z #2 [auth] library/postgres:pull token for registry-1.docker.io
+2026-11-15T06:47:26.6524877Z #2 DONE 0.0s
+2026-11-15T06:47:26.6524976Z 
+2026-11-15T06:47:26.6525419Z #3 [internal] load metadata for docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395
+2026-11-15T06:47:26.8035679Z #3 DONE 0.3s
+2026-11-15T06:47:26.9159224Z 
+2026-11-15T06:47:26.9160240Z #4 [internal] load .dockerignore
+2026-11-15T06:47:26.9161061Z #4 transferring context: 102B done
+2026-11-15T06:47:26.9161527Z #4 DONE 0.0s
+2026-11-15T06:47:26.9161710Z 
+2026-11-15T06:47:26.9161870Z #5 [internal] load build context
+2026-11-15T06:47:26.9162344Z #5 transferring context: 165B done
+2026-11-15T06:47:26.9162624Z #5 DONE 0.0s
+2026-11-15T06:47:26.9162752Z 
+2026-11-15T06:47:26.9163314Z #6 [1/4] FROM docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395
+2026-11-15T06:47:26.9164336Z #6 resolve docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395 done
+2026-11-15T06:47:26.9165089Z #6 extracting sha256:881fc932939efef04ca120ad44bbd2c0917851eb247aa4995428afb1e80ede17
+2026-11-15T06:47:26.9165636Z #6 sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395 10.29kB / 10.29kB done
+2026-11-15T06:47:26.9166247Z #6 sha256:38b9ffe2d4c13d7c445b66306be6763dfa6f503689ea0c5b9f84544ccf3ca8e4 8.51kB / 8.51kB done
+2026-11-15T06:47:26.9166788Z #6 sha256:f9a5f8f89c069fdaa449d6191dce8751a40ff81e750a73a010d2b60fa5d9c320 968B / 968B 0.1s done
+2026-11-15T06:47:26.9167358Z #6 sha256:63677b2e422dcc313c982a9f276c5344201e017d48035fb320d0fda846ece913 900.01kB / 900.01kB 0.1s done
+2026-11-15T06:47:26.9167961Z #6 sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 2.10MB / 115.29MB 0.1s
+2026-11-15T06:47:26.9168568Z #6 sha256:84314b29d42166e310db70993819c128034677b2aa21b691669c40b4936db591 19.00kB / 19.00kB 0.1s done
+2026-11-15T06:47:26.9169155Z #6 sha256:8f865016089d0863f5ba57d56464ceb62252c972611983404670f22cd012f98a 0B / 6.10kB 0.1s
+2026-11-15T06:47:26.9169682Z #6 sha256:300ebd02c6d4de9ee27ad7f6855d5d21b4d3a4a5117767c1197d284c635d9736 2.68kB / 2.68kB done
+2026-11-15T06:47:26.9170231Z #6 sha256:881fc932939efef04ca120ad44bbd2c0917851eb247aa4995428afb1e80ede17 3.85MB / 3.85MB 0.1s done
+2026-11-15T06:47:26.9170780Z #6 sha256:ef1860e97cefa5caf816631e64a1803a9f1a5c30aa4c77d05d9d83195fe6ecf8 116B / 116B 0.1s done
+2026-11-15T06:47:26.9171359Z #6 sha256:08007d924193a5e83793bf258918e8f93dc4b73bf5f1e81bcecbb2b6ec7018dc 0B / 127B 0.1s
+2026-11-15T06:47:27.0166236Z #6 extracting sha256:881fc932939efef04ca120ad44bbd2c0917851eb247aa4995428afb1e80ede17 0.1s done
+2026-11-15T06:47:27.0166924Z #6 sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 12.58MB / 115.29MB 0.2s
+2026-11-15T06:47:27.0167575Z #6 sha256:8f865016089d0863f5ba57d56464ceb62252c972611983404670f22cd012f98a 6.10kB / 6.10kB 0.1s done
+2026-11-15T06:47:27.0168168Z #6 sha256:08007d924193a5e83793bf258918e8f93dc4b73bf5f1e81bcecbb2b6ec7018dc 127B / 127B 0.1s done
+2026-11-15T06:47:27.0168705Z #6 extracting sha256:f9a5f8f89c069fdaa449d6191dce8751a40ff81e750a73a010d2b60fa5d9c320 done
+2026-11-15T06:47:27.0169223Z #6 extracting sha256:63677b2e422dcc313c982a9f276c5344201e017d48035fb320d0fda846ece913 done
+2026-11-15T06:47:27.0169919Z #6 extracting sha256:ef1860e97cefa5caf816631e64a1803a9f1a5c30aa4c77d05d9d83195fe6ecf8 done
+2026-11-15T06:47:27.0170494Z #6 sha256:21a876ea75ef6fffb419194907dd5da653247e227e11adf311fd5ca16a6f809c 185B / 185B 0.1s done
+2026-11-15T06:47:27.2157615Z #6 sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 32.51MB / 115.29MB 0.4s
+2026-11-15T06:47:27.4157030Z #6 sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 52.43MB / 115.29MB 0.6s
+2026-11-15T06:47:27.5159177Z #6 sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 62.91MB / 115.29MB 0.7s
+2026-11-15T06:47:27.6159433Z #6 sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 72.35MB / 115.29MB 0.8s
+2026-11-15T06:47:27.8165051Z #6 sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 92.27MB / 115.29MB 1.0s
+2026-11-15T06:47:28.0170785Z #6 sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 113.25MB / 115.29MB 1.2s
+2026-11-15T06:47:28.1800362Z #6 sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 115.29MB / 115.29MB 1.3s done
+2026-11-15T06:47:28.1801373Z #6 extracting sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 0.1s
+2026-11-15T06:47:29.5324549Z #6 extracting sha256:269f116f693d41b319c0fd5c804aa076dc3c3996a17c0f49a4c0aa8bd2920b40 1.4s done
+2026-11-15T06:47:29.5328062Z #6 extracting sha256:84314b29d42166e310db70993819c128034677b2aa21b691669c40b4936db591 done
+2026-11-15T06:47:29.5328642Z #6 extracting sha256:08007d924193a5e83793bf258918e8f93dc4b73bf5f1e81bcecbb2b6ec7018dc done
+2026-11-15T06:47:29.5329155Z #6 extracting sha256:8f865016089d0863f5ba57d56464ceb62252c972611983404670f22cd012f98a done
+2026-11-15T06:47:29.5329711Z #6 extracting sha256:21a876ea75ef6fffb419194907dd5da653247e227e11adf311fd5ca16a6f809c done
+2026-11-15T06:47:29.5330096Z #6 DONE 2.7s
+2026-11-15T06:47:29.6833108Z 
+2026-11-15T06:47:29.6834266Z #7 [2/4] RUN apk add --no-cache krb5-libs=1.22.3-r0 libxslt=1.1.43-r4 su-exec=0.3-r0     && rm /usr/local/bin/gosu
+2026-11-15T06:47:29.9140835Z #7 0.381 (1/3) Upgrading krb5-libs (1.22.2-r1 -> 1.22.3-r0)
+2026-11-15T06:47:30.0903486Z #7 0.397 (2/3) Upgrading libxslt (1.1.43-r3 -> 1.1.43-r4)
+2026-11-15T06:47:30.0903875Z #7 0.401 (3/3) Installing su-exec (0.3-r0)
+2026-11-15T06:47:30.0904219Z #7 0.403 Executing busybox-1.37.0-r31.trigger
+2026-11-15T06:47:30.0904508Z #7 0.407 OK: 229.4 MiB in 54 packages
+2026-11-15T06:47:34.3032496Z #7 DONE 4.8s
+2026-11-15T06:47:34.4163267Z 
+2026-11-15T06:47:34.4163908Z #8 [3/4] COPY su-exec-wrapper.sh /usr/local/bin/gosu
+2026-11-15T06:47:34.4164228Z #8 DONE 0.0s
+2026-11-15T06:47:34.4164341Z 
+2026-11-15T06:47:34.4164642Z #9 [4/4] RUN chmod 0755 /usr/local/bin/gosu     && /usr/local/bin/gosu postgres id -u | grep -qx 70
+2026-11-15T06:47:34.4164977Z #9 DONE 0.1s
+2026-11-15T06:47:34.4165083Z 
+2026-11-15T06:47:34.4165184Z #10 exporting to image
+2026-11-15T06:47:34.4165447Z #10 exporting layers 0.0s done
+2026-11-15T06:47:34.4285407Z #10 writing image sha256:2cb0bc3464a94f576c1e4ccbd7d9b311d875ef19871a61ecfd84acf29820d02c done
+2026-11-15T06:47:34.4286364Z #10 DONE 0.0s
+2026-11-15T06:47:34.6826618Z #0 building with "default" instance using docker driver
+2026-11-15T06:47:34.6826912Z 
+2026-11-15T06:47:34.6827442Z #1 [internal] load build definition from Dockerfile.origin
+2026-11-15T06:47:34.6827766Z #1 transferring dockerfile: 658B done
+2026-11-15T06:47:34.6827992Z #1 DONE 0.0s
+2026-11-15T06:47:34.6828091Z 
+2026-11-15T06:47:34.6828278Z #2 [auth] library/python:pull token for registry-1.docker.io
+2026-11-15T06:47:34.6828546Z #2 DONE 0.0s
+2026-11-15T06:47:34.6828638Z 
+2026-11-15T06:47:34.6829076Z #3 [internal] load metadata for docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894
+2026-11-15T06:47:34.8252571Z #3 DONE 0.3s
+2026-11-15T06:47:34.9333511Z 
+2026-11-15T06:47:34.9334493Z #4 [internal] load .dockerignore
+2026-11-15T06:47:34.9335549Z #4 transferring context: 102B done
+2026-11-15T06:47:34.9336497Z #4 DONE 0.0s
+2026-11-15T06:47:34.9336714Z 
+2026-11-15T06:47:34.9337375Z #5 [1/2] FROM docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894
+2026-11-15T06:47:34.9339118Z #5 resolve docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894 done
+2026-11-15T06:47:34.9340074Z #5 extracting sha256:69f156d17328c6499d12383769c39c5de3ec2b8706bd81bb977f27cfe9aa0c30 0.0s done
+2026-11-15T06:47:34.9341076Z #5 sha256:76c65fc8c52c4d375e958298d9f66198b8fb6b06416c0e5500bf710c19cbaa77 1.74kB / 1.74kB done
+2026-11-15T06:47:34.9341833Z #5 sha256:05318f6e99ea9af0049ac2c0de060fe663cd81ddcea9148ba9d5bbf87f2939ea 4.85kB / 4.85kB done
+2026-11-15T06:47:34.9342668Z #5 sha256:69f156d17328c6499d12383769c39c5de3ec2b8706bd81bb977f27cfe9aa0c30 411.99kB / 411.99kB 0.0s done
+2026-11-15T06:47:34.9343652Z #5 sha256:ddab54470924185bca4fbf91b4991764cc716d44e363c60a4e3876db764f15d3 3.15MB / 13.58MB 0.1s
+2026-11-15T06:47:34.9344386Z #5 sha256:6898526789b2690410db36a9609f51f6f36aceb6b77facb4aa13ff1039416523 252B / 252B 0.0s done
+2026-11-15T06:47:34.9345269Z #5 sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894 10.30kB / 10.30kB done
+2026-11-15T06:47:35.1057958Z #5 sha256:ddab54470924185bca4fbf91b4991764cc716d44e363c60a4e3876db764f15d3 13.58MB / 13.58MB 0.2s done
+2026-11-15T06:47:35.1058773Z #5 extracting sha256:ddab54470924185bca4fbf91b4991764cc716d44e363c60a4e3876db764f15d3 0.1s
+2026-11-15T06:47:35.3198427Z #5 extracting sha256:ddab54470924185bca4fbf91b4991764cc716d44e363c60a4e3876db764f15d3 0.3s done
+2026-11-15T06:47:35.3216106Z #5 extracting sha256:6898526789b2690410db36a9609f51f6f36aceb6b77facb4aa13ff1039416523 done
+2026-11-15T06:47:35.3216962Z #5 DONE 0.5s
+2026-11-15T06:47:35.4721787Z 
+2026-11-15T06:47:35.4723864Z #6 [2/2] RUN rm -rf /usr/local/lib/python3.14/site-packages/*       /usr/local/lib/python3.14/ensurepip /root/.cache     && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.14     && python -I -c "import http.server, ssl; assert ssl.OPENSSL_VERSION"
+2026-11-15T06:47:35.7333290Z #6 DONE 0.4s
+2026-11-15T06:47:35.7513054Z 
+2026-11-15T06:47:35.7513729Z #7 exporting to image
+2026-11-15T06:47:35.7514135Z #7 exporting layers 0.0s done
+2026-11-15T06:47:35.7668127Z #7 writing image sha256:f06294da484e015b94e092949752f202fd8707bf1185b934966233a962ede5d4 done
+2026-11-15T06:47:35.7669057Z #7 DONE 0.0s
+2026-11-15T06:47:35.7669867Z Local fixture images built and locked by immutable image ID; no publication
+2026-11-15T06:47:35.7737999Z test -z "$(gofmt -l apps/control-api apps/config-publisher internal packages/test-fixtures)"
+2026-11-15T06:47:35.7980366Z cargo +1.99.1 fmt --all --check --manifest-path apps/edge/Cargo.toml
+2026-11-15T06:47:35.8286853Z cargo +1.99.1 fmt --all --check --manifest-path spikes/hyper/Cargo.toml
+2026-11-15T06:47:35.8614832Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm run format:check
+2026-11-15T06:47:35.9504960Z 
+2026-11-15T06:47:35.9505835Z > aegisgate-contract-tools@0.0.0 format:check
+2026-11-15T06:47:35.9506697Z > prettier --check package.json packages/contracts scripts/*.mjs .github infra/compose/compose.yaml
+2026-11-15T06:47:35.9507147Z 
+2026-11-15T06:47:36.0195334Z Checking formatting...
+2026-11-15T06:47:36.6902345Z All matched files use Prettier code style!
+2026-11-15T06:47:36.7035798Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run fmt:check
+2026-11-15T06:47:36.7982496Z 
+2026-11-15T06:47:36.7983208Z > @aegisgate/dashboard@0.1.0 fmt:check
+2026-11-15T06:47:36.7983783Z > prettier --check app lib tests *.mjs *.json *.md
+2026-11-15T06:47:36.7984055Z 
+2026-11-15T06:47:36.8595664Z Checking formatting...
+2026-11-15T06:47:37.1099348Z All matched files use Prettier code style!
+2026-11-15T06:47:37.1210971Z GOTOOLCHAIN=go1.27.4 go vet ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/...
+2026-11-15T06:47:37.9565925Z cargo +1.99.1 clippy --workspace --all-targets --locked --manifest-path apps/edge/Cargo.toml -- -D warnings
+2026-11-15T06:47:38.0083619Z [1m[92m   Compiling[0m proc-macro2 v1.0.107
+2026-11-15T06:47:38.0084222Z [1m[92m   Compiling[0m serde_core v1.0.229
+2026-11-15T06:47:38.0084655Z [1m[92m   Compiling[0m unicode-ident v1.0.27
+2026-11-15T06:47:38.0085210Z [1m[92m   Compiling[0m quote v1.0.47
+2026-11-15T06:47:38.0515037Z [1m[92m   Compiling[0m zmij v1.0.23
+2026-11-15T06:47:38.2345052Z [1m[92m   Compiling[0m serde_json v1.0.154
+2026-11-15T06:47:38.2373728Z [1m[92m   Compiling[0m serde v1.0.229
+2026-11-15T06:47:38.3575747Z [1m[92m    Checking[0m memchr v2.8.3
+2026-11-15T06:47:38.4293660Z [1m[92m    Checking[0m itoa v1.0.19
+2026-11-15T06:47:38.4894288Z [1m[92m    Checking[0m policy-engine v0.1.0 (/home/runner/work/aegis-gate/aegis-gate/apps/edge/policy-engine)
+2026-11-15T06:47:38.5084189Z [1m[92m    Checking[0m edge-server v0.1.0 (/home/runner/work/aegis-gate/aegis-gate/apps/edge/edge-server)
+2026-11-15T06:47:38.6774376Z [1m[92m   Compiling[0m syn v3.0.10
+2026-11-15T06:47:39.2565648Z [1m[92m    Checking[0m uuid v1.29.2
+2026-11-15T06:47:39.6716147Z [1m[92m   Compiling[0m serde_derive v1.0.229
+2026-11-15T06:47:40.9498006Z [1m[92m    Checking[0m edge-types v0.1.0 (/home/runner/work/aegis-gate/aegis-gate/apps/edge/edge-types)
+2026-11-15T06:47:40.9970908Z [1m[92m    Checking[0m config-agent v0.1.0 (/home/runner/work/aegis-gate/aegis-gate/apps/edge/config-agent)
+2026-11-15T06:47:41.0297484Z [1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 3.05s
+2026-11-15T06:47:41.0326120Z cargo +1.99.1 clippy --workspace --all-targets --locked --manifest-path spikes/hyper/Cargo.toml -- -D warnings
+2026-11-15T06:47:41.1057700Z [1m[92m   Compiling[0m libc v0.2.191
+2026-11-15T06:47:41.1058221Z [1m[92m   Compiling[0m proc-macro2 v1.0.107
+2026-11-15T06:47:41.1058544Z [1m[92m   Compiling[0m quote v1.0.47
+2026-11-15T06:47:41.1058863Z [1m[92m   Compiling[0m unicode-ident v1.0.27
+2026-11-15T06:47:41.1489442Z [1m[92m   Compiling[0m find-msvc-tools v0.1.15
+2026-11-15T06:47:41.2174321Z [1m[92m   Compiling[0m shlex v2.0.1
+2026-11-15T06:47:41.2670124Z [1m[92m    Checking[0m bytes v1.12.1
+2026-11-15T06:47:41.2969031Z [1m[92m   Compiling[0m cc v1.11.1
+2026-11-15T06:47:41.6944035Z [1m[92m   Compiling[0m syn v3.0.10
+2026-11-15T06:47:41.7003823Z [1m[92m    Checking[0m pin-project-lite v0.2.17
+2026-11-15T06:47:41.7163595Z [1m[92m    Checking[0m once_cell v1.21.4
+2026-11-15T06:47:41.7934645Z [1m[92m    Checking[0m futures-core v0.3.34
+2026-11-15T06:47:41.8286634Z [1m[92m    Checking[0m itoa v1.0.19
+2026-11-15T06:47:41.8904428Z [1m[92m    Checking[0m http v1.5.0
+2026-11-15T06:47:42.0035888Z [1m[92m    Checking[0m errno v0.3.14
+2026-11-15T06:47:42.0344712Z [1m[92m    Checking[0m signal-hook-registry v1.4.8
+2026-11-15T06:47:42.1023991Z [1m[92m    Checking[0m socket2 v0.6.5
+2026-11-15T06:47:42.2633865Z [1m[92m    Checking[0m mio v1.2.4
+2026-11-15T06:47:42.3043632Z [1m[92m    Checking[0m cfg-if v1.0.5
+2026-11-15T06:47:42.3203448Z [1m[92m    Checking[0m tracing-core v0.1.36
+2026-11-15T06:47:42.4293914Z [1m[92m    Checking[0m hashbrown v0.17.1
+2026-11-15T06:47:42.5101596Z [1m[92m    Checking[0m equivalent v1.0.3
+2026-11-15T06:47:42.5102751Z [1m[92m   Compiling[0m ring v0.17.14
+2026-11-15T06:47:42.5280727Z [1m[92m    Checking[0m futures-sink v0.3.34
+2026-11-15T06:47:42.5607583Z [1m[92m   Compiling[0m httparse v1.10.1
+2026-11-15T06:47:42.7094064Z [1m[92m    Checking[0m tracing v0.1.44
+2026-11-15T06:47:42.7804127Z [1m[92m    Checking[0m indexmap v2.14.2
+2026-11-15T06:47:42.8039959Z [1m[92m    Checking[0m getrandom v0.2.17
+2026-11-15T06:47:42.8425859Z [1m[92m    Checking[0m http-body v1.1.0
+2026-11-15T06:47:42.8701694Z [1m[92m   Compiling[0m pkg-config v0.3.34
+2026-11-15T06:47:43.0773351Z [1m[92m    Checking[0m zeroize v1.9.1
+2026-11-15T06:47:43.1173441Z [1m[92m    Checking[0m slab v0.4.12
+2026-11-15T06:47:43.1635794Z [1m[92m    Checking[0m try-lock v0.2.5
+2026-11-15T06:47:43.1715613Z [1m[92m    Checking[0m fnv v1.0.7
+2026-11-15T06:47:43.1843687Z [1m[92m    Checking[0m untrusted v0.9.0
+2026-11-15T06:47:43.1897456Z [1m[92m   Compiling[0m vcpkg v0.2.15
+2026-11-15T06:47:43.2123318Z [1m[92m    Checking[0m atomic-waker v1.1.2
+2026-11-15T06:47:43.2332875Z [1m[92m    Checking[0m want v0.3.2
+2026-11-15T06:47:43.2651822Z [1m[92m    Checking[0m rustls-pki-types v1.16.0
+2026-11-15T06:47:43.4923945Z [1m[92m   Compiling[0m openssl-sys v0.9.118
+2026-11-15T06:47:43.5210495Z [1m[92m    Checking[0m futures-channel v0.3.34
+2026-11-15T06:47:43.5826649Z [1m[92m   Compiling[0m rustls v0.23.46
+2026-11-15T06:47:43.6277642Z [1m[92m    Checking[0m futures-task v0.3.34
+2026-11-15T06:47:43.6584269Z [1m[92m   Compiling[0m serde_core v1.0.229
+2026-11-15T06:47:43.7039839Z [1m[92m    Checking[0m httpdate v1.0.3
+2026-11-15T06:47:43.7493514Z [1m[92m    Checking[0m smallvec v1.16.5
+2026-11-15T06:47:43.8158519Z [1m[92m    Checking[0m futures-util v0.3.34
+2026-11-15T06:47:44.1918016Z [1m[92m   Compiling[0m tokio-macros v2.7.2
+2026-11-15T06:47:44.2754304Z [1m[92m   Compiling[0m zmij v1.0.23
+2026-11-15T06:47:44.3698815Z [1m[92m    Checking[0m tower-service v0.3.3
+2026-11-15T06:47:44.3979079Z [1m[92m   Compiling[0m rustversion v1.0.23
+2026-11-15T06:47:44.4235661Z [1m[92m    Checking[0m subtle v2.6.1
+2026-11-15T06:47:44.4601308Z [1m[92m    Checking[0m tokio v1.54.1
+2026-11-15T06:47:44.5380257Z [1m[92m   Compiling[0m syn v2.0.119
+2026-11-15T06:47:45.7453623Z [1m[92m   Compiling[0m serde_json v1.0.154
+2026-11-15T06:47:45.8033830Z [1m[92m   Compiling[0m serde v1.0.229
+2026-11-15T06:47:45.9104090Z [1m[92m    Checking[0m foreign-types-shared v0.1.1
+2026-11-15T06:47:45.9263747Z [1m[92m   Compiling[0m openssl v0.10.82
+2026-11-15T06:47:46.0054417Z [1m[92m    Checking[0m foreign-types v0.3.2
+2026-11-15T06:47:46.6610162Z [1m[92m   Compiling[0m serde_derive v1.0.229
+2026-11-15T06:47:46.6862969Z [1m[92m    Checking[0m tokio-util v0.7.20
+2026-11-15T06:47:46.9297496Z [1m[92m    Checking[0m h2 v0.4.20
+2026-11-15T06:47:47.1210691Z [1m[92m   Compiling[0m openssl-macros v0.1.1
+2026-11-15T06:47:47.2264879Z [1m[92m    Checking[0m bitflags v2.13.2
+2026-11-15T06:47:47.2938856Z [1m[92m    Checking[0m memchr v2.8.3
+2026-11-15T06:47:48.3903122Z [1m[92m    Checking[0m hyper v1.12.0
+2026-11-15T06:47:48.6376455Z [1m[92m    Checking[0m arc-swap v1.9.5
+2026-11-15T06:47:48.7528123Z [1m[92m    Checking[0m http-body-util v0.1.5
+2026-11-15T06:47:48.9147249Z [1m[92m    Checking[0m hyper-util v0.1.21
+2026-11-15T06:47:49.4200828Z [1m[92m    Checking[0m hyper-timeout v0.5.2
+2026-11-15T06:47:59.3059531Z [1m[92m    Checking[0m rustls-webpki v0.103.16
+2026-11-15T06:48:00.7995793Z [1m[92m    Checking[0m tokio-rustls v0.26.6
+2026-11-15T06:48:00.8826184Z [1m[92m    Checking[0m hyper-rustls v0.27.10
+2026-11-15T06:48:00.9347376Z [1m[92m    Checking[0m aegisgate-hyper-feasibility v0.1.0 (/home/runner/work/aegis-gate/aegis-gate/spikes/hyper)
+2026-11-15T06:48:01.1345934Z [1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 20.08s
+2026-11-15T06:48:01.1413521Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm run contracts:check
+2026-11-15T06:48:01.2312609Z 
+2026-11-15T06:48:01.2313742Z > aegisgate-contract-tools@0.0.0 contracts:check
+2026-11-15T06:48:01.2314931Z > node scripts/module03-contracts.mjs --check && node scripts/contracts.mjs --check
+2026-11-15T06:48:01.2315392Z 
+2026-11-15T06:48:01.2579720Z Module03 contract synchronized with shared snapshot schema
+2026-11-15T06:48:01.8997021Z Contracts validated: OpenAPI, Go, TypeScript, JSON Schema, baseline, fixture
+2026-11-15T06:48:01.9154210Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run lint
+2026-11-15T06:48:02.0034734Z 
+2026-11-15T06:48:02.0035524Z > @aegisgate/dashboard@0.1.0 lint
+2026-11-15T06:48:02.0036313Z > eslint . --max-warnings=0
+2026-11-15T06:48:02.0036592Z 
+2026-11-15T06:48:02.6659044Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run typecheck
+2026-11-15T06:48:02.7599469Z 
+2026-11-15T06:48:02.7600308Z > @aegisgate/dashboard@0.1.0 typecheck
+2026-11-15T06:48:02.7600701Z > tsc --noEmit
+2026-11-15T06:48:02.7600845Z 
+2026-11-15T06:48:03.7723305Z python3 scripts/dev-secrets.test.py
+2026-11-15T06:48:04.5781648Z ...
+2026-11-15T06:48:04.5782362Z ----------------------------------------------------------------------
+2026-11-15T06:48:04.5782854Z Ran 3 tests in 0.667s
+2026-11-15T06:48:04.5783043Z 
+2026-11-15T06:48:04.5783196Z OK
+2026-11-15T06:48:04.5857634Z python3 scripts/git_history_preflight_test.py
+2026-11-15T06:48:06.8731745Z ....
+2026-11-15T06:48:06.8732472Z ----------------------------------------------------------------------
+2026-11-15T06:48:06.8732899Z Ran 4 tests in 2.252s
+2026-11-15T06:48:06.8733049Z 
+2026-11-15T06:48:06.8733186Z OK
+2026-11-15T06:48:06.8808965Z python3 scripts/image_identity_test.py
+2026-11-15T06:48:06.9793480Z ...............................
+2026-11-15T06:48:06.9794207Z ----------------------------------------------------------------------
+2026-11-15T06:48:06.9794597Z Ran 31 tests in 0.055s
+2026-11-15T06:48:06.9794764Z 
+2026-11-15T06:48:06.9794923Z OK
+2026-11-15T06:48:06.9875339Z "$(scripts/node-path.sh)" --test spikes/edge-comparison/*.test.mjs
+2026-11-15T06:48:07.0847594Z ✔ rejection permits explicit400 or immediate closed peer (0.795062ms)
+2026-11-15T06:48:07.0883486Z ✔ negative: status and zero handlers cannot hide forwarded bytes or parser errors (1.030699ms)
+2026-11-15T06:48:07.0888550Z ✔ negative: missing or duplicated functional and security cases cannot pass inventory (1.515514ms)
+2026-11-15T06:48:07.0995713Z ✔ evaluator checks original wire bytes even when every test is labeled pass (3.884238ms)
+2026-11-15T06:48:07.0997769Z ✔ negative: claimed pass cannot conceal forwarded bytes or origin parser errors (0.73985ms)
+2026-11-15T06:48:07.0998970Z ✔ negative: wrong manifest, fatal setup, skipped cases and dishonest summary fail closed (0.910524ms)
+2026-11-15T06:48:07.5627181Z ✔ H2 observer counts decrypted preface without handler dispatch and preserves valid frames (467.541184ms)
+2026-11-15T06:48:07.5685365Z ℹ tests 7
+2026-11-15T06:48:07.5685871Z ℹ suites 0
+2026-11-15T06:48:07.5686196Z ℹ pass 7
+2026-11-15T06:48:07.5686524Z ℹ fail 0
+2026-11-15T06:48:07.5687048Z ℹ cancelled 0
+2026-11-15T06:48:07.5687406Z ℹ skipped 0
+2026-11-15T06:48:07.5687785Z ℹ todo 0
+2026-11-15T06:48:07.5688131Z ℹ duration_ms 532.235619
+2026-11-15T06:48:07.5720505Z "$(scripts/node-path.sh)" --test spikes/envoy/*.test.mjs
+2026-11-15T06:48:08.3451318Z ✔ manifest rejects replay, unknown fields, duplicate hosts, invalid ports and weights (254.300762ms)
+2026-11-15T06:48:08.3463822Z ✔ private key permissions, SAN mismatch, symlinks and fixture bounds fail closed (235.431836ms)
+2026-11-15T06:48:08.3465469Z ✔ compiled origin trust and pools change across route and generation boundaries (180.971781ms)
+2026-11-15T06:48:09.1040896Z ✔ trace drains coalesced input over old decoder chunk bound (2.573965ms)
+2026-11-15T06:48:09.1044642Z ✔ fragmented control and bounded control samples preserve totals (3.382254ms)
+2026-11-15T06:48:09.2534602Z {"direct_and_observed":[{"path":"/encoded%2Ftarget?x=%2520","authority":"synthetic.test","sni":"lab-origin.test","bytes":262144,"sha256":"dd3dde87623d9a6b354c68c943d189c89c63652d945e7bbdf0986cae91a49521"},{"path":"/encoded%2Ftarget?x=%2520","authority":"synthetic.test","sni":"lab-origin.test","bytes":262144,"sha256":"dd3dde87623d9a6b354c68c943d189c89c63652d945e7bbdf0986cae91a49521"}],"peer_fingerprint256":"65:AD:03:D0:C7:9B:4F:C8:20:2E:AF:44:A1:8C:09:47:66:B1:B1:23:DE:A1:D3:0B:CE:51:A1:C2:E3:37:AF:03","wire":{"records":[{"id":1,"opened_ms":1485.02912,"candidate_tls":{"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3","authorized":false,"authorization_error":null,"local_fingerprint256":"65:AD:03:D0:C7:9B:4F:C8:20:2E:AF:44:A1:8C:09:47:66:B1:B1:23:DE:A1:D3:0B:CE:51:A1:C2:E3:37:AF:03"},"candidate_to_origin":{"bytes":262590,"frames":36,"data_bytes":262144,"headers":1,"streams":{"1":{"frames":26,"data_bytes":262144,"headers":1,"resets":[]}},"events":[{"ms":1487.510566,"kind":"preface","bytes":24},{"ms":1487.537623,"kind":"frame","type":4,"name":"SETTINGS","flags":0,"stream":0,"length":0,"bytes":9,"sha256":"5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053","hex":"000000040000000000"},{"ms":1487.555747,"kind":"frame","type":1,"name":"HEADERS","flags":4,"stream":1,"length":34,"bytes":43,"sha256":"74f24a6a88ed633fd50a67a4f818510ffbb9bbb1089677c6d2f640318c40916e"},{"ms":1526.610054,"kind":"frame","type":4,"name":"SETTINGS","flags":1,"stream":0,"length":0,"bytes":9,"sha256":"a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6","hex":"000000040100000000"},{"ms":1570.961652,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":1570.966963,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":1570.986119,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":1570.99051,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"},{"ms":1571.454006,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":1571.457474,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":1571.516357,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":1571.519108,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"},{"ms":1613.701541,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":1613.711182,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":1613.780828,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":1613.78625,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"},{"ms":1614.471125,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":1614.476911,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":1614.499209,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":1614.501889,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"}],"omitted":0},"origin_to_candidate":{"bytes":262558,"frames":36,"data_bytes":262144,"headers":1,"streams":{"1":{"frames":26,"data_bytes":262144,"headers":1,"resets":[]}},"events":[{"ms":1488.534534,"kind":"frame","type":4,"name":"SETTINGS","flags":0,"stream":0,"length":0,"bytes":9,"sha256":"5ceac9f2d246f5485cc5d0db7cef01a9dd10bc5e1826ca37ad43cddded957053","hex":"000000040000000000"},{"ms":1488.539478,"kind":"frame","type":4,"name":"SETTINGS","flags":1,"stream":0,"length":0,"bytes":9,"sha256":"a9fd441cc14ae4b467f3ea0a0ed70de71bb5834db34815eca9cceb70017adfd6","hex":"000000040100000000"},{"ms":1488.573948,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":1488.581783,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":1488.593948,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":1488.596693,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"},{"ms":1527.351555,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":1527.358063,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":1527.389138,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":1527.394768,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"},{"ms":1568.707305,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":1568.716875,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":1568.784664,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":1568.78907,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"},{"ms":1569.677799,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"cb4bfee8f853b979c2a94536dad0ae3bc41ac0cfebb5dc8a48e35a4cc53b2bb0","hex":"00000408000000000000008000"},{"ms":1569.682699,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"c1cbb37a0c7f6517ff98ed5e090b8b8a6e2ce6d79083ee0bf3ba9010f09adcbf","hex":"00000408000000000100008000"},{"ms":1569.706919,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":0,"length":4,"bytes":13,"sha256":"5deb705e7beefab1c5ade75f5f71d917f8e40a367dfcb88c1771be0714b552a6","hex":"00000408000000000000007fff"},{"ms":1569.709669,"kind":"frame","type":8,"name":"WINDOW_UPDATE","flags":0,"stream":1,"length":4,"bytes":13,"sha256":"082c4f1b8c36733b177cd1f647dcdb4bb69c2f4cc7ac9796e82bc01abf5572c3","hex":"00000408000000000100007fff"},{"ms":1570.473565,"kind":"frame","type":1,"name":"HEADERS","flags":4,"stream":1,"length":26,"bytes":35,"sha256":"3507371c41662550336e9a77b919f2a96bdf8b8a2ca969c15289c5f15123fd81"}],"omitted":0},"lifecycle":[],"native_tls":{"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3","authorized":true,"authorization_error":null,"peer_fingerprint256":"65:AD:03:D0:C7:9B:4F:C8:20:2E:AF:44:A1:8C:09:47:66:B1:B1:23:DE:A1:D3:0B:CE:51:A1:C2:E3:37:AF:03"}}],"errors":0,"omitted":0,"bytes":262590,"headers":1,"data_bytes":262144}}
+2026-11-15T06:48:09.2561097Z ✔ new relay preserves native H2 body, response, configured TLS identity and encoded target (1572.057194ms)
+2026-11-15T06:48:09.9658899Z === RUN   TestValidFragmentedStatefulHPACK
+2026-11-15T06:48:09.9659873Z --- PASS: TestValidFragmentedStatefulHPACK (0.00s)
+2026-11-15T06:48:09.9660681Z === RUN   TestStatefulDynamicReference
+2026-11-15T06:48:09.9661494Z --- PASS: TestStatefulDynamicReference (0.00s)
+2026-11-15T06:48:09.9662361Z === RUN   TestDeliberateLeaks
+2026-11-15T06:48:09.9663040Z === RUN   TestDeliberateLeaks/HEADERS
+2026-11-15T06:48:09.9663614Z === RUN   TestDeliberateLeaks/DATA
+2026-11-15T06:48:09.9664295Z === RUN   TestDeliberateLeaks/RST_STREAM
+2026-11-15T06:48:09.9665020Z --- PASS: TestDeliberateLeaks (0.00s)
+2026-11-15T06:48:09.9665728Z     --- PASS: TestDeliberateLeaks/HEADERS (0.00s)
+2026-11-15T06:48:09.9666370Z     --- PASS: TestDeliberateLeaks/DATA (0.00s)
+2026-11-15T06:48:09.9667031Z     --- PASS: TestDeliberateLeaks/RST_STREAM (0.00s)
+2026-11-15T06:48:09.9667641Z === RUN   TestPartialForbiddenHeadersFailClosed
+2026-11-15T06:48:09.9668287Z --- PASS: TestPartialForbiddenHeadersFailClosed (0.00s)
+2026-11-15T06:48:09.9668886Z === RUN   TestIncompleteContinuation
+2026-11-15T06:48:09.9669489Z --- PASS: TestIncompleteContinuation (0.00s)
+2026-11-15T06:48:09.9670057Z === RUN   TestInterleavedContinuation
+2026-11-15T06:48:09.9670814Z --- PASS: TestInterleavedContinuation (0.00s)
+2026-11-15T06:48:09.9671353Z === RUN   TestNewDialWithoutHandler
+2026-11-15T06:48:09.9671810Z --- PASS: TestNewDialWithoutHandler (0.00s)
+2026-11-15T06:48:09.9672488Z === RUN   TestCaptureOmissionAndIdentityFailClosed
+2026-11-15T06:48:09.9673071Z === RUN   TestCaptureOmissionAndIdentityFailClosed/drop
+2026-11-15T06:48:09.9673554Z === RUN   TestCaptureOmissionAndIdentityFailClosed/truncated
+2026-11-15T06:48:09.9674063Z === RUN   TestCaptureOmissionAndIdentityFailClosed/open
+2026-11-15T06:48:09.9674495Z === RUN   TestCaptureOmissionAndIdentityFailClosed/identity
+2026-11-15T06:48:09.9674970Z === RUN   TestCaptureOmissionAndIdentityFailClosed/registry
+2026-11-15T06:48:09.9675394Z === RUN   TestCaptureOmissionAndIdentityFailClosed/unmapped
+2026-11-15T06:48:09.9675840Z === RUN   TestCaptureOmissionAndIdentityFailClosed/forged
+2026-11-15T06:48:09.9676320Z === RUN   TestCaptureOmissionAndIdentityFailClosed/duplicate
+2026-11-15T06:48:09.9676790Z === RUN   TestCaptureOmissionAndIdentityFailClosed/transport
+2026-11-15T06:48:09.9677230Z === RUN   TestCaptureOmissionAndIdentityFailClosed/parser
+2026-11-15T06:48:09.9677659Z === RUN   TestCaptureOmissionAndIdentityFailClosed/new
+2026-11-15T06:48:09.9678131Z --- PASS: TestCaptureOmissionAndIdentityFailClosed (0.00s)
+2026-11-15T06:48:09.9679001Z     --- PASS: TestCaptureOmissionAndIdentityFailClosed/drop (0.00s)
+2026-11-15T06:48:09.9679698Z     --- PASS: TestCaptureOmissionAndIdentityFailClosed/truncated (0.00s)
+2026-11-15T06:48:09.9680373Z     --- PASS: TestCaptureOmissionAndIdentityFailClosed/open (0.00s)
+2026-11-15T06:48:09.9681047Z     --- PASS: TestCaptureOmissionAndIdentityFailClosed/identity (0.00s)
+2026-11-15T06:48:09.9681688Z     --- PASS: TestCaptureOmissionAndIdentityFailClosed/registry (0.00s)
+2026-11-15T06:48:09.9682533Z     --- PASS: TestCaptureOmissionAndIdentityFailClosed/unmapped (0.00s)
+2026-11-15T06:48:09.9683182Z     --- PASS: TestCaptureOmissionAndIdentityFailClosed/forged (0.00s)
+2026-11-15T06:48:09.9683991Z     --- PASS: TestCaptureOmissionAndIdentityFailClosed/duplicate (0.00s)
+2026-11-15T06:48:09.9684666Z     --- PASS: TestCaptureOmissionAndIdentityFailClosed/transport (0.00s)
+2026-11-15T06:48:09.9685377Z     --- PASS: TestCaptureOmissionAndIdentityFailClosed/parser (0.00s)
+2026-11-15T06:48:09.9686054Z     --- PASS: TestCaptureOmissionAndIdentityFailClosed/new (0.00s)
+2026-11-15T06:48:09.9686585Z === RUN   TestDecoderBoundsAndInvalidHPACK
+2026-11-15T06:48:09.9687028Z --- PASS: TestDecoderBoundsAndInvalidHPACK (0.01s)
+2026-11-15T06:48:09.9687602Z === RUN   TestDecompressionAndContinuationBounds
+2026-11-15T06:48:09.9688155Z === RUN   TestDecompressionAndContinuationBounds/string
+2026-11-15T06:48:09.9688770Z === RUN   TestDecompressionAndContinuationBounds/fields
+2026-11-15T06:48:09.9689359Z === RUN   TestDecompressionAndContinuationBounds/wrong-stream
+2026-11-15T06:48:09.9690048Z === RUN   TestDecompressionAndContinuationBounds/table-size
+2026-11-15T06:48:09.9690669Z --- PASS: TestDecompressionAndContinuationBounds (0.00s)
+2026-11-15T06:48:09.9691374Z     --- PASS: TestDecompressionAndContinuationBounds/string (0.00s)
+2026-11-15T06:48:09.9692293Z     --- PASS: TestDecompressionAndContinuationBounds/fields (0.00s)
+2026-11-15T06:48:09.9693066Z     --- PASS: TestDecompressionAndContinuationBounds/wrong-stream (0.00s)
+2026-11-15T06:48:09.9693889Z     --- PASS: TestDecompressionAndContinuationBounds/table-size (0.00s)
+2026-11-15T06:48:09.9694440Z PASS
+2026-11-15T06:48:09.9696700Z ok  	aegisgate.dev/aegisgate/spikes/envoy/sprint04c-attribution	1.028s
+2026-11-15T06:48:09.9697051Z 
+2026-11-15T06:48:11.1606210Z ✔ Sprint04-C maintained H2/HPACK attribution rejects deliberate leaks and incomplete evidence (2286.550722ms)
+2026-11-15T06:48:11.1607597Z ✔ bounded capture accounts for drops and closed lifecycle (1.272722ms)
+2026-11-15T06:48:11.2455740Z {"direct_and_relay":[{"target":"/encoded%2Ftarget?x=%2520","sni":"lab-origin.test"},{"target":"/encoded%2Ftarget?x=%2520","sni":"lab-origin.test"}],"capture_totals":[{"direction":"candidate-to-origin","bytes":98,"sha256":"c29c81961e5f1cdda6bde0e4e39bc9b19a5c20682c7f48110294ecc289726560"},{"direction":"origin-to-candidate","bytes":73,"sha256":"ec2d0b1788bb2e1ec29ab679b27b1b604809a72df68fd1688d9356ea36675d4b"}]}
+2026-11-15T06:48:11.2466367Z ✔ new raw relay preserves verified TLS, exact synthetic payload and encoded target (1277.751062ms)
+2026-11-15T06:48:11.2530213Z ✔ candidate changes only local reply mapping across every baseline filter chain (2.540191ms)
+2026-11-15T06:48:11.2531113Z ✔ Sprint05C authenticated H2 observer rejects deliberate effects and lost attribution (1873.629521ms)
+2026-11-15T06:48:11.6803179Z ✔ fragmented envelopes classify controls and preserve bounded decoder state (1.6877ms)
+2026-11-15T06:48:11.6809475Z {"native_h2_identity_controls":[{"peer_fingerprint":"39:E6:2E:67:9B:12:46:AF:AD:78:5D:1E:A8:93:C9:ED:A9:FE:CC:24:8F:A5:C9:92:6F:1E:BD:3B:F6:B0:E5:D1","downstream_tls":"TLSv1.3","samples":[{"connection":1,"stream":1,"method":"GET","target":"/bad%20target","authority":"synthetic-authority.test","marker":"first-only","sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"},{"connection":1,"stream":3,"method":"GET","target":"/encoded%2Fsegment?value=%2520","authority":"synthetic-authority.test","marker":null,"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"}]},{"peer_fingerprint":"39:E6:2E:67:9B:12:46:AF:AD:78:5D:1E:A8:93:C9:ED:A9:FE:CC:24:8F:A5:C9:92:6F:1E:BD:3B:F6:B0:E5:D1","downstream_tls":"TLSv1.3","samples":[{"connection":2,"stream":1,"method":"GET","target":"/bad%20target","authority":"synthetic-authority.test","marker":"first-only","sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"},{"connection":2,"stream":3,"method":"GET","target":"/encoded%2Fsegment?value=%2520","authority":"synthetic-authority.test","marker":null,"sni":"lab-origin.test","alpn":"h2","tls":"TLSv1.3"}]}],"observed_decrypted_bytes":139,"identity_scope":"configured origin SNI preserved; HTTP authority forwarded without binding or rewriting"}
+2026-11-15T06:48:11.6862657Z ✔ native H2 direct and observed controls preserve authority, SNI, targets and reuse (951.251734ms)
+2026-11-15T06:48:11.8399711Z {"payload_bytes":37843,"sha256":"814492f3243b52ec0c40be131e59025e439d93efe4286906d2a4c61b121615ca","direct_and_observed":[{"fingerprint":"1D:6E:08:A0:4D:C8:16:B3:0A:67:B2:9D:79:92:66:11:12:2F:CD:D5:21:DB:31:5C:7B:BC:F7:10:06:CE:CF:75","tls":"TLSv1.3","alpn":"h2"},{"fingerprint":"1D:6E:08:A0:4D:C8:16:B3:0A:67:B2:9D:79:92:66:11:12:2F:CD:D5:21:DB:31:5C:7B:BC:F7:10:06:CE:CF:75","tls":"TLSv1.3","alpn":"h2"}],"invalid_origin_attempted_payload_bytes":37843,"samples":4096,"omitted":112}
+2026-11-15T06:48:11.8408549Z ✔ observer preserves bytes, configured identity and verified TLS; bounds samples (1587.123805ms)
+2026-11-15T06:48:11.8478984Z ℹ tests 14
+2026-11-15T06:48:11.8479377Z ℹ suites 0
+2026-11-15T06:48:11.8479955Z ℹ pass 14
+2026-11-15T06:48:11.8480253Z ℹ fail 0
+2026-11-15T06:48:11.8480548Z ℹ cancelled 0
+2026-11-15T06:48:11.8480822Z ℹ skipped 0
+2026-11-15T06:48:11.8481086Z ℹ todo 0
+2026-11-15T06:48:11.8481450Z ℹ duration_ms 4229.852122
+2026-11-15T06:48:11.8517033Z "$(scripts/node-path.sh)" spikes/edge-comparison/extract-baseline.mjs --check
+2026-11-15T06:48:11.9151238Z PASS immutable baseline manifest matches pinned source and all65 test IDs
+2026-11-15T06:48:11.9175475Z GOTOOLCHAIN=go1.27.4 go test -race ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/...
+2026-11-15T06:48:13.8524121Z ?   	aegisgate.dev/aegisgate/apps/control-api/cmd/control-api	[no test files]
+2026-11-15T06:48:13.8553854Z ?   	aegisgate.dev/aegisgate/apps/control-api/internal/application	[no test files]
+2026-11-15T06:48:13.8569684Z ok  	aegisgate.dev/aegisgate/apps/control-api/internal/domain	(cached)
+2026-11-15T06:48:13.8641789Z ok  	aegisgate.dev/aegisgate/apps/control-api/internal/identity	(cached)
+2026-11-15T06:48:15.7463885Z ok  	aegisgate.dev/aegisgate/apps/control-api/internal/persistence	1.033s
+2026-11-15T06:48:16.6518008Z ok  	aegisgate.dev/aegisgate/apps/control-api/internal/transport	1.582s
+2026-11-15T06:48:16.6518941Z ?   	aegisgate.dev/aegisgate/apps/control-api/publication	[no test files]
+2026-11-15T06:48:16.6519490Z ?   	aegisgate.dev/aegisgate/apps/config-publisher/cmd/config-publisher	[no test files]
+2026-11-15T06:48:18.4974813Z ok  	aegisgate.dev/aegisgate/internal/configconsumer	3.427s
+2026-11-15T06:48:18.4975532Z ok  	aegisgate.dev/aegisgate/internal/configpublish	1.088s
+2026-11-15T06:48:18.4975995Z ok  	aegisgate.dev/aegisgate/internal/configreview	1.151s
+2026-11-15T06:48:18.4976450Z ok  	aegisgate.dev/aegisgate/internal/configrollout	1.096s
+2026-11-15T06:48:18.4976865Z ok  	aegisgate.dev/aegisgate/internal/configsnapshot	1.200s
+2026-11-15T06:48:18.4977355Z ok  	aegisgate.dev/aegisgate/internal/contracts	(cached)
+2026-11-15T06:48:18.4977844Z ?   	aegisgate.dev/aegisgate/packages/test-fixtures/cmd/fixtures	[no test files]
+2026-11-15T06:48:18.4978392Z ?   	aegisgate.dev/aegisgate/packages/test-fixtures/configlab	[no test files]
+2026-11-15T06:48:18.4978887Z ok  	aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab	(cached)
+2026-11-15T06:48:18.5063733Z cargo +1.99.1 test --workspace --locked --manifest-path apps/edge/Cargo.toml
+2026-11-15T06:48:18.5428212Z [1m[92m   Compiling[0m serde_core v1.0.229
+2026-11-15T06:48:18.5428843Z [1m[92m   Compiling[0m zmij v1.0.23
+2026-11-15T06:48:18.5429378Z [1m[92m   Compiling[0m memchr v2.8.3
+2026-11-15T06:48:18.5430126Z [1m[92m   Compiling[0m itoa v1.0.19
+2026-11-15T06:48:18.6360009Z [1m[92m   Compiling[0m policy-engine v0.1.0 (/home/runner/work/aegis-gate/aegis-gate/apps/edge/policy-engine)
+2026-11-15T06:48:18.6604639Z [1m[92m   Compiling[0m edge-server v0.1.0 (/home/runner/work/aegis-gate/aegis-gate/apps/edge/edge-server)
+2026-11-15T06:48:19.6920325Z [1m[92m   Compiling[0m serde_json v1.0.154
+2026-11-15T06:48:19.6921349Z [1m[92m   Compiling[0m uuid v1.29.2
+2026-11-15T06:48:19.6922156Z [1m[92m   Compiling[0m serde v1.0.229
+2026-11-15T06:48:20.1673862Z [1m[92m   Compiling[0m edge-types v0.1.0 (/home/runner/work/aegis-gate/aegis-gate/apps/edge/edge-types)
+2026-11-15T06:48:20.2935295Z [1m[92m   Compiling[0m config-agent v0.1.0 (/home/runner/work/aegis-gate/aegis-gate/apps/edge/config-agent)
+2026-11-15T06:48:20.4711440Z [1m[92m    Finished[0m `test` profile [unoptimized + debuginfo] target(s) in 1.95s
+2026-11-15T06:48:20.4723496Z [1m[92m     Running[0m unittests src/main.rs (apps/edge/target/debug/deps/config_agent-fe9b0ad4296db96e)
+2026-11-15T06:48:20.4729711Z 
+2026-11-15T06:48:20.4729864Z running 0 tests
+2026-11-15T06:48:20.4730048Z 
+2026-11-15T06:48:20.4730461Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-11-15T06:48:20.4730948Z 
+2026-11-15T06:48:20.4731585Z [1m[92m     Running[0m tests/error_contract.rs (apps/edge/target/debug/deps/error_contract-ca4917393080892a)
+2026-11-15T06:48:20.4737650Z 
+2026-11-15T06:48:20.4737822Z running 3 tests
+2026-11-15T06:48:20.4747577Z test negative_missing_file_does_not_disclose_path ... ok
+2026-11-15T06:48:20.4750938Z test shared_fixture_is_consumed_without_configuration_activation ... ok
+2026-11-15T06:48:20.4756644Z test negative_malformed_and_oversized_inputs_rejected_without_echo ... ok
+2026-11-15T06:48:20.4756932Z 
+2026-11-15T06:48:20.4757362Z test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-11-15T06:48:20.4757734Z 
+2026-11-15T06:48:20.4758340Z [1m[92m     Running[0m unittests src/main.rs (apps/edge/target/debug/deps/edge_server-312c04b63f751aec)
+2026-11-15T06:48:20.4763829Z 
+2026-11-15T06:48:20.4764018Z running 0 tests
+2026-11-15T06:48:20.4764201Z 
+2026-11-15T06:48:20.4764561Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-11-15T06:48:20.4764905Z 
+2026-11-15T06:48:20.4765970Z [1m[92m     Running[0m tests/bootstrap.rs (apps/edge/target/debug/deps/bootstrap-4264b5b6b55311e7)
+2026-11-15T06:48:20.4772316Z 
+2026-11-15T06:48:20.4772670Z running 2 tests
+2026-11-15T06:48:20.4780400Z test offline_check_reports_unready ... ok
+2026-11-15T06:48:20.4795940Z test negative_runtime_cannot_be_enabled_by_untrusted_flags ... ok
+2026-11-15T06:48:20.4796220Z 
+2026-11-15T06:48:20.4796627Z test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-11-15T06:48:20.4796990Z 
+2026-11-15T06:48:20.4797578Z [1m[92m     Running[0m unittests src/lib.rs (apps/edge/target/debug/deps/edge_types-511e4ed3f063386a)
+2026-11-15T06:48:20.4803570Z 
+2026-11-15T06:48:20.4803724Z running 8 tests
+2026-11-15T06:48:20.4806232Z test tests::generation_is_monotonic_and_bounded ... ok
+2026-11-15T06:48:20.4806877Z test tests::negative_diagnostics_never_echo_secret_input ... ok
+2026-11-15T06:48:20.4807734Z test tests::negative_noncanonical_or_nonrandom_uuid_denied ... ok
+2026-11-15T06:48:20.4808332Z test tests::negative_oversized_error_rejected_before_parsing ... ok
+2026-11-15T06:48:20.4809128Z test tests::negative_generation_replay_and_rollback_denied ... ok
+2026-11-15T06:48:20.4809741Z test tests::negative_unknown_duplicate_fields_and_trailing_data_denied ... ok
+2026-11-15T06:48:20.4810385Z test tests::negative_untrusted_codes_and_messages_denied ... ok
+2026-11-15T06:48:20.4810762Z test tests::valid_wire_round_trip ... ok
+2026-11-15T06:48:20.4810958Z 
+2026-11-15T06:48:20.4811262Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-11-15T06:48:20.4811738Z 
+2026-11-15T06:48:20.4812583Z [1m[92m     Running[0m unittests src/lib.rs (apps/edge/target/debug/deps/policy_engine-e926b75152b353c7)
+2026-11-15T06:48:20.4815435Z 
+2026-11-15T06:48:20.4815563Z running 1 test
+2026-11-15T06:48:20.4816907Z test tests::negative_bootstrap_never_authorizes_or_becomes_ready ... ok
+2026-11-15T06:48:20.4817168Z 
+2026-11-15T06:48:20.4817493Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-11-15T06:48:20.4817897Z 
+2026-11-15T06:48:20.4818154Z [1m[92m   Doc-tests[0m edge_types
+2026-11-15T06:48:20.4981669Z 
+2026-11-15T06:48:20.4982348Z running 0 tests
+2026-11-15T06:48:20.4982775Z 
+2026-11-15T06:48:20.4983175Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-11-15T06:48:20.4983484Z 
+2026-11-15T06:48:20.4989230Z [1m[92m   Doc-tests[0m policy_engine
+2026-11-15T06:48:20.5082321Z 
+2026-11-15T06:48:20.5082637Z running 0 tests
+2026-11-15T06:48:20.5082898Z 
+2026-11-15T06:48:20.5083251Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-11-15T06:48:20.5083540Z 
+2026-11-15T06:48:20.5101253Z cargo +1.99.1 test --workspace --locked --manifest-path spikes/hyper/Cargo.toml
+2026-11-15T06:48:20.5635377Z [1m[92m   Compiling[0m libc v0.2.191
+2026-11-15T06:48:20.5636054Z [1m[92m   Compiling[0m bytes v1.12.1
+2026-11-15T06:48:20.5636759Z [1m[92m   Compiling[0m pin-project-lite v0.2.17
+2026-11-15T06:48:20.5637254Z [1m[92m   Compiling[0m once_cell v1.21.4
+2026-11-15T06:48:20.5897737Z [1m[92m   Compiling[0m futures-core v0.3.34
+2026-11-15T06:48:20.6427840Z [1m[92m   Compiling[0m itoa v1.0.19
+2026-11-15T06:48:20.6743718Z [1m[92m   Compiling[0m cfg-if v1.0.5
+2026-11-15T06:48:20.6894044Z [1m[92m   Compiling[0m tracing-core v0.1.36
+2026-11-15T06:48:20.7313913Z [1m[92m   Compiling[0m hashbrown v0.17.1
+2026-11-15T06:48:21.0352450Z [1m[92m   Compiling[0m http v1.5.0
+2026-11-15T06:48:21.0743483Z [1m[92m   Compiling[0m equivalent v1.0.3
+2026-11-15T06:48:21.0954038Z [1m[92m   Compiling[0m futures-sink v0.3.34
+2026-11-15T06:48:21.1253891Z [1m[92m   Compiling[0m indexmap v2.14.2
+2026-11-15T06:48:21.1478135Z [1m[92m   Compiling[0m tracing v0.1.44
+2026-11-15T06:48:21.2673596Z [1m[92m   Compiling[0m errno v0.3.14
+2026-11-15T06:48:21.3033713Z [1m[92m   Compiling[0m socket2 v0.6.5
+2026-11-15T06:48:21.3225212Z [1m[92m   Compiling[0m signal-hook-registry v1.4.8
+2026-11-15T06:48:21.5003667Z [1m[92m   Compiling[0m mio v1.2.4
+2026-11-15T06:48:21.6015007Z [1m[92m   Compiling[0m http-body v1.1.0
+2026-11-15T06:48:21.6364002Z [1m[92m   Compiling[0m getrandom v0.2.17
+2026-11-15T06:48:21.6607490Z [1m[92m   Compiling[0m atomic-waker v1.1.2
+2026-11-15T06:48:21.6989431Z [1m[92m   Compiling[0m tokio v1.54.1
+2026-11-15T06:48:21.7194806Z [1m[92m   Compiling[0m slab v0.4.12
+2026-11-15T06:48:21.7963470Z [1m[92m   Compiling[0m zeroize v1.9.1
+2026-11-15T06:48:21.8000760Z [1m[92m   Compiling[0m fnv v1.0.7
+2026-11-15T06:48:21.8209227Z [1m[92m   Compiling[0m try-lock v0.2.5
+2026-11-15T06:48:21.8313800Z [1m[92m   Compiling[0m untrusted v0.9.0
+2026-11-15T06:48:21.8494090Z [1m[92m   Compiling[0m want v0.3.2
+2026-11-15T06:48:21.8596141Z [1m[92m   Compiling[0m rustls-pki-types v1.16.0
+2026-11-15T06:48:21.8696739Z [1m[92m   Compiling[0m ring v0.17.14
+2026-11-15T06:48:21.9113775Z [1m[92m   Compiling[0m httparse v1.10.1
+2026-11-15T06:48:22.0913805Z [1m[92m   Compiling[0m futures-channel v0.3.34
+2026-11-15T06:48:22.1874242Z [1m[92m   Compiling[0m futures-task v0.3.34
+2026-11-15T06:48:22.2023661Z [1m[92m   Compiling[0m httpdate v1.0.3
+2026-11-15T06:48:22.2277736Z [1m[92m   Compiling[0m smallvec v1.16.5
+2026-11-15T06:48:22.3227117Z [1m[92m   Compiling[0m futures-util v0.3.34
+2026-11-15T06:48:22.3414676Z [1m[92m   Compiling[0m tower-service v0.3.3
+2026-11-15T06:48:22.3643951Z [1m[92m   Compiling[0m subtle v2.6.1
+2026-11-15T06:48:22.4253877Z [1m[92m   Compiling[0m serde_core v1.0.229
+2026-11-15T06:48:23.2478938Z [1m[92m   Compiling[0m rustls-webpki v0.103.16
+2026-11-15T06:48:23.5634229Z [1m[92m   Compiling[0m foreign-types-shared v0.1.1
+2026-11-15T06:48:23.5833910Z [1m[92m   Compiling[0m foreign-types v0.3.2
+2026-11-15T06:48:23.5992314Z [1m[92m   Compiling[0m zmij v1.0.23
+2026-11-15T06:48:23.7859460Z [1m[92m   Compiling[0m rustls v0.23.46
+2026-11-15T06:48:24.0314337Z [1m[92m   Compiling[0m openssl-sys v0.9.118
+2026-11-15T06:48:24.0834166Z [1m[92m   Compiling[0m bitflags v2.13.2
+2026-11-15T06:48:24.1974362Z [1m[92m   Compiling[0m memchr v2.8.3
+2026-11-15T06:48:24.3783953Z [1m[92m   Compiling[0m openssl v0.10.82
+2026-11-15T06:48:24.7064257Z [1m[92m   Compiling[0m serde_json v1.0.154
+2026-11-15T06:48:25.6244038Z [1m[92m   Compiling[0m tokio-util v0.7.20
+2026-11-15T06:48:26.1113396Z [1m[92m   Compiling[0m h2 v0.4.20
+2026-11-15T06:48:26.3424128Z [1m[92m   Compiling[0m tokio-rustls v0.26.6
+2026-11-15T06:48:26.4883969Z [1m[92m   Compiling[0m serde v1.0.229
+2026-11-15T06:48:26.8664212Z [1m[92m   Compiling[0m arc-swap v1.9.5
+2026-11-15T06:48:27.0244003Z [1m[92m   Compiling[0m http-body-util v0.1.5
+2026-11-15T06:48:28.0478458Z [1m[92m   Compiling[0m hyper v1.12.0
+2026-11-15T06:48:28.7790547Z [1m[92m   Compiling[0m hyper-util v0.1.21
+2026-11-15T06:48:29.3903897Z [1m[92m   Compiling[0m hyper-rustls v0.27.10
+2026-11-15T06:48:29.3908255Z [1m[92m   Compiling[0m hyper-timeout v0.5.2
+2026-11-15T06:48:29.5441027Z [1m[92m   Compiling[0m aegisgate-hyper-feasibility v0.1.0 (/home/runner/work/aegis-gate/aegis-gate/spikes/hyper)
+2026-11-15T06:48:30.0958785Z [1m[92m    Finished[0m `test` profile [unoptimized + debuginfo] target(s) in 9.57s
+2026-11-15T06:48:30.1000049Z [1m[92m     Running[0m unittests src/main.rs (spikes/hyper/target/debug/deps/aegisgate_hyper_feasibility-7705241e1c794325)
+2026-11-15T06:48:30.1016374Z 
+2026-11-15T06:48:30.1017267Z running 4 tests
+2026-11-15T06:48:30.1020538Z test config::tests::authority_rejects_ambiguous_hosts ... ok
+2026-11-15T06:48:30.1021097Z test tests::parsed_policy_rejects_ambiguous_authority_and_framing ... ok
+2026-11-15T06:48:30.1021685Z test tests::preserved_encoded_targets_survive_uri_and_policy_layers ... ok
+2026-11-15T06:48:30.1022312Z test config::tests::invalid_manifest_cannot_bootstrap ... ok
+2026-11-15T06:48:30.1022577Z 
+2026-11-15T06:48:30.1022902Z test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-11-15T06:48:30.1023202Z 
+2026-11-15T06:48:30.1043271Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm run contracts:test
+2026-11-15T06:48:30.1931761Z 
+2026-11-15T06:48:30.1932830Z > aegisgate-contract-tools@0.0.0 contracts:test
+2026-11-15T06:48:30.1933508Z > node --test scripts/contracts.test.mjs
+2026-11-15T06:48:30.1933779Z 
+2026-11-15T06:48:30.5720906Z ✔ foundation error fixture follows generated JSON schema (27.488653ms)
+2026-11-15T06:48:30.5801545Z ✔ negative: unknown fields, tenant header injection, malformed IDs and unbounded errors rejected (9.057676ms)
+2026-11-15T06:48:30.5852411Z ✔ negative: intentionally broken schema and operation changes fail compatibility (4.886327ms)
+2026-11-15T06:48:30.5976018Z ℹ tests 3
+2026-11-15T06:48:30.5976345Z ℹ suites 0
+2026-11-15T06:48:30.5978723Z ℹ pass 3
+2026-11-15T06:48:30.5979395Z ℹ fail 0
+2026-11-15T06:48:30.5979977Z ℹ cancelled 0
+2026-11-15T06:48:30.5980519Z ℹ skipped 0
+2026-11-15T06:48:30.5980978Z ℹ todo 0
+2026-11-15T06:48:30.5981475Z ℹ duration_ms 378.561424
+2026-11-15T06:48:30.6045903Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard test
+2026-11-15T06:48:30.6947196Z 
+2026-11-15T06:48:30.6947869Z > @aegisgate/dashboard@0.1.0 test
+2026-11-15T06:48:30.6948432Z > node --test tests/unit.test.mjs
+2026-11-15T06:48:30.6948629Z 
+2026-11-15T06:48:30.7584252Z ✔ unconfigured dashboard never advertises live tenant services (0.497201ms)
+2026-11-15T06:48:30.7585995Z ✔ browser security policy blocks framing and external connections on every path (0.27012ms)
+2026-11-15T06:48:30.7637426Z ℹ tests 2
+2026-11-15T06:48:30.7638286Z ℹ suites 0
+2026-11-15T06:48:30.7638863Z ℹ pass 2
+2026-11-15T06:48:30.7639173Z ℹ fail 0
+2026-11-15T06:48:30.7639540Z ℹ cancelled 0
+2026-11-15T06:48:30.7639923Z ℹ skipped 0
+2026-11-15T06:48:30.7640248Z ℹ todo 0
+2026-11-15T06:48:30.7640689Z ℹ duration_ms 44.383095
+2026-11-15T06:48:30.7709939Z mkdir -p .local/bin
+2026-11-15T06:48:30.7728839Z GOTOOLCHAIN=go1.27.4 go build -o .local/bin/control-api ./apps/control-api/cmd/control-api
+2026-11-15T06:48:31.6096071Z GOTOOLCHAIN=go1.27.4 go build -o .local/bin/config-publisher ./apps/config-publisher/cmd/config-publisher
+2026-11-15T06:48:32.1910249Z GOTOOLCHAIN=go1.27.4 go build -o .local/bin/fixtures ./packages/test-fixtures/cmd/fixtures
+2026-11-15T06:48:32.4216277Z cargo +1.99.1 build --workspace --locked --manifest-path apps/edge/Cargo.toml
+2026-11-15T06:48:32.4405563Z [1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 0.01s
+2026-11-15T06:48:32.4417005Z cargo +1.99.1 build --workspace --locked --manifest-path spikes/hyper/Cargo.toml
+2026-11-15T06:48:32.4771647Z [1m[92m   Compiling[0m aegisgate-hyper-feasibility v0.1.0 (/home/runner/work/aegis-gate/aegis-gate/spikes/hyper)
+2026-11-15T06:48:34.1316229Z [1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 1.68s
+2026-11-15T06:48:34.1375626Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run build
+2026-11-15T06:48:34.2337235Z 
+2026-11-15T06:48:34.2337985Z > @aegisgate/dashboard@0.1.0 build
+2026-11-15T06:48:34.2338791Z > NEXT_TELEMETRY_DISABLED=1 next build --webpack
+2026-11-15T06:48:34.2339077Z 
+2026-11-15T06:48:34.4724415Z ▲ Next.js 16.4.6 (webpack)
+2026-11-15T06:48:34.4876482Z ✓ Running next.config.mjs took 16ms
+2026-11-15T06:48:34.4877824Z ⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+2026-11-15T06:48:34.5055920Z 
+2026-11-15T06:48:34.5189593Z   Creating an optimized production build ...
+2026-11-15T06:48:38.7417827Z ✓ Compiled successfully in 2.8s
+2026-11-15T06:48:38.7427900Z   Running TypeScript ...
+2026-11-15T06:48:39.7663260Z   Finished TypeScript in 1023ms ...
+2026-11-15T06:48:39.7675873Z   Collecting page data using 3 workers ...
+2026-11-15T06:48:40.1923287Z   Generating static pages using 3 workers (0/3) ...
+2026-11-15T06:48:40.4770425Z ✓ Generating static pages using 3 workers (3/3) in 285ms
+2026-11-15T06:48:40.6253097Z   Finalizing page optimization ...
+2026-11-15T06:48:40.6254292Z   Collecting build traces ...
+2026-11-15T06:48:44.7617711Z 
+2026-11-15T06:48:44.7630512Z Route (app)
+2026-11-15T06:48:44.7631191Z ┌ ○ /
+2026-11-15T06:48:44.7631875Z └ ○ /_not-found
+2026-11-15T06:48:44.7632391Z 
+2026-11-15T06:48:44.7632401Z 
+2026-11-15T06:48:44.7632698Z ○  (Static)  prerendered as static content
+2026-11-15T06:48:44.7633031Z 
+2026-11-15T06:48:44.7885621Z python3 scripts/dev-secrets.py
+2026-11-15T06:48:44.8091455Z Local development secrets ready (material not logged)
+2026-11-15T06:48:44.8137636Z python3 scripts/build-fixture-images.py
+2026-11-15T06:48:44.9221650Z #0 building with "default" instance using docker driver
+2026-11-15T06:48:44.9222173Z 
+2026-11-15T06:48:44.9222517Z #1 [internal] load build definition from Dockerfile.postgres
+2026-11-15T06:48:44.9387917Z #1 transferring dockerfile: 644B done
+2026-11-15T06:48:44.9388753Z #1 DONE 0.0s
+2026-11-15T06:48:44.9389596Z 
+2026-11-15T06:48:44.9390519Z #2 [internal] load metadata for docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395
+2026-11-15T06:48:44.9391323Z #2 DONE 0.0s
+2026-11-15T06:48:44.9391551Z 
+2026-11-15T06:48:44.9391953Z #3 [internal] load .dockerignore
+2026-11-15T06:48:44.9392569Z #3 transferring context: 102B done
+2026-11-15T06:48:44.9392971Z #3 DONE 0.0s
+2026-11-15T06:48:44.9393167Z 
+2026-11-15T06:48:44.9393704Z #4 [1/4] FROM docker.io/library/postgres:18.6-alpine@sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395
+2026-11-15T06:48:44.9396389Z #4 DONE 0.0s
+2026-11-15T06:48:44.9396641Z 
+2026-11-15T06:48:44.9397066Z #5 [internal] load build context
+2026-11-15T06:48:44.9397542Z #5 transferring context: 39B done
+2026-11-15T06:48:44.9397934Z #5 DONE 0.0s
+2026-11-15T06:48:44.9398109Z 
+2026-11-15T06:48:44.9398651Z #6 [2/4] RUN apk add --no-cache krb5-libs=1.22.3-r0 libxslt=1.1.43-r4 su-exec=0.3-r0     && rm /usr/local/bin/gosu
+2026-11-15T06:48:44.9399226Z #6 CACHED
+2026-11-15T06:48:44.9399381Z 
+2026-11-15T06:48:44.9399593Z #7 [3/4] COPY su-exec-wrapper.sh /usr/local/bin/gosu
+2026-11-15T06:48:44.9399930Z #7 CACHED
+2026-11-15T06:48:44.9400090Z 
+2026-11-15T06:48:44.9400413Z #8 [4/4] RUN chmod 0755 /usr/local/bin/gosu     && /usr/local/bin/gosu postgres id -u | grep -qx 70
+2026-11-15T06:48:44.9400958Z #8 CACHED
+2026-11-15T06:48:44.9401098Z 
+2026-11-15T06:48:44.9401270Z #9 exporting to image
+2026-11-15T06:48:44.9401578Z #9 exporting layers done
+2026-11-15T06:48:44.9402310Z #9 writing image sha256:2cb0bc3464a94f576c1e4ccbd7d9b311d875ef19871a61ecfd84acf29820d02c done
+2026-11-15T06:48:44.9402746Z #9 DONE 0.0s
+2026-11-15T06:48:45.0427059Z #0 building with "default" instance using docker driver
+2026-11-15T06:48:45.0427769Z 
+2026-11-15T06:48:45.0428521Z #1 [internal] load build definition from Dockerfile.origin
+2026-11-15T06:48:45.0429076Z #1 transferring dockerfile: 658B done
+2026-11-15T06:48:45.0429448Z #1 DONE 0.0s
+2026-11-15T06:48:45.0429576Z 
+2026-11-15T06:48:45.0430073Z #2 [internal] load metadata for docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894
+2026-11-15T06:48:45.0430786Z #2 DONE 0.0s
+2026-11-15T06:48:45.0430933Z 
+2026-11-15T06:48:45.0431144Z #3 [internal] load .dockerignore
+2026-11-15T06:48:45.0431633Z #3 transferring context: 102B done
+2026-11-15T06:48:45.0432314Z #3 DONE 0.0s
+2026-11-15T06:48:45.0432493Z 
+2026-11-15T06:48:45.0433184Z #4 [1/2] FROM docker.io/library/python:3.14.10-alpine@sha256:a18b20ad69e74df6cf6d2e1b1a260d7a1ecf5380fd83b310f83ba88c461cf894
+2026-11-15T06:48:45.0433850Z #4 DONE 0.0s
+2026-11-15T06:48:45.0434030Z 
+2026-11-15T06:48:45.0434952Z #5 [2/2] RUN rm -rf /usr/local/lib/python3.14/site-packages/*       /usr/local/lib/python3.14/ensurepip /root/.cache     && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.14     && python -I -c "import http.server, ssl; assert ssl.OPENSSL_VERSION"
+2026-11-15T06:48:45.0435926Z #5 CACHED
+2026-11-15T06:48:45.0436075Z 
+2026-11-15T06:48:45.0436208Z #6 exporting to image
+2026-11-15T06:48:45.0436562Z #6 exporting layers done
+2026-11-15T06:48:45.0437063Z #6 writing image sha256:f06294da484e015b94e092949752f202fd8707bf1185b934966233a962ede5d4 done
+2026-11-15T06:48:45.0437514Z #6 DONE 0.0s
+2026-11-15T06:48:45.0575212Z Local fixture images built and locked by immutable image ID; no publication
+2026-11-15T06:48:45.0627548Z docker compose --env-file .local/compose.env --env-file .local/fixture-images.env -f infra/compose/compose.yaml up -d --wait --wait-timeout 90
+2026-11-15T06:48:48.3853207Z  redis Pulling 
+2026-11-15T06:48:48.3853892Z  nats Pulling 
+2026-11-15T06:48:48.5690616Z  74c614fb2c68 Pulling fs layer 
+2026-11-15T06:48:48.5691289Z  c8ea569334dd Pulling fs layer 
+2026-11-15T06:48:48.5691600Z  6de6a661124c Pulling fs layer 
+2026-11-15T06:48:48.5691963Z  ab7525b6cc9e Pulling fs layer 
+2026-11-15T06:48:48.5692457Z  efd1ae24e8b5 Pulling fs layer 
+2026-11-15T06:48:48.5692763Z  4f4fb700ef54 Pulling fs layer 
+2026-11-15T06:48:48.5693174Z  a5986f71dff3 Pulling fs layer 
+2026-11-15T06:48:48.5693433Z  ab7525b6cc9e Waiting 
+2026-11-15T06:48:48.5693808Z  efd1ae24e8b5 Waiting 
+2026-11-15T06:48:48.5694144Z  4f4fb700ef54 Waiting 
+2026-11-15T06:48:48.5694509Z  a5986f71dff3 Waiting 
+2026-11-15T06:48:48.5763269Z  710f3da1112f Pulling fs layer 
+2026-11-15T06:48:48.5764151Z  278547e819af Pulling fs layer 
+2026-11-15T06:48:48.5764484Z  2bd9e4cfb447 Pulling fs layer 
+2026-11-15T06:48:48.5764996Z  2380c5ca2327 Pulling fs layer 
+2026-11-15T06:48:48.5765916Z  2bd9e4cfb447 Waiting 
+2026-11-15T06:48:48.5766499Z  710f3da1112f Waiting 
+2026-11-15T06:48:48.5766847Z  2380c5ca2327 Waiting 
+2026-11-15T06:48:48.5767415Z  278547e819af Waiting 
+2026-11-15T06:48:48.6096819Z  74c614fb2c68 Downloading [>                                                  ]  50.65kB/3.853MB
+2026-11-15T06:48:48.6108107Z  c8ea569334dd Downloading [==================================================>]     949B/949B
+2026-11-15T06:48:48.6108949Z  c8ea569334dd Verifying Checksum 
+2026-11-15T06:48:48.6109428Z  c8ea569334dd Download complete 
+2026-11-15T06:48:48.6165137Z  6de6a661124c Downloading [====>                                              ]  16.38kB/201kB
+2026-11-15T06:48:48.6187521Z  6de6a661124c Downloading [==================================================>]    201kB/201kB
+2026-11-15T06:48:48.6188401Z  6de6a661124c Verifying Checksum 
+2026-11-15T06:48:48.6188843Z  6de6a661124c Download complete 
+2026-11-15T06:48:48.6255666Z  74c614fb2c68 Verifying Checksum 
+2026-11-15T06:48:48.6257240Z  74c614fb2c68 Download complete 
+2026-11-15T06:48:48.6259204Z  74c614fb2c68 Extracting [>                                                  ]  65.54kB/3.853MB
+2026-11-15T06:48:48.6552471Z  ab7525b6cc9e Downloading [>                                                  ]  365.7kB/35.47MB
+2026-11-15T06:48:48.6559906Z  efd1ae24e8b5 Downloading [==================================================>]     101B/101B
+2026-11-15T06:48:48.6560541Z  efd1ae24e8b5 Verifying Checksum 
+2026-11-15T06:48:48.6654114Z  efd1ae24e8b5 Download complete 
+2026-11-15T06:48:48.6654785Z  4f4fb700ef54 Downloading [==================================================>]      32B/32B
+2026-11-15T06:48:48.6655662Z  4f4fb700ef54 Download complete 
+2026-11-15T06:48:48.6881565Z  74c614fb2c68 Extracting [==================================================>]  3.853MB/3.853MB
+2026-11-15T06:48:48.6885908Z  74c614fb2c68 Extracting [==================================================>]  3.853MB/3.853MB
+2026-11-15T06:48:48.6998156Z  74c614fb2c68 Pull complete 
+2026-11-15T06:48:48.7002755Z  c8ea569334dd Extracting [==================================================>]     949B/949B
+2026-11-15T06:48:48.7005961Z  c8ea569334dd Extracting [==================================================>]     949B/949B
+2026-11-15T06:48:48.7050301Z  c8ea569334dd Pull complete 
+2026-11-15T06:48:48.7057040Z  6de6a661124c Extracting [========>                                          ]  32.77kB/201kB
+2026-11-15T06:48:48.7085099Z  a5986f71dff3 Downloading [==================================================>]  2.103kB/2.103kB
+2026-11-15T06:48:48.7085775Z  a5986f71dff3 Download complete 
+2026-11-15T06:48:48.7092145Z  6de6a661124c Extracting [==================================================>]    201kB/201kB
+2026-11-15T06:48:48.7122420Z  710f3da1112f Downloading [>                                                  ]  50.67kB/3.794MB
+2026-11-15T06:48:48.7226675Z  6de6a661124c Extracting [==================================================>]    201kB/201kB
+2026-11-15T06:48:48.7235917Z  710f3da1112f Verifying Checksum 
+2026-11-15T06:48:48.7236861Z  710f3da1112f Download complete 
+2026-11-15T06:48:48.7248081Z  710f3da1112f Extracting [>                                                  ]  65.54kB/3.794MB
+2026-11-15T06:48:48.7567590Z  ab7525b6cc9e Downloading [=================>                                 ]  12.71MB/35.47MB
+2026-11-15T06:48:48.7778291Z  6de6a661124c Pull complete 
+2026-11-15T06:48:48.7820586Z  2bd9e4cfb447 Downloading [==================================================>]     560B/560B
+2026-11-15T06:48:48.7821277Z  2bd9e4cfb447 Verifying Checksum 
+2026-11-15T06:48:48.7821725Z  2bd9e4cfb447 Download complete 
+2026-11-15T06:48:48.7905726Z  710f3da1112f Extracting [==================================================>]  3.794MB/3.794MB
+2026-11-15T06:48:48.7911557Z  710f3da1112f Extracting [==================================================>]  3.794MB/3.794MB
+2026-11-15T06:48:48.8030787Z  710f3da1112f Pull complete 
+2026-11-15T06:48:48.8087402Z  278547e819af Downloading [>                                                  ]  85.49kB/7.749MB
+2026-11-15T06:48:48.8222478Z  2380c5ca2327 Downloading [==================================================>]     408B/408B
+2026-11-15T06:48:48.8223164Z  2380c5ca2327 Verifying Checksum 
+2026-11-15T06:48:48.8223736Z  2380c5ca2327 Download complete 
+2026-11-15T06:48:48.8285036Z  278547e819af Verifying Checksum 
+2026-11-15T06:48:48.8285561Z  278547e819af Download complete 
+2026-11-15T06:48:48.8290235Z  278547e819af Extracting [>                                                  ]   98.3kB/7.749MB
+2026-11-15T06:48:48.8573873Z  ab7525b6cc9e Downloading [================================>                  ]  22.85MB/35.47MB
+2026-11-15T06:48:48.9320985Z  278547e819af Extracting [==================================================>]  7.749MB/7.749MB
+2026-11-15T06:48:48.9444298Z  278547e819af Extracting [==================================================>]  7.749MB/7.749MB
+2026-11-15T06:48:48.9596170Z  ab7525b6cc9e Downloading [==============================================>    ]  33.04MB/35.47MB
+2026-11-15T06:48:48.9866828Z  ab7525b6cc9e Verifying Checksum 
+2026-11-15T06:48:48.9944015Z  ab7525b6cc9e Download complete 
+2026-11-15T06:48:48.9944841Z  ab7525b6cc9e Extracting [>                                                  ]  360.4kB/35.47MB
+2026-11-15T06:48:48.9962303Z  278547e819af Pull complete 
+2026-11-15T06:48:48.9976742Z  2bd9e4cfb447 Extracting [==================================================>]     560B/560B
+2026-11-15T06:48:48.9977604Z  2bd9e4cfb447 Extracting [==================================================>]     560B/560B
+2026-11-15T06:48:49.0039002Z  2bd9e4cfb447 Pull complete 
+2026-11-15T06:48:49.0048724Z  2380c5ca2327 Extracting [==================================================>]     408B/408B
+2026-11-15T06:48:49.0050800Z  2380c5ca2327 Extracting [==================================================>]     408B/408B
+2026-11-15T06:48:49.0080653Z  2380c5ca2327 Pull complete 
+2026-11-15T06:48:49.0139242Z  nats Pulled 
+2026-11-15T06:48:49.0956232Z  ab7525b6cc9e Extracting [=============>                                     ]  9.732MB/35.47MB
+2026-11-15T06:48:49.1973253Z  ab7525b6cc9e Extracting [============================>                      ]  20.19MB/35.47MB
+2026-11-15T06:48:49.2983957Z  ab7525b6cc9e Extracting [==========================================>        ]  29.92MB/35.47MB
+2026-11-15T06:48:49.3831779Z  ab7525b6cc9e Extracting [==================================================>]  35.47MB/35.47MB
+2026-11-15T06:48:49.3879010Z  ab7525b6cc9e Pull complete 
+2026-11-15T06:48:49.3884445Z  efd1ae24e8b5 Extracting [==================================================>]     101B/101B
+2026-11-15T06:48:49.3886946Z  efd1ae24e8b5 Extracting [==================================================>]     101B/101B
+2026-11-15T06:48:49.3914626Z  efd1ae24e8b5 Pull complete 
+2026-11-15T06:48:49.3919195Z  4f4fb700ef54 Extracting [==================================================>]      32B/32B
+2026-11-15T06:48:49.3921708Z  4f4fb700ef54 Extracting [==================================================>]      32B/32B
+2026-11-15T06:48:49.3944102Z  4f4fb700ef54 Pull complete 
+2026-11-15T06:48:49.3959853Z  a5986f71dff3 Extracting [==================================================>]  2.103kB/2.103kB
+2026-11-15T06:48:49.3961852Z  a5986f71dff3 Extracting [==================================================>]  2.103kB/2.103kB
+2026-11-15T06:48:49.4000502Z  a5986f71dff3 Pull complete 
+2026-11-15T06:48:49.4026679Z  redis Pulled 
+2026-11-15T06:48:49.4046663Z  Network aegisgate-local_lab  Creating
+2026-11-15T06:48:49.4274402Z  Network aegisgate-local_lab  Created
+2026-11-15T06:48:49.4291629Z  Volume "aegisgate-local_nats-data"  Creating
+2026-11-15T06:48:49.4300666Z  Volume "aegisgate-local_nats-data"  Created
+2026-11-15T06:48:49.4303878Z  Volume "aegisgate-local_postgres-data"  Creating
+2026-11-15T06:48:49.4308861Z  Volume "aegisgate-local_postgres-data"  Created
+2026-11-15T06:48:49.4312203Z  Container aegisgate-local-postgres-1  Creating
+2026-11-15T06:48:49.4313070Z  Container aegisgate-local-demo-origin-1  Creating
+2026-11-15T06:48:49.4313660Z  Container aegisgate-local-nats-1  Creating
+2026-11-15T06:48:49.4314176Z  Container aegisgate-local-redis-1  Creating
+2026-11-15T06:48:51.4588183Z  Container aegisgate-local-redis-1  Created
+2026-11-15T06:48:51.4588705Z  Container aegisgate-local-postgres-1  Created
+2026-11-15T06:48:51.4646919Z  Container aegisgate-local-demo-origin-1  Created
+2026-11-15T06:48:51.4651598Z  Container aegisgate-local-nats-1  Created
+2026-11-15T06:48:51.4659808Z  Container aegisgate-local-redis-1  Starting
+2026-11-15T06:48:51.4660500Z  Container aegisgate-local-nats-1  Starting
+2026-11-15T06:48:51.4661127Z  Container aegisgate-local-postgres-1  Starting
+2026-11-15T06:48:51.4666584Z  Container aegisgate-local-demo-origin-1  Starting
+2026-11-15T06:48:51.7555678Z  Container aegisgate-local-postgres-1  Started
+2026-11-15T06:48:51.7578678Z  Container aegisgate-local-demo-origin-1  Started
+2026-11-15T06:48:51.7609348Z  Container aegisgate-local-nats-1  Started
+2026-11-15T06:48:51.7650610Z  Container aegisgate-local-redis-1  Started
+2026-11-15T06:48:51.7652675Z  Container aegisgate-local-nats-1  Waiting
+2026-11-15T06:48:51.7653531Z  Container aegisgate-local-demo-origin-1  Waiting
+2026-11-15T06:48:51.7654264Z  Container aegisgate-local-postgres-1  Waiting
+2026-11-15T06:48:51.7654877Z  Container aegisgate-local-redis-1  Waiting
+2026-11-15T06:48:52.2665703Z  Container aegisgate-local-demo-origin-1  Healthy
+2026-11-15T06:48:54.2665881Z  Container aegisgate-local-redis-1  Healthy
+2026-11-15T06:48:54.2666519Z  Container aegisgate-local-nats-1  Healthy
+2026-11-15T06:48:54.2667580Z  Container aegisgate-local-postgres-1  Healthy
+2026-11-15T06:48:54.2706166Z # Schema-isolated packages still share database-global migration locks.
+2026-11-15T06:48:54.2718661Z AEGIS_TENANCY_INTEGRATION=1 GOTOOLCHAIN=go1.27.4 go test -p 1 -race ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/... -run Integration -count=1
+2026-11-15T06:48:54.4024751Z ?   	aegisgate.dev/aegisgate/apps/control-api/cmd/control-api	[no test files]
+2026-11-15T06:48:54.4025585Z ?   	aegisgate.dev/aegisgate/apps/control-api/internal/application	[no test files]
+2026-11-15T06:48:55.5785285Z ok  	aegisgate.dev/aegisgate/apps/control-api/internal/domain	1.009s [no tests to run]
+2026-11-15T06:48:56.9048094Z ok  	aegisgate.dev/aegisgate/apps/control-api/internal/identity	1.026s
+2026-11-15T06:49:05.3271522Z ok  	aegisgate.dev/aegisgate/apps/control-api/internal/persistence	7.987s
+2026-11-15T06:49:19.2101496Z ok  	aegisgate.dev/aegisgate/apps/control-api/internal/transport	13.453s
+2026-11-15T06:49:19.2102869Z ?   	aegisgate.dev/aegisgate/apps/control-api/publication	[no test files]
+2026-11-15T06:49:19.2106546Z ?   	aegisgate.dev/aegisgate/apps/config-publisher/cmd/config-publisher	[no test files]
+2026-11-15T06:49:20.5250119Z ok  	aegisgate.dev/aegisgate/internal/configconsumer	1.028s [no tests to run]
+2026-11-15T06:49:23.1236357Z ok  	aegisgate.dev/aegisgate/internal/configpublish	2.291s
+2026-11-15T06:49:24.3987568Z ok  	aegisgate.dev/aegisgate/internal/configreview	1.027s [no tests to run]
+2026-11-15T06:49:25.9808851Z ok  	aegisgate.dev/aegisgate/internal/configrollout	1.206s
+2026-11-15T06:49:27.1922300Z ok  	aegisgate.dev/aegisgate/internal/configsnapshot	1.028s [no tests to run]
+2026-11-15T06:49:28.4321958Z ok  	aegisgate.dev/aegisgate/internal/contracts	1.010s [no tests to run]
+2026-11-15T06:49:28.4325301Z ?   	aegisgate.dev/aegisgate/packages/test-fixtures/cmd/fixtures	[no test files]
+2026-11-15T06:49:28.4326227Z ?   	aegisgate.dev/aegisgate/packages/test-fixtures/configlab	[no test files]
+2026-11-15T06:49:29.9921877Z ok  	aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab	1.305s
+2026-11-15T06:49:29.9978222Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" "$(scripts/node-path.sh)" scripts/contract-integration.mjs
+2026-11-15T06:49:30.8684425Z PASS: actual OpenAPI-generated Go envelope consumed by Rust CLI and validated against JSON Schema
+2026-11-15T06:49:30.8765884Z python3 scripts/integration.py
+2026-11-15T06:49:31.5537679Z PASS: local Postgres transaction + credential positive/negative, authenticated Redis/NATS, JetStream, TLS origin + wrong-host/untrusted negatives, loopback/digest policy
+2026-11-15T06:49:31.5607581Z python3 scripts/fixture-image-integration.py
+2026-11-15T06:49:33.2015353Z PASS: exact local Postgres image fresh initialization, su-exec UID drop, persisted-volume restart and password positive/negative; no public port
+2026-11-15T06:49:33.2067338Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" npm --prefix apps/dashboard run integration
+2026-11-15T06:49:33.2995646Z 
+2026-11-15T06:49:33.2996626Z > @aegisgate/dashboard@0.1.0 integration
+2026-11-15T06:49:33.2997416Z > node --test tests/integration.test.mjs
+2026-11-15T06:49:33.2997736Z 
+2026-11-15T06:49:33.6819287Z ✔ local Next.js app serves public status and denies tenant-resource paths (323.070074ms)
+2026-11-15T06:49:33.6886856Z ℹ tests 1
+2026-11-15T06:49:33.6887225Z ℹ suites 0
+2026-11-15T06:49:33.6887596Z ℹ pass 1
+2026-11-15T06:49:33.6887832Z ℹ fail 0
+2026-11-15T06:49:33.6888091Z ℹ cancelled 0
+2026-11-15T06:49:33.6888408Z ℹ skipped 0
+2026-11-15T06:49:33.6888639Z ℹ todo 0
+2026-11-15T06:49:33.6889006Z ℹ duration_ms 363.727985
+2026-11-15T06:49:33.6964347Z python3 scripts/dev-secrets.test.py
+2026-11-15T06:49:34.2295009Z ...
+2026-11-15T06:49:34.2295705Z ----------------------------------------------------------------------
+2026-11-15T06:49:34.2296152Z Ran 3 tests in 0.498s
+2026-11-15T06:49:34.2296375Z 
+2026-11-15T06:49:34.2300772Z OK
+2026-11-15T06:49:34.2373039Z python3 scripts/image_identity_test.py
+2026-11-15T06:49:34.3349193Z ...............................
+2026-11-15T06:49:34.3349905Z ----------------------------------------------------------------------
+2026-11-15T06:49:34.3350433Z Ran 31 tests in 0.057s
+2026-11-15T06:49:34.3350664Z 
+2026-11-15T06:49:34.3350838Z OK
+2026-11-15T06:49:34.3433768Z GOTOOLCHAIN=go1.27.4 go test -race ./apps/control-api/... ./apps/config-publisher/... ./internal/... ./packages/test-fixtures/... -run 'Negative|IntegrationLocalPKI' -count=1
+2026-11-15T06:49:34.4651596Z ?   	aegisgate.dev/aegisgate/apps/control-api/cmd/control-api	[no test files]
+2026-11-15T06:49:34.4653257Z ?   	aegisgate.dev/aegisgate/apps/control-api/internal/application	[no test files]
+2026-11-15T06:49:35.7266444Z ok  	aegisgate.dev/aegisgate/apps/control-api/internal/domain	1.013s
+2026-11-15T06:49:36.0218087Z ok  	aegisgate.dev/aegisgate/apps/control-api/internal/identity	1.166s
+2026-11-15T06:49:36.1154159Z ok  	aegisgate.dev/aegisgate/apps/control-api/internal/persistence	1.032s
+2026-11-15T06:49:36.5976725Z ok  	aegisgate.dev/aegisgate/apps/control-api/internal/transport	1.510s
+2026-11-15T06:49:36.5977746Z ?   	aegisgate.dev/aegisgate/apps/control-api/publication	[no test files]
+2026-11-15T06:49:36.5978531Z ?   	aegisgate.dev/aegisgate/apps/config-publisher/cmd/config-publisher	[no test files]
+2026-11-15T06:49:37.2742922Z ok  	aegisgate.dev/aegisgate/internal/configconsumer	1.254s
+2026-11-15T06:49:37.4850102Z ok  	aegisgate.dev/aegisgate/internal/configpublish	1.069s
+2026-11-15T06:49:37.4850943Z ok  	aegisgate.dev/aegisgate/internal/configreview	1.030s [no tests to run]
+2026-11-15T06:49:38.0169452Z ok  	aegisgate.dev/aegisgate/internal/configrollout	1.031s
+2026-11-15T06:49:38.5859120Z ok  	aegisgate.dev/aegisgate/internal/configsnapshot	1.124s
+2026-11-15T06:49:38.7391462Z ok  	aegisgate.dev/aegisgate/internal/contracts	1.009s [no tests to run]
+2026-11-15T06:49:38.7392400Z ?   	aegisgate.dev/aegisgate/packages/test-fixtures/cmd/fixtures	[no test files]
+2026-11-15T06:49:38.7392989Z ?   	aegisgate.dev/aegisgate/packages/test-fixtures/configlab	[no test files]
+2026-11-15T06:49:39.1232741Z ok  	aegisgate.dev/aegisgate/packages/test-fixtures/internal/lab	1.329s
+2026-11-15T06:49:39.1302376Z cargo +1.99.1 test --workspace --locked --manifest-path apps/edge/Cargo.toml negative_
+2026-11-15T06:49:39.1495162Z [1m[92m    Finished[0m `test` profile [unoptimized + debuginfo] target(s) in 0.01s
+2026-11-15T06:49:39.1499535Z [1m[92m     Running[0m unittests src/main.rs (apps/edge/target/debug/deps/config_agent-fe9b0ad4296db96e)
+2026-11-15T06:49:39.1508424Z 
+2026-11-15T06:49:39.1508744Z running 0 tests
+2026-11-15T06:49:39.1509066Z 
+2026-11-15T06:49:39.1510159Z [1m[92m     Running[0m tests/error_contract.rs (apps/edge/target/debug/deps/error_contract-ca4917393080892a)
+2026-11-15T06:49:39.1510866Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-11-15T06:49:39.1511314Z 
+2026-11-15T06:49:39.1516161Z 
+2026-11-15T06:49:39.1516329Z running 2 tests
+2026-11-15T06:49:39.1525249Z test negative_missing_file_does_not_disclose_path ... ok
+2026-11-15T06:49:39.1534126Z test negative_malformed_and_oversized_inputs_rejected_without_echo ... ok
+2026-11-15T06:49:39.1534414Z 
+2026-11-15T06:49:39.1534792Z test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+2026-11-15T06:49:39.1535468Z 
+2026-11-15T06:49:39.1536143Z [1m[92m     Running[0m unittests src/main.rs (apps/edge/target/debug/deps/edge_server-312c04b63f751aec)
+2026-11-15T06:49:39.1541590Z 
+2026-11-15T06:49:39.1541726Z running 0 tests
+2026-11-15T06:49:39.1541939Z 
+2026-11-15T06:49:39.1542530Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-11-15T06:49:39.1543034Z 
+2026-11-15T06:49:39.1545000Z [1m[92m     Running[0m tests/bootstrap.rs (apps/edge/target/debug/deps/bootstrap-4264b5b6b55311e7)
+2026-11-15T06:49:39.1549835Z 
+2026-11-15T06:49:39.1550132Z running 1 test
+2026-11-15T06:49:39.1573071Z test negative_runtime_cannot_be_enabled_by_untrusted_flags ... ok
+2026-11-15T06:49:39.1573452Z 
+2026-11-15T06:49:39.1573733Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+2026-11-15T06:49:39.1574187Z 
+2026-11-15T06:49:39.1574765Z [1m[92m     Running[0m unittests src/lib.rs (apps/edge/target/debug/deps/edge_types-511e4ed3f063386a)
+2026-11-15T06:49:39.1580498Z 
+2026-11-15T06:49:39.1580616Z running 6 tests
+2026-11-15T06:49:39.1582972Z test tests::negative_generation_replay_and_rollback_denied ... ok
+2026-11-15T06:49:39.1583661Z test tests::negative_oversized_error_rejected_before_parsing ... ok
+2026-11-15T06:49:39.1584331Z test tests::negative_diagnostics_never_echo_secret_input ... ok
+2026-11-15T06:49:39.1585022Z test tests::negative_untrusted_codes_and_messages_denied ... ok
+2026-11-15T06:49:39.1585760Z [1m[92m     Running[0m unittests src/lib.rs (apps/edge/target/debug/deps/policy_engine-e926b75152b353c7)
+2026-11-15T06:49:39.1586563Z test tests::negative_unknown_duplicate_fields_and_trailing_data_denied ... ok
+2026-11-15T06:49:39.1587123Z test tests::negative_noncanonical_or_nonrandom_uuid_denied ... ok
+2026-11-15T06:49:39.1587463Z 
+2026-11-15T06:49:39.1587923Z test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+2026-11-15T06:49:39.1588377Z 
+2026-11-15T06:49:39.1591384Z 
+2026-11-15T06:49:39.1591582Z running 1 test
+2026-11-15T06:49:39.1593343Z test tests::negative_bootstrap_never_authorizes_or_becomes_ready ... ok
+2026-11-15T06:49:39.1593677Z 
+2026-11-15T06:49:39.1593971Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+2026-11-15T06:49:39.1594297Z 
+2026-11-15T06:49:39.1605283Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" "$(scripts/node-path.sh)" --test --test-name-pattern='negative' scripts/contracts.test.mjs
+2026-11-15T06:49:39.5885833Z ✔ negative: unknown fields, tenant header injection, malformed IDs and unbounded errors rejected (26.910067ms)
+2026-11-15T06:49:39.5933316Z ✔ negative: intentionally broken schema and operation changes fail compatibility (5.506482ms)
+2026-11-15T06:49:39.6059184Z ℹ tests 2
+2026-11-15T06:49:39.6059643Z ℹ suites 0
+2026-11-15T06:49:39.6060016Z ℹ pass 2
+2026-11-15T06:49:39.6060299Z ℹ fail 0
+2026-11-15T06:49:39.6060535Z ℹ cancelled 0
+2026-11-15T06:49:39.6060898Z ℹ skipped 0
+2026-11-15T06:49:39.6061165Z ℹ todo 0
+2026-11-15T06:49:39.6061492Z ℹ duration_ms 374.586809
+2026-11-15T06:49:39.6096449Z PATH="$(dirname "$(scripts/node-path.sh)"):$PATH" "$(scripts/node-path.sh)" scripts/gate-selftest.mjs
+2026-11-15T06:49:40.2470291Z PASS: formatting, Go vet, schema compatibility and negative fixture reject deliberate defects; restored inputs pass
+2026-11-15T06:49:40.2592506Z docker compose --env-file .local/compose.env --env-file .local/fixture-images.env -f infra/compose/compose.yaml down
+2026-11-15T06:49:40.3181656Z  Container aegisgate-local-postgres-1  Stopping
+2026-11-15T06:49:40.3189622Z  Container aegisgate-local-nats-1  Stopping
+2026-11-15T06:49:40.3190398Z  Container aegisgate-local-demo-origin-1  Stopping
+2026-11-15T06:49:40.3191138Z  Container aegisgate-local-redis-1  Stopping
+2026-11-15T06:49:40.4055405Z  Container aegisgate-local-nats-1  Stopped
+2026-11-15T06:49:40.4055988Z  Container aegisgate-local-nats-1  Removing
+2026-11-15T06:49:40.4087062Z  Container aegisgate-local-nats-1  Removed
+2026-11-15T06:49:40.4755189Z  Container aegisgate-local-postgres-1  Stopped
+2026-11-15T06:49:40.4755807Z  Container aegisgate-local-postgres-1  Removing
+2026-11-15T06:49:40.4787816Z  Container aegisgate-local-postgres-1  Removed
+2026-11-15T06:49:40.5210777Z  Container aegisgate-local-redis-1  Stopped
+2026-11-15T06:49:40.5211408Z  Container aegisgate-local-redis-1  Removing
+2026-11-15T06:49:40.5232669Z  Container aegisgate-local-redis-1  Removed
+2026-11-15T06:49:50.4249333Z  Container aegisgate-local-demo-origin-1  Stopped
+2026-11-15T06:49:50.4250707Z  Container aegisgate-local-demo-origin-1  Removing
+2026-11-15T06:49:50.4273158Z  Container aegisgate-local-demo-origin-1  Removed
+2026-11-15T06:49:50.4288907Z  Network aegisgate-local_lab  Removing
+2026-11-15T06:49:50.5397909Z  Network aegisgate-local_lab  Removed
+2026-11-15T06:49:50.5521630Z Post job cleanup.
+2026-11-15T06:49:50.6398083Z Cache hit occurred on the primary key node-cache-Linux-x64-npm-f8ac0b1f041bf4fdcb61a100da39e882b6326762ac4751d09e537ed4333230a9, not saving cache.
+2026-11-15T06:49:50.6493859Z Post job cleanup.
+2026-11-15T06:49:50.7420891Z [command]/opt/hostedtoolcache/go/1.27.4/x64/bin/go env GOMODCACHE
+2026-11-15T06:49:50.7464682Z [command]/opt/hostedtoolcache/go/1.27.4/x64/bin/go env GOCACHE
+2026-11-15T06:49:50.7500023Z /home/runner/go/pkg/mod
+2026-11-15T06:49:50.7513499Z /home/runner/.cache/go-build
+2026-11-15T06:49:50.7528581Z Cache hit occurred on the primary key setup-go-Linux-x64-ubuntu24-go-1.27.4-36375a5e7de5636dfac8581ad6d43d41c121db9c07f2dda457b8cc56ef596372, not saving cache.
+2026-11-15T06:49:50.7660302Z Post job cleanup.
+2026-11-15T06:49:50.8361096Z [command]/usr/bin/git version
+2026-11-15T06:49:50.8394146Z git version 2.56.1
+2026-11-15T06:49:50.8417560Z Temporarily overriding HOME='/home/runner/work/_temp/dfee4507-3537-43ef-9071-fb0269eca439' before making global git config changes
+2026-11-15T06:49:50.8418921Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-15T06:49:50.8420613Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/aegis-gate/aegis-gate
+2026-11-15T06:49:50.8448684Z Removing SSH command configuration
+2026-11-15T06:49:50.8453292Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-15T06:49:50.8479616Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-15T06:49:50.8654828Z Removing HTTP extra header
+2026-11-15T06:49:50.8659587Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-15T06:49:50.8696208Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-15T06:49:50.8873915Z Removing includeIf entries pointing to credentials config files
+2026-11-15T06:49:50.8879524Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-15T06:49:50.8899928Z includeif.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git.path
+2026-11-15T06:49:50.8900933Z includeif.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git/worktrees/*.path
+2026-11-15T06:49:50.8901768Z includeif.gitdir:/github/workspace/.git.path
+2026-11-15T06:49:50.8902802Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-15T06:49:50.8906464Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git.path
+2026-11-15T06:49:50.8931594Z /home/runner/work/_temp/git-credentials-39bb4aad-35cc-4142-8333-780a46ff61cd.config
+2026-11-15T06:49:50.8941414Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-39bb4aad\-35cc\-4142\-8333\-780a46ff61cd\.config
+2026-11-15T06:49:50.8972550Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git/worktrees/*.path
+2026-11-15T06:49:50.8992457Z /home/runner/work/_temp/git-credentials-39bb4aad-35cc-4142-8333-780a46ff61cd.config
+2026-11-15T06:49:50.8999764Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/aegis-gate/aegis-gate/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-39bb4aad\-35cc\-4142\-8333\-780a46ff61cd\.config
+2026-11-15T06:49:50.9028513Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-11-15T06:49:50.9050160Z /github/runner_temp/git-credentials-39bb4aad-35cc-4142-8333-780a46ff61cd.config
+2026-11-15T06:49:50.9055500Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-39bb4aad\-35cc\-4142\-8333\-780a46ff61cd\.config
+2026-11-15T06:49:50.9081880Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-11-15T06:49:50.9100966Z /github/runner_temp/git-credentials-39bb4aad-35cc-4142-8333-780a46ff61cd.config
+2026-11-15T06:49:50.9109042Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-39bb4aad\-35cc\-4142\-8333\-780a46ff61cd\.config
+2026-11-15T06:49:50.9135589Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-15T06:49:50.9301427Z Removing credentials config '/home/runner/work/_temp/git-credentials-39bb4aad-35cc-4142-8333-780a46ff61cd.config'
+2026-11-15T06:49:50.9431199Z Cleaning up orphan processes

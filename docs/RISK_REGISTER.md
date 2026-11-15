@@ -15,6 +15,13 @@ Four independently found observer false-PASS defects are fixed, but complete
 dispatch/HPACK mutation attribution is unproven. No contract waiver or downstream
 unlock follows. See `reports/sprint05c-completion.md` and scoped A-F reports.
 
+PR21 integrates reviewed non-production tooling as22f6986, with the same tree
+as accepted5da5504. Full locked local check/security/cleanup atcd32311 and both
+exact-head hosted jobs43686973829 PASS. Independent F accepts only scoped
+integration; runtime/production are rejected. Both exact-main jobs43687689500
+PASS; raw receipts and complete hosted logs are retained in the completion
+evidence. No security contract, failed assertion or human approval changes.
+
 This register tracks residual implementation and release risks. It does not accept risks on behalf of a human reviewer. The current module states and actual executed evidence are recorded in `IMPLEMENTATION_STATUS.md`; T01–T20 mappings are maintained in `docs/SECURITY_COVERAGE.md`.
 
 ## Sprint05-A measured disposition
