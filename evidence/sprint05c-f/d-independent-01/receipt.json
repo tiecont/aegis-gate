@@ -1,0 +1,72 @@
+{
+  "reviewer_commit": "9d5e520e293cf07bcedd9e938aff054d828c61d3",
+  "reviewer_tree": "b619e43758f8c9d4fcea14ce7a912d772fcee336",
+  "collector_sha256": "92c866c2857f5643072010ad4d22fa5652e44f6c34cdd0b35668fa8c2a7c6264",
+  "source_commit": "8494aa20b48efd822a85e7b423b99314a7ccd334",
+  "source_tree": "a6e58c0b6f9e0edc0a2c58f3e469fa3502b65760",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/tmp/aegisgate-05c-f/scripts/sprint05c-f-review.mjs",
+    "d",
+    "8494aa2",
+    "evidence/sprint05c-f/d-independent-01"
+  ],
+  "cwd": "/tmp/aegisgate-05c-f",
+  "mode": "d",
+  "clone": "/tmp/aegisgate-05c-f/.local/sprint05c-f-sources/d-8494aa20b48e-d-independent-01",
+  "started_at": "2026-11-15T05:06:38.847Z",
+  "fixture_lock": "/tmp/aegisgate-sprint02-fixtures.lock",
+  "node": {
+    "path": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "version": "v26.13.0",
+    "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+  },
+  "go": {
+    "path": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+    "sha256": "de0ae3e082ce7599eae4fb69fa2ef1e43b8f31ffd3fce62cdf81930aa9005050"
+  },
+  "commands": [
+    {
+      "label": "clone",
+      "program": "git",
+      "binary_sha256": null,
+      "args": [
+        "clone",
+        "--shared",
+        "--no-checkout",
+        "/tmp/aegisgate-05c-f",
+        "/tmp/aegisgate-05c-f/.local/sprint05c-f-sources/d-8494aa20b48e-d-independent-01"
+      ],
+      "cwd": "/tmp/aegisgate-05c-f",
+      "environment": {
+        "GOTOOLCHAIN": "local",
+        "GOWORK": "off",
+        "GOAMD64": "v1",
+        "GOFLAGS": ""
+      },
+      "started_at": "2026-11-15T05:06:39.060Z",
+      "ended_at": "2026-11-15T05:06:39.080Z",
+      "exit_code": 0,
+      "signal": null,
+      "timedOut": false,
+      "streams": [
+        {
+          "file": "clone.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "clone.stderr",
+          "bytes": 104,
+          "sha256": "a3f515ac387afb10ebf9a0d2fc0c7231998cf129e9e41b09792887fdf6876deb"
+        }
+      ]
+    }
+  ],
+  "observations_complete": false,
+  "semantic_security_pass": false,
+  "error": "Error: ENOSPC: no space left on device, write\n    at Object.writeSync (node:fs:1237:3)\n    at Object.writeFileSync (node:fs:3048:26)\n    at file:///tmp/aegisgate-05c-f/scripts/sprint05c-f-review.mjs:58:8\n    at Array.map (<anonymous>)\n    at run (file:///tmp/aegisgate-05c-f/scripts/sprint05c-f-review.mjs:56:40)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async checked (file:///tmp/aegisgate-05c-f/scripts/sprint05c-f-review.mjs:69:18)\n    at async file:///tmp/aegisgate-05c-f/scripts/sprint05c-f-review.mjs:81:3",
+  "captures": [],
+  "lock_held_through_capture_and_hashes": true,
+  "ended_at": "2026-11-15T05:06:39.456Z"
+}

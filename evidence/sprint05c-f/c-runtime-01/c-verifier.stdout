@@ -1,0 +1,62 @@
+{
+  "source_commit": "7255fa2b38eb657c2b6d0c10e066a13121289b46",
+  "artifacts": 69,
+  "sourceBindings": 512,
+  "results": [
+    {
+      "attempt": "01",
+      "mode": "baseline",
+      "source_commit": "2487ebbe398bb4cb7f429f2a956eb0ea774057dc",
+      "passed": 19,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-HEADERS-stream-zero",
+        "raw-H2-zero-WINDOW_UPDATE"
+      ]
+    },
+    {
+      "attempt": "02",
+      "mode": "oghttp2",
+      "source_commit": "2487ebbe398bb4cb7f429f2a956eb0ea774057dc",
+      "passed": 20,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-unexpected-CONTINUATION"
+      ]
+    },
+    {
+      "attempt": "03",
+      "mode": "oghttp2",
+      "source_commit": "2487ebbe398bb4cb7f429f2a956eb0ea774057dc",
+      "passed": 20,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-unexpected-CONTINUATION"
+      ]
+    },
+    {
+      "attempt": "04",
+      "mode": "oghttp2-runtime",
+      "source_commit": "becc22082e093e7da7e262c0b2f143c2ce900426",
+      "passed": 20,
+      "failures": [
+        "settled-reuse-identity-and-three-authority-negatives",
+        "individual-settled-userinfo-denial",
+        "raw-H2-unexpected-CONTINUATION"
+      ]
+    }
+  ],
+  "retained_source_receipt_sha256": "39d24cb0fb8b8d9b7801a71d3bd4c933fdaa06ec4436e0547677b16437120514",
+  "b_reference": {
+    "commit": "235fe4a24524cdc89577590ebe8bf872e4b11575",
+    "file": "evidence/sprint05c-b/go-ordering-02/original23.json",
+    "sha256": "eee326abb2515611d57c02b5720eb11199c2e5612f1cb74ca7380af67c09a27c",
+    "passed": 17
+  },
+  "integrity_verified": true,
+  "semantic_security_pass": false,
+  "resource_eligible": false
+}
