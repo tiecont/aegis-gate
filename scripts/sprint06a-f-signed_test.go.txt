@@ -1,0 +1,70 @@
+//go:build aegisgate_sprint06a_feasibility
+
+package admission
+
+import (
+	"context"
+	"encoding/json"
+	"testing"
+)
+
+func TestSprint06AFSignedGenerationImmutableSidecar(t *testing.T) {
+	f := setup(t)
+	raw, notice, broad := f.artifact(t, 7, 7, f.signer)
+	must(t, f.a.Apply(context.Background(), notice, raw, broad))
+	// Identical authenticated retries must remain usable.
+	must(t, f.a.Apply(context.Background(), notice, raw, broad))
+	var policy Sidecar
+	must(t, json.Unmarshal(broad, &policy))
+	policy.Bindings = policy.Bindings[:1]
+	narrow, err := SignSidecar(context.Background(), policy, f.signer)
+	must(t, err)
+	if err = f.a.Apply(context.Background(), notice, raw, narrow); err != nil {
+		lease, err := f.a.Capture("api-b.example.com", "api-b.example.com", "/v1", "POST")
+		must(t, err)
+		lease.Close()
+		t.Log("same-generation sidecar conflict rejected; original binding retained")
+		return
+	}
+	lease, err := f.a.Capture("api-b.example.com", "api-b.example.com", "/v1", "POST")
+	if lease != nil {
+		lease.Close()
+	}
+	if err == nil {
+		t.Fatal("narrowed signed sidecar did not revoke the removed binding")
+	}
+	must(t, f.a.Apply(context.Background(), notice, raw, broad))
+	lease, err = f.a.Capture("api-b.example.com", "api-b.example.com", "/v1", "POST")
+	must(t, err)
+	lease.Close()
+	t.Log("same signed snapshot/generation7 accepted broad then narrow then replayed broad; removed tenant-b binding restored")
+	t.Fatal("conflicting authenticated sidecar changed admission at unchanged snapshot generation; old sidecar replay re-enabled removed binding")
+}
+
+func TestSprint06AFNoticeMismatchRetainsAuthenticatedProfile(t *testing.T) {
+	f := setup(t)
+	f.apply(t, 7, 7, f.signer)
+	raw, notice, sidecar := f.artifact(t, 8, 8, f.signer)
+	for _, kind := range []string{"digest", "deployment", "generation"} {
+		t.Run(kind, func(t *testing.T) {
+			bad := notice
+			switch kind {
+			case "digest":
+				bad.Digest = digest(sidecar)
+			case "deployment":
+				bad.DeploymentID = "foreign"
+			case "generation":
+				bad.Generation++
+			}
+			if f.a.Apply(context.Background(), bad, raw, sidecar) == nil {
+				t.Fatal("mismatched notice applied")
+			}
+			lease, err := f.a.Capture("api-a.example.com", "api-a.example.com", "/v1", "POST")
+			must(t, err)
+			defer lease.Close()
+			if lease.Route.Generation != 7 {
+				t.Fatal("mismatched notice replaced old immutable profile")
+			}
+		})
+	}
+}

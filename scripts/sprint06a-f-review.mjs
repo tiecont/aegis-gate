@@ -9,7 +9,7 @@ process.umask(0o077);
 assertLock();
 const root = process.cwd();
 const [revision, relativeOutput, mode = "d"] = process.argv.slice(2);
-assert.ok(["a", "b", "c", "d"].includes(mode));
+assert.ok(["a", "b", "b-attack", "c", "d"].includes(mode));
 assert.match(relativeOutput ?? "", /^evidence\/sprint06a-f\/[a-z0-9-]+$/);
 const output = path.resolve(relativeOutput);
 assert.ok(!fs.existsSync(output));
@@ -237,14 +237,52 @@ try {
         "evidence/sprint06a-c/verify-901",
       ]);
     record.checksComplete = true;
-  } else if (mode === "b") {
-    run(
-      "b-exact-proof",
-      node,
-      ["scripts/sprint06a-b-run.mjs", "evidence/sprint06a-b/attempt-901"],
-      { timeout: 600000, allowedExits: [0, 1] },
+  } else if (mode === "b" || mode === "b-attack") {
+    if (mode === "b") {
+      run(
+        "b-exact-proof",
+        node,
+        ["scripts/sprint06a-b-run.mjs", "evidence/sprint06a-b/attempt-901"],
+        { timeout: 600000, allowedExits: [0, 1] },
+      );
+      record.exactProofExit = record.commands.at(-1).exit;
+    }
+    const overlay = path.join(stage, "signed-overlay.json");
+    const attack = path.join(root, "scripts/sprint06a-f-signed_test.go.txt");
+    fs.writeFileSync(
+      overlay,
+      JSON.stringify({
+        Replace: {
+          [path.join(
+            clone,
+            "spikes/sprint06a-admission/sprint06af_independent_test.go",
+          )]: attack,
+        },
+      }),
     );
-    record.exactProofExit = record.commands.at(-1).exit;
+    record.independentOverlay = {
+      source: attack,
+      sha256: sha(fs.readFileSync(attack)),
+      overlaySha256: sha(fs.readFileSync(overlay)),
+    };
+    run(
+      "b-independent-attacks",
+      go,
+      [
+        "test",
+        "-race",
+        "-v",
+        "-tags=aegisgate_sprint06a_feasibility",
+        "-overlay",
+        overlay,
+        "./spikes/sprint06a-admission",
+        "-run",
+        "^TestSprint06AF",
+        "-count=1",
+      ],
+      { allowedExits: [0, 1] },
+    );
+    record.independentAttackExit = record.commands.at(-1).exit;
     record.checksComplete = true;
   } else {
     run("d-exact-proof", node, [
