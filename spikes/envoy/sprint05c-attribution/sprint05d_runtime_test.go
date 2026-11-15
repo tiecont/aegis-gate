@@ -102,6 +102,7 @@ func runtimeHeaders(rawHex string, field string, client bool) (map[string]uint32
 
 func assessRuntime(e runtimeEvidence, key []byte) runtimeAssessment {
 	r := runtimeAssessment{Raw: e, UpstreamStreams: map[string]uint32{}, DownstreamStreams: map[string]uint32{}}
+	upstreamProbes := map[string]uint32{}
 	fail := func(s string) { r.Incomplete = append(r.Incomplete, s) }
 	if len(key) != 32 || !hmac.Equal([]byte(e.MAC), []byte(runtimeMAC(e, key))) {
 		fail("runtime observation authentication")
@@ -132,9 +133,14 @@ func assessRuntime(e runtimeEvidence, key []byte) runtimeAssessment {
 			r.DownstreamStreams = m
 		} else {
 			r.UpstreamStreams = m
+			upstreamProbes, err = runtimeHeaders(w.To, "x-aegis-probe-id", true)
+			if err != nil {
+				fail("invalid upstream probe correlation")
+			}
 		}
 	}
 	seen := map[string]bool{}
+	nonces := map[string]bool{}
 	accepted := 0
 	for _, q := range e.Requests {
 		if seen[q.Probe] || q.Probe == "" || q.SNI != "example.com" || q.Tenant != "fixture-A" || q.Generation != 7 || r.DownstreamStreams[q.Probe] == 0 {
@@ -143,14 +149,15 @@ func assessRuntime(e runtimeEvidence, key []byte) runtimeAssessment {
 		seen[q.Probe] = true
 		if q.Status == 200 {
 			accepted++
-			if q.Nonce == "" || !q.GotConnection || !q.Wrote || q.OriginHandlers != 1 || r.UpstreamStreams[q.Nonce] == 0 {
+			if q.Nonce == "" || nonces[q.Nonce] || !q.GotConnection || !q.Wrote || q.OriginHandlers != 1 || r.UpstreamStreams[q.Nonce] == 0 || upstreamProbes[q.Probe] != r.UpstreamStreams[q.Nonce] {
 				fail("missing runtime transport/handler binding")
 			}
+			nonces[q.Nonce] = true
 		} else if q.Status != 421 || q.OriginHandlers != 0 || q.GotConnection || q.Wrote || q.Nonce != "" {
 			fail("denied request caused origin effect or forged decision")
 		}
 	}
-	if len(r.UpstreamStreams) != accepted || len(r.DownstreamStreams) != len(e.Requests) {
+	if len(r.UpstreamStreams) != accepted || len(upstreamProbes) != accepted || len(r.DownstreamStreams) != len(e.Requests) {
 		fail("unattributed stream or omitted request")
 	}
 	r.CorrelationConsistent = len(r.Incomplete) == 0
@@ -292,6 +299,7 @@ func TestSprint05DRuntimeDerivedMappings(t *testing.T) {
 		}
 		// Caller-provided correlation is replaced by a fixture-generated identity.
 		out.Header.Set("X-Aegis-Fixture-Id", rec.Nonce)
+		out.Header.Set("X-Aegis-Probe-Id", probe)
 		resp, err := up.RoundTrip(out)
 		if err != nil {
 			t.Error(err)
@@ -370,7 +378,7 @@ func TestSprint05DRuntimeDerivedMappings(t *testing.T) {
 	}
 	b, _ := json.Marshal(assessment)
 	t.Log(string(b))
-	for _, kind := range []string{"missing-handler", "missing-trace", "duplicate-probe", "forged-decision", "late-rejection", "missing-identity", "lost-capture", "truncated-capture", "truncated-reverse", "omitted-dial", "tampered-MAC", "missing-header-block"} {
+	for _, kind := range []string{"missing-handler", "missing-trace", "duplicate-probe", "swapped-nonces", "duplicate-nonce", "forged-decision", "late-rejection", "missing-identity", "lost-capture", "truncated-capture", "truncated-reverse", "omitted-dial", "tampered-MAC", "missing-header-block"} {
 		t.Run(kind, func(t *testing.T) {
 			copyBytes, _ := json.Marshal(e)
 			var bad runtimeEvidence
@@ -382,6 +390,10 @@ func TestSprint05DRuntimeDerivedMappings(t *testing.T) {
 				bad.Requests[0].GotConnection = false
 			case "duplicate-probe":
 				bad.Requests[1].Probe = bad.Requests[0].Probe
+			case "swapped-nonces":
+				bad.Requests[0].Nonce, bad.Requests[2].Nonce = bad.Requests[2].Nonce, bad.Requests[0].Nonce
+			case "duplicate-nonce":
+				bad.Requests[2].Nonce = bad.Requests[0].Nonce
 			case "forged-decision":
 				bad.Requests[1].Status = 200
 			case "late-rejection":
