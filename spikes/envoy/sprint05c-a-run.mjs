@@ -316,6 +316,8 @@ try {
   record.complete = true;
 } catch (e) { record.error = { name: e.name, message: e.message, stack: e.stack }; process.exitCode = 1; }
 finally {
+  if (front) record.metrics = front.metrics;
+  record.observer ??= { allConnections: rows, handlers, rawBytes, connections, parserErrors, tlsErrors };
   clearInterval(sampling); clearTimeout(watchdog);
   try {
     assertLock(); for (const s of sockets) s.destroy(); if (front) await front.close();

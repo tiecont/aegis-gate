@@ -266,6 +266,7 @@ export async function runtime({ addon, edgeTLS, routes, directory }) {
       const status = error.status ?? (signal.aborted ? signal.reason.status : undefined) ??
         (['ENOSPC', 'EDQUOT', 'EMFILE', 'ENFILE'].includes(error.code) ? 503 : 502);
       metrics.rejections[error.message] = (metrics.rejections[error.message] ?? 0) + 1;
+      metrics.lastError = { name: error.name, message: error.message, code: error.code, stack: error.stack };
       upstream?.destroy();
       if (!client.destroyed && !responseStarted) client.end(`HTTP/1.1 ${status} Rejected\r\nContent-Length: 0\r\nConnection: close\r\n\r\n`);
     } finally {
