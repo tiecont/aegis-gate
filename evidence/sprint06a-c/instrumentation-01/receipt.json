@@ -1,0 +1,98 @@
+{
+  "source": "45c1a7b8fb2f7e4475168386aee9152c106a8909",
+  "tree": "9df57de70538c11076b0d3d0cbf9d1494356fbeb",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/home/tiecont/.cache/aegisgate-06a/c/spikes/envoy/sprint06a-c-go-release.mjs",
+    "evidence/sprint06a-c/instrumentation-01"
+  ],
+  "started": "2026-11-15T11:20:37.178Z",
+  "node": "v26.13.0",
+  "node_sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b",
+  "collector_sha256": "02662ca469cffb3b48542c653349ceebb70e09d6cc6869d87b21e9b0071bc4c7",
+  "commands": [
+    {
+      "command": "/usr/bin/curl",
+      "binary_sha256": "e94f761d3f3d78060fdd1654e4b0f0475c519ec984764d0cc1d5bcef6a4a1732",
+      "args": [
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--max-time",
+        "30",
+        "--proto",
+        "=https",
+        "https://go.dev/dl/?mode=json"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "go-stable.stdout",
+          "bytes": 22898,
+          "sha256": "00c8b9cdf0143ac3cc91c55166d28c6c3c08e70cd114129f76d9aa3a0e076ab9"
+        },
+        {
+          "file": "go-stable.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "command": "/usr/bin/curl",
+      "binary_sha256": "e94f761d3f3d78060fdd1654e4b0f0475c519ec984764d0cc1d5bcef6a4a1732",
+      "args": [
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--max-time",
+        "30",
+        "--proto",
+        "=https",
+        "https://proxy.golang.org/golang.org/x/net/@latest"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "net-latest.stdout",
+          "bytes": 190,
+          "sha256": "6adc90d9df36b729ca3e6bb697f9743faf486b09dce49afffb731f724b508c7d"
+        },
+        {
+          "file": "net-latest.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "new_runtime_executed": false,
+  "qualifying_capability": false,
+  "releases": {
+    "go": "go1.27.4",
+    "go_source": {
+      "filename": "go1.27.4.src.tar.gz",
+      "os": "",
+      "arch": "",
+      "version": "go1.27.4",
+      "sha256": "73cfb8571aec0c01177687db87163d46aa20e9779672772891aa17654d9a6099",
+      "size": 35153471,
+      "kind": "source"
+    },
+    "net": {
+      "Version": "v0.62.0",
+      "Time": "2026-10-27T19:00:16Z",
+      "Origin": {
+        "VCS": "git",
+        "URL": "https://go.googlesource.com/net",
+        "Hash": "3de643db506517b3e652a13cc0b56034cea6b8e6",
+        "Ref": "refs/tags/v0.62.0"
+      }
+    }
+  },
+  "same_as_inspected": true,
+  "complete": true,
+  "ended": "2026-11-15T11:20:38.303Z"
+}
