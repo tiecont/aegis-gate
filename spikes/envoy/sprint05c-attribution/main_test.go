@@ -101,6 +101,7 @@ func TestNoEffects(t *testing.T) {
 
 func TestLateRejectionRetainsEarlierOriginEffects(t *testing.T) {
 	e := capture(t, Event{Kind: "handler", Connection: "origin-1", Stream: 1, Request: "valid"}, Event{Kind: "decision", Request: "valid", Rejected: true, FinalDecision: true})
+	e[0].FinalDecision = false
 	r := inspect(t, e)
 	if r.Research.Pass || len(r.Research.Violations) < 3 {
 		t.Fatalf("late invalidation hidden: %+v", r)

@@ -137,6 +137,7 @@ func analyze(l Ledger, key []byte) Result {
 	}
 	connections := map[string]*connection{}
 	requests := map[string]Event{}
+	requestStreams := map[string]string{}
 	downBindings := map[string]string{}
 	var handlerRequests []string
 	previous := ""
@@ -155,6 +156,11 @@ func analyze(l Ledger, key []byte) Result {
 		c := connections[e.Connection]
 		switch e.Kind {
 		case "request":
+			key := fmt.Sprintf("%s/%d", e.Downstream, e.DownStream)
+			if _, ok := requestStreams[key]; ok {
+				fail("duplicate downstream request identity")
+			}
+			requestStreams[key] = e.Request
 			if e.Request == "" || e.Downstream == "" || e.DownStream == 0 || e.Identity.Tenant == "" || e.Identity.Generation == 0 || e.Identity.SNI == "" || e.Identity.OriginSNI == "" || !e.TLSVerified {
 				fail("missing verified request identity")
 			}
@@ -166,6 +172,10 @@ func analyze(l Ledger, key []byte) Result {
 			request, ok := requests[e.Request]
 			if !ok {
 				fail("decision for unknown request")
+				continue
+			}
+			if request.FinalDecision {
+				fail("final request decision cannot be changed")
 				continue
 			}
 			request.Rejected = e.Rejected
@@ -312,6 +322,19 @@ func analyze(l Ledger, key []byte) Result {
 	for _, request := range handlerRequests {
 		if requests[request].Rejected {
 			violate("handler belongs to finally rejected request")
+		}
+	}
+	for _, e := range l.Events {
+		if e.Kind == "handler" {
+			found := false
+			for _, f := range r.Frames {
+				if f.Connection == e.Connection && f.Direction == "to-origin" && f.Stream == e.Stream && f.Type == "HEADERS" && f.LastSequence <= e.Sequence {
+					found = true
+				}
+			}
+			if !found {
+				fail("handler without earlier captured request HEADERS")
+			}
 		}
 	}
 	r.Current.Zero = r.Current.Bytes == 0

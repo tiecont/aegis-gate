@@ -2,8 +2,8 @@
 
 ## Scope And Implementation
 
-Question D is IMPLEMENTED/PASS for the bounded adversarial fixture suite and
-UNRESOLVED for complete runtime attribution. This additive research tool cannot
+Question D is pending independent acceptance for the corrected bounded fixture
+suite and UNRESOLVED for complete runtime attribution. This additive research tool cannot
 replace the immutable original75/23 evaluators, change their intervals, subtract
 control bytes or grant Module01 GO. The current all-byte requirement remains binding.
 
@@ -92,3 +92,19 @@ resolve the streaming/late-trailer admission conflict. A future observer-backed
 contract still needs independent review, complete proxy instrumentation and
 recorded human architecture/security approval. Current Module01 NO-GO;
 04-12 LOCKED; production BLOCKED. Independent F verdict remains separate.
+
+## Independent Findings And Repair
+
+F reproduced three false bounded-PASS defects against b58e7bb: a later decision
+could overwrite a final rejection; two request IDs could alias one downstream
+stream; and a handler could be accepted without captured upstream HEADERS.
+The earlier passing self-tests did not establish completeness for those attacks.
+Their earlier bounded-PASS conclusion is explicitly rejected and superseded.
+
+Source `be26f55` makes final decisions immutable, registers unique downstream
+request identities before bindings, and requires every handler to have earlier
+captured to-origin HEADERS on its exact connection/stream. The late-rejection
+control now starts with a pending decision before final denial. Fresh locked
+`adversarial-five` on clean be26f55 exits0; F's original independent attack overlay
+must pass before any corrected bounded completeness claim is accepted. No
+original runtime assertion or overall security gate is repaired by this change.
