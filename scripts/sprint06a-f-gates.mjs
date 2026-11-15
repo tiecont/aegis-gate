@@ -12,6 +12,7 @@ const [
   revision,
   output,
   rawRelative = "evidence/sprint06a-root/gates-01",
+  bootstrapDirectory,
 ] = process.argv.slice(2);
 assert.ok(path.isAbsolute(clone));
 assert.match(output ?? "", /^evidence\/sprint06a-f\/gate-run-\d+$/);
@@ -130,6 +131,28 @@ async function run(label, executable, args, checked = true) {
 }
 let before;
 try {
+  if (bootstrapDirectory) {
+    assert.ok(path.isAbsolute(bootstrapDirectory));
+    const file = path.join(bootstrapDirectory, "receipt.json"),
+      proof = JSON.parse(fs.readFileSync(file));
+    assert.equal(proof.source_commit, commit);
+    assert.equal(proof.source_tree, record.sourceTree);
+    assert.equal(proof.exit_code, 0);
+    assert.equal(proof.signal, null);
+    assert.equal(proof.error, undefined);
+    for (const stream of proof.streams) {
+      const bytes = fs.readFileSync(
+        path.join(bootstrapDirectory, path.basename(stream.file)),
+      );
+      assert.equal(bytes.length, stream.bytes);
+      assert.equal(sha(bytes), stream.sha256);
+    }
+    record.bootstrap = {
+      directory: bootstrapDirectory,
+      receiptSha256: sha(fs.readFileSync(file)),
+      proof,
+    };
+  }
   before = inventory();
   record.sourceFilesBefore = before.length;
   record.inventorySha256 = sha(JSON.stringify(before));
