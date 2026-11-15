@@ -21,6 +21,13 @@ failure: the live hardlink target was on disk while its source was on tmpfs.
 The attack target now stays on the same tmpfs. All cleanup counters were zero;
 the stopped container was removed. No failed capture is overwritten.
 
+`run-05` at `817d59a` completed66 controls with child/ingress exit0 and all
+cleanup counters zero, but the collector retains FAIL because it incorrectly
+required Docker State.OOMKilled=false. Docker correctly reports true for the
+deliberately OOM-killed child even though the ingress survived and completed.
+The next collector requires that true flag, the child's SIGKILL, the healthy
+post-OOM request, ingress exit0 and the cgroup event deltas together.
+
 ## Declared Experiment
 
 | Field | Declaration before execution |

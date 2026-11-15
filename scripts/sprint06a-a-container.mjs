@@ -238,11 +238,13 @@ try {
   assert.equal(result.exit, 0, result.stderr || result.stdout);
   assert.equal(result.error, undefined);
   assert.equal(record.inspectAfter.State.ExitCode, 0);
-  assert.equal(record.inspectAfter.State.OOMKilled, false);
   const receipt = JSON.parse(fs.readFileSync(`${out}/receipt.json`));
   assert.equal(receipt.completeValidationPass, true);
   assert.equal(receipt.streamingPass, false);
   assert.ok(receipt.cgroupFinal);
+  assert.equal(record.inspectAfter.State.OOMKilled, true);
+  assert.equal(receipt.resourceChild.signal, "SIGKILL");
+  assert.ok(receipt.probes.find((p) => p.name === "healthy-after-cgroup-OOM"));
   assert.ok(
     receipt.probes.find((p) => p.name === "actual-tmpfs-ENOSPC-before-origin"),
   );
