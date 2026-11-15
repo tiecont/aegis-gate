@@ -45,22 +45,23 @@ type Ledger struct {
 	Events []Event `json:"events"`
 }
 type Frame struct {
-	Connection    string              `json:"connection"`
-	Direction     string              `json:"direction"`
-	FirstSequence int                 `json:"first_sequence"`
-	LastSequence  int                 `json:"last_sequence"`
-	Type          string              `json:"type"`
-	Stream        uint32              `json:"stream"`
-	Raw           string              `json:"raw_hex"`
-	SHA256        string              `json:"raw_sha256"`
-	Fields        []hpack.HeaderField `json:"fields,omitempty"`
-	HPACKBefore   string              `json:"hpack_history_before,omitempty"`
-	HPACKAfter    string              `json:"hpack_history_after,omitempty"`
-	Identity      Identity            `json:"verified_fixture_identity"`
-	Request       string              `json:"request,omitempty"`
-	Downstream    string              `json:"downstream_connection,omitempty"`
-	DownStream    uint32              `json:"downstream_stream,omitempty"`
-	StreamState   string              `json:"stream_state,omitempty"`
+	Connection      string              `json:"connection"`
+	Direction       string              `json:"direction"`
+	FirstSequence   int                 `json:"first_sequence"`
+	LastSequence    int                 `json:"last_sequence"`
+	Type            string              `json:"type"`
+	Stream          uint32              `json:"stream"`
+	Raw             string              `json:"raw_hex"`
+	SHA256          string              `json:"raw_sha256"`
+	Fields          []hpack.HeaderField `json:"fields,omitempty"`
+	HPACKBefore     string              `json:"hpack_history_before,omitempty"`
+	HPACKAfter      string              `json:"hpack_history_after,omitempty"`
+	HeadersComplete bool                `json:"headers_complete"`
+	Identity        Identity            `json:"verified_fixture_identity"`
+	Request         string              `json:"request,omitempty"`
+	Downstream      string              `json:"downstream_connection,omitempty"`
+	DownStream      uint32              `json:"downstream_stream,omitempty"`
+	StreamState     string              `json:"stream_state,omitempty"`
 }
 type Result struct {
 	Current struct {
@@ -328,7 +329,7 @@ func analyze(l Ledger, key []byte) Result {
 		if e.Kind == "handler" {
 			found := false
 			for _, f := range r.Frames {
-				if f.Connection == e.Connection && f.Direction == "to-origin" && f.Stream == e.Stream && f.Type == "HEADERS" && f.LastSequence <= e.Sequence {
+				if f.Connection == e.Connection && f.Direction == "to-origin" && f.Stream == e.Stream && f.HeadersComplete && f.LastSequence <= e.Sequence {
 					found = true
 				}
 			}
@@ -479,6 +480,7 @@ func (r *Result) decode(id, direction string, cap *wireCapture, c *connection, f
 					fail("HPACK incomplete block")
 				}
 				ev.Fields = append([]hpack.HeaderField{}, fields...)
+				ev.HeadersComplete = true
 				pending = 0
 			}
 		}
