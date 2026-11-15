@@ -233,7 +233,7 @@ export async function runtime({ addon, edgeTLS, routes, directory }) {
             if (parsed.complete) {
               assert.ok(identity); validateTrailers(parsed, identity);
               completed = true; keepAlive = parsed.keepAlive;
-            } else assert.ok(parsed.consumed || parsed.headersReady, 'llhttp made progress');
+            } else assert.ok(parsed.consumed || parsed.headersReady || offset === b.length, 'llhttp made progress');
           }
           if (offset < b.length) { reader.unread(b.subarray(offset)); metrics.peakPending = Math.max(metrics.peakPending, b.length - offset); }
         }
