@@ -58,7 +58,7 @@ function check(dir) {
   }
 }
 try {
-  run('protected', process.execPath, ['scripts/sprint05b-baseline.mjs']);
+  const protectedFiles = JSON.parse(run('protected', process.execPath, ['scripts/sprint05b-baseline.mjs']).stdout).protectedFiles;
   run('protected-tests', process.execPath, ['--test', 'spikes/edge-comparison/contract.test.mjs', 'spikes/edge-comparison/evaluate.test.mjs',
     'spikes/edge-comparison/tls-observer.test.mjs', 'spikes/envoy/wire-observer.test.mjs', 'spikes/envoy/sprint05a-a-config.test.mjs']);
   for (const file of fs.readdirSync('scripts').filter((file) => /^sprint05c-f-.*\.mjs$/.test(file))) run(`syntax-${file}`, process.execPath, ['--check', `scripts/${file}`]);
@@ -69,12 +69,20 @@ try {
   for (const file of fs.readdirSync('scripts').filter((file) => file.startsWith('sprint05c-f-'))) copy(`scripts/${file}`);
   copy('docs/reports/sprint05c-f-security-review.md'); copy('evidence/sprint05c-f');
   r.reviewed_sources = [];
-  for (const [letter, revision] of [['a', 'dc5d966'], ['b', '0444023'], ['c', '7255fa2'], ['d', 'ee67bdd'], ['e', 'dd1eaa4']]) {
+  r.protected_source_checks = 0;
+  r.dependency_changes = [];
+  for (const [letter, revision] of [['a', 'dc5d966'], ['b', '0444023'], ['c', '7255fa2'], ['d', 'cbc73f5'], ['e', 'dd1eaa4']]) {
     const commit = git('rev-parse', `${revision}^{commit}`);
     const files = git('diff', '--name-only', '078d83c', commit).split('\n').filter((file) => file && !file.startsWith('evidence/'));
     r.reviewed_sources.push({ letter, commit, tree: git('rev-parse', `${commit}^{tree}`), files });
+    r.dependency_changes.push(...files.filter((file) => /(?:^|\/)(?:go\.(?:mod|sum)|Cargo\.(?:toml|lock)|package(?:-lock)?\.json|pnpm-lock\.yaml|yarn\.lock)$/.test(file)).map((file) => ({ letter, commit, file })));
+    for (const pin of protectedFiles) {
+      assert.equal(sha(execFileSync('git', ['show', `${commit}:${pin.file}`], { maxBuffer: 16 << 20 })), pin.sha256);
+      r.protected_source_checks++;
+    }
     for (const file of files) put(`reviewed-source/${letter}/${file}`, execFileSync('git', ['show', `${commit}:${file}`], { maxBuffer: 16 << 20 }), `${commit}:${file}`);
   }
+  assert.deepEqual(r.dependency_changes, []);
   run('scanner-image', 'docker', ['image', 'inspect', image, '--format', '{{.Id}} {{json .RepoDigests}}']);
   run('secrets', 'docker', ['run', '--rm', '--pull', 'never', '--network', 'none', '--name', name,
     '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges', '--user', `${process.getuid()}:${process.getgid()}`,

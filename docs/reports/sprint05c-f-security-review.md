@@ -3,8 +3,8 @@
 **ACCEPT only the scoped research tooling, corrected bounded observer tests,
 technical stops and local Module00/02/03 regression evidence specified below.**
 No complete H1/H2 ingress or streaming admission repair is accepted. Module01
-remains NO-GO, Modules04-12 LOCKED, production BLOCKED. Final F hash/scanner
-receipt follows this report; root full local/hosted gates are separate.
+remains NO-GO, Modules04-12 LOCKED, production BLOCKED. F hash/scanner checks01
+pass; a final closeout-source check follows. Root full local/hosted gates remain separate.
 
 ## Independent Execution
 
@@ -142,6 +142,8 @@ proves a particular queued GOAWAY on the regressing CONTINUATION case.
 
 **REJECT D8494aa2/codeb58e7bb and be26f55 bounded security PASS; ACCEPT
 ee67bdd only for the corrected bounded research fixture and tested negatives.**
+Final D report/evidencecbc73f5 changes no observer executable bytes and accurately
+retains the fourth finding and corrected source.
 
 F's overlay edits no D file and reproduces four consistency failures within
 the trusted-signer boundary. They are not a claim to detect a compromised signer.
@@ -209,10 +211,18 @@ mounts read-only. Staging avoids the policy's ignored `.local` path, so reviewed
 inputs are actually scanned. Its exact receipt and final integration gates
 must be assessed independently of the scoped verdicts above.
 
+Executed `checks-01` on clean Fa951e86:677 retained hashes verified,555 staged
+inputs scanned, all11 protected unit tests pass with zero skips, syntax/gofmt/
+whitespace pass, gitleaks exits0 with `[]`, scanner container/stage absent.
+The initial empty ENOSPC manifest remains explicitly ineligible. Closeout checks02
+add the final D report and explicit55 protected-source comparisons across all
+five reviewed heads plus unchanged dependency manifest/lockfile assertions.
+No executable mechanism or original suite is rerun solely for this report update.
+
 ## Agent Completion Report
 
 - Module/status: Sprint05C F independent security review, scoped work complete;
-  final F checks follow and runtime acceptance remains blocked.
+  owned checks pass and runtime acceptance remains blocked.
 - Commits/files: F-owned source/report/evidence; exact history and receipts retained.
 - Architecture/ADR decisions: none; no contract revision or blanket acceptance.
 - Positive tests: A77 controls/native splits; B finite matrix; C direct/relay
