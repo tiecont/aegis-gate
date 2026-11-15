@@ -196,6 +196,23 @@ not invoke writer verifier in this successful fresh untracked evidence context.
 | Late-invalid CL/trailers | Strict finite staging closes tested prefix paths, but mandatory precompletion streaming FAIL |
 | Complete runtime/causal observer | INCOMPLETE: no authoritative pre-wire mapping, signed runtime generation or exact HPACK mutation authority; RuntimePass false |
 
+Final component-delta review: A `a005a23` adds only truthful driver-repair
+documentation and committed verifier03 evidence after reproduced `c13c7b1`;
+ACCEPT those report/evidence additions. D `661f0d5` records corrected response
+coverage and its full-proof receipt after independently reproduced `6bc71e8`;
+ACCEPT that scoped report/evidence. B `044afc6` changes only the existing offline
+verifier (pinned Prettier/Gitleaks/tool identity additions) and a142-line report
+after independently verified `a09565d`; its report explicitly keeps both
+userinfo failures and relay timing limitations. ACCEPT final B source/report
+for integration. Later evidence-only receipts must remain source/hash bound.
+
+F component report/source are committed clean. Root-pinned Prettier3.9.10
+checks all three F MJS files; pinned Go1.27.4 gofmt lists no changes; scoped
+`git diff --check aa289da` exits0. F's component-source ownership has no merge
+conflict with A/B/C/D/E: only `scripts/sprint05d-f-*`, this report and F evidence.
+Ready for final exact integration check/security-scan phase. This readiness
+does not mark those gates executed or change any Module01/production decision.
+
 ## Agent Completion Report
 
 - Module: Sprint05D F independent Module01 security research review.
