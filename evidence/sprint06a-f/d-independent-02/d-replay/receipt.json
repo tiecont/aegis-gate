@@ -1,0 +1,471 @@
+{
+  "sourceCommit": "69a3be8d1e339bf3699b721ff8af78042c20f9fe",
+  "sourceTree": "cf2dfe73a0d131faff43751b92fca066002015ec",
+  "argv": [
+    "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+    "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-ToEByR/source/scripts/sprint06a-d-proof.mjs",
+    "evidence/sprint06a-d/f-replay-01"
+  ],
+  "nodeVersion": "v26.13.0",
+  "started": "2026-11-15T11:43:07.247Z",
+  "environment": {
+    "TMPDIR": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-ToEByR/source/.local/tmp",
+    "GOTOOLCHAIN": "local",
+    "GOAMD64": "v1",
+    "GOWORK": "off",
+    "GOFLAGS": ""
+  },
+  "tools": [
+    {
+      "file": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "sha256": "0adde40d1b7dfa57c8bc83cbc319758c3ec6ebba21363bb2fa752ea6b267ad1b"
+    },
+    {
+      "file": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "sha256": "de0ae3e082ce7599eae4fb69fa2ef1e43b8f31ffd3fce62cdf81930aa9005050"
+    },
+    {
+      "file": "/usr/bin/flock",
+      "sha256": "6f70b9fc3793b39d52bc0769033eaaea91a5c1fecda71c1dde1c754fbd34f8d7"
+    },
+    {
+      "file": "/usr/bin/git",
+      "sha256": "0da72c00a915c06b9e7062e2dc999afe323223d000fef63111a94f522afd8ecf"
+    }
+  ],
+  "commands": [
+    {
+      "label": "protected-before",
+      "command": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "protected-before.stdout",
+          "bytes": 4342,
+          "sha256": "12fecd21d0163ccd7b6c2e53ba49a36bf9cd15aaeb5311710088bae5cb41d3f5"
+        },
+        {
+          "file": "protected-before.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "go-version",
+      "command": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "args": [
+        "version"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "go-version.stdout",
+          "bytes": 32,
+          "sha256": "a29205bd83967c2f70e6768fae009600038d6056499fa289de9d5f9b79beaef4"
+        },
+        {
+          "file": "go-version.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "trace-api",
+      "command": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "args": [
+        "doc",
+        "net/http/httptrace.ClientTrace"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "trace-api.stdout",
+          "bytes": 4045,
+          "sha256": "3a2953a90db230b6d15faa11f08e014c644b8531df4be6b7de3033a0bf236299"
+        },
+        {
+          "file": "trace-api.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "transport-api",
+      "command": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "args": [
+        "doc",
+        "golang.org/x/net/http2.Transport"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "transport-api.stdout",
+          "bytes": 6854,
+          "sha256": "9d41572f2e9d464e1c0cde90cce204ef12087d4cf5ea6ea9b4c0883d043db5e6"
+        },
+        {
+          "file": "transport-api.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "clientconn-api",
+      "command": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "args": [
+        "doc",
+        "golang.org/x/net/http2.ClientConn"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "clientconn-api.stdout",
+          "bytes": 642,
+          "sha256": "dd10731f131c6cfa8421d0857219a70f93fb821de0505c30d614fe9235538732"
+        },
+        {
+          "file": "clientconn-api.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "decoder-api",
+      "command": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "args": [
+        "doc",
+        "golang.org/x/net/http2/hpack.Decoder"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "decoder-api.stdout",
+          "bytes": 716,
+          "sha256": "842af95492a464ef0d8a38918fa4104a25bb0988234f3dae531868200a1dec82"
+        },
+        {
+          "file": "decoder-api.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "compile",
+      "command": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "args": [
+        "test",
+        "-c",
+        "-race",
+        "-overlay",
+        "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-ToEByR/source/.local/sprint06a-d-rLJQ4N/overlay.json",
+        "-o",
+        "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-ToEByR/source/.local/sprint06a-d-rLJQ4N/attribution.test",
+        "./spikes/envoy/sprint05c-attribution"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "compile.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "compile.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "proof",
+      "command": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-ToEByR/source/.local/sprint06a-d-rLJQ4N/attribution.test",
+      "args": [
+        "-test.v",
+        "-test.timeout=70s",
+        "-test.count=1"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "proof.stdout",
+          "bytes": 176986,
+          "sha256": "e6bd33ddc53a1249e268e3c6e543971e056dd5b472973c1f7bb015f45f8d0041"
+        },
+        {
+          "file": "proof.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "f-overlay",
+      "command": "/usr/bin/git",
+      "args": [
+        "show",
+        "7694b614fae56b34d96e4c4495301595cb19e676:scripts/sprint06a-f-attribution_test.go.txt"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "f-overlay.stdout",
+          "bytes": 6214,
+          "sha256": "224469de9d5355ad5ecd01ed768bd50cd4998938558dcd2401004531b3f3cd89"
+        },
+        {
+          "file": "f-overlay.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "rejected-f-receipt.json",
+      "command": "/usr/bin/git",
+      "args": [
+        "show",
+        "f6b1413c424d9e56d2e40bc937b397ae6cf7ee05:evidence/sprint06a-f/d-independent-01/receipt.json"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "rejected-f-receipt.json.stdout",
+          "bytes": 20575,
+          "sha256": "598f4e8bb67489b030589aacc6a224fe798d0e6d7797308b7c0a4e716944f371"
+        },
+        {
+          "file": "rejected-f-receipt.json.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "rejected-f-SHA256SUMS",
+      "command": "/usr/bin/git",
+      "args": [
+        "show",
+        "f6b1413c424d9e56d2e40bc937b397ae6cf7ee05:evidence/sprint06a-f/d-independent-01/SHA256SUMS"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "rejected-f-SHA256SUMS.stdout",
+          "bytes": 5223,
+          "sha256": "1302d8a33d2dc67638c4abe543226ec34c4fdaf6426d5def819d4f6d9c1bd84c"
+        },
+        {
+          "file": "rejected-f-SHA256SUMS.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "rejected-f-f-full-proof.stdout",
+      "command": "/usr/bin/git",
+      "args": [
+        "show",
+        "f6b1413c424d9e56d2e40bc937b397ae6cf7ee05:evidence/sprint06a-f/d-independent-01/f-full-proof.stdout"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "rejected-f-f-full-proof.stdout.stdout",
+          "bytes": 210830,
+          "sha256": "80216c00bf43b0e5ea2c24009761af7cd64de5b5c0bbf59ecce140c9424e585b"
+        },
+        {
+          "file": "rejected-f-f-full-proof.stdout.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "rejected-f-f-full-proof.stderr",
+      "command": "/usr/bin/git",
+      "args": [
+        "show",
+        "f6b1413c424d9e56d2e40bc937b397ae6cf7ee05:evidence/sprint06a-f/d-independent-01/f-full-proof.stderr"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "rejected-f-f-full-proof.stderr.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "rejected-f-f-full-proof.stderr.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "f-compile",
+      "command": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/bin/go",
+      "args": [
+        "test",
+        "-c",
+        "-race",
+        "-overlay",
+        "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-ToEByR/source/.local/sprint06a-d-rLJQ4N/overlay.json",
+        "-o",
+        "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-ToEByR/source/.local/sprint06a-d-rLJQ4N/attribution.test",
+        "./spikes/envoy/sprint05c-attribution"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "f-compile.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "f-compile.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "f-full-proof",
+      "command": "/home/tiecont/.cache/aegisgate-06a/f/.local/sprint06a-f-ToEByR/source/.local/sprint06a-d-rLJQ4N/attribution.test",
+      "args": [
+        "-test.v",
+        "-test.timeout=70s",
+        "-test.count=1"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "f-full-proof.stdout",
+          "bytes": 213412,
+          "sha256": "81765a2cc08e9c6eb403dc070f8b29ab39ba97487e840015e987e8a72a751a89"
+        },
+        {
+          "file": "f-full-proof.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "protected-after",
+      "command": "/home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node",
+      "args": [
+        "scripts/sprint05b-baseline.mjs"
+      ],
+      "exit": 0,
+      "signal": null,
+      "streams": [
+        {
+          "file": "protected-after.stdout",
+          "bytes": 4342,
+          "sha256": "12fecd21d0163ccd7b6c2e53ba49a36bf9cd15aaeb5311710088bae5cb41d3f5"
+        },
+        {
+          "file": "protected-after.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "file": "spikes/envoy/sprint05c-attribution/live_test.go",
+      "sha256": "ffa99ff26869a561e0991514ba4d1e98ea82f5e2a65d8e3ab531e0c0da994b89"
+    },
+    {
+      "file": "spikes/envoy/sprint05c-attribution/main.go",
+      "sha256": "8d82fb80844a6ef878d14ea41d635dbba49b7999e4ac3b0b3572e44f232bf4f7"
+    },
+    {
+      "file": "spikes/envoy/sprint05c-attribution/main_test.go",
+      "sha256": "3d3d9e6c80bacae1197c104e1b8bb36e07d22e6d382c007c8954dfad94e5c6dc"
+    },
+    {
+      "file": "spikes/envoy/sprint05c-attribution/sprint05d_runtime_test.go",
+      "sha256": "4cb5ac158a8577ca8ef72895a492e198968c9f4c09efb23b480f9bba047fbcaf"
+    },
+    {
+      "file": "spikes/envoy/sprint05c-attribution/sprint06a_runtime_test.go",
+      "sha256": "abf61eb7c363898ae9c1110aec22d621319dc9825e9344ac946104622b30d72b"
+    },
+    {
+      "file": "scripts/sprint05c-f-observer_test.go.txt",
+      "sha256": "e6b9e7583bc28ba110c215f7ab6a58417de1b6cbd713072530c9482168f5b7b4"
+    },
+    {
+      "file": "scripts/sprint05d-f-runtime_test.go.txt",
+      "sha256": "d19bad44a94c08b228546c4f0dd6b0b1d6a01889834e1974a69e96ab4fcde124"
+    },
+    {
+      "file": "scripts/sprint06a-d-proof.mjs",
+      "sha256": "88616792e73dff860269c2efb2a17b198f122aa19005acca62f5d0a56e538968"
+    },
+    {
+      "file": "docs/reports/sprint06a-d-capability-v1.json",
+      "sha256": "773bf8ba8cfbb839361531edf3028fdd84defb090abe357ce6d1e7e834c5280f"
+    }
+  ],
+  "publicAPISources": [
+    {
+      "file": "/home/tiecont/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.4.linux-amd64/src/net/http/httptrace/trace.go",
+      "sha256": "37f9680b999f3c3949729970692d54c67f82e2f0eafbb7148b98463a0843b533"
+    },
+    {
+      "file": "/home/tiecont/go/pkg/mod/golang.org/x/net@v0.62.0/http2/transport.go",
+      "sha256": "65813b29f50cca84bfe9b1df9394662f40417f80653c53f8a97397e9aaff6e35"
+    },
+    {
+      "file": "/home/tiecont/go/pkg/mod/golang.org/x/net@v0.62.0/http2/hpack/hpack.go",
+      "sha256": "e1a1b7c22e9df2d1d2da30ac382347a9076ba8736084635957bc7a6d7ddb5034"
+    },
+    {
+      "file": "/home/tiecont/go/pkg/mod/golang.org/x/net@v0.62.0/http2/frame.go",
+      "sha256": "4466f8ba7f851901df67721935d75f526f9f91184bd93c899307e577b97d9bd7"
+    }
+  ],
+  "checksComplete": true,
+  "runtimeComplete": false,
+  "runtimePass": false,
+  "module01Pass": false,
+  "testBinarySha256": "1721fba0e51fce7302d5078355df39e9d11eec7801d0d8339ba975c1bbbc9bee",
+  "independentReviewer": {
+    "source": "7694b614fae56b34d96e4c4495301595cb19e676",
+    "file": "scripts/sprint06a-f-attribution_test.go.txt",
+    "sha256": "224469de9d5355ad5ecd01ed768bd50cd4998938558dcd2401004531b3f3cd89",
+    "rejectedEvidence": "f6b1413c424d9e56d2e40bc937b397ae6cf7ee05"
+  },
+  "independentTestBinarySha256": "fd93de24246fafbbb3bf971cc303800ee30988a18f481800e1904d0ee74cd9f7",
+  "privateStageAbsent": true,
+  "ended": "2026-11-15T11:43:14.193Z"
+}

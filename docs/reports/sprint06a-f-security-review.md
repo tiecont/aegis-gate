@@ -109,5 +109,43 @@ Exact command:
 env TMPDIR=/home/tiecont/.cache/aegisgate-06a/f/.local/tmp flock -w 600 /tmp/aegisgate-sprint02-fixtures.lock /home/tiecont/Projects/aegis-gate/.local/toolchains/node/bin/node scripts/sprint06a-f-review.mjs 45c1a7b evidence/sprint06a-f/c-independent-01 c
 ```
 
-A/B/E and final integration gates remain pending review; no production
-eligibility is inferred.
+**D ACCEPT** corrected source `69a3be8`, final `716780c`, for bounded research
+consistency/API-stop tooling only. The earlier `406d560` rejection is preserved
+above. F `d-independent-02`, reviewer source `3137cc3`, clean-replays the exact D
+proof and all independently overlaid suites: both exit0. All four new F cases
+now reject. The fix requires one probe/nonce per request block, accounts for
+every block/event, and binds unique request and completed response streams.
+The unchanged05C/05D and F regressions remain passing; old historical map gaps
+remain demonstrated unchanged. Honest and coherent signer rewrite stay merely
+consistent with RuntimeComplete/RuntimePass/Module01Pass=false. Both actual
+nine-byte ACK observations still report aggregate FAIL. No new runtime authority
+or H2 security acceptance is claimed. Source bytes/11 pins and cleanup verify.
+
+A first clean replay `a-independent-01` (source `5ca4e3a`, reviewer `ee6b8eb`)
+retains a pre-traffic container harness failure: record.lockPID=process.ppid
+points at the reviewer wrapper, while the enclosing actual flock is its
+ancestor. No lock assertion was bypassed. Container removal and source/11-pin
+postchecks pass. All29 separate F attacks pass: malformed/partial/failed/cancelled
+writes; exact quotas; truncate/tamper/inode/link/mode seal rejection; startup
+inventory validation before any deletion; symlink/hardlink/enumeration limits;
+actual ingress ENOSPC503, CL10EOF400, late-fold400, Host/SNI421 with zero origin
+dials/bytes; healthy exact-wire controls before and after. Reachable JS key/
+IV/tag buffers zero and accounting releases. Same-UID races remain excluded.
+A is not yet independently accepted pending a supported exact container replay.
+
+B source `260dc7f` clean replay `b-independent-01` (reviewer `e6f9b77`) exits0:
+all6 top-level/42 tagged subtests and46 top-level/90 unchanged Module03 race
+subtests pass with real isolated fixtures, no skips. Its single tag-only hook,
+fixed signature context, shared canonicalizer/trust.key and standard Ed25519
+preserve ordinary API/wire bytes. Source review confirms JWT/auth-required,
+signed digest/tenant/resource binding, floor, rotation and LKG boundaries.
+Multi-hop SNI/capture, internal admission bytes and fixture allowlist limits in
+the final B report are accurate; these do not establish a unified ingress or
+production SSRF/JWKS support. Independent same-generation sidecar challenges
+are pending. `b-independent-02` retains an F harness assumption failure: an
+identical second Adapter.Apply is denied rather than accepted idempotently.
+This is not a B security defect; the test is corrected to challenge conflicting
+activation while allowing the existing duplicate-notification semantics.
+
+E and final integration gates remain pending review; no production eligibility
+is inferred.
