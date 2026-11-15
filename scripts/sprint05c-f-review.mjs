@@ -78,7 +78,7 @@ const captures = [];
 try {
   fs.mkdirSync(path.dirname(clone), { recursive: true });
   await checked('clone', 'git', ['clone', '--shared', '--no-checkout', root, clone], { cwd: root });
-  await checked('checkout', 'git', ['checkout', '--detach', commit]);
+  await checked('checkout', 'git', mode === 'a' ? ['checkout', '-b', 'feat/sprint05c-strict-ingress', commit] : ['checkout', '--detach', commit]);
   record.clean_before = (await checked('clean-before', 'git', ['status', '--porcelain'])).stdout.trim();
   assert.equal(record.clean_before, '');
   record.sources = inventory();
@@ -103,8 +103,16 @@ try {
   } else if (mode === 'e') {
     captures.push('evidence/sprint05c-e/attempt-901');
     await checked('e-regressions', node, ['scripts/sprint05c-e-regressions.mjs', captures[0]], { env: { GOTOOLCHAIN: 'go1.27.4' } });
-  } else {
-    throw new Error(`Final ${mode.toUpperCase()} source/runner review required before enabling executable path`);
+  } else if (mode === 'a') {
+    captures.push('evidence/sprint05c-a/run-901');
+    await checked('a-wire-proof', node, ['spikes/envoy/sprint05c-a-proof.mjs', captures[0]]);
+    await checked('a-stream-admission', node, [path.join(root, 'scripts/sprint05c-f-ingress.mjs'), clone, path.resolve(output, 'a-stream-admission.json')]);
+  } else if (mode === 'c') {
+    await checked('spike-install', path.join(path.dirname(node), 'npm'), ['--prefix', 'spikes/pingora', 'ci', '--ignore-scripts', '--strict-peer-deps']);
+    captures.push('evidence/sprint05b-f/candidate-901');
+    await checked('unchanged-envoy-originals', node, ['spikes/envoy/sprint05a-combined-run.mjs', captures[0]], { env: {
+      AEGIS_05B_NATIVE_BINARY: `${upstream}/.local/sprint05b-native/envoy`,
+    } });
   }
   await checked('protected-after', node, ['scripts/sprint05b-baseline.mjs']);
   const after = inventory();
