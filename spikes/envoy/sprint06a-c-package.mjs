@@ -10,6 +10,7 @@ export function packageData() {
   const manifest = JSON.parse(
     fs.readFileSync("spikes/edge-comparison/manifest.json"),
   );
+  assert.ok(manifest.rejection_contract);
   const historical23 = JSON.parse(
     fs.readFileSync("evidence/sprint05a-root/candidate-02/original23.json"),
   );
@@ -29,7 +30,7 @@ export function packageData() {
       raw: Buffer.from(item.request).toString("hex"),
       sha256: sha(Buffer.from(item.request)),
       historical_result: "FAIL on accepted Envoy",
-      expected: manifest.negative_contract,
+      expected: manifest.rejection_contract,
     });
   }
   for (const id of requirements.requirements[2].cases) {
