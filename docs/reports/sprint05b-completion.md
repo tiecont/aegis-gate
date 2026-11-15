@@ -1,7 +1,10 @@
 # Sprint 05-B Completion Evidence
 
-Status: component implementation, independent review and full local gates complete;
-exact final PR-head hosted CI and merge closeout pending at this checkpoint.
+Status: scoped engineering delivery COMPLETE. PR19 merged as
+`dd445fda3d6989fdb50cca13d641571eecfcdc29`; exact final-head run43669783439
+and integration-main run43671151410 both PASS the two required jobs. The
+[closeout addendum](sprint05b-closeout-addendum.md) supplies actual delivery
+receipts and supersedes historical pending checkpoint fields below.
 This report does not grant Module 01 GO. Subsequent closeout receipts must name
 the actual reviewed source, PR head, merge SHA and hosted run; no commit can
 contain its own final commit hash.
