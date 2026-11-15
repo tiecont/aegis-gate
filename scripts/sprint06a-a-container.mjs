@@ -142,7 +142,10 @@ try {
     ]),
   );
   const spool = path.join(local, "sprint06a-a-spool");
-  fs.mkdirSync(spool, { mode: 0o700 });
+  fs.mkdirSync(spool, { mode: 0o700, recursive: true });
+  assert.equal(fs.lstatSync(spool).isDirectory(), true);
+  assert.equal(fs.lstatSync(spool).mode & 0o777, 0o700);
+  assert.deepEqual(fs.readdirSync(spool), []);
   const gitRoot = path.resolve(await git("rev-parse", "--git-common-dir"));
   const nodeRoot = path.resolve(path.dirname(process.execPath), "..");
   const argv = [

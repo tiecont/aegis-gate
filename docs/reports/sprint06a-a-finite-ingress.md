@@ -8,6 +8,10 @@ OpenSSL binary could not read `/etc/ssl/openssl.cnf` in the image. Container
 removal and protected-file checks completed. The next source adds a read-only
 mount of that public configuration; no TLS verification policy changes.
 
+`run-02` at `de7b60a` is retained FAIL before container creation: the prior
+empty tmpfs mountpoint remained and exclusive mkdir rejected it. The collector
+now permits only an existing empty0700 directory; no fixtures were active.
+
 ## Declared Experiment
 
 | Field | Declaration before execution |
