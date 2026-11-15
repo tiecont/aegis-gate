@@ -46,6 +46,22 @@ a12th deliberately truncated reverse-capture mutation. The original observer sui
 HPACK stateful/dynamic references, missing and reordered events and prior four
 false-PASS regressions. Fresh source/receipt results follow actual execution.
 
+Independent F at aa72f2a subsequently rejects two more narrow-correlation
+claims: swapped admitted-request nonces and a duplicate nonce with an orphan
+upstream stream were accepted as consistent. Full runtime PASS stayed false,
+but that does not excuse the diagnostic false consistency. Source a532ea2
+requires unique nonces and both captured probe and nonce on the same upstream
+HEADERS stream, with exact coverage counts. The actual front fixture emits the
+probe alongside its generated nonce. Both attacks are now live-fixture
+regressions. This checks observed correlation only; a trusted signer that
+rewrites or omits underlying coverage still defeats causality certification.
+
+Runtime-five at a532ea2 exits0 on the full race proof and14 live mutations.
+Receipt SHA256:
+`14bdc9b79397dadd15333e3daf86cc9e87a174d2d0a271affa5131266bdd34d5`.
+Use the runtime-four command below with output runtime-five for reproduction.
+Independent F reproduction of this correction remains required.
+
 ## Completeness Boundary
 
 Both streams are discovered only after real captured HEADERS. A trusted signer
