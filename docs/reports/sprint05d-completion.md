@@ -2,9 +2,9 @@
 
 Disposition: Outcome B, architecture decision required for the tested designs.
 No original mandatory failure is claimed repaired. This report records executed
-bounded implementation and exact stops, not a new runtime acceptance. Delivery
-review, final local gates and hosted/merge receipts are recorded below as they
-complete; pending fields are not PASS.
+bounded implementation and exact stops, not a new runtime acceptance. Independent
+review, full local gates, final-head hosted gates and post-merge main gates are
+complete. Formal architecture/security decisions remain pending.
 
 ## Baseline And Source
 
@@ -23,9 +23,9 @@ Root protected receipt: `evidence/sprint05d-root/baseline/`.
 | B fix/sprint05d-h2-identity-status | 62d8a90 exact five-body diagnostic; two userinfo FAIL/three controls PASS | Finala419dcd; F538820f scoped ACCEPT and clean offline replay |
 | C fix/sprint05d-h2-frame-rejection | 3474579 source/API audit; final5bc9489; no supported post-error adapter-send hook | F3172979 scoped ACCEPT |
 | D test/sprint05d-origin-isolation | 6bc71e8 response/nonce-corrected real TLS/H2 correlation; final661f0d5 | F3763052 full race/13 adversarial mutations PASS, scoped ACCEPT |
-| E test/sprint05d-runtime-regression | 01fdaac real fixtures; f155927 report/evidence; all28 commands0 | F3172979 source/retained-evidence ACCEPT; full fresh gate replay pending |
+| E test/sprint05d-runtime-regression | 01fdaac real fixtures; f155927 report/evidence; all28 commands0 | F3172979 source/retained-evidence ACCEPT; F full fresh locked gate replay PASS |
 | F review/sprint05d-security | Clean-source builds/attacks; a91b6c5 final local integration/export ACCEPT | Fresh full locked gates and semantic/source audit PASS |
-| Root sprint/05d-integration | 619d883 ownership; 1ff79f3 namespaces; 30c9019 proposed ADR;2cb0c34 tested integration | PR23 open; exact final-head/merge receipts pending |
+| Root sprint/05d-integration | 619d883 ownership; 1ff79f3 namespaces; 30c9019 proposed ADR;2cb0c34 tested integration | PR23 MERGED ebd9954; final-head and exact-main hosted jobs PASS |
 
 Agent reports and their receipts carry full source/tree/tool versions, exact
 argv, exits, artifact SHA256 and failed-attempt history. Shared fixtures hold
@@ -154,12 +154,26 @@ scanner semantics, and confirms real management-fixture replay/cleanup. Source
 de25477 produce integration-01/02. All58 published artifact hashes,57 raw
 artifacts and normalized original receipt match. Scope excludes runtime GO.
 
-PR: https://github.com/tiecont/aegis-gate/pull/23. Intermediate head0baf29c
-passes both hosted jobs in43699864411; this does not substitute for the final
-head after independent review receipts. Final-head hosted jobs, actual merge
-SHA and exact-main hosted jobs remain PENDING until observed. A receipt-only
-closeout records those actual events without a self-referential commit hash.
-These delivery fields must be completed before declaring the sprint delivered.
+PR: https://github.com/tiecont/aegis-gate/pull/23, MERGED. F's read-only final
+review ACCEPTs exact head `eaedc62030d2ba69bf4a07ae546883833d030554`, tree
+`d73a5d64c95e8bdda631f3be6006a55d648530f2`, verifying all9188 tracked files
+and86 artifact hashes. Both final-head jobs PASS in
+https://github.com/tiecont/aegis-gate/actions/runs/43700515321:
+foundation-quality132770406375 and supply-chain-security132770406607.
+Actual merge `ebd995439e0ef2529dc1cfda48ad257f5e0f9650` has the same tree.
+Both exact-main jobs PASS in
+https://github.com/tiecont/aegis-gate/actions/runs/43701448046:
+foundation-quality132773257955 and supply-chain-security132773257788.
+
+Raw GitHub run/job/merge metadata and full hosted logs, with command exits,
+source/tree identities and SHA256 manifests, are retained under
+`evidence/sprint05d-root/pr23-final-{run,jobs,log}/`, `pr23-merged/` and
+`pr23-main-{run,jobs,log}/`. A receipt-only `docs/sprint05d-closeout` delivery
+updates this report, status and risks without changing runtime, tests or gates.
+Its own review/hosted/post-merge receipts are verified separately; the final
+delivery message records that resulting main SHA without an infinite chain of
+self-referential receipt commits. Sprint05D closes as Outcome B, with all six
+original failure IDs still FAIL on the accepted candidate.
 
 ## Decision Boundary And Next Work
 
